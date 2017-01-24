@@ -1,7 +1,5 @@
 These instructions were tested on Debian Jessie.
 ### Dependencies
-If unzip is not installed already, install it
-
 ```bash
 apt-get install zip
 apt-get install unzip
@@ -9,7 +7,6 @@ apt-get install build-essential
 apt-get install mercurial
 apt-get install build-essential
 ```
-
 
 ### Create a directory for the project:
 ```bash
@@ -21,9 +18,6 @@ Copy epiClassifierForLinux.zip in this directory and unzip it:
 ```bash
 unzip epiClassifierForLinux.zip
 ```
-
-
-
 ### NSPR
 
 From [NSPR build instructions]:
