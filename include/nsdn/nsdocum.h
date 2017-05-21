@@ -20,7 +20,7 @@ class NSPersonGraphManager ;
   #include "partage/nsglobal.h"
 #endif
 
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 #include "nsbb/nspatpat.h"
 
 #ifndef __linux__

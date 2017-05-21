@@ -413,9 +413,9 @@ catch (...)
   return false ;
 }
 }
-
+#ifdef FOR_WINDOWS
 bool
-NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - begin") ;	trace(&ps, 1, trSteps) ;	ps = string("Java init : opening file pilot.dat") ;	trace(&ps, 1, trSubSteps) ;	ifstream inFile ;	inFile.open("pilot.dat") ;	if (!inFile)
+NSSuper::InitialiseJava(){	string ps = string("Java init - begin") ;	trace(&ps, 1, trSteps) ;	ps = string("Java init : opening file pilot.dat") ;	trace(&ps, 1, trSubSteps) ;	ifstream inFile ;	inFile.open("pilot.dat") ;	if (!inFile)
 	{
 		string sErreur = getText("pilotManagement", "cannotOpenPilot.dat") ;
     trace(&sErreur, 1, NSSuper::trError) ;
@@ -514,10 +514,11 @@ NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - beg
 		return false ;
 	}
   _bJavaOk = true ;
-#endif    // #ifdef FOR_WINDOWS
+
 
 	return true ;
 }
+#endif    // #ifdef FOR_WINDOWS
 
 // -----------------------------------------------------------------------------
 // Fonction     : NSSuper::estEgal(string *pChaine, string *pModele)

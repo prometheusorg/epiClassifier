@@ -94,9 +94,9 @@ class NSFrameDocumentsArray ;
 # endif
 #endif
 
-# include "partage/ns_vector.h"
-# include "nautilus/nsanxary.h"
-# include "nsbb/nspatpat.h"
+# include "../partage/nsvector.h"
+# include "../nautilus/nsanxary.h"
+# include "../nsbb/nspatpat.h"
 
 const char LocalPatient  = '-' ;
 const char INMEMORY_CHAR = '#' ;

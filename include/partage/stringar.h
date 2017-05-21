@@ -1,7 +1,7 @@
 #ifndef __STRINGAR_H
 #define __STRINGAR_H
 
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 
 //
 // Definition de stringArray (Vecteur de string)

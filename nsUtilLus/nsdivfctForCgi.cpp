@@ -1,4 +1,4 @@
-// -----------------------------------------------------------------------------// nsdivfct.cpp
+// -----------------------------------------------------------------------------// nsdivfct.cpp
 // -----------------------------------------------------------------------------
 // Pot-pourri de fonctions
 // -----------------------------------------------------------------------------
@@ -77,9 +77,17 @@
 #include <string>
 #include <fstream>
 
-#include "enterpriseLus/nsdivfctForCgi.h"intStringToInt(string sValeur){	return (string("") != sValeur) ? atoi(sValeur.c_str()) : 0 ;}// -----------------------------------------------------------------------------// Function : Transforme un int en string// -----------------------------------------------------------------------------stringIntToString(int val){	char temp[33] ;  // was itoa(val, temp, 10) but itoa is non-standard ; better use sprintf  sprintf(temp, "%d", val) ;  string result(temp) ;  return result ;}
+#include "enterpriseLus/nsdivfctForCgi.h"
+
+using std::ofstream;
+using std::ifstream;
+
+int StringToInt(string sValeur){	return (string("") != sValeur) ? atoi(sValeur.c_str()) : 0 ;}
+
+// -----------------------------------------------------------------------------// Function : Transforme un int en string// -----------------------------------------------------------------------------stringIntToString(int val){	char temp[33] ;  // was itoa(val, temp, 10) but itoa is non-standard ; better use sprintf  sprintf(temp, "%d", val) ;  string result(temp) ;  return result ;}
 // -----------------------------------------------------------------------------
-// void strip(string& s, int n)// Fonction : enleve les blancs d'une string// Retour   : rien// -----------------------------------------------------------------------------voidstrip(string& s, STRIPTYPE n, char c){  if (string("") == s)    return ;  size_t pos1 = s.find_first_not_of(c) ;  if (string::npos == pos1)  {		s = "" ;    return ;  }  size_t pos2 ;  switch (n)  {    case stripBoth  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;    	pos2 = s.find_last_not_of(c) ;      if (pos2 != string::npos)      	s = string(s, 0, pos2 + 1) ;      break ;    case stripLeft  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;      break ;    case stripRight :    	pos2 = s.find_last_not_of(c) ;      if (pos2 != string::npos)      	s = string(s, 0, pos2 + 1) ;      break ;  }}void strip(string& s, string sM, STRIPTYPE n){  if ((string("") == s) || (string("") == sM))    return ;  size_t pos1 = s.find_first_not_of(sM) ;  if (string::npos == pos1)  {		s = string("") ;    return ;  }  size_t pos2 ;  switch (n)  {    case stripBoth  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;    	pos2 = s.find_last_not_of(sM) ;      if (string::npos != pos2)      	s = string(s, 0, pos2 + 1) ;      break ;    case stripLeft  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;      break ;    case stripRight :    	pos2 = s.find_last_not_of(sM) ;      if (string::npos != pos2)      	s = string(s, 0, pos2 + 1) ;      break ;  }}
+// void strip(string& s, int n)// Fonction : enleve les blancs d'une string// Retour   : rien// -----------------------------------------------------------------------------
+void strip(string& s, STRIPTYPE n, char c){  if (string("") == s)    return ;  size_t pos1 = s.find_first_not_of(c) ;  if (string::npos == pos1)  {		s = "" ;    return ;  }  size_t pos2 ;  switch (n)  {    case stripBoth  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;    	pos2 = s.find_last_not_of(c) ;      if (pos2 != string::npos)      	s = string(s, 0, pos2 + 1) ;      break ;    case stripLeft  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;      break ;    case stripRight :    	pos2 = s.find_last_not_of(c) ;      if (pos2 != string::npos)      	s = string(s, 0, pos2 + 1) ;      break ;  }}void strip(string& s, string sM, STRIPTYPE n){  if ((string("") == s) || (string("") == sM))    return ;  size_t pos1 = s.find_first_not_of(sM) ;  if (string::npos == pos1)  {		s = string("") ;    return ;  }  size_t pos2 ;  switch (n)  {    case stripBoth  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;    	pos2 = s.find_last_not_of(sM) ;      if (string::npos != pos2)      	s = string(s, 0, pos2 + 1) ;      break ;    case stripLeft  :    	if (pos1 > 0)    		s = string(s, pos1, strlen(s.c_str()) - pos1) ;      break ;    case stripRight :    	pos2 = s.find_last_not_of(sM) ;      if (string::npos != pos2)      	s = string(s, 0, pos2 + 1) ;      break ;  }}
 // -----------------------------------------------------------------------------
 // Function   : unsigned int pseumaj(lettre)
 // Decription : Renvoie la pseudo-majuscule
@@ -390,7 +398,7 @@ donne_age(string sDatex, string sDateNaiss)
 }
 
 // -----------------------------------------------------------------------------
-// Function    : void donne_heure(char* pHeure)// Description : Donne l'heure au format hhmmss
+// Function    : void donne_heure(char* pHeure)// Description : Donne l'heure au format hhmmss
 // Return      : Rien
 // -----------------------------------------------------------------------------
 // Created on 26/05/1998
@@ -511,7 +519,7 @@ try
 } // try
 catch (...)
 {
-	erreur("Exception VectString::operator=", standardError) ;}
+	erreur("Exception VectString::operator=", standardError) ;}
 	return (*this) ;
 }
 
@@ -546,7 +554,7 @@ pseumaj(string sChaine)
 }
 
 // -----------------------------------------------------------------------------
-// Function    : void pseumaj(char *chaine)// Description : Convertit la chaine en pseudo-majuscules
+// Function    : void pseumaj(char *chaine)// Description : Convertit la chaine en pseudo-majuscules
 // Return	     : Rien
 // Created on 6/10/1999
 // -----------------------------------------------------------------------------
@@ -620,7 +628,7 @@ catch (...)
 	erreur("Exception ClasseStringVector copy ctor.", standardError) ;
 }
 }
-// -----------------------------------------------------------------------------//// classe classString//// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------//// classe classString//// -----------------------------------------------------------------------------
 classString::classString(const classString& src)
 {
   sItem      = src.sItem ;
@@ -1002,10 +1010,10 @@ texteHtml(string texte)
       case 'ù'  : sHtml = sHtml + "&ugrave;" ;	break ;
       case 'û'  : sHtml = sHtml + "&ucirc;" ;		break ;
       case 'ü'  : sHtml = sHtml + "&uuml;" ;		break ;
-      case 'Â'  : sHtml = sHtml + "&Acirc;" ;		break ;      case 'À'  : sHtml = sHtml + "&Agrave;" ;	break ;      case 'Æ'  : sHtml = sHtml + "&Aelig;" ;		break ;      case 'Ç'  : sHtml = sHtml + "&Ccedil;" ;	break ;      case 'É'  : sHtml = sHtml + "&Eacute;" ;	break ;      case 'Ê'  : sHtml = sHtml + "&Ecirc;" ;		break ;      case 'È'  : sHtml = sHtml + "&Egrave;" ;	break ;      case 'Ë'  : sHtml = sHtml + "&Euml;" ;		break ;      case 'Î'  : sHtml = sHtml + "&Icirc;" ;		break ;      case 'Ï'  : sHtml = sHtml + "&Iuml;" ;		break ;      case 'Ò'  : sHtml = sHtml + "&Ograve;" ;	break ;      case 'Ó'  : sHtml = sHtml + "&Oacute;" ;	break ;      case 'Ô'  : sHtml = sHtml + "&Ocirc;" ;		break ;      case 'Õ'  : sHtml = sHtml + "&Otilde;" ;	break ;      case 'Ö'  : sHtml = sHtml + "&Ouml;" ;		break ;      case ''  : sHtml = sHtml + "&#338;" ;		break ;      case 'Ú'  : sHtml = sHtml + "&Uacute;" ;	break ;      case 'Ù'  : sHtml = sHtml + "&Ugrave;" ;	break ;      case 'Û'  : sHtml = sHtml + "&Ucirc;" ;		break ;      case 'Ü'	: sHtml = sHtml + "&Uuml;" ;		break ;      case 'Ý'	: sHtml = sHtml + "&Yacute;" ;	break ;      case 'Þ'	: sHtml = sHtml + "&THORN;" ;	  break ;      case 'ß'	: sHtml = sHtml + "&szlig;" ;	  break ;      default   : sHtml = sHtml + string(1, texte[i]) ;
+      case 'Â'  : sHtml = sHtml + "&Acirc;" ;		break ;      case 'À'  : sHtml = sHtml + "&Agrave;" ;	break ;      case 'Æ'  : sHtml = sHtml + "&Aelig;" ;		break ;      case 'Ç'  : sHtml = sHtml + "&Ccedil;" ;	break ;      case 'É'  : sHtml = sHtml + "&Eacute;" ;	break ;      case 'Ê'  : sHtml = sHtml + "&Ecirc;" ;		break ;      case 'È'  : sHtml = sHtml + "&Egrave;" ;	break ;      case 'Ë'  : sHtml = sHtml + "&Euml;" ;		break ;      case 'Î'  : sHtml = sHtml + "&Icirc;" ;		break ;      case 'Ï'  : sHtml = sHtml + "&Iuml;" ;		break ;      case 'Ò'  : sHtml = sHtml + "&Ograve;" ;	break ;      case 'Ó'  : sHtml = sHtml + "&Oacute;" ;	break ;      case 'Ô'  : sHtml = sHtml + "&Ocirc;" ;		break ;      case 'Õ'  : sHtml = sHtml + "&Otilde;" ;	break ;      case 'Ö'  : sHtml = sHtml + "&Ouml;" ;		break ;      case ''  : sHtml = sHtml + "&#338;" ;		break ;      case 'Ú'  : sHtml = sHtml + "&Uacute;" ;	break ;      case 'Ù'  : sHtml = sHtml + "&Ugrave;" ;	break ;      case 'Û'  : sHtml = sHtml + "&Ucirc;" ;		break ;      case 'Ü'	: sHtml = sHtml + "&Uuml;" ;		break ;      case 'Ý'	: sHtml = sHtml + "&Yacute;" ;	break ;      case 'Þ'	: sHtml = sHtml + "&THORN;" ;	  break ;      case 'ß'	: sHtml = sHtml + "&szlig;" ;	  break ;      default   : sHtml = sHtml + string(1, texte[i]) ;
     }
 	}
-	return sHtml ;}
+	return sHtml ;}
 
 string
 texteCourant(string textHtml)
@@ -1129,14 +1137,14 @@ texteCourant(string textHtml)
     }
 /*
       textOut.replace(pos, 6, "|") ;
-    else if ((len >= 6) && (string(textOut, pos, 6) == "&#163;"))      textOut.replace(pos, 6, "£") ;    else if ((len >= 5) && (string(textOut, pos, 5) == "&#36;"))      textOut.replace(pos, 5, "$") ;*/
+    else if ((len >= 6) && (string(textOut, pos, 6) == "&#163;"))      textOut.replace(pos, 6, "£") ;    else if ((len >= 5) && (string(textOut, pos, 5) == "&#36;"))      textOut.replace(pos, 5, "$") ;*/
     pos++ ;
     pos = textOut.find("&",pos) ;
 	}
 /*
     bool isdigit (charT c, const locale& loc) const;
-  isdigit*/
-  return textOut ;}
+  isdigit*/
+  return textOut ;}
 
 string
 texteWebLink(string texte)
@@ -1232,12 +1240,12 @@ string
 getTreeIDFromID(string sAnyID)
 {
 	if (strlen(sAnyID.c_str()) < 13)
-		return string("") ;	return string(sAnyID, 7, 6) ;
+		return string("") ;	return string(sAnyID, 7, 6) ;
 }
-stringgetNodeIDFromID(string sAnyID){	if (strlen(sAnyID.c_str()) < 18)		return string("") ;	return string(sAnyID, 13, 5) ;}
+string getNodeIDFromID(string sAnyID){	if (strlen(sAnyID.c_str()) < 18)		return string("") ;	return string(sAnyID, 13, 5) ;}
 
 string
-getRegularPath(string sMonoSeparatorPath, char cPath, char cIntranode){  if (string("") == sMonoSeparatorPath)    return string("") ;  string result = sMonoSeparatorPath ;  for (register unsigned int i = 0; i < result.size(); i++)
+getRegularPath(string sMonoSeparatorPath, char cPath, char cIntranode){  if (string("") == sMonoSeparatorPath)    return string("") ;  string result = sMonoSeparatorPath ;  for (register unsigned int i = 0; i < result.size(); i++)
   {
     if (cPath == result[i])
     {
@@ -1269,9 +1277,9 @@ getRegularPath(string sMonoSeparatorPath, char cPath, char cIntranode){  if (s
         result[i] = cIntranode ;
     }
   }
-  return (result) ;}
+  return (result) ;}
 /**
-* Is this element a collective, group, local or in memory object** This works with a patient ID, a tree ID or a node ID*/GRAPHELEMTYPEgetGraphElementTypeFromID(string sElementID){	if (sElementID == "")  	return isIncorrectID ;  char cFirstChar = sElementID[0] ;	if (cFirstChar == '#')  	return isMemoryID ;	if (cFirstChar == '-')  	return isLocalID ;	if (cFirstChar == '~')  	return isGroupID ;  return isCollectiveID ;}
+* Is this element a collective, group, local or in memory object** This works with a patient ID, a tree ID or a node ID*/GRAPHELEMTYPEgetGraphElementTypeFromID(string sElementID){	if (sElementID == "")  	return isIncorrectID ;  char cFirstChar = sElementID[0] ;	if (cFirstChar == '#')  	return isMemoryID ;	if (cFirstChar == '-')  	return isLocalID ;	if (cFirstChar == '~')  	return isGroupID ;  return isCollectiveID ;}
 
 string getFormatedTime(string sRawDate, string sLang, string sTimeFormat)
 {
@@ -1325,7 +1333,7 @@ string getFormatedTime(string sRawDate, string sLang, string sTimeFormat)
 
 	return sResult ;
 }
-string getFormatedTime(string sRawTime, string sLang, string sDateFormat, string sHourFormat){	size_t iRawTimeSize = strlen(sRawTime.c_str()) ;	if (iRawTimeSize < 8)		return string("") ;	string sFormatedHour = string("") ;	string sRawDate = string(sRawTime, 0, 8) ;  string sFormatedDate = getFormatedDate(sRawDate, sLang, sDateFormat) ;  if (14 == iRawTimeSize)  {  	string sRawHour = string(sRawTime, 8, 6) ;    if (string("") == sHourFormat)    {    	sFormatedHour = getFormatedHour(sRawHour, sLang, sFormatedDate) ;      if (string("") == sFormatedHour)      	return sFormatedDate ;      else      	return sFormatedHour ;    }    else    {    	sFormatedHour = getFormatedHour(sRawHour, sLang, sHourFormat) ;    	sFormatedDate += string(" ") + sFormatedHour ;    }  }  return sFormatedDate ;}string getFormatedDate(string sRawDate, string sLang, string sDateFormat)
+string getFormatedTime(string sRawTime, string sLang, string sDateFormat, string sHourFormat){	size_t iRawTimeSize = strlen(sRawTime.c_str()) ;	if (iRawTimeSize < 8)		return string("") ;	string sFormatedHour = string("") ;	string sRawDate = string(sRawTime, 0, 8) ;  string sFormatedDate = getFormatedDate(sRawDate, sLang, sDateFormat) ;  if (14 == iRawTimeSize)  {  	string sRawHour = string(sRawTime, 8, 6) ;    if (string("") == sHourFormat)    {    	sFormatedHour = getFormatedHour(sRawHour, sLang, sFormatedDate) ;      if (string("") == sFormatedHour)      	return sFormatedDate ;      else      	return sFormatedHour ;    }    else    {    	sFormatedHour = getFormatedHour(sRawHour, sLang, sHourFormat) ;    	sFormatedDate += string(" ") + sFormatedHour ;    }  }  return sFormatedDate ;}string getFormatedDate(string sRawDate, string sLang, string sDateFormat)
 {
 	if (strlen(sRawDate.c_str()) != 8)
 		return string("") ;
@@ -1451,7 +1459,7 @@ ote_blancs(char* mot)
   for (i = strlen(mot) ; (mot[i-1] == ' ') && (i > 0) ; i--)
     ;
 
-  if (i == 0)  {    mot[0] = '\0' ;    return (0) ;  }  else
+  if (i == 0)  {    mot[0] = '\0' ;    return (0) ;  }  else
   	mot[i] = '\0' ;
 
   // On ôte les blancs initiaux
@@ -1584,7 +1592,7 @@ donne_mois(string mois, string sLang)
 }
 
 // -----------------------------------------------------------------------------
-// Description : Donne le libellé du mois à partir d'un int             ¦// -----------------------------------------------------------------------------
+// Description : Donne le libellé du mois à partir d'un int             ¦// -----------------------------------------------------------------------------
 // Created on 14/11/1997
 // Last modified on 14/11/1997
 // -----------------------------------------------------------------------------
@@ -1634,7 +1642,7 @@ donne_mois(int iMois, string sLang)
 }
 
 // -----------------------------------------------------------------------------
-// Function    : void donne_date(date, message, pays)// Description : Transforme une date AAAAMMJJ en un message JJ/MM/AAAA
+// Function    : void donne_date(date, message, pays)// Description : Transforme une date AAAAMMJJ en un message JJ/MM/AAAA
 // Return      : Rien
 // -----------------------------------------------------------------------------
 // Created on 12/04/1991
@@ -1909,7 +1917,7 @@ isLogicalFormulaValid(string sFormula, string *psErrorMsg, bool bPureLogical)
     //
     if ((' ' == sFormula[cc]) || ('\t' == sFormula[cc]))
     {
-      while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))        cc++ ;
+      while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))        cc++ ;
 
       // If pure logical, check that 2 'non operators' don't appear in a row
       //
@@ -1922,7 +1930,7 @@ isLogicalFormulaValid(string sFormula, string *psErrorMsg, bool bPureLogical)
       }
     }
 
-    // Checking current operand    //    if (cc < iSize)
+    // Checking current operand    //    if (cc < iSize)
     {
       // Is current operand compatible with the previous one?
       //
@@ -2052,9 +2060,9 @@ parseLogicalBlocks(string &sFormula, map<string, string> *paBlocks)
   {
     // Skip blanks and tabs
     //
-    while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))      cc++ ;
+    while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))      cc++ ;
 
-    // Checking current operand    //    if (cc < iSize)
+    // Checking current operand    //    if (cc < iSize)
     {
       // ')' is always invalid
       //
@@ -2211,7 +2219,7 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
   size_t iSize = strlen(sFormula.c_str()) ;
 
   if (cc == iSize)
-  {    if (psErrorMsg)      *psErrorMsg = string("emptyComparisonBlock") ;    return false ;  }
+  {    if (psErrorMsg)      *psErrorMsg = string("emptyComparisonBlock") ;    return false ;  }
   bool bExistsBlanck = false ;
 
   string sOper = string("") ;
@@ -2223,12 +2231,12 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
 
     // Skip blanks and tabs
     //
-    while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))    {      cc++ ;
+    while ((cc < iSize) && ((' ' == sFormula[cc]) || ('\t' == sFormula[cc])))    {      cc++ ;
       bAfterBlank   = true ;
       bExistsBlanck = true ;
     }
 
-    // Checking current operand    //    if (cc < iSize)
+    // Checking current operand    //    if (cc < iSize)
     {
       if (bAfterBlank && ('*' == sFormula[cc]))
       {
@@ -2247,13 +2255,13 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
           if (iOpNb > 1)
           {
             if (psErrorMsg)
-              *psErrorMsg = string("emptyComparisonBlock") ;            return false ;
+              *psErrorMsg = string("emptyComparisonBlock") ;            return false ;
           }
 
           if (cc >= iSize)
           {
             if (psErrorMsg)
-              *psErrorMsg = string("noRvalueInComparisonBlock") ;
+              *psErrorMsg = string("noRvalueInComparisonBlock") ;
             return false ;
           }
 
@@ -2263,7 +2271,7 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
           if (string("") == sLValue)
           {
             if (psErrorMsg)
-              *psErrorMsg = string("noLvalueInComparisonBlock") ;
+              *psErrorMsg = string("noLvalueInComparisonBlock") ;
             return false ;
           }
 
@@ -2275,7 +2283,7 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
           if (string("") == sRValue)
           {
             if (psErrorMsg)
-              *psErrorMsg = string("noRvalueInComparisonBlock") ;
+              *psErrorMsg = string("noRvalueInComparisonBlock") ;
             return false ;
           }
         }
@@ -2294,7 +2302,7 @@ parseComparisonBlock(string sFormula, string &sLValue, string &sOperator, string
     }
 
     if (psErrorMsg)
-      *psErrorMsg = string("noComparisonOperatorFound") ;
+      *psErrorMsg = string("noComparisonOperatorFound") ;
     return false ;
   }
 
@@ -2318,15 +2326,15 @@ evaluate(map<string, bool> *pDatas, string sFormula, size_t& cc)
   char oper = ' ' ;
   bool bNegation ;
 
-  while (cc < strlen(sFormula.c_str()))  {
+  while (cc < strlen(sFormula.c_str()))  {
     result1 = 1 ;
     bNegation = false ;
 
     // Skip blanks
     //
-    while ((cc < strlen(sFormula.c_str())) && (string::npos != sBlanks.find(sFormula[cc])))      cc++ ;
+    while ((cc < strlen(sFormula.c_str())) && (string::npos != sBlanks.find(sFormula[cc])))      cc++ ;
 
-    // on évalue l'opérande en cours    if (cc < strlen(sFormula.c_str()))
+    // on évalue l'opérande en cours    if (cc < strlen(sFormula.c_str()))
     {
       // on évalue d'abord la négation
       if ('!' == sFormula[cc])
@@ -2365,22 +2373,22 @@ evaluate(map<string, bool> *pDatas, string sFormula, size_t& cc)
       }
     }
 
-    // cas erreur à l'évaluation de l'opérande    if (-1 == result1)
+    // cas erreur à l'évaluation de l'opérande    if (-1 == result1)
       return -1 ;
     if (bNegation)
       result1 = !result1 ;
 
-    // on calcule le résultat selon l'opérateur en cours    if      (' ' == oper)
+    // on calcule le résultat selon l'opérateur en cours    if      (' ' == oper)
       result = result1 ;
     else if ('|' == oper)
       result = result || result1 ;
     else if ('&' == oper)
       result = result && result1 ;
 
-    // on avance à nouveau    while ((cc < strlen(sFormula.c_str())) && (' ' == sFormula[cc]))
+    // on avance à nouveau    while ((cc < strlen(sFormula.c_str())) && (' ' == sFormula[cc]))
       cc++ ;
 
-    // on évalue l'opérateur    if (cc < strlen(sFormula.c_str()))
+    // on évalue l'opérateur    if (cc < strlen(sFormula.c_str()))
     {
       // on doit avoir ici une ')' ou un opérateur
       if (('|' == sFormula[cc]) || ('&' == sFormula[cc]))
@@ -2693,7 +2701,7 @@ getPathUnit(string sPath)
   // First case, desired unit is explicitly mentionned inside []
   //
   size_t posStartUnit = sPath.find("[") ;
-  if (string::npos != posStartUnit)  {    size_t posEndUnit = sPath.find("]", posStartUnit + 1) ;    if (string::npos != posEndUnit)
+  if (string::npos != posStartUnit)  {    size_t posEndUnit = sPath.find("]", posStartUnit + 1) ;    if (string::npos != posEndUnit)
       return string(sPath, posStartUnit + 1, posEndUnit - posStartUnit - 1) ;
   }
 

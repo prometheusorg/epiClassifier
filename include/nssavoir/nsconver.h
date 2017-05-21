@@ -2,7 +2,7 @@
 #define NSCONVER_H
 
 #include <vector>
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 
 #ifndef __linux__
 #if defined(_DANSLEXIDLL)

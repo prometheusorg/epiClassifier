@@ -5,7 +5,7 @@
 */
 
 #ifndef _NT_ARRAY_
-# define _NT_ARRAY_
+#define _NT_ARRAY_
 
 #include <vector>
 

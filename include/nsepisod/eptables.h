@@ -8,7 +8,7 @@
 #ifndef __EPTABLES_H
 # define __EPTABLES_H
 
-# include "partage/ns_vector.h"
+# include "partage/nsvector.h"
 
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsdivfctForCgi.h"

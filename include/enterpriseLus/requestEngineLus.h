@@ -75,7 +75,7 @@
 #  define _CLASSEENGINE __import
 # endif
 
-# include "partage/ns_vector.h"
+# include "partage/nsvector.h"
 # include "nautilus/nsanxary.h"
 
 // -----------------------------------------------------------------------------

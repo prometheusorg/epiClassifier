@@ -9,8 +9,12 @@
 
 class NSSuper ;
 
-#include "partage/ns_vector.h"
+#include <vector>
 #include <map>
+#include <string>
+
+using std::string;
+using std::ifstream;
 
 #ifdef _ENTERPRISE_DLL
   # if defined(_DANSPERSONDLL)

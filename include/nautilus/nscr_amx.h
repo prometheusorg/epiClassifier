@@ -7,7 +7,7 @@
 
 #include "nautilus/nsannexe.h"
 // #include "nautilus/nstxstyl.h"
-#include "partage/NTArray.h"
+#include "partage/ntarray.h"
 
 /*class NSCRPhraLes
 {

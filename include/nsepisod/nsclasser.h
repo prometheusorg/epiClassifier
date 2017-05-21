@@ -24,7 +24,7 @@ class NSEpiClassif ;
 class VectString ;
 class NSPathologData ;
 
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 
 #ifndef _ENTERPRISE_DLL
   #include <owl\edit.h>

@@ -30,7 +30,7 @@ DEALINGS IN THE SOFTWARE.
 #ifndef SOCKSTREAM_H__DTI_
 #define SOCKSTREAM_H__DTI_
 
-#include <dti/sockets/sock.h>
+#include <sock.h>
 #include <dti/stream/streambufImpl.h>
 #include <dti/abortable.h>
 

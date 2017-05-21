@@ -2,8 +2,8 @@
 #define __NSVARRAY_H
 
 #include <string>
-#include "partage/ns_vector.h"
-#include "partage/NTArray.h"
+#include "partage/nsvector.h"
+#include "partage/ntarray.h"
 
 #ifndef __linux__
 #if defined(_DANSLEXIDLL)

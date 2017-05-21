@@ -27,8 +27,8 @@ class VectString ;
   #include "partage/nsglobal.h"
 #endif
 
-# include "partage/ns_vector.h"
-# include "partage/NTArray.h"
+# include "../partage/nsvector.h"
+# include "../partage/ntarray.h"
 # include "nsbb/nsexport.h"
 # include "nsbb/nsbb_glo.h"
 // # include "nsbb\nsbbtran.h"

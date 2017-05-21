@@ -11,12 +11,12 @@ class gereNum ;
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
 #else
-  #include "partage/nsglobal.h"
+  #include "nsglobal.h"
 #endif
 
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 #include "nssavoir/nspatbas.h"
-#include "partage/NTArray.h"
+#include "partage/ntarray.h"
 
 #ifndef __linux__
 #if defined(_DKD_DLL)

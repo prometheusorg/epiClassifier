@@ -11,9 +11,13 @@
 
 #include <map>
 #include <string>
+#include <vector>
+
+using std::vector;
+using std::map;
+using std::string;
 // #include <owl\applicat.h>
 
-#include "partage/ns_vector.h"
 #ifndef BOOL
 	#define BOOL    int
 #endif

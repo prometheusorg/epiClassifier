@@ -13,7 +13,7 @@
   #include "partage/nsglobal.h"
 #endif
 
-#include "partage/ns_vector.h"
+#include "partage/nsvector.h"
 #ifndef __linux__
 #include "ns_sgbd/nsfiche.h"
 #endif

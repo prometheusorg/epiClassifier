@@ -19,8 +19,8 @@ class NSChemiseInfo ;
 // #include "nautilus\nsannexe.h"
 // #include "nsdn\nsdocum.h"
 
-#include "partage/ns_vector.h"
-#include "partage/NTArray.h"
+#include "../partage/nsvector.h"
+#include "../partage/ntarray.h"
 
 //
 // Définition de NSDocumentArray (Array de NSDocument(s))

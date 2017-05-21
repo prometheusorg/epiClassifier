@@ -8,16 +8,14 @@
 //---------------------------------------------------------------------------
 
 #ifndef __NSSUPER_H__
-# define __NSSUPER_H__
+#define __NSSUPER_H__
 
 // # include <cstring.h>
 // # include <dos.h>
 // # include <time.h>
 // # include <stdio.h>
 
-# include <string>
-
-#include "dti/sockets/sock.h"
+#include "../dti/sockets/sock.h"
 
 class Person ;
 class PersonArray ;
@@ -43,11 +41,10 @@ class NSSuper ;
 
 // class NSContextArray ;
 
-#include "partage/NTArray.h"
-#include "partage/ns_vector.h"
+#include "../partage/ntarray.h"
 
 // # include "nsdivfctForCgi.h"    // fonction erreur
-#include "enterpriseLus/personLus.h"
+#include "personLus.h"
 
 // # include "pilot\NautilusPilot.hpp"
 
