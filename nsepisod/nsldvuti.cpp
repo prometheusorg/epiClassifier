@@ -26,7 +26,7 @@
 #include "nsepisod/nsldvuti.h"
 #include "nssavoir/nsfilgd.h"
 
-#include "prtime.h"
+#include <nspr/prtime.h>
 
 #ifndef _ENTERPRISE_DLL
 // --------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 #include <fstream>
 #include <string>
 #include <cstring>
-#include "prtime.h"
+#include <nspr/prtime.h>
 
 // #include "enterpriseLus/nsglobalLus.h"
 #include "nssavoir/nslocalise.h"

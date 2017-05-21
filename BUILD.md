@@ -6,6 +6,7 @@ apt-get install unzip
 apt-get install build-essential
 apt-get install mercurial
 apt-get install build-essential
+apt-get install libnspr4-dev
 ```
 
 ### Create a directory for the project:
@@ -19,7 +20,11 @@ Copy epiClassifierForLinux.zip in this directory and unzip it:
 unzip epiClassifierForLinux.zip
 ```
 ### NSPR
+#### Dynamic linking
+We will try to link epiClassifier with the version packaged for Debian 9 Stretch:
+libnspr4-dev (2:4.12-6)
 
+#### Static linking
 From [NSPR build instructions]:
 
 Check out the source tree from Mercurial

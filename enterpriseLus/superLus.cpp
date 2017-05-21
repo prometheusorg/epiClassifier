@@ -72,7 +72,7 @@
 #include <string>
 #include <cstdarg>
 // #include <sysutils.hpp>
-#include "prtime.h"
+#include <nspr/prtime.h>
 
 using std::string ;
 
@@ -415,7 +415,7 @@ catch (...)
 }
 
 bool
-NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - begin") ;	trace(&ps, 1, trSteps) ;	ps = string("Java init : opening file pilot.dat") ;	trace(&ps, 1, trSubSteps) ;	ifstream inFile ;	inFile.open("pilot.dat") ;	if (!inFile)
+NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - begin") ;	trace(&ps, 1, trSteps) ;	ps = string("Java init : opening file pilot.dat") ;	trace(&ps, 1, trSubSteps) ;	ifstream inFile ;	inFile.open("pilot.dat") ;	if (!inFile)
 	{
 		string sErreur = getText("pilotManagement", "cannotOpenPilot.dat") ;
     trace(&sErreur, 1, NSSuper::trError) ;
@@ -423,14 +423,14 @@ NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - 
 		return false ;
 	}
 	inFile.close() ;
-	ps = string("Java init : JavaSystem::Init") ;	trace(&ps, 1, trSubSteps) ;	//=== Pilot initialisations
+	ps = string("Java init : JavaSystem::Init") ;	trace(&ps, 1, trSubSteps) ;	//=== Pilot initialisations
 	char* propertyFile = NULL ; //by default Pilot.properties
 	if (JavaSystem::Init(this, "pilot.properties", false))
 	{
 		string sErreur = getText("pilotManagement", "cannotInitJavaMachine") ;
     trace(&sErreur, 1, NSSuper::trError) ;
     _bJavaOk = false ;
-		return false ;	}
+		return false ;	}
 
 	ps = string("Java init : Pilot::Init") ;
 	trace(&ps, 1, trSubSteps) ;
@@ -471,8 +471,8 @@ NSSuper::InitialiseJava(){#ifdef FOR_WINDOWS	string ps = string("Java init - 
 		string sErreur = getText("pilotManagement", "cannotAddServices") ;
     trace(&sErreur, 1, NSSuper::trError) ;
 	}
-	itoa(stat, szInfo, 10) ;	ps = string("Pilot init - nb of services : ") + string(szInfo) ;
-	trace(&ps, 1, trDetails) ;
+	itoa(stat, szInfo, 10) ;	ps = string("Pilot init - nb of services : ") + string(szInfo) ;
+	trace(&ps, 1, trDetails) ;
 	ps = string("Java init : NautilusPilot::Init") ;
 	trace(&ps, 1, trSubSteps) ;
 
