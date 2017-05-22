@@ -16,7 +16,7 @@
 #include <time.h>
 #include <stdio.h>
 
-using namespace ClassLib ;
+using namespace ClassLib;
 
 int  TTime::_daylight = 0 ;
 long TTime::_timezone = 0 ;

@@ -7,7 +7,7 @@
 // TDate class implementation
 //----------------------------------------------------------------------------
 // #include <classlib/pch.h>
-#include <date.h>
+#include <classlib/date.h>
 // #include <services/cstring.h>
 // #include <services/checks.h>
 #include <stdio.h>
