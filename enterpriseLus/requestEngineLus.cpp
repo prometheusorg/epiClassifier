@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <cstring>
 #include <nspr/prtime.h>
 
@@ -82,7 +83,7 @@ try
 catch (dti::sockets::sock_error_ex& e)
 {
   std::string sError = std::string("Exception tcp_listener::recv(): ") + e.what() ;
-  sError += std::string(" Error number: ") + IntToString(e.whaterr()) ;
+  sError += std::string(" Error number: ") + std::to_string(e.whaterr()) ;
   sError += std::string(" Error text: ") + e.whatsystext() ;
   trace(&sError, 1, trError) ;
   return ;

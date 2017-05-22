@@ -27,7 +27,7 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
-#include <sock.h>
+#include "../../include/dti/sockets/sock.h"
 #ifdef _WIN32
 #	include <winsock2.h>
 #	include <windows.h>

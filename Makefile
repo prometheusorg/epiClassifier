@@ -56,8 +56,8 @@ OBJDTILIB	= $(EPIPATH)/dtilib/sockets/sockstream.o $(EPIPATH)/dtilib/sockets/soc
 		$(EPIPATH)/dtilib/async/async.o
 
 # librairies
-LIB	= -lmysqlclient ./pr/target.debug/dist/lib/libnspr4.so
-
+LIB	= -lmysqlclient -lnspr4 -lpthread
+#LIB	= -lmysqlclient ./pr/target.debug/dist/lib/libnspr4.so -lnspr4
 #########################################################
 #							#
 #		Parametres de compilation		#

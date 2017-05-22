@@ -13,7 +13,7 @@
 // #include <classlib/pch.h>
 #include <time.h>
 // #include <services/checks.h>
-#include <time.h>
+#include "../include/classlib/time.h"
 #include <stdio.h>
 
 using namespace ClassLib;

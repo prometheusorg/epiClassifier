@@ -47,3 +47,6 @@ CMakeLists.txt.user*
 # Eclipse
 .cproject
 .project
+
+# binary
+epiClassifier

@@ -2833,7 +2833,7 @@ replaceVarByAlias(string *psFormula, map<string, string> *paAliases, size_t iVar
             bool bKeepChecking = true ;
             while (bKeepChecking)
             {
-                sAlias = sNameInit + IntToString(iBlockNb) ;
+                sAlias = sNameInit + std::to_string(iBlockNb) ;
                 map<string, string>::iterator cur = paAliases->begin() ;
                 while ((paAliases->end() != cur) && ((*cur).second != sAlias))
                     cur++ ;

@@ -3320,7 +3320,7 @@ try
       }
     }
 	}
-  ps = "NSFilGuide::TousLesVrais: done, leaving (" + IntToString(iVectorSize) + " elements found)";
+  ps = "NSFilGuide::TousLesVrais: done, leaving (" + std::to_string(iVectorSize) + " elements found)";
   _pSuper->trace(&ps, 1, NSSuper::trSubDetails) ;
 }
 catch (...)

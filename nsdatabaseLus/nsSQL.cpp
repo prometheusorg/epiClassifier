@@ -129,7 +129,7 @@ ontologyBaseManager::executeQuery(const string sQuery, bool bVerbose, string *pE
   if (0 == iQueryError)
     return mysql_use_result(_sqlConnector) ;
 
-  *pErrorMessage = string("Query error ") + IntToString(iQueryError) + string(" ") ;
+  *pErrorMessage = string("Query error ") + std::to_string(iQueryError) + string(" ") ;
 
   // Connection lost - try again to reconnect automatically
   //
