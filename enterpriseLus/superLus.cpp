@@ -71,8 +71,12 @@
 #include <fstream>
 #include <string>
 #include <cstdarg>
-// #include <sysutils.hpp>
 #include <nspr/prtime.h>
+
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <libconfig.h++>
 
 using std::string ;
 
@@ -382,12 +386,13 @@ try
   std::string ps = std::string("Entering InitDatabase") ;
 	trace(&ps, 1, trSteps) ;
 
-  std::string sServer   = std::string("localhost") ;
+  std::string sHost     = std::string("localhost") ;
+  std::string sDatabase = std::string("nsontology") ;
   std::string sUser     = std::string("nsontology") ;
-  std::string sPassWd   = std::string("putPassHere") ;
-  std::string sDataBase = std::string("nsontology") ;
+  std::string sPassword = std::string("nsontology") ;
 
-  _ontologyManager = new ontologyBaseManager(sServer, sUser, sPassWd, sDataBase) ;
+
+  _ontologyManager = new ontologyBaseManager(sHost, sUser, sPassword, sDatabase) ;
   if ((ontologyBaseManager *) NULL == _ontologyManager)
     return false ;
 

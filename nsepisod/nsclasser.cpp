@@ -1788,7 +1788,7 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'É' :
       case 'Ê' :
       case 'Ë' :
-			case 'é' :
+      case 'é' :
       case 'ë' :
       case 'è' :
       case 'ê' : chaine[i] =  'E' ;

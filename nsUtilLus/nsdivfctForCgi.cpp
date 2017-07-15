@@ -69,6 +69,7 @@
 // The fact that you are presently reading this means that you have had
 // knowledge of the CeCILL license and that you accept its terms.
 // -----------------------------------------------------------------------------
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -85,7 +86,17 @@ using namespace std;
 
 int StringToInt(string sValeur){	return (string("") != sValeur) ? atoi(sValeur.c_str()) : 0 ;}
 
-// -----------------------------------------------------------------------------// Function : Transforme un int en string// -----------------------------------------------------------------------------stringIntToString(int val){	char temp[33] ;  // was itoa(val, temp, 10) but itoa is non-standard ; better use sprintf  sprintf(temp, "%d", val) ;  string result(temp) ;  return result ;}
+// -----------------------------------------------------------------------------
+// Function : Transforme un int en string
+// -----------------------------------------------------------------------------
+string IntToString(int val)
+{
+    char temp[33] ;// was itoa(val, temp, 10) but itoa is non-standard ; better use sprintf
+    sprintf(temp, "%d", val);
+    string result(temp);
+    return result ;
+}
+
 // -----------------------------------------------------------------------------
 // void strip(string& s, int n)// Fonction : enleve les blancs d'une string// Retour   : rien// -----------------------------------------------------------------------------
 void strip(string& s, STRIPTYPE n, char c)
@@ -2946,8 +2957,11 @@ URL_ScanFor(string *psBuff, char cTarget, size_t &x)
 
 int ParseUrlQuery(string *psBuff, map<string, string> *pQueryParts)
 {
-    if ((NULL == pQueryParts) || (NULL == psBuff))
-        return 0 ;
+    std::cout << "ParseUrlQuery() psBuff: " << *psBuff << std::endl;
+    if (!pQueryParts || !psBuff) {
+        std::cout << "null pointer" << std::endl;
+        return 0;
+    }
 
     size_t iQueryLength = strlen(psBuff->c_str()) ;
     if (iQueryLength < 1)

@@ -8,11 +8,6 @@
   #include <owl\pch.h>
 #endif
 
-/*
-#include "classlib/date.h"
-#include "classlib/time.h"
-*/
-
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/superLus.h"
   #include "enterpriseLus/nsdivfctForCgi.h"

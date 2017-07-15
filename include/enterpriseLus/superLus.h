@@ -12,7 +12,6 @@
 
 // # include <cstring.h>
 // # include <dos.h>
-// # include <time.h>
 // # include <stdio.h>
 
 #include "../dti/sockets/sock.h"

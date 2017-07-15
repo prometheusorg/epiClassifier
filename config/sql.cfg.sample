@@ -1,0 +1,9 @@
+# Configuration file for epiclassifier SQL database
+#
+# Rename this file sql.cfg
+
+host = "localhost";
+database = "database";
+user = "sqluser";
+password = "sqlpassword";
+

@@ -4,6 +4,7 @@
 //    Request Engine model
 //---------------------------------------------------------------------------
 
+#include <iostream>
 #include <stdio.h>
 #include <fstream>
 #include <string>
@@ -42,8 +43,7 @@ RequestEngine::~RequestEngine()
 {
 }
 
-void
-RequestEngine::mainLoop()
+void RequestEngine::mainLoop()
 {
   std::string sMsg = std::string("Entering main loop") ;
   trace(&sMsg, 1, trSubSteps) ;
@@ -139,6 +139,9 @@ RequestEngine::processCommand(std::string sInput)
 std::string
 RequestEngine::processURL(std::string sQuery)
 {
+  std::cout << "std::string RequestEngine::processURL(std::string sQuery)" << std::endl;
+  std::cout << "sQuery: " << sQuery << std::endl;
+
   if (std::string("") == sQuery)
     return std::string("") ;
 

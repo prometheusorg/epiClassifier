@@ -50,3 +50,10 @@ CMakeLists.txt.user*
 
 # binary
 epiClassifier
+
+# config files
+config/sql.cfg
+
+# trace files
+traceEngine.inf
+traceNau.inf

@@ -1,4 +1,4 @@
-These instructions were tested on Debian Jessie.
+These instructions were tested on Debian Stretch.
 ### Dependencies
 ```bash
 apt-get install zip
@@ -7,6 +7,7 @@ apt-get install build-essential
 apt-get install mercurial
 apt-get install build-essential
 apt-get install libnspr4-dev
+apt-get install libconfig9
 ```
 
 ### Create a directory for the project:
