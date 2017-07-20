@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     ClassifierEngine engine(&NSSuperviseur) ;
 
     engine.Init(string("enterpriseLus.ini")) ;
-/*
+    /*
     std::string sArg;
     if (argc > 1) {
         sArg = argv[1];
@@ -77,6 +77,9 @@ ClassifierEngine::~ClassifierEngine()
 string
 ClassifierEngine::processCommands(map<string, string> *pCommands)
 {
+    std::cout << "inside function "
+                 "string ClassifierEngine::processCommands(map<string, string> *pCommands)";
+
     string sResult = string("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n") ;
 
     if (NULL == pCommands)
@@ -86,8 +89,7 @@ ClassifierEngine::processCommands(map<string, string> *pCommands)
     if (string("") == sWhatToDo)
         return sResult + string("<error code=\"EPI_ERR_MISSING_COMMAND\" />") ;
 
-    // Connecting database
-    //
+    std::cout << "Connecting database\n";
     ontologyBaseManager* pDbManager = _pSuper->getDatabaseManager() ;
     if ((ontologyBaseManager*) NULL == pDbManager)
     {
@@ -97,13 +99,21 @@ ClassifierEngine::processCommands(map<string, string> *pCommands)
     }
     if (false == pDbManager->openBase())
     {
-        string sTrace = string("Cannot open database, cannot process command (") + pDbManager->getMysqlError() +string(")") ;
-        trace(&sTrace, 1, trError) ;
-        return string("") ;
+        std::cout << "Cannot open database, cannot process command\n";
+        if (pDbManager) {
+            if (!pDbManager->getMysqlError().empty()) {
+                std::cout << pDbManager->getMysqlError();
+                string sTrace = string("Cannot open database, cannot process command (") + pDbManager->getMysqlError() +string(")") ;
+                trace(&sTrace, 1, trError) ;
+                return string("");
+            }
+        }
     }
 
     if (string("getCodesFromText") == sWhatToDo)
     {
+        std::cout << "(\"getCodesFromText\") == sWhatToD \n";
+
         string sText = (*pCommands)[string("text")] ;
         if (string("") == sText)
         {

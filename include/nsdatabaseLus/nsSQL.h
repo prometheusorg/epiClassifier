@@ -19,7 +19,8 @@
 # include <vector>
 # include <string>
 
-# include "mysql/mysql.h"
+//#include "../epiClassifier/include/mysql/mysql.h"
+#include  "mysql/mysql.h"
 
 using namespace std ;
 

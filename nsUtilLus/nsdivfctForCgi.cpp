@@ -77,6 +77,7 @@
 
 #include <string>
 #include <fstream>
+#include <regex>
 
 #include "enterpriseLus/nsdivfctForCgi.h"
 
@@ -2964,8 +2965,10 @@ int ParseUrlQuery(string *psBuff, map<string, string> *pQueryParts)
     }
 
     size_t iQueryLength = strlen(psBuff->c_str()) ;
+
     if (iQueryLength < 1)
         return 0 ;
+
 
     /*
     **	MAIN QUERY PARSING LOOP
