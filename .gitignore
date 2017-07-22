@@ -57,3 +57,5 @@ config/sql.cfg
 # trace files
 traceEngine.inf
 traceNau.inf
+
+index.html
