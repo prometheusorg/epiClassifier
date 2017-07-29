@@ -3806,7 +3806,7 @@ TermsParser::FindAllClinicalTermsStartingWith(NSThesaurusInfo *pClinicalBase, st
     return string("") ;
   }
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
   {
     string sTrace = string("TermsParser::FindClinicalTerm -> incorrect query ") + sQuery ;

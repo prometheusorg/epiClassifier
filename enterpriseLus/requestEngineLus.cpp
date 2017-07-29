@@ -103,6 +103,7 @@ void RequestEngine::mainLoop()
 string
 RequestEngine::processCommand(std::string sInput)
 {
+    std::cout << "sInput: " << sInput;
     if (string("") == sInput)
         return std::string("") ;
 

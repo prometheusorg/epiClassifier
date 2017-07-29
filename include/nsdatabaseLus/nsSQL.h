@@ -19,7 +19,6 @@
 # include <vector>
 # include <string>
 
-//#include "../epiClassifier/include/mysql/mysql.h"
 #include  "mysql/mysql.h"
 
 using namespace std ;
@@ -40,8 +39,8 @@ class ontologyBaseManager
 {
  public:
 
-  ontologyBaseManager(string sHost, string sUser, string sPass, string sDB) ;
-  ~ontologyBaseManager() ;
+  ontologyBaseManager(string sHost, string sUser, string sPass, string sDB);
+  ~ontologyBaseManager();
 
   bool initBase() ;
   // bool insertMessage(messageData message) ;
@@ -59,10 +58,10 @@ class ontologyBaseManager
   MYSQL * _sqlConnector ;
   int     _iInstanceCounter ;
 
-  string  _host ;
-  string  _user ;
-  string  _pass ;
-  string  _database ;
+  const char *  _host ;
+  const char *  _user ;
+  const char *  _pass ;
+  const char *  _database ;
 
   string  _sMysqlError ;
 } ;

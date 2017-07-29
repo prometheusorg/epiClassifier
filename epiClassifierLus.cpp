@@ -4,6 +4,8 @@
 #include <condefs.h>
 #endif
 
+#include <mysql/mysql.h>
+
 // #include <string>
 
 // using std::string ;
@@ -25,8 +27,14 @@
 int main(int argc, char* argv[])
 {
     std::cout << "main\n";
-    NSSuper NSSuperviseur(3) ;
-    NSSuperviseur.setTraceLevel(NSSuper::trSubDetails) ;
+
+    /*if (mysql_library_init(0, NULL, NULL)) {
+        fprintf(stderr, "could not initialize MySQL library\n");
+        exit(1);
+    }*/
+
+    NSSuper NSSuperviseur(3);
+    NSSuperviseur.setTraceLevel(NSSuper::trSubDetails);
 
     string sTr = string("Starting epiClassifier version ") + NSSuperviseur._sNumVersion ;
     NSSuperviseur.trace(&sTr, 1, NSSuper::trSteps) ;
@@ -35,7 +43,7 @@ int main(int argc, char* argv[])
     NSSuperviseur.InitPointers() ;
 
     if (false == NSSuperviseur.InitDatabase())
-        return -1 ;
+        return -1;
 
     ClassifierEngine engine(&NSSuperviseur) ;
 

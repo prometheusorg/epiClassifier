@@ -554,7 +554,7 @@ try
   }
 
   if (src._pComplement)
-  	_pComplement = new NSPhraseur(*(src._pComplement)) ;
+      _pComplement = new NSPhraseur(*(src._pComplement));
 
 	return *this ;
 }

@@ -732,10 +732,9 @@ NSDico::SetData(string sItem, string* pUnite, NSPatPathoArray* pPathoDocEnCours)
   return sValeur ;
 }
 
-void
-NSDico::separe(string* psChaine, string* psLexique, string* psCertitude, string* psPluriel)
+void NSDico::separe(string* psChaine, string* psLexique, string* psCertitude, string* psPluriel)
 {
-	*psCertitude = "" ;
+  *psCertitude = "" ;
   *psPluriel   = "" ;
 
   size_t pos = psChaine->find("/") ;
@@ -778,8 +777,7 @@ NSDico::separe(string* psChaine, string* psLexique, string* psCertitude, string*
 //-----------------------------------------------------------------------
 // fonction globale
 //-----------------------------------------------------------------------
-bool
-inferieure(string* s, string* b)
+bool inferieure(string* s, string* b)
 {
 	return (*s < *b) ;
 }
@@ -906,8 +904,7 @@ catch (...)
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-void
-NSFilGuide::Relache()
+void NSFilGuide::Relache()
 {
 	if (!bOuvreFerme)
 		return ;
@@ -920,10 +917,10 @@ NSFilGuide::Relache()
 
 
 // -----------------------------------------------------------------------------
-//Egalité au sens stricte
+// Egalité au sens stricte
 // -----------------------------------------------------------------------------
-void
-NSFilGuide::chercheCheminEgaliteStricte(string* pCheminPere, VecteurRechercheSelonCritere* pVecteurSelonCritere)
+void NSFilGuide::chercheCheminEgaliteStricte(string* pCheminPere,
+                                             VecteurRechercheSelonCritere* pVecteurSelonCritere)
 {
 #ifndef _ENTERPRISE_DLL
   bool continuer = true ;
@@ -3120,9 +3117,9 @@ NSFilGuide::chercheCheminObjet(string* /* pChemin */, VecteurRechercheSelonCrite
 //										-> pDonnees : pointeur sur BBItemData
 //										-> ses équivalents sémantiques
 //---------------------------------------------------------------------------
-void
-NSFilGuide::chercheChemin(string* pCheminPere, VecteurRechercheSelonCritere* pVecteurSelonCritere,
-                                 int precision)
+void NSFilGuide::chercheChemin(string* pCheminPere,
+                               VecteurRechercheSelonCritere* pVecteurSelonCritere,
+                               int precision)
 {
 	switch (precision)
 	{

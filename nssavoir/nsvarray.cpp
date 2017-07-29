@@ -194,9 +194,10 @@ VecteurDecode::operator=(VecteurDecode src)
 
   vider() ;
 
-  if (!(src.empty()))
+  if (!(src.empty())) {
   	for (EquiDecodeIter i = src.begin(); i != src.end(); i++)
-    	push_back(new BBDecodeData(*(*i))) ;
+        push_back(new BBDecodeData(*(*i)));
+  }
 
 	return *this ;
 }
@@ -292,9 +293,10 @@ BBFicheArray::operator=(BBFicheArray src)
 
 	vider() ;
 
-  if (!(src.empty()))
+  if (!(src.empty())) {
   	for (BBFicheIter i = src.begin(); i != src.end(); i++)
-    	push_back(new BBItemInfo(*(*i))) ;
+        push_back(new BBItemInfo(*(*i)));
+  }
 
 	return *this ;
 }
@@ -340,9 +342,10 @@ VecteurItem::operator=(VecteurItem src)
 
   vider() ;
 
-  if (!(src.empty()))
+  if (!(src.empty())) {
   	for (EquiItemVectorIter i = src.begin(); i != src.end(); i++)
-    	push_back(new VecteurString(*(*i))) ;
+        push_back(new VecteurString(*(*i)));
+  }
 
 	return *this ;
 }
@@ -691,11 +694,13 @@ RechercheSelonCritereData::operator=(RechercheSelonCritereData src)
   	pVecteurData    = 0 ;
 
   if (pDonnees)
-  	delete pDonnees ;
-  if (src.pDonnees)
-  	pDonnees    = new BBItemData(*(src.pDonnees)) ;
-  else
-  	pDonnees    = 0 ;
+    delete pDonnees;
+
+  if (src.pDonnees) {
+      pDonnees = new BBItemData(*(src.pDonnees));
+  } else {
+      pDonnees = 0;
+  }
 
 	return *this ;
 }
@@ -806,7 +811,7 @@ RechercheSelonCritereDecode::operator= (RechercheSelonCritereDecode src)
 }
 
 //***************************************************************************
-// 							Implémentation des mèthodes VecteurRechercheSelonCritere
+// Implémentation des mèthodes VecteurRechercheSelonCritere
 //***************************************************************************
 VecteurRechercheSelonCritere::~VecteurRechercheSelonCritere()
 {
@@ -940,8 +945,7 @@ VecteurRechercheSelonCritere::ItemDansUnVecteur(int rang, string sItem)
 //----------------------------------------------------------------------------
 // Borne Inférieure des vecteurs situés au RANG Rang
 //----------------------------------------------------------------------------
-string
-VecteurRechercheSelonCritere::BorneInf(int Rang)
+string VecteurRechercheSelonCritere::BorneInf(int Rang)
 {
 	if (empty())
   	return "" ;

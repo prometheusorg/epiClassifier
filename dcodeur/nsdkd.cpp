@@ -456,10 +456,11 @@ decodageBase::initialiseIterateurs()
 	pNoyau->itDcode  = pNoyau->pPatPathoArray->begin() ;
 	pNoyau->itMDcode = pNoyau->pPatPathoArray->begin() ;
 
-  if (pNoyau->pPatPathoArray->end() != pNoyau->itDcode)
-  	pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique() ;
-  else
-  	pNoyau->codeLexique = "" ;
+  if (pNoyau->pPatPathoArray->end() != pNoyau->itDcode) {
+    pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique();
+  } else {
+    pNoyau->codeLexique = "";
+  }
     
 	set_iBon(1) ;
 }
@@ -2234,8 +2235,9 @@ string
 gereNum::getNum(string sFormatage, EXTENSIONS eExtensions, int iIndice)
 {
 	numStorage* pStorage = getStorageFromIndice(iIndice) ;
-  if (NULL == pStorage)
+  if (NULL == pStorage) {
   	return string("") ;
+  }
 
 	if (eExtensions == RIEN)
   	return pStorage->sNum ;
@@ -2501,8 +2503,9 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
     *pMessage   = "";
     *pIntro     = "";
 
-    if (sDate == "")
+    if (sDate == "") {
         return;
+    }
 
   	//
   	// Date au format AAAAMMJJ
@@ -2777,10 +2780,11 @@ gereHeure::donne_heure(string* pMessage)
         if (sHeure == "0000")
       	    return;
 
-        if (sHeure[0] == '0')
+        if (sHeure[0] == '0') {
             *pMessage = string(sHeure, 1, 1);
-        else
+        } else {
             *pMessage = string(sHeure, 0, 2);
+        }
 
    	    *pMessage += "h" + string(sHeure, 2, 2);
     }

@@ -1053,9 +1053,10 @@ try
 
 	vider() ;
 
-  if (false == src.empty())
+  if (false == src.empty()) {
     for (TimeIter i = src.begin() ; src.end() != i ; i++)
-    	push_back(new NVLdVTemps(*(*i))) ;
+        push_back(new NVLdVTemps(*(*i)));
+  }
 
 	return *this ;
 }
