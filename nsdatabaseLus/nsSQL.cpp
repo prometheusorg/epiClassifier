@@ -15,6 +15,9 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <libconfig.h++>
 
 #include "enterpriseLus/nsdivfctForCgi.h"
 #include "enterpriseLus/superLus.h"
@@ -22,6 +25,9 @@
 #include "nsdatabaseLus/nsSQL.h"
 
 #include "mysql/errmsg.h"
+
+using namespace std;
+using namespace libconfig;
 
 ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB)
     :_sqlConnector((MYSQL * )0), _iInstanceCounter(0)
@@ -33,7 +39,7 @@ ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPas
 
     _host             = sHost.c_str();
     _user             = sUser.c_str();
-    _pass             = sPass.c_str();
+    _password         = sPass.c_str();
     _database         = sDB.c_str();
 
     initBase();
@@ -80,17 +86,59 @@ bool ontologyBaseManager::openBase()
     if (_iInstanceCounter > 1)
             return true;
 
-    // attempts to establish a connection to a MySQL database engine running on host
+    Config cfg;
+    // Read the file. If there is an error, report it and exit.
     try
     {
-        if(!mysql_real_connect(_sqlConnector,
-                               "localhost",
-                               "nsontology",
-                               "nsontology",
-                               "nsontology",
-                               0,
-                               NULL,
-                               0)){
+        cfg.readFile("./config/sql.cfg");
+    }
+    catch(const FileIOException &fioex)
+    {
+        std::cerr << "I/O error while reading file." << std::endl;
+        return(EXIT_FAILURE);
+    }
+    catch(const ParseException &pex)
+    {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << std::endl;
+        return(EXIT_FAILURE);
+    }
+
+    std::map<std::string, std::string> credentials;
+    std::vector<string> keys = {"host", "database", "user", "password"};
+
+    for (string key : keys)
+    {
+        try
+        {
+            credentials[key] = cfg.lookup(key).c_str();
+            std::cout << "Database " << key << ": " << credentials[key] << endl;
+        }
+        catch(const SettingNotFoundException &nfex)
+        {
+            cerr << "No " << key << " setting in configuration file." << endl;
+        }
+    }
+
+    // attempts to establish a connection to a MySQL database engine running on host
+
+    //std::cout << "members " << host << _user << _password << _database << std::endl;
+
+    const char* cHost = credentials["host"].c_str();
+    const char* cUser = credentials["user"].c_str();
+    const char* cPassword = credentials["password"].c_str();
+    const char* cDatabase = credentials["database"].c_str();
+
+    std::cout << "cHost: " << cHost << std::endl;
+    std::cout << "cUser: " << cUser << std::endl;
+    std::cout << "cPassword: " << cPassword << std::endl;
+    std::cout << "cDatabase: " << cDatabase << std::endl;
+
+    try
+    {
+        if(!mysql_real_connect(_sqlConnector, cHost, cUser,
+                               cPassword, cDatabase, 3306, NULL, 0))
+        {
             throw 1;
         }
         /*MYSQL_RES *res_set;
@@ -237,11 +285,11 @@ bool ontologyBaseManager::closeBase()
     // Closes opened connection and deallocates the connection handle
 
     if (_sqlConnector != NULL) {
-        mysql_close(_sqlConnector);
-        _sqlConnector = NULL;
+            mysql_close(_sqlConnector);
+            _sqlConnector = NULL;
     }
 
-    _iInstanceCounter = 0 ;
+    _iInstanceCounter = 0;
 
     return true ;
 }

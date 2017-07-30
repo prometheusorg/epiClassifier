@@ -10,6 +10,10 @@ apt-get install libnspr4-dev
 apt-get install libconfig9
 ```
 
+```bash
+apt-get install libconfig++-dev
+```
+
 ### Create a directory for the project:
 ```bash
 mkdir epiClassifier

@@ -60,7 +60,7 @@ class ontologyBaseManager
 
   const char *  _host ;
   const char *  _user ;
-  const char *  _pass ;
+  const char *  _password ;
   const char *  _database ;
 
   string  _sMysqlError ;

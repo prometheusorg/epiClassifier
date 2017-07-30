@@ -31,11 +31,12 @@
 #include <string>
 #include <cstdarg>
 #include <nspr/prtime.h>
+#include <map>
 
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
-//#include <libconfig.h++>
+#include <libconfig.h++>
 
 using std::string ;
 
@@ -59,6 +60,9 @@ using std::string ;
 #ifndef __linux__
 #include "nssavoir/nsgraphe.h"
 #endif
+
+using namespace std;
+using namespace libconfig;
 
 /*
 #include "nsbb/nsdefArch.h"
@@ -339,18 +343,49 @@ NSSuper::getText(std::string sChapter, std::string sCode, std::string sLang, NSC
 
 bool NSSuper::InitDatabase()
 {
+    Config cfg;
+    // Read the file. If there is an error, report it and exit.
+    try
+    {
+        cfg.readFile("./config/sql.cfg");
+    }
+    catch(const FileIOException &fioex)
+    {
+        std::cerr << "I/O error while reading file." << std::endl;
+        return(EXIT_FAILURE);
+    }
+    catch(const ParseException &pex)
+    {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << std::endl;
+        return(EXIT_FAILURE);
+    }
+
+    std::map<std::string, std::string> credentials;
+    std::vector<string> keys = {"host", "database", "user", "password"};
+
+    for (string key : keys)
+    {
+        try
+        {
+            credentials[key] = cfg.lookup(key).c_str();
+            std::cout << "Database " << key << ": " << credentials[key] << endl;
+        }
+        catch(const SettingNotFoundException &nfex)
+        {
+            cerr << "No " << key << " setting in configuration file." << endl;
+        }
+    }
+
     try
     {
         std::string ps = std::string("Entering InitDatabase") ;
         trace(&ps, 1, trSteps) ;
 
-        std::string sHost     = std::string("localhost") ;
-        std::string sDatabase = std::string("nsontology") ;
-        std::string sUser     = std::string("nsontology") ;
-        std::string sPassword = std::string("nsontology") ;
-
-
-        _ontologyManager = new ontologyBaseManager(sHost, sUser, sPassword, sDatabase);
+        _ontologyManager = new ontologyBaseManager(credentials["host"],
+                credentials["user"],
+                credentials["password"],
+                credentials["database"]);
         if ((ontologyBaseManager *) NULL == _ontologyManager)
             return false ;
 
