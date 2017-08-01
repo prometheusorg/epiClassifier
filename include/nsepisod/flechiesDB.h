@@ -8,11 +8,7 @@
 #ifndef __FLECHIESDB_H__
 # define __FLECHIESDB_H__
 
-# ifndef FOR_WINDOWS
 #  include <vector>
-# else
-#  include <vector.h>
-# endif
 
 #ifndef _ENTERPRISE_DLL
   #include "partage/nsglobal.h"

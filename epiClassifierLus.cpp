@@ -1,9 +1,3 @@
-
-#ifdef __WINDOWS__
-#pragma hdrstop
-#include <condefs.h>
-#endif
-
 #include <mysql/mysql.h>
 
 // #include <string>
@@ -27,11 +21,6 @@
 int main(int argc, char* argv[])
 {
     std::cout << "main\n";
-
-    /*if (mysql_library_init(0, NULL, NULL)) {
-        fprintf(stderr, "could not initialize MySQL library\n");
-        exit(1);
-    }*/
 
     NSSuper NSSuperviseur(3);
     NSSuperviseur.setTraceLevel(NSSuper::trSubDetails);
@@ -75,15 +64,14 @@ int main(int argc, char* argv[])
 ClassifierEngine::ClassifierEngine(NSSuper* pSuper)
     :RequestEngine()
 {
-    _pSuper = pSuper ;
+    _pSuper = pSuper;
 }
 
 ClassifierEngine::~ClassifierEngine()
 {
 }
 
-string
-ClassifierEngine::processCommands(map<string, string> *pCommands)
+string ClassifierEngine::processCommands(map<string, string> *pCommands)
 {
     std::cout << "inside function "
                  "string ClassifierEngine::processCommands(map<string, string> *pCommands)";

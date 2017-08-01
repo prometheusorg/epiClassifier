@@ -6,10 +6,6 @@
 #ifndef __NSGLOBAL_H
 #define __NSGLOBAL_H
 
-#ifdef __WINDOWS__
-# include <windows.h>
-#endif
-
 // using namespace OWL;
 
 //
@@ -35,30 +31,30 @@
 //  Definition des messages WINDOWS a usage interne
 //---------------------------------------------------------------------------
 #define WM_CONTINUE WM_USER+0       // Message envoye a une fenetre pour
-            // passer a la suivante
+// passer a la suivante
 #define WM_CORRECT  WM_USER+1       // Message envoye par un controle EDIT
-            // a sa fenetre mere
+// a sa fenetre mere
 //#define WM_DICOCORRECT  WM_USER+2       // Message envoye par un controle EDIT
-            // a sa fenetre mere
+// a sa fenetre mere
 
 class NSSuper ;
 
 class NSSuperRoot
 {
-   public:
+public:
 
-		NSSuper* _pSuper ;
-		NSSuperRoot(NSSuper* pSuper) : _pSuper(pSuper) {}
+    NSSuper* _pSuper ;
+    NSSuperRoot(NSSuper* pSuper) : _pSuper(pSuper) {}
 };
 
 class NSContexte ;
 
 class NSRoot
 {
-   public:
+public:
 
-		NSContexte* pContexte ;
-		NSRoot(NSContexte* pCtx) : pContexte(pCtx) {}
+    NSContexte* pContexte ;
+    NSRoot(NSContexte* pCtx) : pContexte(pCtx) {}
 };
 
 // Type de graphe
@@ -91,28 +87,14 @@ enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, gen
 
 #ifdef __MAIN
 
-#ifdef __WINDOWS__
-  WNDPROC lpOldProc;                // Adresse de la WndProc des contrôles EDIT
-  HINSTANCE hInst;                  // Instance courante
-#endif
-
-  char	sDate [2], sTime [2], sAMPM [2][5] ;
-  int	iDate, iTime ;
+char	sDate [2], sTime [2], sAMPM [2][5] ;
+int	iDate, iTime ;
 
 #else
 
-#ifdef __WINDOWS__
-  extern WNDPROC lpOldProc;
-  extern HINSTANCE hInst;
-#endif
+extern char	sDate [2], sTime [2], sAMPM [2][5] ;
+extern int	iDate, iTime ;
 
-  extern char	sDate [2], sTime [2], sAMPM [2][5] ;
-  extern int	iDate, iTime ;
-
-#endif
-
-#ifdef __WINDOWS__
-const ID_TIMER = 1;                 // Numero de l'horloge
 #endif
 
 //---------------------------------------------------------------------------
@@ -134,11 +116,11 @@ const ID_TIMER = 1;                 // Numero de l'horloge
 #define NewLineUnix    "\n\n"
 
 #ifndef __linux
-	#define FILESLASH "\\"
-	#define NEWLINE	"\r\n"
+#define FILESLASH "\\"
+#define NEWLINE	"\r\n"
 #else
-	#define FILESLASH	"/"
-	#define NEWLINE	"\n\n"
+#define FILESLASH	"/"
+#define NEWLINE	"\n\n"
 #endif
 
 //---------------------------------------------------------------------------

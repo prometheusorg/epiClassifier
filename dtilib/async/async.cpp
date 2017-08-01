@@ -29,13 +29,6 @@ DEALINGS IN THE SOFTWARE.
 #include <dti/abortable.h>
 #include "events.h"
 
-#ifdef _WIN32
-#	ifndef _WIN32_WINNT
-#		define _WIN32_WINNT 0x0500 // We need this in order to use QueueUserWorkItem()
-#	endif
-#	include <windows.h>
-#	include <process.h>
-#endif
 #ifdef __GNUC__
 #	include <pthread.h>
 #endif
@@ -58,9 +51,6 @@ using namespace dti::async::detail;
 // parameter to this function.
 //----------------------------------------------------------------------------
 
-#ifdef _WIN32
-static unsigned __stdcall doio(void* lpParameter)
-#endif
 #ifdef __GNUC__
 static void* doio(void* lpParameter)
 #endif
@@ -86,9 +76,7 @@ static void* doio(void* lpParameter)
 		hiop->excepstr = CHIT("Unknown exception");
 	}
 	set_event(hiop->event_id);
-#ifdef _WIN32
-	_endthread();
-#endif
+
 	return 0;
 }
 
@@ -121,10 +109,6 @@ void half_io::cleanup()
 		delete *it;
 	vec.clear();
 
-#ifdef _WIN32
-    WaitForSingleObject((HANDLE)threadid, INFINITE);
-    CloseHandle((HANDLE)threadid);
-#endif
 #ifdef __GNUC__
 	pthread_join(threadid, 0);
 #endif
@@ -149,11 +133,6 @@ event half_io::iostart()
 			set_running();
 			may_abort = true;
 
-#ifdef _WIN32			
-			threadid = _beginthreadex(0, 0, doio, this, 0, 0);
-			if (!threadid)
-				throw std::runtime_error("Cannot start asynchronous handler");
-#endif
 #ifdef __GNUC__
 			if (pthread_create(&threadid, 0, doio, this))
 				throw std::runtime_error("Cannot start asynchronous handler");
