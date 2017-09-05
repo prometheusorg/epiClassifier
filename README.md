@@ -15,12 +15,18 @@ ICPC is the International Classification of Primary Care.
 
 ### Try it
 
+#### Original version online 
+[promethe.org](http://promethe.org) is based on the original version, prior to the modifications recorded on this git
+
+#### Current version
+The current version is not yet ready for an online demo. If you want to test it and/or contribute to the development, you can build it yourself and ask for database credentials.
 
 ### Future
 
 * We are coding a SOAP API based on gSOAP that will allow any web based or standalone software running on any OS to use epiClassifier as a service
 * epiClassifier will be packaged for Debian & Ubuntu
-* Anyone willing to package epiClassifier for a free software distribution is welcome
+* Anyone willing to package epiClassifier for a free software distribution is welcome, we will  provide help on a best effort basis
+* This is free software, you are free to build it for any OS you wish without limitation, but we might not be available to help you deal with proprietary operating systems
 
 ### Build
 * [Original build instructions](http://philippe.ameline.free.fr/epiClassifier/instructions.htm)
