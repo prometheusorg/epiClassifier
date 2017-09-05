@@ -13,30 +13,14 @@
 
 #include "enterpriseLus/superLus.h"
 #include "enterpriseLus/personLus.h"
-#ifndef __linux__
-#include "enterpriseLus/histdoLus.h"
-#endif
+
 // #include "enterpriseLus\nspathoLus.h"
 #include "nssavoir/nspatho.h"
 
-#ifndef __linux__
-#include "nautilus/nsLdv_Vars.h"
-#include "nsbb/nsmanager.h"
-#include "nsbb/nsbbtran.h"
-#include "nsbb/nspatpat.h"
-#include "nssavoir/nsgraphe.h"
-#include "nssavoir/nsHealthTeam.h"
-#include "nsdn/nsdochis.h"
-#include "nsdn/nsframedocs.h"
-#include "partage/ns_search.h"
-#endif
 #include "nssavoir/nsfilgd.h"
 #include "nsepisod/nsldvuti.h"
 #include "dcodeur/nsgen.h"
 
-#ifndef __linux__
-#include "pilot\NautilusPilot.hpp"
-#endif
 #include "nsbb/tagNames.h"
 
 //***************************************************************************

@@ -9,10 +9,6 @@
 //  Kaddachi Hafedh
 // Date de création : PA Mai 96                mise à jour : PA 15/02/1995
 //**************************************************************************
-#ifndef __linux__
-#include <owl\olemdifr.h>
-#include <owl\applicat.h>
-#endif
 
 #ifndef _ENTERPRISE_DLL
   #include "partage/nsdivfct.h"

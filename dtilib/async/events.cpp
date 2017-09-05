@@ -26,71 +26,34 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 #include <dti/async.h>
-#ifdef _WIN32
-#	include <windows.h>
-#endif
-#ifdef __GNUC__
-#	include <pthread.h>
-#	include <sys/time.h>
-#endif
-
+#include <pthread.h>
+#include <sys/time.h>
 #include "events.h"
-
 
 namespace dti {
 namespace async {
 namespace detail {
 
-
 //********************************  EVENT  ***********************************
 // Emulation of Windows' event mechanism
 //****************************************************************************
 
-#ifdef __GNUC__
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-#endif
 
-#ifdef _WIN32
-event create_event(bool initval)
-{
-	return CreateEvent(0, true, initval, 0);
-}
-#endif
-
-#ifdef __GNUC__
 event create_event(bool initval)
 {
 	bool *p = new bool;
 	*p = initval;
 	return p;
 }
-#endif
 
 
-#ifdef _WIN32
-void delete_event(event ev)
-{
-	CloseHandle(ev);
-}
-#endif
-
-#ifdef __GNUC__
 void delete_event(event ev)
 {
 	delete ev;
 }
-#endif
 
-
-#ifdef _WIN32
-void set_event(event ev)
-{
-	SetEvent(ev);
-}
-#endif
-
-#ifdef __GNUC__
 void set_event(event ev)
 {
 	pthread_mutex_lock(&mut);
@@ -98,18 +61,7 @@ void set_event(event ev)
 	pthread_cond_signal(&cond);
 	pthread_mutex_unlock(&mut);
 }
-#endif
 
-
-
-#ifdef _WIN32
-void reset_event(event ev)
-{
-	ResetEvent(ev);
-}
-#endif
-
-#ifdef __GNUC__
 void reset_event(event ev)
 {
 	pthread_mutex_lock(&mut);
@@ -117,24 +69,7 @@ void reset_event(event ev)
 	pthread_cond_signal(&cond);
 	pthread_mutex_unlock(&mut);
 }
-#endif
 
-
-
-#ifdef _WIN32
-int wait_for_multiple_events(int count, event events[], bool all, long msec)
-{
-	DWORD retval = 
-		WaitForMultipleObjects(count, events, all, msec==-1 ? INFINITE : msec);
-
-	if (retval==WAIT_TIMEOUT)
-		return -1;
-	else
-		return retval - WAIT_OBJECT_0;
-}
-#endif
-
-#ifdef __GNUC__
 int wait_for_multiple_events(int count, event events[], bool all, long msec)
 {
 	pthread_mutex_lock(&mut);
@@ -169,8 +104,6 @@ int wait_for_multiple_events(int count, event events[], bool all, long msec)
 	pthread_mutex_unlock(&mut);
 	return -1;
 }
-#endif
-
 
 //***************************  CRITICAL_SECTION  *****************************
 // Emulation of Windows' critical section mechanism
@@ -179,51 +112,29 @@ int wait_for_multiple_events(int count, event events[], bool all, long msec)
 
 critical_section::critical_section()
 {
-#ifdef _WIN32
-	handle = new CRITICAL_SECTION;
-	InitializeCriticalSection((LPCRITICAL_SECTION)handle);
-#endif
-#ifdef __GNUC__
 	handle = new pthread_mutex_t;
 	pthread_mutex_init((pthread_mutex_t*)handle, 0);
-#endif
 }
 	
 
 
 critical_section::~critical_section()
 {
-#ifdef _WIN32
-	DeleteCriticalSection((LPCRITICAL_SECTION)handle);
-	delete (LPCRITICAL_SECTION)handle;
-#endif
-#ifdef __GNUC__
 	pthread_mutex_destroy((pthread_mutex_t*)handle);
 	delete (pthread_mutex_t*)handle;
-#endif
 }
 
 
 void critical_section::enter()
 {
-#ifdef _WIN32
-	EnterCriticalSection((LPCRITICAL_SECTION)handle);
-#endif
-#ifdef __GNUC__
 	if (pthread_mutex_lock((pthread_mutex_t*)handle))
 		throw std::runtime_error("Cannot lock mutex");
-#endif
 }
 
 void critical_section::leave()
 {
-#ifdef _WIN32
-	LeaveCriticalSection((LPCRITICAL_SECTION)handle);
-#endif
-#ifdef __GNUC__
 	if (pthread_mutex_unlock((pthread_mutex_t*)handle))
 		throw std::runtime_error("Cannot unlock mutex");
-#endif
 }
 
 

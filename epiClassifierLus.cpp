@@ -14,10 +14,6 @@
 
 #include <iostream>
 
-#ifdef __linux__
-#  include "classlib/time.h"
-#endif
-
 int main(int argc, char* argv[])
 {
     std::cout << "main\n";

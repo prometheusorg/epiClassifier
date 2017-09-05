@@ -16,16 +16,11 @@
 #endif
 
 #include "nsbb/nsbb_glo.h"
-
 #include "nsbb/nspatpat.h"
 #include "partage/stringar.h"
 #include "nsbb/nsbbtran.h"
 #include "nsbb/nstlibre.h"
 #include "nsbb/ns_objs.h"
-#ifndef __linux__
-  #include "nssavoir/nsgraphe.h"
-  #include "partage/nsmatfic.h"
-#endif
 #include "nssavoir/nsfilgd.h"
 #include "nssavoir/nsguide.h"
 #include "nssavoir/nsconver.h"
@@ -87,7 +82,6 @@ void ComposeNoeudsChemin(string sCheminBrut, string& sCheminPatho)
   }
 }
 
-#ifdef __linux__
 bool
 infLoc(NSPatPathoInfo* s, NSPatPathoInfo* b)
 {
@@ -96,7 +90,6 @@ infLoc(NSPatPathoInfo* s, NSPatPathoInfo* b)
 
   return (s->getLigne() < b->getLigne()) ;
 }
-#endif
 
 // -------------------------------------------------------------------------
 // -------------------- METHODES DE NSVectPatPathoArray ------------------------

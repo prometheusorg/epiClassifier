@@ -1,9 +1,3 @@
-#ifndef __linux__
-#include <owl\owlpch.h>
-#include <owl\applicat.h>
-#include <owl\window.h>
-#endif
-
 #include <string>
 #include "nssavoir/nsguide.h"
 

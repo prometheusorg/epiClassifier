@@ -9,39 +9,13 @@
 #define __NSSOAPDIV_H
 
 class BBFilsItem ;
-#ifndef __linux__
-class NSCapture ;
-#endif
 
 #include "nsepisod/eptables.h"
 
-#ifndef __linux__
-#if defined(_EPISODUSDLL)
-	#define _EPISODUS __export
-#else
-	#define _EPISODUS __import
-#endif
-#endif
-
-#ifndef __linux__
-
-#define _NSSOAPVIEWCLASS _USERCLASS
-#define IDC_SOAPVIEW     0x0042
-
-#define NS_EV_TLISTWIND_NOTIFY_BOOL(notifyCode, method)\
-  {notifyCode, UINT_MAX, (TAnyDispatcher)::B_LPARAM_Dispatch,\
-  (TMyPMF)b_LISTWIND_NOTIFY_Sig(&TMyClass::method)}
-#define NS_LVN_BEGINDRAG(method) NS_EV_TLISTWIND_NOTIFY_BOOL(LVN_BEGINDRAG, method)
-
-#endif // #ifndef __linux__
-
 // enum category_type {subjective = 0, objective, assesment, plan} ;
 
-#ifndef __linux__
-class _EPISODUS ClassificationPrinciple
-#else
 class ClassificationPrinciple
-#endif
+
 {
   public:
 
@@ -62,11 +36,8 @@ typedef vector<ClassificationPrinciple*> ArrayPrinciples ;
 typedef ArrayPrinciples::iterator        PrinciplesIter ;
 typedef ArrayPrinciples::const_iterator  PrinciplesConstIter ;
 
-#ifndef __linux__
-class _EPISODUS PrinciplesArray : public ArrayPrinciples, public NSSuperRoot
-#else
 class PrinciplesArray : public ArrayPrinciples, public NSSuperRoot
-#endif
+
 {
   public:
 
@@ -82,11 +53,8 @@ class PrinciplesArray : public ArrayPrinciples, public NSSuperRoot
     PrinciplesArray& operator=(const PrinciplesArray& src) ;
 };
 
-#ifndef __linux__
-class _EPISODUS SOAPObject
-#else
 class SOAPObject
-#endif
+
 {
   public:
 
@@ -102,18 +70,12 @@ class SOAPObject
 
     // Le SOAPObject peut se referer a un element capture OU a un noeud
     //
-#ifndef __linux__
-    NSCapture*  pCaptElemnt;    // Pour un element externe capture
-#endif
     string      sNoeud;         // Pour un noeud deja enregistre
     BBFilsItem* pFilsItem;      // Pour un noeud interne en cours de saisie
 
     bool        bFloculable ;
 
     SOAPObject() ;
-#ifndef __linux__
-    SOAPObject(NSCapture* pCapt) ;
-#endif
     SOAPObject(string sTI, string sCd, string sCl, int iCf, string sNoeud) ;
     SOAPObject(string sTI, string sCd, string sCl, int iCf, BBFilsItem* pItem) ;
     SOAPObject(const SOAPObject &rv) ;
@@ -122,10 +84,6 @@ class SOAPObject
 
     string  donneLibelle() ;
     string  donneChapitre() ;
-
-#ifndef __linux__
-    void    initFromCapture(NSCapture* pCapt) ;
-#endif
 
     bool    estFloculable()             { return bFloculable ; }
     void    setFloculable(bool bFloc)   { bFloculable = bFloc ; }
@@ -137,11 +95,7 @@ typedef vector<SOAPObject*>             ArraySOAPObject ;
 typedef ArraySOAPObject::iterator       ArraySOAPObjectIter ;
 typedef ArraySOAPObject::const_iterator ArraySOAPObjectConstIter ;
 
-#ifndef __linux__
-class _EPISODUS SOAPObjectArray : public ArraySOAPObject
-#else
 class SOAPObjectArray : public ArraySOAPObject
-#endif
 {
   public:
 
@@ -168,11 +122,8 @@ typedef vector<SOAPObjectArray*> ArraySOAPObjectArray ;
 typedef ArraySOAPObjectArray::iterator       SOAPBasketIter ;
 typedef ArraySOAPObjectArray::const_iterator SOAPBasketConstIter ;
 
-#ifndef __linux__
-class _EPISODUS SOAPBasket : public ArraySOAPObjectArray
-#else
+
 class SOAPBasket : public ArraySOAPObjectArray
-#endif
 {
   public:
 
@@ -196,11 +147,7 @@ typedef vector<SOAPBasket*> ArraySOAPBasket ;
 typedef ArraySOAPBasket::iterator       SOAPBasketArrayIter ;
 typedef ArraySOAPBasket::const_iterator SOAPBasketArrayConstIter ;
 
-#ifndef __linux__
-class _EPISODUS SOAPBasketArray : public ArraySOAPBasket
-#else
 class SOAPBasketArray : public ArraySOAPBasket
-#endif
 {
   public:
 

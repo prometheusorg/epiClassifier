@@ -5,23 +5,7 @@
 #ifndef __NSLDVUTI_H
 #define __NSLDVUTI_H
 
-#ifndef __linux__
-#if defined(_EPISODUSDLL)
-	#define _EPISODUS __export
-#else
-	#define _EPISODUS __import
-#endif
-#endif
-
-#ifndef __linux__
-// #include <classlib/time.h>
-#include <owl/window.h>
-#include <WinSys/geometry.h>
-#include <WinSys/color.h>
-#include <classlib/time.h>
-#else
 #include "classlib/time.h"
-#endif
 
 #define DATETIMESTRLEN 14
 #define DATESTRLEN      8
@@ -30,11 +14,8 @@
 * Classe de gestion du temps dans tout le logiciel
 * Time management class (to be used everywhere)
 */
-#ifndef __linux__
-class _EPISODUS NVLdVTemps
-#else
 class NVLdVTemps
-#endif
+
 {
 	protected:
 
@@ -54,9 +35,7 @@ class NVLdVTemps
 
     bool    initFromDate(string sDate) ;
     bool    initFromDateHeure(string sDateHeure) ;
-#ifndef __linux__
-    bool    initFromSystemTime(LPSYSTEMTIME lpSystemTime) ;
-#endif
+
     void		normalize() ;
 
     bool    estVide()    { return ((string(DATETIMESTRLEN, '0') == sTemps) ||
@@ -121,11 +100,8 @@ class NVLdVTemps
 typedef vector<NVLdVTemps*> TimeVector ;
 typedef TimeVector::iterator TimeIter ;
 
-#ifndef __linux__
-class _EPISODUS TimeArray : public TimeVector
-#else
 class TimeArray : public TimeVector
-#endif
+
 {
 	public:
 
@@ -146,11 +122,8 @@ class TimeArray : public TimeVector
 class NSLdvView ;
 class NSLdvViewArea ;
 
-#ifndef __linux__
-class _EPISODUS NVLdVPoint
-#else
 class NVLdVPoint
-#endif
+
 {
 	protected:
 
@@ -176,11 +149,8 @@ class NVLdVPoint
     void        setY(long lHaut)        { dY = lHaut ; }
 };
 
-#ifndef __linux__
-class _EPISODUS NVLdVRect
-#else
 class NVLdVRect
-#endif
+
 {
 	protected:
 
@@ -229,143 +199,6 @@ class NVLdVRect
     bool Contains(NVLdVRect other) ;
     bool Touches(NVLdVRect other) ;    // A une intersection avec other
 };
-
-#ifndef _EXT_CAPTURE
-
-#ifndef __linux__
-class _EPISODUS NSPixel
-{
-	protected:
-
-  	NS_CLASSLIB::TPoint point ;
-    NS_CLASSLIB::TColor color ;
-
-	public:
-
-  	NSPixel(NS_CLASSLIB::TPoint Point, NS_CLASSLIB::TColor Color) ;
-    NSPixel(int X, int Y, NS_CLASSLIB::TColor Color) ;
-    NSPixel(NSPixel& rv) ;
-    ~NSPixel() ;
-
-    NSPixel& operator=(NSPixel src) ;
-
-    NS_CLASSLIB::TPoint getPoint()  { return point ; }
-    int                 X()         { return point.X() ; }
-    int                 Y()         { return point.Y() ; }
-    NS_CLASSLIB::TColor getColor()  { return color ; }
-
-    char*               getTuple() ;
-};
-
-// definition d'un array de pixels
-
-typedef vector<NSPixel*> PixArray ;
-typedef PixArray::iterator pixelIter ;
-
-class _EPISODUS PixelArray : public PixArray
-{
-	public:
-
-  	// Constructeurs - Destructeur
-    PixelArray() ;
-    PixelArray(PixelArray& rv) ;
-    ~PixelArray() ;
-
-    NS_CLASSLIB::TRect ArrayRect ;
-
-    bool ScreenCapture(TWindowDC* pWinDC, ClassLib::TRect* pSrcRect) ;
-
-    bool Affiche(TDC* pDestDC, NS_CLASSLIB::TRect* pDstRect, NS_CLASSLIB::TPoint* pSrcPt) ;
-
-    void ajouter(NSPixel* pNewPix) ;
-
-    NS_CLASSLIB::TColor getColor(NS_CLASSLIB::TPoint pt, bool* pExist) ;
-
-    int getBottom() { return ArrayRect.Bottom() ; }
-    int getTop()    { return ArrayRect.Top() ;    }
-    int getLeft()   { return ArrayRect.Left() ;   }
-    int getRight()  { return ArrayRect.Right() ;  }
-
-    void vider() ;
-		PixelArray& operator=(PixelArray src) ;
-};
-
-class NSOCRbloc;
-
-class _EPISODUS NSBitmap
-{
-	public:
-
-  	// Constructeurs - Destructeur
-    NSBitmap() ;
-    NSBitmap(NSBitmap& rv) ;
-    ~NSBitmap() ;
-
-    bool ScreenCapture(TWindowDC* pWinDC, ClassLib::TRect* pSrcRect) ;
-    bool Affiche(TDC* pDestDC, NS_CLASSLIB::TRect* pDstRect, NS_CLASSLIB::TPoint* pSrcPt, int iZoomFactor = 1) ;
-
-    bool trouveBloc(NSOCRbloc* pBloc, NS_CLASSLIB::TPoint* pPoint) ;
-
-    bool enableCapture(ClassLib::TRect* pRect, NS_CLASSLIB::TColor* pBgColor) ;
-    void nearBlank(ClassLib::TRect* pRect, NS_CLASSLIB::TColor* pBgColor, bool *pLeft, bool *pTop, bool *pRight, bool *pBottom) ;
-    void existEdges(ClassLib::TRect* pRect, NS_CLASSLIB::TColor* pBgColor, bool *pLeft, bool *pTop, bool *pRight, bool *pBottom) ;
-
-    NS_CLASSLIB::TColor getColor(int X, int Y, bool* pExist) ;
-    NS_CLASSLIB::TColor getColor(NS_CLASSLIB::TPoint pt, bool* pExist) ;
-
-    int getBottom() { return pBitmap->Height() ; }
-    int getTop()    { return 0 ; }
-    int getLeft()   { return 0 ; }
-    int getRight()  { return pBitmap->Width() ; }
-
-    TDib* getDib()  { return pBitmap ; }
-
-    NSBitmap& operator=(NSBitmap src) ;
-
-	protected:
-
-  	TDib* pBitmap ;
-};
-
-class _EPISODUS NSOCRbloc
-{
-	public:
-
-  	NS_CLASSLIB::TRect  BlocRect ;
-    NS_CLASSLIB::TRect  BlocOCR ;
-    string              sTexte ;
-    NS_CLASSLIB::TColor bgColor ;
-    NS_CLASSLIB::TColor fgColor ;
-
-    NSOCRbloc(NS_CLASSLIB::TRect Bloc) ;
-    NSOCRbloc(NS_CLASSLIB::TRect Bloc,  NS_CLASSLIB::TColor bColor,
-            NS_CLASSLIB::TColor fColor = NS_CLASSLIB::TColor::Black) ;
-    NSOCRbloc(NSOCRbloc& rv) ;
-    ~NSOCRbloc() ;
-
-    NSOCRbloc& operator=(NSOCRbloc src) ;
-};
-
-// definition d'un array de modeles
-typedef vector<NSOCRbloc*> OCRArray;
-typedef OCRArray::iterator blocIter;
-
-class _EPISODUS OCRBlocsArray : public OCRArray
-{
-	public:
-
-  	// Constructeurs - Destructeur
-    OCRBlocsArray() : OCRArray() {}
-    OCRBlocsArray(OCRBlocsArray& rv) ;
-    ~OCRBlocsArray() ;
-
-    void    vider() ;
-    OCRBlocsArray& operator=(OCRBlocsArray src) ;
-};
-
-#endif
-
-#endif
 
 #endif
 

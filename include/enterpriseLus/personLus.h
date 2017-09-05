@@ -86,14 +86,6 @@ class NSFrameDocumentsArray ;
 
 // # include <cstring.h>
 
-#ifndef __linux__
-# if defined(_DANSPERSONDLL)
-#  define _CLASSEPERSON __export
-# else
-#  define _CLASSEPERSON __import
-# endif
-#endif
-
 # include "../partage/nsvector.h"
 # include "../nautilus/nsanxary.h"
 # include "../nsbb/nspatpat.h"
@@ -110,11 +102,8 @@ const char INMEMORY_CHAR = '#' ;
 // -----------------------------------------------------------------------------
 // A person...
 // -----------------------------------------------------------------------------
-#ifndef __linux__
-class _CLASSEPERSON Person
-#else
+
 class Person
-#endif
 {
   protected:
 
@@ -145,13 +134,6 @@ class Person
     string _sProRoles ;
     string _sProAddress ;
     string _sProCity ;
-
-#ifndef __linux__
-    NSPersonGraphManager*  _pGraphPerson ;
-    NSHealthTeam*          _pHealthTeam ;
-    NSHISTODocument*       _pDocHis ;
-    NSFrameDocumentsArray* _pFramesDocuments ;
-#endif
 
     NSContexte*           _pContexte ;
 
@@ -216,15 +198,7 @@ class Person
     string 	fabriqueAgeLabelDays(string sLang = "") ;
     string 	fabriqueAgeLabelHours(string sLang = "") ;
 
-#ifndef __linux__
-    NSPersonGraphManager* getGraphPerson() { return _pGraphPerson ; }
-#endif
     NSContexte*           getContext()     { return _pContexte ; }
-
-#ifndef __linux__
-    NSHISTODocument*      getDocHis()      { return _pDocHis ; }
-    void                  setDocHis(NSHISTODocument* pDH) { _pDocHis = pDH ; }
-#endif
 
     string  donneLang()      	 { return _sLang ; }
     string  getPseudo()        { return _sPseudo ; }
@@ -269,17 +243,6 @@ class Person
     void setFullName(string sVal)     { _sFullName          = sVal ; }
 
     bool LookForPath(string sChemin, NSSearchStruct *pSearchStruct, bool reinit_structure = false) ;
-
-#ifndef __linux__
-    bool SearchInSynthesis(string sChemin, NSSearchStruct *pSearchStruct) ;
-    bool SearchInIndexes(string sChemin, NSSearchStruct *pSearchStruct) ;
-    bool SearchInIndexExtensions(string sChemin, vector<NSDocumentHisto*> *pConcernDocs, NSSearchStruct *pSearchStruct) ;
-    bool SearchInDocument(string sChemin, NSSearchStruct *pSearchStruct, NSDocumentHisto* pDocument) ;
-    bool isValidRegularNode(NSPatPathoArray *pPPT, PatPathoConstIter pptIter, NSSearchStruct *pSearchStruct, string sDateDoc, string &sRefDate) ;
-    bool isValidIndexNode(NSPatPathoArray *pPPT, PatPathoIter pptIter, NSSearchStruct *pSearchStruct, string &sRefDate) ;
-    bool IsDocumentAFrameIndex(NSDocumentHisto* pDocument) ;
-    bool IsDocumentASynthesis(NSDocumentHisto* pDocument) ;
-#endif
 
     NSDocumentHisto* GetDocument(string sRootSens) ;
 

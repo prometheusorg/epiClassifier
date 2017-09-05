@@ -43,11 +43,8 @@
 //
 // Objet contenant les données
 //---------------------------------------------------------------------------
-#ifndef __linux__
-class _EPISODUS NSFlechiesData
-#else
+
 class NSFlechiesData
-#endif
 {
   public:
 
@@ -81,11 +78,8 @@ class NSFlechies ;
 // -----------------------------------------------------------------------------
 //  Classe NSFlechiesInfo  (destinée à être stockée dans une Array)
 // -----------------------------------------------------------------------------
-#ifndef __linux__
-class _EPISODUS NSFlechiesInfo
-#else
+
 class NSFlechiesInfo
-#endif
 {
   public:
 
