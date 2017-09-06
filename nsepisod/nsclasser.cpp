@@ -32,13 +32,7 @@
   #include "nsepisod\nsepidiv.h"
 #endif
 
-#include "nsepisod/nsldvuti.h"
 #include "nssavoir/nsfilgd.h"
-
-#ifndef __linux__
-#include "nssavoir/nscaptur.h"
-#endif
-
 #include "dcodeur/nsphrase.h"
 #include "dcodeur/nsgenlan.h"
 
@@ -692,7 +686,7 @@ catch (...)
 #endif
 }
 
-void
+/*void
 classifExpert::setControlString(string* pCtrlData, SOAPObject* pObjet,
                             int iInitialLevel, NSEpiClassifInfoArray* pArrayClassif,
                             NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
@@ -701,9 +695,9 @@ classifExpert::setControlString(string* pCtrlData, SOAPObject* pObjet,
     setControlString(pCtrlData, pObjet->sClassification, pObjet->sCase,
                         pObjet->sTexteInitial, iInitialLevel, pArrayClassif,
                         pTpsDebut, pTpsFin, sResult, sCodeSens) ;
-}
+}*/
 
-void
+/*void
 classifExpert::setControlString(string* pCtrlData, string sClassification, string sCase,
                             string sTexteInitial, int iInitialLevel,
                             NSEpiClassifInfoArray* pArrayClassif,
@@ -762,7 +756,7 @@ classifExpert::setControlString(string* pCtrlData, string sClassification, strin
 	*pCtrlData += string("  <selected code=\"") + sResult + string("\" />\n") ;
 
 	*pCtrlData += string("</classification_event>\n") ;
-}
+}*/
 
 void
 classifExpert::storeControlData(string sCtrlData)

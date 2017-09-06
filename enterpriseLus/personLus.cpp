@@ -18,7 +18,7 @@
 #include "nssavoir/nspatho.h"
 
 #include "nssavoir/nsfilgd.h"
-#include "nsepisod/nsldvuti.h"
+//#include "nsepisod/nsldvuti.h"
 #include "dcodeur/nsgen.h"
 
 #include "nsbb/tagNames.h"
@@ -1140,7 +1140,7 @@ Person::operator=(Person src)
 	return *this ;
 }
 
-string
+/*string
 Person::fabriqueAgeLabel(string sLang)
 {
   if (string("") == _sBirthDate)
@@ -1163,9 +1163,9 @@ Person::fabriqueAgeLabel(string sLang)
     return fabriqueAgeLabelMonths(sLang) ;
 
   return fabriqueAgeLabelYears(sLang) ;
-}
+}*/
 
-string
+/*string
 Person::fabriqueAgeLabelYears(string sLang)
 {
   if (string("") == _sBirthDate)
@@ -1195,9 +1195,9 @@ Person::fabriqueAgeLabelYears(string sLang)
   string sTitre = std::to_string(iCurrentAge) + string(" ") + sLibel ;
 
   return sTitre ;
-}
+}*/
 
-string
+/*string
 Person::fabriqueAgeLabelMonths(string sLang)
 {
   if (string("") == _sBirthDate)
@@ -1227,9 +1227,9 @@ Person::fabriqueAgeLabelMonths(string sLang)
   string sTitre = std::to_string(iCurrentAge) + string(" ") + sLibel ;
 
   return sTitre ;
-}
+}*/
 
-string
+/*string
 Person::fabriqueAgeLabelDays(string sLang)
 {
   NVLdVTemps tNaissance ;
@@ -1263,13 +1263,13 @@ Person::fabriqueAgeLabelDays(string sLang)
   string sTitre = std::to_string(iCurrentAge) + string(" ") + sLibel ;
 
   return sTitre ;
-}
+}*/
 
-string
+/*string
 Person::fabriqueAgeLabelHours(string sLang)
 {
   return string("") ;
-}
+}*/
 
 #ifndef __linux__
 // -----------------------------------------------------------------------------

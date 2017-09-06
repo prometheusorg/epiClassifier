@@ -11,7 +11,7 @@
 class ParseElem ;
 class ParseElemArray ;
 class NSEpiFlechiesDB ;
-class NVLdVTemps ;
+//class NVLdVTemps ;
 class NSThesaurus ;
 class NSThesaurusInfo ;
 class NSPatholog ;
@@ -604,15 +604,15 @@ class classifExpert : public NSRoot
 
     void    setDomain(string sClassification, string sDomain, ElemSetArray* pDomain) ;
 
-    void    setControlString(string* pCtrlData, string sClassification, string sCase,
+/*    void    setControlString(string* pCtrlData, string sClassification, string sCase,
                         string sTexteInitial, int iInitialLevel,
                         NSEpiClassifInfoArray* pArrayClassif,
                         NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
-                        string sResult, string sCodeSens = "") ;
-    void    setControlString(string* pCtrlData, SOAPObject* pObjet,
+                        string sResult, string sCodeSens = "") ;*/
+/*    void    setControlString(string* pCtrlData, SOAPObject* pObjet,
                         int iInitialLevel, NSEpiClassifInfoArray* pArrayClassif,
                         NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
-                        string sResult, string sCodeSens = "") ;
+                        string sResult, string sCodeSens = "") ;*/
     void    storeControlData(string sCtrlData) ;
 
   protected:

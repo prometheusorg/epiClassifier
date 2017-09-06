@@ -24,7 +24,7 @@
 #include "nssavoir/nsfilgd.h"
 #include "nssavoir/nsguide.h"
 #include "nssavoir/nsconver.h"
-#include "nsepisod/nsldvuti.h"
+//#include "nsepisod/nsldvuti.h"
 
 long NSPatPathoData::lObjectCount = 0 ;
 long NSPatPathoInfo::lObjectCount = 0 ;
@@ -4810,7 +4810,7 @@ NSPatPathoArray::getFirstNumericalValue(char cValueType, PatPathoIter iterFrom, 
   return iter ;
 }
 
-bool
+/*bool
 NSPatPathoArray::getNumericalValueForUnit(string sUnit, double *pdValue, string sConcept)
 {
   if ((string("") == sUnit) || (NULL == pdValue) || empty())
@@ -4939,7 +4939,7 @@ NSPatPathoArray::getNumericalValueForUnit(string sUnit, double *pdValue, string 
 #endif
 
   return false ;
-}
+}*/
 
 //
 //

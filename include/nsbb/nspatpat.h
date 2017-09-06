@@ -522,7 +522,7 @@ class NSPatPathoArray : public NSPatPathoInfoArray, public NSSuperRoot
     bool          isNumericExpressionTrue(string sOperator, string sValue, string sUnit, bool *pbExpressionIsValid) ;
     bool          isNonNumericExpressionTrue(string sOperator, string sOperand, bool *pbExpressionIsValid) ;
     PatPathoIter  getFirstNumericalValue(char cValueType = ' ', PatPathoIter iterFrom = (PatPathoIter) 0, int iBaseCol = 0) ;
-    bool          getNumericalValueForUnit(string sUnit, double *pdValue, string sConcept) ;
+    //bool          getNumericalValueForUnit(string sUnit, double *pdValue, string sConcept) ;
 } ;
 
 // VECTEUR DE PATPATHO
