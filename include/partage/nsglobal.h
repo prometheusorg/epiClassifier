@@ -27,16 +27,6 @@
 #define DOC_CODE_DOCUM_LEN 6
 #define OBJECT_ID_LEN      PIDS_NSS_LEN + DOC_CODE_DOCUM_LEN
 
-//---------------------------------------------------------------------------
-//  Definition des messages WINDOWS a usage interne
-//---------------------------------------------------------------------------
-#define WM_CONTINUE WM_USER+0       // Message envoye a une fenetre pour
-// passer a la suivante
-#define WM_CORRECT  WM_USER+1       // Message envoye par un controle EDIT
-// a sa fenetre mere
-//#define WM_DICOCORRECT  WM_USER+2       // Message envoye par un controle EDIT
-// a sa fenetre mere
-
 class NSSuper ;
 
 class NSSuperRoot

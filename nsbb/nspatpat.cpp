@@ -24,7 +24,6 @@
 #include "nssavoir/nsfilgd.h"
 #include "nssavoir/nsguide.h"
 #include "nssavoir/nsconver.h"
-//#include "nsepisod/nsldvuti.h"
 
 long NSPatPathoData::lObjectCount = 0 ;
 long NSPatPathoInfo::lObjectCount = 0 ;

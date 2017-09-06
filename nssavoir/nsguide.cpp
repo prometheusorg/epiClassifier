@@ -16,7 +16,6 @@
   #include "ns_sgbd/nsfiche.h"
 #endif
 
-//#include "ns_vector.h"
 #include "nssavoir/nsguide.h"
 
 //***************************************************************************

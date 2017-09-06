@@ -16,9 +16,6 @@ class NSPathologInfo ;
 
 #include "nssavoir/nspatho.h"
 
-//#include "nsbb\nsdicogl.h"
-//#include "nssavoir\nsfilgd.h"
-
 #ifndef __linux__
 #if defined(_DANSLEXIDLL)
     #define _CLASSELEXI __export

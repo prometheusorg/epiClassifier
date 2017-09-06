@@ -48,7 +48,6 @@ class NSSavoir ;
 #include "nssavoir/nsvarray.h"
 
 #ifdef _ENTERPRISE_DLL
-  //#include "partage/nsglobal.h"
   #include "enterpriseLus/nsglobalLus.h"
   #include "enterpriseLus/nsdivfctForCgi.h"
   #include "enterpriseLus/superLus.h"

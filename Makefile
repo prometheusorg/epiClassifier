@@ -27,9 +27,6 @@ OBJENTERPRISE	= ./enterpriseLus/superLus.o ./enterpriseLus/personLus.o
 SRCUTIL		= ./nsUtilLus/nsdivfctForCgi.cpp
 OBJUTIL		= ./nsUtilLus/nsdivfctForCgi.o
 
-#SRCCLASSLIB	= ./classlib/date.cpp ./classlib/time.cpp ./include/classlib/time.h
-#OBJCLASSLIB	= ./classlib/date.o ./classlib/time.o
-
 EPIPATH		= .
 
 SRCNSBB		= $(EPIPATH)/nsbb/nspatpat.cpp $(EPIPATH)/nsbb/nsbbtran.cpp
