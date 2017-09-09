@@ -2160,7 +2160,7 @@ void
 NSEpiClasser::alimenteFiche()
 {
   char code[CLASSER_CODE_LEN + 1] ;
-  char classification[CLASSER_CLASSIF_LEN + 1] ;  char critere[CLASSER_CRITERE_LEN + 1] ;  char relation[CLASSER_RELATION_LEN + 1] ;
+  char classification[CLASSER_CLASSIF_LEN + 1] ;  char critere[CLASSER_CRITERE_LEN + 1] ;  char relation[CLASSER_RELATION_LEN + 1] ;
 
   alimenteChamp(code, 		      CLASSER_CODE_FIELD,     CLASSER_CODE_LEN) ;
   alimenteChamp(classification, CLASSER_CLASSIF_FIELD,  CLASSER_CLASSIF_LEN) ;
@@ -2473,7 +2473,7 @@ NSThesaurusData::metAZero()
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSThesaurus::NSThesaurus(NSSuper *pSuper)
             :NSThesaurusInfo(), NSFiche(pSuper)
@@ -2481,7 +2481,7 @@ NSThesaurus::NSThesaurus(NSSuper *pSuper)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSThesaurus::NSThesaurus(NSThesaurus& rv)
             :NSThesaurusInfo(rv), NSFiche(rv._pSuper)
@@ -2489,7 +2489,7 @@ NSThesaurus::NSThesaurus(NSThesaurus& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSThesaurus::~NSThesaurus()
 {
@@ -2502,13 +2502,13 @@ void
 NSThesaurus::alimenteFiche()
 {
   char ibui[THESAURUS_IBUI_LEN + 1] ;
-  char labelFr[THESAURUS_LABEL_LEN + 1] ;  char labelNl[THESAURUS_LABEL_LEN + 1] ;  char icpc2[THESAURUS_ICPC2_LEN + 1] ;
+  char labelFr[THESAURUS_LABEL_LEN + 1] ;  char labelNl[THESAURUS_LABEL_LEN + 1] ;  char icpc2[THESAURUS_ICPC2_LEN + 1] ;
   char icd10[THESAURUS_ICD10_LEN + 1] ;
-  char icpc2_2[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2[THESAURUS_ICD10_LEN + 1] ;  char icpc2_1X[THESAURUS_ICPC2_LEN + 1] ;
+  char icpc2_2[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2[THESAURUS_ICD10_LEN + 1] ;  char icpc2_1X[THESAURUS_ICPC2_LEN + 1] ;
   char icd10_1X[THESAURUS_ICD10_LEN + 1] ;
-  char icpc2_2X[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2X[THESAURUS_ICD10_LEN + 1] ;
+  char icpc2_2X[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2X[THESAURUS_ICD10_LEN + 1] ;
   char icpc2_1Y[THESAURUS_ICPC2_LEN + 1] ;
-  char icd10_1Y[THESAURUS_ICD10_LEN + 1] ;  char icpc2_2Y[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2Y[THESAURUS_ICD10_LEN + 1] ;
+  char icd10_1Y[THESAURUS_ICD10_LEN + 1] ;  char icpc2_2Y[THESAURUS_ICPC2_LEN + 1] ;  char icd10_2Y[THESAURUS_ICD10_LEN + 1] ;
 
   alimenteChamp(ibui,			THESAURUS_IBUI_FIELD,     THESAURUS_IBUI_LEN) ;
   alimenteChamp(labelFr,	THESAURUS_FR_LABEL_FIELD,	THESAURUS_LABEL_LEN) ;
@@ -2923,7 +2923,7 @@ void
 NSEpiClassif::alimenteFiche()
 {
   char classification[CLASSIF_CLASSIF_LEN + 1] ;
-  char code[CLASSIF_CODE_LEN + 1] ;  char libelle[CLASSIF_LIBELLE_LEN + 1] ;  char chapitre[CLASSIF_CHAPITRE_LEN + 1] ;
+  char code[CLASSIF_CODE_LEN + 1] ;  char libelle[CLASSIF_LIBELLE_LEN + 1] ;  char chapitre[CLASSIF_CHAPITRE_LEN + 1] ;
 
   alimenteChamp(classification, CLASSIF_CLASSIF_FIELD,  CLASSIF_CLASSIF_LEN) ;
   alimenteChamp(code, 		      CLASSIF_CODE_FIELD,     CLASSIF_CODE_LEN) ;

@@ -264,13 +264,11 @@ NSLocalChapterArray::init(ifstream * pInFile, string *psErrorMsg)
 
     size_t iLineLen = strlen(sLine.c_str()) ;
 
-#ifdef __linux__
     while ((iLineLen > 0) && (('\n' == sLine[iLineLen-1]) || ('\r' == sLine[iLineLen-1])))
     {
       sLine = string(sLine, 0, iLineLen - 1) ;
       iLineLen-- ;
     }
-#endif
 
     if (string("") != sLine)
     {

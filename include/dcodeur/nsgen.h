@@ -23,24 +23,12 @@ class gereNum ;
 #define STR_CCCHIFFRE "CCCh"
 #define STR_CCHYPOTH  "CCHy"
 
-#ifndef __linux__
-#if defined(_DKD_DLL)
-	#define _NSDKDCLASSE __export
-#else
-	#define _NSDKDCLASSE __import
-#endif
-#endif
-
 //
 // Enumeration des modes de decodage
 //
 enum DCODETYPE { dcPhrase, dcTiret } ;
 
-#ifndef __linux__
-class _NSDKDCLASSE NSGenerateur : public NSRoot
-#else
 class NSGenerateur : public NSRoot
-#endif
 {
 	public :
 

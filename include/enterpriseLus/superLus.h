@@ -47,22 +47,10 @@ class NSSuper ;
 
 // # include "pilot\NautilusPilot.hpp"
 
-#ifndef __linux__
-# if defined(_DANSPERSONDLL)
-#  define _CLASSESUPER __export
-# else
-#  define _CLASSESUPER __import
-# endif
-#endif
-
 //
 // Définition de ToDoTask
 //
-#ifndef __linux__
-class _CLASSESUPER NSToDoTask
-#else
 class NSToDoTask
-#endif
 {
   public:
 
@@ -123,11 +111,7 @@ typedef std::vector<NSContexte *> NSContextVector ;
 typedef NSContextVector::iterator       CtxIter ;
 typedef NSContextVector::const_iterator CtxConstIter ;
 
-#ifndef __linux__
-class _CLASSESUPER NSContextArray : public NSContextVector
-#else
 class NSContextArray : public NSContextVector
-#endif
 {
   public:
 
@@ -146,11 +130,8 @@ class NSContextArray : public NSContextVector
 // Classe NSSuper
 // Big Brother principal : "Superviseur"
 // -----------------------------------------------------------------------------
-#ifndef __linux__
-class _CLASSESUPER NSSuper
-#else
+
 class NSSuper
-#endif
 {
   friend class NSContexte ;
 
@@ -183,9 +164,6 @@ class NSSuper
     // Pointeur sur l'objet de gestion du Graphe entre noeuds d'arbres
     // Note : ce pointeur est desactive pour eviter les pbs multitache sur la base NSPatLink
     // NSGraphe*       pGraphe ;
-#ifndef __linux__
-    NSArcManager*         _pArcManager ;
-#endif
 
     NautilusPilot*        _pPilot ;
 
@@ -211,9 +189,6 @@ class NSSuper
     NSSuper& operator=(NSSuper& srcNSSuper) ;
 
     NSDico*               getDico()            { return _pDico ; }
-#ifndef __linux__
-    NSArcManager*         getArcManager()      { return _pArcManager ; }
-#endif
     NSFilGuide*           getFilGuide()        { return _pFilGuide ; }
     NSFilGuide*           getFilDecode()       { return _pFilDecode ; }
     classifExpert*        getClassifExpert()   { return _pClassifExpert ; }
@@ -292,11 +267,7 @@ class NSUserPatRelation
 } ;
 */
 
-#ifndef __linux__
-class _CLASSESUPER NSContexte
-#else
 class NSContexte
-#endif
 {
   protected:
 
@@ -393,9 +364,6 @@ class NSContexte
     NSDico*         getDico()           { return _pSuper->getDico() ; }
     NSFilGuide*     getFilGuide()       { return _pSuper->getFilGuide() ; }
     NSFilGuide*     getFilDecode()      { return _pSuper->getFilDecode() ; }
-#ifndef __linux__
-    NSArcManager*   getArcManager()     { return _pSuper->getArcManager() ; }
-#endif
     // PersonArray*    getPersonArray()    { return _pSuper->getPersonArray() ; }
 
     void creePilot() ;

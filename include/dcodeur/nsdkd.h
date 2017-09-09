@@ -28,12 +28,6 @@ class NSMaterielInfo ;
 
 class NSPersonInfo ;
 
-#ifndef __linux__
-#include <owl/treewind.h>
-#include <owl/imagelst.h>
-#include <owl\dialog.h>
-#endif
-
 #ifndef _ENTERPRISE_DLL
 #include "partage/ns_vector.h"
 typedef std::vector<OWL::TTreeNode*>   VectorTTreeNode ;
@@ -45,14 +39,6 @@ typedef NTArray<OWL::TTreeNode>   VectTTreeNode ;
 # include "nautilus/nscr_ama.h"
 # include "nsbb/nspatpat.h"
 
-#ifndef __linux__
-#if defined(_DKD_DLL)
-	#define _NSDKDCLASSE __export
-#else
-	#define _NSDKDCLASSE __import
-#endif
-#endif
-
 //
 // Enumeration des types de fenetres
 //
@@ -60,29 +46,9 @@ enum AIDEDECODTYPE { iOk = 0, iAnnule, iCorrige, iErreur, iAutomatique };
 
 // enum GENRE { genreMS = 1, genreFS, genreMP, genreFP, genreIT};
 
-#ifndef __linux__
-class _NSDKDCLASSE decodageBase ;
-#else
 class decodageBase ;
-#endif
 
-/*
-class VectTTreeNode : public VectorTTreeNode
-{
-    public:
-
-        VectTTreeNode() ;
-        ~VectTTreeNode();
-        VectTTreeNode(VectTTreeNode& src);
-
-        void vider();
-};   */
-
-#ifndef __linux__
-class _NSDKDCLASSE AdjIntens
-#else
 class AdjIntens
-#endif
 {
  public:
 
@@ -94,38 +60,7 @@ class AdjIntens
 
 /***************************************************************************/
 
-#ifndef __linux__
-class AideDecode : public TDialog, public NSRoot
-{
- public:
-
-	TWindow* 		     _Aparent ;
-  TTreeWindow* 	   _pTreeWind ;
-  OWL::TImageList* _pImages ;
-  decodageBase*	   _pDecodageBase ;
-
-  AideDecode(TWindow*, decodageBase* pDecode) ;
-  ~AideDecode() ;
-
-  void Cmok() ;
-  void CmCorrige() ;
-  void CmAnnule() ;
-  void CmAutomatique() ;
-  void SetupWindow() ;
-
-  string buildLabel(PatPathoIter iterTReeView) ;
-
-  DECLARE_RESPONSE_TABLE(AideDecode) ;
-};
-#endif // #ifndef __linux__
-
-/***************************************************************************/
-
-#ifndef __linux__
-class _NSDKDCLASSE gereDate : public NSSuperRoot
-#else
 class gereDate : public NSSuperRoot
-#endif
 {
  public :
 
@@ -167,11 +102,7 @@ class gereDate : public NSSuperRoot
 
 class gereNum ;
 
-#ifndef __linux__
-class _NSDKDCLASSE numStorage
-#else
 class numStorage
-#endif
 {
  public :
 
@@ -211,11 +142,7 @@ typedef vector<numStorage*>        VectorNumStorage ;
 typedef VectorNumStorage::iterator IterNumStorage ;
 typedef NTArray<numStorage>        VectNumStorage ;
 
-#ifndef __linux__
-class _NSDKDCLASSE gereNum : public NSSuperRoot
-#else
 class gereNum : public NSSuperRoot
-#endif
 {
  public :
 
@@ -282,11 +209,7 @@ class gereNum : public NSSuperRoot
   string         _sLang ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE gereHeure : public NSSuperRoot
-#else
 class gereHeure : public NSSuperRoot
-#endif
 {
  public :
 
@@ -322,11 +245,7 @@ class gereHeure : public NSSuperRoot
   string sLang ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE gereCode : public NSRoot
-#else
 class gereCode : public NSRoot
-#endif
 {
  public :
 
@@ -361,11 +280,7 @@ class gereCode : public NSRoot
 //
 // Phrases de decodage : le decodage en memoire permet un tri dynamique
 //
-#ifndef __linux__
-class _NSDKDCLASSE NSDkdPhrase
-#else
 class NSDkdPhrase
-#endif
 {
  public:
 
@@ -389,25 +304,7 @@ class NSDkdPhrase
 
 typedef vector<NSDkdPhrase*> NSDkdPhrArray;
 typedef NSDkdPhrArray::iterator NSDkdPhrArrayIter;
-#ifndef __linux__
-typedef NTArray<NSDkdPhrase> _NSDKDCLASSE NSDkdPhraseArray;
-#else
 typedef NTArray<NSDkdPhrase> NSDkdPhraseArray;
-#endif
-
-/*
-class _NSDKDCLASSE NSDkdPhraseArray : public NSDkdPhrArray
-{
-    public :
-
-	    NSDkdPhraseArray() : NSDkdPhrArray() {}
-	    NSDkdPhraseArray(NSDkdPhraseArray& rv) ;
-
-	    virtual ~NSDkdPhraseArray() ;
-
-	    NSDkdPhraseArray& operator=(NSDkdPhraseArray src) ;
-        void vider() ;
-};  */
 
 //-----------------------------------------------------------------
 // classe decodage
@@ -417,11 +314,6 @@ class _NSDKDCLASSE NSDkdPhraseArray : public NSDkdPhrArray
 class dkdNoyau : public NSRoot
 {
  public:
-
-#ifndef __linux__
-	HANDLE 			      dcode ;
-#endif
-
   NSPatPathoArray*  pPatPathoArray ;
   PatPathoIter      itDcode, itMDcode ;
   string			      codeLexique, complement ;
@@ -454,11 +346,7 @@ class dkdNoyau : public NSRoot
 //
 // Classe de base des classes de decodage
 //-----------------------------------------------------------------
-#ifndef __linux__
-class _NSDKDCLASSE decodageBase : public NSRoot
-#else
 class decodageBase : public NSRoot
-#endif
 {
  private:
 

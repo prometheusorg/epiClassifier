@@ -18,19 +18,7 @@ class gereNum ;
 #include "nssavoir/nspatbas.h"
 #include "partage/ntarray.h"
 
-#ifndef __linux__
-#if defined(_DKD_DLL)
-	#define _NSDKDCLASSE __export
-#else
-	#define _NSDKDCLASSE __import
-#endif
-#endif
-
-#ifndef __linux__
-class _NSDKDCLASSE NSPhraseMot : public NSRoot
-#else
 class NSPhraseMot : public NSRoot
-#endif
 {
   public :
 
@@ -152,11 +140,7 @@ enum TIME_EVENT { TpsTypeUndefined = 0, TpsDuration, TpsDate } ;  // Dure 2h ou 
 enum TIME_FORM  { TpsFormUndefined = 0, TpsInstant, TpsInterval } ; //
 enum TIME_FRAME { TpsFrameUndefined = 0, TpsPresent, TpsPast, TpsFutur } ;
 
-#ifndef __linux__
-class _NSDKDCLASSE NSPhraseMotTime : public NSPhraseMot
-#else
 class NSPhraseMotTime : public NSPhraseMot
-#endif
 {
   public :
 
@@ -237,11 +221,7 @@ class NSPhraseMotTime : public NSPhraseMot
     bool estVide() ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE NSPhraseMotTimeCycle : public NSPhraseMot
-#else
 class NSPhraseMotTimeCycle : public NSPhraseMot
-#endif
 {
 	public :
 
@@ -290,11 +270,7 @@ class NSPhraseMotTimeCycle : public NSPhraseMot
 typedef vector<NSPhraseMot*> NSPhraMotArray ;
 typedef NSPhraMotArray::iterator iterPhraseMot ;
 
-#ifndef __linux__
-class _NSDKDCLASSE NSPhraseMotArray : public NSPhraMotArray
-#else
 class NSPhraseMotArray : public NSPhraMotArray
-#endif
 {
   public :
 
@@ -310,11 +286,7 @@ class NSPhraseMotArray : public NSPhraMotArray
     void initPreposition() ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE NSPhraseur : public NSRoot
-#else
 class NSPhraseur : public NSRoot
-#endif
 {
   public :
 
@@ -458,11 +430,7 @@ class NSPhraseur : public NSRoot
     NSPhraseur& operator=(NSPhraseur src) ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE NsProposition : public NSRoot
-#else
 class NsProposition : public NSRoot
-#endif
 {
   public :
 
@@ -556,25 +524,7 @@ class NsProposition : public NSRoot
 typedef vector<NsProposition*> NSPropositionVector ;
 typedef NSPropositionVector::iterator iterProposition ;
 
-#ifndef __linux__
-typedef NTArray<NsProposition> _NSDKDCLASSE NSPropositionArray;
-#else
 typedef NTArray<NsProposition> NSPropositionArray;
-#endif
-
-/*
-class _NSDKDCLASSE NSPropositionArray : public NSPropositionVector
-{
-    public :
-	    // Constructeurs
-	    NSPropositionArray() : NSPropositionVector() {}
-	    NSPropositionArray(NSPropositionArray& rv) ;
-	    // Destructeur
-	    virtual ~NSPropositionArray() ;
-	    NSPropositionArray& NSPropositionArray::operator=(NSPropositionArray src) ;
-        //
-        void vider() ;
-};   */
 
 #endif  // __NSPHRASE_H
 

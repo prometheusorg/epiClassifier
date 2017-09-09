@@ -17,18 +17,11 @@ class NSLinkedNodeArray ;
 #include <cstring>
 #include <string>
 #include <vector>
-#ifndef __linux__
-#include <Owl/window.h>
-#endif
 
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
 #else
   #include "partage/nsglobal.h"
-#endif
-
-#ifndef __linux__
-  #include "nsbb\nsExport.h"            // definition of _NSBBCLASSE
 #endif
 
 #include "nsbb/nspatpat.h"
@@ -46,11 +39,7 @@ const char heureMARK     = 'H' ;   // Saisie d'une heure pour l'Edit
 const char LibreMARK2    = 'L' ;   // libelle
 const char codMARK2      = 'C' ;   // code
 
-#ifndef __linux__
-class _NSBBCLASSE Message //xportable car utilisée dans KE
-#else
 class Message //xportable car utilisée dans KE
-#endif
 {
   private:
 

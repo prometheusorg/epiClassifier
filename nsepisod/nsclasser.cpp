@@ -439,7 +439,7 @@ try
 	}
 
 	//
-	// Loading forbiden domain
+    // Loading forbidden domain
 	//
 	ElemSetArray ForbidenDomain ;
 	donneInterdits(sClassification, sCase, &ForbidenDomain) ;

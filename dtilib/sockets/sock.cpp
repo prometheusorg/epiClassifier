@@ -821,11 +821,7 @@ tcp_base_socket::tcp_base_socket(socket_handle s)
 	int optval;
 	int optlen = sizeof optval;
 
-#ifdef __linux__
   if (getsockopt(s, SOL_SOCKET, SO_TYPE, (char*)&optval, (socklen_t *) &optlen))
-#else
-  if (getsockopt(s, SOL_SOCKET, SO_TYPE, (char*)&optval, &optlen))
-#endif
 		throw sock_error_ex("Cannot get socket options");
 	if (optval!=SOCK_STREAM)
 		throw sock_error_ex("Socket type is not SOCK_STREAM");
@@ -892,11 +888,7 @@ endpoint tcp_base_socket::my_endpoint() const
 	sockaddr_in si;
 	int namelen = sizeof si;
 
-#ifdef __linux__
   if (::getsockname(get_socket_handle(), (sockaddr*)&si, (socklen_t*)&namelen))
-#else
-  if (::getsockname(get_socket_handle(), (sockaddr*)&si, &namelen))
-#endif
 		throw sock_error_ex("Cannot get this endpoint");
 
 	return endpoint(ipaddr(si.sin_addr.s_addr), ntohs(si.sin_port));
@@ -937,11 +929,7 @@ bool tcp_socket::is_connected() const
 	sockaddr_in si;
 	int namelen = sizeof si;
 
-#ifdef __linux__
-  return ::getpeername(get_socket_handle(), (sockaddr*)&si, (socklen_t*)&namelen) == 0;
-#else
-  return ::getpeername(get_socket_handle(), (sockaddr*)&si, &namelen) == 0;
-#endif
+    return ::getpeername(get_socket_handle(), (sockaddr*)&si, (socklen_t*)&namelen) == 0;
 }
 
 endpoint tcp_socket::peer() const
@@ -949,11 +937,7 @@ endpoint tcp_socket::peer() const
 	sockaddr_in si;
 	int namelen = sizeof si;
 
-#ifdef __linux__
   if (::getpeername(get_socket_handle(), (sockaddr*)&si, (socklen_t*)&namelen))
-#else
-  if (::getpeername(get_socket_handle(), (sockaddr*)&si, &namelen))
-#endif
 		throw sock_error_ex("Cannot get the peer endpoint");
 
 	return endpoint(ipaddr(si.sin_addr.s_addr), ntohs(si.sin_port));

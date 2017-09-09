@@ -91,9 +91,6 @@ NSSuper::NSSuper(short sStatus)
 
         loadLocalisationString("") ;
 
-#ifndef __linux__
-        _pArcManager         = new NSArcManager(this) ;
-#endif
         _pClassifExpert      = (classifExpert *) 0 ;
 
         // _aContextArray       = new NSContextArray ;
@@ -158,9 +155,6 @@ NSSuper::~NSSuper()
     _pDico = 0 ;
     delete _pFilGuide ;
     delete _pFilDecode ;
-#ifndef __linux__
-    delete _pArcManager ;
-#endif
 }
 
 //

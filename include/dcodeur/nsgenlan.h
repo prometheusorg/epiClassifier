@@ -5,19 +5,7 @@
 #include "dcodeur/nsdkd.h"
 #include "nssavoir/nspatho.h"
 
-#ifndef __linux__
-#if defined(_DKD_DLL)
-	#define _NSDKDCLASSE __export
-#else
-	#define _NSDKDCLASSE __import
-#endif
-#endif
-
-#ifndef __linux__
-class _NSDKDCLASSE NSGenerateurFr : public NSGenerateur
-#else
 class NSGenerateurFr : public NSGenerateur
-#endif
 {
   public :
 
@@ -103,11 +91,7 @@ class NSGenerateurFr : public NSGenerateur
     bool    generePhrase(DCODETYPE iStyle) ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE gereDateFr : public gereDate
-#else
 class gereDateFr : public gereDate
-#endif
 {
   public :
 
@@ -125,11 +109,8 @@ class gereDateFr : public gereDate
     string donne_mois(int iMois) ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE NSGenerateurEn : public NSGenerateur
-#else
+
 class NSGenerateurEn : public NSGenerateur
-#endif
 {
   public :
 
@@ -206,11 +187,7 @@ class NSGenerateurEn : public NSGenerateur
     bool    generePhrase(DCODETYPE iStyle) ;
 };
 
-#ifndef __linux__
-class _NSDKDCLASSE gereDateEn : public gereDate
-#else
 class gereDateEn : public gereDate
-#endif
 {
   public :
 

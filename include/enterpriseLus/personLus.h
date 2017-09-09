@@ -172,10 +172,6 @@ class Person
     string 	getTranslatedBirthDate(string sLang = "") ;
     string 	getTitle(string sLang = "") ;
 
-    bool    initGraphs() ;
-
-    void    debloquer() ;
-
     bool    getReadOnly() ;
     bool    getADebloquer() ;
     void    setReadOnly(bool bRO) ;
@@ -184,19 +180,6 @@ class Person
     void    GetDocPatho(NSPatPathoArray *pPatho, string sRootSens) ;
     void    DonnePathoSynthese(NSPatPathoArray *pPathoSynthese) { GetDocPatho(pPathoSynthese, string("ZSYNT")) ; } /* Fills a patpaho with synthese */
 
-    // bool    DonneArray(string sNoeud, NSPatPathoArray *pPPT) ;
-    // bool    DonneSousArray(string sNoeud, NSPatPathoArray *pPPT) ;
-
-    bool    initCorrespArray(NSPatPathoArray* pPatPathoArray = 0) ;
-
-    bool    getFoldersPatho(NSPatPathoArray* pPatPathoArray) ;
-    // bool    getFoldersArray(NSChemiseArray* pChemisesArray) ;
-
-    string 	fabriqueAgeLabel(string sLang = "") ;
-    string 	fabriqueAgeLabelYears(string sLang = "") ;
-    string 	fabriqueAgeLabelMonths(string sLang = "") ;
-    string 	fabriqueAgeLabelDays(string sLang = "") ;
-    string 	fabriqueAgeLabelHours(string sLang = "") ;
 
     NSContexte*           getContext()     { return _pContexte ; }
 
@@ -242,17 +225,13 @@ class Person
     void setCivility(string sVal)     { _sCivility          = sVal ; }
     void setFullName(string sVal)     { _sFullName          = sVal ; }
 
-    bool LookForPath(string sChemin, NSSearchStruct *pSearchStruct, bool reinit_structure = false) ;
-
     NSDocumentHisto* GetDocument(string sRootSens) ;
 
     bool             getArray(string sNode, NSPatPathoArray *pPPT) ;
     bool             getSubArray(string sNode, NSPatPathoArray *pPPT) ;
-    bool             getFoldersArray(NSChemiseArray* pChemisesArray) ;
 
-    bool             CreeContribution(bool bInitiale) ;
-    bool             FermeContribution() ;
-    string           getContribution() { return _sContribution ; }
+    //bool             FermeContribution() ;
+    //string           getContribution() { return _sContribution ; }
 } ;
 
 #endif // !__PERSONLUS_H

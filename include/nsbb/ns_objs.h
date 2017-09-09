@@ -14,9 +14,6 @@
 #endif
 
 #include "partage/nsvector.h"
-#ifndef __linux__
-#include "ns_sgbd/nsfiche.h"
-#endif
 #include "nsbb/nsexport.h"
 #include "nssavoir/nspatbas.h"
 #include "nssavoir/ns_fic.h"
@@ -45,11 +42,7 @@
 //---------------------------------------------------------------------------
 //  Classe NSObjectData
 //---------------------------------------------------------------------------
-#ifndef __linux__
-class _NSBBCLASSE NSObjectData
-#else
 class NSObjectData
-#endif
 {
     public :
 
@@ -101,11 +94,7 @@ class _NSBBCLASSE NSObjectDat : public NSFiche
 };
 */
 
-#ifndef __linux__
-class _NSBBCLASSE NSObjectDatInfo
-#else
 class NSObjectDatInfo
-#endif
 {
   public :
 
@@ -130,11 +119,7 @@ class NSObjectDatInfo
 typedef vector<NSObjectDatInfo*> NSObjectDatInfoArray ;
 typedef NSObjectDatInfoArray::iterator ObjectDatIter ;
 
-#ifndef __linux__
-class _NSBBCLASSE NSObjectDatArray : public NSObjectDatInfoArray, public NSRoot
-#else
 class NSObjectDatArray : public NSObjectDatInfoArray, public NSRoot
-#endif
 {
   public :
 
@@ -171,11 +156,7 @@ class NSObjectDatArray : public NSObjectDatInfoArray, public NSRoot
 //---------------------------------------------------------------------------
 //  Classe NSObjectLocData
 //---------------------------------------------------------------------------
-#ifndef __linux__
-class _NSBBCLASSE NSObjectLocData
-#else
 class NSObjectLocData
-#endif
 {
     public :
 
@@ -197,33 +178,7 @@ class NSObjectLocData
 		void metAZero();
 };
 
-#ifndef __linux__
-class _NSBBCLASSE NSObjectLoc : public NSFiche
-{
-    public :
-
-        NSObjectLocData* pDonnees;   // Objet qui contient les données
-
-	    NSObjectLoc(NSContexte* pCtx);
-	    ~NSObjectLoc();
-
-	    DBIResult open();
-	    void alimenteFiche();
-	    void videFiche();
-
-	    short prendStatut() { return statut; }
-	    void  metStatut(short nouvStatut) { statut = nouvStatut; }
-
-	    virtual bool Create();
-	    virtual bool Modify();
-};
-#endif // #ifndef __linux__
-
-#ifndef __linux__
-class _NSBBCLASSE NSObjectLocInfo
-#else
 class NSObjectLocInfo
-#endif
 {
     public :
         //
@@ -232,9 +187,6 @@ class NSObjectLocInfo
 		NSObjectLocData* pDonnees ;
 
 		NSObjectLocInfo() ;
-#ifndef __linux__
-		NSObjectLocInfo(NSObjectLoc* pObjLoc) ;
-#endif
 		NSObjectLocInfo(NSObjectLocInfo& rv) ;
 
 		NSObjectLocInfo&    operator=(NSObjectLocInfo src) ;
@@ -247,11 +199,7 @@ class NSObjectLocInfo
 typedef vector<NSObjectLocInfo*> NSObjectLocInfoArray;
 typedef NSObjectLocInfoArray::iterator ObjectLocIter;
 
-#ifndef __linux__
-class _NSBBCLASSE NSObjectLocArray : public NSObjectLocInfoArray, public NSRoot
-#else
 class NSObjectLocArray : public NSObjectLocInfoArray, public NSRoot
-#endif
 {
   public :
 
@@ -287,11 +235,7 @@ class NSObjectLocArray : public NSObjectLocInfoArray, public NSRoot
 // Classe NSObjectTLibreData
 //---------------------------------------------------------------------------
 
-#ifndef __linux__
-class _NSBBCLASSE NSObjectTLibreData
-#else
 class NSObjectTLibreData
-#endif
 {
   public :
 
@@ -321,12 +265,7 @@ class NSObjectTLibreData
 // Classe NSTlibreInfo
 //---------------------------------------------------------------------------
 
-#ifndef __linux__
-class NSObjectTLibre;
-class _NSBBCLASSE NSObjectTLibreInfo
-#else
 class NSObjectTLibreInfo
-#endif
 {
 	public :
 
@@ -337,9 +276,6 @@ class NSObjectTLibreInfo
 		NSObjectTLibreData* pDonnees;
 
 		NSObjectTLibreInfo();
-#ifndef __linux__
-		NSObjectTLibreInfo(NSObjectTLibre* pNSTextelibre);
-#endif
 		NSObjectTLibreInfo(NSObjectTLibreInfo& rv);
         ~NSObjectTLibreInfo();
 
@@ -348,45 +284,17 @@ class NSObjectTLibreInfo
 };
 
 //---------------------------------------------------------------------------
-// Classe NSObjectTLibre
-//---------------------------------------------------------------------------
-#ifndef __linux__
-class _NSBBCLASSE NSObjectTLibre : public NSFiche
-{
-    public :
-
-        NSObjectTLibreData* pDonnees;   // Objet qui contient les données
-
-	    NSObjectTLibre(NSContexte* pCtx);
-	    ~NSObjectTLibre();
-
-        DBIResult open();
-	    void metABlanc() { pDonnees->metABlanc(); }
-	    void alimenteFiche();
-	    void videFiche();
-};
-#endif // #ifndef __linux__
-
-//---------------------------------------------------------------------------
 // Classe NSObjectTLibreBase
 //---------------------------------------------------------------------------
-#ifndef __linux__
-class _NSBBCLASSE NSObjectTLibreBase : public NSRoot
-#else
 class NSObjectTLibreBase : public NSRoot
-#endif
 {
   public :
 
     //
     // Variables de stockage des valeurs
     //
-#ifndef __linux__
-    NSObjectTLibre* pNSTexteLibre ;
-#else
-    NSObjectTLibreInfo* pNSTexteLibre ;
-#endif
 
+    NSObjectTLibreInfo* pNSTexteLibre ;
     NSObjectTLibreBase(NSContexte* pCtx);
     NSObjectTLibreBase(NSObjectTLibreBase& rv);
     ~NSObjectTLibreBase();

@@ -4,14 +4,6 @@
 #include <vector>
 #include "partage/nsvector.h"
 
-#ifndef __linux__
-#if defined(_DANSLEXIDLL)
-	#define _CLASSELEXI __export
-#else
-	#define _CLASSELEXI __import
-#endif
-#endif
-
 //
 // Taille des champs du fichier CONVERT
 //
@@ -130,13 +122,6 @@ class NSCV : public NSSuperRoot
     void   videFiche() ;
 #endif
 
-#ifndef _ENTERPRISE_DLL
-    void   CalculValeur(string sLexique, string* pLabel, string* pUnite,
-     					string* pMethodeCalcul, NSPatPathoArray* pNSPatPathoEnCours) ;
-#else
-    void   CalculValeur(string sLexique, string* pLabel, string* pUnite,
-     					string* pMethodeCalcul, NSPatPathoArray* pNSPatPathoEnCours, NSContexte* pCtx) ;
-#endif
     void   AnalyseurSyntaxique(string sFormule, double* pValeur) ;
     bool   ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sLieA = "") ;
     double Operation(double dOperande, double dOperateur, string sOperation) ;

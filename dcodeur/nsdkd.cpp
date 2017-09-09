@@ -6,9 +6,6 @@
 /*  ¦             Debut d'ecriture : 17 Juillet 1995 (PA)             ¦  */
 /*  ¦             Derniere version : 17 Juillet 1995 (PA)             ¦  */
 /*  +-----------------------------------------------------------------+  */
-#ifndef __linux__
-#include <owl\olemdifr.h>
-#endif
 #include <stdlib.h>
 #include <string>
 
@@ -30,11 +27,6 @@
 #include "nsbb/nspatpat.h"
 #include "dcodeur/nsdkd.h"
 
-#ifndef __linux__
-#include "dcodeur/nsdecode.h"
-#include "dcodeur/nsdecode.rh"
-#endif
-
 #include "dcodeur/nsphrase.h"
 #include "dcodeur/nsgenlan.h"
 #include "nsepisod/eptables.h"
@@ -48,10 +40,6 @@
 //-------------------------------------------------------------------------
 dkdNoyau::dkdNoyau(NSContexte* pCtx) : NSRoot(pCtx)
 {
-#ifndef __linux__
-  dcode = 0 ;
-#endif
-
   pPatPathoArray = 0 ;
   itDcode 	     = (PatPathoIter) 0 ;
   itMDcode 	     = (PatPathoIter) 0 ;
@@ -74,11 +62,6 @@ dkdNoyau::dkdNoyau(NSContexte* pCtx) : NSRoot(pCtx)
 
 dkdNoyau::~dkdNoyau()
 {
-#ifndef __linux__
-  if (dcode)
-    CloseHandle(dcode) ;
-#endif
-
   // Ne surtout pas tuer la PatPathoArray, on n'en est pas propriétaire
   //
   //if (pPatPathoArray)
@@ -441,10 +424,6 @@ decodageBase::VaMarque()
 void
 decodageBase::fermeFichier()
 {
-#ifndef __linux__
-	CloseHandle(pNoyau->dcode) ;
-	pNoyau->dcode = 0 ;
-#endif
 }
 
 void
@@ -468,16 +447,6 @@ decodageBase::initialiseIterateurs()
 void
 decodageBase::ouvreFichier(char *fichier)
 {
-#ifndef __linux__
-  pNoyau->dcode = CreateFile(fichier,	              // address of name of the file
-                             GENERIC_WRITE,				  // access (read-write) mode
-                             0,								      // share mode
-                             0,								      // address of security descriptor
-                             CREATE_ALWAYS,				  // how to create
-                             FILE_ATTRIBUTE_NORMAL, // file attributes
-                             0 				              // handle of file with attributes to copy
-                            ) ;
-#endif
 }
 
 //---------------------------------------------------------------------------
@@ -496,136 +465,12 @@ decodageBase::ouvreFichier(char *fichier)
 void
 decodageBase::metPhrase(string decDeb, string decFin, int sautLigne)
 {
-#ifndef __linux__
-	//
-	if (!(pNoyau->iBon))
-		return ;
-	//
-	// Inscription des lésions
-	//
-	bool 	bWOK ;
-	DWORD nbEcrit ;
-
-    /*metUnCar('<');
-	if (!pPhraLes->IsEmpty())
-	{
-		iMin = pPhraLes->LowerBound();
-		iMax = iMin + pPhraLes->GetItemsInContainer();
-		for (i = iMin; i < iMax; i++)
-		{
-			iNumLes = ((*pPhraLes)[i]).iNumeroLesion;
-			numacar(cNumLes, iNumLes, 2);
-         bWOK = WriteFile(dcode, cNumLes, 2, &nbEcrit,	0);
-         metUnCar(((*pPhraLes)[i]).cType);
-         metUnCar(((*pPhraLes)[i]).cTypeIndex);
-		}
-		pPhraLes->Flush();
-	}
-    metUnCar('>'); */
-	//
-	// Mise dans le fichier
-	//
-
-	size_t nbChar ;
-	//
-	//
-	//
-	if (getDsFichier())
-	{
-  	if ((pNoyau->locLesion != "") || (pNoyau->locPath != ""))
-    {
-    	metUnCar('|') ;
-      if (pNoyau->locLesion != "")
-      {
-      	nbChar = strlen(pNoyau->locLesion.c_str()) ;
-        bWOK = WriteFile(pNoyau->dcode, pNoyau->locLesion.c_str(), nbChar, &nbEcrit, 0) ;
-      }
-      if (pNoyau->locPath != "")
-      {
-      	nbChar = strlen(pNoyau->locPath.c_str()) ;
-        bWOK = WriteFile(pNoyau->dcode, pNoyau->locPath.c_str(), nbChar, &nbEcrit, 0) ;
-      }
-      metUnCar('|') ;
-      pNoyau->locLesion = "" ;
-      pNoyau->locPath   = "" ;
-    }
-    //
-    // Caractères de début
-    //
-    if ((decDeb == "") && (decFin == ""))
-    {
-    	metUnCar(27) ;
-      metUnCar('T') ;
-    }
-    else if (decDeb != "")
-    {
-    	metUnCar(27) ;
-      nbChar = strlen(decDeb.c_str()) ;
-      bWOK = WriteFile(pNoyau->dcode, decDeb.c_str(), nbChar, &nbEcrit, 0) ;
-    }
-    //
-    // Texte
-    //
-    nbChar = strlen(pNoyau->sDcodeur.c_str()) ;
-    if (nbChar > 0)
-      bWOK = WriteFile(pNoyau->dcode, pNoyau->sDcodeur.c_str(), nbChar, &nbEcrit, 0) ;
-    //
-    // Caractères de fin
-    //
-    if (sautLigne == 1)
-    {
-    	metUnCar(13) ;
-      metUnCar(10) ;
-    }
-    //
-    if (sautLigne >= 0)
-    {
-    	metUnCar(13) ;
-      metUnCar(10) ;
-    }
-    if ((decDeb == "") && (decFin == ""))
-    {
-    	metUnCar(28) ;
-      metUnCar('T') ;
-    }
-    else if (decFin != "")
-    {
-    	metUnCar(28) ;
-      nbChar = strlen(decFin.c_str()) ;
-      bWOK = WriteFile(pNoyau->dcode, decFin.c_str(), nbChar, &nbEcrit,	0) ;
-    }
-	}
-	else
-	{
-try
-{
-		//
-    // Mise dans l'array de phrases
-    //
-    NSCRPhrase* pPhra = new NSCRPhrase ;
-    pPhra->sTexte 	  = pNoyau->sDcodeur ;
-    getPhA()->push_back(pPhra) ;
-}
-catch (...)
-{
-    erreur("Exception à la copie dans l'array de phrases.", standardError) ;
-}
-	}
-	return ;
-#endif
 }
 
 bool
 decodageBase::metUnCar(char cCar)
 {
-#ifndef __linux__
-	char 	cF[2];
-  DWORD nbEcrit;
-  cF[0] = cCar; cF[1] = '\0';
-  return WriteFile(pNoyau->dcode, cF, 1, &nbEcrit, 0) ;
-#else
-  return false ;
-#endif
+   return false ;
 }
 
 void
@@ -860,58 +705,6 @@ decodageBase::getCorresp(NSPersonInfo* pPersonInfo)
 
 	return true ;
 }
-
-/*
-DBIResult
-decodageBase::getCorresp(NSCorrespondantInfo* pCorInfo)
-{
-	pCorInfo->pDonnees->metAZero() ;
-
-	if (*getSt() != "£SGDR")
-  	return DBIERR_NONE ;
-  //
-	// Ouverture du fichier
-	//
-	NSCorrespondant Cor(pContexte) ;
-
-	Cor.lastError = Cor.open() ;
-	if (Cor.lastError != DBIERR_NONE)
-	{
-		erreur("Erreur à l'ouverture du fichier des correspondants.", standardError, Cor.lastError) ;
-		return Cor.lastError ;
-	}
-	//
-	// Recherche du matériel dont le code est dans le champ complément
-	//
-	Cor.lastError = Cor.chercheClef(getCpl(),
-    									"",
-									   	0,
-									   	keySEARCHEQ,
-									   	dbiWRITELOCK) ;
-	if (Cor.lastError != DBIERR_NONE)
-	{
-    Cor.close() ;
-		erreur("Erreur à la recherche du correspondant.", standardError, Cor.lastError) ;
-		return Cor.lastError ;
-	}
-	Cor.lastError = Cor.getRecord() ;
-	if (Cor.lastError != DBIERR_NONE)
-	{
-    Cor.close() ;
-		erreur("Erreur à la lecture du correspondant.", standardError, Cor.lastError) ;
-		return Cor.lastError ;
-	}
-
-	//
-  // Si tout a bien marché, on met à jour pCorInfo
-  //
-  *(pCorInfo->pDonnees) = *(Cor.pDonnees) ;
-  Cor.close() ;
-
-
-	return DBIERR_NONE ;
-}
-*/
 
 //---------------------------------------------------------------------------
 //  Function 	 : void et_du_milieu(type, type1, type2, entre)
@@ -3306,38 +3099,6 @@ AideDecode::buildLabel(PatPathoIter iterTReeView)
 
 #endif
 
-//***************************************************************************
-// 							Implémentation des mèthodes VectTTreeNode
-//***************************************************************************
-/*
-VectTTreeNode::VectTTreeNode()
-              :VectorTTreeNode()
-{}
-
-void
-VectTTreeNode::vider()
-{
-    IterTTreeNode i = begin();
-    while (i != end())
-    {
-        delete *i;
-        erase(i);
-    }
-}
-
-VectTTreeNode::~VectTTreeNode()
-{
-  	vider();
-}
-
-VectTTreeNode::VectTTreeNode(VectTTreeNode& src)
-				  :VectorTTreeNode()
-{
-    for (IterTTreeNode i = src.begin(); i != src.end(); i++)
-   	    push_back(new TTreeNode(*(*i)));
-
-}       */
-
 AdjIntens::AdjIntens()
 {
 	sAdjectif  = "" ;
@@ -3398,41 +3159,7 @@ NSDkdPhrase::operator == (const NSDkdPhrase& o)
 	return 0 ;
 }
 
-/*
-NSDkdPhraseArray::NSDkdPhraseArray(NSDkdPhraseArray& rv)
-                 :NSDkdPhrArray()
-{
-    if (!(rv.empty()))
-        for (NSDkdPhrArrayIter i = rv.begin(); i != rv.end(); i++)
-            push_back(new NSDkdPhrase(*(*i))) ;
-}
 
-void
-NSDkdPhraseArray::vider()
-{
-    if (empty())
-        return ;
 
-    for (NSDkdPhrArrayIter i = begin(); i != end(); )
-    {
-   	    delete *i ;
-        erase(i) ;
-    }
-}
 
-NSDkdPhraseArray::~NSDkdPhraseArray()
-{
-	vider() ;
-}
-
-NSDkdPhraseArray&
-NSDkdPhraseArray::operator=(NSDkdPhraseArray src)
-{
-    vider() ;
-    if (!(src.empty()))
-        for (NSDkdPhrArrayIter i = src.begin(); i != src.end(); i++)
-            push_back(new NSDkdPhrase(*(*i))) ;
-
-    return *this ;
-}    */
 

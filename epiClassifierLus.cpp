@@ -6,7 +6,6 @@
 
 // using namespace std ;
 
-// #include "NsCgiLus.h"
 #include "enterpriseLus/superLus.h"
 #include "enterpriseLus/epiClassifierLus.h"
 #include "nsepisod/nsclasser.h"
@@ -187,8 +186,8 @@ string ClassifierEngine::processCommands(map<string, string> *pCommands)
             if (pElemDomain)
             {
                 //
-                // On trouve les codes qui correspondent au domaine
                 // Finding the codes that belong to the domain
+                // (Fr On trouve les codes qui correspondent au domaine)
                 //
                 NSEpiClassifInfoArray ArrayClassif ;
                 string sCase = string("") ;

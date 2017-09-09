@@ -502,12 +502,6 @@ enum GRAPHELEMTYPE { isIncorrectID = 0, isCollectiveID, isGroupID, isLocalID, is
 
   // Fonction qui parse une string pour recuperer les coordonnees d'une fenetre
   void   getWindowPosit(string sPosition, int& X, int& Y, int& W, int& H, string* psTaille = 0);
-
-#ifndef __linux__
-  WORD   getVirtualKeyFromString(string sVK) ;
-  string getStringFromVirtualKey(WORD key) ;
-#endif
-
   char   URL_ScanFor(string *psBuff, char cTarget, size_t &x) ;
   int    ParseUrlQuery(string *psBuff, map<string, string> *pQueryParts) ;
   void   DecodeURL(string& sBuffer) ;

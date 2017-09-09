@@ -26,9 +26,16 @@
 
 // Taille des champs du fichier CLASSER
 // Criteres d'inclusion et d'exclusion de classification
-# define CLASSER_CODE_LEN 		       5  // Code NAUTILUS
-# define CLASSER_CLASSIF_LEN 		     5  // Classification
-# define CLASSER_CRITERE_LEN  	     1  // Obligatoire Possible Interdit
+
+// NAUTILUS code
+# define CLASSER_CODE_LEN 		       5
+
+// Classification
+# define CLASSER_CLASSIF_LEN 		     5
+
+// O: obligatory P: possible I: impossible
+// O: obligatoire P: possible I: interdit
+# define CLASSER_CRITERE_LEN  	     1
 # define CLASSER_RELATION_LEN  	    20  // éléments de classification
 
 // Indice des champs du fichier CLASSER
@@ -155,11 +162,8 @@ class NSEpiClasser ;
 // -----------------------------------------------------------------------------
 // Classe NSEpiClasserInfo  (destinee a etre stockee dans une Array)
 // -----------------------------------------------------------------------------
-#ifndef __linux__
-class _EPISODUS NSEpiClasserInfo
-#else
+
 class NSEpiClasserInfo
-#endif
 {
   public:
 

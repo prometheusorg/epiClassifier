@@ -1,7 +1,7 @@
 ## epiClassifier
 
 ### Author
-© 2011  Philippe Ameline
+© 2011  [Philippe Ameline]((https://twitter.com/p_ameline)
 
 epiClassifier's original code is part of [Episodus](https://sourceforge.net/projects/episodus/), an innovative open source Electronic Health Record app based on knowledge management technologies able to tell a patient's health (hi)story over time and to organize it like a project manager.
 
@@ -25,7 +25,7 @@ The current version is not yet ready for an online demo. If you want to test it 
 
 * We are coding a SOAP API based on gSOAP that will allow any web based or standalone software running on any OS to use epiClassifier as a service
 * epiClassifier will be packaged for Debian & Ubuntu
-* Anyone willing to package epiClassifier for a free software distribution is welcome, we will  provide help on a best effort basis
+* Anyone willing to package epiClassifier for a free software distribution is welcome, we will provide help on a best effort basis
 * This is free software, you are free to build it for any OS you wish without limitation, but we might not be available to help you deal with proprietary operating systems
 
 ### Build
