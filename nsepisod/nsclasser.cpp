@@ -68,11 +68,11 @@ classifExpert::~classifExpert()
 string
 classifExpert::donnePattern(string sClassification)
 {
-  // CISP 2
+  // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
     return string("ABDFHKLNPRSTUWXYZ 0123456789 0123456789") ;
 
-  // CIM 10
+  // ICD-10 (Fr CIM-10)
   if (sClassification == "6CIMA")
     return string("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789 0123456789 . 0123456789 0123456789") ;
 
@@ -82,11 +82,11 @@ classifExpert::donnePattern(string sClassification)
 int
 classifExpert::donneCodeSize(string sClassification)
 {
-  // CISP 2
+  // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
     return 3 ;
 
-  // CIM 10
+  // ICD-10 (Fr CIM-10)
   if (sClassification == "6CIMA")
     return 6 ;
 
@@ -104,12 +104,13 @@ classifExpert::donneInterdits(string sClassification, string sCase,
   if (string("") != sCase)
     NSDico::donneCodeSens(&sCase, &sCaseSens) ;
 
-  // CISP 2
+  // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
   {
     //
+    // Forbidden codes due to patient's sex
     // Interdits en fonction du sexe du patient
-    // Forbiden codes due to patient's sex
+    //
     //
     if (pContexte->getPatient())
     {
@@ -132,13 +133,13 @@ classifExpert::donneInterdits(string sClassification, string sCase,
       }
     }
     //
-    // Interdits en fonction de la case
-    // Forbiden codes due to coding location
+    // Forbidden codes due to coding location
+    // (Codes interdits en fonction de la case)
     //
-    if      (sCaseSens == "0MOTI") // Motif
+    if      (sCaseSens == "0MOTI") // Chief complaint (Fr Motif)
     {
     }
-    else if (sCaseSens == "0SOA0") // S du SOAP
+    else if (sCaseSens == "0SOA0") // S of SOAP
     {
     }
     else if (sCaseSens == "0SOA5") // Procédure pré-appréciation SOPAP
@@ -256,8 +257,9 @@ try
 	string sClassif = pObjet->sClassification ;
 	string sCase    = pObjet->sCase ;
 	//
-	// Si l'objet est issu d'une capture, on peut déterminer son domaine
-	// If the object comes from capture, we can define its domain
+    // If the object comes from capture, we can define its domain
+    // (Fr Si l'objet est issu d'une capture, on peut déterminer son domaine)
+    //
 	//
 #ifndef __linux__
 	if ((iNiveau == niveauPreselection) && (pObjet->pCaptElemnt))
@@ -545,7 +547,7 @@ try
     return ;
 
   //
-	// Loading forbiden domain
+    // Loading forbidden domain
 	//
 	ElemSetArray ForbidenDomain ;
 	donneInterdits(sClassification, sCase, &ForbidenDomain) ;
@@ -619,7 +621,8 @@ classifExpert::chooseCode(SOAPObject* pObjet)
 #ifndef _ENTERPRISE_DLL
 try
 {
-	// Codes proposés - candidate codes
+    // candidate codes
+    // (Fr Codes proposés)
 	NSEpiClassifInfoArray aArrayClassif ;
 	donneClassifArray(pObjet, &aArrayClassif, niveauPreselection) ;
 
@@ -843,7 +846,7 @@ classifExpert::chooseCode(string sClassif, string sDomain, string sCase)
 */
 
 // ----------------------------------------------------------
-// constructeur
+// constructor
 // ----------------------------------------------------------
 Classify::Classify(NSContexte* pCtx, string* psClassif, string* psConcept, string* psPath)
 				 :NSRoot(pCtx)
@@ -855,7 +858,7 @@ Classify::Classify(NSContexte* pCtx, string* psClassif, string* psConcept, strin
 }
 
 // ----------------------------------------------------------
-// destructeur
+// destructor
 // ----------------------------------------------------------
 Classify::~Classify()
 {
@@ -893,7 +896,7 @@ catch (...)
 // ----------------------------------------------------------
 // ParseSOAP::ParseSOAP(string *, NSContexte *)
 // ----------------------------------------------------------
-// constructeur
+// constructor
 // ----------------------------------------------------------
 
 ParseSOAP::ParseSOAP(NSContexte* pCtx, string *sClassifier)
@@ -910,7 +913,7 @@ ParseSOAP::ParseSOAP(NSContexte* pCtx, string *sClassifier)
 // ----------------------------------------------------------
 // ParseSOAP::~ParseSOAP(string *, NSContexte *)
 // ----------------------------------------------------------
-// destructeur
+// destructor
 // ----------------------------------------------------------
 ParseSOAP::~ParseSOAP()
 {

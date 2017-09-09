@@ -52,21 +52,8 @@ enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, gen
 //  Variables globales
 //---------------------------------------------------------------------------
 
-#define NS_LEXIQUE_TAILLE 6#define NS_LEXIQUE_SIGNIF 5
-
-//---------------------------------------------------------------------------
-#define YEAR	(datetime->tm_year % 100)
-#define MONTH (datetime->tm_mon + 1)
-#define MDAY	(datetime->tm_mday)
-#define WDAY	(datetime->tm_wday)
-#define HOUR	(datetime->tm_hour)
-#define MIN	  (datetime->tm_min)
-#define SEC	  (datetime->tm_sec)
-
 // pour les string
 #define NPOS string::npos// For files
-#define NewLineWindows "\r\n"
-#define NewLineUnix    "\n\n"
 
 #ifndef FOR_LINUX
 	#define FILESLASH "\\"

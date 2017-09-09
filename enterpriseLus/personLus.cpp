@@ -1369,7 +1369,7 @@ string StringTitre(NSContexte* pContexte, string sTypeTitre, string sLang)
 //
 //***************************************************************************
 
-string StringAvantTitre(string sTypeTitre, string sLang)
+/*string StringAvantTitre(string sTypeTitre, string sLang)
 {
 	string avant("") ;
 
@@ -1390,7 +1390,7 @@ string StringAvantTitre(string sTypeTitre, string sLang)
   }
 
 	return avant ;
-}
+}*/
 
 //////////////////////// ending personLus.cpp //////////////////////////////
 

@@ -46,7 +46,7 @@ using std::string ;
 
 #include "enterpriseLus/nsdivfctForCgi.h"
 
-#include "enterpriseLus/personLus.h"
+//#include "enterpriseLus/personLus.h"
 #include "nsdatabaseLus/nsSQL.h"
 
 #include "nssavoir/nsfilgd.h"
