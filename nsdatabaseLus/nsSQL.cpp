@@ -154,7 +154,6 @@ bool ontologyBaseManager::openBase()
                 cout << row[i] << endl;
             }
             */
-        return true;
     }
     catch (...)
     {
@@ -169,7 +168,12 @@ bool ontologyBaseManager::openBase()
     //  _sMysqlError = mysql_error(_sqlConnector) ;
     //  return false ;
     //}
-
+    if (!mysql_set_character_set(_sqlConnector, "utf8mb4"))
+    {
+        std::cout << "New client character set: " << mysql_character_set_name(_sqlConnector) << std::endl;
+    } else {
+        std::cout << "New client character set could not be set." << std::endl;
+    }
     return true;
 }
 
