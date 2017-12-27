@@ -105,7 +105,7 @@ bool ontologyBaseManager::openBase()
     }
 
     std::map<std::string, std::string> credentials;
-    std::vector<string> keys = {"host", "database", "user", "password"};
+    std::vector<string> keys = {"host", "database", "user", "password", "charset"};
 
     for (string key : keys)
     {
@@ -128,11 +128,13 @@ bool ontologyBaseManager::openBase()
     const char* cUser = credentials["user"].c_str();
     const char* cPassword = credentials["password"].c_str();
     const char* cDatabase = credentials["database"].c_str();
+    const char* cCharset = credentials["charset"].c_str();
 
     std::cout << "cHost: " << cHost << std::endl;
     std::cout << "cUser: " << cUser << std::endl;
     std::cout << "cPassword: " << cPassword << std::endl;
     std::cout << "cDatabase: " << cDatabase << std::endl;
+    std::cout << "cCharset:" << cCharset << std::endl;
 
     try
     {
@@ -168,7 +170,7 @@ bool ontologyBaseManager::openBase()
     //  _sMysqlError = mysql_error(_sqlConnector) ;
     //  return false ;
     //}
-    if (!mysql_set_character_set(_sqlConnector, "utf8mb4"))
+    if (!mysql_set_character_set(_sqlConnector, cCharset))
     {
         std::cout << "New client character set: " << mysql_character_set_name(_sqlConnector) << std::endl;
     } else {
