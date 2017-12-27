@@ -1,7 +1,7 @@
 ## epiClassifier
 
 ### Author
-© 2011  [Philippe Ameline]((https://twitter.com/p_ameline)
+© 2011  [Philippe Ameline](https://twitter.com/p_ameline)
 
 epiClassifier's original code is part of [Episodus](https://sourceforge.net/projects/episodus/), an innovative open source Electronic Health Record app based on knowledge management technologies able to tell a patient's health (hi)story over time and to organize it like a project manager.
 
