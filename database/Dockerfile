@@ -3,7 +3,6 @@ FROM mariadb:latest
 MAINTAINER jerome
 
 # Environment variables
-ENV MYSQL_ROOT_PASSWORD password
 ENV MYSQL_DATABASE ontology
 
 RUN mkdir /usr/sql
