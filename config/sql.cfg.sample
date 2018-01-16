@@ -1,13 +1,17 @@
 # Configuration file for epiclassifier SQL database
 #
 # Rename this file sql.cfg
+#
+# The sample credentials used in this file are those of the public
+# MariaDB server hosted by freehealth.io for development purpose.
+# The connection to this server is not encrypted. Do not send queries containing
+# private medical data.
 
-host = "localhost";
-database = "database";
-user = "sqluser";
-password = "sqlpassword";
-
+host = "icpc.freehealth.io";
+database = "ontology";
+user = "ontology";
+password = "ontology";
 # character set used to communicate with MySQL database
 # examples: latin1, utf8, utf8mb4
 charset = "utf8mb4"
-
+port = 3307

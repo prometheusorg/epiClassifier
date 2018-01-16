@@ -361,6 +361,21 @@ bool NSSuper::InitDatabase()
         }
     }
 
+    unsigned int uiPort;
+    try
+    {
+        if (cfg.lookupValue("port", uiPort))
+        {
+            std::cout << "port" << uiPort << endl;
+        }
+        else
+            std::cout << "No 'port' setting in configuration file." << endl;
+    }
+    catch(const SettingNotFoundException &nfex)
+    {
+        cerr << "No 'port' setting in configuration file." << endl;
+    }
+
     try
     {
         std::string ps = std::string("Entering InitDatabase") ;
@@ -369,7 +384,8 @@ bool NSSuper::InitDatabase()
         _ontologyManager = new ontologyBaseManager(credentials["host"],
                 credentials["user"],
                 credentials["password"],
-                credentials["database"]);
+                credentials["database"],
+                uiPort);
         if ((ontologyBaseManager *) NULL == _ontologyManager)
             return false ;
 

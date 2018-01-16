@@ -29,10 +29,10 @@
 using namespace std;
 using namespace libconfig;
 
-ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB)
+ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB, const unsigned int uiPort)
     :_sqlConnector((MYSQL * )0), _iInstanceCounter(0)
 {
-    std::cout << "ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB)" << std::endl;
+    std::cout << "ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB, unsigned int uiPort)" << std::endl;
 
     //_sqlConnector     = (MYSQL *) 0 ;
     //_iInstanceCounter = 0 ;
@@ -41,6 +41,7 @@ ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPas
     _user             = sUser.c_str();
     _password         = sPass.c_str();
     _database         = sDB.c_str();
+    _port             = uiPort;
 
     initBase();
 }
@@ -79,12 +80,12 @@ bool ontologyBaseManager::openBase()
     }
 
     if((MYSQL *)NULL == _sqlConnector)
-            return false;
+        return false;
 
     _iInstanceCounter++;
 
     if (_iInstanceCounter > 1)
-            return true;
+        return true;
 
     Config cfg;
     // Read the file. If there is an error, report it and exit.
@@ -120,9 +121,24 @@ bool ontologyBaseManager::openBase()
         }
     }
 
+    unsigned int uiPort;
+    try
+    {
+        if (cfg.lookupValue("port", uiPort))
+        {
+            std::cout << "port" << uiPort << endl;
+        }
+        else
+            std::cout << "No 'port' setting in configuration file." << endl;
+    }
+    catch(const SettingNotFoundException &nfex)
+    {
+        cerr << "No 'port' setting in configuration file." << endl;
+    }
+
     // attempts to establish a connection to a MySQL database engine running on host
 
-    //std::cout << "members " << host << _user << _password << _database << std::endl;
+    //std::cout << "members " << host << _user << _password << _database << _port << std::endl;
 
     const char* cHost = credentials["host"].c_str();
     const char* cUser = credentials["user"].c_str();
@@ -138,8 +154,14 @@ bool ontologyBaseManager::openBase()
 
     try
     {
-        if(!mysql_real_connect(_sqlConnector, cHost, cUser,
-                               cPassword, cDatabase, 3306, NULL, 0))
+        if(!mysql_real_connect(_sqlConnector,
+                               cHost,
+                               cUser,
+                               cPassword,
+                               cDatabase,
+                               uiPort,
+                               NULL,
+                               0))
         {
             throw 1;
         }
@@ -291,8 +313,8 @@ bool ontologyBaseManager::closeBase()
     // Closes opened connection and deallocates the connection handle
 
     if (_sqlConnector != NULL) {
-            mysql_close(_sqlConnector);
-            _sqlConnector = NULL;
+        mysql_close(_sqlConnector);
+        _sqlConnector = NULL;
     }
 
     _iInstanceCounter = 0;

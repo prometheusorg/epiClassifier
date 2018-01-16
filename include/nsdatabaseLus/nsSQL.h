@@ -39,7 +39,7 @@ class ontologyBaseManager
 {
  public:
 
-  ontologyBaseManager(string sHost, string sUser, string sPass, string sDB);
+  ontologyBaseManager(string sHost, string sUser, string sPass, string sDB, unsigned int uiPort);
   ~ontologyBaseManager();
 
   bool initBase() ;
@@ -62,6 +62,7 @@ class ontologyBaseManager
   const char *  _user ;
   const char *  _password ;
   const char *  _database ;
+  unsigned int _port;
 
   string  _sMysqlError ;
 } ;
