@@ -48,6 +48,8 @@ We are in the process of securing their release under open source licences. Unti
 [Jérôme Pinguet](https://twitter.com/medecinelibre)
 
 ### References
+#### English
 * [Letrilliart, Laurent, Bénédicte Gelas-Dore, Bernard Ortolan, and Cyrille Colin. “Prometheus: The Implementation of Clinical Coding Schemes in French Routine General Practice.” Journal of Innovation in Health Informatics 14, no. 3 (2006): 157–165.](http://hijournal.bcs.org/index.php/jhi/article/view/626)
 * [Letrilliart, Laurent, et. al, “Automatic Coding of Reasons for Hospital Referral from General Medicine Free-Text Reports. - PubMed - NCBI.” Accessed January 26, 2017. https://www.ncbi.nlm.nih.gov/pubmed/11079931.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2243796/)
-
+#### French
+* [Ameline, Philippe. “Moteur CISP.” presented at the 15èmes ateliers du CISP Club, Bruxelles, 2012.](http://www.cispclub.org/cispclub/docs/27/000256/0000316.pdf)
