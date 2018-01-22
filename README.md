@@ -19,7 +19,10 @@ ICPC is the International Classification of Primary Care.
 [promethe.org](http://promethe.org) is based on the original version, prior to the modifications recorded on this git
 
 #### Current version
-The current version is not yet ready for an online demo. If you want to test it and/or contribute to the development, you can build it yourself and ask for database credentials.
+The current version is not yet ready for an online demo. If you want to test it and/or contribute to the development, you can build it yourself
+
+#### Database
+You can use the online test database with the default credentials from config/sql.cfg.sample (you need to rename this file to sql.cfg). Don't use real medical data with this test database as it cannot handle TLS encryption yet. If the database is down, please let us know.
 
 ### Future
 
