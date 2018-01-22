@@ -6,18 +6,12 @@
 #ifndef __NSFILGD_H
 #define __NSFILGD_H
 
-// #include "nssavoir\nspathor.h"
-//
 #include <vector>
 
-#ifndef _NO_BDE
-#  include <bde.hpp>
-#else
-  typedef char DBITBLNAME[261] ;
+typedef char DBITBLNAME[261] ;
   
-  #define	GUIDE  string("GUIDE")
-  #define	DECODE string("DECODE") 
-#endif
+#define	GUIDE  string("GUIDE")
+#define	DECODE string("DECODE")
 
 class NSContexte ;
 class BBChem ;
@@ -36,14 +30,6 @@ class NSPatholog ;
 class NSLexiMed ;
 class NSPathologData ;
 class NSSavoir ;
-
-#ifndef __linux__
-#if defined(_DANSLEXIDLL)
-	#define _CLASSELEXI __export
-#else
-	#define _CLASSELEXI __import
-#endif
-#endif
 
 #include "nssavoir/nsvarray.h"
 

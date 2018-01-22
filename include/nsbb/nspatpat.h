@@ -17,10 +17,6 @@ class NSSavFiche ;
 #endif
 class VectString ;
 
-#ifndef _NO_BDE
-  # include <bde.hpp>
-#endif
-
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
 #else
@@ -124,10 +120,6 @@ class NSPatPathoData : public NSPathoBaseData
   bool            estMemeNode(NSPatPathoData* pPathoData) ;
 
   void            getOtherNodeContent(NSPatPathoData* pPathoData) ;
-
-#ifndef _NO_BDE
-  DBIResult       donneLibelle(string* pLibel, NSPatholog* pPathor) ;
-#endif
 
   int	 	          getType() ;
   void 		        setType(int newType) ;
