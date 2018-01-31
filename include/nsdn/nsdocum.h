@@ -11,8 +11,8 @@
 #include <vector>
 #include <cstring>
 
-class NSPatInfo ;
-class NSPersonGraphManager ;
+class NSPatInfo;
+class NSPersonGraphManager;
 
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
@@ -238,52 +238,52 @@ class NSDocumentData
 		char crc[DOC_CRC_LEN + 1];
 */
 
-		string _sCodePatient ;
-		string _sCodeDocument ;
-		string _sNom ;
-		string _sDateCreation ;
-		string _sAcces ;
-		string _sCreateur ;     // The user when document is created/imported
-    string _sAuteur ;		   // The genuine author
-    string _sDestinataire ; // The target
-		string _sType ;
-    string _sTypeComplet ;
-		string _sLocalisation ;
-		// string sFichier ;
-		// string sEntete ;
-		string _sEmplacement ;
-		string _sInteret ;
-		string _sCommentaire ;
-		string _sVisible ;
-		string _sTranNew ;
-		string _sTranDel ;
-		string _sCRC ;
+		string _sCodePatient;
+		string _sCodeDocument;
+		string _sNom;
+		string _sDateCreation;
+		string _sAcces;
+		string _sCreateur;     // The user when document is created/imported
+    string _sAuteur;		   // The genuine author
+    string _sDestinataire; // The target
+		string _sType;
+    string _sTypeComplet;
+		string _sLocalisation;
+		// string sFichier;
+		// string sEntete;
+		string _sEmplacement;
+		string _sInteret;
+		string _sCommentaire;
+		string _sVisible;
+		string _sTranNew;
+		string _sTranDel;
+		string _sCRC;
 
-		string _sFichier ;
-		string _sTemplate ;
-		string _sEnTete ;
-		string _sTypeContenu ;
-		string _sTypeContenuSens ;
-		string _sDateExamen ;
+		string _sFichier;
+		string _sTemplate;
+		string _sEnTete;
+		string _sTypeContenu;
+		string _sTypeContenuSens;
+		string _sDateExamen;
 
-		string 	_sRights ;
+		string 	_sRights;
 
-		void   metAZero() ;
-		string donneDateCreation(string sLang = string("")) ;
+		void   metAZero();
+		string donneDateCreation(string sLang = string(""));
 
-		bool   estVisible() { return ((string("") != _sVisible) && ('1' == _sVisible[0])) ; }
+		bool   estVisible() { return ((string("") != _sVisible) && ('1' == _sVisible[0])); }
 
-		void   rendVisible()   { _sVisible = string("1") ; }
-		void   rendInvisible() { _sVisible = string("0") ; }
+		void   rendVisible()   { _sVisible = string("1"); }
+		void   rendInvisible() { _sVisible = string("0"); }
 
-		NSDocumentData() { metAZero() ; }
-		NSDocumentData(const NSDocumentData& rv) ;
+		NSDocumentData() { metAZero(); }
+		NSDocumentData(const NSDocumentData& rv);
 
-		string getID() { return _sCodePatient + _sCodeDocument ; }
-    void   setID(string sId) ;
+		string getID() { return _sCodePatient + _sCodeDocument; }
+    void   setID(string sId);
 
-		NSDocumentData& operator=(const NSDocumentData& src) ;
-		int             operator==(const NSDocumentData& o) ;
+		NSDocumentData& operator=(const NSDocumentData& src);
+		int             operator==(const NSDocumentData& o);
 };
 
 //
@@ -299,118 +299,118 @@ class NSDocumentInfo : public NSRoot
 {
   private:
 
- 	  static long lObjectCount ;
+ 	  static long lObjectCount;
 
 	protected:
 
-		NSDocumentData  _Donnees ;
+		NSDocumentData  _Donnees;
 
-    NSPatPathoArray _Meta ;
-    NSPatPathoArray _Pres ;
-    string 				  _sCodeDocMeta ;
-    string          _sCodeDocPres ;
+    NSPatPathoArray _Meta;
+    NSPatPathoArray _Pres;
+    string 				  _sCodeDocMeta;
+    string          _sCodeDocPres;
 
 	public:
 
-		NSDocumentInfo(NSContexte* pCtx = 0) ; // on a besoin d'un constructeur par défaut
-		// NSDocumentInfo(string sMeta, NSContexte* pCtx, NSPatInfo* pPatInfo = 0) ;
-    NSDocumentInfo(string sMeta, NSContexte* pCtx, NSPersonGraphManager* pGraphManager) ;
-    NSDocumentInfo(const NSDocumentInfo& rv) ;
-    ~NSDocumentInfo() ;
+		NSDocumentInfo(NSContexte* pCtx = 0); // on a besoin d'un constructeur par défaut
+		// NSDocumentInfo(string sMeta, NSContexte* pCtx, NSPatInfo* pPatInfo = 0);
+    NSDocumentInfo(string sMeta, NSContexte* pCtx, NSPersonGraphManager* pGraphManager);
+    NSDocumentInfo(const NSDocumentInfo& rv);
+    ~NSDocumentInfo();
 
-		bool getNomFichier(string& sNomFichier) ;
-    // bool DonnePatPatho(NSPatPathoArray* pPatPathoArray, NSPatInfo* pPatInfo = 0) ;
-    bool DonnePatPatho(NSPatPathoArray* pPatPathoArray, NSPersonGraphManager* pGraphManager) ;
+		bool getNomFichier(string& sNomFichier);
+    // bool DonnePatPatho(NSPatPathoArray* pPatPathoArray, NSPatInfo* pPatInfo = 0);
+    bool DonnePatPatho(NSPatPathoArray* pPatPathoArray, NSPersonGraphManager* pGraphManager);
 
-    // bool LoadMetaAndData(NSPatInfo* pPatInfo = 0) ;
-    // bool GetDataInformation(NSPatInfo* pPatInfo = 0) ;
-    // bool ChargeDocMeta(NSPatInfo* pPatInfo = 0) ;
-    bool LoadMetaAndData(NSPersonGraphManager* pGraphManager) ;
-    bool GetDataInformation(NSPersonGraphManager* pGraphManager) ;
-    bool ChargeDocMeta(NSPersonGraphManager* pGraphManager) ;
-    bool ParseMetaDonnees() ;
+    // bool LoadMetaAndData(NSPatInfo* pPatInfo = 0);
+    // bool GetDataInformation(NSPatInfo* pPatInfo = 0);
+    // bool ChargeDocMeta(NSPatInfo* pPatInfo = 0);
+    bool LoadMetaAndData(NSPersonGraphManager* pGraphManager);
+    bool GetDataInformation(NSPersonGraphManager* pGraphManager);
+    bool ChargeDocMeta(NSPersonGraphManager* pGraphManager);
+    bool ParseMetaDonnees();
 
-    bool CommitMetaDonnees() ;
-    bool InitDocumentBrut(NSDocumentInfo** ppDocument) ;
+    bool CommitMetaDonnees();
+    bool InitDocumentBrut(NSDocumentInfo** ppDocument);
 
-		string getID() 		   { return _Donnees.getID() ; }
-    string getPatient()	 { return _Donnees._sCodePatient ; }
-    string getDocument() { return _Donnees._sCodeDocument ; }
-    string getRights()	 { return _Donnees._sRights ; }
-    string getTypeCplt() { return _Donnees._sTypeComplet ; }
-    string getTypeSem()  { return _Donnees._sType ; }
-    string getInteret()	 { return _Donnees._sInteret ; }
-    string getVisible()	 { return _Donnees._sVisible ; }
-    string getCreator()	 { return _Donnees._sCreateur ; }
-    string getAuthor()	 { return _Donnees._sAuteur ; }
-    string getContent()	 { return _Donnees._sTypeContenu ; }
-    string getSemCont()	 { return _Donnees._sTypeContenuSens ; }
-    string getDocName()  { return _Donnees._sNom ; }
-    string getCreDate()  { return _Donnees._sDateCreation ; }
-    string getDateExm()  { return _Donnees._sDateExamen ; }
-    string getLocalis()  { return _Donnees._sLocalisation ; }
-    string getFichier()  { return _Donnees._sFichier ; }
-    string getTemplate() { return _Donnees._sTemplate ; }
-    string getEntete()   { return _Donnees._sEnTete ; }
-    string getDestinat() { return _Donnees._sDestinataire ; }
+		string getID() 		   { return _Donnees.getID(); }
+    string getPatient()	 { return _Donnees._sCodePatient; }
+    string getDocument() { return _Donnees._sCodeDocument; }
+    string getRights()	 { return _Donnees._sRights; }
+    string getTypeCplt() { return _Donnees._sTypeComplet; }
+    string getTypeSem()  { return _Donnees._sType; }
+    string getInteret()	 { return _Donnees._sInteret; }
+    string getVisible()	 { return _Donnees._sVisible; }
+    string getCreator()	 { return _Donnees._sCreateur; }
+    string getAuthor()	 { return _Donnees._sAuteur; }
+    string getContent()	 { return _Donnees._sTypeContenu; }
+    string getSemCont()	 { return _Donnees._sTypeContenuSens; }
+    string getDocName()  { return _Donnees._sNom; }
+    string getCreDate()  { return _Donnees._sDateCreation; }
+    string getDateExm()  { return _Donnees._sDateExamen; }
+    string getLocalis()  { return _Donnees._sLocalisation; }
+    string getFichier()  { return _Donnees._sFichier; }
+    string getTemplate() { return _Donnees._sTemplate; }
+    string getEntete()   { return _Donnees._sEnTete; }
+    string getDestinat() { return _Donnees._sDestinataire; }
 
-    bool   estVisible()  { return _Donnees.estVisible() ; }
+    bool   estVisible()  { return _Donnees.estVisible(); }
 
-    // NSDocumentData* getData()         { return &_Donnees ; }
-    void             setData(const NSDocumentData* pData) ;
-    void             initFromData(NSDocumentData* pData) const ;
+    // NSDocumentData* getData()         { return &_Donnees; }
+    void             setData(const NSDocumentData* pData);
+    void             initFromData(NSDocumentData* pData) const;
 
-    // NSPatPathoArray* getMeta()        { return &_Meta ; }
-    void             setMeta(const NSPatPathoArray* pPpt) ;
-    void             initFromMeta(NSPatPathoArray* pPpt) const ;
+    // NSPatPathoArray* getMeta()        { return &_Meta; }
+    void             setMeta(const NSPatPathoArray* pPpt);
+    void             initFromMeta(NSPatPathoArray* pPpt) const;
 
-    // NSPatPathoArray* getPres()        { return &_Pres ; }
-    void             setPres(const NSPatPathoArray* pPpt) ;
-    void             initFromPres(NSPatPathoArray* pPpt) const ;
+    // NSPatPathoArray* getPres()        { return &_Pres; }
+    void             setPres(const NSPatPathoArray* pPpt);
+    void             initFromPres(NSPatPathoArray* pPpt) const;
 
-    string 				   getCodeDocMeta() { return _sCodeDocMeta ; }
-    string           getCodeDocPres() { return _sCodeDocPres ; }
+    string 				   getCodeDocMeta() { return _sCodeDocMeta; }
+    string           getCodeDocPres() { return _sCodeDocPres; }
 
-    string getDocTitleWithDate() ;
+    string getDocTitleWithDate();
 
-    void   setID(string sId)       { _Donnees.setID(sId) ; }
-    void   setPatient(string sPa)  { _Donnees._sCodePatient  = sPa ; }
-    void   setDocument(string sDo) { _Donnees._sCodeDocument = sDo ; }
-    void   setType(string sTy) ;
-    void   setInteret(string sIn)  { _Donnees._sInteret      = sIn ; }
-    void   setVisible(string sVi)  { _Donnees._sVisible      = sVi ; }
-    void   setCreator(string sCr)  { _Donnees._sCreateur     = sCr ; }
-    void   setAuthor(string sAu)   { _Donnees._sAuteur       = sAu ; }
-    void   setNom(string sNo)      { _Donnees._sNom          = sNo ; }
-    void   setCreDate(string sCD)  { _Donnees._sDateCreation = sCD ; }
-    void   setDateExm(string sDa)  { _Donnees._sDateExamen   = sDa ; }
-    void   setLocalisa(string sLo) { _Donnees._sLocalisation = sLo ; }
-    void   setFichier(string sFi)  { _Donnees._sFichier      = sFi ; }
-    void   setContent(string sCo) ;
-    void   setTemplate(string sTp) { _Donnees._sTemplate     = sTp ; }
-    void   setEnTete(string sET)   { _Donnees._sEnTete       = sET ; }
-    void   setDestinat(string sDe) { _Donnees._sDestinataire = sDe ; }
+    void   setID(string sId)       { _Donnees.setID(sId); }
+    void   setPatient(string sPa)  { _Donnees._sCodePatient  = sPa; }
+    void   setDocument(string sDo) { _Donnees._sCodeDocument = sDo; }
+    void   setType(string sTy);
+    void   setInteret(string sIn)  { _Donnees._sInteret      = sIn; }
+    void   setVisible(string sVi)  { _Donnees._sVisible      = sVi; }
+    void   setCreator(string sCr)  { _Donnees._sCreateur     = sCr; }
+    void   setAuthor(string sAu)   { _Donnees._sAuteur       = sAu; }
+    void   setNom(string sNo)      { _Donnees._sNom          = sNo; }
+    void   setCreDate(string sCD)  { _Donnees._sDateCreation = sCD; }
+    void   setDateExm(string sDa)  { _Donnees._sDateExamen   = sDa; }
+    void   setLocalisa(string sLo) { _Donnees._sLocalisation = sLo; }
+    void   setFichier(string sFi)  { _Donnees._sFichier      = sFi; }
+    void   setContent(string sCo);
+    void   setTemplate(string sTp) { _Donnees._sTemplate     = sTp; }
+    void   setEnTete(string sET)   { _Donnees._sEnTete       = sET; }
+    void   setDestinat(string sDe) { _Donnees._sDestinataire = sDe; }
 
     // Obsolete
     //
-    void   setAccess(string sAc)   { _Donnees._sAcces        = sAc ; }
-    void   setEmplacmt(string sEm) { _Donnees._sEmplacement  = sEm ; }
-    void   setComment(string sCo)  { _Donnees._sCommentaire  = sCo ; }
-    void   setTranNew(string sTr)  { _Donnees._sTranNew      = sTr ; }
-    void   setTranDel(string sTr)  { _Donnees._sTranDel      = sTr ; }
-    void   setCRC(string sCR)      { _Donnees._sCRC          = sCR ; }
+    void   setAccess(string sAc)   { _Donnees._sAcces        = sAc; }
+    void   setEmplacmt(string sEm) { _Donnees._sEmplacement  = sEm; }
+    void   setComment(string sCo)  { _Donnees._sCommentaire  = sCo; }
+    void   setTranNew(string sTr)  { _Donnees._sTranNew      = sTr; }
+    void   setTranDel(string sTr)  { _Donnees._sTranDel      = sTr; }
+    void   setCRC(string sCR)      { _Donnees._sCRC          = sCR; }
 
-    void   rendVisible()   { _Donnees.rendVisible() ; }
-		void   rendInvisible() { _Donnees.rendInvisible() ; }
+    void   rendVisible()   { _Donnees.rendVisible(); }
+		void   rendInvisible() { _Donnees.rendInvisible(); }
 
-    void 	 setCodeDocMeta(string sCode) { _sCodeDocMeta = sCode ; }
-    void   setCodeDocPres(string sCode) { _sCodeDocPres = sCode ; }
+    void 	 setCodeDocMeta(string sCode) { _sCodeDocMeta = sCode; }
+    void   setCodeDocPres(string sCode) { _sCodeDocPres = sCode; }
 
-		NSDocumentInfo& operator=(const NSDocumentInfo src) ;
-		int             operator==(const NSDocumentInfo& o) ;
+		NSDocumentInfo& operator=(const NSDocumentInfo src);
+		int             operator==(const NSDocumentInfo& o);
 
-    static long getNbInstance()  { return lObjectCount ; }
-    static void initNbInstance() { lObjectCount = 0 ; }
+    static long getNbInstance()  { return lObjectCount; }
+    static void initNbInstance() { lObjectCount = 0; }
 };
 
 //---------------------------------------------------------------------------
@@ -432,30 +432,30 @@ class NSChemiseData
     // Variables de stockage des valeurs
     //
 /*
-    char code[CHE_CODE_LEN + 1] ;
-    char nom[CHE_NOM_LEN + 1] ;
-    char creation[CHE_CREATION_LEN + 1] ;
-    char acces[CHE_ACCES_LEN + 1] ;
-    char createur[CHE_CREATEUR_LEN + 1] ;
-    char commentaire[CHE_COMMENTAIRE_LEN + 1] ;
+    char code[CHE_CODE_LEN + 1];
+    char nom[CHE_NOM_LEN + 1];
+    char creation[CHE_CREATION_LEN + 1];
+    char acces[CHE_ACCES_LEN + 1];
+    char createur[CHE_CREATEUR_LEN + 1];
+    char commentaire[CHE_COMMENTAIRE_LEN + 1];
 */
 
-    string _sCode ;
-    string _sNom ;
-    string _sCreation ;
-    string _sAcces ;
-    string _sCreateur ;
-    string _sCommentaire ;
+    string _sCode;
+    string _sNom;
+    string _sCreation;
+    string _sAcces;
+    string _sCreateur;
+    string _sCommentaire;
 
-    NSChemiseData() { metAZero() ; }
-    NSChemiseData(const NSChemiseData& rv) ;
+    NSChemiseData() { metAZero(); }
+    NSChemiseData(const NSChemiseData& rv);
 
-    NSChemiseData& operator=(const NSChemiseData& src) ;
-    int            operator==(const NSChemiseData& o) const ;
+    NSChemiseData& operator=(const NSChemiseData& src);
+    int            operator==(const NSChemiseData& o) const;
 
-    void metAZero() ;
+    void metAZero();
 
-    string donneIntitule(string sLang) ;
+    string donneIntitule(string sLang);
 };
 
 //
@@ -470,24 +470,24 @@ class NSChemiseInfo
 {
 	public:
 
-		string        _sNodeChemise ;
-		NSChemiseData _Donnees ;
+		string        _sNodeChemise;
+		NSChemiseData _Donnees;
 
-		NSChemiseInfo() ;
+		NSChemiseInfo();
 
-		NSChemiseInfo(const NSChemiseInfo& rv) ;
-		~NSChemiseInfo() ;
+		NSChemiseInfo(const NSChemiseInfo& rv);
+		~NSChemiseInfo();
 
-    string getNom()      { return _Donnees._sNom ; }
-    string getCreation() { return _Donnees._sCreation ; }
+    string getNom()      { return _Donnees._sNom; }
+    string getCreation() { return _Donnees._sCreation; }
 
-    void   setNom(string sN)      { _Donnees._sNom      = sN ; }
-    void   setCreation(string sC) { _Donnees._sCreation = sC ; }
+    void   setNom(string sN)      { _Donnees._sNom      = sN; }
+    void   setCreation(string sC) { _Donnees._sCreation = sC; }
 
-		string donneIntitule(string sLang) ;
+		string donneIntitule(string sLang);
 
-		NSChemiseInfo& operator=(const NSChemiseInfo& src) ;
-		int            operator==(const NSChemiseInfo& o) const ;
+		NSChemiseInfo& operator=(const NSChemiseInfo& src);
+		int            operator==(const NSChemiseInfo& o) const;
 };
 
 //---------------------------------------------------------------------------
@@ -508,22 +508,22 @@ class NSSejourData
 		//
 		// Variables de stockage des valeurs
 		//
-    string sTreeID ;
-    string sNumero ;
-		string sDateDeb ;
-		string sDateFin ;
-		string sUnit ;
-    string sCarePlace ;
+    string sTreeID;
+    string sNumero;
+		string sDateDeb;
+		string sDateFin;
+		string sUnit;
+    string sCarePlace;
 
-		NSSejourData() { metAZero() ; }
-		NSSejourData(const NSSejourData& rv) ;
+		NSSejourData() { metAZero(); }
+		NSSejourData(const NSSejourData& rv);
 
-		NSSejourData& operator=(const NSSejourData& src) ;
-		int           operator==(const NSSejourData& o) const ;
+		NSSejourData& operator=(const NSSejourData& src);
+		int           operator==(const NSSejourData& o) const;
 
-		void metAZero() ;
+		void metAZero();
 
-		void donneIntitule(char *intitule) ;
+		void donneIntitule(char *intitule);
 };
 
 //
@@ -538,43 +538,43 @@ class NSSejourInfo
 {
 	public:
 
-		NSSejourInfo() ;
-		NSSejourInfo(NSSejourInfo& rv) ;
-		~NSSejourInfo() ;
+		NSSejourInfo();
+		NSSejourInfo(NSSejourInfo& rv);
+		~NSSejourInfo();
 
-		void donneIntitule(char *intitule) ;
+		void donneIntitule(char *intitule);
 
-		NSSejourInfo& operator=(NSSejourInfo src) ;
-		int           operator==(const NSSejourInfo& o) ;
+		NSSejourInfo& operator=(NSSejourInfo src);
+		int           operator==(const NSSejourInfo& o);
 
-    string getTreeID()    { return _Donnees.sTreeID ; }
-    string getNumero()    { return _Donnees.sNumero ; }
-		string getBeginDate() { return _Donnees.sDateDeb ; }
-		string getEndDate()   { return _Donnees.sDateFin ; }
-		string getUnit()      { return _Donnees.sUnit ; }
-    string getCarePlace() { return _Donnees.sCarePlace ; }
+    string getTreeID()    { return _Donnees.sTreeID; }
+    string getNumero()    { return _Donnees.sNumero; }
+		string getBeginDate() { return _Donnees.sDateDeb; }
+		string getEndDate()   { return _Donnees.sDateFin; }
+		string getUnit()      { return _Donnees.sUnit; }
+    string getCarePlace() { return _Donnees.sCarePlace; }
 
-    void   setTreeID(string sI)    { _Donnees.sTreeID    = sI ; }
-    void   setNumero(string sI)    { _Donnees.sNumero    = sI ; }
-		void   setBeginDate(string sI) { _Donnees.sDateDeb   = sI ; }
-		void   setEndDate(string sI)   { _Donnees.sDateFin   = sI ; }
-		void   setUnit(string sI)      { _Donnees.sUnit      = sI ; }
-    void   setCarePlace(string sI) { _Donnees.sCarePlace = sI ; }
+    void   setTreeID(string sI)    { _Donnees.sTreeID    = sI; }
+    void   setNumero(string sI)    { _Donnees.sNumero    = sI; }
+		void   setBeginDate(string sI) { _Donnees.sDateDeb   = sI; }
+		void   setEndDate(string sI)   { _Donnees.sDateFin   = sI; }
+		void   setUnit(string sI)      { _Donnees.sUnit      = sI; }
+    void   setCarePlace(string sI) { _Donnees.sCarePlace = sI; }
 
-    bool   initFromPatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper) ;
-    bool   buildPatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper) ;
-    bool   updatePatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper) ;
+    bool   initFromPatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper);
+    bool   buildPatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper);
+    bool   updatePatPatho(NSPatPathoArray *pPPT, NSSuper* pSuper);
 
   protected:
 
-    NSSejourData _Donnees ;
+    NSSejourData _Donnees;
 };
 
 // Définition de l'array des séjours
-typedef vector<NSSejourInfo*> NSSejourArray ;
-typedef NSSejourArray::iterator NSSejourIter ;
+typedef vector<NSSejourInfo*> NSSejourArray;
+typedef NSSejourArray::iterator NSSejourIter;
 //Reverse_iter
-typedef NSSejourArray::reverse_iterator NSSejourReverseIter ;
+typedef NSSejourArray::reverse_iterator NSSejourReverseIter;
 
 //---------------------------------------------------------------------------
 //  Classe NSChemDoc
@@ -612,14 +612,14 @@ class NSChemDocInfo
 {
   public :
 
-    NSChemDocData* pDonnees ;
+    NSChemDocData* pDonnees;
 
-    NSChemDocInfo() ;
-    NSChemDocInfo(NSChemDocInfo& rv) ;
-    ~NSChemDocInfo() ;
+    NSChemDocInfo();
+    NSChemDocInfo(NSChemDocInfo& rv);
+    ~NSChemDocInfo();
 
-    NSChemDocInfo& operator=(NSChemDocInfo src) ;
-    int 		   operator==(const NSChemDocInfo& o) ;
+    NSChemDocInfo& operator=(NSChemDocInfo src);
+    int 		   operator==(const NSChemDocInfo& o);
 };
 
 #ifndef __linux__
@@ -630,33 +630,33 @@ class NSDocStatus
 {
   public :
 
-    enum DOCSTATUS { StatusUndefined = 0, StatusNew, StatusUnchanged, StatusModified, StatusDeleted } ;
+    enum DOCSTATUS { StatusUndefined = 0, StatusNew, StatusUnchanged, StatusModified, StatusDeleted };
 
-    NSDocStatus() ;
-    NSDocStatus(NSDocStatus& rv) ;
-    ~NSDocStatus() ;
+    NSDocStatus();
+    NSDocStatus(NSDocStatus& rv);
+    ~NSDocStatus();
 
-    NSDocStatus& operator=(NSDocStatus src) ;
+    NSDocStatus& operator=(NSDocStatus src);
 
-    DOCSTATUS getStatus()              { return _iStatus ; }
-    void      setStatus(DOCSTATUS iSt) { _iStatus = iSt ; }
+    DOCSTATUS getStatus()              { return _iStatus; }
+    void      setStatus(DOCSTATUS iSt) { _iStatus = iSt; }
 
-    DOCSTATUS getCptaStatus()              { return _iCptaStatus ; }
-    void      setCptaStatus(DOCSTATUS iSt) { _iCptaStatus = iSt ; }
+    DOCSTATUS getCptaStatus()              { return _iCptaStatus; }
+    void      setCptaStatus(DOCSTATUS iSt) { _iCptaStatus = iSt; }
 
-    string    getDocId()              { return _sDocId ; }
-    void      setDocId(string sSt)    { _sDocId = sSt ; }
+    string    getDocId()              { return _sDocId; }
+    void      setDocId(string sSt)    { _sDocId = sSt; }
 
-    string    getNumCompt()           { return _sNumCompt ; }
-    void      setNumCompt(string sSt) { _sNumCompt = sSt ; }
+    string    getNumCompt()           { return _sNumCompt; }
+    void      setNumCompt(string sSt) { _sNumCompt = sSt; }
 
   protected :
 
-    DOCSTATUS _iStatus ;
-    DOCSTATUS _iCptaStatus ;
+    DOCSTATUS _iStatus;
+    DOCSTATUS _iCptaStatus;
 
-    string    _sDocId ;
-    string    _sNumCompt ;
+    string    _sDocId;
+    string    _sNumCompt;
 };
 
 //---------------------------------------------------------------------------

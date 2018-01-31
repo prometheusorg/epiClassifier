@@ -45,20 +45,20 @@ class NSTexteLibreData
     //
     // Variables de stockage des valeurs
     //
-    char patient[TLIBRE_PAT_LEN + 1] ;
-    char code[TLIBRE_CODE_LEN + 1] ;
-    char texte[TLIBRE_TEXTE_LEN + 1] ;
-    char suivant[TLIBRE_SUIVANT_LEN + 1] ;
+    char patient[TLIBRE_PAT_LEN + 1];
+    char code[TLIBRE_CODE_LEN + 1];
+    char texte[TLIBRE_TEXTE_LEN + 1];
+    char suivant[TLIBRE_SUIVANT_LEN + 1];
 
-    NSTexteLibreData(NSTexteLibreData& rv) ;
-    NSTexteLibreData() { metAZero() ; }
-    ~NSTexteLibreData() ;
+    NSTexteLibreData(NSTexteLibreData& rv);
+    NSTexteLibreData() { metAZero(); }
+    ~NSTexteLibreData();
 
-    NSTexteLibreData& operator=(NSTexteLibreData src) ;
-    int               operator==(const NSTexteLibreData& o) ;
+    NSTexteLibreData& operator=(NSTexteLibreData src);
+    int               operator==(const NSTexteLibreData& o);
 
     //methodes
-    void metAZero() ;
+    void metAZero();
 };
 
 //---------------------------------------------------------------------------
@@ -69,15 +69,15 @@ class  NSTextelibreBase : public NSFiche
 {
   public :
 
-    NSTexteLibreData* pDonnees ;   // Objet qui contient les donnees
+    NSTexteLibreData* pDonnees;   // Objet qui contient les donnees
 
     NSTextelibreBase(NSContexte* pCtx);
     ~NSTextelibreBase();
 
     virtual DBIResult open() = 0;
     void metABlanc() { pDonnees->metABlanc(); }
-    void alimenteFiche() ;
-    void videFiche() ;
+    void alimenteFiche();
+    void videFiche();
 };
 */
 
@@ -90,20 +90,20 @@ class NSTlibreInfo
 		//
     // Objet qui contient les donnees
 		//
-		NSTexteLibreData* pDonnees ;
+		NSTexteLibreData* pDonnees;
 
-		NSTlibreInfo() ;
-		// NSTlibreInfo(NSTextelibreBase* pNSTextelibre) ;
-		NSTlibreInfo(NSTlibreInfo& rv) ;
-    ~NSTlibreInfo() ;
+		NSTlibreInfo();
+		// NSTlibreInfo(NSTextelibreBase* pNSTextelibre);
+		NSTlibreInfo(NSTlibreInfo& rv);
+    ~NSTlibreInfo();
 
-		NSTlibreInfo& operator=(NSTlibreInfo src) ;
-		int operator == ( const NSTlibreInfo& o ) ;
+		NSTlibreInfo& operator=(NSTlibreInfo src);
+		int operator == ( const NSTlibreInfo& o );
 
-    string getPatient() { return string(pDonnees->patient) ; }
-    string getCode()    { return string(pDonnees->code) ; }
-    string getTexte()   { return string(pDonnees->texte) ; }
-    string getSuivant() { return string(pDonnees->suivant) ; }
+    string getPatient() { return string(pDonnees->patient); }
+    string getCode()    { return string(pDonnees->code); }
+    string getTexte()   { return string(pDonnees->texte); }
+    string getSuivant() { return string(pDonnees->suivant); }
 };
 
 // **************************************************************************

@@ -20,24 +20,24 @@ NSGenerateur::NSGenerateur(NSContexte* pCtx, NsProposition* pPropos, string sLan
              :NSRoot(pCtx)
 {
   // pPhraseur->nettoye();
-  pCCArray     = new NSGenereCompArray(pCtx, this) ;
-  pProposition = pPropos ;
-  initialise() ;
+  pCCArray     = new NSGenereCompArray(pCtx, this);
+  pProposition = pPropos;
+  initialise();
 
-  sPhrase      = "" ;
-  sLang        = sLangue ;
-  pPh          = 0 ;
+  sPhrase      = "";
+  sLang        = sLangue;
+  pPh          = 0;
   if (pProposition && (NsProposition::isPhraseur == pProposition->iObjectType))
-    pPh = (static_cast<NSPhraseur*>(pProposition->pProposition)) ;
+    pPh = (static_cast<NSPhraseur*>(pProposition->pProposition));
 }
 
 NSGenerateur::NSGenerateur(NSGenerateur& rv)
              :NSRoot(rv.pContexte)
 {
-  pCCArray = new NSGenereCompArray(*(rv.pCCArray)) ;
-  initialise() ;
-  sPhrase = "" ;
-  copieTout(&rv) ;
+  pCCArray = new NSGenereCompArray(*(rv.pCCArray));
+  initialise();
+  sPhrase = "";
+  copieTout(&rv);
 }
 
 NSGenerateur::~NSGenerateur()
@@ -135,20 +135,20 @@ NSGenerateur::copieTout(NSGenerateur* rv)
 {
   if (rv->pProposition)
   {
-    pProposition = new NsProposition(*(rv->pProposition)) ;
+    pProposition = new NsProposition(*(rv->pProposition));
     if (pProposition->iObjectType == NsProposition::isPhraseur)
-      pPh = (static_cast<NSPhraseur*>(pProposition->pProposition)) ;
+      pPh = (static_cast<NSPhraseur*>(pProposition->pProposition));
   }
   else
-    pProposition = 0 ;
+    pProposition = 0;
 
-  sPhrase = rv->sPhrase ;
-  sLang   = rv->sLang ;
+  sPhrase = rv->sPhrase;
+  sLang   = rv->sLang;
 
   if (rv->pAdjEpitheteAvPos)
-    pAdjEpitheteAvPos = new NSPhraseMotArray(*(rv->pAdjEpitheteAvPos)) ;
+    pAdjEpitheteAvPos = new NSPhraseMotArray(*(rv->pAdjEpitheteAvPos));
   else
-    pAdjEpitheteAvPos = 0 ;
+    pAdjEpitheteAvPos = 0;
 
     if (rv->pAdjEpitheteAvNeg)
         pAdjEpitheteAvNeg = new NSPhraseMotArray(*(rv->pAdjEpitheteAvNeg));
@@ -222,18 +222,18 @@ NSGenerateur::copieTout(NSGenerateur* rv)
 bool
 NSGenerateur::genereProposition(DCODETYPE iStyle, NsProposition* pPropos)
 {
-  NsProposition* pCurrentProp ;
+  NsProposition* pCurrentProp;
   if (pPropos)
-    pCurrentProp = pPropos ;
+    pCurrentProp = pPropos;
   else
-    pCurrentProp = pProposition ;
+    pCurrentProp = pProposition;
 
   if (NULL == pCurrentProp)
-    return false ;
+    return false;
 try
 {
-  pCurrentProp->sPhrase = string("") ;
-  pCurrentProp->sLang   = sLang ;
+  pCurrentProp->sPhrase = string("");
+  pCurrentProp->sLang   = sLang;
 
   //
   // Proposition isolee : on se contente de la decoder
@@ -241,11 +241,11 @@ try
   //
   if (NsProposition::isPhraseur == pCurrentProp->iObjectType)
   {
-    pPh = (static_cast<NSPhraseur*>(pCurrentProp->pProposition)) ;
-    bool bResult = generePhrase(iStyle) ;
+    pPh = (static_cast<NSPhraseur*>(pCurrentProp->pProposition));
+    bool bResult = generePhrase(iStyle);
     if (bResult)
-      pCurrentProp->sPhrase = sPhrase ;
-    return bResult ;
+      pCurrentProp->sPhrase = sPhrase;
+    return bResult;
   }
   //
   // Propositions multiples : on decode, puis on assemble
@@ -253,23 +253,23 @@ try
   //
   if (NsProposition::isPropositionArray == pCurrentProp->iObjectType)
   {
-    NSPropositionArray* pPropArray = (static_cast<NSPropositionArray*>(pCurrentProp->pProposition)) ;
+    NSPropositionArray* pPropArray = (static_cast<NSPropositionArray*>(pCurrentProp->pProposition));
     if (pPropArray->empty())
-      return true ;
-    for (iterProposition i = pPropArray->begin() ; pPropArray->end() != i ; i++)
+      return true;
+    for (iterProposition i = pPropArray->begin(); pPropArray->end() != i; i++)
     {
-      bool bResult = genereProposition(iStyle, *i) ;
+      bool bResult = genereProposition(iStyle, *i);
       if (false == bResult)
-        return false ;
+        return false;
     }
-    return assembleProposition(iStyle, pCurrentProp) ;
+    return assembleProposition(iStyle, pCurrentProp);
   }
-  return false ;
+  return false;
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::generePhrase.", standardError) ;
-  return false ;
+	erreur("Exception NSGenerateurFr::generePhrase.", standardError);
+  return false;
 }
 }
 
@@ -279,19 +279,19 @@ NSGenerateur::ajouteMot(NSPhraseMotArray** ppMotArray, NSPhraseMot* pMot)
 try
 {
 	if (NULL == pMot)
-  	return true ;
+  	return true;
 
 	if (NULL == *ppMotArray)
-  	*ppMotArray = new NSPhraseMotArray() ;
+  	*ppMotArray = new NSPhraseMotArray();
 
-	(*ppMotArray)->push_back(pMot) ;
+	(*ppMotArray)->push_back(pMot);
 
-	return true ;
+	return true;
 }
 catch (...)
 {
-	erreur("Exception NSGenerateur::ajouteMot.", standardError) ;
-	return false ;
+	erreur("Exception NSGenerateur::ajouteMot.", standardError);
+	return false;
 }
 }
 
@@ -301,38 +301,38 @@ NSGenerateur::ajouteCopieMot(NSPhraseMotArray** ppMotArray, NSPhraseMot* pMot)
 try
 {
   if (NULL == pMot)
-    return true ;
+    return true;
 
   if (NULL == *ppMotArray)
-    *ppMotArray = new NSPhraseMotArray() ;
+    *ppMotArray = new NSPhraseMotArray();
 
   //
   // NSPhraseMotTime ?
   //
-  NSPhraseMotTime* pDate = dynamic_cast<NSPhraseMotTime*>(pMot) ;
+  NSPhraseMotTime* pDate = dynamic_cast<NSPhraseMotTime*>(pMot);
   if (pDate)
   {
-    NSPhraseMotTime *pNewDate = new NSPhraseMotTime(*pDate) ;
-    (*ppMotArray)->push_back(pNewDate) ;
+    NSPhraseMotTime *pNewDate = new NSPhraseMotTime(*pDate);
+    (*ppMotArray)->push_back(pNewDate);
   }
   else
   {
-    NSPhraseMotTimeCycle* pCycle = dynamic_cast<NSPhraseMotTimeCycle*>(pMot) ;
+    NSPhraseMotTimeCycle* pCycle = dynamic_cast<NSPhraseMotTimeCycle*>(pMot);
     if ( pCycle )
     {
-      NSPhraseMotTimeCycle *pNewCycle = new NSPhraseMotTimeCycle(*pCycle) ;
-      (*ppMotArray)->push_back(pNewCycle) ;
+      NSPhraseMotTimeCycle *pNewCycle = new NSPhraseMotTimeCycle(*pCycle);
+      (*ppMotArray)->push_back(pNewCycle);
     }
     else
-      (*ppMotArray)->push_back(new NSPhraseMot(*pMot)) ;
+      (*ppMotArray)->push_back(new NSPhraseMot(*pMot));
   }
 
-  return true ;
+  return true;
 }
 catch (...)
 {
-	erreur("Exception NSGenerateur::ajouteCopieMot.", standardError) ;
-	return false ;
+	erreur("Exception NSGenerateur::ajouteCopieMot.", standardError);
+	return false;
 }
 }
 
@@ -341,34 +341,34 @@ NSGenerateur::terminePhrase()
 {
   if (string("") != sPhrase)
   {
-    sPhrase[0] = pseumaj(sPhrase[0]) ;
-    sPhrase += string(".") ;
+    sPhrase[0] = pseumaj(sPhrase[0]);
+    sPhrase += string(".");
   }
-  return true ;
+  return true;
 }
 
 bool
 NSGenerateur::termineProposition(NsProposition* pPropos)
 {
-  string* pPhrase = 0 ;
+  string* pPhrase = 0;
   if (NULL != pPropos)
-    pPhrase = &(pPropos->sPhrase) ;
+    pPhrase = &(pPropos->sPhrase);
   else
-    pPhrase = &(pProposition->sPhrase) ;
+    pPhrase = &(pProposition->sPhrase);
 
   if ((NULL != pPhrase) && (string("") != *pPhrase))
   {
-    (*pPhrase)[0] = pseumaj((*pPhrase)[0]) ;
-    *pPhrase += string(".") ;
+    (*pPhrase)[0] = pseumaj((*pPhrase)[0]);
+    *pPhrase += string(".");
   }
-  return true ;
+  return true;
 }
 
 bool
 NSGenerateur::CommenceParVoyelle(string* pLib)
 {
   if ((NULL == pLib) || (strlen(pLib->c_str()) == 0))
-    return false ;
+    return false;
 
 	switch ((*pLib)[0])
   {
@@ -432,43 +432,43 @@ NSGenerateur::CommenceParVoyelle(string* pLib)
     case 'Ý' :
     case 'y' :
     case 'Y' :
-    case 'ÿ' :  return true ;
+    case 'ÿ' :  return true;
   }
-  return false ;
+  return false;
 }
 
 void
 NSGenerateur::etDuMilieu(string *type, string *type1, string *type2)
 {
 	if ((NULL == type) || (NULL == type1) || (NULL == type2) || (string("") == *type2))
-		return ;
+		return;
 	if (string("") != *type)
-		*type += string(", ") ;
-	*type += *type1 ;
-	*type1 = *type2 ;
-	*type2 = string("") ;
+		*type += string(", ");
+	*type += *type1;
+	*type1 = *type2;
+	*type2 = string("");
 }
 
 void
 NSGenerateur::contracting(string *pSentence, string sFrom, string sTo)
 {
   if ((NULL == pSentence) || (string("") == *pSentence) || (string("") == sFrom))
-    return ;
+    return;
 
-  size_t posit1 = pSentence->find(sFrom) ;
+  size_t posit1 = pSentence->find(sFrom);
   if (NPOS == posit1)
-    return ;
+    return;
 
-  size_t iFromSize = strlen(sFrom.c_str()) ;
+  size_t iFromSize = strlen(sFrom.c_str());
 
   while (NPOS != posit1)
   {
     if (0 == posit1)
-      pSentence->replace(0, iFromSize, sTo) ;
+      pSentence->replace(0, iFromSize, sTo);
     else if (' ' == (*pSentence)[posit1-1])
-      pSentence->replace(posit1, iFromSize, sTo) ;
+      pSentence->replace(posit1, iFromSize, sTo);
 
-    posit1 = pSentence->find(sFrom, posit1 + 1) ;
+    posit1 = pSentence->find(sFrom, posit1 + 1);
   }
 }
 
@@ -482,27 +482,27 @@ void
 NSGenerateur::dispatchArray(NSPhraseMotArray* pMots, NSPhraseMotArray** ppYesArray, NSPhraseMotArray** ppNoArray, WORDTYPE iWordType)
 {
   if (NULL == pMots)
-    return ;
+    return;
 
   if (pMots->empty())
-    return ;
+    return;
 
-  for (iterPhraseMot iterMots = pMots->begin() ; pMots->end() != iterMots ; iterMots++)
+  for (iterPhraseMot iterMots = pMots->begin(); pMots->end() != iterMots; iterMots++)
   {
-    bool bFound = true ;
+    bool bFound = true;
 
     if (false == (*iterMots)->estTexteLibre())
     {
-      NSSuper* pSuper = pContexte->getSuperviseur() ;
+      NSSuper* pSuper = pContexte->getSuperviseur();
 
-      string sLexique = (*iterMots)->getLexique() ;
+      string sLexique = (*iterMots)->getLexique();
 
-      NSPathologData Data ;
-      bFound = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+      NSPathologData Data;
+      bFound = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
       if (false == bFound)
       {
-        string sErrorText = string("NSGenerateur::dispatchArray discarding ") + sLexique + string(" which cannot be found in Lexique for langage ") + sLang ;
-        pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
+        string sErrorText = string("NSGenerateur::dispatchArray discarding ") + sLexique + string(" which cannot be found in Lexique for langage ") + sLang;
+        pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
       }
       else
       {
@@ -512,58 +512,58 @@ NSGenerateur::dispatchArray(NSPhraseMotArray* pMots, NSPhraseMotArray** ppYesArr
           {
             if (false == Data.estNom())
             {
-              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is no a noun.") ;
-              pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
-              bFound = false ;
+              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is no a noun.");
+              pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
+              bFound = false;
             }
-            break ;
+            break;
           }
           case isAdjective :
           {
             if (false == Data.estAdjectif())
             {
-              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an adjective.") ;
-              pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
-              bFound = false ;
+              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an adjective.");
+              pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
+              bFound = false;
             }
-            break ;
+            break;
           }
           case isAdverb :
           {
             if (false == Data.estAdverbe())
             {
-              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an adverb.") ;
-              pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
-              bFound = false ;
+              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an adverb.");
+              pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
+              bFound = false;
             }
-            break ;
+            break;
           }
           case isVerb :
           {
             if (false == Data.estVerbe())
             {
-              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not a verb.") ;
-              pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
-              bFound = false ;
+              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not a verb.");
+              pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
+              bFound = false;
             }
-            break ;
+            break;
           }
           case isInvar :
           {
             if (false == Data.estInvariable())
             {
-              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an invariable.") ;
-              pSuper->trace(&sErrorText, 1, NSSuper::trWarning) ;
-              bFound = false ;
+              string sErrorText = string("NSGenerateurFr::classeTout discarding ") + sLexique + string(" because it is not an invariable.");
+              pSuper->trace(&sErrorText, 1, NSSuper::trWarning);
+              bFound = false;
             }
-            break ;
+            break;
           }
         }
       }
     }
 
     if (bFound)
-      dispatchYesNo(*iterMots, ppYesArray, ppNoArray) ;
+      dispatchYesNo(*iterMots, ppYesArray, ppNoArray);
   }
 }
 
@@ -575,21 +575,21 @@ void
 NSGenerateur::dispatchYesNo(NSPhraseMot* pMot, NSPhraseMotArray** ppYesArray, NSPhraseMotArray** ppNoArray)
 {
   if (NULL == pMot)
-    return ;
+    return;
 
-  string sCertitude = pMot->getCertitude() ;
+  string sCertitude = pMot->getCertitude();
   if (string("") != sCertitude)
   {
     if      ((string(sCertitude, 0, 3) == "WCE") &&
              (string(sCertitude, 0, 5) < "WCE50"))
-      ajouteCopieMot(ppNoArray, pMot) ;
+      ajouteCopieMot(ppNoArray, pMot);
 
     else if ((string(sCertitude, 0, 3) == "WCE") &&
              (string(sCertitude, 0, 5) >= "WCE50"))
-      ajouteCopieMot(ppYesArray, pMot) ;
+      ajouteCopieMot(ppYesArray, pMot);
   }
   else
-    ajouteCopieMot(ppYesArray, pMot) ;
+    ajouteCopieMot(ppYesArray, pMot);
 }
 
 // -------------------------------------------------------------------------
@@ -598,14 +598,14 @@ NSGenerateur::dispatchYesNo(NSPhraseMot* pMot, NSPhraseMotArray** ppYesArray, NS
 NSGenComplement::NSGenComplement(NSContexte* pCtx, NSGenerateur* pGener)
                 :NSRoot(pCtx)
 {
-  pGenerateur = pGener ;
+  pGenerateur = pGener;
 
-  sType       = string("") ;
-  sPositif    = string("") ;
-  sNegatif    = string("") ;
-  pMotsPos    = (NSPhraseMotArray*) 0 ;
-  pMotsNeg    = (NSPhraseMotArray*) 0 ;
-  iPriorite   = 50 ;
+  sType       = string("");
+  sPositif    = string("");
+  sNegatif    = string("");
+  pMotsPos    = (NSPhraseMotArray*) 0;
+  pMotsNeg    = (NSPhraseMotArray*) 0;
+  iPriorite   = 50;
 }
 
 NSGenComplement::NSGenComplement(NSGenComplement& rv)
@@ -613,33 +613,33 @@ NSGenComplement::NSGenComplement(NSGenComplement& rv)
 {
 try
 {
-  sType        = rv.sType ;
-  sPositif     = rv.sPositif ;
-  sNegatif     = rv.sNegatif ;
-  iPriorite    = rv.iPriorite ;
-  pGenerateur  = rv.pGenerateur ;
+  sType        = rv.sType;
+  sPositif     = rv.sPositif;
+  sNegatif     = rv.sNegatif;
+  iPriorite    = rv.iPriorite;
+  pGenerateur  = rv.pGenerateur;
 
   if (rv.pMotsPos)
-    pMotsPos = new NSPhraseMotArray(*(rv.pMotsPos)) ;
+    pMotsPos = new NSPhraseMotArray(*(rv.pMotsPos));
   else
-    pMotsPos = (NSPhraseMotArray*) 0 ;
+    pMotsPos = (NSPhraseMotArray*) 0;
   if (rv.pMotsNeg)
-    pMotsNeg = new NSPhraseMotArray(*(rv.pMotsNeg)) ;
+    pMotsNeg = new NSPhraseMotArray(*(rv.pMotsNeg));
   else
-    pMotsNeg = (NSPhraseMotArray*) 0 ;
+    pMotsNeg = (NSPhraseMotArray*) 0;
 }
 catch (...)
 {
-	erreur("Exception NSGenComplement copy ctor.", standardError) ;
+	erreur("Exception NSGenComplement copy ctor.", standardError);
 }
 }
 
 NSGenComplement::~NSGenComplement()
 {
 	if (pMotsPos)
-  	delete pMotsPos ;
+  	delete pMotsPos;
 	if (pMotsNeg)
-  	delete pMotsNeg ;
+  	delete pMotsNeg;
 }
 
 void
@@ -647,98 +647,98 @@ NSGenComplement::donnePhrElements(NSPhraseMot** ppLiaison, NSPhraseMot** ppPrepo
 {
   if ((NULL == pGenerateur) || (!(pGenerateur->getCurrentPhraseur())))
   {
-    *ppLiaison     = 0 ;
-    *ppPreposition = 0 ;
-    *ppMots        = 0 ;
-    return ;
+    *ppLiaison     = 0;
+    *ppPreposition = 0;
+    *ppMots        = 0;
+    return;
   }
 
-  NSPhraseur* pPhra = pGenerateur->getCurrentPhraseur() ;
+  NSPhraseur* pPhra = pGenerateur->getCurrentPhraseur();
 
   if      (sType == string(STR_CCLIEU))
   {
-    *ppLiaison     = &(pPhra->LiaisonLieu) ;
-    *ppPreposition = &(pPhra->PrepositionLieu) ;
-    *ppMots        = &(pPhra->CCLieu) ;
+    *ppLiaison     = &(pPhra->LiaisonLieu);
+    *ppPreposition = &(pPhra->PrepositionLieu);
+    *ppMots        = &(pPhra->CCLieu);
   }
   else if (sType == string(STR_CCTEMPS))
   {
-    *ppLiaison     = &(pPhra->LiaisonTemps) ;
-    *ppPreposition = &(pPhra->PrepositionTemps) ;
-    *ppMots        = &(pPhra->CCTemps) ;
+    *ppLiaison     = &(pPhra->LiaisonTemps);
+    *ppPreposition = &(pPhra->PrepositionTemps);
+    *ppMots        = &(pPhra->CCTemps);
   }
   else if (sType == string(STR_CCMANIERE))
   {
-    *ppLiaison     = &(pPhra->LiaisonManiere) ;
-    *ppPreposition = &(pPhra->PrepositionManiere) ;
-    *ppMots        = &(pPhra->CCManiere) ;
+    *ppLiaison     = &(pPhra->LiaisonManiere);
+    *ppPreposition = &(pPhra->PrepositionManiere);
+    *ppMots        = &(pPhra->CCManiere);
   }
   else if (sType == string(STR_CCMOYEN))
   {
-    *ppLiaison     = &(pPhra->LiaisonMoyen) ;
-    *ppPreposition = &(pPhra->PrepositionMoyen) ;
-    *ppMots        = &(pPhra->CCMoyen) ;
+    *ppLiaison     = &(pPhra->LiaisonMoyen);
+    *ppPreposition = &(pPhra->PrepositionMoyen);
+    *ppMots        = &(pPhra->CCMoyen);
   }
   else if (sType == string(STR_CCCHIFFRE))
   {
-    *ppLiaison     = &(pPhra->LiaisonChiffre) ;
-    *ppPreposition = &(pPhra->PrepositionChiffre) ;
-    *ppMots        = &(pPhra->CCChiffre) ;
+    *ppLiaison     = &(pPhra->LiaisonChiffre);
+    *ppPreposition = &(pPhra->PrepositionChiffre);
+    *ppMots        = &(pPhra->CCChiffre);
   }
   else if (sType == string(STR_CCBUT))
   {
-    *ppLiaison     = &(pPhra->LiaisonBut) ;
-    *ppPreposition = &(pPhra->PrepositionBut) ;
-    *ppMots        = &(pPhra->CCBut) ;
+    *ppLiaison     = &(pPhra->LiaisonBut);
+    *ppPreposition = &(pPhra->PrepositionBut);
+    *ppMots        = &(pPhra->CCBut);
   }
   else if (sType == string(STR_CCCAUSE))
   {
-    *ppLiaison     = &(pPhra->LiaisonCause) ;
-    *ppPreposition = &(pPhra->PrepositionCause) ;
-    *ppMots        = &(pPhra->CCCause) ;
+    *ppLiaison     = &(pPhra->LiaisonCause);
+    *ppPreposition = &(pPhra->PrepositionCause);
+    *ppMots        = &(pPhra->CCCause);
   }
   else if (sType == string(STR_CCTYPE))
   {
-    *ppLiaison     = &(pPhra->LiaisonType) ;
-    *ppPreposition = &(pPhra->PrepositionType) ;
-    *ppMots        = &(pPhra->CCType) ;
+    *ppLiaison     = &(pPhra->LiaisonType);
+    *ppPreposition = &(pPhra->PrepositionType);
+    *ppMots        = &(pPhra->CCType);
   }
   else if (sType == string(STR_CCHYPOTH))
   {
-    *ppLiaison     = &(pPhra->LiaisonHypoth) ;
-    *ppPreposition = &(pPhra->PrepositionHypoth) ;
-    *ppMots        = &(pPhra->CCHypoth) ;
+    *ppLiaison     = &(pPhra->LiaisonHypoth);
+    *ppPreposition = &(pPhra->PrepositionHypoth);
+    *ppMots        = &(pPhra->CCHypoth);
   }
-  return ;
+  return;
 }
 
 bool
 NSGenComplement::donnePhrase()
 {
-  bool bSucces ;
+  bool bSucces;
 
-  NSPhraseMot*      pLiaison ;
-  NSPhraseMot*      pPreposition ;
-  NSPhraseMotArray* pMots ;
+  NSPhraseMot*      pLiaison;
+  NSPhraseMot*      pPreposition;
+  NSPhraseMotArray* pMots;
 
-  donnePhrElements(&pLiaison, &pPreposition, &pMots) ;
+  donnePhrElements(&pLiaison, &pPreposition, &pMots);
 
   if (STR_CCCHIFFRE == sType)
   {
     if ((pMotsPos) && (false == pMotsPos->empty()))
     {
       sPositif = pGenerateur->donnePhraseChiffree(pLiaison, pPreposition,
-                                                        pMotsPos, &bSucces) ;
+                                                        pMotsPos, &bSucces);
       if (false == bSucces)
-        return false ;
+        return false;
     }
 
     if ((pMotsNeg) && (false == pMotsNeg->empty()))
     {
       sNegatif = pGenerateur->donnePhraseChiffree(pLiaison, pPreposition,
-                                                        pMotsNeg, &bSucces) ;
+                                                        pMotsNeg, &bSucces);
       if (false == bSucces)
-        return false ;
+        return false;
     }
   }
   else
@@ -746,55 +746,55 @@ NSGenComplement::donnePhrase()
     if ((pMotsPos) && (false == pMotsPos->empty()))
     {
       sPositif = pGenerateur->donnePhraseComplement(pLiaison, pPreposition,
-                                                          pMotsPos, &bSucces) ;
+                                                          pMotsPos, &bSucces);
       if (false == bSucces)
-        return false ;
+        return false;
     }
 
     if ((pMotsNeg) && (false == pMotsNeg->empty()))
     {
       sNegatif = pGenerateur->donnePhraseComplement(pLiaison, pPreposition,
-                                                          pMotsNeg, &bSucces) ;
+                                                          pMotsNeg, &bSucces);
       if (false == bSucces)
-        return false ;
+        return false;
     }
   }
-  return true ;
+  return true;
 }
 
 void
 NSGenComplement::initialise()
 {
-  sType     = "" ;
-  sPositif  = "" ;
-  sNegatif  = "" ;
-  iPriorite = 0 ;
+  sType     = "";
+  sPositif  = "";
+  sNegatif  = "";
+  iPriorite = 0;
 
   if (pMotsPos)
-    delete pMotsPos ;
+    delete pMotsPos;
   if (pMotsNeg)
-    delete pMotsNeg ;
+    delete pMotsNeg;
 }
 
 void
 NSGenComplement::classe()
 {
-  iPriorite = 0 ;
-  sPositif  = "" ;
-  sNegatif  = "" ;
+  iPriorite = 0;
+  sPositif  = "";
+  sNegatif  = "";
   if (pMotsPos)
-    delete pMotsPos ;
+    delete pMotsPos;
   if (pMotsNeg)
-    delete pMotsNeg ;
+    delete pMotsNeg;
 
-  NSPhraseMot*      pLiaison ;
-  NSPhraseMot*      pPreposition ;
-  NSPhraseMotArray* pMots ;
+  NSPhraseMot*      pLiaison;
+  NSPhraseMot*      pPreposition;
+  NSPhraseMotArray* pMots;
 
-  donnePhrElements(&pLiaison, &pPreposition, &pMots) ;
+  donnePhrElements(&pLiaison, &pPreposition, &pMots);
 
   if (NULL == pMots)
-    return ;
+    return;
 
   iterPhraseMot  iterMots;
   NSPathologData Data;
@@ -802,29 +802,29 @@ NSGenComplement::classe()
 
   for (iterMots = pMots->begin(); iterMots != pMots->end(); iterMots++)
   {
-    string sLexique = (*iterMots)->getLexique() ;
+    string sLexique = (*iterMots)->getLexique();
 
     if ((sLexique != "") && (false == (*iterMots)->estTexteLibre()))
     {
-      bool trouve = pContexte->getDico()->trouvePathologData(pGenerateur->getLang(), &sLexique, &Data) ;
+      bool trouve = pContexte->getDico()->trouvePathologData(pGenerateur->getLang(), &sLexique, &Data);
       if (false == trouve)
-        return ;
+        return;
       // if (!Data.estNom())
       //    return;
 
-      string sCertitude = (*iterMots)->getCertitude() ;
+      string sCertitude = (*iterMots)->getCertitude();
 
       if ((string(sCertitude, 0, 3) == "WCE") &&
               (string(sCertitude, 0, 5) < "WCE50"))
-        pGenerateur->ajouteCopieMot(&pMotsNeg, *iterMots) ;
+        pGenerateur->ajouteCopieMot(&pMotsNeg, *iterMots);
       else if (((string(sCertitude, 0, 3) == "WCE") &&
                   (string(sCertitude, 0, 5) >= "WCE50")) || (sCertitude == ""))
-        pGenerateur->ajouteCopieMot(&pMotsPos, *iterMots) ;
+        pGenerateur->ajouteCopieMot(&pMotsPos, *iterMots);
     }
     else
-      pGenerateur->ajouteCopieMot(&pMotsPos, *iterMots) ;
+      pGenerateur->ajouteCopieMot(&pMotsPos, *iterMots);
 
-    iPriorite = max(iPriorite, (*iterMots)->getPriority()) ;
+    iPriorite = max(iPriorite, (*iterMots)->getPriority());
   }
 }
 
@@ -832,35 +832,35 @@ NSGenComplement&
 NSGenComplement::operator=(const NSGenComplement& rv)
 {
   if (&rv == this)
-    return *this ;
+    return *this;
 
-  sType       = rv.sType ;
-  sPositif    = rv.sPositif ;
-  sNegatif    = rv.sNegatif ;
-  iPriorite   = rv.iPriorite ;
-  pGenerateur = rv.pGenerateur ;
+  sType       = rv.sType;
+  sPositif    = rv.sPositif;
+  sNegatif    = rv.sNegatif;
+  iPriorite   = rv.iPriorite;
+  pGenerateur = rv.pGenerateur;
 
   if (rv.pMotsPos)
   {
     if (pMotsPos)
-      *pMotsPos = *(rv.pMotsPos) ;
+      *pMotsPos = *(rv.pMotsPos);
     else
-      pMotsPos = new NSPhraseMotArray(*(rv.pMotsPos)) ;
+      pMotsPos = new NSPhraseMotArray(*(rv.pMotsPos));
   }
   else if (pMotsPos)
-    delete pMotsPos ;
+    delete pMotsPos;
 
   if (rv.pMotsNeg)
   {
     if (pMotsNeg)
-      *pMotsNeg = *(rv.pMotsNeg) ;
+      *pMotsNeg = *(rv.pMotsNeg);
     else
-      pMotsNeg = new NSPhraseMotArray(*(rv.pMotsNeg)) ;
+      pMotsNeg = new NSPhraseMotArray(*(rv.pMotsNeg));
   }
   else if (pMotsNeg)
-    delete pMotsNeg ;
+    delete pMotsNeg;
 
-  return *this ;
+  return *this;
 }
 
 // -------------------------------------------------------------------------
@@ -870,8 +870,8 @@ NSGenComplement::operator=(const NSGenComplement& rv)
 NSGenereCompArray::NSGenereCompArray(NSContexte* pCtx, NSGenerateur* pGener)
                   :NSGenCompArray()
 {
-  pGenerateur = pGener ;
-  pContexte   = pCtx ;
+  pGenerateur = pGener;
+  pContexte   = pCtx;
 }
 
 //--------------------------------------------------------------------------
@@ -880,18 +880,18 @@ NSGenereCompArray::NSGenereCompArray(NSContexte* pCtx, NSGenerateur* pGener)
 NSGenereCompArray::NSGenereCompArray(NSGenereCompArray& rv)
                   :NSGenCompArray()
 {
-  pGenerateur = rv.pGenerateur ;
-  pContexte   = rv.pContexte ;
+  pGenerateur = rv.pGenerateur;
+  pContexte   = rv.pContexte;
 
 try
 {
   if (false == rv.empty())
     for (GenCompIter i = rv.begin(); i != rv.end(); i++)
-      push_back(new NSGenComplement(*(*i))) ;
+      push_back(new NSGenComplement(*(*i)));
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray copy ctor.", standardError) ;
+	erreur("Exception NSGenereCompArray copy ctor.", standardError);
 }
 }
 
@@ -902,24 +902,24 @@ void
 NSGenereCompArray::vider()
 {
   if (empty())
-    return ;
+    return;
 
   for (GenCompIter i = begin(); i != end(); )
   {
-    delete *i ;
-    erase(i) ;
+    delete *i;
+    erase(i);
   }
 }
 
 NSGenereCompArray::~NSGenereCompArray()
 {
-	vider() ;
+	vider();
 }
 
 void
 NSGenereCompArray::initialise()
 {
-  vider() ;
+  vider();
 
     /*if (empty())
         return true;
@@ -927,7 +927,7 @@ NSGenereCompArray::initialise()
     for (GenCompIter i = begin(); i != end(); i++)
         (*i)->initialise(); */
 
-  return ;
+  return;
 }
 
 void
@@ -935,81 +935,81 @@ NSGenereCompArray::classeTout()
 {
 try
 {
-  vider() ;
+  vider();
 
   if ((NULL == pGenerateur) || (NULL == pGenerateur->getCurrentPhraseur()))
-    return ;
+    return;
 
-  NSPhraseur* pPh = pGenerateur->getCurrentPhraseur() ;
+  NSPhraseur* pPh = pGenerateur->getCurrentPhraseur();
 
   if (false == pPh->CCLieu.empty())
   {
-    NSGenComplement* pCCLieu = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCLieu->sType = STR_CCLIEU ;
-    pCCLieu->classe() ;
-    push_back(pCCLieu) ;
+    NSGenComplement* pCCLieu = new NSGenComplement(pContexte, pGenerateur);
+    pCCLieu->sType = STR_CCLIEU;
+    pCCLieu->classe();
+    push_back(pCCLieu);
   }
   if (false == pPh->CCTemps.empty())
   {
-    NSGenComplement* pCCTemps = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCTemps->sType = STR_CCTEMPS ;
-    pCCTemps->classe() ;
-    push_back(pCCTemps) ;
+    NSGenComplement* pCCTemps = new NSGenComplement(pContexte, pGenerateur);
+    pCCTemps->sType = STR_CCTEMPS;
+    pCCTemps->classe();
+    push_back(pCCTemps);
   }
   if (false == pPh->CCManiere.empty())
   {
-    NSGenComplement* pCCManiere = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCManiere->sType = STR_CCMANIERE ;
-    pCCManiere->classe() ;
-    push_back(pCCManiere) ;
+    NSGenComplement* pCCManiere = new NSGenComplement(pContexte, pGenerateur);
+    pCCManiere->sType = STR_CCMANIERE;
+    pCCManiere->classe();
+    push_back(pCCManiere);
   }
   if (false == pPh->CCMoyen.empty())
   {
-    NSGenComplement* pCCMoyen = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCMoyen->sType = STR_CCMOYEN ;
-    pCCMoyen->classe() ;
-    push_back(pCCMoyen) ;
+    NSGenComplement* pCCMoyen = new NSGenComplement(pContexte, pGenerateur);
+    pCCMoyen->sType = STR_CCMOYEN;
+    pCCMoyen->classe();
+    push_back(pCCMoyen);
   }
   if (false == pPh->CCCause.empty())
   {
-    NSGenComplement* pCCCause = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCCause->sType = STR_CCCAUSE ;
-    pCCCause->classe() ;
-    push_back(pCCCause) ;
+    NSGenComplement* pCCCause = new NSGenComplement(pContexte, pGenerateur);
+    pCCCause->sType = STR_CCCAUSE;
+    pCCCause->classe();
+    push_back(pCCCause);
   }
   if (false == pPh->CCBut.empty())
   {
-    NSGenComplement* pCCBut = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCBut->sType = STR_CCBUT ;
-    pCCBut->classe() ;
-    push_back(pCCBut) ;
+    NSGenComplement* pCCBut = new NSGenComplement(pContexte, pGenerateur);
+    pCCBut->sType = STR_CCBUT;
+    pCCBut->classe();
+    push_back(pCCBut);
   }
   if (false == pPh->CCType.empty())
   {
-    NSGenComplement* pCCType = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCType->sType = STR_CCTYPE ;
-    pCCType->classe() ;
-    push_back(pCCType) ;
+    NSGenComplement* pCCType = new NSGenComplement(pContexte, pGenerateur);
+    pCCType->sType = STR_CCTYPE;
+    pCCType->classe();
+    push_back(pCCType);
   }
   if (false == pPh->CCChiffre.empty())
   {
-    NSGenComplement* pCCChiffre = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCChiffre->sType = STR_CCCHIFFRE ;
-    pCCChiffre->classe() ;
-    push_back(pCCChiffre) ;
+    NSGenComplement* pCCChiffre = new NSGenComplement(pContexte, pGenerateur);
+    pCCChiffre->sType = STR_CCCHIFFRE;
+    pCCChiffre->classe();
+    push_back(pCCChiffre);
   }
   if (false == pPh->CCHypoth.empty())
   {
-    NSGenComplement* pCCHypoth = new NSGenComplement(pContexte, pGenerateur) ;
-    pCCHypoth->sType = STR_CCHYPOTH ;
-    pCCHypoth->classe() ;
-    push_back(pCCHypoth) ;
+    NSGenComplement* pCCHypoth = new NSGenComplement(pContexte, pGenerateur);
+    pCCHypoth->sType = STR_CCHYPOTH;
+    pCCHypoth->classe();
+    push_back(pCCHypoth);
   }
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray::classeTout", standardError) ;
-	return ;
+	erreur("Exception NSGenereCompArray::classeTout", standardError);
+	return;
 }
 }
 
@@ -1017,51 +1017,51 @@ NSGenComplement*
 NSGenereCompArray::donneComplement(string sType)
 {
   if (empty())
-    return 0 ;
+    return 0;
 
   for (GenCompIter i = begin(); i != end(); i++)
     if ((*i)->sType == sType)
-      return (*i) ;
+      return (*i);
 
-  return 0 ;
+  return 0;
 }
 
 bool
 NSGenereCompArray::donnePhrase()
 {
   if (empty())
-    return true ;
+    return true;
 
   for (GenCompIter i = begin(); i != end(); i++)
     if (false == (*i)->donnePhrase())
-      return false ;
+      return false;
 
-  return true ;
+  return true;
 }
 
 NSGenereCompArray&
 NSGenereCompArray::operator=(NSGenereCompArray src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	pGenerateur = src.pGenerateur ;
-	pContexte   = src.pContexte ;
+	pGenerateur = src.pGenerateur;
+	pContexte   = src.pContexte;
 
 try
 {
-	vider() ;
+	vider();
 
 	if (false == src.empty())
-  	for (GenCompIter i = src.begin() ; src.end() != i ; i++)
-    	push_back(new NSGenComplement(*(*i))) ;
+  	for (GenCompIter i = src.begin(); src.end() != i; i++)
+    	push_back(new NSGenComplement(*(*i)));
 
-	return *this ;
+	return *this;
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray::operator=", standardError) ;
-	return *this ;
+	erreur("Exception NSGenereCompArray::operator=", standardError);
+	return *this;
 }
 }
 

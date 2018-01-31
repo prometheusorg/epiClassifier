@@ -1,4 +1,4 @@
-// -----------------------------------------------------------------------------// identityLus.h
+// -----------------------------------------------------------------------------// identityLus.h
 // -----------------------------------------------------------------------------
 // Identity management
 // -----------------------------------------------------------------------------
@@ -73,9 +73,9 @@
 # include "enterpriseLus/nsglobalLus.h"
 # include "partage/ns_vector.h"
 
-string getTokenFromTraits(NSSuper* pSuper, map<string, string> *pCommands) ;
-string getPseudo(NSSuper* pSuper, map<string, string> *pCommands) ;
-string getDemographics(NSSuper* pSuper, map<string, string> *pCommands, string sToken) ;
+string getTokenFromTraits(NSSuper* pSuper, map<string, string> *pCommands);
+string getPseudo(NSSuper* pSuper, map<string, string> *pCommands);
+string getDemographics(NSSuper* pSuper, map<string, string> *pCommands, string sToken);
 
 #endif // !__IDENTITYLUS_H__
 

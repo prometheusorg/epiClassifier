@@ -25,20 +25,20 @@ namespace ClassLib {
 // class _BIDSCLASS ipstream;
 // class _BIDSCLASS opstream;
 
-typedef unsigned HourTy ;
-typedef unsigned MinuteTy ;
-typedef unsigned SecondTy ;
-typedef unsigned long ClockTy ;
+typedef unsigned HourTy;
+typedef unsigned MinuteTy;
+typedef unsigned SecondTy;
+typedef unsigned long ClockTy;
 
-static const unsigned long secFrom_Jan_1_1901_to_Jan_1_1970 = 2177452800L ;
+static const unsigned long secFrom_Jan_1_1901_to_Jan_1_1970 = 2177452800L;
 
 class TTime
 {
 
 public:
 
-    static int  _daylight ;
-    static long _timezone ;
+    static int  _daylight;
+    static long _timezone;
 
     friend TDate::TDate( const TTime & );
 

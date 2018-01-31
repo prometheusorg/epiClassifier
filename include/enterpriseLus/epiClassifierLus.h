@@ -82,15 +82,15 @@ class ClassifierEngine : public RequestEngine
 {
   public:
 
-	  ClassifierEngine(NSSuper* pSuper) ;
-    ~ClassifierEngine() ;
+	  ClassifierEngine(NSSuper* pSuper);
+    ~ClassifierEngine();
 
-    string processCommands(map<string, string> *pCommands) ;
+    string processCommands(map<string, string> *pCommands);
 
   protected:
 
-    NSSuper *_pSuper ;
-} ;
+    NSSuper *_pSuper;
+};
 
 #endif // __EPICLASSIFIERLUS_H
 

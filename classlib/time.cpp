@@ -18,8 +18,8 @@
 
 using namespace ClassLib;
 
-int  TTime::_daylight = 0 ;
-long TTime::_timezone = 0 ;
+int  TTime::_daylight = 0;
+long TTime::_timezone = 0;
 
 enum TimeZone { CarolineIslands=-11,    MarianaIslands,         Japan,
                 China,                  minusSeven,             minusSix,

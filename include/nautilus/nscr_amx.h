@@ -54,19 +54,19 @@ class NSCRPhrase
 {
 	public:
 
-    unsigned int iNumero ;
-    unsigned int iIndentation ;
-    string       sTexte ;
+    unsigned int iNumero;
+    unsigned int iIndentation;
+    string       sTexte;
 
-    NSCRPhraLesArray aLesions ;
-    NSCRPhraLesArray aChemins ;
+    NSCRPhraLesArray aLesions;
+    NSCRPhraLesArray aChemins;
 
-    NSCRPhrase() ;
-    NSCRPhrase(NSCRPhrase& rv) ;
-    ~NSCRPhrase() ;
-    NSCRPhrase& operator=(NSCRPhrase src) ;
-    int operator == (const NSCRPhrase& o) ;
-    int operator != (const NSCRPhrase& o) { return !(*this==o) ; }
+    NSCRPhrase();
+    NSCRPhrase(NSCRPhrase& rv);
+    ~NSCRPhrase();
+    NSCRPhrase& operator=(NSCRPhrase src);
+    int operator == (const NSCRPhrase& o);
+    int operator != (const NSCRPhrase& o) { return !(*this==o); }
 };
 
 #endif // __NSCR_AMX_H

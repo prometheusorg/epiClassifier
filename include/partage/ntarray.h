@@ -32,12 +32,12 @@ class NTArray : public std::vector<TYPE*>
   NTArray(NTArray& temp)
   {
     if (temp.empty())
-      return ;
+      return;
 
-    typename std::vector<TYPE*>::iterator iter ;
+    typename std::vector<TYPE*>::iterator iter;
 
-    for (iter = temp.begin() ; temp.end() != iter ; iter++)
-      this->push_back(new TYPE(**iter)) ;
+    for (iter = temp.begin(); temp.end() != iter; iter++)
+      this->push_back(new TYPE(**iter));
   }
 
   /*
@@ -46,15 +46,15 @@ class NTArray : public std::vector<TYPE*>
   virtual void vider()
   {
     if (this->empty())
-      return ;
+      return;
 
-    typename std::vector<TYPE*>::iterator iter ;
+    typename std::vector<TYPE*>::iterator iter;
 
-    for (iter = this->begin() ; this->end() != iter ; )
+    for (iter = this->begin(); this->end() != iter; )
     {
       if (*iter)
-        delete(*iter) ;
-      this->erase(iter) ;
+        delete(*iter);
+      this->erase(iter);
     }
   }
 
@@ -65,13 +65,13 @@ class NTArray : public std::vector<TYPE*>
   int operator == (NTArray& temp)
   {
     if (temp.size() != this->size())
-      return 0 ;
+      return 0;
 
     for (register size_t i =0; i < temp.size(); i++)
       if ((*temp[i] == *(*this)[i]) == false)
-        return 0 ;
+        return 0;
 
-    return 1 ;
+    return 1;
   }
 
   /*
@@ -80,19 +80,19 @@ class NTArray : public std::vector<TYPE*>
   NTArray& operator=(const NTArray& temp)
   {
   	if (this == &temp)
-    	return *this ;
+    	return *this;
 
-    vider() ;
+    vider();
 
     if (false == temp.empty())
     {
-      typename std::vector<TYPE*>::const_iterator iter ;
+      typename std::vector<TYPE*>::const_iterator iter;
 
-      for (iter = temp.begin() ; temp.end() != iter ; iter++)
-      	this->push_back(new TYPE(**iter)) ;
+      for (iter = temp.begin(); temp.end() != iter; iter++)
+      	this->push_back(new TYPE(**iter));
     }
 
-    return *this ;
+    return *this;
   }
 
   /*
@@ -100,7 +100,7 @@ class NTArray : public std::vector<TYPE*>
   */
   virtual ~NTArray()
   {
-    vider() ;
+    vider();
   }
 };
 

@@ -14,23 +14,23 @@
 #define DOC_CODE_DOCUM_LEN 6
 #define OBJECT_ID_LEN      PIDS_NSS_LEN + DOC_CODE_DOCUM_LEN
 
-class NSSuper ;
+class NSSuper;
 
 class NSSuperRoot
 {
    public:
 
-		NSSuper* _pSuper ;
+		NSSuper* _pSuper;
 		NSSuperRoot(NSSuper* pSuper) : _pSuper(pSuper) {}
 };
 
-class NSContexte ;
+class NSContexte;
 
 class NSRoot
 {
    public:
 
-		NSContexte* pContexte ;
+		NSContexte* pContexte;
 		NSRoot(NSContexte* pCtx) : pContexte(pCtx) {}
 };
 
@@ -43,10 +43,10 @@ enum PIDSTYPE { pidsPatient = 0, pidsCorresp, pidsUtilisat, pidsPatientGroup, pi
 // Type de personne (pour le mode N_TIERS)
 enum PERSONTYPE { asPatient = 0, asCorresp, asUser };
 
-const char nodeSeparationMARK      = '|' ;const char cheminSeparationMARK    = '/' ;
-const char intranodeSeparationMARK = '.' ;
+const char nodeSeparationMARK      = '|';const char cheminSeparationMARK    = '/';
+const char intranodeSeparationMARK = '.';
 
-enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, genreNP, genreIT } ;
+enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, genreNP, genreIT };
 
 //---------------------------------------------------------------------------
 //  Variables globales

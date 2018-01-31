@@ -7,7 +7,7 @@
 #ifndef __NSLOCALISE_H
 #define __NSLOCALISE_H
 
-class NSSuper ;
+class NSSuper;
 
 #include <vector>
 #include <map>
@@ -47,29 +47,29 @@ class NSLocalisedChapter
 		NSLocalisedChapter() {}
 
     // Constructeur par copie
-    NSLocalisedChapter(NSLocalisedChapter& rv) ;
+    NSLocalisedChapter(NSLocalisedChapter& rv);
 
     // Opérateur affectation
-    NSLocalisedChapter& operator=(NSLocalisedChapter& src) ;
+    NSLocalisedChapter& operator=(NSLocalisedChapter& src);
 
     //destructeur
-	   ~NSLocalisedChapter() ;
+	   ~NSLocalisedChapter();
 
      // Ajoute une variable instancié au chapitre
-     void   			addText(std::string sCod, std::string sTxt) ;
+     void   			addText(std::string sCod, std::string sTxt);
 
      // retourne la valeur d'une variable
-     std::string  getLocalText(std::string sCod) ;
+     std::string  getLocalText(std::string sCod);
 
-     bool empty () {return aLocalTexts.empty() ; }
+     bool empty () {return aLocalTexts.empty(); }
 
-     std::map<std::string, std::string>* getLocalTexts() { return &aLocalTexts ; }
+     std::map<std::string, std::string>* getLocalTexts() { return &aLocalTexts; }
 
   private:
-  	std::map<std::string, std::string> aLocalTexts ;
+  	std::map<std::string, std::string> aLocalTexts;
 };
 
-typedef std::map<std::string, NSLocalisedChapter* >::iterator NSLocalChapterArrayIter ;
+typedef std::map<std::string, NSLocalisedChapter* >::iterator NSLocalChapterArrayIter;
 
 #ifndef __linux__
 class _CLASSELEXI NSLocalChapterArray
@@ -80,33 +80,33 @@ class NSLocalChapterArray
   public :
 
     // Constructeurs
-    NSLocalChapterArray() ;
-    NSLocalChapterArray(NSLocalChapterArray& rv) ;
+    NSLocalChapterArray();
+    NSLocalChapterArray(NSLocalChapterArray& rv);
     // Opérateur =
-    NSLocalChapterArray& operator=(NSLocalChapterArray& src) ;
+    NSLocalChapterArray& operator=(NSLocalChapterArray& src);
     // Destructeur
-    ~NSLocalChapterArray() ;
+    ~NSLocalChapterArray();
 
-    void   addText(string sChap, string sCod, string sTxt) ;
-    string getLocalText(string sChap, string sCod, bool bSendTextBackIfNotFound = false) ;
+    void   addText(string sChap, string sCod, string sTxt);
+    string getLocalText(string sChap, string sCod, bool bSendTextBackIfNotFound = false);
 
-    NSLocalisedChapter* getChapter(string sChapterTitle) ;
-    NSLocalisedChapter* getChapterWhereText(string sText, string sValue) ;
+    NSLocalisedChapter* getChapter(string sChapterTitle);
+    NSLocalisedChapter* getChapterWhereText(string sText, string sValue);
 
-    void   init(ifstream* pInFile, string *psErrorMsg) ;
-    void   init(string sFileName, string *psErrorMsg) ;
-    bool   writeToFile(string sFileName, NSSuper *pSuper) ;
+    void   init(ifstream* pInFile, string *psErrorMsg);
+    void   init(string sFileName, string *psErrorMsg);
+    bool   writeToFile(string sFileName, NSSuper *pSuper);
 
-    bool   empty () {return _chapters.empty() ; }
+    bool   empty () {return _chapters.empty(); }
 
-    void   vider() ;
+    void   vider();
 
-    NSLocalChapterArrayIter begin() { return _chapters.begin() ; }
-    NSLocalChapterArrayIter end()   { return _chapters.end() ; }
+    NSLocalChapterArrayIter begin() { return _chapters.begin(); }
+    NSLocalChapterArrayIter end()   { return _chapters.end(); }
 
   private:
 
-    std::map<std::string, NSLocalisedChapter* > _chapters ;
+    std::map<std::string, NSLocalisedChapter* > _chapters;
 };
 
 #endif // __NSLOCALISE_H

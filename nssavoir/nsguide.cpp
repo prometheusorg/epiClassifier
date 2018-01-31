@@ -25,10 +25,10 @@ void
 BBChemData::metAZero()
 {
 	// Met les champs de données à zéro
-	memset(code,	   0, CH_CODE_LEN + 1) ;
-	memset(auteur,   0, CH_AUTEUR_LEN + 1) ;
-	memset(chemin,   0, CH_CHEMIN_LEN + 1) ;
-	memset(scenario, 0, CH_SCENARIO_LEN + 1) ;
+	memset(code,	   0, CH_CODE_LEN + 1);
+	memset(auteur,   0, CH_AUTEUR_LEN + 1);
+	memset(chemin,   0, CH_CHEMIN_LEN + 1);
+	memset(scenario, 0, CH_SCENARIO_LEN + 1);
 }
 
 //---------------------------------------------------------------------------
@@ -36,10 +36,10 @@ BBChemData::metAZero()
 //---------------------------------------------------------------------------
 BBChemData::BBChemData(BBChemData& rv)
 {
-	strcpy(code,	   rv.code) ;
-	strcpy(auteur,   rv.auteur) ;
-	strcpy(chemin,   rv.chemin) ;
-	strcpy(scenario, rv.scenario) ;
+	strcpy(code,	   rv.code);
+	strcpy(auteur,   rv.auteur);
+	strcpy(chemin,   rv.chemin);
+	strcpy(scenario, rv.scenario);
 }
 
 //---------------------------------------------------------------------------
@@ -49,14 +49,14 @@ BBChemData&
 BBChemData::operator=(BBChemData rv)
 {
 	if (this == &rv)
-		return *this ;
+		return *this;
 
- 	strcpy(code,	   rv.code) ;
-	strcpy(auteur,   rv.auteur) ;
-	strcpy(chemin,   rv.chemin) ;
-	strcpy(scenario, rv.scenario) ;
+ 	strcpy(code,	   rv.code);
+	strcpy(auteur,   rv.auteur);
+	strcpy(chemin,   rv.chemin);
+	strcpy(scenario, rv.scenario);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -69,9 +69,9 @@ BBChemData::operator == (const BBChemData& o)
 	     (strcmp(auteur, o.auteur) == 0) &&
        (strcmp(chemin, o.chemin) == 0) &&
        (strcmp(scenario, o.scenario) == 0))
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 BBChemData::~BBChemData()
@@ -92,9 +92,9 @@ BBChem::BBChem(NSSuper* pSuper)
 BBChem::~BBChem()
 {
 	if (pDonnees)
-		delete pDonnees ;
+		delete pDonnees;
 
-	pDonnees = 0 ;
+	pDonnees = 0;
 }
 
 //---------------------------------------------------------------------------
@@ -127,13 +127,13 @@ void BBChem::videFiche()
 DBIResult
 BBChem::open()
 {
-	return(DBIERR_NONE) ;
+	return(DBIERR_NONE);
 }
 
 DBIResult
 BBChem::open(string tableName)
 {
-	return(DBIERR_NONE) ;
+	return(DBIERR_NONE);
 }
 #endif
 
@@ -150,22 +150,22 @@ void
 BBItemData::metAZero()
 {
 	// Met les champs de données à zéro
-	BBChemData::metAZero() ;
+	BBChemData::metAZero();
 
-	memset(commentaire, 	  0, BB_COMMENTAIRE_LEN + 1) ;
-  memset(fichierDialogue, 0, BB_FICHIER_DIALOGUE_LEN + 1) ;
-  memset(nomDialogue, 	  0, BB_NOM_DIALOGUE_LEN + 1) ;
-	memset(ouvreDialogue, 	0, BB_OUVRE_DIALOGUE_LEN + 1) ;
-	memset(fichierFonction, 0, BB_FICHIER_FONCTION_LEN + 1) ;
-	memset(nomFonction, 	  0, BB_NOM_FONCTION_LEN + 1) ;
-	memset(decalageNiveau, 	0, BB_DECALAGE_NIVEAU_LEN + 1) ;
-	memset(fils, 			      0, BB_FILS_LEN + 1) ;
-	memset(exclusion, 		  0, BB_EXCLUSION_LEN + 1) ;
-  memset(automatique, 	  0, BB_AUTOMATIQUE_LEN + 1) ;
-  memset(actif_vide, 		  0, BB_ACTIF_VIDE_LEN + 1) ;
-  memset(unicite_lesion, 	0, BB_UNICITE_LESION_LEN + 1) ;
-  memset(impose, 		      0, BB_IMPOSE_LEN + 1) ;
-  memset(tri, 			      0, BB_TRI_LEN + 1) ;
+	memset(commentaire, 	  0, BB_COMMENTAIRE_LEN + 1);
+  memset(fichierDialogue, 0, BB_FICHIER_DIALOGUE_LEN + 1);
+  memset(nomDialogue, 	  0, BB_NOM_DIALOGUE_LEN + 1);
+	memset(ouvreDialogue, 	0, BB_OUVRE_DIALOGUE_LEN + 1);
+	memset(fichierFonction, 0, BB_FICHIER_FONCTION_LEN + 1);
+	memset(nomFonction, 	  0, BB_NOM_FONCTION_LEN + 1);
+	memset(decalageNiveau, 	0, BB_DECALAGE_NIVEAU_LEN + 1);
+	memset(fils, 			      0, BB_FILS_LEN + 1);
+	memset(exclusion, 		  0, BB_EXCLUSION_LEN + 1);
+  memset(automatique, 	  0, BB_AUTOMATIQUE_LEN + 1);
+  memset(actif_vide, 		  0, BB_ACTIF_VIDE_LEN + 1);
+  memset(unicite_lesion, 	0, BB_UNICITE_LESION_LEN + 1);
+  memset(impose, 		      0, BB_IMPOSE_LEN + 1);
+  memset(tri, 			      0, BB_TRI_LEN + 1);
 }
 
 //---------------------------------------------------------------------------
@@ -175,24 +175,24 @@ BBItemData::metAZero()
 //---------------------------------------------------------------------------
 BBItemData::BBItemData(BBItemData& rv)
 {
-	strcpy(code,		  	    rv.code) ;
-  strcpy(auteur, 			    rv.auteur) ;
-  strcpy(chemin, 			    rv.chemin) ;
-  strcpy(commentaire,		  rv.commentaire) ;
-  strcpy(fichierDialogue, rv.fichierDialogue) ;
-  strcpy(nomDialogue, 	  rv.nomDialogue) ;
-	strcpy(ouvreDialogue, 	rv.ouvreDialogue) ;
-	strcpy(fichierFonction, rv.fichierFonction) ;
-	strcpy(nomFonction, 	  rv.nomFonction) ;
-	strcpy(decalageNiveau, 	rv.decalageNiveau) ;
-	strcpy(fils,		  	    rv.fils) ;
-	strcpy(exclusion,		    rv.exclusion) ;
-  strcpy(automatique,		  rv.automatique) ;
-	strcpy(actif_vide, 		  rv.actif_vide) ;
-	strcpy(unicite_lesion, 	rv.unicite_lesion) ;
-	strcpy(impose, 	        rv.impose) ;
-	strcpy(tri, 			      rv.tri) ;
-  strcpy(scenario, 		    rv.scenario) ;
+	strcpy(code,		  	    rv.code);
+  strcpy(auteur, 			    rv.auteur);
+  strcpy(chemin, 			    rv.chemin);
+  strcpy(commentaire,		  rv.commentaire);
+  strcpy(fichierDialogue, rv.fichierDialogue);
+  strcpy(nomDialogue, 	  rv.nomDialogue);
+	strcpy(ouvreDialogue, 	rv.ouvreDialogue);
+	strcpy(fichierFonction, rv.fichierFonction);
+	strcpy(nomFonction, 	  rv.nomFonction);
+	strcpy(decalageNiveau, 	rv.decalageNiveau);
+	strcpy(fils,		  	    rv.fils);
+	strcpy(exclusion,		    rv.exclusion);
+  strcpy(automatique,		  rv.automatique);
+	strcpy(actif_vide, 		  rv.actif_vide);
+	strcpy(unicite_lesion, 	rv.unicite_lesion);
+	strcpy(impose, 	        rv.impose);
+	strcpy(tri, 			      rv.tri);
+  strcpy(scenario, 		    rv.scenario);
 }
 
 //---------------------------------------------------------------------------
@@ -203,30 +203,30 @@ BBItemData::BBItemData(BBItemData& rv)
 BBItemData& BBItemData::operator=(BBItemData rv)
 {
 	if (this == &rv)
-		return *this ;
+		return *this;
 
-	metAZero() ;
+	metAZero();
 
-	strcpy(code,		  		  rv.code) ;
-  strcpy(auteur, 			    rv.auteur) ;
-  strcpy(chemin, 			    rv.chemin) ;
-  strcpy(commentaire,		  rv.commentaire) ;
-  strcpy(fichierDialogue, rv.fichierDialogue) ;
-  strcpy(nomDialogue, 	  rv.nomDialogue) ;
-	strcpy(ouvreDialogue, 	rv.ouvreDialogue) ;
-	strcpy(fichierFonction, rv.fichierFonction) ;
-	strcpy(nomFonction, 	  rv.nomFonction) ;
-	strcpy(decalageNiveau, 	rv.decalageNiveau) ;
-	strcpy(fils,		  	    rv.fils) ;
-	strcpy(exclusion,		    rv.exclusion) ;
-  strcpy(automatique,		  rv.automatique) ;
-	strcpy(actif_vide, 		  rv.actif_vide) ;
-	strcpy(unicite_lesion, 	rv.unicite_lesion) ;
-	strcpy(impose, 	        rv.impose) ;
-	strcpy(tri, 			      rv.tri) ;
-  strcpy(scenario, 		    rv.scenario) ;
+	strcpy(code,		  		  rv.code);
+  strcpy(auteur, 			    rv.auteur);
+  strcpy(chemin, 			    rv.chemin);
+  strcpy(commentaire,		  rv.commentaire);
+  strcpy(fichierDialogue, rv.fichierDialogue);
+  strcpy(nomDialogue, 	  rv.nomDialogue);
+	strcpy(ouvreDialogue, 	rv.ouvreDialogue);
+	strcpy(fichierFonction, rv.fichierFonction);
+	strcpy(nomFonction, 	  rv.nomFonction);
+	strcpy(decalageNiveau, 	rv.decalageNiveau);
+	strcpy(fils,		  	    rv.fils);
+	strcpy(exclusion,		    rv.exclusion);
+  strcpy(automatique,		  rv.automatique);
+	strcpy(actif_vide, 		  rv.actif_vide);
+	strcpy(unicite_lesion, 	rv.unicite_lesion);
+	strcpy(impose, 	        rv.impose);
+	strcpy(tri, 			      rv.tri);
+  strcpy(scenario, 		    rv.scenario);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -254,9 +254,9 @@ int BBItemData::operator == ( const BBItemData& o )
 	    (strcmp(impose, 	       o.impose)           == 0) &&
 	    (strcmp(tri, 			       o.tri)              == 0) &&
       (strcmp(scenario, 		   o.scenario)         == 0))
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 BBItemData::~BBItemData()
@@ -275,7 +275,7 @@ BBItemData::~BBItemData()
 BBItemInfo::BBItemInfo()
 {
 	// Crée l'objet de données
-	pDonnees = new BBItemData() ;
+	pDonnees = new BBItemData();
 }
 
 //---------------------------------------------------------------------------
@@ -288,11 +288,11 @@ BBItemInfo::BBItemInfo(BBFiche* pBBFiche)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new BBItemData() ;
+	pDonnees = new BBItemData();
 	//
 	// Copie les valeurs du NSCorrespondant
 	//
-	*pDonnees = *(static_cast<BBItemData*>(pBBFiche->pDonnees)) ;
+	*pDonnees = *(static_cast<BBItemData*>(pBBFiche->pDonnees));
 }
 
 //---------------------------------------------------------------------------
@@ -302,7 +302,7 @@ BBItemInfo::BBItemInfo(BBFiche* pBBFiche)
 //---------------------------------------------------------------------------
 BBItemInfo::~BBItemInfo()
 {
-	delete pDonnees ;
+	delete pDonnees;
 }
 
 //---------------------------------------------------------------------------
@@ -315,11 +315,11 @@ BBItemInfo::BBItemInfo(BBItemInfo& rv)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new BBItemData() ;
+	pDonnees = new BBItemData();
 	//
 	// Copie les valeurs du BBItemInfo d'origine
 	//
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 //---------------------------------------------------------------------------
@@ -331,11 +331,11 @@ BBItemInfo&
 BBItemInfo::operator=(BBItemInfo src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -345,7 +345,7 @@ BBItemInfo::operator=(BBItemInfo src)
 //---------------------------------------------------------------------------
 int BBItemInfo::operator == (BBItemInfo& o)
 {
-	return (*pDonnees == *(o.pDonnees)) ;
+	return (*pDonnees == *(o.pDonnees));
 }
 
 //-------------------------------------------------------------------------
@@ -359,7 +359,7 @@ BBItemArray::BBItemArray(BBItemArray& rv)
 {
 	if (!(rv.empty()))
 	   for (BBItemIter i = rv.begin(); i != rv.end(); i++)
-			 	push_back(new BBItemInfo(*(*i))) ;
+			 	push_back(new BBItemInfo(*(*i)));
 }
 
 // fonction vider()
@@ -367,19 +367,19 @@ void
 BBItemArray::vider()
 {
 	if (empty())
-		return ;
+		return;
 
 	for (BBItemIter i = begin(); i != end(); )
 	{
-  	delete *i ;
-    erase(i) ;
+  	delete *i;
+    erase(i);
 	}
 }
 
 // destructeur
 BBItemArray::~BBItemArray()
 {
-	vider() ;
+	vider();
 }
 
 //---------------------------------------------------------------------------
@@ -391,15 +391,15 @@ BBItemArray&
 BBItemArray::operator=(BBItemArray src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	vider() ;
+	vider();
 
 	if (false == src.empty())
 		for (BBItemIter i = src.begin(); i != src.end(); i++)
-			push_back(new BBItemInfo(*(*i))) ;
+			push_back(new BBItemInfo(*(*i)));
 
-	return *this ;
+	return *this;
 }
 
 //***************************************************************************
@@ -415,14 +415,14 @@ BBFiche::BBFiche(NSSuper* pSuper)
 		    :BBChem(pSuper)
 {
 	// Crée l'objet de données
-	pDonnees = new BBItemData() ;
+	pDonnees = new BBItemData();
 }
 
 BBFiche::~BBFiche()
 {
 	if (pDonnees)
-		delete pDonnees ;
-	pDonnees = 0 ;
+		delete pDonnees;
+	pDonnees = 0;
 }
 
 //---------------------------------------------------------------------------
@@ -435,26 +435,26 @@ BBFiche::~BBFiche()
 //---------------------------------------------------------------------------
 void BBFiche::alimenteFiche()
 {
-	pDonnees->metAZero() ;
+	pDonnees->metAZero();
 #ifndef _ENTERPRISE_DLL
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->code, 			     BB_CODE_FIELD, 	 		      CH_CODE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->auteur, 		     BB_AUTEUR_FIELD, 	 		    CH_AUTEUR_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->chemin, 		     BB_CHEMIN_FIELD, 	 		    CH_CHEMIN_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->commentaire, 	   BB_COMMENTAIRE_FIELD, 	  	BB_COMMENTAIRE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fichierDialogue, BB_FICHIER_DIALOGUE_FIELD, BB_FICHIER_DIALOGUE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->nomDialogue, 	   BB_NOM_DIALOGUE_FIELD, 	  BB_NOM_DIALOGUE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->ouvreDialogue,   BB_OUVRE_DIALOGUE_FIELD,   BB_OUVRE_DIALOGUE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fichierFonction, BB_FICHIER_FONCTION_FIELD, BB_FICHIER_FONCTION_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->nomFonction, 	   BB_NOM_FONCTION_FIELD, 	  BB_NOM_FONCTION_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->decalageNiveau,  BB_DECALAGE_NIVEAU_FIELD,  BB_DECALAGE_NIVEAU_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fils,  			     BB_FILS_FIELD,  			      BB_FILS_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->exclusion,  	   BB_EXCLUSION_FIELD,  		  BB_EXCLUSION_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->automatique,  	 BB_AUTOMATIQUE_FIELD,  	  BB_AUTOMATIQUE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->actif_vide,  	   BB_ACTIF_VIDE_FIELD,  	  	BB_ACTIF_VIDE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->unicite_lesion,  BB_UNICITE_LESION_FIELD,   BB_UNICITE_LESION_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->impose,  	       BB_IMPOSE_FIELD,   	      BB_IMPOSE_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->tri,  	  		   BB_TRI_FIELD,   	  		    BB_TRI_LEN) ;
-  alimenteChamp((static_cast<BBItemData*>(pDonnees))->scenario, 		   BB_SCENARIO_FIELD, 		    CH_SCENARIO_LEN) ;
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->code, 			     BB_CODE_FIELD, 	 		      CH_CODE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->auteur, 		     BB_AUTEUR_FIELD, 	 		    CH_AUTEUR_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->chemin, 		     BB_CHEMIN_FIELD, 	 		    CH_CHEMIN_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->commentaire, 	   BB_COMMENTAIRE_FIELD, 	  	BB_COMMENTAIRE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fichierDialogue, BB_FICHIER_DIALOGUE_FIELD, BB_FICHIER_DIALOGUE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->nomDialogue, 	   BB_NOM_DIALOGUE_FIELD, 	  BB_NOM_DIALOGUE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->ouvreDialogue,   BB_OUVRE_DIALOGUE_FIELD,   BB_OUVRE_DIALOGUE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fichierFonction, BB_FICHIER_FONCTION_FIELD, BB_FICHIER_FONCTION_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->nomFonction, 	   BB_NOM_FONCTION_FIELD, 	  BB_NOM_FONCTION_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->decalageNiveau,  BB_DECALAGE_NIVEAU_FIELD,  BB_DECALAGE_NIVEAU_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->fils,  			     BB_FILS_FIELD,  			      BB_FILS_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->exclusion,  	   BB_EXCLUSION_FIELD,  		  BB_EXCLUSION_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->automatique,  	 BB_AUTOMATIQUE_FIELD,  	  BB_AUTOMATIQUE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->actif_vide,  	   BB_ACTIF_VIDE_FIELD,  	  	BB_ACTIF_VIDE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->unicite_lesion,  BB_UNICITE_LESION_FIELD,   BB_UNICITE_LESION_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->impose,  	       BB_IMPOSE_FIELD,   	      BB_IMPOSE_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->tri,  	  		   BB_TRI_FIELD,   	  		    BB_TRI_LEN);
+  alimenteChamp((static_cast<BBItemData*>(pDonnees))->scenario, 		   BB_SCENARIO_FIELD, 		    CH_SCENARIO_LEN);
 #endif
 }
 
@@ -468,24 +468,24 @@ void BBFiche::alimenteFiche()
 void BBFiche::videFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	videChamp((static_cast<BBItemData*>(pDonnees))->code, 			     BB_CODE_FIELD, 	 		      CH_CODE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->auteur, 		     BB_AUTEUR_FIELD, 	 		    CH_AUTEUR_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->chemin, 		     BB_CHEMIN_FIELD, 	 		    CH_CHEMIN_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->commentaire, 	   BB_COMMENTAIRE_FIELD, 	    BB_COMMENTAIRE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->fichierDialogue, BB_FICHIER_DIALOGUE_FIELD, BB_FICHIER_DIALOGUE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->nomDialogue, 	   BB_NOM_DIALOGUE_FIELD, 	  BB_NOM_DIALOGUE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->ouvreDialogue,   BB_OUVRE_DIALOGUE_FIELD,   BB_OUVRE_DIALOGUE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->fichierFonction, BB_FICHIER_FONCTION_FIELD, BB_FICHIER_FONCTION_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->nomFonction, 	   BB_NOM_FONCTION_FIELD, 	  BB_NOM_FONCTION_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->decalageNiveau,  BB_DECALAGE_NIVEAU_FIELD,  BB_DECALAGE_NIVEAU_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->fils,  			     BB_FILS_FIELD,  		        BB_FILS_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->exclusion,  	   BB_EXCLUSION_FIELD,  		  BB_EXCLUSION_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->automatique,  	 BB_AUTOMATIQUE_FIELD,  	  BB_AUTOMATIQUE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->actif_vide,  	   BB_ACTIF_VIDE_FIELD,  	    BB_ACTIF_VIDE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->unicite_lesion,  BB_UNICITE_LESION_FIELD,   BB_UNICITE_LESION_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->impose,  	       BB_IMPOSE_FIELD,   	      BB_IMPOSE_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->tri,  	  		   BB_TRI_FIELD,   	  		    BB_TRI_LEN) ;
-  videChamp((static_cast<BBItemData*>(pDonnees))->scenario, 		   BB_SCENARIO_FIELD, 		    CH_SCENARIO_LEN) ;
+	videChamp((static_cast<BBItemData*>(pDonnees))->code, 			     BB_CODE_FIELD, 	 		      CH_CODE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->auteur, 		     BB_AUTEUR_FIELD, 	 		    CH_AUTEUR_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->chemin, 		     BB_CHEMIN_FIELD, 	 		    CH_CHEMIN_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->commentaire, 	   BB_COMMENTAIRE_FIELD, 	    BB_COMMENTAIRE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->fichierDialogue, BB_FICHIER_DIALOGUE_FIELD, BB_FICHIER_DIALOGUE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->nomDialogue, 	   BB_NOM_DIALOGUE_FIELD, 	  BB_NOM_DIALOGUE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->ouvreDialogue,   BB_OUVRE_DIALOGUE_FIELD,   BB_OUVRE_DIALOGUE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->fichierFonction, BB_FICHIER_FONCTION_FIELD, BB_FICHIER_FONCTION_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->nomFonction, 	   BB_NOM_FONCTION_FIELD, 	  BB_NOM_FONCTION_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->decalageNiveau,  BB_DECALAGE_NIVEAU_FIELD,  BB_DECALAGE_NIVEAU_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->fils,  			     BB_FILS_FIELD,  		        BB_FILS_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->exclusion,  	   BB_EXCLUSION_FIELD,  		  BB_EXCLUSION_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->automatique,  	 BB_AUTOMATIQUE_FIELD,  	  BB_AUTOMATIQUE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->actif_vide,  	   BB_ACTIF_VIDE_FIELD,  	    BB_ACTIF_VIDE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->unicite_lesion,  BB_UNICITE_LESION_FIELD,   BB_UNICITE_LESION_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->impose,  	       BB_IMPOSE_FIELD,   	      BB_IMPOSE_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->tri,  	  		   BB_TRI_FIELD,   	  		    BB_TRI_LEN);
+  videChamp((static_cast<BBItemData*>(pDonnees))->scenario, 		   BB_SCENARIO_FIELD, 		    CH_SCENARIO_LEN);
 #endif
 }
 
@@ -506,9 +506,9 @@ DBIResult BBFiche::open()
   // Appelle la fonction open() de la classe de base pour ouvrir
   // l'index primaire
   //
-  lastError = NSFiche::open("GUIDES", NSF_GUIDES) ;
+  lastError = NSFiche::open("GUIDES", NSF_GUIDES);
 
-  return(lastError) ;
+  return(lastError);
 }
 #endif
 
@@ -529,9 +529,9 @@ DBIResult BBFiche::open(string tableName)
   // Appelle la fonction open() de la classe de base pour ouvrir
   // l'index primaire
   //
-  lastError = NSFiche::open(tableName, NSF_GUIDES) ;
+  lastError = NSFiche::open(tableName, NSF_GUIDES);
 
-  return(lastError) ;
+  return(lastError);
 }
 #endif
 
@@ -545,11 +545,11 @@ void
 BBDecodeData::metAZero()
 {
 	// Met les champs de données à zéro
-  BBChemData::metAZero() ;
+  BBChemData::metAZero();
 
-	memset(commentaire, 0, DKD_COMMENTAIRE_LEN + 1) ;
-	memset(fichier, 	  0, DKD_FICHIER_LEN + 1) ;
-	memset(nomFonction, 0, DKD_NOM_FONCTION_LEN + 1) ;
+	memset(commentaire, 0, DKD_COMMENTAIRE_LEN + 1);
+	memset(fichier, 	  0, DKD_FICHIER_LEN + 1);
+	memset(nomFonction, 0, DKD_NOM_FONCTION_LEN + 1);
 }
 
 //---------------------------------------------------------------------------
@@ -557,13 +557,13 @@ BBDecodeData::metAZero()
 //---------------------------------------------------------------------------
 BBDecodeData::BBDecodeData(BBDecodeData& rv)
 {
-	strcpy(code,		    rv.code) ;
-  strcpy(auteur, 		  rv.auteur) ;
-  strcpy(chemin, 		  rv.chemin) ;
-  strcpy(commentaire,	rv.commentaire) ;
-  strcpy(fichier, 	  rv.fichier) ;
-	strcpy(nomFonction, rv.nomFonction) ;
-  strcpy(scenario, 	  rv.scenario) ;
+	strcpy(code,		    rv.code);
+  strcpy(auteur, 		  rv.auteur);
+  strcpy(chemin, 		  rv.chemin);
+  strcpy(commentaire,	rv.commentaire);
+  strcpy(fichier, 	  rv.fichier);
+	strcpy(nomFonction, rv.nomFonction);
+  strcpy(scenario, 	  rv.scenario);
 }
 
 //---------------------------------------------------------------------------
@@ -573,19 +573,19 @@ BBDecodeData&
 BBDecodeData::operator=(BBDecodeData rv)
 {
 	if (this == &rv)
-  	return *this ;
+  	return *this;
 
-	metAZero() ;
+	metAZero();
 
-	strcpy(code,		    rv.code) ;
-	strcpy(auteur, 	    rv.auteur) ;
-	strcpy(chemin, 	    rv.chemin) ;
-	strcpy(commentaire, rv.commentaire) ;
-	strcpy(fichier, 	  rv.fichier) ;
-	strcpy(nomFonction, rv.nomFonction) ;
-	strcpy(scenario, 	  rv.scenario) ;
+	strcpy(code,		    rv.code);
+	strcpy(auteur, 	    rv.auteur);
+	strcpy(chemin, 	    rv.chemin);
+	strcpy(commentaire, rv.commentaire);
+	strcpy(fichier, 	  rv.fichier);
+	strcpy(nomFonction, rv.nomFonction);
+	strcpy(scenario, 	  rv.scenario);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -611,14 +611,14 @@ BBDecode::BBDecode(NSSuper* pSuper)
          :BBChem(pSuper)
 {
 	// Crée l'objet de données
-	pDonnees = new BBDecodeData() ;
+	pDonnees = new BBDecodeData();
 }
 
 BBDecode::~BBDecode()
 {
 	if (pDonnees)
-		delete pDonnees ;
-	pDonnees = 0 ;
+		delete pDonnees;
+	pDonnees = 0;
 }
 
 //---------------------------------------------------------------------------
@@ -630,15 +630,15 @@ BBDecode::~BBDecode()
 void
 BBDecode::alimenteFiche()
 {
-	pDonnees->metAZero() ;
+	pDonnees->metAZero();
 #ifndef _ENTERPRISE_DLL
-	alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->code, 		   DKD_CODE_FIELD, 	 		   CH_CODE_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->auteur, 		 DKD_AUTEUR_FIELD, 	 	   CH_AUTEUR_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->chemin, 		 DKD_CHEMIN_FIELD, 	 	   CH_CHEMIN_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->commentaire, DKD_COMMENTAIRE_FIELD,  DKD_COMMENTAIRE_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->fichier, 	   DKD_FICHIER_FIELD, 		 DKD_FICHIER_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->nomFonction, DKD_NOM_FONCTION_FIELD, DKD_NOM_FONCTION_LEN) ;
-  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->scenario, 	 DKD_SCENARIO_FIELD, 	   CH_SCENARIO_LEN) ;
+	alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->code, 		   DKD_CODE_FIELD, 	 		   CH_CODE_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->auteur, 		 DKD_AUTEUR_FIELD, 	 	   CH_AUTEUR_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->chemin, 		 DKD_CHEMIN_FIELD, 	 	   CH_CHEMIN_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->commentaire, DKD_COMMENTAIRE_FIELD,  DKD_COMMENTAIRE_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->fichier, 	   DKD_FICHIER_FIELD, 		 DKD_FICHIER_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->nomFonction, DKD_NOM_FONCTION_FIELD, DKD_NOM_FONCTION_LEN);
+  alimenteChamp((static_cast<BBDecodeData*>(pDonnees))->scenario, 	 DKD_SCENARIO_FIELD, 	   CH_SCENARIO_LEN);
 #endif
 }
 
@@ -651,13 +651,13 @@ void
 BBDecode::videFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	videChamp((static_cast<BBDecodeData*>(pDonnees))->code, 			 DKD_CODE_FIELD, 	 	  	 CH_CODE_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->auteur, 		 DKD_AUTEUR_FIELD, 	 	   CH_AUTEUR_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->chemin, 		 DKD_CHEMIN_FIELD, 	 	   CH_CHEMIN_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->commentaire, DKD_COMMENTAIRE_FIELD,  DKD_COMMENTAIRE_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->fichier, 		 DKD_FICHIER_FIELD, 	   DKD_FICHIER_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->nomFonction, DKD_NOM_FONCTION_FIELD, DKD_NOM_FONCTION_LEN) ;
-  videChamp((static_cast<BBDecodeData*>(pDonnees))->scenario, 	 DKD_SCENARIO_FIELD, 	   CH_SCENARIO_LEN) ;
+	videChamp((static_cast<BBDecodeData*>(pDonnees))->code, 			 DKD_CODE_FIELD, 	 	  	 CH_CODE_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->auteur, 		 DKD_AUTEUR_FIELD, 	 	   CH_AUTEUR_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->chemin, 		 DKD_CHEMIN_FIELD, 	 	   CH_CHEMIN_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->commentaire, DKD_COMMENTAIRE_FIELD,  DKD_COMMENTAIRE_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->fichier, 		 DKD_FICHIER_FIELD, 	   DKD_FICHIER_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->nomFonction, DKD_NOM_FONCTION_FIELD, DKD_NOM_FONCTION_LEN);
+  videChamp((static_cast<BBDecodeData*>(pDonnees))->scenario, 	 DKD_SCENARIO_FIELD, 	   CH_SCENARIO_LEN);
 #endif
 }
 
@@ -674,9 +674,9 @@ BBDecode::open()
   // Appelle la fonction open() de la classe de base pour ouvrir
   // l'index primaire
   //
-  lastError = NSFiche::open("DECODE", NSF_GUIDES) ;
+  lastError = NSFiche::open("DECODE", NSF_GUIDES);
 
-  return(lastError) ;
+  return(lastError);
 }
 #endif
 
@@ -693,9 +693,9 @@ BBDecode::open(string tableName)
   // Appelle la fonction open() de la classe de base pour ouvrir
   // l'index primaire
   //
-  lastError = NSFiche::open(tableName, NSF_GUIDES) ;
+  lastError = NSFiche::open(tableName, NSF_GUIDES);
 
-  return(lastError) ;
+  return(lastError);
 }
 #endif
 
@@ -708,10 +708,10 @@ BBDecode::open(string tableName)
 NSGroupGdData::NSGroupGdData()
 {
 	// met les champs de donnees a zero
-	memset(groupe,	0, GRPGD_GROUPE_LEN + 1) ;
-  memset(libelle,	0, GRPGD_LIBELLE_LEN + 1) ;
-  memset(date,		0, GRPGD_DATE_LEN + 1) ;
-  memset(util,   	0, GRPGD_UTIL_LEN + 1) ;
+	memset(groupe,	0, GRPGD_GROUPE_LEN + 1);
+  memset(libelle,	0, GRPGD_LIBELLE_LEN + 1);
+  memset(date,		0, GRPGD_DATE_LEN + 1);
+  memset(util,   	0, GRPGD_UTIL_LEN + 1);
 }
 
 //---------------------------------------------------------------------------
@@ -721,10 +721,10 @@ NSGroupGdData::NSGroupGdData()
 //---------------------------------------------------------------------------
 NSGroupGdData::NSGroupGdData(NSGroupGdData& rv)
 {
-	strcpy(groupe,  rv.groupe) ;
-	strcpy(libelle, rv.libelle) ;
-	strcpy(date, 		rv.date) ;
-	strcpy(util, 		rv.util) ;
+	strcpy(groupe,  rv.groupe);
+	strcpy(libelle, rv.libelle);
+	strcpy(date, 		rv.date);
+	strcpy(util, 		rv.util);
 }
 
 //---------------------------------------------------------------------------
@@ -736,14 +736,14 @@ NSGroupGdData&
 NSGroupGdData::operator=(NSGroupGdData src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	strcpy(groupe,  src.groupe) ;
-	strcpy(libelle, src.libelle) ;
-	strcpy(date, 	  src.date) ;
-	strcpy(util,		src.util) ;
+	strcpy(groupe,  src.groupe);
+	strcpy(libelle, src.libelle);
+	strcpy(date, 	  src.date);
+	strcpy(util,		src.util);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -758,9 +758,9 @@ NSGroupGdData::operator == ( const NSGroupGdData& o )
 		  (strcmp(libelle, o.libelle) == 0) &&
 		  (strcmp(date, 	 o.date) 		== 0) &&
       (strcmp(util,		 o.util)	  == 0))
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 //---------------------------------------------------------------------------
@@ -775,13 +775,13 @@ NSGroupGd::NSGroupGd(NSSuper* pSuper)
 #endif
 {
 	// cree un objet de donnees
-	pDonnees = new NSGroupGdData() ;
+	pDonnees = new NSGroupGdData();
 }
 
 NSGroupGd::~NSGroupGd()
 {
-	delete pDonnees ;
-	pDonnees = 0 ;
+	delete pDonnees;
+	pDonnees = 0;
 }
 
 // Ouverture et fermeture de la base des templates
@@ -791,13 +791,13 @@ NSGroupGd::~NSGroupGd()
 DBIResult
 NSGroupGd::open()
 {
-	char tableName[] = "GROUPGD.DB" ;
+	char tableName[] = "GROUPGD.DB";
   //
   // Appelle la fonction open() de la classe de base pour ouvrir
   // l'index primaire
   //
-  lastError = NSFiche::open(tableName, NSF_GUIDES) ;
-  return(lastError) ;
+  lastError = NSFiche::open(tableName, NSF_GUIDES);
+  return(lastError);
 }
 #endif
 
@@ -808,10 +808,10 @@ void
 NSGroupGd::alimenteFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	alimenteChamp(pDonnees->groupe,	 GRPGD_GROUPE_FIELD, 	GRPGD_GROUPE_LEN) ;
-	alimenteChamp(pDonnees->libelle, GRPGD_LIBELLE_FIELD, GRPGD_LIBELLE_LEN) ;
-	alimenteChamp(pDonnees->date,		 GRPGD_DATE_FIELD, 		GRPGD_DATE_LEN) ;
-	alimenteChamp(pDonnees->util,		 GRPGD_UTIL_FIELD, 		GRPGD_UTIL_LEN) ;
+	alimenteChamp(pDonnees->groupe,	 GRPGD_GROUPE_FIELD, 	GRPGD_GROUPE_LEN);
+	alimenteChamp(pDonnees->libelle, GRPGD_LIBELLE_FIELD, GRPGD_LIBELLE_LEN);
+	alimenteChamp(pDonnees->date,		 GRPGD_DATE_FIELD, 		GRPGD_DATE_LEN);
+	alimenteChamp(pDonnees->util,		 GRPGD_UTIL_FIELD, 		GRPGD_UTIL_LEN);
 #endif
 }
 
@@ -822,10 +822,10 @@ void
 NSGroupGd::videFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	videChamp(pDonnees->groupe,	 GRPGD_GROUPE_FIELD, 	GRPGD_GROUPE_LEN) ;
-	videChamp(pDonnees->libelle, GRPGD_LIBELLE_FIELD, GRPGD_LIBELLE_LEN) ;
-	videChamp(pDonnees->date,		 GRPGD_DATE_FIELD, 		GRPGD_DATE_LEN) ;
-	videChamp(pDonnees->util,		 GRPGD_UTIL_FIELD, 		GRPGD_UTIL_LEN) ;
+	videChamp(pDonnees->groupe,	 GRPGD_GROUPE_FIELD, 	GRPGD_GROUPE_LEN);
+	videChamp(pDonnees->libelle, GRPGD_LIBELLE_FIELD, GRPGD_LIBELLE_LEN);
+	videChamp(pDonnees->date,		 GRPGD_DATE_FIELD, 		GRPGD_DATE_LEN);
+	videChamp(pDonnees->util,		 GRPGD_UTIL_FIELD, 		GRPGD_UTIL_LEN);
 #endif
 }
 
@@ -841,7 +841,7 @@ NSGroupGd::videFiche()
 NSGroupGdInfo::NSGroupGdInfo()
 {
 	// Crée l'objet de données
-	pDonnees = new NSGroupGdData() ;
+	pDonnees = new NSGroupGdData();
 }
 
 //---------------------------------------------------------------------------
@@ -854,11 +854,11 @@ NSGroupGdInfo::NSGroupGdInfo(NSGroupGd* pGroupGd)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new NSGroupGdData() ;
+	pDonnees = new NSGroupGdData();
 	//
 	// Copie les valeurs du NSCorrespondant
 	//
-	*pDonnees = *(pGroupGd->pDonnees) ;
+	*pDonnees = *(pGroupGd->pDonnees);
 }
 
 //---------------------------------------------------------------------------
@@ -868,7 +868,7 @@ NSGroupGdInfo::NSGroupGdInfo(NSGroupGd* pGroupGd)
 //---------------------------------------------------------------------------
 NSGroupGdInfo::~NSGroupGdInfo()
 {
-	delete pDonnees ;
+	delete pDonnees;
 }
 
 //---------------------------------------------------------------------------
@@ -881,11 +881,11 @@ NSGroupGdInfo::NSGroupGdInfo(NSGroupGdInfo& rv)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new NSGroupGdData() ;
+	pDonnees = new NSGroupGdData();
 	//
 	// Copie les valeurs du NSGroupGdInfo d'origine
 	//
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 //---------------------------------------------------------------------------
@@ -897,11 +897,11 @@ NSGroupGdInfo&
 NSGroupGdInfo::operator=(NSGroupGdInfo src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -911,7 +911,7 @@ NSGroupGdInfo::operator=(NSGroupGdInfo src)
 //---------------------------------------------------------------------------
 int NSGroupGdInfo::operator == ( const NSGroupGdInfo& o )
 {
-	 return (*pDonnees == *(o.pDonnees)) ;
+	 return (*pDonnees == *(o.pDonnees));
 }
 
 //-------------------------------------------------------------------------
@@ -924,8 +924,8 @@ NSGroupGdArray::NSGroupGdArray(NSGroupGdArray& rv)
                :NSGroupGdVector()
 {
 	if (false == rv.empty())
-	   for (NSGroupGdIter i = rv.begin() ; rv.end() != i ; i++)
-			 	push_back(new NSGroupGdInfo(*(*i))) ;
+	   for (NSGroupGdIter i = rv.begin(); rv.end() != i; i++)
+			 	push_back(new NSGroupGdInfo(*(*i)));
 }
 
 // fonction vider()
@@ -933,19 +933,19 @@ void
 NSGroupGdArray::vider()
 {
 	if (empty())
-		return ;
+		return;
 
-	for (NSGroupGdIter i = begin() ; end() != i ; )
+	for (NSGroupGdIter i = begin(); end() != i; )
 	{
-		delete *i ;
-    erase(i) ;
+		delete *i;
+    erase(i);
 	}
 }
 
 // destructeur
 NSGroupGdArray::~NSGroupGdArray()
 {
-	vider() ;
+	vider();
 }
 
 //---------------------------------------------------------------------------
@@ -957,14 +957,14 @@ NSGroupGdArray&
 NSGroupGdArray::operator=(NSGroupGdArray src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	vider() ;
+	vider();
 
 	if (false == src.empty())
 		for (NSGroupGdIter i = src.begin(); i != src.end(); i++)
-			push_back(new NSGroupGdInfo(*(*i))) ;
+			push_back(new NSGroupGdInfo(*(*i)));
 
-	return *this ;
+	return *this;
 }
 

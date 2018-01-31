@@ -35,15 +35,15 @@ NSPathologData::NSPathologData()
 {
 #ifndef _ENTERPRISE_DLL
 	// Met les champs de données à zéro
-	memset(libelle,   0, PATHO_LIBELLE_LEN + 1) ;
-	memset(code, 	    0, PATHO_CODE_LEN + 1) ;
-	memset(grammaire, 0, PATHO_GRAMMAIRE_LEN + 1) ;
-	memset(freq, 	    0, PATHO_FREQ_LEN + 1) ;
+	memset(libelle,   0, PATHO_LIBELLE_LEN + 1);
+	memset(code, 	    0, PATHO_CODE_LEN + 1);
+	memset(grammaire, 0, PATHO_GRAMMAIRE_LEN + 1);
+	memset(freq, 	    0, PATHO_FREQ_LEN + 1);
 #else
-  sLabel     = string("") ;
-  sCode      = string("") ;
-  sGrammar   = string("") ;
-  sFrequency = string("") ;
+  sLabel     = string("");
+  sCode      = string("");
+  sGrammar   = string("");
+  sFrequency = string("");
 #endif
 }
 
@@ -54,15 +54,15 @@ NSPathologData::NSPathologData()
 NSPathologData::NSPathologData(NSPathologData& rv)
 {
 #ifndef _ENTERPRISE_DLL
-	strcpy(libelle,   rv.libelle) ;
-	strcpy(code, 	    rv.code) ;
-	strcpy(grammaire, rv.grammaire) ;
-	strcpy(freq,   	  rv.freq) ;
+	strcpy(libelle,   rv.libelle);
+	strcpy(code, 	    rv.code);
+	strcpy(grammaire, rv.grammaire);
+	strcpy(freq,   	  rv.freq);
 #else
-  sLabel     = rv.sLabel ;
-  sCode      = rv.sCode ;
-  sGrammar   = rv.sGrammar ;
-  sFrequency = rv.sFrequency ;
+  sLabel     = rv.sLabel;
+  sCode      = rv.sCode;
+  sGrammar   = rv.sGrammar;
+  sFrequency = rv.sFrequency;
 #endif
 }
 
@@ -80,21 +80,21 @@ NSPathologData&
 NSPathologData::operator=(NSPathologData src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
 #ifndef _ENTERPRISE_DLL
-	strcpy(libelle,   src.libelle) ;
-	strcpy(code, 	    src.code) ;
-	strcpy(grammaire, src.grammaire) ;
-	strcpy(freq,   	  src.freq) ;
+	strcpy(libelle,   src.libelle);
+	strcpy(code, 	    src.code);
+	strcpy(grammaire, src.grammaire);
+	strcpy(freq,   	  src.freq);
 #else
-  sLabel     = src.sLabel ;
-  sCode      = src.sCode ;
-  sGrammar   = src.sGrammar ;
-  sFrequency = src.sFrequency ;
+  sLabel     = src.sLabel;
+  sCode      = src.sCode;
+  sGrammar   = src.sGrammar;
+  sFrequency = src.sFrequency;
 #endif
 
-	return *this ;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -108,9 +108,9 @@ NSPathologData::operator==(const NSPathologData& o)
 #else
   if ((sLabel == o.sLabel) && (sCode == o.sCode))
 #endif
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -121,10 +121,10 @@ void
 NSPathologData::metABlanc()
 {
 	// Met les champs de données à blanc
-	memset(libelle, 	' ', PATHO_LIBELLE_LEN) ;
-	memset(code, 		  ' ', PATHO_CODE_LEN) ;
-	memset(grammaire, ' ', PATHO_GRAMMAIRE_LEN) ;
-	memset(freq, 	    ' ', PATHO_FREQ_LEN) ;
+	memset(libelle, 	' ', PATHO_LIBELLE_LEN);
+	memset(code, 		  ' ', PATHO_CODE_LEN);
+	memset(grammaire, ' ', PATHO_GRAMMAIRE_LEN);
+	memset(freq, 	    ' ', PATHO_FREQ_LEN);
 }
 #endif
 
@@ -147,117 +147,117 @@ void
 NSPathologData::donneLibelleChoix(string* pLibelle)
 {
   if ((string *) NULL == pLibelle)
-    return ;
+    return;
 
   // le libellé est du type 	Crohn [maladie][de]{détails}
   // qui donne 					Crohn (maladie){détails}
   //
   // Les indications d'orthographe au pluriel sont entre ||,
   // il faut les enlever
-  string sLibelle = string("") ;
+  string sLibelle = string("");
 
-  bool dansPluriel = false ;
+  bool dansPluriel = false;
 #ifndef _ENTERPRISE_DLL
-  for (int k = 0 ; (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0') ; k++)
+  for (int k = 0; (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'); k++)
 	{
     if      (libelle[k] == '|')
     {
       if (dansPluriel)
-        dansPluriel = false ;
+        dansPluriel = false;
       else
-        dansPluriel = true ;
+        dansPluriel = true;
     }
     else if (!dansPluriel)
-      sLibelle += libelle[k] ;
+      sLibelle += libelle[k];
   }
 #else
-  for (size_t k = 0 ; (k < strlen(sLabel.c_str())) ; k++)
+  for (size_t k = 0; (k < strlen(sLabel.c_str())); k++)
 	{
     if ('|' == sLabel[k])
     {
       if (dansPluriel)
-        dansPluriel = false ;
+        dansPluriel = false;
       else
-        dansPluriel = true ;
+        dansPluriel = true;
     }
     else if (false == dansPluriel)
-      sLibelle += sLabel[k] ;
+      sLibelle += sLabel[k];
   }
 #endif
 
-  int  niveau_crochet = -1 ;
+  int  niveau_crochet = -1;
 
-  string qualifiant[2] ;
-  string mot_debut  = "" ;
-  string mot_fin	  = "" ;
-  qualifiant[0]     = "" ;
-  qualifiant[1]     = "" ;
+  string qualifiant[2];
+  string mot_debut  = "";
+  string mot_fin	  = "";
+  qualifiant[0]     = "";
+  qualifiant[1]     = "";
 
   // On sépare le libellé sous la forme :
   // mot_debut 	  = "Crohn"
   // mot_fin   	  = "{détails}"
   // qualifiant[0] = "maladie"
   // qualifiant[1] = "de"
-  int iLibLen = strlen(sLibelle.c_str()) ;
-  for (int k = 0 ; k < iLibLen ; k++)
+  int iLibLen = strlen(sLibelle.c_str());
+  for (int k = 0; k < iLibLen; k++)
   {
     if (sLibelle[k] == '[')
     {
-      niveau_crochet++ ;
-      k++ ;
+      niveau_crochet++;
+      k++;
 
       while ((sLibelle[k] != ']') && (k < iLibLen))
       {
-        qualifiant[niveau_crochet] += sLibelle[k] ;
-        k++ ;
+        qualifiant[niveau_crochet] += sLibelle[k];
+        k++;
       }
     }
     else
     {
       if (niveau_crochet == -1)
-        mot_debut += sLibelle[k] ;
+        mot_debut += sLibelle[k];
       else
-        mot_fin += sLibelle[k] ;
+        mot_fin += sLibelle[k];
     }
   }
 
   // On assemble le nouveau libelle
-  *pLibelle = mot_debut ;
+  *pLibelle = mot_debut;
   if (qualifiant[0] != "")
-    *pLibelle += "(" + qualifiant[0] + ")" ;
-  *pLibelle += mot_fin ;
+    *pLibelle += "(" + qualifiant[0] + ")";
+  *pLibelle += mot_fin;
 
   // On s'assure qu'il fait encore PATHO_LIBELLE_LEN caractères
   if 	  (strlen(pLibelle->c_str()) < PATHO_LIBELLE_LEN)
-    *pLibelle += string(PATHO_LIBELLE_LEN - strlen(pLibelle->c_str()), ' ') ;
+    *pLibelle += string(PATHO_LIBELLE_LEN - strlen(pLibelle->c_str()), ' ');
   else if (strlen(pLibelle->c_str()) > PATHO_LIBELLE_LEN)
-    (*pLibelle)[PATHO_LIBELLE_LEN-1] = '\0' ;
+    (*pLibelle)[PATHO_LIBELLE_LEN-1] = '\0';
 
 
   // On supprime les blancs terminaux
   strip(*pLibelle, stripRight);
 
   // On vérifie qu'il n'existe pas plusieurs blancs contigus
-  size_t positBlanc = pLibelle->find(" ") ;
-  size_t debut, fin, taille ;
+  size_t positBlanc = pLibelle->find(" ");
+  size_t debut, fin, taille;
   while (positBlanc != NPOS)
   {
-    debut  = positBlanc ;
+    debut  = positBlanc;
 
-    taille = strlen(pLibelle->c_str()) ;
+    taille = strlen(pLibelle->c_str());
     if ((debut < taille - 1) && ((*pLibelle)[debut + 1] == ' '))
     {
-      fin = debut + 1 ;
+      fin = debut + 1;
       while ((fin < taille - 1) && ((*pLibelle)[fin + 1] == ' '))
-        fin++ ;
+        fin++;
 
-      *pLibelle = string(*pLibelle, 0, debut) + " " + string(*pLibelle, fin + 1, taille - fin - 1) ;
+      *pLibelle = string(*pLibelle, 0, debut) + " " + string(*pLibelle, fin + 1, taille - fin - 1);
     }
     else
-      fin = debut ;
+      fin = debut;
 
-    debut++ ;
-    positBlanc = pLibelle->find(" ", debut) ;
+    debut++;
+    positBlanc = pLibelle->find(" ", debut);
   }
 }
 
@@ -270,7 +270,7 @@ void
 NSPathologData::donneLibelleAffiche(string* pLibelle, int iDeclinaison)
 {
   if ((string *) NULL == pLibelle)
-    return ;
+    return;
 
   *pLibelle = "";
 
@@ -288,13 +288,13 @@ NSPathologData::donneLibelleAffiche(string* pLibelle, int iDeclinaison)
   //    élément (0) permet de définir la racine, les autres donnent les
   //    déclinaisons (1, 2...)
 
-  int niveau_crochet  = -1 ;
-  string mot_debut 	  = "" ;
-  string mot_fin	  	= "" ;
-  string orthographe  = "" ;
-  string qualifiant[2] ;
-  qualifiant[0]       = "" ;
-  qualifiant[1]       = "" ;
+  int niveau_crochet  = -1;
+  string mot_debut 	  = "";
+  string mot_fin	  	= "";
+  string orthographe  = "";
+  string qualifiant[2];
+  qualifiant[0]       = "";
+  qualifiant[1]       = "";
 
   // On sépare le libellé sous la forme :
   // mot_debut 	  = "Crohn"
@@ -302,31 +302,31 @@ NSPathologData::donneLibelleAffiche(string* pLibelle, int iDeclinaison)
   // qualifiant[0] = "maladie"
   // qualifiant[1] = "de"
 #ifndef _ENTERPRISE_DLL
-  for (int k = 0 ; (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0') ; k++)
+  for (int k = 0; (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'); k++)
   {
     if (libelle[k] == '[')
     {
-      niveau_crochet++ ;
-      k++ ;
+      niveau_crochet++;
+      k++;
       while ((libelle[k] != ']') && (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'))
       {
         if (libelle[k] == '|')
         {
-          orthographe = "" ;
-          k++ ;
+          orthographe = "";
+          k++;
           while ((libelle[k] != '|') && (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'))
           {
-            orthographe += libelle[k] ;
-            k++ ;
+            orthographe += libelle[k];
+            k++;
           }
           if ((k < PATHO_LIBELLE_LEN) && (libelle[k] == '|'))
-            traiteOrthographe(&qualifiant[niveau_crochet], &orthographe, iDeclinaison) ;
+            traiteOrthographe(&qualifiant[niveau_crochet], &orthographe, iDeclinaison);
           else
-            return ;
+            return;
         }
         else
-          qualifiant[niveau_crochet] += libelle[k] ;
-        k++ ;
+          qualifiant[niveau_crochet] += libelle[k];
+        k++;
       }
     }
     else
@@ -334,62 +334,62 @@ NSPathologData::donneLibelleAffiche(string* pLibelle, int iDeclinaison)
       if      ((libelle[k] == '{') && (k < PATHO_LIBELLE_LEN + 1) && (libelle[k+1] == '|'))
       {
         while ((libelle[k] != '}') && (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'))
-          k++ ;
+          k++;
       }
       else if (libelle[k] == '|')
       {
-        k++ ;
-        orthographe = "" ;
+        k++;
+        orthographe = "";
         while ((libelle[k] != '|') && (k < PATHO_LIBELLE_LEN) && (libelle[k] != '\0'))
         {
-          orthographe += libelle[k] ;
-          k++ ;
+          orthographe += libelle[k];
+          k++;
         }
         if ((k < PATHO_LIBELLE_LEN) && (libelle[k] == '|'))
         {
           if (niveau_crochet == -1)
-            traiteOrthographe(&mot_debut, &orthographe, iDeclinaison) ;
+            traiteOrthographe(&mot_debut, &orthographe, iDeclinaison);
           else
-            traiteOrthographe(&mot_fin, &orthographe, iDeclinaison) ;
+            traiteOrthographe(&mot_fin, &orthographe, iDeclinaison);
         }
         else
-          return ;
+          return;
       }
       else
       {
         if (niveau_crochet == -1)
-          mot_debut += libelle[k] ;
+          mot_debut += libelle[k];
         else
-          mot_fin   += libelle[k] ;
+          mot_fin   += libelle[k];
       }
     }
   }
 #else
-  for (size_t k = 0 ; (k < strlen(sLabel.c_str())) ; k++)
+  for (size_t k = 0; (k < strlen(sLabel.c_str())); k++)
   {
     if ('[' == sLabel[k])
     {
-      niveau_crochet++ ;
-      k++ ;
+      niveau_crochet++;
+      k++;
       while ((k < strlen(sLabel.c_str())) && (']' != sLabel[k]))
       {
         if ('|' == sLabel[k])
         {
-          orthographe = "" ;
-          k++ ;
+          orthographe = "";
+          k++;
           while ((k < strlen(sLabel.c_str())) && ('|' != sLabel[k]))
           {
-            orthographe += sLabel[k] ;
-            k++ ;
+            orthographe += sLabel[k];
+            k++;
           }
           if ((k < strlen(sLabel.c_str())) && ('|' == sLabel[k]))
-            traiteOrthographe(&qualifiant[niveau_crochet], &orthographe, iDeclinaison) ;
+            traiteOrthographe(&qualifiant[niveau_crochet], &orthographe, iDeclinaison);
           else
-            return ;
+            return;
         }
         else
-          qualifiant[niveau_crochet] += sLabel[k] ;
-        k++ ;
+          qualifiant[niveau_crochet] += sLabel[k];
+        k++;
       }
     }
     else
@@ -397,110 +397,110 @@ NSPathologData::donneLibelleAffiche(string* pLibelle, int iDeclinaison)
       if      ((k < strlen(sLabel.c_str()) - 1) && ('{' == sLabel[k]) && ('|' == sLabel[k+1]))
       {
         while ((k < strlen(sLabel.c_str())) && ('}' != sLabel[k]))
-          k++ ;
+          k++;
       }
       else if ('|' == sLabel[k])
       {
-        k++ ;
-        orthographe = "" ;
+        k++;
+        orthographe = "";
         while ((k < strlen(sLabel.c_str())) && ('|' != sLabel[k]))
         {
-          orthographe += sLabel[k] ;
-          k++ ;
+          orthographe += sLabel[k];
+          k++;
         }
         if ((k < strlen(sLabel.c_str())) && ('|' == sLabel[k]))
         {
           if (-1 == niveau_crochet)
-            traiteOrthographe(&mot_debut, &orthographe, iDeclinaison) ;
+            traiteOrthographe(&mot_debut, &orthographe, iDeclinaison);
           else
-            traiteOrthographe(&mot_fin, &orthographe, iDeclinaison) ;
+            traiteOrthographe(&mot_fin, &orthographe, iDeclinaison);
         }
         else
-          return ;
+          return;
       }
       else
       {
         if (-1 == niveau_crochet)
-          mot_debut += sLabel[k] ;
+          mot_debut += sLabel[k];
         else
-          mot_fin   += sLabel[k] ;
+          mot_fin   += sLabel[k];
       }
     }
   }
 #endif
 
   // On assemble le nouveau libelle
-  char dernCar = '\0' ;
-  char premCar = '\0' ;
+  char dernCar = '\0';
+  char premCar = '\0';
 
   if (!(mot_debut == ""))
-    strip(mot_debut, stripBoth) ;
+    strip(mot_debut, stripBoth);
 
   if (!(mot_fin == ""))
-    strip(mot_fin, stripBoth) ;
+    strip(mot_fin, stripBoth);
 
-  *pLibelle = qualifiant[0] ;
+  *pLibelle = qualifiant[0];
   if (qualifiant[0] != "")
-    dernCar = qualifiant[0][strlen(qualifiant[0].c_str())-1] ;
+    dernCar = qualifiant[0][strlen(qualifiant[0].c_str())-1];
 
   if (qualifiant[1] != "")
   {
-    premCar = qualifiant[1][0] ;
+    premCar = qualifiant[1][0];
 
     if ((premCar != ' ') && (dernCar != '-') && (dernCar != '\'') && (dernCar != ' '))
-      *pLibelle += " " ;
+      *pLibelle += " ";
 
-    *pLibelle += qualifiant[1] ;
+    *pLibelle += qualifiant[1];
 
-    dernCar = qualifiant[1][strlen(qualifiant[1].c_str()) - 1] ;
+    dernCar = qualifiant[1][strlen(qualifiant[1].c_str()) - 1];
   }
 
   if (mot_debut != "")
   {
-    premCar = mot_debut[0] ;
+    premCar = mot_debut[0];
 
     if (*pLibelle != "" )
       if ((premCar != ' ') && (dernCar != '-') && (dernCar != '\'') && (dernCar != ' '))
-        *pLibelle += " " ;
+        *pLibelle += " ";
 
-    *pLibelle += mot_debut ;
+    *pLibelle += mot_debut;
   }
 
   // On supprime les blancs terminaux
   strip(*pLibelle, stripRight);
 
-  size_t positionAccolades = pLibelle->find("{") ;
-  size_t positionVideAccolades = pLibelle->find(" {") ;
+  size_t positionAccolades = pLibelle->find("{");
+  size_t positionVideAccolades = pLibelle->find(" {");
   if      (positionVideAccolades != NPOS)
-    *pLibelle = string(*pLibelle, 0, positionVideAccolades) ;
+    *pLibelle = string(*pLibelle, 0, positionVideAccolades);
   else if (positionAccolades != NPOS)
-    *pLibelle = string(*pLibelle, 0, positionAccolades) ;
+    *pLibelle = string(*pLibelle, 0, positionAccolades);
 
   // On vérifie qu'il n'existe pas plusieurs blancs contigus
-  size_t positBlanc = pLibelle->find(" ") ;
-  size_t debut, fin, taille ;
+  size_t positBlanc = pLibelle->find(" ");
+  size_t debut, fin, taille;
   while (positBlanc != NPOS)
   {
-    debut  = positBlanc ;
+    debut  = positBlanc;
 
-    taille = strlen(pLibelle->c_str()) ;
+    taille = strlen(pLibelle->c_str());
     if ((debut < taille - 1) && ((*pLibelle)[debut + 1] == ' '))
     {
-      fin = debut + 1 ;
+      fin = debut + 1;
       while ((fin < taille - 1) && ((*pLibelle)[fin + 1] == ' '))
-        fin++ ;
+        fin++;
 
-      *pLibelle = string(*pLibelle, 0, debut) + " " + string(*pLibelle, fin + 1, taille - fin - 1) ;
+      *pLibelle = string(*pLibelle, 0, debut) + " " + string(*pLibelle, fin + 1, taille - fin - 1);
     }
     else
-      fin = debut ;
+      fin = debut;
 
-    debut++ ;
-    positBlanc = pLibelle->find(" ", debut) ;
+    debut++;
+    positBlanc = pLibelle->find(" ", debut);
   }
 
   // On supprime les blancs terminaux
-  strip(*pLibelle, stripRight) ;
+  strip(*pLibelle, stripRight);
 }
 
 // -----------------------------------------------------------------------------
@@ -513,44 +513,44 @@ void
 NSPathologData::traiteOrthographe(string* pMot, string* pOrthographe, int iDeclinaison)
 {
   if (NULL == pMot)
-    return ;
+    return;
 
   // simple précaution
-  strip(*pMot, stripRight, ' ') ;
+  strip(*pMot, stripRight, ' ');
 
   // Si on demande la déclinaison 0, il n'y a rien à faire
   if (iDeclinaison == 0)
-    return ;
+    return;
 
   if (NULL == pOrthographe)
-    return ;
+    return;
 
-  int iLen = strlen(pOrthographe->c_str()) ;
+  int iLen = strlen(pOrthographe->c_str());
 
   // Cas simple, pas de déclinaisons, on ne fait rien
   if (0 == iLen)
-    return ;
+    return;
 
   // distribution des déclinaisons dans les différentes cases d'un vecteur
-  vector<string>            vOrthographe ;
-  vector<string>::iterator  ivOrtho ;
+  vector<string>            vOrthographe;
+  vector<string>::iterator  ivOrtho;
 
-  int    iNbElmnt = 0 ;
-  string sOrtho   = string("") ;
-  for (int i = 0 ; i < iLen ; i++)
+  int    iNbElmnt = 0;
+  string sOrtho   = string("");
+  for (int i = 0; i < iLen; i++)
   {
     if ('/' == (*pOrthographe)[i])
     {
-      vOrthographe.push_back(string(sOrtho, 0, strlen(sOrtho.c_str()))) ;
-      sOrtho = string("") ;
-      iNbElmnt++ ;
+      vOrthographe.push_back(string(sOrtho, 0, strlen(sOrtho.c_str())));
+      sOrtho = string("");
+      iNbElmnt++;
     }
     else
-      sOrtho += (*pOrthographe)[i] ;
+      sOrtho += (*pOrthographe)[i];
   }
 
-  vOrthographe.push_back(string(sOrtho, 0, strlen(sOrtho.c_str()))) ;
-  iNbElmnt++ ;
+  vOrthographe.push_back(string(sOrtho, 0, strlen(sOrtho.c_str())));
+  iNbElmnt++;
 
   // Cas où il n'existe qu'une seule déclinaison :
   //
@@ -559,8 +559,8 @@ NSPathologData::traiteOrthographe(string* pMot, string* pOrthographe, int iDecli
   if (1 == iNbElmnt)
   {
     if (1 == iDeclinaison)
-      *pMot = *pMot + *(vOrthographe.begin()) ;
-    return ;
+      *pMot = *pMot + *(vOrthographe.begin());
+    return;
   }
 
   // Cas où il existe plusieurs déclinaisons :
@@ -569,22 +569,22 @@ NSPathologData::traiteOrthographe(string* pMot, string* pOrthographe, int iDecli
 
   // Recherche de la iDeclinaisonième déclinaison
 
-  int i = 0 ;
-  for (ivOrtho = vOrthographe.begin() ; (i < iDeclinaison) && (ivOrtho != vOrthographe.end()) ; i++, ivOrtho++)
-    ;
+  int i = 0;
+  for (ivOrtho = vOrthographe.begin(); (i < iDeclinaison) && (ivOrtho != vOrthographe.end()); i++, ivOrtho++)
+   ;
 
   // On vérifie quand même qu'elle existe
   if ((i < iDeclinaison) || (vOrthographe.end() == ivOrtho))
-    return ;
+    return;
 
-  int iRaciLen = strlen(pMot->c_str()) - strlen(vOrthographe.begin()->c_str()) ;
+  int iRaciLen = strlen(pMot->c_str()) - strlen(vOrthographe.begin()->c_str());
   if (iRaciLen <= 0)
   {
-    *pMot = *ivOrtho ;
-    return ;
+    *pMot = *ivOrtho;
+    return;
   }
 
-  *pMot = string(*pMot, 0, iRaciLen) + *ivOrtho ;
+  *pMot = string(*pMot, 0, iRaciLen) + *ivOrtho;
 }
 
 // -----------------------------------------------------------------------------
@@ -596,62 +596,62 @@ void
 NSPathologData::donneGenre(GENRE *pGenre)
 {
   if ((GENRE *) NULL == pGenre)
-    return ;
+    return;
 
 #ifndef _ENTERPRISE_DLL
-  string sGenre = string(grammaire) ;
+  string sGenre = string(grammaire);
 #else
-  string sGenre = sGrammar ;
+  string sGenre = sGrammar;
 #endif
 
-  strip(sGenre) ;
+  strip(sGenre);
 
   if 	    (string("FS") == sGenre)
-    *pGenre = genreFS ;
+    *pGenre = genreFS;
   else if (string("MS") == sGenre)
-    *pGenre = genreMS ;
+    *pGenre = genreMS;
   else if (string("NS") == sGenre)
-    *pGenre = genreNS ;
+    *pGenre = genreNS;
   else if (string("FP") == sGenre)
-    *pGenre = genreFP ;
+    *pGenre = genreFP;
   else if (string("MP") == sGenre)
-    *pGenre = genreMP ;
+    *pGenre = genreMP;
   else if (string("NP") == sGenre)
-    *pGenre = genreNP ;
+    *pGenre = genreNP;
   else
-    *pGenre = genreNull ;
+    *pGenre = genreNull;
 }
 
 void
 NSPathologData::donneGenrePluriel(GENRE *pGenre)
 {
   if ((GENRE *) NULL == pGenre)
-    return ;
+    return;
 
   if      (genreFS == *pGenre)
-    *pGenre = genreFP ;
+    *pGenre = genreFP;
   else if (genreMS == *pGenre)
-    *pGenre = genreMP ;
+    *pGenre = genreMP;
   else if (genreNS == *pGenre)
-    *pGenre = genreNP ;
+    *pGenre = genreNP;
   else
-    *pGenre = genreNull ;
+    *pGenre = genreNull;
 }
 
 void
 NSPathologData::donneGenreSingulier(GENRE *pGenre)
 {
   if ((GENRE *) NULL == pGenre)
-    return ;
+    return;
 
   if      (genreFP == *pGenre)
-    *pGenre = genreFS ;
+    *pGenre = genreFS;
   else if (genreMP == *pGenre)
-    *pGenre = genreMS ;
+    *pGenre = genreMS;
   else if (genreNP == *pGenre)
-    *pGenre = genreNS ;
+    *pGenre = genreNS;
   else
-    *pGenre = genreNull ;
+    *pGenre = genreNull;
 }
 
 // -----------------------------------------------------------------------------
@@ -664,43 +664,43 @@ string
 NSPathologData::chercheGrammaire(string sAChercher)
 {
 #ifndef _ENTERPRISE_DLL
-  string sLibelleBrut = string(libelle) ;
+  string sLibelleBrut = string(libelle);
 #else
-  string sLibelleBrut = sLabel ;
+  string sLibelleBrut = sLabel;
 #endif
 
-  size_t positionAccolades = sLibelleBrut.find("{|") ;
+  size_t positionAccolades = sLibelleBrut.find("{|");
   if (positionAccolades == string::npos)
-    return string("") ;
-  size_t finAccolades = sLibelleBrut.find("}", positionAccolades + 1) ;
+    return string("");
+  size_t finAccolades = sLibelleBrut.find("}", positionAccolades + 1);
   if ((finAccolades == string::npos) || (finAccolades-positionAccolades < 4))
-    return "" ;
+    return "";
 
   // On recupere dans sGrammaire le contenu entre {| et }
   // On analysera par la suite sGrammaire
-  string sGrammaire = string(sLibelleBrut, positionAccolades + 2, finAccolades-positionAccolades - 2) ;
-  size_t pos = sGrammaire.find(sAChercher) ;
-  // size_t len = strlen(sAChercher.c_str()) ;
+  string sGrammaire = string(sLibelleBrut, positionAccolades + 2, finAccolades-positionAccolades - 2);
+  size_t pos = sGrammaire.find(sAChercher);
+  // size_t len = strlen(sAChercher.c_str());
 
   if (string::npos == pos)
-    return("") ;
+    return("");
 
   // On recherche la fin de la string cherchee
   // Puis on renvoie la string cherchee
   if (pos == strlen(sGrammaire.c_str()))
-    return string(sGrammaire, pos, 1) ;
+    return string(sGrammaire, pos, 1);
 
-  size_t posfin = sGrammaire.find("/", pos + 1) ;
+  size_t posfin = sGrammaire.find("/", pos + 1);
   if (string::npos == posfin)
-    return string(sGrammaire, pos, strlen(sGrammaire.c_str()) - pos) ;
+    return string(sGrammaire, pos, strlen(sGrammaire.c_str()) - pos);
 
-  return string(sGrammaire, pos, posfin - pos) ;
+  return string(sGrammaire, pos, posfin - pos);
 }
 
 bool
 NSPathologData::estReel()
 {
-  return true ;
+  return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -713,20 +713,20 @@ NSPatholog::NSPatholog(NSSuper* pSuper, string sLang)
            :NSSuperRoot(pSuper)
 #endif
 {
-  _sLangue = sLang ;
+  _sLangue = sLang;
 
 #ifdef _ENTERPRISE_DLL
   if      (string("") == _sLangue)
-    _sTableName = "lexiq_fr" ;
+    _sTableName = "lexiq_fr";
   else
-    _sTableName = string("lexiq_") + _sLangue ;
+    _sTableName = string("lexiq_") + _sLangue;
 #else
   if      (_sLangue == "")
-    sNomFichier = "LEXIQUE.DB" ;
+    sNomFichier = "LEXIQUE.DB";
   else if (_sLangue == "fr")
-    sNomFichier = "LEXIQUE.DB" ;
+    sNomFichier = "LEXIQUE.DB";
   else
-    sNomFichier = string("LEXIQ_") + _sLangue + string(".DB") ;
+    sNomFichier = string("LEXIQ_") + _sLangue + string(".DB");
 #endif
 }
 
@@ -741,11 +741,11 @@ NSPatholog::NSPatholog(NSPatholog& rv)
 #endif
 {
 	// Copie les valeurs du NSPathologInfo d'origine
-	_Donnees    = rv._Donnees ;
-  _sLangue    = rv._sLangue ;
+	_Donnees    = rv._Donnees;
+  _sLangue    = rv._sLangue;
 
 #ifdef _ENTERPRISE_DLL
-  _sTableName = rv._sTableName ;
+  _sTableName = rv._sTableName;
 #endif
 }
 
@@ -764,12 +764,12 @@ void
 NSPatholog::alimenteFiche()
 {
 #ifndef _ENTERPRISE_DLL
-  alimenteChamp(_Donnees.libelle,    PATHO_LIBELLE_FIELD,   PATHO_LIBELLE_LEN) ;
-  alimenteChamp(_Donnees.code, 	    PATHO_CODE_FIELD, 	   PATHO_CODE_LEN) ;
-	alimenteChamp(_Donnees.grammaire,  PATHO_GRAMMAIRE_FIELD, PATHO_GRAMMAIRE_LEN) ;
-  alimenteChamp(_Donnees.freq, 	    PATHO_FREQ_FIELD, 	   PATHO_FREQ_LEN) ;
+  alimenteChamp(_Donnees.libelle,    PATHO_LIBELLE_FIELD,   PATHO_LIBELLE_LEN);
+  alimenteChamp(_Donnees.code, 	    PATHO_CODE_FIELD, 	   PATHO_CODE_LEN);
+	alimenteChamp(_Donnees.grammaire,  PATHO_GRAMMAIRE_FIELD, PATHO_GRAMMAIRE_LEN);
+  alimenteChamp(_Donnees.freq, 	    PATHO_FREQ_FIELD, 	   PATHO_FREQ_LEN);
 
-	_Donnees.fabriqueLibelleLong() ;
+	_Donnees.fabriqueLibelleLong();
 #endif
 }
 
@@ -777,12 +777,12 @@ NSPatholog::alimenteFiche()
 void
 NSPatholog::alimenteFiche(MYSQL_ROW *pRow)
 {
-  _Donnees.setLabel((*pRow)[PATHO_LIBELLE_FIELD-1]) ;
-  _Donnees.setCode((*pRow)[PATHO_CODE_FIELD-1]) ;
-	_Donnees.setGrammar((*pRow)[PATHO_GRAMMAIRE_FIELD-1]) ;
-  _Donnees.setFrequency((*pRow)[PATHO_FREQ_FIELD-1]) ;
+  _Donnees.setLabel((*pRow)[PATHO_LIBELLE_FIELD-1]);
+  _Donnees.setCode((*pRow)[PATHO_CODE_FIELD-1]);
+	_Donnees.setGrammar((*pRow)[PATHO_GRAMMAIRE_FIELD-1]);
+  _Donnees.setFrequency((*pRow)[PATHO_FREQ_FIELD-1]);
 
-	_Donnees.fabriqueLibelleLong() ;
+	_Donnees.fabriqueLibelleLong();
 }
 #endif
 
@@ -794,10 +794,10 @@ void
 NSPatholog::videFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	videChamp(_Donnees.libelle,   PATHO_LIBELLE_FIELD,   PATHO_LIBELLE_LEN) ;
-  videChamp(_Donnees.code, 	   PATHO_CODE_FIELD, 	    PATHO_CODE_LEN) ;
-	videChamp(_Donnees.grammaire, PATHO_GRAMMAIRE_FIELD, PATHO_GRAMMAIRE_LEN) ;
-	videChamp(_Donnees.freq, 	   PATHO_FREQ_FIELD, 	    PATHO_FREQ_LEN) ;
+	videChamp(_Donnees.libelle,   PATHO_LIBELLE_FIELD,   PATHO_LIBELLE_LEN);
+  videChamp(_Donnees.code, 	   PATHO_CODE_FIELD, 	    PATHO_CODE_LEN);
+	videChamp(_Donnees.grammaire, PATHO_GRAMMAIRE_FIELD, PATHO_GRAMMAIRE_LEN);
+	videChamp(_Donnees.freq, 	   PATHO_FREQ_FIELD, 	    PATHO_FREQ_LEN);
 #endif
 }
 
@@ -813,11 +813,11 @@ NSPatholog::getPatRecord()
 {
 	// La table est-elle ouverte ?
   if (!isOpen)
-    return(lastError = ERROR_TABLENOTOPEN) ;
+    return(lastError = ERROR_TABLENOTOPEN);
 
 	// Appel de la classe de base pour récupérer l'enregistrement.
-	lastError = getDbiRecord(dbiWRITELOCK) ;
-  return (lastError) ;
+	lastError = getDbiRecord(dbiWRITELOCK);
+  return (lastError);
 }
 #endif
 
@@ -825,46 +825,46 @@ NSPatholog::getPatRecord()
 string
 NSPatholog::getTableName(string sLanguage)
 {
-  string sTableName = string("lexiq_fr") ;
+  string sTableName = string("lexiq_fr");
 
   if (string("") != _sLangue)
-    sTableName = string("lexiq_") + _sLangue ;
+    sTableName = string("lexiq_") + _sLangue;
 
-  return sTableName ;
+  return sTableName;
 }
 
 bool
 NSPatholog::executeQuery(string sQuery, bool bVerbose)
 {
   if (string("") == sQuery)
-    return false ;
+    return false;
 
   if (NULL == _pSuper->getDatabaseManager())
-    return false ;
+    return false;
 
-  MYSQL_RES *pResult = _pSuper->getDatabaseManager()->executeQuery(sQuery, bVerbose) ;
+  MYSQL_RES *pResult = _pSuper->getDatabaseManager()->executeQuery(sQuery, bVerbose);
 
   if ((MYSQL_RES *) NULL == pResult)
-    return false ;
+    return false;
 
   if (mysql_num_rows(pResult) == 0)
-    return false ;
+    return false;
 
-  bool bSucces = true ;
+  bool bSucces = true;
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   if (Row)
-    alimenteFiche(&Row) ;
+    alimenteFiche(&Row);
   else if (bVerbose)
   {
-    string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector()) ;
-    erreur(sErreurMsg.c_str(), standardError) ;
-    bSucces = false ;
+    string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector());
+    erreur(sErreurMsg.c_str(), standardError);
+    bSucces = false;
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  return bSucces ;
+  return bSucces;
 }
 #endif
 
@@ -877,45 +877,45 @@ bool
 NSPatholog::trouvePathologData(string* pCode, NSPathologData* pData, bool afficheErreur)
 {
   if (((string *) NULL == pCode) || (string("") == *pCode) || ((NSPathologData *) NULL == pData))
-    return false ;
+    return false;
 
-  lastError = chercheClef(pCode, "CODE_INDEX", keySEARCHEQ, dbiWRITELOCK) ;
+  lastError = chercheClef(pCode, "CODE_INDEX", keySEARCHEQ, dbiWRITELOCK);
 
   if (lastError != DBIERR_NONE)
 	{
     if (afficheErreur)
     {
-    	string sErreurMsg = string("Erreur à la recherche du code [") + *pCode + string("]") ;
-			erreur(sErreurMsg.c_str(), standardError, lastError) ;
+    	string sErreurMsg = string("Erreur à la recherche du code [") + *pCode + string("]");
+			erreur(sErreurMsg.c_str(), standardError, lastError);
     }
-		return false ;
+		return false;
 	}
 
-	lastError = getRecord() ;
+	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la lecture du lexique.", standardError, lastError) ;
-		return false ;
+		erreur("Erreur à la lecture du lexique.", standardError, lastError);
+		return false;
 	}
 
-  *pData = _Donnees ;
+  *pData = _Donnees;
 
 #else
 
 NSPatholog::trouvePathologData(string sLang, string* pCode, NSPathologData* pData, bool afficheErreur)
 {
   if (((string *) NULL == pCode) || (string("") == *pCode) || ((NSPathologData *) NULL == pData))
-    return false ;
+    return false;
 
-  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE code = \"") + *pCode + string("\" ;") ;
+  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE code = \"") + *pCode + string("\";");
 
   if (false == executeQuery(sQuery, afficheErreur))
-    return false ;
+    return false;
 
-  *pData = _Donnees ;
+  *pData = _Donnees;
 
 #endif
-	return true ;
+	return true;
 }
 
 
@@ -929,46 +929,46 @@ NSPatholog::trouvePathologData(string sLang, string* pCode, NSPathologData* pDat
 DBIResult
 NSPatholog::trouveCode(string* pCode, DBISearchCond searchMode, DBILockType Blocage, bool bErrMessage)
 {
-  lastError = chercheClef(pCode, "CODE_INDEX", searchMode, Blocage) ;
+  lastError = chercheClef(pCode, "CODE_INDEX", searchMode, Blocage);
   if (lastError != DBIERR_NONE)
 	{
-    char msg[255] ;
-    string sCode ;
+    char msg[255];
+    string sCode;
 
     if ((*pCode) == "")
-      sCode = "vide" ;
+      sCode = "vide";
     else
-      sCode = *pCode ;
+      sCode = *pCode;
 
     if (bErrMessage)
     {
-      sprintf(msg, "Erreur à la recherche du code : [%s]", sCode.c_str()) ;
-		  erreur(msg, standardError, lastError) ;
+      sprintf(msg, "Erreur à la recherche du code : [%s]", sCode.c_str());
+		  erreur(msg, standardError, lastError);
     }
-		return lastError ;
+		return lastError;
 	}
-	lastError = getRecord() ;
+	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
     if (bErrMessage)
-		  erreur("Erreur à la lecture du lexique.", standardError, lastError) ;
-		return lastError ;
+		  erreur("Erreur à la lecture du lexique.", standardError, lastError);
+		return lastError;
 	}
-  return (lastError) ;
+  return (lastError);
 }
 #else
 bool
 NSPatholog::trouveCode(string sLang, string* pCode, bool bVerbose)
 {
   if ((string *) NULL == pCode)
-    return false ;
+    return false;
 
-  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE code = \"") + *pCode + string("\" ;") ;
+  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE code = \"") + *pCode + string("\";");
 
   if (false == executeQuery(sQuery, bVerbose))
-    return false ;
+    return false;
 
-  return true ;
+  return true;
 }
 #endif
 
@@ -981,48 +981,48 @@ NSPatholog::trouveCode(string sLang, string* pCode, bool bVerbose)
 DBIResult
 NSPatholog::trouveLibelle(string* pLibelle, DBISearchCond searchMode, DBILockType Blocage)
 {
-  lastError = chercheClef((unsigned char *)pLibelle->c_str(), "", 0, searchMode, Blocage) ;
+  lastError = chercheClef((unsigned char *)pLibelle->c_str(), "", 0, searchMode, Blocage);
   if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la recherche de l'ammorce.", standardError, lastError) ;
-		return lastError ;
+		erreur("Erreur à la recherche de l'ammorce.", standardError, lastError);
+		return lastError;
 	}
 
-	lastError = getRecord() ;
+	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la lecture du lexique.", standardError, lastError) ;
-		return lastError ;
+		erreur("Erreur à la lecture du lexique.", standardError, lastError);
+		return lastError;
 	}
-  return (lastError) ;
+  return (lastError);
 }
 #else
 bool
 NSPatholog::trouveLibelle(string sLang, string* pLibelle)
 {
   if ((string *) NULL == pLibelle)
-    return false ;
+    return false;
 
-  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE libelle = \"") + *pLibelle + string("\" ;") ;
+  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE libelle = \"") + *pLibelle + string("\";");
 
   if (false == executeQuery(sQuery, true))
-    return false ;
+    return false;
 
-  return true ;
+  return true;
 }
 
 bool
 NSPatholog::trouveLibelleApproche(string sLang, string* pLibelle)
 {
   if ((string *) NULL == pLibelle)
-    return false ;
+    return false;
 
-  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE libelle LIKE \"") + *pLibelle + string("%\" ;") ;
+  string sQuery = string("SELECT * FROM ") + getTableName(sLang) + string(" WHERE libelle LIKE \"") + *pLibelle + string("%\";");
 
   if (false == executeQuery(sQuery, true))
-    return false ;
+    return false;
 
-  return true ;
+  return true;
 }
 #endif
 
@@ -1035,12 +1035,12 @@ NSPatholog::trouveLibelleApproche(string sLang, string* pLibelle)
 DBIResult
 NSPatholog::open()
 {
-	//char tableName[] = "LEXIQUE.DB" ;
+	//char tableName[] = "LEXIQUE.DB";
 
 	// Appelle la fonction open() de la classe de base pour ouvrir
 	// l'index primaire
-	lastError = NSFiche::open(/*tableName*/sNomFichier.c_str(), NSF_GUIDES) ;
-	return (lastError) ;
+	lastError = NSFiche::open(/*tableName*/sNomFichier.c_str(), NSF_GUIDES);
+	return (lastError);
 }
 #endif
 
@@ -1050,7 +1050,7 @@ NSPatholog::open()
 bool
 NSPatholog::Create()
 {
-	return true ;
+	return true;
 }
 
 
@@ -1060,7 +1060,7 @@ NSPatholog::Create()
 bool
 NSPatholog::Modify()
 {
-	return true ;
+	return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -1070,12 +1070,12 @@ NSPatholog&
 NSPatholog::operator=(NSPatholog src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-	_Donnees = src._Donnees ;
-  _sLangue = src._sLangue ;
+	_Donnees = src._Donnees;
+  _sLangue = src._sLangue;
 
-	return *this ;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -1084,7 +1084,7 @@ NSPatholog::operator=(NSPatholog src)
 int
 NSPatholog::operator==(const NSPatholog& o)
 {
-  return (_Donnees == o._Donnees) ;
+  return (_Donnees == o._Donnees);
 }
 
 // -----------------------------------------------------------------------------
@@ -1102,10 +1102,10 @@ NSPathologInfo::NSPathologInfo()
 NSPathologInfo::NSPathologInfo(NSPatholog* pPatho)
 {
   if (NULL == pPatho)
-    return ;
+    return;
 
 	// Copie les valeurs du NSDocument
-	_Donnees = pPatho->_Donnees ;
+	_Donnees = pPatho->_Donnees;
 }
 
 // -----------------------------------------------------------------------------
@@ -1114,7 +1114,7 @@ NSPathologInfo::NSPathologInfo(NSPatholog* pPatho)
 NSPathologInfo::NSPathologInfo(NSPathologInfo& rv)
 {
 	// Copie les valeurs du NSPathologInfo d'origine
-	_Donnees = rv._Donnees ;
+	_Donnees = rv._Donnees;
 }
 
 // -----------------------------------------------------------------------------
@@ -1131,11 +1131,11 @@ NSPathologInfo&
 NSPathologInfo::operator=(NSPathologInfo src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-	_Donnees = src._Donnees ;
+	_Donnees = src._Donnees;
 
-	return *this ;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -1144,7 +1144,7 @@ NSPathologInfo::operator=(NSPathologInfo src)
 int
 NSPathologInfo::operator==(const NSPathologInfo& o)
 {
-  return (_Donnees == o._Donnees) ;
+  return (_Donnees == o._Donnees);
 }
 
 // -----------------------------------------------------------------------------
@@ -1161,21 +1161,21 @@ NSSavoirData::NSSavoirData()
 {
 #ifndef _ENTERPRISE_DLL
 	// Met les champs de données à zéro
-	memset(code, 		    0, SAVOIR_CODE_LEN + 1) ;
-  memset(qualifie, 	  0, SAVOIR_QUALIFIE_LEN + 1) ;
-  memset(lien, 		    0, SAVOIR_LIEN_LEN + 1) ;
-  memset(qualifiant,  0, SAVOIR_QUALIFIANT_LEN + 1) ;
-  memset(classe, 	    0, SAVOIR_CLASSE_LEN + 1) ;
-  memset(degre, 	 	  0, SAVOIR_DEGRE_LEN + 1) ;
-  memset(scenario, 	  0, SAVOIR_SCENARIO_LEN + 1) ;
+	memset(code, 		    0, SAVOIR_CODE_LEN + 1);
+  memset(qualifie, 	  0, SAVOIR_QUALIFIE_LEN + 1);
+  memset(lien, 		    0, SAVOIR_LIEN_LEN + 1);
+  memset(qualifiant,  0, SAVOIR_QUALIFIANT_LEN + 1);
+  memset(classe, 	    0, SAVOIR_CLASSE_LEN + 1);
+  memset(degre, 	 	  0, SAVOIR_DEGRE_LEN + 1);
+  memset(scenario, 	  0, SAVOIR_SCENARIO_LEN + 1);
 #else
-  _sCode      = string("") ;
-	_sQualified = string("") ;
-	_sLink      = string("") ;
-	_sQualifier = string("") ;
-	_sLevel     = string("") ;
-	_sClass     = string("") ;
-	_sScenario  = string("") ;
+  _sCode      = string("");
+	_sQualified = string("");
+	_sLink      = string("");
+	_sQualifier = string("");
+	_sLevel     = string("");
+	_sClass     = string("");
+	_sScenario  = string("");
 #endif
 }
 
@@ -1187,21 +1187,21 @@ NSSavoirData::NSSavoirData()
 NSSavoirData::NSSavoirData(NSSavoirData& rv)
 {
 #ifndef _ENTERPRISE_DLL
-	strcpy(code, 		    rv.code) ;
-  strcpy(qualifie, 	  rv.qualifie) ;
-  strcpy(lien, 		    rv.lien) ;
-  strcpy(qualifiant,  rv.qualifiant) ;
-  strcpy(degre, 	 	  rv.degre) ;
-  strcpy(classe, 	    rv.classe) ;
-  strcpy(scenario, 	  rv.scenario) ;
+	strcpy(code, 		    rv.code);
+  strcpy(qualifie, 	  rv.qualifie);
+  strcpy(lien, 		    rv.lien);
+  strcpy(qualifiant,  rv.qualifiant);
+  strcpy(degre, 	 	  rv.degre);
+  strcpy(classe, 	    rv.classe);
+  strcpy(scenario, 	  rv.scenario);
 #else
-  _sCode      = rv._sCode ;
-	_sQualified = rv._sQualified ;
-	_sLink      = rv._sLink ;
-	_sQualifier = rv._sQualifier ;
-	_sLevel     = rv._sLevel ;
-	_sClass     = rv._sClass ;
-	_sScenario  = rv._sScenario ;
+  _sCode      = rv._sCode;
+	_sQualified = rv._sQualified;
+	_sLink      = rv._sLink;
+	_sQualifier = rv._sQualifier;
+	_sLevel     = rv._sLevel;
+	_sClass     = rv._sClass;
+	_sScenario  = rv._sScenario;
 #endif
 }
 
@@ -1222,27 +1222,27 @@ NSSavoirData&
 NSSavoirData::operator=(NSSavoirData rv)
 {
   if (&rv == this)
-		return *this ;
+		return *this;
 
 #ifndef _ENTERPRISE_DLL
-	strcpy(code, 		    rv.code) ;
-  strcpy(qualifie, 	  rv.qualifie) ;
-  strcpy(lien, 		    rv.lien) ;
-  strcpy(qualifiant,  rv.qualifiant) ;
-  strcpy(degre, 	 	  rv.degre) ;
-  strcpy(classe, 	    rv.classe) ;
-  strcpy(scenario, 	  rv.scenario) ;
+	strcpy(code, 		    rv.code);
+  strcpy(qualifie, 	  rv.qualifie);
+  strcpy(lien, 		    rv.lien);
+  strcpy(qualifiant,  rv.qualifiant);
+  strcpy(degre, 	 	  rv.degre);
+  strcpy(classe, 	    rv.classe);
+  strcpy(scenario, 	  rv.scenario);
 #else
-  _sCode      = rv._sCode ;
-	_sQualified = rv._sQualified ;
-	_sLink      = rv._sLink ;
-	_sQualifier = rv._sQualifier ;
-	_sLevel     = rv._sLevel ;
-	_sClass     = rv._sClass ;
-	_sScenario  = rv._sScenario ;
+  _sCode      = rv._sCode;
+	_sQualified = rv._sQualified;
+	_sLink      = rv._sLink;
+	_sQualifier = rv._sQualifier;
+	_sLevel     = rv._sLevel;
+	_sClass     = rv._sClass;
+	_sScenario  = rv._sScenario;
 #endif
 
-	return *this ;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -1258,9 +1258,9 @@ NSSavoirData::operator==(const NSSavoirData& o)
 #else
   if (_sCode == o._sCode)
 #endif
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -1275,7 +1275,7 @@ NSSavoir::NSSavoir(NSSuper* pSuper)
 #endif
 {
 	// Crée un objet de données
-	pDonnees = new NSSavoirData() ;
+	pDonnees = new NSSavoirData();
 }
 
 // -----------------------------------------------------------------------------
@@ -1289,10 +1289,10 @@ NSSavoir::NSSavoir(NSSavoir& rv)
 #endif
 {
 	// Crée l'objet de données
-	pDonnees = new NSSavoirData() ;
+	pDonnees = new NSSavoirData();
 
 	// Copie les valeurs du NSSavoirInfo d'origine
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 // -----------------------------------------------------------------------------
@@ -1301,7 +1301,7 @@ NSSavoir::NSSavoir(NSSavoir& rv)
 // -----------------------------------------------------------------------------
 NSSavoir::~NSSavoir()
 {
-	delete pDonnees ;
+	delete pDonnees;
 }
 
 // -----------------------------------------------------------------------------
@@ -1312,13 +1312,13 @@ void
 NSSavoir::alimenteFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	alimenteChamp(pDonnees->code, 		  SAVOIR_CODE_FIELD, 	  	 SAVOIR_CODE_LEN) ;
-  alimenteChamp(pDonnees->qualifie, 	SAVOIR_QUALIFIE_FIELD, 	 SAVOIR_QUALIFIE_LEN) ;
-  alimenteChamp(pDonnees->lien, 		  SAVOIR_LIEN_FIELD, 	  	 SAVOIR_LIEN_LEN) ;
-  alimenteChamp(pDonnees->qualifiant, SAVOIR_QUALIFIANT_FIELD, SAVOIR_QUALIFIANT_LEN) ;
-  alimenteChamp(pDonnees->degre, 	  	SAVOIR_DEGRE_FIELD,   	 SAVOIR_DEGRE_LEN) ;
-  alimenteChamp(pDonnees->classe, 	  SAVOIR_CLASSE_FIELD,   	 SAVOIR_CLASSE_LEN) ;
-  alimenteChamp(pDonnees->scenario, 	SAVOIR_SCENARIO_FIELD,   SAVOIR_SCENARIO_LEN) ;
+	alimenteChamp(pDonnees->code, 		  SAVOIR_CODE_FIELD, 	  	 SAVOIR_CODE_LEN);
+  alimenteChamp(pDonnees->qualifie, 	SAVOIR_QUALIFIE_FIELD, 	 SAVOIR_QUALIFIE_LEN);
+  alimenteChamp(pDonnees->lien, 		  SAVOIR_LIEN_FIELD, 	  	 SAVOIR_LIEN_LEN);
+  alimenteChamp(pDonnees->qualifiant, SAVOIR_QUALIFIANT_FIELD, SAVOIR_QUALIFIANT_LEN);
+  alimenteChamp(pDonnees->degre, 	  	SAVOIR_DEGRE_FIELD,   	 SAVOIR_DEGRE_LEN);
+  alimenteChamp(pDonnees->classe, 	  SAVOIR_CLASSE_FIELD,   	 SAVOIR_CLASSE_LEN);
+  alimenteChamp(pDonnees->scenario, 	SAVOIR_SCENARIO_FIELD,   SAVOIR_SCENARIO_LEN);
 #endif
 }
 
@@ -1327,22 +1327,22 @@ void
 NSSavoir::alimenteFiche(MYSQL_ROW *pRow)
 {
   if ((MYSQL_ROW *) NULL == pRow)
-    return ;
+    return;
 
   if ((*pRow)[SAVOIR_CODE_FIELD-1])
-    pDonnees->setCode((*pRow)[SAVOIR_CODE_FIELD-1]) ;
+    pDonnees->setCode((*pRow)[SAVOIR_CODE_FIELD-1]);
   if ((*pRow)[SAVOIR_QUALIFIE_FIELD-1])
-    pDonnees->setQualified((*pRow)[SAVOIR_QUALIFIE_FIELD-1]) ;
+    pDonnees->setQualified((*pRow)[SAVOIR_QUALIFIE_FIELD-1]);
   if ((*pRow)[SAVOIR_LIEN_FIELD-1])
-	  pDonnees->setLink((*pRow)[SAVOIR_LIEN_FIELD-1]) ;
+	  pDonnees->setLink((*pRow)[SAVOIR_LIEN_FIELD-1]);
   if ((*pRow)[SAVOIR_QUALIFIANT_FIELD-1])
-    pDonnees->setQualifier((*pRow)[SAVOIR_QUALIFIANT_FIELD-1]) ;
+    pDonnees->setQualifier((*pRow)[SAVOIR_QUALIFIANT_FIELD-1]);
   if ((*pRow)[SAVOIR_DEGRE_FIELD-1])
-    pDonnees->setLevel((*pRow)[SAVOIR_DEGRE_FIELD-1]) ;
+    pDonnees->setLevel((*pRow)[SAVOIR_DEGRE_FIELD-1]);
   if ((*pRow)[SAVOIR_CLASSE_FIELD-1])
-	  pDonnees->setClass((*pRow)[SAVOIR_CLASSE_FIELD-1]) ;
+	  pDonnees->setClass((*pRow)[SAVOIR_CLASSE_FIELD-1]);
   if ((*pRow)[SAVOIR_SCENARIO_FIELD-1])
-    pDonnees->setScenario((*pRow)[SAVOIR_SCENARIO_FIELD-1]) ;
+    pDonnees->setScenario((*pRow)[SAVOIR_SCENARIO_FIELD-1]);
 }
 #endif
 
@@ -1354,13 +1354,13 @@ void
 NSSavoir::videFiche()
 {
 #ifndef _ENTERPRISE_DLL
-	videChamp(pDonnees->code, 		  SAVOIR_CODE_FIELD, 	  	  SAVOIR_CODE_LEN) ;
-  videChamp(pDonnees->qualifie,   SAVOIR_QUALIFIE_FIELD, 	  SAVOIR_QUALIFIE_LEN) ;
-  videChamp(pDonnees->lien, 		  SAVOIR_LIEN_FIELD, 	  	  SAVOIR_LIEN_LEN) ;
-  videChamp(pDonnees->qualifiant, SAVOIR_QUALIFIANT_FIELD,  SAVOIR_QUALIFIANT_LEN) ;
-  videChamp(pDonnees->degre, 	    SAVOIR_DEGRE_FIELD,   	  SAVOIR_DEGRE_LEN) ;
-  videChamp(pDonnees->classe, 	  SAVOIR_CLASSE_FIELD,   	  SAVOIR_CLASSE_LEN) ;
-  videChamp(pDonnees->scenario,   SAVOIR_SCENARIO_FIELD,    SAVOIR_SCENARIO_LEN) ;
+	videChamp(pDonnees->code, 		  SAVOIR_CODE_FIELD, 	  	  SAVOIR_CODE_LEN);
+  videChamp(pDonnees->qualifie,   SAVOIR_QUALIFIE_FIELD, 	  SAVOIR_QUALIFIE_LEN);
+  videChamp(pDonnees->lien, 		  SAVOIR_LIEN_FIELD, 	  	  SAVOIR_LIEN_LEN);
+  videChamp(pDonnees->qualifiant, SAVOIR_QUALIFIANT_FIELD,  SAVOIR_QUALIFIANT_LEN);
+  videChamp(pDonnees->degre, 	    SAVOIR_DEGRE_FIELD,   	  SAVOIR_DEGRE_LEN);
+  videChamp(pDonnees->classe, 	  SAVOIR_CLASSE_FIELD,   	  SAVOIR_CLASSE_LEN);
+  videChamp(pDonnees->scenario,   SAVOIR_SCENARIO_FIELD,    SAVOIR_SCENARIO_LEN);
 #endif
 }
 
@@ -1369,34 +1369,34 @@ bool
 NSSavoir::executeQuery(string sQuery, bool bVerbose)
 {
   if (string("") == sQuery)
-    return false ;
+    return false;
 
   if (NULL == _pSuper->getDatabaseManager())
-    return false ;
+    return false;
 
-  MYSQL_RES *pResult = _pSuper->getDatabaseManager()->executeQuery(sQuery, bVerbose) ;
+  MYSQL_RES *pResult = _pSuper->getDatabaseManager()->executeQuery(sQuery, bVerbose);
 
   if ((MYSQL_RES *) NULL == pResult)
-    return false ;
+    return false;
 
   if (mysql_num_rows(pResult) == 0)
-    return false ;
+    return false;
 
-  bool bSucces = true ;
+  bool bSucces = true;
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   if (Row)
-    alimenteFiche(&Row) ;
+    alimenteFiche(&Row);
   else if (bVerbose)
   {
-    string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector()) ;
-    erreur(sErreurMsg.c_str(), standardError) ;
-    bSucces = false ;
+    string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector());
+    erreur(sErreurMsg.c_str(), standardError);
+    bSucces = false;
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  return bSucces ;
+  return bSucces;
 }
 #endif
 
@@ -1412,12 +1412,12 @@ NSSavoir::getPatRecord()
 {
 	// La table est-elle ouverte ?
 	if (!isOpen)
-	  return (lastError = ERROR_TABLENOTOPEN) ;
+	  return (lastError = ERROR_TABLENOTOPEN);
 
 	// Appel de la classe de base pour récupérer l'enregistrement.
-	lastError = getDbiRecord(dbiWRITELOCK) ;
+	lastError = getDbiRecord(dbiWRITELOCK);
 
-	return (lastError) ;
+	return (lastError);
 }
 #endif
 
@@ -1429,12 +1429,12 @@ NSSavoir::getPatRecord()
 DBIResult
 NSSavoir::open()
 {
-	char tableName[] = "SAVOIR.DB" ;
+	char tableName[] = "SAVOIR.DB";
 
 	// Appelle la fonction open() de la classe de base pour ouvrir
 	// l'index primaire
-	lastError = NSFiche::open(tableName, NSF_GUIDES) ;
-	return (lastError) ;
+	lastError = NSFiche::open(tableName, NSF_GUIDES);
+	return (lastError);
 }
 #endif
 
@@ -1444,7 +1444,7 @@ NSSavoir::open()
 bool
 NSSavoir::Create()
 {
-	return true ;
+	return true;
 }
 
 
@@ -1454,7 +1454,7 @@ NSSavoir::Create()
 bool
 NSSavoir::Modify()
 {
-	return true ;
+	return true;
 }
 
 
@@ -1465,11 +1465,11 @@ NSSavoir&
 NSSavoir::operator=(NSSavoir src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
   
-	return *this ;
+	return *this;
 }
 
 
@@ -1479,7 +1479,7 @@ NSSavoir::operator=(NSSavoir src)
 int
 NSSavoir::operator==(const NSSavoir& o)
 {
-  return (*pDonnees == *(o.pDonnees)) ;
+  return (*pDonnees == *(o.pDonnees));
 }
 
 
@@ -1489,7 +1489,7 @@ NSSavoir::operator==(const NSSavoir& o)
 NSSavoirInfo::NSSavoirInfo()
 {
 	// Crée l'objet de données
-	pDonnees = new NSSavoirData() ;
+	pDonnees = new NSSavoirData();
 }
 
 
@@ -1499,10 +1499,10 @@ NSSavoirInfo::NSSavoirInfo()
 NSSavoirInfo::NSSavoirInfo(NSSavoir* pPatho)
 {
 	// Crée l'objet de données
-	pDonnees = new NSSavoirData() ;
+	pDonnees = new NSSavoirData();
 
 	// Copie les valeurs du NSDocument
-	*pDonnees = *(pPatho->pDonnees) ;
+	*pDonnees = *(pPatho->pDonnees);
 }
 
 
@@ -1512,10 +1512,10 @@ NSSavoirInfo::NSSavoirInfo(NSSavoir* pPatho)
 NSSavoirInfo::NSSavoirInfo(NSSavoirInfo& rv)
 {
 	// Crée l'objet de données
-	pDonnees = new NSSavoirData() ;
+	pDonnees = new NSSavoirData();
 
 	// Copie les valeurs du NSSavoirInfo d'origine
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 
@@ -1524,7 +1524,7 @@ NSSavoirInfo::NSSavoirInfo(NSSavoirInfo& rv)
 // -----------------------------------------------------------------------------
 NSSavoirInfo::~NSSavoirInfo()
 {
-  delete pDonnees ;
+  delete pDonnees;
 }
 
 
@@ -1535,11 +1535,11 @@ NSSavoirInfo&
 NSSavoirInfo::operator=(NSSavoirInfo src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
   
-	return *this ;
+	return *this;
 }
 
 
@@ -1549,7 +1549,7 @@ NSSavoirInfo::operator=(NSSavoirInfo src)
 int
 NSSavoirInfo::operator==(const NSSavoirInfo& o)
 {
-  return (*pDonnees == *(o.pDonnees)) ;
+  return (*pDonnees == *(o.pDonnees));
 }
 
 
@@ -1589,12 +1589,12 @@ NSLexiMed::~NSLexiMed()
 DBIResult
 NSLexiMed::open()
 {
-	char tableName[] = "LEXI_MED.DB" ;
+	char tableName[] = "LEXI_MED.DB";
 
 	// Appelle la fonction open() de la classe de base pour ouvrir l'index primaire
-	lastError = NSFiche::open(tableName, NSF_GUIDES) ;
+	lastError = NSFiche::open(tableName, NSF_GUIDES);
 
-	return (lastError) ;
+	return (lastError);
 }
 #endif
 

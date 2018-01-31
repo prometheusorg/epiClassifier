@@ -198,24 +198,24 @@ class NSRootLink
                         letterOfDocument,
                         externViewOfDocument,
                         structuredVersionOfDocument,
-                        appointment} ;
+                        appointment};
 
-  int iTypeGraphe ;   //!< Type de graphe (graphPerson / graphObject) - pour mode MUE uniquement -
+  int iTypeGraphe;   //!< Type de graphe (graphPerson / graphObject) - pour mode MUE uniquement -
 
   //! constructor
-  NSRootLink() ;
+  NSRootLink();
 
   //! destructor
-  ~NSRootLink() ;
+  ~NSRootLink();
 
   //! Transformation d'une relation en code
-	std::string     donneString(NODELINKTYPES iRelation) ;
+	std::string     donneString(NODELINKTYPES iRelation);
 
   //! Transformation d'un code en relation
-	NODELINKTYPES   donneRelation(std::string sRelation) ;
+	NODELINKTYPES   donneRelation(std::string sRelation);
 
   //! Changement du type de graphe
-  void            setTypeGraphe(int iType)    { iTypeGraphe = iType ; }
-} ;
+  void            setTypeGraphe(int iType)    { iTypeGraphe = iType; }
+};
 
 #endif // !__NSROOTLINK_H__

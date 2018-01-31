@@ -52,78 +52,78 @@ class NSPathoBaseData
 {
   protected:
 
-    string _sCodeLocalisation ;
-		string _sType ;
-		string _sLexique ;
-		string _sComplement ;
-		string _sUnit ;
-		string _sCertitude ;
-		string _sInteret ;
-		string _sPluriel ;
-		string _sVisible ;
+    string _sCodeLocalisation;
+		string _sType;
+		string _sLexique;
+		string _sComplement;
+		string _sUnit;
+		string _sCertitude;
+		string _sInteret;
+		string _sPluriel;
+		string _sVisible;
 
 	public :
 		//
 		// Variables de stockage des valeurs
 		//
-		// char codeLocalisation[BASE_LOCALISATION_LEN + 1] ;
-		// char type[BASE_TYPE_LEN + 1] ;
-		// char lexique[BASE_LEXIQUE_LEN + 1] ;
-		// char complement[BASE_COMPLEMENT_LEN + 1] ;
-		// char unit[BASE_UNIT_LEN + 1] ;
-		// char certitude[BASE_CERTITUDE_LEN + 1] ;
-		// char interet[BASE_INTERET_LEN + 1] ;
-		// char pluriel[BASE_PLURIEL_LEN + 1] ;
-		// char visible[BASE_VISIBLE_LEN + 1] ;
+		// char codeLocalisation[BASE_LOCALISATION_LEN + 1];
+		// char type[BASE_TYPE_LEN + 1];
+		// char lexique[BASE_LEXIQUE_LEN + 1];
+		// char complement[BASE_COMPLEMENT_LEN + 1];
+		// char unit[BASE_UNIT_LEN + 1];
+		// char certitude[BASE_CERTITUDE_LEN + 1];
+		// char interet[BASE_INTERET_LEN + 1];
+		// char pluriel[BASE_PLURIEL_LEN + 1];
+		// char visible[BASE_VISIBLE_LEN + 1];
 
-		NSPathoBaseData() ;
-		NSPathoBaseData(const NSPathoBaseData& rv) ;
-		~NSPathoBaseData() ;
+		NSPathoBaseData();
+		NSPathoBaseData(const NSPathoBaseData& rv);
+		~NSPathoBaseData();
 
-		void 	 metAZero() ;
+		void 	 metAZero();
 
-		string asString() ;
-		void	 fromString(string sNode) ;
+		string asString();
+		void	 fromString(string sNode);
 
-		bool   sameContent(const NSPathoBaseData& o) ;
+		bool   sameContent(const NSPathoBaseData& o);
 
-    int    getIndice(const int indice) const ;
-    int    getLigne()   const { return getIndice(0) ; }
-    int    getColonne() const { return getIndice(1) ; }
-    int    getZ()       const { return getIndice(2) ; }
-    int    getT()       const { return getIndice(3) ; }
+    int    getIndice(const int indice) const;
+    int    getLigne()   const { return getIndice(0); }
+    int    getColonne() const { return getIndice(1); }
+    int    getZ()       const { return getIndice(2); }
+    int    getT()       const { return getIndice(3); }
 
-    void   setIndice(int indice, int valeur) ;
-    void   setLigne(int valeur)   { setIndice(0, valeur) ; }
-    void   setColonne(int valeur) { setIndice(1, valeur) ; }
-    void   setZ(int valeur)       { setIndice(2, valeur) ; }
-    void   setT(int valeur)       { setIndice(3, valeur) ; }
+    void   setIndice(int indice, int valeur);
+    void   setLigne(int valeur)   { setIndice(0, valeur); }
+    void   setColonne(int valeur) { setIndice(1, valeur); }
+    void   setZ(int valeur)       { setIndice(2, valeur); }
+    void   setT(int valeur)       { setIndice(3, valeur); }
 
-    string getLocalisation() const { return _sCodeLocalisation ; }
-		string getTypeString()   const { return _sType ; }
-		string getLexique()      const { return _sLexique ; }
-		string getComplement()   const { return _sComplement ; }
-		string getUnit()         const { return _sUnit ; }
-		string getCertitude()    const { return _sCertitude ; }
-		string getInteret()      const { return _sInteret ; }
-		string getPluriel()      const { return _sPluriel ; }
-		string getVisible()      const { return _sVisible ; }
+    string getLocalisation() const { return _sCodeLocalisation; }
+		string getTypeString()   const { return _sType; }
+		string getLexique()      const { return _sLexique; }
+		string getComplement()   const { return _sComplement; }
+		string getUnit()         const { return _sUnit; }
+		string getCertitude()    const { return _sCertitude; }
+		string getInteret()      const { return _sInteret; }
+		string getPluriel()      const { return _sPluriel; }
+		string getVisible()      const { return _sVisible; }
 
-    void setLocalisation(string sVar) { setFixedSizeValue(&_sCodeLocalisation, BASE_LOCALISATION_LEN, sVar) ; }
-		void setTypeString(string sVar)   { setFixedSizeValue(&_sType, BASE_TYPE_LEN, sVar) ; }
-		void setLexique(string sVar)      { setFixedSizeValue(&_sLexique, BASE_LEXIQUE_LEN, sVar) ; }
-		void setComplement(string sVar)   { setFixedSizeValue(&_sComplement, BASE_COMPLEMENT_LEN, sVar) ; }
-		void setUnit(string sVar)         { setFixedSizeValue(&_sUnit, BASE_UNIT_LEN, sVar) ; }
-		void setCertitude(string sVar)    { setFixedSizeValue(&_sCertitude, BASE_CERTITUDE_LEN, sVar) ; }
-		void setInteret(string sVar)      { setFixedSizeValue(&_sInteret, BASE_INTERET_LEN, sVar) ; }
-		void setPluriel(string sVar)      { setFixedSizeValue(&_sPluriel, BASE_PLURIEL_LEN, sVar) ; }
-		void setVisible(string sVar)      { setFixedSizeValue(&_sVisible, BASE_VISIBLE_LEN, sVar) ; }
+    void setLocalisation(string sVar) { setFixedSizeValue(&_sCodeLocalisation, BASE_LOCALISATION_LEN, sVar); }
+		void setTypeString(string sVar)   { setFixedSizeValue(&_sType, BASE_TYPE_LEN, sVar); }
+		void setLexique(string sVar)      { setFixedSizeValue(&_sLexique, BASE_LEXIQUE_LEN, sVar); }
+		void setComplement(string sVar)   { setFixedSizeValue(&_sComplement, BASE_COMPLEMENT_LEN, sVar); }
+		void setUnit(string sVar)         { setFixedSizeValue(&_sUnit, BASE_UNIT_LEN, sVar); }
+		void setCertitude(string sVar)    { setFixedSizeValue(&_sCertitude, BASE_CERTITUDE_LEN, sVar); }
+		void setInteret(string sVar)      { setFixedSizeValue(&_sInteret, BASE_INTERET_LEN, sVar); }
+		void setPluriel(string sVar)      { setFixedSizeValue(&_sPluriel, BASE_PLURIEL_LEN, sVar); }
+		void setVisible(string sVar)      { setFixedSizeValue(&_sVisible, BASE_VISIBLE_LEN, sVar); }
 
-    void setFixedSizeValue(string *pValue, size_t iSize, string sNewValue) ;
+    void setFixedSizeValue(string *pValue, size_t iSize, string sNewValue);
 
-		NSPathoBaseData& operator=(const NSPathoBaseData& src) ;
-    int 			       operator==(const NSPathoBaseData& o) ;
-} ;
+		NSPathoBaseData& operator=(const NSPathoBaseData& src);
+    int 			       operator==(const NSPathoBaseData& o);
+};
 
 //---------------------------------------------------------------------------
 #endif    // __NSPATBASE_H

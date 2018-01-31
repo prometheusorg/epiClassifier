@@ -13,8 +13,8 @@
 
 // #include <classlib\arrays.h>
 
-class NSDocumentInfo ;
-class NSChemiseInfo ;
+class NSDocumentInfo;
+class NSChemiseInfo;
 
 // #include "nautilus\nsannexe.h"
 // #include "nsdn\nsdocum.h"
@@ -25,9 +25,9 @@ class NSChemiseInfo ;
 //
 // Définition de NSDocumentArray (Array de NSDocument(s))
 //
-typedef vector<NSDocumentInfo*>  NSDocInfoArray ;
-typedef NSDocInfoArray::iterator DocInfoIter ;
-typedef NTArray<NSDocumentInfo>  NSDocumentArray ;
+typedef vector<NSDocumentInfo*>  NSDocInfoArray;
+typedef NSDocInfoArray::iterator DocInfoIter;
+typedef NTArray<NSDocumentInfo>  NSDocumentArray;
 
 /*
 class NSDocumentArray : public NSDocInfoArray
@@ -46,7 +46,7 @@ class NSDocumentArray : public NSDocInfoArray
 //
 typedef vector<NSChemiseInfo*> NSChemInfoArray;
 typedef NSChemInfoArray::iterator ChemInfoIter;
-typedef NTArray<NSChemiseInfo>  NSChemiseArray ;
+typedef NTArray<NSChemiseInfo>  NSChemiseArray;
 
 /*
 class NSChemiseArray : public NSChemInfoArray

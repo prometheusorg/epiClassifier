@@ -39,13 +39,13 @@
 #include "nssavoir/nspatho.h"
 #include "nsepisod/flechiesDB.h"
 
-long ElemSet::lObjectCount          = 0 ;
-long ElemSetArray::lObjectCount     = 0 ;
-long TermsParser::lObjectCount      = 0 ;
-long ParseElem::lObjectCount        = 0 ;
-long ParseElemArray::lObjectCount   = 0 ;
-long ClassifElem::lObjectCount      = 0 ;
-long ClassifElemArray::lObjectCount = 0 ;
+long ElemSet::lObjectCount          = 0;
+long ElemSetArray::lObjectCount     = 0;
+long TermsParser::lObjectCount      = 0;
+long ParseElem::lObjectCount        = 0;
+long ParseElemArray::lObjectCount   = 0;
+long ClassifElem::lObjectCount      = 0;
+long ClassifElemArray::lObjectCount = 0;
 
 // -----------------------------------------------------------------------------
 //
@@ -70,13 +70,13 @@ classifExpert::donnePattern(string sClassification)
 {
   // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
-    return string("ABDFHKLNPRSTUWXYZ 0123456789 0123456789") ;
+    return string("ABDFHKLNPRSTUWXYZ 0123456789 0123456789");
 
   // ICD-10 (Fr CIM-10)
   if (sClassification == "6CIMA")
-    return string("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789 0123456789 . 0123456789 0123456789") ;
+    return string("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789 0123456789 . 0123456789 0123456789");
 
-  return string("") ;
+  return string("");
 }
 
 int
@@ -84,13 +84,13 @@ classifExpert::donneCodeSize(string sClassification)
 {
   // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
-    return 3 ;
+    return 3;
 
   // ICD-10 (Fr CIM-10)
   if (sClassification == "6CIMA")
-    return 6 ;
+    return 6;
 
-  return 0 ;
+  return 0;
 }
 
 void
@@ -98,11 +98,11 @@ classifExpert::donneInterdits(string sClassification, string sCase,
                                             ElemSetArray* pForbidenDomain)
 {
   if (NULL == pForbidenDomain)
-    return ;
+    return;
 
-  string sCaseSens = string("") ;
+  string sCaseSens = string("");
   if (string("") != sCase)
-    NSDico::donneCodeSens(&sCase, &sCaseSens) ;
+    NSDico::donneCodeSens(&sCase, &sCaseSens);
 
   // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
@@ -145,33 +145,33 @@ classifExpert::donneInterdits(string sClassification, string sCase,
     else if (sCaseSens == "0SOA5") // Procédure pré-appréciation SOPAP
     {
       // Exclude symptoms and diagnosis
-      pForbidenDomain->push_back(new ElemSet("?00", "?29")) ;
-      pForbidenDomain->push_back(new ElemSet("?70", "?99")) ;
+      pForbidenDomain->push_back(new ElemSet("?00", "?29"));
+      pForbidenDomain->push_back(new ElemSet("?70", "?99"));
     }
     else if (sCaseSens == "0SOA4")  // diagnostic - diagnosis
     {
       // Exclude procedures
-      pForbidenDomain->push_back(new ElemSet("?30", "?69")) ;
+      pForbidenDomain->push_back(new ElemSet("?30", "?69"));
     }
     else if (sCaseSens == "0SOA3") // P du SOAP
     {
       // Exclude symptoms and diagnosis
-      pForbidenDomain->push_back(new ElemSet("?00", "?29")) ;
-      pForbidenDomain->push_back(new ElemSet("?70", "?99")) ;
+      pForbidenDomain->push_back(new ElemSet("?00", "?29"));
+      pForbidenDomain->push_back(new ElemSet("?70", "?99"));
     }
     else if (sCaseSens == "0SOPR") // Procédure réalisée du SOAP1P2
     {
       // Exclude symptoms and diagnosis
-      pForbidenDomain->push_back(new ElemSet("?00", "?29")) ;
-      pForbidenDomain->push_back(new ElemSet("?70", "?99")) ;
+      pForbidenDomain->push_back(new ElemSet("?00", "?29"));
+      pForbidenDomain->push_back(new ElemSet("?70", "?99"));
     }
     else if (sCaseSens == "0SOPP") // Procédure prescrite du SOAP1P2
     {
       // Exclude symptoms and diagnosis
-      pForbidenDomain->push_back(new ElemSet("?00", "?29")) ;
-      pForbidenDomain->push_back(new ElemSet("?70", "?99")) ;
+      pForbidenDomain->push_back(new ElemSet("?00", "?29"));
+      pForbidenDomain->push_back(new ElemSet("?70", "?99"));
     }
-    return ;
+    return;
   }
 
   // CIM 10
@@ -197,7 +197,7 @@ classifExpert::donneInterdits(string sClassification, string sCase,
       else if (pContexte->getPatient()->isMale())
 #endif
       {
-        pForbidenDomain->push_back(new ElemSet("O00", "O99.99")) ;
+        pForbidenDomain->push_back(new ElemSet("O00", "O99.99"));
       }
     }
 /*
@@ -252,10 +252,10 @@ classifExpert::donneClassifArray(SOAPObject* pObjet,
 try
 {
   if (NULL == pObjet)
-    return ;
+    return;
 
-	string sClassif = pObjet->sClassification ;
-	string sCase    = pObjet->sCase ;
+	string sClassif = pObjet->sClassification;
+	string sCase    = pObjet->sCase;
 	//
     // If the object comes from capture, we can define its domain
     // (Fr Si l'objet est issu d'une capture, on peut déterminer son domaine)
@@ -268,63 +268,63 @@ try
 		// On instancie le domaine
     // Instanciating the domain
     //
-    string sDomain = pObjet->pCaptElemnt->sClassifResultP ;
+    string sDomain = pObjet->pCaptElemnt->sClassifResultP;
   	ParseCategory Parser(donneCodeSize(sClassif), sClassif, donnePattern(sClassif));
-		ElemSetArray* pElemDomain = Parser.DefDomain(sDomain) ;
+		ElemSetArray* pElemDomain = Parser.DefDomain(sDomain);
     if (NULL == pElemDomain)
-    	return ;
+    	return;
 		//
 		// On trouve les codes qui correspondent au domaine
 		// Finding the codes that belong to the domain
 		//
-		fillList(sClassif, pElemDomain, pArrayClassif, pObjet->sCase) ;
+		fillList(sClassif, pElemDomain, pArrayClassif, pObjet->sCase);
 
-    delete pElemDomain ;
-		return ;
+    delete pElemDomain;
+		return;
 	}
 #endif
 
 #ifndef _ENTERPRISE_DLL
 
 	// open table
-	_DBcurseur.lastError = _DBcurseur.open() ;
+	_DBcurseur.lastError = _DBcurseur.open();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
-		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return ;
+		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+		return;
 	}
 
 	//
 	// Loading forbiden domain
 	//
-	ElemSetArray ForbidenDomain ;
+	ElemSetArray ForbidenDomain;
 	if (iNiveau <= niveauAutorises)
-		donneInterdits(sClassif, sCase, &ForbidenDomain) ;
+		donneInterdits(sClassif, sCase, &ForbidenDomain);
 
 	// définition de la clé de recherche
-	string cle = sClassif ;
+	string cle = sClassif;
 
 	// recherche dans la base
 	_DBcurseur.lastError = _DBcurseur.chercheClef(&cle,
                                                 "",
                                                 NODEFAULTINDEX,
                                                 keySEARCHGEQ,
-                                                dbiREADLOCK) ;
+                                                dbiREADLOCK);
 	if ((_DBcurseur.lastError != DBIERR_NONE) &&
         (_DBcurseur.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		_DBcurseur.close() ;
-		return ;
+		erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+		_DBcurseur.close();
+		return;
 	}
 
 	// récupération de l'enregistrement
-	_DBcurseur.lastError = _DBcurseur.getRecord() ;
+	_DBcurseur.lastError = _DBcurseur.getRecord();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
 		erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-		_DBcurseur.close() ;
-		return ;
+		_DBcurseur.close();
+		return;
 	}
 
 	// on continue tant qu'on reste dans la classification
@@ -332,85 +332,85 @@ try
 	while ((_DBcurseur.getClassification() == sClassif) &&
            (_DBcurseur.lastError == DBIERR_NONE))
 	{
-		NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo(&_DBcurseur) ;
+		NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo(&_DBcurseur);
 
 		//
 		// si l'élément n'est pas déjà présent dans l'array on le
 		// rajoute (s'il n'est pas interdit)
 		//
 		if (false == ForbidenDomain.doesContain(pNewElem->getCode()))
-			pArrayClassif->push_back(pNewElem) ;
+			pArrayClassif->push_back(pNewElem);
 		else
-			delete pNewElem ;
+			delete pNewElem;
 
 		//
 		// on passe à l'enregistrement suivant
 		//
-		_DBcurseur.lastError = _DBcurseur.suivant(dbiREADLOCK) ;
+		_DBcurseur.lastError = _DBcurseur.suivant(dbiREADLOCK);
 		if (_DBcurseur.lastError != DBIERR_NONE)
 		{
 			if (_DBcurseur.lastError != DBIERR_EOF)
 			{
-				erreur("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-				_DBcurseur.close() ;
-				return ;
+				erreur("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+				_DBcurseur.close();
+				return;
 			}
 		}
 		else
 		{
 			// récupération de l'enregistrement suivant
-			_DBcurseur.lastError = _DBcurseur.getRecord() ;
+			_DBcurseur.lastError = _DBcurseur.getRecord();
 			if (_DBcurseur.lastError != DBIERR_NONE)
 			{
-				erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-				_DBcurseur.close() ;
-				return ;
+				erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+				_DBcurseur.close();
+				return;
 			}
 		}
 	}
 
 	// on ferme la base
-	_DBcurseur.lastError = _DBcurseur.close() ;
+	_DBcurseur.lastError = _DBcurseur.close();
 	if (_DBcurseur.lastError != DBIERR_NONE)
-		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
 #else
 
   //
 	// Loading forbiden domain
 	//
-	ElemSetArray ForbidenDomain ;
+	ElemSetArray ForbidenDomain;
 	if (iNiveau <= niveauAutorises)
-		donneInterdits(sClassif, sCase, &ForbidenDomain) ;
+		donneInterdits(sClassif, sCase, &ForbidenDomain);
 
 	// Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM classif WHERE CLASSIF = \"") + sClassif + string("\"") ;
+  string sQuery = string("SELECT * FROM classif WHERE CLASSIF = \"") + sClassif + string("\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
-    return ;
+    return;
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
-    return ;
+    return;
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   while (Row)
   {
-    NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo() ;
-    pNewElem->alimenteFiche(&Row) ;
+    NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo();
+    pNewElem->alimenteFiche(&Row);
 
-    Row = mysql_fetch_row(pResult) ;
+    Row = mysql_fetch_row(pResult);
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
 #endif // #ifndef _ENTERPRISE_DLL
 }
 catch (...)
 {
-	erreur("Exception classifExpert::donneClassifArray.", standardError) ;
+	erreur("Exception classifExpert::donneClassifArray.", standardError);
 }
 }
 
@@ -426,56 +426,56 @@ classifExpert::fillList(string sClassification, ElemSetArray *pDomain,
 try
 {
 	if ((NULL == pArrayClassif) || (NULL == pDomain) || (pDomain->empty()))
-		return ;
+		return;
 
 #ifndef _ENTERPRISE_DLL
 
 	// open table
-	_DBcurseur.lastError = _DBcurseur.open() ;
+	_DBcurseur.lastError = _DBcurseur.open();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
-		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return ;
+		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+		return;
 	}
 
 	//
     // Loading forbidden domain
 	//
-	ElemSetArray ForbidenDomain ;
-	donneInterdits(sClassification, sCase, &ForbidenDomain) ;
+	ElemSetArray ForbidenDomain;
+	donneInterdits(sClassification, sCase, &ForbidenDomain);
 
 	ElemSetIterator DomainIter = pDomain->begin();
-	for (; pDomain->end() != DomainIter ; DomainIter++)
+	for (; pDomain->end() != DomainIter; DomainIter++)
 	{
 		if (false == (*DomainIter)->isEmptySet())
 		{
-			string  sBornInf = (*DomainIter)->getBegin() ;
-			string  sBornSup = (*DomainIter)->getEnd() ;
+			string  sBornInf = (*DomainIter)->getBegin();
+			string  sBornSup = (*DomainIter)->getEnd();
 
 			// définition de la clé de recherche
-			string cle = sClassification + sBornInf ;
+			string cle = sClassification + sBornInf;
 
 			// recherche dans la base
 			_DBcurseur.lastError = _DBcurseur.chercheClef(&cle,
                                                     "",
                                                     NODEFAULTINDEX,
                                                     keySEARCHGEQ,
-                                                    dbiREADLOCK) ;
+                                                    dbiREADLOCK);
 			if ((_DBcurseur.lastError != DBIERR_NONE) &&
           (_DBcurseur.lastError != DBIERR_RECNOTFOUND))
 			{
-				erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        _DBcurseur.close() ;
-        return ;
+				erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        _DBcurseur.close();
+        return;
       }
 
 			// récupération de l'enregistrement
-			_DBcurseur.lastError = _DBcurseur.getRecord() ;
+			_DBcurseur.lastError = _DBcurseur.getRecord();
 			if (_DBcurseur.lastError != DBIERR_NONE)
 			{
       	erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-        _DBcurseur.close() ;
-        return ;
+        _DBcurseur.close();
+        return;
       }
 
 			// on continue jusqu'à ce qu'on soit strictement supérieur à
@@ -483,18 +483,18 @@ try
 			while ((sBornSup >= _DBcurseur.getCode()) &&
                     (_DBcurseur.lastError == DBIERR_NONE))
 			{
-				NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo(&_DBcurseur) ;
-        bool bElemAlreadyPresent = false ;
+				NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo(&_DBcurseur);
+        bool bElemAlreadyPresent = false;
 
         // on vérifie si l'élément est pas déjà présent dans l'array que l'on renvoie
         if (false == pArrayClassif->empty())
         {
-        	NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin() ;
-          for ( ; (pArrayClassif->end() != ClassifInfoIter) &&
-                                        (!(*pNewElem == *(*ClassifInfoIter))) ;
-                                                        ClassifInfoIter++) ;
+        	NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin();
+          for (; (pArrayClassif->end() != ClassifInfoIter) &&
+                                        (!(*pNewElem == *(*ClassifInfoIter)));
+                                                        ClassifInfoIter++);
           if (pArrayClassif->end() != ClassifInfoIter)
-          	bElemAlreadyPresent = true ;
+          	bElemAlreadyPresent = true;
         }
 
         //
@@ -503,32 +503,32 @@ try
         //
         if ((false == bElemAlreadyPresent) &&
                     (false == ForbidenDomain.doesContain(pNewElem->getCode())))
-        	pArrayClassif->push_back(pNewElem) ;
+        	pArrayClassif->push_back(pNewElem);
         else
-        	delete pNewElem ;
+        	delete pNewElem;
 
         //
         // on passe à l'enregistrement suivant
         //
-        _DBcurseur.lastError = _DBcurseur.suivant(dbiREADLOCK) ;
+        _DBcurseur.lastError = _DBcurseur.suivant(dbiREADLOCK);
         if (_DBcurseur.lastError != DBIERR_NONE)
         {
         	if (_DBcurseur.lastError != DBIERR_EOF)
           {
           	erreur("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-            _DBcurseur.close() ;
-            return ;
+            _DBcurseur.close();
+            return;
           }
         }
         else
         {
         	// récupération de l'enregistrement suivant
-          _DBcurseur.lastError = _DBcurseur.getRecord() ;
+          _DBcurseur.lastError = _DBcurseur.getRecord();
           if (_DBcurseur.lastError != DBIERR_NONE)
           {
           	erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-            _DBcurseur.close() ;
-            return ;
+            _DBcurseur.close();
+            return;
           }
         }
       }
@@ -536,57 +536,57 @@ try
   }
 
 	// on ferme la base
-	_DBcurseur.lastError = _DBcurseur.close() ;
+	_DBcurseur.lastError = _DBcurseur.close();
 	if (_DBcurseur.lastError != DBIERR_NONE)
-		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
 #else
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
-    return ;
+    return;
 
   //
     // Loading forbidden domain
 	//
-	ElemSetArray ForbidenDomain ;
-	donneInterdits(sClassification, sCase, &ForbidenDomain) ;
+	ElemSetArray ForbidenDomain;
+	donneInterdits(sClassification, sCase, &ForbidenDomain);
 
-	ElemSetIterator DomainIter = pDomain->begin() ;
-	for (; pDomain->end() != DomainIter ; DomainIter++)
+	ElemSetIterator DomainIter = pDomain->begin();
+	for (; pDomain->end() != DomainIter; DomainIter++)
 	{
 		if (false == (*DomainIter)->isEmptySet())
 		{
-			string  sBornInf = (*DomainIter)->getBegin() ;
-			string  sBornSup = (*DomainIter)->getEnd() ;
+			string  sBornInf = (*DomainIter)->getBegin();
+			string  sBornSup = (*DomainIter)->getEnd();
 
-      string sQuery = string("SELECT * FROM classif WHERE CLASSIF = \"") + sClassification + string("\"") ;
+      string sQuery = string("SELECT * FROM classif WHERE CLASSIF = \"") + sClassification + string("\"");
 
       if (sBornInf == sBornSup)
-        sQuery += string(" AND CODE = \"") + sBornInf + string("\"") ;
+        sQuery += string(" AND CODE = \"") + sBornInf + string("\"");
       else
-        sQuery += string(" AND CODE >= \"") + sBornInf + string("\" AND CODE <= \"") + sBornSup + string("\"") ;
+        sQuery += string(" AND CODE >= \"") + sBornInf + string("\" AND CODE <= \"") + sBornSup + string("\"");
 
-      MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+      MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
       if (pResult)
       {
-        MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+        MYSQL_ROW Row = mysql_fetch_row(pResult);
         while (Row)
         {
-          NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo() ;
-          pNewElem->alimenteFiche(&Row) ;
+          NSEpiClassifInfo* pNewElem = new NSEpiClassifInfo();
+          pNewElem->alimenteFiche(&Row);
 
-          bool bElemAlreadyPresent = false ;
+          bool bElemAlreadyPresent = false;
 
           // on vérifie si l'élément est pas déjà présent dans l'array que l'on renvoie
           if (false == pArrayClassif->empty())
           {
-        	  NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin() ;
+        	  NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin();
             for (; (pArrayClassif->end() != ClassifInfoIter) &&
-                                        (!(*pNewElem == *(*ClassifInfoIter))) ;
-                                                        ClassifInfoIter++) ;
+                                        (!(*pNewElem == *(*ClassifInfoIter)));
+                                                        ClassifInfoIter++);
             if (pArrayClassif->end() != ClassifInfoIter)
-          	  bElemAlreadyPresent = true ;
+          	  bElemAlreadyPresent = true;
           }
 
           //
@@ -595,14 +595,14 @@ try
           //
           if ((false == bElemAlreadyPresent) &&
                     (false == ForbidenDomain.doesContain(pNewElem->getCode())))
-        	  pArrayClassif->push_back(pNewElem) ;
+        	  pArrayClassif->push_back(pNewElem);
           else
-        	  delete pNewElem ;
+        	  delete pNewElem;
 
-          Row = mysql_fetch_row(pResult) ;
+          Row = mysql_fetch_row(pResult);
         }
 
-        mysql_free_result(pResult) ;
+        mysql_free_result(pResult);
       }
     }
   }
@@ -611,7 +611,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception classifExpert::fillList.", standardError) ;
+	erreur("Exception classifExpert::fillList.", standardError);
 }
 }
 
@@ -623,14 +623,14 @@ try
 {
     // candidate codes
     // (Fr Codes proposés)
-	NSEpiClassifInfoArray aArrayClassif ;
-	donneClassifArray(pObjet, &aArrayClassif, niveauPreselection) ;
+	NSEpiClassifInfoArray aArrayClassif;
+	donneClassifArray(pObjet, &aArrayClassif, niveauPreselection);
 
-	string sResult = "" ;
+	string sResult = "";
 
 	if (pObjet->sClassification == "6CISP")
 	{
-		string sCtrlData = "" ;
+		string sCtrlData = "";
 
 		CISPFindCodeDlg* pFindCodeDlg
                             = new CISPFindCodeDlg(pContexte->GetMainWindow(),
@@ -638,20 +638,20 @@ try
                                                   pObjet,
                                                   niveauPreselection,
                                                   &aArrayClassif,
-                                                  &sCtrlData) ;
-		int iResult = pFindCodeDlg->Execute() ;
+                                                  &sCtrlData);
+		int iResult = pFindCodeDlg->Execute();
 
 		if (iResult == IDOK)
 		{
-			sResult = pFindCodeDlg->getResult() ;
-			storeControlData(sCtrlData) ;
+			sResult = pFindCodeDlg->getResult();
+			storeControlData(sCtrlData);
 		}
 
-		delete pFindCodeDlg ;
+		delete pFindCodeDlg;
 	}
 	else if (pObjet->sClassification == "6CIMA")
 	{
-		string sCtrlData = "" ;
+		string sCtrlData = "";
 
 		CIMFindCodeDlg* pFindCodeDlg
                             = new CIMFindCodeDlg(pContexte->GetMainWindow(),
@@ -659,33 +659,33 @@ try
                                                   pObjet,
                                                   niveauPreselection,
                                                   &aArrayClassif,
-                                                  &sCtrlData) ;
-		int iResult = pFindCodeDlg->Execute() ;
+                                                  &sCtrlData);
+		int iResult = pFindCodeDlg->Execute();
 
 		if (iResult == IDOK)
 		{
-			sResult = pFindCodeDlg->getResult() ;
-			storeControlData(sCtrlData) ;
+			sResult = pFindCodeDlg->getResult();
+			storeControlData(sCtrlData);
 		}
 
-		delete pFindCodeDlg ;
+		delete pFindCodeDlg;
 	}
 
-	return sResult ;
+	return sResult;
 }
 catch(TWindow::TXWindow& e)
 {
-  string sErr = string("Exception classifExpert::chooseCode : ") + e.why() ;
-  erreur(sErr.c_str(), standardError, 0) ;
-  return "" ;
+  string sErr = string("Exception classifExpert::chooseCode : ") + e.why();
+  erreur(sErr.c_str(), standardError, 0);
+  return "";
 }
 catch (...)
 {
-	erreur("Exception classifExpert::chooseCode.", standardError, 0) ;
+	erreur("Exception classifExpert::chooseCode.", standardError, 0);
 	return "";
 }
 #else
-  return string("") ;
+  return string("");
 #endif
 }
 
@@ -697,7 +697,7 @@ classifExpert::setControlString(string* pCtrlData, SOAPObject* pObjet,
 {
     setControlString(pCtrlData, pObjet->sClassification, pObjet->sCase,
                         pObjet->sTexteInitial, iInitialLevel, pArrayClassif,
-                        pTpsDebut, pTpsFin, sResult, sCodeSens) ;
+                        pTpsDebut, pTpsFin, sResult, sCodeSens);
 }*/
 
 /*void
@@ -707,13 +707,13 @@ classifExpert::setControlString(string* pCtrlData, string sClassification, strin
                             NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
                             string sResult, string sCodeSens)
 {
-	*pCtrlData = "" ;
+	*pCtrlData = "";
   *pCtrlData = string("<classification_event") +
                     string(" classification=\"") + sClassification + string("\"") +
                     string(" case=\"")  + sCase                         + string("\"") +
                     string(" start=\"") + pTpsDebut->donneDateHeure()   + string("\"") +
                     string(" end=\"")   + pTpsFin->donneDateHeure()     + string("\"") +
-                    string(">\n") ;
+                    string(">\n");
 	*pCtrlData += string("  <patient") +
 #ifndef _ENTERPRISE_DLL
                     string(" id=\"")    + pContexte->getPatient()->getNss() + string("\"") +
@@ -724,72 +724,72 @@ classifExpert::setControlString(string* pCtrlData, string sClassification, strin
                     string(" sex=\"")   + pContexte->getPatient()->getGender() + string("\"") +
                     string(" birthday=\"") + pContexte->getPatient()->getBirthDate() + string("\"") +
 #endif
-                    string(">\n") ;
-	*pCtrlData += string("  <text") ;
+                    string(">\n");
+	*pCtrlData += string("  <text");
 	if (sCodeSens != "")
-		*pCtrlData += string(" semantic=\"") + sCodeSens + string("\"") ;
-	*pCtrlData += string(">\n") ;
-	*pCtrlData += sTexteInitial + string("\n") ;
-	*pCtrlData += string("  </text>\n") ;
-	*pCtrlData += string("  <proposals level=\"") ;
+		*pCtrlData += string(" semantic=\"") + sCodeSens + string("\"");
+	*pCtrlData += string(">\n");
+	*pCtrlData += sTexteInitial + string("\n");
+	*pCtrlData += string("  </text>\n");
+	*pCtrlData += string("  <proposals level=\"");
 	if      (iInitialLevel == classifExpert::niveauPreselection)
 	{
   	if (pArrayClassif)
     {
-    	*pCtrlData += string("pre-selection\">\n") ;
+    	*pCtrlData += string("pre-selection\">\n");
       if (!(pArrayClassif->empty()))
       {
-      	NSEpiClassifInfoIter i = pArrayClassif->begin() ;
-        for ( ; i != pArrayClassif->end() ; i++)
+      	NSEpiClassifInfoIter i = pArrayClassif->begin();
+        for (; i != pArrayClassif->end(); i++)
         	*pCtrlData += string("    ") + (*i)->getCode() + string(" ") +
-                                         (*i)->getLabel() + string("\n") ;
+                                         (*i)->getLabel() + string("\n");
       }
-      *pCtrlData += string("  </proposals>\n") ;
+      *pCtrlData += string("  </proposals>\n");
     }
     else
-    	*pCtrlData += string("automatic\" />\n") ;
+    	*pCtrlData += string("automatic\" />\n");
 	}
 	else if (iInitialLevel == classifExpert::niveauAutorises)
-  	*pCtrlData += string("allowed\" />\n") ;
+  	*pCtrlData += string("allowed\" />\n");
 	else if (iInitialLevel == classifExpert::niveauTous)
-  	*pCtrlData += string("any\" />\n") ;
+  	*pCtrlData += string("any\" />\n");
 	else
-		*pCtrlData += string("unknown\" />\n") ;
+		*pCtrlData += string("unknown\" />\n");
 
-	*pCtrlData += string("  <selected code=\"") + sResult + string("\" />\n") ;
+	*pCtrlData += string("  <selected code=\"") + sResult + string("\" />\n");
 
-	*pCtrlData += string("</classification_event>\n") ;
+	*pCtrlData += string("</classification_event>\n");
 }*/
 
 void
 classifExpert::storeControlData(string sCtrlData)
 {
     if (sCtrlData == "")
-        return ;
+        return;
 
     string sFichier = string("class") +
 #ifndef _ENTERPRISE_DLL
                       pContexte->getUtilisateur()->getNss() +
                       string(".xml");
-    sFichier = pContexte->PathName("BGLO") + sFichier ;
+    sFichier = pContexte->PathName("BGLO") + sFichier;
 #else
                       pContexte->getUtilisateur()->getId() +
                       string(".xml");
 #endif
-    ofstream outFile ;
-    outFile.open(sFichier.c_str(), ios::ate | ios::app) ;
+    ofstream outFile;
+    outFile.open(sFichier.c_str(), ios::ate | ios::app);
 
     if (!outFile)
    	{
         string sErrMess = string("Erreur d'ouverture en écriture du fichier ")
-                                                                    + sFichier ;
-        erreur(sErrMess.c_str(), standardError) ;
+                                                                    + sFichier;
+        erreur(sErrMess.c_str(), standardError);
    		return;
    	}
     //
     //
-    outFile << sCtrlData ;
-    outFile.close() ;
+    outFile << sCtrlData;
+    outFile.close();
 }
 
 /*
@@ -851,10 +851,10 @@ classifExpert::chooseCode(string sClassif, string sDomain, string sCase)
 Classify::Classify(NSContexte* pCtx, string* psClassif, string* psConcept, string* psPath)
 				 :NSRoot(pCtx)
 {
-  psClassification = psClassif ;
+  psClassification = psClassif;
 
-  pElement         = psConcept ;
-  pChemin          = psPath ;
+  pElement         = psConcept;
+  pChemin          = psPath;
 }
 
 // ----------------------------------------------------------
@@ -876,20 +876,20 @@ Classify::computeParsing(string  *psClassifResultO,
 try
 {
 #ifndef _ENTERPRISE_DLL
-	NSEpiClasser EpiClasser(pContexte->getSuperviseur()) ;
-  EpiClasser.donneRelations(psClassifResultO, *pElement, *psClassification, "O") ;
-  EpiClasser.donneRelations(psClassifResultP, *pElement, *psClassification, "P") ;
-	EpiClasser.donneRelations(psClassifResultI, *pElement, *psClassification, "I") ;
+	NSEpiClasser EpiClasser(pContexte->getSuperviseur());
+  EpiClasser.donneRelations(psClassifResultO, *pElement, *psClassification, "O");
+  EpiClasser.donneRelations(psClassifResultP, *pElement, *psClassification, "P");
+	EpiClasser.donneRelations(psClassifResultI, *pElement, *psClassification, "I");
 #else
-  NSEpiClasserInfo EpiClasser ;
-  EpiClasser.donneRelations(psClassifResultO, *pElement, *psClassification, "O", pContexte->getSuperviseur()->getDatabaseManager()) ;
-  EpiClasser.donneRelations(psClassifResultP, *pElement, *psClassification, "P", pContexte->getSuperviseur()->getDatabaseManager()) ;
-	EpiClasser.donneRelations(psClassifResultI, *pElement, *psClassification, "I", pContexte->getSuperviseur()->getDatabaseManager()) ;
+  NSEpiClasserInfo EpiClasser;
+  EpiClasser.donneRelations(psClassifResultO, *pElement, *psClassification, "O", pContexte->getSuperviseur()->getDatabaseManager());
+  EpiClasser.donneRelations(psClassifResultP, *pElement, *psClassification, "P", pContexte->getSuperviseur()->getDatabaseManager());
+	EpiClasser.donneRelations(psClassifResultI, *pElement, *psClassification, "I", pContexte->getSuperviseur()->getDatabaseManager());
 #endif
 }
 catch (...)
 {
-	erreur("Exception Classify::computeParsing.", standardError) ;
+	erreur("Exception Classify::computeParsing.", standardError);
 }
 }
 
@@ -902,12 +902,12 @@ catch (...)
 ParseSOAP::ParseSOAP(NSContexte* pCtx, string *sClassifier)
 					:NSRoot(pCtx)
 {
-  psClassifier = sClassifier ;
-  pPatho = pContexte->getDico()->getPatholog() ;
+  psClassifier = sClassifier;
+  pPatho = pContexte->getDico()->getPatholog();
 
-  psSOAPChemin    = 0 ;
-  psSOAP2Parse    = 0 ;
-  psResultParsing = 0 ;
+  psSOAPChemin    = 0;
+  psSOAP2Parse    = 0;
+  psResultParsing = 0;
 }
 
 // ----------------------------------------------------------
@@ -918,7 +918,7 @@ ParseSOAP::ParseSOAP(NSContexte* pCtx, string *sClassifier)
 ParseSOAP::~ParseSOAP()
 {
   if (NULL != psResultParsing)
-    delete psResultParsing ;
+    delete psResultParsing;
 }
 
 // ----------------------------------------------------------
@@ -934,7 +934,7 @@ ParseSOAP::~ParseSOAP()
 void
 ParseSOAP::ChangeSOAPEdit(string *psSOAPEdit)
 {
-  psSOAP2Parse = psSOAPEdit ;
+  psSOAP2Parse = psSOAPEdit;
 }
 
 
@@ -953,11 +953,11 @@ void    ParseSOAP::computeParsing(  string  *sLibelle,
                                     string  *psClassifResultI,
                                     string  *psClassifResult3)
 {
-//    vector<string *> *psResult = new vector<string *> ;
-//    string  sResult ;
+//    vector<string *> *psResult = new vector<string *>;
+//    string  sResult;
 //    sResult =
-  searchTermsInLexique(sLibelle, psClassifResultO, psClassifResultP, psClassifResultI, psClassifResult3) ;
-//    computeParsingElem(sLibelle, sChemin, psClassifResultO, psClassifResultP, psClassifResultI) ;
+  searchTermsInLexique(sLibelle, psClassifResultO, psClassifResultP, psClassifResultI, psClassifResult3);
+//    computeParsingElem(sLibelle, sChemin, psClassifResultO, psClassifResultP, psClassifResultI);
 }
 
 
@@ -978,47 +978,47 @@ ParseSOAP::searchTermsInLexique(string *psLibelle, string *psClassifResultO, str
 try
 {
 	if ((NULL == psLibelle) || (*psLibelle == string("")))
-		return ;
+		return;
 
-  string sTrace = string("Processing text: ") + *psLibelle ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSteps) ;
+  string sTrace = string("Processing text: ") + *psLibelle;
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSteps);
 
-  TermsParser TheParser(pContexte, *psClassifier, bUse3BT) ;
+  TermsParser TheParser(pContexte, *psClassifier, bUse3BT);
 
   // First, check for the exact verbatim in "reference bases"
   //
   if (bUse3BT)
   {
 #ifndef _ENTERPRISE_DLL
-    NSThesaurus thesaurus(pContexte->getSuperviseur()) ;
+    NSThesaurus thesaurus(pContexte->getSuperviseur());
 #else
-    NSThesaurusInfo thesaurus ;
+    NSThesaurusInfo thesaurus;
 #endif
 
-    string sClinicalTerms = TheParser.FindAllClinicalTermsStartingWith(&thesaurus, psLibelle, *psClassifier) ;
+    string sClinicalTerms = TheParser.FindAllClinicalTermsStartingWith(&thesaurus, psLibelle, *psClassifier);
     if (string("") != sClinicalTerms)
     {
-      sTrace = string("Global text found as start in 3BT : ") + sClinicalTerms ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("Global text found as start in 3BT : ") + sClinicalTerms;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
     }
     else
     {
-      sTrace = string("Global text not found in 3BT.") ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("Global text not found in 3BT.");
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
     }
 
 /*  Now all thesaurus are compiled into Clinical_Labels
 
-    string sSentinelTerms = TheParser.FindAllSentinelTermsStartingWith(&thesaurus, psLibelle, *psClassifier) ;
+    string sSentinelTerms = TheParser.FindAllSentinelTermsStartingWith(&thesaurus, psLibelle, *psClassifier);
     if (string("") != sSentinelTerms)
     {
-      sTrace = string("Global text found as start in Sentinelles : ") + sSentinelTerms ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("Global text found as start in Sentinelles : ") + sSentinelTerms;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
     }
     else
     {
-      sTrace = string("Global text not found in Sentinelles.") ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("Global text not found in Sentinelles.");
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
     }
 */
 
@@ -1026,49 +1026,49 @@ try
     if (string("") != sClinicalTerms)
     {
       if (psClassifResultP)
-        *psClassifResultP = sClinicalTerms ;
+        *psClassifResultP = sClinicalTerms;
 
-      // *psClassifResultP = TheParser.sBasicOnlyAddNewcodes(*psClassifResultP, sSentinelTerms) ;
+      // *psClassifResultP = TheParser.sBasicOnlyAddNewcodes(*psClassifResultP, sSentinelTerms);
 
-      return ;
+      return;
     }
   }
 
   // Taking an array of individual words after removing all punctuation characters
   //
-	ParseElemArray aParseResult ;
-	initParseElemArray(psLibelle, &aParseResult) ;
+	ParseElemArray aParseResult;
+	initParseElemArray(psLibelle, &aParseResult);
 
 	if (aParseResult.empty())
-		return ;
+		return;
 
   // Getting the array of individual and compound words (like "corps étranger")
   //
-	ParseElemArray Temp ;
-	initGroupElemArray(&aParseResult, &Temp) ;
+	ParseElemArray Temp;
+	initGroupElemArray(&aParseResult, &Temp);
 
   // Looking for classification codes
   //
-	ElemSetArray *pResult = TheParser.Compute(&Temp) ;
+	ElemSetArray *pResult = TheParser.Compute(&Temp);
 
-	*psClassifResultO = string("") ;                  //pTheParser->getsObligatoire()) ;
+	*psClassifResultO = string("");                  //pTheParser->getsObligatoire());
 
 	if (pResult)
   {
-		*psClassifResultP = string(pResult->toString()) ; // pTheParser->getsPossible()) ;
-    delete pResult ;
+		*psClassifResultP = string(pResult->toString()); // pTheParser->getsPossible());
+    delete pResult;
   }
 	else
-		*psClassifResultP = string("") ;
+		*psClassifResultP = string("");
 
-	*psClassifResultI = string("") ;                  //pTheParser->getsInterdit()) ;
+	*psClassifResultI = string("");                  //pTheParser->getsInterdit());
 
 /*
     // begin test fab
-    NSEpiClassifInfoArray   *pTestArray = new NSEpiClassifInfoArray() ;
-    NSEpiClassifDB          *pClassifDB = new NSEpiClassifDB(pContexte) ;
-    pClassifDB->searchDomainInClassif(string("6CISP"), pResult, pTestArray) ;
-    delete pClassifDB ;
+    NSEpiClassifInfoArray   *pTestArray = new NSEpiClassifInfoArray();
+    NSEpiClassifDB          *pClassifDB = new NSEpiClassifDB(pContexte);
+    pClassifDB->searchDomainInClassif(string("6CISP"), pResult, pTestArray);
+    delete pClassifDB;
     // end test fab
 */
 
@@ -1080,17 +1080,17 @@ try
     // avec ce terme en début
 
 /*
-    ofstream    outFile ;
-    outFile.open("resultTestSOAP.log") ;
+    ofstream    outFile;
+    outFile.open("resultTestSOAP.log");
     if (outFile)
-        for (pIter = pResult->begin() ; pIter != pResult->end() ; pIter++)
-            outFile.write((*pIter)->c_str(), strlen((*pIter)->c_str())) ;
-		outFile.close() ;
+        for (pIter = pResult->begin(); pIter != pResult->end(); pIter++)
+            outFile.write((*pIter)->c_str(), strlen((*pIter)->c_str()));
+		outFile.close();
 */
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::searchTermsInLexique.", standardError) ;
+	erreur("Exception ParseSOAP::searchTermsInLexique.", standardError);
 }
 }
 
@@ -1098,69 +1098,69 @@ void
 ParseSOAP::initParseElemArray(string* psLibelle, ParseElemArray* pParseResult)
 {
 	if ((NULL == pParseResult) || (NULL == psLibelle) || (*psLibelle == string("")))
-		return ;
+		return;
 
-	string sLibelPurge = *psLibelle ;
-  vector<string *>* pPurgeResult = Purge(&sLibelPurge) ;
+	string sLibelPurge = *psLibelle;
+  vector<string *>* pPurgeResult = Purge(&sLibelPurge);
   if (NULL == pPurgeResult)
-  	return ;
+  	return;
 
   if (pPurgeResult->empty())
 	{
-		delete pPurgeResult ;
-  	return ;
+		delete pPurgeResult;
+  	return;
 	}
 
-	ParseElemArray aParseResult(pPurgeResult) ;
+	ParseElemArray aParseResult(pPurgeResult);
 
   // Il faut supprimer pPurgeResult
   //
-  for (vector<string *>::iterator pIter = pPurgeResult->begin() ; pPurgeResult->end() != pIter ; )
+  for (vector<string *>::iterator pIter = pPurgeResult->begin(); pPurgeResult->end() != pIter; )
 	{
-		delete *pIter ;
-		pPurgeResult->erase(pIter) ;
+		delete *pIter;
+		pPurgeResult->erase(pIter);
 	}
-  delete pPurgeResult ;
+  delete pPurgeResult;
 
-  *pParseResult = aParseResult ;
+  *pParseResult = aParseResult;
 }
 
 void
 ParseSOAP::initGroupElemArray(ParseElemArray* pLoneWords, ParseElemArray* pGroups)
 {
 	if ((NULL == pGroups) || (NULL == pLoneWords) || (pLoneWords->empty()))
-		return ;
+		return;
 
-	pGroups->vider() ;
+	pGroups->vider();
 
-  addAllGroups(pLoneWords, pGroups) ;
+  addAllGroups(pLoneWords, pGroups);
 
 /*
-	ParseElemIter   pIter ;
+	ParseElemIter   pIter;
 
 	// on essaye de voir si un groupe de mot peut commencer par un terme
 	// si on ne trouve pas d'occurence dans le LexiqueFlechies, aucun groupe
 	// de mots ne peut commencer par cette occurence
 
-	for (pIter = pLoneWords->begin() ; pIter != pLoneWords->end() ; pIter++)
+	for (pIter = pLoneWords->begin(); pIter != pLoneWords->end(); pIter++)
 	{
-  	INDBLEVEL iResultLevel ;
-		bool bResult = findInLexiq((*pIter)->getContent(), 0, &iResultLevel) ;
+  	INDBLEVEL iResultLevel;
+		bool bResult = findInLexiq((*pIter)->getContent(), 0, &iResultLevel);
 		if (!bResult && (iResultLevel != INDBasABegining))
-			(*pIter)->setNotInFirst(true) ;
+			(*pIter)->setNotInFirst(true);
 	}
 
 	// il faut maintenant créer des groupes de mots commencant par les termes
 	// qui peuvent commencer un groupe de mots
 
-  NSEpiFlechiesDB Flechies(pContexte) ;
+  NSEpiFlechiesDB Flechies(pContexte);
 
-	for (pIter = pLoneWords->begin() ; pIter != pLoneWords->end() ; pIter++)
+	for (pIter = pLoneWords->begin(); pIter != pLoneWords->end(); pIter++)
 		if ((*pIter)->getNotInFirst() == false)
 		{
-    	ParseElem* pGroupElem = findGroup(*pIter, pLoneWords, &Flechies) ;
+    	ParseElem* pGroupElem = findGroup(*pIter, pLoneWords, &Flechies);
       if (pGroupElem)
-				pGroups->push_back(pGroupElem) ;
+				pGroups->push_back(pGroupElem);
 		}
 */
 }
@@ -1174,79 +1174,79 @@ ParseSOAP::initGroupElemArray(ParseElemArray* pLoneWords, ParseElemArray* pGroup
 // "angine" and "poitrine" are inside "angine de poitrine"
 //
 // So, in the sentence ABCDEFG if we have the groups A AB BCDE CD EFG G
-// BCDE is the biggest, and kills AB, CD and EFG ; thus remains A BCDE and G
+// BCDE is the biggest, and kills AB, CD and EFG; thus remains A BCDE and G
 // WARNING: We must take care not to have AB kill A before AB is killed by BCDE
 //
 void
 ParseSOAP::cleanGroupElemArray(ParseElemArray* pGroups)
 {
 	if ((NULL == pGroups) || (pGroups->empty()))
-		return ;
+		return;
 
-	int iCurrentSize = 0xFFFF ;
+	int iCurrentSize = 0xFFFF;
 
-	bool bRunning = true ;
+	bool bRunning = true;
 
 	while (bRunning)
 	{
 		// First step : find the new iCurrentSize as max of NbTerms < iCurrentSize
     //
-    int iNewCurrentSize = 0 ;
+    int iNewCurrentSize = 0;
 
-    for (ParseElemIter pIter = pGroups->begin() ; pIter != pGroups->end() ; pIter++)
+    for (ParseElemIter pIter = pGroups->begin(); pIter != pGroups->end(); pIter++)
 			if (((*pIter)->getNbOfTerms() < iCurrentSize) &&
           ((*pIter)->getNbOfTerms() > iNewCurrentSize))
-    		iNewCurrentSize = (*pIter)->getNbOfTerms() ;
+    		iNewCurrentSize = (*pIter)->getNbOfTerms();
 
     if (iNewCurrentSize == 0)
-    	return ;
-    iCurrentSize = iNewCurrentSize ;
+    	return;
+    iCurrentSize = iNewCurrentSize;
 
     // Second step : groups with this NbOfTerms can kill smallest groups
     //
-    for (ParseElemIter pRefIter = pGroups->begin() ; pRefIter != pGroups->end() ; pRefIter++)
+    for (ParseElemIter pRefIter = pGroups->begin(); pRefIter != pGroups->end(); pRefIter++)
     {
 			if ((*pRefIter)->getNbOfTerms() == iCurrentSize)
       {
-				int iRefLeftPos  = (*pRefIter)->getPos() ;
-				int iRefRightPos = iRefLeftPos + (*pRefIter)->getNbOfTerms() - 1 ;
+				int iRefLeftPos  = (*pRefIter)->getPos();
+				int iRefRightPos = iRefLeftPos + (*pRefIter)->getNbOfTerms() - 1;
 
-				bool bPosBeforeRef = true ;
-        bool bKilledBeforeRef = false ;
+				bool bPosBeforeRef = true;
+        bool bKilledBeforeRef = false;
 
-        for (ParseElemIter pIter = pGroups->begin() ; pIter != pGroups->end() ; )
+        for (ParseElemIter pIter = pGroups->begin(); pIter != pGroups->end(); )
         {
         	if (pIter == pRefIter)
-          	bPosBeforeRef = false ;
+          	bPosBeforeRef = false;
 
           if ((*pIter)->getNbOfTerms() < iCurrentSize)
           {
-          	int iLeftPos = (*pIter)->getPos() ;
-						int iRightPos = iLeftPos + (*pIter)->getNbOfTerms() - 1 ;
+          	int iLeftPos = (*pIter)->getPos();
+						int iRightPos = iLeftPos + (*pIter)->getNbOfTerms() - 1;
 
           	if ((iLeftPos <= iRefRightPos) && (iRightPos >= iRefLeftPos))
             {
             	// Killing objects before pRefIter is dangerous because
-              // it changes pRefIter itself ; so we just mark it for deletion
+              // it changes pRefIter itself; so we just mark it for deletion
               // by setting NbOfTerms to -1
 							//
               if (bPosBeforeRef)
               {
-              	bKilledBeforeRef = true ;
-                (*pIter)->setNbOfTerms(-1) ;
-                pIter++ ;
+              	bKilledBeforeRef = true;
+                (*pIter)->setNbOfTerms(-1);
+                pIter++;
               }
               else
               {
-              	delete *pIter ;
-        				pGroups->erase(pIter) ;
+              	delete *pIter;
+        				pGroups->erase(pIter);
               }
             }
             else
-          		pIter++ ;
+          		pIter++;
           }
           else
-          	pIter++ ;
+          	pIter++;
         }
         //
         // If we killed items before pRefIter, pRefIter is no longer valid
@@ -1255,20 +1255,20 @@ ParseSOAP::cleanGroupElemArray(ParseElemArray* pGroups)
         {
         	// Kill terms marked for deletion
           //
-        	for (ParseElemIter pIter = pGroups->begin() ; pIter != pGroups->end() ; )
+        	for (ParseElemIter pIter = pGroups->begin(); pIter != pGroups->end(); )
           {
           	if ((*pIter)->getNbOfTerms() == -1)
             {
-            	delete *pIter ;
-            	pGroups->erase(pIter) ;
+            	delete *pIter;
+            	pGroups->erase(pIter);
             }
             else
-            	pIter++ ;
+            	pIter++;
           }
           //
           // Reset pRefIter
           //
-        	pRefIter = pGroups->begin() ;
+        	pRefIter = pGroups->begin();
         }
 			}
 		}
@@ -1290,64 +1290,64 @@ ParseSOAP::findLargerGroup(ParseElem *pElem, ParseElemArray *pArray, NSEpiFlechi
 try
 {
 	if ((NULL == pElem) || (NULL == pArray) || (pArray->empty()))
-		return NULL ;
+		return NULL;
 
-	int           Pos   = 0 ;
-  ParseElemIter pIter = pArray->begin() ;
+	int           Pos   = 0;
+  ParseElemIter pIter = pArray->begin();
   //
   // Placing the iterator on the good word
   //
-	for ( ; (pIter != pArray->end()) && (*pIter != pElem) ; pIter++, Pos++) ;
+	for (; (pIter != pArray->end()) && (*pIter != pElem); pIter++, Pos++);
   if (pIter == pArray->end())
-		return NULL ;
+		return NULL;
 
-	int    nbTermsTemp = 0 ;
-  string sResultTemp = "" ;
+	int    nbTermsTemp = 0;
+  string sResultTemp = "";
 
-	string sResult     = "" ;
-	int    nbTerms     = 0 ;
+	string sResult     = "";
+	int    nbTerms     = 0;
 
   // Testing terms by adding one by one the following words
   //
-	for ( ; (pIter != pArray->end()) ; pIter++)
+	for (; (pIter != pArray->end()); pIter++)
 	{
 		if (sResultTemp != "")
 		{
-    	char cLastChar = sResultTemp[strlen(sResultTemp.c_str()) - 1] ;
+    	char cLastChar = sResultTemp[strlen(sResultTemp.c_str()) - 1];
 
 			if (cLastChar != '\'')
-    		sResultTemp += string(" ") ;
+    		sResultTemp += string(" ");
 		}
 
-    sResultTemp += (*pIter)->getContent() ;
-    nbTermsTemp++ ;
+    sResultTemp += (*pIter)->getContent();
+    nbTermsTemp++;
 
-		INDBLEVEL iResultLevel ;
-		bool bResult = findInLexiq(sResultTemp, pFlechies, &iResultLevel) ;
+		INDBLEVEL iResultLevel;
+		bool bResult = findInLexiq(sResultTemp, pFlechies, &iResultLevel);
     //
     // Good term : prepare the result
     //
     if (bResult)
 		{
-			sResult = sResultTemp ;
-			nbTerms = nbTermsTemp ;
+			sResult = sResultTemp;
+			nbTerms = nbTermsTemp;
 		}
     //
     // Term that even doesn't begin a lexique concept : we leave
     //
 		else if (iResultLevel != INDBasABegining)
-			break ;
+			break;
 	}
 
 	if (sResult != "")
-		return new ParseElem(sResult, nbTerms, Pos) ;
+		return new ParseElem(sResult, nbTerms, Pos);
   else
-  	return NULL ;
+  	return NULL;
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::findLargerGroup.", standardError) ;
-	return NULL ;
+	erreur("Exception ParseSOAP::findLargerGroup.", standardError);
+	return NULL;
 }
 }
 
@@ -1357,53 +1357,53 @@ ParseSOAP::addAllGroups(ParseElemArray *pLoneArray, ParseElemArray *pGroupArray,
 try
 {
 	if ((NULL == pGroupArray) || (NULL == pLoneArray) || (pLoneArray->empty()))
-		return ;
+		return;
 
 	// We need good pos for pLoneArray
   //
-  pLoneArray->setAllPos() ;
+  pLoneArray->setAllPos();
 
-  int _iPos = 0 ;
+  int _iPos = 0;
 
-	for (ParseElemIter pRefIter = pLoneArray->begin() ; pLoneArray->end() != pRefIter ; pRefIter++)
+	for (ParseElemIter pRefIter = pLoneArray->begin(); pLoneArray->end() != pRefIter; pRefIter++)
 	{
-		int    nbTermsTemp = 0 ;
-		string sResultTemp = string("") ;
+		int    nbTermsTemp = 0;
+		string sResultTemp = string("");
 
-    _iPos = (*pRefIter)->getPos() ;
+    _iPos = (*pRefIter)->getPos();
 
-    for (ParseElemIter pIter = pRefIter ; pLoneArray->end() != pIter ; pIter++)
+    for (ParseElemIter pIter = pRefIter; pLoneArray->end() != pIter; pIter++)
     {
       if (string("") != sResultTemp)
       {
-        char cLastChar = sResultTemp[strlen(sResultTemp.c_str()) - 1] ;
+        char cLastChar = sResultTemp[strlen(sResultTemp.c_str()) - 1];
 
         if (cLastChar != '\'')
-          sResultTemp += string(" ") ;
+          sResultTemp += string(" ");
       }
 
-      sResultTemp += (*pIter)->getContent() ;
-      nbTermsTemp++ ;
+      sResultTemp += (*pIter)->getContent();
+      nbTermsTemp++;
 
-      INDBLEVEL iResultLevel ;
-      bool bResult = findInLexiq(sResultTemp, pFlechies, &iResultLevel) ;
+      INDBLEVEL iResultLevel;
+      bool bResult = findInLexiq(sResultTemp, pFlechies, &iResultLevel);
       //
       // Good term : prepare the result
       //
       if (bResult)
-      	pGroupArray->push_back(new ParseElem(sResultTemp, nbTermsTemp, _iPos)) ;
+      	pGroupArray->push_back(new ParseElem(sResultTemp, nbTermsTemp, _iPos));
       //
       // Term that even doesn't begin a lexique concept : we leave
       //
       else if (iResultLevel != INDBasABegining)
-        break ;
+        break;
     }
 	}
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::addAllGroups.", standardError) ;
-	return ;
+	erreur("Exception ParseSOAP::addAllGroups.", standardError);
+	return;
 }
 }
 
@@ -1420,28 +1420,28 @@ ParseSOAP::findInLexiq(string ps2Find, NSEpiFlechiesDB* pFlechies, INDBLEVEL* pL
 {
 try
 {
-  bool bTermFound = false ;
+  bool bTermFound = false;
 
 	if (pFlechies)
-		bTermFound = pFlechies->isInDB(&ps2Find, pLevel) ;
+		bTermFound = pFlechies->isInDB(&ps2Find, pLevel);
   else
   {
-	  NSEpiFlechiesDB Flechies(pContexte) ;
-    bTermFound = Flechies.isInDB(&ps2Find, pLevel) ;
+	  NSEpiFlechiesDB Flechies(pContexte);
+    bTermFound = Flechies.isInDB(&ps2Find, pLevel);
   }
 
-  string sTrace = string("Term ") + ps2Find ;
+  string sTrace = string("Term ") + ps2Find;
   if (false == bTermFound)
-    sTrace += string(" not") ;
-  sTrace += string(" found in Flechies.") ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+    sTrace += string(" not");
+  sTrace += string(" found in Flechies.");
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
-  return bTermFound ;
+  return bTermFound;
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::findInLexiq.", standardError) ;
-	return false ;
+	erreur("Exception ParseSOAP::findInLexiq.", standardError);
+	return false;
 }
 }
 
@@ -1459,24 +1459,24 @@ ParseSOAP::Purge(string *sLibelle)
 {
 try
 {
-	vector<string *> *pResult = new vector<string *> ;
+	vector<string *> *pResult = new vector<string *>;
 
 	if (*sLibelle == "")
-		return (pResult) ;
+		return (pResult);
 
 	//
 	// Etape 1 : on remplace les caractères de ponctuation par des blancs
 	//
-	string sToRemove = string(";:?!") ;
+	string sToRemove = string(";:?!");
 
-  size_t iPos ;
-  for (size_t i = 0 ; i < strlen(sToRemove.c_str()) ; i++)
+  size_t iPos;
+  for (size_t i = 0; i < strlen(sToRemove.c_str()); i++)
 	{
-		iPos = sLibelle->find(sToRemove[i]) ;
+		iPos = sLibelle->find(sToRemove[i]);
     while (iPos != NPOS)
     {
-			sLibelle->replace(iPos, 1, " ") ;
-			iPos = sLibelle->find(sToRemove[i]) ;
+			sLibelle->replace(iPos, 1, " ");
+			iPos = sLibelle->find(sToRemove[i]);
     }
 	}
 
@@ -1484,11 +1484,11 @@ try
 	// Etape 1 bis : on remplace les caractères de ponctuation par des blancs
   //               si ce ne sont pas des séparateurs numériques
 	//
-	sToRemove = string(",.") ;
+	sToRemove = string(",.");
 
-  for (size_t i = 0 ; i < strlen(sToRemove.c_str()) ; i++)
+  for (size_t i = 0; i < strlen(sToRemove.c_str()); i++)
 	{
-		iPos = sLibelle->find(sToRemove[i]) ;
+		iPos = sLibelle->find(sToRemove[i]);
     while (iPos != NPOS)
     {
     	// We check if the char to remove is not between 2 numbers
@@ -1497,9 +1497,9 @@ try
           ((iPos > 0) && (!isdigit((*sLibelle)[iPos-1]))) ||
           ((iPos < strlen(sLibelle->c_str())-1) && (!isdigit((*sLibelle)[iPos+1])))
          )
-				sLibelle->replace(iPos, 1, " ") ;
+				sLibelle->replace(iPos, 1, " ");
 
-			iPos = sLibelle->find(sToRemove[i], iPos + 1) ;
+			iPos = sLibelle->find(sToRemove[i], iPos + 1);
     }
 	}
 
@@ -1508,58 +1508,58 @@ try
 	//  à réfléchir plus sérieusement
 	//  les termes du Lexique peuvent contenir des apostrophes
 	// 	from nsparse (STEP project)
-	iPos = 0 ;
+	iPos = 0;
 	while (sLibelle->find("'", iPos + 1) != string::npos)
 	{
-		iPos = sLibelle->find("'", iPos + 1) ;
-		sLibelle->insert(iPos + 1, " ") ;
+		iPos = sLibelle->find("'", iPos + 1);
+		sLibelle->insert(iPos + 1, " ");
 	}
 
 /*
-		iPos = 0 ;
+		iPos = 0;
 		while (sLibelle->find("'", iPos + 1) != NPOS)
 		{
-				iPos = sLibelle->find("'", iPos + 1) ;
-				sLibelle->insert(iPos, " ") ;
-				iPos = iPos + 2 ;
-				sLibelle->insert(iPos, " ") ;
+				iPos = sLibelle->find("'", iPos + 1);
+				sLibelle->insert(iPos, " ");
+				iPos = iPos + 2;
+				sLibelle->insert(iPos, " ");
 		}
 */
 
 	// Etape 3 : on supprime les blancs en excès
 	//
-	strip(*sLibelle, stripBoth) ;
+	strip(*sLibelle, stripBoth);
 
 	iPos = 0;
 	while (sLibelle->find(" ", iPos + 1) != NPOS)
 	{
-		iPos = sLibelle->find(" ", iPos + 1) ;
+		iPos = sLibelle->find(" ", iPos + 1);
 		while (sLibelle->find(" ", iPos + 1) == iPos + 1)
-			sLibelle->erase(iPos, 1) ;
+			sLibelle->erase(iPos, 1);
 	}
 
 	// Etape 4 : on met les mots dans l'array résultat
 	//
-	int iPosBegin = 0 ;
+	int iPosBegin = 0;
 	do
 	{
 		if (sLibelle->find(" ", iPosBegin + 1) != NPOS)
-			iPos = sLibelle->find(" ", iPosBegin + 1) ;
+			iPos = sLibelle->find(" ", iPosBegin + 1);
 		else
-			iPos = strlen(sLibelle->c_str()) ;
+			iPos = strlen(sLibelle->c_str());
 
-		pResult->push_back(new string(*sLibelle, iPosBegin, iPos - (iPosBegin)) ) ;
+		pResult->push_back(new string(*sLibelle, iPosBegin, iPos - (iPosBegin)) );
 
 		iPosBegin = iPos + 1;
 	}
-	while (iPos < strlen(sLibelle->c_str()) ) ;
+	while (iPos < strlen(sLibelle->c_str()) );
 
-	return (pResult) ;
+	return (pResult);
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::Purge.", standardError) ;
-	return NULL ;
+	erreur("Exception ParseSOAP::Purge.", standardError);
+	return NULL;
 }
 }
 
@@ -1579,31 +1579,31 @@ ParseSOAP::computeParsingElem(  string  *sLibelle,
 {
 try
 {
-	psSOAP2Parse = sLibelle ;
-	psSOAPChemin = sChemin ;
+	psSOAP2Parse = sLibelle;
+	psSOAPChemin = sChemin;
 
 	if (ParsingEq())
 	{
-    string sCodeSens ;
-		pContexte->getDico()->donneCodeSens(getCodeParsing(), &sCodeSens) ;
+    string sCodeSens;
+		pContexte->getDico()->donneCodeSens(getCodeParsing(), &sCodeSens);
 
 #ifndef _ENTERPRISE_DLL
-		NSEpiClasser EpiClasser(pContexte->getSuperviseur()) ;
-		EpiClasser.donneRelations(psClassifResultO, sCodeSens, *psClassifier, "O") ;
-		EpiClasser.donneRelations(psClassifResultP, sCodeSens, *psClassifier, "P") ;
-		EpiClasser.donneRelations(psClassifResultI, sCodeSens, *psClassifier, "I") ;
+		NSEpiClasser EpiClasser(pContexte->getSuperviseur());
+		EpiClasser.donneRelations(psClassifResultO, sCodeSens, *psClassifier, "O");
+		EpiClasser.donneRelations(psClassifResultP, sCodeSens, *psClassifier, "P");
+		EpiClasser.donneRelations(psClassifResultI, sCodeSens, *psClassifier, "I");
 #else
-    NSEpiClasserInfo EpiClasser ;
-    EpiClasser.donneRelations(psClassifResultO, sCodeSens, *psClassifier, "O", pContexte->getSuperviseur()->getDatabaseManager()) ;
-    EpiClasser.donneRelations(psClassifResultP, sCodeSens, *psClassifier, "P", pContexte->getSuperviseur()->getDatabaseManager()) ;
-	  EpiClasser.donneRelations(psClassifResultI, sCodeSens, *psClassifier, "I", pContexte->getSuperviseur()->getDatabaseManager()) ;
+    NSEpiClasserInfo EpiClasser;
+    EpiClasser.donneRelations(psClassifResultO, sCodeSens, *psClassifier, "O", pContexte->getSuperviseur()->getDatabaseManager());
+    EpiClasser.donneRelations(psClassifResultP, sCodeSens, *psClassifier, "P", pContexte->getSuperviseur()->getDatabaseManager());
+	  EpiClasser.donneRelations(psClassifResultI, sCodeSens, *psClassifier, "I", pContexte->getSuperviseur()->getDatabaseManager());
 #endif
 	}
-	return true ;
+	return true;
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::computeParsingElem.", standardError) ;
+	erreur("Exception ParseSOAP::computeParsingElem.", standardError);
 	return false;
 }
 }
@@ -1622,96 +1622,96 @@ ParseSOAP::ParsingEq()                   // renvoie le nombre de termes trouvés
 {
 try
 {
-  char* pcSOAPRadixReq = new char[strlen(psSOAP2Parse->c_str()) + 1] ;
-  char* pcSOAPRadix    = new char[strlen(psSOAP2Parse->c_str()) + 1] ;
+  char* pcSOAPRadixReq = new char[strlen(psSOAP2Parse->c_str()) + 1];
+  char* pcSOAPRadix    = new char[strlen(psSOAP2Parse->c_str()) + 1];
 
   // la requête se fait en majuscule à cause des problèmes d'accentuations
   // on garde quand même une chaine pour la comparaison avec la requête
-  strcpy(pcSOAPRadixReq, psSOAP2Parse->c_str()) ;
-  strcpy(pcSOAPRadix, psSOAP2Parse->c_str()) ;
-  ConvertitMajuscule(pcSOAPRadixReq) ;
+  strcpy(pcSOAPRadixReq, psSOAP2Parse->c_str());
+  strcpy(pcSOAPRadix, psSOAP2Parse->c_str());
+  ConvertitMajuscule(pcSOAPRadixReq);
 
   // on s'arrete au premier mot pour la requête
   // on s'occupe plus tard de tester toutes les possibilités avec les mots suivants
   // (problèmes au niveau des requêtes avec plusieurs mots)
   // la méthode GEQ cherche >= or les termes du Lexique peuvent avoir plusieurs espaces avant le deuxième mot
-  int iPos = psSOAP2Parse->find(" ") ;
-  pcSOAPRadix[iPos] = '\0' ;
-  pcSOAPRadixReq[iPos] = '\0' ;
+  int iPos = psSOAP2Parse->find(" ");
+  pcSOAPRadix[iPos] = '\0';
+  pcSOAPRadixReq[iPos] = '\0';
 
   // on recherche dans le Lexique keySEARCHEQ, keySEARCHGEQ, keySEARCHGT
   // cette requête cherche un terme du Lexique "proche" (dont le début est le plus proche)
-  string sToFind = string(pcSOAPRadixReq) ;
+  string sToFind = string(pcSOAPRadixReq);
 
 #ifndef _ENTERPRISE_DLL
-  pPatho->trouveLibelle(&sToFind, keySEARCHGEQ, dbiWRITELOCK) ;
+  pPatho->trouveLibelle(&sToFind, keySEARCHGEQ, dbiWRITELOCK);
   // si on a rien trouvé, on arrête
   if (pPatho->lastError != DBIERR_NONE)
 #else
   if (false == pPatho->trouveLibelleApproche(pContexte->getUserLanguage(), &sToFind))
 #endif
   {
-    delete[] pcSOAPRadixReq ;
-    delete[] pcSOAPRadix ;
-    return (false) ;
+    delete[] pcSOAPRadixReq;
+    delete[] pcSOAPRadix;
+    return (false);
   }
 
   // on trouve la racine commune
-  size_t iCompare ;
-  for (iCompare = 0 ; (iCompare <= strlen(pcSOAPRadix)) && (strncmp(pPatho->_Donnees.getLabel().c_str(), pcSOAPRadix, iCompare) == 0) ; iCompare++)
-        ;
-  pcSOAPRadix[--iCompare] = '\0' ;
-  pcSOAPRadixReq[iCompare] = '\0' ;
+  size_t iCompare;
+  for (iCompare = 0; (iCompare <= strlen(pcSOAPRadix)) && (strncmp(pPatho->_Donnees.getLabel().c_str(), pcSOAPRadix, iCompare) == 0); iCompare++)
+       ;
+  pcSOAPRadix[--iCompare] = '\0';
+  pcSOAPRadixReq[iCompare] = '\0';
 
 #ifndef _ENTERPRISE_DLL
 
-  int comp = 0 ;
+  int comp = 0;
 
   // on va essayer de trouver d'autres occurences
   while ((pPatho->lastError == DBIERR_NONE) && (comp == 0))
   {
     // purification du résultat de la requête
     // (nettoyage des caractères spéciaux utilisés dans le Lexique)
-    string  sLibelleAffiche ;
-    pPatho->_Donnees.donneLibelleAffiche(&sLibelleAffiche) ;
+    string  sLibelleAffiche;
+    pPatho->_Donnees.donneLibelleAffiche(&sLibelleAffiche);
 
     // on vérifie si le terme trouvé correspond à la requête
     if (sLibelleAffiche == *psSOAP2Parse)
     {
-      delete[] pcSOAPRadixReq ;
-      delete[] pcSOAPRadix ;
+      delete[] pcSOAPRadixReq;
+      delete[] pcSOAPRadix;
 
-      return (true) ;
+      return (true);
     }
-    pPatho->lastError = pPatho->suivant(dbiWRITELOCK) ;
+    pPatho->lastError = pPatho->suivant(dbiWRITELOCK);
     if (pPatho->lastError == DBIERR_NONE)
     {
-      pPatho->lastError = pPatho->getRecord() ;
+      pPatho->lastError = pPatho->getRecord();
 			if (pPatho->lastError == DBIERR_NONE)
       {
-        char donneeFiche[255] ;
-        strncpy(donneeFiche, pPatho->_Donnees.libelle, strlen(pPatho->_Donnees.libelle)) ;
-        donneeFiche[strlen(pPatho->_Donnees.libelle)] = '\0' ;
-        ConvertitMajuscule(donneeFiche) ;
+        char donneeFiche[255];
+        strncpy(donneeFiche, pPatho->_Donnees.libelle, strlen(pPatho->_Donnees.libelle));
+        donneeFiche[strlen(pPatho->_Donnees.libelle)] = '\0';
+        ConvertitMajuscule(donneeFiche);
 
         // on fait une comparaison avec la racine (test de continuation)
-        comp = strncmp(donneeFiche, pcSOAPRadixReq, strlen(pcSOAPRadix)) ;
+        comp = strncmp(donneeFiche, pcSOAPRadixReq, strlen(pcSOAPRadix));
       }
     }
   }
 #endif
 
-  delete[] pcSOAPRadixReq ;
-  delete[] pcSOAPRadix ;
+  delete[] pcSOAPRadixReq;
+  delete[] pcSOAPRadix;
 
   // à ce stade on a testé tous les termes de la liste d'éléments probables (du moins "proche")
   // mais on a pas trouvé de terme qui matche assez
-  return (false) ;
+  return (false);
 }
 catch (...)
 {
-  erreur("Exception ParseSOAP::ParsingEq.", standardError) ;
-  return false ;
+  erreur("Exception ParseSOAP::ParsingEq.", standardError);
+  return false;
 }
 }
 
@@ -1728,16 +1728,16 @@ ParseSOAP::getLibelleParsing()
 try
 {
   if (psResultParsing)
-    delete psResultParsing ;
+    delete psResultParsing;
 
-	psResultParsing = new string(pPatho->_Donnees.getLabel()) ;
+	psResultParsing = new string(pPatho->_Donnees.getLabel());
 
-	return (psResultParsing) ;
+	return (psResultParsing);
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getLibelleParsing.", standardError) ;
-	return NULL ;
+	erreur("Exception ParseSOAP::getLibelleParsing.", standardError);
+	return NULL;
 }
 }
 
@@ -1755,15 +1755,15 @@ ParseSOAP::getCodeParsing()
 try
 {
   if (NULL == psResultParsing)
-    delete psResultParsing ;
+    delete psResultParsing;
 
-	psResultParsing = new string(pPatho->_Donnees.getCode()) ;
+	psResultParsing = new string(pPatho->_Donnees.getCode());
 
-	return (psResultParsing) ;
+	return (psResultParsing);
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getCodeParsing.", standardError) ;
+	erreur("Exception ParseSOAP::getCodeParsing.", standardError);
 	return NULL;
 }
 }
@@ -1777,7 +1777,7 @@ catch (...)
 void
 ParseSOAP::ConvertitMajuscule(char* chaine)
 {
-  for (size_t i = 0 ; i< strlen(chaine); i++)
+  for (size_t i = 0; i< strlen(chaine); i++)
   {
     switch (chaine[i])
     {
@@ -1788,7 +1788,7 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'é' :
       case 'ë' :
       case 'è' :
-      case 'ê' : chaine[i] =  'E' ;
+      case 'ê' : chaine[i] =  'E';
         break;
       case 'À' :
       case 'Á' :
@@ -1803,7 +1803,7 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'ä' :
       case 'å' :
       case 'æ' :
-      case 'á' : chaine[i] =  'A' ;
+      case 'á' : chaine[i] =  'A';
                  break;
       case 'Ì' :
       case 'Í' :
@@ -1811,7 +1811,7 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'Ï' :
       case 'í' :
       case 'î' :
-      case 'ï' : chaine[i] =  'I' ;
+      case 'ï' : chaine[i] =  'I';
                  break;
       case 'Ü' ://220
       case 'Û' :
@@ -1820,7 +1820,7 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'ú' :
       case 'û' :
       case 'ü' :
-      case 'ù' : chaine[i] =  'U' ;
+      case 'ù' : chaine[i] =  'U';
                  break;
       case 'Õ' : //213
       case 'Ö' :
@@ -1831,41 +1831,41 @@ ParseSOAP::ConvertitMajuscule(char* chaine)
       case 'ó' :
       case 'ô' :
       case 'õ' :
-      case 'ö' : chaine[i] = 'O' ;
+      case 'ö' : chaine[i] = 'O';
                  break;
       case 'ñ' :
-      case 'Ñ' : chaine[i] = 'N' ; //209
+      case 'Ñ' : chaine[i] = 'N'; //209
                  break;
       case 'Ý' :
-      case 'ÿ' : chaine[i] = 'Y' ; //209
+      case 'ÿ' : chaine[i] = 'Y'; //209
                  break;
       case 'Ç' :
-      case 'ç' : chaine[i] = 'C' ; //209
+      case 'ç' : chaine[i] = 'C'; //209
                  break;
-      case 'Ð' : chaine[i] = 'D' ; //209
+      case 'Ð' : chaine[i] = 'D'; //209
                  break;
 #ifdef __linux__
-      default  : chaine[i] = toupper(chaine[i]) ;
+      default  : chaine[i] = toupper(chaine[i]);
 #endif
     }
   }
 #ifndef __linux__
-  chaine = strupr(chaine) ;
+  chaine = strupr(chaine);
 #endif
 }
 
 string
 ParseSOAP::ConvertitMajuscule(string sChaine)
 {
-	char* pcChaine = new char[strlen(sChaine.c_str()) + 1] ;
-	strcpy(pcChaine, sChaine.c_str()) ;
+	char* pcChaine = new char[strlen(sChaine.c_str()) + 1];
+	strcpy(pcChaine, sChaine.c_str());
 
-  ConvertitMajuscule(pcChaine) ;
+  ConvertitMajuscule(pcChaine);
 
-  string sMajChaine = string(pcChaine) ;
-  delete[] pcChaine ;
+  string sMajChaine = string(pcChaine);
+  delete[] pcChaine;
 
-  return sMajChaine ;
+  return sMajChaine;
 }
 
 // ----------------------------------------------------------
@@ -1900,39 +1900,39 @@ ParseCategory::ParseCategory(int nb, string label, string pattern)
 {
 try
 {
-  nbDigit   = nb ;
-  sLabel    = label ;
-  psPattern = new vector<string *> ;
+  nbDigit   = nb;
+  sLabel    = label;
+  psPattern = new vector<string *>;
 
-  int iPosBeg = 0 ;
-  int iPosEnd = pattern.find(" ") ;
-  int iLength = iPosEnd - iPosBeg ;
+  int iPosBeg = 0;
+  int iPosEnd = pattern.find(" ");
+  int iLength = iPosEnd - iPosBeg;
 
   while (iLength > 0)
   {
-    string *pNewString = new string(pattern, iPosBeg, iLength) ;
-    psPattern->push_back(pNewString) ;
+    string *pNewString = new string(pattern, iPosBeg, iLength);
+    psPattern->push_back(pNewString);
 
-    iPosBeg = iPosEnd + 1 ;
-    iPosEnd = pattern.find(" ", iPosBeg) ;
+    iPosBeg = iPosEnd + 1;
+    iPosEnd = pattern.find(" ", iPosBeg);
     if (iPosEnd < iPosBeg)
-      iPosEnd = strlen(pattern.c_str()) ;
-    iLength = iPosEnd - iPosBeg ;
+      iPosEnd = strlen(pattern.c_str());
+    iLength = iPosEnd - iPosBeg;
   }
 
-  pDomainObligatoire = new ElemSetArray() ;
-  pDomainPossible    = new ElemSetArray() ;
-  pDomainInterdit    = new ElemSetArray() ;
-  pDomain3BT         = new ElemSetArray() ;
+  pDomainObligatoire = new ElemSetArray();
+  pDomainPossible    = new ElemSetArray();
+  pDomainInterdit    = new ElemSetArray();
+  pDomain3BT         = new ElemSetArray();
 
-  sObligatoire = string("") ;
-  sPossible    = string("") ;
-  sInterdit    = string("") ;
-  s3BT         = string("") ;
+  sObligatoire = string("");
+  sPossible    = string("");
+  sInterdit    = string("");
+  s3BT         = string("");
 }
 catch (...)
 {
-  erreur("Exception ParseCategory ctor.", standardError) ;
+  erreur("Exception ParseCategory ctor.", standardError);
 }
 }
 
@@ -1943,26 +1943,26 @@ catch (...)
 // ----------------------------------------------------------
 ParseCategory::~ParseCategory()
 {
-//    delete psPattern ;
-  pDomainObligatoire->vider() ;
-  delete pDomainObligatoire ;
-  pDomainPossible->vider() ;
-  delete pDomainPossible ;
-  pDomainInterdit->vider() ;
-  delete pDomainInterdit ;
-  pDomain3BT->vider() ;
-  delete pDomain3BT ;
+//    delete psPattern;
+  pDomainObligatoire->vider();
+  delete pDomainObligatoire;
+  pDomainPossible->vider();
+  delete pDomainPossible;
+  pDomainInterdit->vider();
+  delete pDomainInterdit;
+  pDomain3BT->vider();
+  delete pDomain3BT;
 
   if (false == psPattern->empty())
   {
-    pstringIterator i = psPattern->begin() ;
-    for ( ; i != psPattern->end() ; )
+    pstringIterator i = psPattern->begin();
+    for (; i != psPattern->end(); )
     {
-      delete *i ;
-      psPattern->erase(i) ;
+      delete *i;
+      psPattern->erase(i);
     }
   }
-  delete psPattern ;
+  delete psPattern;
 }
 
 // ----------------------------------------------------------
@@ -1975,12 +1975,12 @@ ParseCategory::~ParseCategory()
 void
 ParseCategory::DefObligatoire(string sDefine)
 {
-  sObligatoire = sDefine ;
+  sObligatoire = sDefine;
 
   if (NULL != pDomainObligatoire)
-    delete pDomainObligatoire ;
+    delete pDomainObligatoire;
     
-  pDomainObligatoire = DefDomain(sDefine) ;
+  pDomainObligatoire = DefDomain(sDefine);
 }
 
 // ----------------------------------------------------------
@@ -1994,12 +1994,12 @@ void
 ParseCategory::DefObligatoire(ElemSetArray *pElemSetArray)
 {
   if (NULL != pDomainObligatoire)
-    delete pDomainObligatoire ;
+    delete pDomainObligatoire;
 
-  pDomainObligatoire = pElemSetArray ;
+  pDomainObligatoire = pElemSetArray;
 
   if (NULL != pElemSetArray)
-    sObligatoire = pDomainObligatoire->toString() ;
+    sObligatoire = pDomainObligatoire->toString();
 }
 
 // ----------------------------------------------------------
@@ -2012,12 +2012,12 @@ ParseCategory::DefObligatoire(ElemSetArray *pElemSetArray)
 void
 ParseCategory::DefPossible(string sDefine)
 {
-  sPossible = sDefine ;
+  sPossible = sDefine;
 
   if (NULL != pDomainPossible)
-    delete pDomainPossible ;
+    delete pDomainPossible;
 
-  pDomainPossible = DefDomain(sDefine) ;
+  pDomainPossible = DefDomain(sDefine);
 }
 
 // ----------------------------------------------------------
@@ -2031,12 +2031,12 @@ void
 ParseCategory::DefPossible(ElemSetArray *pElemSetArray)
 {
   if (NULL != pDomainPossible)
-    delete pDomainPossible ;
+    delete pDomainPossible;
 
-  pDomainPossible = pElemSetArray ;
+  pDomainPossible = pElemSetArray;
 
   if (NULL != pElemSetArray)
-    sPossible = pDomainPossible->toString() ;
+    sPossible = pDomainPossible->toString();
 }
 
 // ----------------------------------------------------------
@@ -2049,12 +2049,12 @@ ParseCategory::DefPossible(ElemSetArray *pElemSetArray)
 void
 ParseCategory::DefInterdit(string sDefine)
 {
-  sInterdit = sDefine ;
+  sInterdit = sDefine;
 
   if (NULL != pDomainInterdit)
-    delete pDomainInterdit ;
+    delete pDomainInterdit;
 
-  pDomainInterdit = DefDomain(sDefine) ;
+  pDomainInterdit = DefDomain(sDefine);
 }
 
 // ----------------------------------------------------------
@@ -2068,35 +2068,35 @@ void
 ParseCategory::DefInterdit(ElemSetArray *pElemSetArray)
 {
   if (NULL != pDomainInterdit)
-    delete pDomainInterdit ;
+    delete pDomainInterdit;
 
-  pDomainInterdit = pElemSetArray ;
+  pDomainInterdit = pElemSetArray;
 
   if (NULL != pElemSetArray)
-    sInterdit = pDomainInterdit->toString() ;
+    sInterdit = pDomainInterdit->toString();
 }
 
 void
 ParseCategory::Def3BT(string sDefine)
 {
-  s3BT = sDefine ;
+  s3BT = sDefine;
 
   if (NULL != pDomain3BT)
-    delete pDomain3BT ;
+    delete pDomain3BT;
 
-  pDomain3BT = DefDomain(sDefine) ;
+  pDomain3BT = DefDomain(sDefine);
 }
 
 void
 ParseCategory::Def3BT(ElemSetArray *pElemSetArray)
 {
   if (NULL != pDomain3BT)
-    delete pDomain3BT ;
+    delete pDomain3BT;
 
-  pDomain3BT = pElemSetArray ;
+  pDomain3BT = pElemSetArray;
 
   if (NULL != pElemSetArray)
-    s3BT = pDomain3BT->toString() ;
+    s3BT = pDomain3BT->toString();
 }
 
 // ----------------------------------------------------------
@@ -2109,10 +2109,10 @@ ParseCategory::Def3BT(ElemSetArray *pElemSetArray)
 void
 ParseCategory::DefCritere(string sDefO, string sDefP, string sDefI, string sDef3)
 {
-  DefObligatoire(sDefO) ;
-  DefPossible(sDefP) ;
-  DefInterdit(sDefI) ;
-  Def3BT(sDef3) ;
+  DefObligatoire(sDefO);
+  DefPossible(sDefP);
+  DefInterdit(sDefI);
+  Def3BT(sDef3);
 }
 
 // ----------------------------------------------------------
@@ -2127,50 +2127,50 @@ ParseCategory::DefDomain(string sDomain)
 {
 try
 {
-	ElemSetArray* pESAResult = new ElemSetArray() ;
+	ElemSetArray* pESAResult = new ElemSetArray();
 
 	if (string("") == sDomain)
-		return pESAResult ;
+		return pESAResult;
 
-	size_t iPosBeg = 0 ;
-	size_t iPosEnd = sDomain.find(";") ;
+	size_t iPosBeg = 0;
+	size_t iPosEnd = sDomain.find(";");
 	if (iPosEnd == NPOS)
-		iPosEnd = strlen(sDomain.c_str()) ;
-	int iLength = iPosEnd - iPosBeg ;
+		iPosEnd = strlen(sDomain.c_str());
+	int iLength = iPosEnd - iPosBeg;
 
 	while (iPosEnd < strlen(sDomain.c_str()) + 1)
 	{
-		ElemSet* pNewElem = new ElemSet(string(sDomain, iPosBeg, iLength)) ;
+		ElemSet* pNewElem = new ElemSet(string(sDomain, iPosBeg, iLength));
 
-		ElemSetArray ElemSetArrayResult ;
-		pNewElem->ComputeJoker(*psPattern, &ElemSetArrayResult) ;
+		ElemSetArray ElemSetArrayResult;
+		pNewElem->ComputeJoker(*psPattern, &ElemSetArrayResult);
 
 		if (ElemSetArrayResult.empty())
-			pESAResult->push_back(pNewElem) ;
+			pESAResult->push_back(pNewElem);
 		else
 		{
-			for (ElemSetIterator ElemSetIter = ElemSetArrayResult.begin() ; ElemSetIter != ElemSetArrayResult.end() ; ElemSetIter++)
-				pESAResult->push_back(new ElemSet(*(*ElemSetIter))) ;
-			delete pNewElem ;
+			for (ElemSetIterator ElemSetIter = ElemSetArrayResult.begin(); ElemSetIter != ElemSetArrayResult.end(); ElemSetIter++)
+				pESAResult->push_back(new ElemSet(*(*ElemSetIter)));
+			delete pNewElem;
 		}
 
-		iPosBeg = iPosEnd + 1 ;
+		iPosBeg = iPosEnd + 1;
 		if (iPosBeg < strlen(sDomain.c_str()))
 		{
-			iPosEnd = sDomain.find(";", iPosBeg) ;
+			iPosEnd = sDomain.find(";", iPosBeg);
 			if (iPosEnd == NPOS)
-				iPosEnd = strlen(sDomain.c_str()) ;
-			iLength = iPosEnd - iPosBeg ;
+				iPosEnd = strlen(sDomain.c_str());
+			iLength = iPosEnd - iPosBeg;
 		}
 		else
-			iPosEnd = strlen(sDomain.c_str()) + 1 ;
+			iPosEnd = strlen(sDomain.c_str()) + 1;
 	}
-	return (pESAResult) ;      // pour l'instant, le résultat sera psResult
+	return (pESAResult);      // pour l'instant, le résultat sera psResult
 }
 catch (...)
 {
-	erreur("Exception ParseCategory::DefDomain.", standardError) ;
-	return NULL ;
+	erreur("Exception ParseCategory::DefDomain.", standardError);
+	return NULL;
 }
 }
 
@@ -2184,29 +2184,29 @@ catch (...)
 // ----------------------------------------------------------
 ElemSet::ElemSet(string sElem)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   if (string("") == sElem)
   {
-    sBegin    = string("") ;
-    sEnd      = string("") ;
-    bEmptySet = false ;
-    return ;
+    sBegin    = string("");
+    sEnd      = string("");
+    bEmptySet = false;
+    return;
   }
 
-  size_t iPos = sElem.find("-") ;
+  size_t iPos = sElem.find("-");
   if (NPOS != iPos)
   {
-    sBegin = string(sElem, 0, iPos) ;
-    sEnd   = string(sElem, iPos + 1, strlen(sElem.c_str()) - iPos - 1) ;
+    sBegin = string(sElem, 0, iPos);
+    sEnd   = string(sElem, iPos + 1, strlen(sElem.c_str()) - iPos - 1);
   }
   else
   {
-    sBegin = string(sElem) ;
-    sEnd   = string(sElem) ;
+    sBegin = string(sElem);
+    sEnd   = string(sElem);
   }
-  reorder() ;
-  bEmptySet = false ;
+  reorder();
+  bEmptySet = false;
 }
 
 // ----------------------------------------------------------
@@ -2219,24 +2219,24 @@ ElemSet::ElemSet(string sElem)
 // ----------------------------------------------------------
 ElemSet::ElemSet(string sElemBegin, string sElemEnd)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   if (string("") != sElemBegin)
-    sBegin = sElemBegin ;
+    sBegin = sElemBegin;
   else
-    sBegin = string("") ;
+    sBegin = string("");
 
   if (string("") != sElemEnd)
-    sEnd   = sElemEnd ;
+    sEnd   = sElemEnd;
   else
-    sEnd   = string("") ;
+    sEnd   = string("");
 
-  reorder() ;
+  reorder();
 
   if ((string("") == sBegin) && (string("") == sEnd))
-    bEmptySet = true ;
+    bEmptySet = true;
   else
-    bEmptySet = false ;
+    bEmptySet = false;
 }
 
 // ----------------------------------------------------------
@@ -2250,20 +2250,20 @@ ElemSet::ElemSet(string sElemBegin, string sElemEnd)
 // ----------------------------------------------------------
 ElemSet::ElemSet(string sElemBegin, string sElemEnd, bool bElemEmpty)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   if (string("") != sElemBegin)
-    sBegin = sElemBegin ;
+    sBegin = sElemBegin;
   else
-    sBegin = string("") ;
+    sBegin = string("");
 
   if (string("") != sElemEnd)
-    sEnd   = sElemEnd ;
+    sEnd   = sElemEnd;
   else
-    sEnd   = string("") ;
+    sEnd   = string("");
 
-  reorder() ;
-  bEmptySet = bElemEmpty ;
+  reorder();
+  bEmptySet = bElemEmpty;
 }
 
 // ----------------------------------------------------------
@@ -2271,19 +2271,19 @@ ElemSet::ElemSet(string sElemBegin, string sElemEnd, bool bElemEmpty)
 // ----------------------------------------------------------
 ElemSet::ElemSet(ElemSet& rv)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   if (string("") != rv.sBegin)
-    sBegin = rv.sBegin ;
+    sBegin = rv.sBegin;
   else
-    sBegin = string("") ;
+    sBegin = string("");
 
   if (string("") != rv.sEnd)
-    sEnd   = rv.sEnd ;
+    sEnd   = rv.sEnd;
   else
-    sEnd   = string("") ;
+    sEnd   = string("");
 
-  bEmptySet = rv.bEmptySet ;
+  bEmptySet = rv.bEmptySet;
 }
 
 // ----------------------------------------------------------
@@ -2293,21 +2293,21 @@ ElemSet&
 ElemSet::operator=(ElemSet src)
 {
   if (&src == this)
-    return *this ;
+    return *this;
 
   if (string("") != src.sBegin)
-    sBegin = src.sBegin ;
+    sBegin = src.sBegin;
   else
-    sBegin = string("") ;
+    sBegin = string("");
 
   if (string("") != src.sEnd)
-    sEnd   = src.sEnd ;
+    sEnd   = src.sEnd;
   else
-    sEnd   = string("") ;
+    sEnd   = string("");
 
-  bEmptySet = src.bEmptySet ;
+  bEmptySet = src.bEmptySet;
 
-  return *this ;
+  return *this;
 }
 
 // ----------------------------------------------------------
@@ -2317,11 +2317,11 @@ void
 ElemSet::reorder()
 {
   if (sBegin <= sEnd)
-    return ;
+    return;
 
-  string sBuff = sBegin ;
-  sBegin = sEnd ;
-  sEnd   = sBuff ;
+  string sBuff = sBegin;
+  sBegin = sEnd;
+  sEnd   = sBuff;
 }
 
 // ----------------------------------------------------------
@@ -2334,14 +2334,14 @@ ElemSet::reorder()
 string
 ElemSet::toString()
 {
-  string sResult = sBegin ;
+  string sResult = sBegin;
   if (sBegin != sEnd)
   {
     if (sResult != "")
-      sResult += string("-") ;
-    sResult += sEnd ;
+      sResult += string("-");
+    sResult += sEnd;
   }
-  return (sResult) ;
+  return (sResult);
 }
 
 /*
@@ -2376,9 +2376,9 @@ bool
 ElemSet::HasJoker()
 {
   if ((sBegin.find("?") != NPOS) || (sEnd.find("?") != NPOS))
-    return true ;
+    return true;
   else
-    return false ;
+    return false;
 }
 
 // ----------------------------------------------------------
@@ -2409,52 +2409,52 @@ ElemSet::ComputeJoker(vector<string *> sPatterns, ElemSetArray *pElemSetResult)
 try
 {
   if ((NULL == pElemSetResult) || (true == sPatterns.empty()))
-    return ;
+    return;
 
 	if (!(this->HasJoker()))
-		return ;
+		return;
 
-	size_t iJokerPos = sBegin.find("?") ;
+	size_t iJokerPos = sBegin.find("?");
 
 	// Il est impossible de traiter des jokers hétérogènes, comme A?1-A2?
 	// Heterogeneous jokers, like A?1-A2?, can't get solved
 	if (iJokerPos != sEnd.find("?"))
 	{
 		// il faudrait retourner une erreur
-		return ;
+		return;
 	}
 
-	string sBornInf = sBegin ;
-	string sBornSup = sEnd ;
+	string sBornInf = sBegin;
+	string sBornSup = sEnd;
 	string sPattern = *(sPatterns[iJokerPos]);
 
-	for (size_t i = 0 ; i < strlen(sPattern.c_str()) ; i++)
+	for (size_t i = 0; i < strlen(sPattern.c_str()); i++)
 	{
 		// Elaboration d'un intervalle possible
 		// Building of a "less generic" interval
-		sBornInf[iJokerPos] = sPattern[i] ;
-		sBornSup[iJokerPos] = sPattern[i] ;
+		sBornInf[iJokerPos] = sPattern[i];
+		sBornSup[iJokerPos] = sPattern[i];
 
-		ElemSet *pNewElemSet = new ElemSet(sBornInf, sBornSup) ;
+		ElemSet *pNewElemSet = new ElemSet(sBornInf, sBornSup);
 
 		// Cet intervalle peut contenir des jokers, on itère
 		// This interval may still contain jokers, we iterate
-		ElemSetArray NewElemSetResult ;
-		pNewElemSet->ComputeJoker(sPatterns, &NewElemSetResult) ;
+		ElemSetArray NewElemSetResult;
+		pNewElemSet->ComputeJoker(sPatterns, &NewElemSetResult);
 
 		if (NewElemSetResult.empty())
-			pElemSetResult->push_back(pNewElemSet) ;
+			pElemSetResult->push_back(pNewElemSet);
 		else
 		{
-			for (ElemSetIterator ElemSetIter = NewElemSetResult.begin() ; ElemSetIter != NewElemSetResult.end() ; ElemSetIter++)
-				pElemSetResult->push_back(new ElemSet(*(*ElemSetIter))) ;
-			delete pNewElemSet ;
+			for (ElemSetIterator ElemSetIter = NewElemSetResult.begin(); ElemSetIter != NewElemSetResult.end(); ElemSetIter++)
+				pElemSetResult->push_back(new ElemSet(*(*ElemSetIter)));
+			delete pNewElemSet;
 		}
 	}
 }
 catch (...)
 {
-	erreur("Exception ElemSet::ComputeJoker.", standardError) ;
+	erreur("Exception ElemSet::ComputeJoker.", standardError);
 }
 }
 
@@ -2470,28 +2470,28 @@ ElemSet::doesContain(string sCode)
   // Empty strings are tricky when compared
 
   if (string("") == sCode)
-    return false ;
+    return false;
   if ((string("") == sBegin) && (string("") == sEnd))
-    return false ;
+    return false;
 
   //  Cas trivial
   if ((sBegin == sCode) || (sEnd == sCode))
-    return true ;
+    return true;
 
-  string sBornInf ;
-  string sBornSup ;
-  string sCompare ;
+  string sBornInf;
+  string sBornSup;
+  string sCompare;
 
-  size_t iCodeSize = strlen(sCode.c_str()) ;
-  size_t iElemSize = strlen(sBegin.c_str()) ;
+  size_t iCodeSize = strlen(sCode.c_str());
+  size_t iElemSize = strlen(sBegin.c_str());
 
   // Jokers ?
-  size_t iJokerPos = sBegin.find("?") ;
+  size_t iJokerPos = sBegin.find("?");
   if (NPOS != iJokerPos)
   {
     // Heterogeneous jokers, like A?1-A2?, can't get solved
     if (iJokerPos != sEnd.find("?"))
-      return false ;
+      return false;
 
     // Size matters : it is only possible to compare strings with same size
 
@@ -2501,51 +2501,51 @@ ElemSet::doesContain(string sCode)
     {
       if ((string(sBegin, iCodeSize, iElemSize - iCodeSize) != string(iElemSize - iCodeSize, '?')) ||
           (string(sEnd, iCodeSize, iElemSize - iCodeSize) != string(iElemSize - iCodeSize, '?')))
-        return false ;
+        return false;
       else
       {
-        sBornInf = string(sBegin, 0, iCodeSize) ;
-        sBornSup = string(sEnd, 0, iCodeSize) ;
-        sCompare = sCode ;
+        sBornInf = string(sBegin, 0, iCodeSize);
+        sBornSup = string(sEnd, 0, iCodeSize);
+        sCompare = sCode;
       }
     }
     else
     {
-      sBornInf = sBegin ;
-      sBornSup = sEnd ;
+      sBornInf = sBegin;
+      sBornSup = sEnd;
       // if sCode is longer than sBegin, we truncate it
       if (iCodeSize > iElemSize)
-        sCompare = string(sCode, 0, iElemSize) ;
+        sCompare = string(sCode, 0, iElemSize);
       else
-        sCompare = sCode ;
+        sCompare = sCode;
     }
 
     // On supprime les colonnes qui possèdent des jokers
     // We delete columns with a joker
-    iJokerPos = sBornInf.find("?") ;
+    iJokerPos = sBornInf.find("?");
     while (iJokerPos != NPOS)
     {
       // Heterogeneous jokers, like A?1-A2?, can't get solved
       if (iJokerPos != sBornSup.find("?"))
-        return false ;
+        return false;
 
-      size_t iSize = strlen(sBornInf.c_str()) ;
+      size_t iSize = strlen(sBornInf.c_str());
       if (iJokerPos < iSize - 1)
       {
-        sBornInf = string(sBornInf, 0, iJokerPos) + string(sBornInf, iJokerPos+1, iSize-iJokerPos-1) ;
-        sBornSup = string(sBornSup, 0, iJokerPos) + string(sBornSup, iJokerPos+1, iSize-iJokerPos-1) ;
-        sCompare = string(sCompare, 0, iJokerPos) + string(sCompare, iJokerPos+1, iSize-iJokerPos-1) ;
+        sBornInf = string(sBornInf, 0, iJokerPos) + string(sBornInf, iJokerPos+1, iSize-iJokerPos-1);
+        sBornSup = string(sBornSup, 0, iJokerPos) + string(sBornSup, iJokerPos+1, iSize-iJokerPos-1);
+        sCompare = string(sCompare, 0, iJokerPos) + string(sCompare, iJokerPos+1, iSize-iJokerPos-1);
       }
       else if (iJokerPos > 0)
       {
-        sBornInf = string(sBornInf, 0, iJokerPos) ;
-        sBornSup = string(sBornSup, 0, iJokerPos) ;
-        sCompare = string(sCompare, 0, iJokerPos) ;
+        sBornInf = string(sBornInf, 0, iJokerPos);
+        sBornSup = string(sBornSup, 0, iJokerPos);
+        sCompare = string(sCompare, 0, iJokerPos);
       }
       else
-        return true ;  // only jokers
+        return true;  // only jokers
 
-      iJokerPos = sBornInf.find("?") ;
+      iJokerPos = sBornInf.find("?");
     }
   }
   // No jokers
@@ -2558,29 +2558,29 @@ ElemSet::doesContain(string sCode)
     // ex A13-A32 compared with A2 = true
     if (iCodeSize < iElemSize)
     {
-      sBornInf = string(sBegin, 0, iCodeSize) ;
-      sBornSup = string(sEnd, 0, iCodeSize) ;
-      sCompare = sCode ;
+      sBornInf = string(sBegin, 0, iCodeSize);
+      sBornSup = string(sEnd, 0, iCodeSize);
+      sCompare = sCode;
       if ((sCode > sBornInf) && (sCode < sBornSup))
-        return true ;
+        return true;
       else
-        return false ;
+        return false;
     }
     else
     {
-      sBornInf = sBegin ;
-      sBornSup = sEnd ;
+      sBornInf = sBegin;
+      sBornSup = sEnd;
       // if sCode is longer than sBegin, we truncate it
       if (iCodeSize > iElemSize)
-        sCompare = string(sCode, 0, iElemSize) ;
+        sCompare = string(sCode, 0, iElemSize);
       else
-        sCompare = sCode ;
+        sCompare = sCode;
     }
   }
   if ((sCompare >= sBornInf) && (sCompare <= sBornSup))
-    return true ;
+    return true;
   else
-    return false ;
+    return false;
 }
 
 /*
@@ -2612,7 +2612,7 @@ ElemSetArray    *ElemSet::ComputeJoker(vector<string *> *psPattern)
 				if (iJokerPos + nbJoker == strlen(this->sBegin.c_str()))
 				// si les '?' sont à la fin, on créé un intervalle
 				{
-						for ( ; iJokerPos <= strlen(this->sBegin.c_str()) ; iJokerPos++)
+						for (; iJokerPos <= strlen(this->sBegin.c_str()); iJokerPos++)
 						{
 								string  sPattern = *(*psPattern)[iJokerPos];         // on récupère le pattern correspondant au Digit
 								// remplacement du '?' de début d'intervalle par le minimum du Digit
@@ -2688,34 +2688,34 @@ bool
 ElemSet::intersect(ElemSet *pElem)
 {
   if (NULL == pElem)
-    return false ;
+    return false;
 
   // si pElem et this sont des ensembles vides
   if ((true == pElem->bEmptySet) && (true == this->bEmptySet))
-    return true ;
+    return true;
 
   // si pElem ou this est l'ensemble vide
   if ((true == pElem->bEmptySet) || (true == this->bEmptySet))
-    return false ;
+    return false;
 
   // si pElem->borneSup est dans this
   if ((pElem->sEnd >= sBegin) && (pElem->sEnd <= sEnd))
-    return true ;
+    return true;
 
   // si pElem->borneInf est dans this
   if ((pElem->sBegin >= sBegin) && (pElem->sBegin <= sEnd))
-    return true ;
+    return true;
 
   // si this->borneSup est dans pElem
   if ((sEnd >= pElem->sBegin) && (sEnd <= pElem->sEnd))
-    return true ;
+    return true;
 
   // si this->borneInf est dans pElem
   if ((sBegin >= pElem->sBegin) && (sBegin <= pElem->sEnd))
-    return true ;
+    return true;
 
   // sinon (on est dans un cas où il n'y a pas d'intersection)
-  return false ;
+  return false;
 }
 
 // ----------------------------------------------------------
@@ -2730,22 +2730,22 @@ ElemSet::Smaller(ElemSet* pElem)
 {
 try
 {
-  string sBorneInf = sBegin ;
-  string sBorneSup = sEnd ;
+  string sBorneInf = sBegin;
+  string sBorneSup = sEnd;
 
   if ((NULL != pElem) && (sBegin <= pElem->sBegin))
-    sBorneInf = string(pElem->sBegin) ;
+    sBorneInf = string(pElem->sBegin);
 
   if ((NULL != pElem) && (sEnd >= pElem->sEnd))
-    sBorneSup = string(pElem->sEnd) ;
+    sBorneSup = string(pElem->sEnd);
 
-  ElemSet *pResult = new ElemSet(sBorneInf, sBorneSup) ;
-  return (pResult) ;
+  ElemSet *pResult = new ElemSet(sBorneInf, sBorneSup);
+  return (pResult);
 }
 catch (...)
 {
-  erreur("Exception ElemSet::Smaller.", standardError) ;
-  return NULL ;
+  erreur("Exception ElemSet::Smaller.", standardError);
+  return NULL;
 }
 }
 
@@ -2761,24 +2761,24 @@ ElemSet::inter(ElemSetArray *pElems)
 {
 try
 {
-	ElemSetArray* pResult = new ElemSetArray() ;
+	ElemSetArray* pResult = new ElemSetArray();
 	if ((NULL == pElems) || (pElems->empty()))
-		return (pResult) ;
+		return (pResult);
 
-	ElemSetArray::iterator pElemIter ;
+	ElemSetArray::iterator pElemIter;
 	// calcul des intersections
-	for (pElemIter = pElems->begin() ; pElems->end() != pElemIter ; pElemIter++)
+	for (pElemIter = pElems->begin(); pElems->end() != pElemIter; pElemIter++)
 	{
 		if (intersect(*pElemIter))
-			pResult->push_back(Smaller(*pElemIter)) ;
+			pResult->push_back(Smaller(*pElemIter));
 		else
-			pResult->push_back(new ElemSet("", "", true)) ;
+			pResult->push_back(new ElemSet("", "", true));
 	}
-	return (pResult) ;
+	return (pResult);
 }
 catch (...)
 {
-	erreur("Exception ElemSet::inter.", standardError) ;
+	erreur("Exception ElemSet::inter.", standardError);
 	return NULL;
 }
 }
@@ -2796,47 +2796,47 @@ ElemSet::ComputeUnion(ElemSetArray *pElems)
 try
 {
 	if ((NULL == pElems) || (pElems->empty()))
-		return ;
+		return;
 
-  ElemSetIterator ElemIter ;
-  bool            bOneEmptySet = false ;
-  bool            bOneElem = false ;
+  ElemSetIterator ElemIter;
+  bool            bOneEmptySet = false;
+  bool            bOneElem = false;
 
   // calcul des unions entre les intersections se chevauchant
-  for (ElemIter = pElems->begin() ; ElemIter != pElems->end() ; )
+  for (ElemIter = pElems->begin(); ElemIter != pElems->end(); )
   {
     if (((*ElemIter) != this) && (intersect(*ElemIter)))
     {
       if ((false == (*ElemIter)->bEmptySet) && (false == this->bEmptySet))
       {
-        bOneElem = true ;
+        bOneElem = true;
         if (sBegin > (*ElemIter)->sBegin)
-          sBegin = string((*ElemIter)->sBegin) ;
+          sBegin = string((*ElemIter)->sBegin);
         if (sEnd < (*ElemIter)->sEnd)
-          sEnd = string((*ElemIter)->sEnd) ;
+          sEnd = string((*ElemIter)->sEnd);
       }
-      delete *ElemIter ;
-      pElems->erase(ElemIter) ;
+      delete *ElemIter;
+      pElems->erase(ElemIter);
     }
     else
     {
       if (((*ElemIter) != this) && (true == (*ElemIter)->bEmptySet))
       {
-        bOneEmptySet = true ;
-        delete *ElemIter ;
-        pElems->erase(ElemIter) ;
+        bOneEmptySet = true;
+        delete *ElemIter;
+        pElems->erase(ElemIter);
       }
       else
-        ElemIter++ ;
+        ElemIter++;
     }
   }
 
   if ((true == bOneEmptySet) && (false == bOneElem))
-    pElems->push_back(new ElemSet("", "", true)) ;
+    pElems->push_back(new ElemSet("", "", true));
 }
 catch (...)
 {
-  erreur("Exception ElemSet::ComputeUnion.", standardError) ;
+  erreur("Exception ElemSet::ComputeUnion.", standardError);
 }
 }
 
@@ -2846,7 +2846,7 @@ catch (...)
 ElemSetArray::ElemSetArray(string sDomaine)
 						 :ElemSetVector()
 {
-  lObjectCount++ ;
+  lObjectCount++;
 }
 
 // ----------------------------------------------------------
@@ -2857,32 +2857,32 @@ ElemSetArray::ElemSetArray(string sDomaine)
 // ----------------------------------------------------------
 ElemSetArray::~ElemSetArray()
 {
-  lObjectCount-- ;
+  lObjectCount--;
 
-	vider() ;
+	vider();
 }
 
 ElemSetArray::ElemSetArray(ElemSetArray& rv)
              :ElemSetVector()
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   if (false == rv.empty())
-    for (ElemSetIterator i = rv.begin() ; rv.end() != i ; i++)
-      push_back(new ElemSet(**i)) ;
+    for (ElemSetIterator i = rv.begin(); rv.end() != i; i++)
+      push_back(new ElemSet(**i));
 }
 
 bool
 ElemSetArray::doesContain(string sCode)
 {
   if (empty())
-    return false ;
+    return false;
 
-  for (ElemSetIterator i = begin() ; end() != i ; i++)
+  for (ElemSetIterator i = begin(); end() != i; i++)
     if ((*i)->doesContain(sCode))
-      return true ;
+      return true;
 
-  return false ;
+  return false;
 }
 
 // ----------------------------------------------------------
@@ -2896,16 +2896,16 @@ bool
 ElemSetArray::isEmpty()
 {
   if (empty())
-    return true ;
+    return true;
 
-  for (ElemSetIterator i = begin() ; end() != i ; i++)
+  for (ElemSetIterator i = begin(); end() != i; i++)
   {
     if (false == (*i)->isEmptySet())
-      return false ;
+      return false;
     if (string("") != (*i)->getBegin())
-      return false ;
+      return false;
   }
-  return true ;
+  return true;
 }
 
 // ----------------------------------------------------------
@@ -2918,12 +2918,12 @@ void
 ElemSetArray::vider()
 {
 	if (empty())
-		return ;
+		return;
 
-	for (ElemSetIterator i = begin() ; i != end() ; )
+	for (ElemSetIterator i = begin(); i != end(); )
 	{
-		delete *i ;
-		erase(i) ;
+		delete *i;
+		erase(i);
 	}
 }
 
@@ -2940,36 +2940,36 @@ ElemSet::minus(ElemSet *pElem)
 {
 try
 {
-	ElemSetArray* pResult = new ElemSetArray() ;
+	ElemSetArray* pResult = new ElemSetArray();
 
 	if (NULL == pElem)
-		return pResult ;
+		return pResult;
 
 	if (pElem->isEmptySet())
 	{
-		pResult->push_back(new ElemSet(sBegin, sEnd, bEmptySet)) ;
-		return pResult ;
+		pResult->push_back(new ElemSet(sBegin, sEnd, bEmptySet));
+		return pResult;
 	}
 
 	if (isEmptySet())
 	{
-		pResult->push_back(new ElemSet("", "", true)) ;
-		return pResult ;
+		pResult->push_back(new ElemSet("", "", true));
+		return pResult;
 	}
 
-	ElemSet* p2remove = Smaller(pElem) ;
+	ElemSet* p2remove = Smaller(pElem);
 	if (sBegin < p2remove->getBegin())
-		pResult->push_back(new ElemSet(sBegin, p2remove->getBegin())) ;
+		pResult->push_back(new ElemSet(sBegin, p2remove->getBegin()));
 
 	if (sEnd > p2remove->getEnd())
-		pResult->push_back(new ElemSet(p2remove->getEnd(), sEnd)) ;
+		pResult->push_back(new ElemSet(p2remove->getEnd(), sEnd));
 
-	return (pResult) ;
+	return (pResult);
 }
 catch (...)
 {
-  erreur("Exception ElemSet::minus.", standardError) ;
-  return NULL ;
+  erreur("Exception ElemSet::minus.", standardError);
+  return NULL;
 }
 }
 
@@ -2987,45 +2987,45 @@ ElemSetArray::ComputeIntersection(ElemSetArray *pElems)
 {
 try
 {
-	ElemSetArray* pResult = new ElemSetArray() ;
+	ElemSetArray* pResult = new ElemSetArray();
 
 	if (NULL == pElems)
-		return (pResult) ;
+		return (pResult);
 
-	ElemSetArray::iterator  ElemIter ;
+	ElemSetArray::iterator  ElemIter;
 
 	if (empty() || isEmpty())
 	{
 		if (pElems->empty() || pElems->isEmpty())
-			pResult->push_back(new ElemSet("", "", true)) ;
+			pResult->push_back(new ElemSet("", "", true));
 		else
-      // pResult->insert(pResult->end(), pElems->begin(), pElems->end()) ;
-      for (ElemSetIterator it = pElems->begin() ; pElems->end() != it ; it++)
-        pResult->push_back(new ElemSet(**it)) ;
+      // pResult->insert(pResult->end(), pElems->begin(), pElems->end());
+      for (ElemSetIterator it = pElems->begin(); pElems->end() != it; it++)
+        pResult->push_back(new ElemSet(**it));
 	}
 	else
 	{
-		for (ElemIter = begin() ; end() != ElemIter ; ElemIter++)
+		for (ElemIter = begin(); end() != ElemIter; ElemIter++)
 		{
-			ElemSetArray* pTemp = (*ElemIter)->inter(pElems) ;
+			ElemSetArray* pTemp = (*ElemIter)->inter(pElems);
       if (NULL != pTemp)
       {
         if (false == pTemp->empty())
-				  // pResult->insert(pResult->end(), pTemp->begin(), pTemp->end()) ;
-          for (ElemSetIterator it = pTemp->begin() ; pTemp->end() != it ; it++)
-            pResult->push_back(new ElemSet(**it)) ;
+				  // pResult->insert(pResult->end(), pTemp->begin(), pTemp->end());
+          for (ElemSetIterator it = pTemp->begin(); pTemp->end() != it; it++)
+            pResult->push_back(new ElemSet(**it));
             
-        delete pTemp ;
+        delete pTemp;
       }
 		}
 	}
-	pResult->ComputeUnion() ;
-	return (pResult) ;
+	pResult->ComputeUnion();
+	return (pResult);
 }
 catch (...)
 {
-	erreur("Exception ElemSetArray::ComputeIntersection.", standardError) ;
-	return NULL ;
+	erreur("Exception ElemSetArray::ComputeIntersection.", standardError);
+	return NULL;
 }
 }
 
@@ -3040,14 +3040,14 @@ void
 ElemSetArray::ComputeUnion()
 {
   if (empty())
-    return ;
+    return;
 
-  ElemSetArray::iterator ElemIter ;
-  for (ElemIter = begin() ; ElemIter != end() ; )
+  ElemSetArray::iterator ElemIter;
+  for (ElemIter = begin(); ElemIter != end(); )
   {
-    (*ElemIter)->ComputeUnion(this) ;
+    (*ElemIter)->ComputeUnion(this);
     if (ElemIter != end())
-      ElemIter++ ;
+      ElemIter++;
   }
 }
 
@@ -3064,33 +3064,33 @@ ElemSetArray::minus(ElemSet *pTerm)
 try
 {
 	if ((NULL == pTerm) || (empty()))
-		return ;
+		return;
 
-	for (ElemSetIterator ElemIter = begin() ; end() != ElemIter ; )
+	for (ElemSetIterator ElemIter = begin(); end() != ElemIter; )
 	{
 		if (pTerm->intersect(*ElemIter))
 		{
-			ElemSetArray* p2add = (*ElemIter)->minus(pTerm) ;
+			ElemSetArray* p2add = (*ElemIter)->minus(pTerm);
       if (NULL != p2add)
       {
         if (false == p2add->empty())
-			    // insert(end(), p2add->begin(), p2add->end()) ;
-          for (ElemSetIterator it = p2add->begin() ; p2add->end() != it ; it++)
-            push_back(new ElemSet(**it)) ;
-        delete p2add ;
+			    // insert(end(), p2add->begin(), p2add->end());
+          for (ElemSetIterator it = p2add->begin(); p2add->end() != it; it++)
+            push_back(new ElemSet(**it));
+        delete p2add;
       }
 
-			delete *ElemIter ;
-			erase(ElemIter) ;
+			delete *ElemIter;
+			erase(ElemIter);
 		}
 		else
-			ElemIter++ ;
+			ElemIter++;
 	}
-	ComputeUnion() ;
+	ComputeUnion();
 }
 catch (...)
 {
-	erreur("Exception ElemSetArray::minus.", standardError) ;
+	erreur("Exception ElemSetArray::minus.", standardError);
 }
 }
 
@@ -3105,12 +3105,12 @@ void
 ElemSetArray::minus(ElemSetArray *pTerms)
 {
   if (empty())
-    return ;
+    return;
 
-  for (ElemSetIterator ElemIter = pTerms->begin() ; ElemIter != pTerms->end() ; )
-    this->minus(*ElemIter) ;
+  for (ElemSetIterator ElemIter = pTerms->begin(); ElemIter != pTerms->end(); )
+    this->minus(*ElemIter);
 
-  this->ComputeUnion() ;
+  this->ComputeUnion();
 }
 
 // ----------------------------------------------------------
@@ -3126,7 +3126,7 @@ ElemSetArray::print(char *Message)
 		ifstream    inFile;
 		ofstream    outFile;
 		string      line;
-		string      sLastMessage ;
+		string      sLastMessage;
 
     inFile.open("SOAPelem.log");
 		if (inFile)
@@ -3153,7 +3153,7 @@ ElemSetArray::print(char *Message)
 		outFile.write(sLastMessage.c_str(), strlen(sLastMessage.c_str()));
 
 		char    sMessage[256];
-		for (ElemSetIterator ElemIter = this->begin() ; ElemIter != this->end() ; ElemIter++)
+		for (ElemSetIterator ElemIter = this->begin(); ElemIter != this->end(); ElemIter++)
 		{
 				sprintf(sMessage, "sBegin : <%s> -- sEnd : <%s>\n", (*ElemIter)->getBegin().c_str(), (*ElemIter)->getEnd().c_str());
 				outFile.write(sMessage, strlen(sMessage));
@@ -3172,36 +3172,36 @@ ElemSetArray::print(char *Message)
 string
 ElemSetArray::toString()
 {
-  string sResult = "" ;
+  string sResult = "";
   if (empty())
-    return sResult ;
+    return sResult;
 
-  for (ElemSetIterator ElemIter = begin() ; end() != ElemIter ; ElemIter++)
+  for (ElemSetIterator ElemIter = begin(); end() != ElemIter; ElemIter++)
   {
-    string  sTemp = (*ElemIter)->toString() ;
+    string  sTemp = (*ElemIter)->toString();
     if (sTemp != "")
     {
       if (string("") != sResult)
-        sResult += ";" ;
-      sResult += sTemp ;
+        sResult += ";";
+      sResult += sTemp;
     }
   }
-  return sResult ;
+  return sResult;
 }
 
 ElemSetArray&
 ElemSetArray::operator=(ElemSetArray src)
 {
   if (&src == this)
-    return *this ;
+    return *this;
 
-  vider() ;
+  vider();
 
   if (false == src.empty())
-    for (ElemSetIterator i = src.begin() ; src.end() != i ; i++)
-      push_back(new ElemSet(**i)) ;
+    for (ElemSetIterator i = src.begin(); src.end() != i; i++)
+      push_back(new ElemSet(**i));
 
-  return *this ;
+  return *this;
 }
 
 // ----------------------------------------------------------
@@ -3216,18 +3216,18 @@ TermsParser::TermsParser(NSContexte* pCtx, string sClassif, bool bUse3bt)
 {
 try
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
   sClassification = sClassif;
-  pObligatoire    = new ElemSetArray() ;
-  pPossible       = new ElemSetArray() ;
-  pInterdit       = new ElemSetArray() ;
+  pObligatoire    = new ElemSetArray();
+  pPossible       = new ElemSetArray();
+  pInterdit       = new ElemSetArray();
 
-  _bUse3bt = bUse3bt ;
+  _bUse3bt = bUse3bt;
 }
 catch (...)
 {
-  erreur("Exception TermsParser ctor.", standardError) ;
+  erreur("Exception TermsParser ctor.", standardError);
 }
 }
 
@@ -3240,16 +3240,16 @@ catch (...)
 // ----------------------------------------------------------
 TermsParser::~TermsParser()
 {
-  vider() ;
+  vider();
 
-  pObligatoire->vider() ;
-  delete pObligatoire ;
-  pPossible->vider() ;
-  delete pPossible ;
-  pInterdit->vider() ;
-  delete pInterdit ;
+  pObligatoire->vider();
+  delete pObligatoire;
+  pPossible->vider();
+  delete pPossible;
+  pInterdit->vider();
+  delete pInterdit;
 
-  lObjectCount-- ;
+  lObjectCount--;
 }
 
 // ----------------------------------------------------------
@@ -3268,15 +3268,15 @@ TermsParser::~TermsParser()
 ElemSetArray*
 TermsParser::Compute()
 {
-	ElemSetArray* pResult = ComputeWithPIntersection() ;
+	ElemSetArray* pResult = ComputeWithPIntersection();
 	if (pResult)
   {
     if (false == pResult->empty())
-		  return (pResult) ;
+		  return (pResult);
     else
-      delete pResult ;
+      delete pResult;
   }
-  return (ComputeWithPUnion()) ;
+  return (ComputeWithPUnion());
 }
 
 // ----------------------------------------------------------
@@ -3297,18 +3297,18 @@ TermsParser::ComputeWithPUnion()
 {
 try
 {
-  ComputePUnion() ;
-  ComputeIUnion() ;
-  ComputeOIntersection() ;
+  ComputePUnion();
+  ComputeIUnion();
+  ComputeOIntersection();
 
-  ElemSetArray *pResultDomain = pObligatoire->ComputeIntersection(pPossible) ;
-  CheckI(pResultDomain) ;
-  return (pResultDomain) ;
+  ElemSetArray *pResultDomain = pObligatoire->ComputeIntersection(pPossible);
+  CheckI(pResultDomain);
+  return (pResultDomain);
 }
 catch (...)
 {
-  erreur("Exception TermsParser::Compute 1.", standardError) ;
-  return NULL ;
+  erreur("Exception TermsParser::Compute 1.", standardError);
+  return NULL;
 }
 }
 
@@ -3330,33 +3330,33 @@ TermsParser::ComputeWithPIntersection()
 {
 try
 {
-  ComputeOIntersection() ;
-  ComputePIntersection() ;
-  ComputeIUnion() ;
-  CheckI(pPossible) ;
+  ComputeOIntersection();
+  ComputePIntersection();
+  ComputeIUnion();
+  CheckI(pPossible);
 
-  ElemSetArray *pResultDomain = pObligatoire->ComputeIntersection(pPossible) ;
+  ElemSetArray *pResultDomain = pObligatoire->ComputeIntersection(pPossible);
 
-  return (pResultDomain) ;
+  return (pResultDomain);
 }
 catch (...)
 {
-  erreur("Exception TermsParser::Compute 1.", standardError) ;
-  return NULL ;
+  erreur("Exception TermsParser::Compute 1.", standardError);
+  return NULL;
 }
 }
 
 ElemSetArray*
 TermsParser::Compute(ParseElemArray *pParseArray)
 {
-	ElemSetArray* pResult = ComputeWithPIntersection(pParseArray) ;
+	ElemSetArray* pResult = ComputeWithPIntersection(pParseArray);
 	if (pResult)
   {
     if (!pResult->empty() && !pResult->isEmpty())
-		  return pResult ;
-    delete pResult ;
+		  return pResult;
+    delete pResult;
   }
-  return (ComputeWithPUnion()) ;
+  return (ComputeWithPUnion());
 }
 
 // ----------------------------------------------------------
@@ -3377,35 +3377,35 @@ TermsParser::ComputeWithPUnion(ParseElemArray *pParseArray)
 {
 try
 {
-  string sTrace = string("Entering ComputeWithPUnion") ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
+  string sTrace = string("Entering ComputeWithPUnion");
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
 
 	if (!pParseArray || (pParseArray->empty()))
   {
-    sTrace = string("Quitting ComputeWithPUnion due to empty set.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
-		return NULL ;
+    sTrace = string("Quitting ComputeWithPUnion due to empty set.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
+		return NULL;
   }
 
   if (false == ComputeElements(pParseArray))
-    return NULL ;
+    return NULL;
 
-	ComputePUnion() ;
-	ComputeIUnion() ;
-	ComputeOIntersection() ;
+	ComputePUnion();
+	ComputeIUnion();
+	ComputeOIntersection();
 
-	ElemSetArray* pResultDomain = pObligatoire->ComputeIntersection(pPossible) ;
-	CheckI(pResultDomain) ;
+	ElemSetArray* pResultDomain = pObligatoire->ComputeIntersection(pPossible);
+	CheckI(pResultDomain);
 
-  sTrace = string("Quitting ComputeWithPUnion.") ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
+  sTrace = string("Quitting ComputeWithPUnion.");
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
 
-	return (pResultDomain) ;
+	return (pResultDomain);
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeWithPUnion.", standardError) ;
-	return NULL ;
+	erreur("Exception TermsParser::ComputeWithPUnion.", standardError);
+	return NULL;
 }
 }
 
@@ -3427,45 +3427,45 @@ TermsParser::ComputeWithPIntersection(ParseElemArray *pParseArray)
 {
 try
 {
-  string sTrace = string("Entering ComputeWithPIntersection") ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
+  string sTrace = string("Entering ComputeWithPIntersection");
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
 
 	if ((NULL == pParseArray) || (pParseArray->empty()))
   {
-    sTrace = string("Quitting ComputeWithPIntersection due to empty set.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
-		return NULL ;
+    sTrace = string("Quitting ComputeWithPIntersection due to empty set.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
+		return NULL;
   }
 
   if (false == ComputeElements(pParseArray))
-    return NULL ;
+    return NULL;
 
-	ElemSetArray* pResultDomain = new ElemSetArray() ;
-  Compute3btIntersection() ;
-	ComputeOIntersection() ;
-	ComputePIntersection() ;
-	ComputeIUnion() ;
-	CheckI(pPossible) ;
+	ElemSetArray* pResultDomain = new ElemSetArray();
+  Compute3btIntersection();
+	ComputeOIntersection();
+	ComputePIntersection();
+	ComputeIUnion();
+	CheckI(pPossible);
 
   //
   // If there are O and P, then don't take P into account
   //
-	// Old code : if just O, they didn't appear ! : pResultDomain = pObligatoire->ComputeIntersection(pPossible) ;
+	// Old code : if just O, they didn't appear ! : pResultDomain = pObligatoire->ComputeIntersection(pPossible);
   //
   if (false == pObligatoire->empty())
-    *pResultDomain = *pObligatoire ;
+    *pResultDomain = *pObligatoire;
   else
-    *pResultDomain = *pPossible ;
+    *pResultDomain = *pPossible;
 
-  sTrace = string("Quitting ComputeWithPIntersection.") ;
-  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps) ;
+  sTrace = string("Quitting ComputeWithPIntersection.");
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubSteps);
 
-	return (pResultDomain) ;
+	return (pResultDomain);
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeWithPIntersection.", standardError) ;
-	return NULL ;
+	erreur("Exception TermsParser::ComputeWithPIntersection.", standardError);
+	return NULL;
 }
 }
 
@@ -3478,116 +3478,116 @@ TermsParser::ComputeElements(ParseElemArray *pParseArray)
 try
 {
   if ((NULL == pParseArray) || (pParseArray->empty()))
-		return false ;
+		return false;
 
 #ifndef _ENTERPRISE_DLL
   if (NULL == pContexte->getEpisodus())
-    return false ;
+    return false;
 
-  classifExpert* pExpert = pContexte->getEpisodus()->pClassifExpert ;
+  classifExpert* pExpert = pContexte->getEpisodus()->pClassifExpert;
 #else
-  classifExpert* pExpert = pContexte->getSuperviseur()->getClassifExpert() ;
+  classifExpert* pExpert = pContexte->getSuperviseur()->getClassifExpert();
 #endif
   if (NULL == pExpert)
-    return false ;
+    return false;
 
-  int     iSize    = pExpert->donneCodeSize(sClassification) ;
-  string  sPattern = pExpert->donnePattern(sClassification) ;
+  int     iSize    = pExpert->donneCodeSize(sClassification);
+  string  sPattern = pExpert->donnePattern(sClassification);
 
 #ifndef _ENTERPRISE_DLL
-  NSThesaurus *pThesaurus = 0 ;
+  NSThesaurus *pThesaurus = 0;
   //
   // If we have to use 3BT, open the table
   //
   if (_bUse3bt)
   {
-    pThesaurus = new NSThesaurus(pContexte->getSuperviseur()) ;
+    pThesaurus = new NSThesaurus(pContexte->getSuperviseur());
 
-    pThesaurus->lastError = pThesaurus->open() ;
+    pThesaurus->lastError = pThesaurus->open();
     if (DBIERR_NONE != pThesaurus->lastError)
 	  {
 		  erreur("Clinical_Labels.db -- Erreur à l'ouverture du fichier Clinical_Labels.db", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
-		  delete pThesaurus ;
-      pThesaurus = 0 ;
+		  delete pThesaurus;
+      pThesaurus = 0;
 	  }
   }
 #else
-  NSThesaurusInfo *pThesaurus = 0 ;
+  NSThesaurusInfo *pThesaurus = 0;
   //
   // If we have to use 3BT, open the table
   //
   if (_bUse3bt)
-    pThesaurus = new NSThesaurusInfo() ;
+    pThesaurus = new NSThesaurusInfo();
 #endif
 
-	for (ParseElemIter theParseSetIter = pParseArray->begin() ; pParseArray->end() != theParseSetIter ; theParseSetIter++)
+	for (ParseElemIter theParseSetIter = pParseArray->begin(); pParseArray->end() != theParseSetIter; theParseSetIter++)
 	{
-    string sElement = (*theParseSetIter)->getContent() ;
+    string sElement = (*theParseSetIter)->getContent();
 
-		ParseSOAP SOAPParser(pContexte, &sClassification) ;
-		SOAPParser.ChangeSOAPEdit(&sElement) ;
+		ParseSOAP SOAPParser(pContexte, &sClassification);
+		SOAPParser.ChangeSOAPEdit(&sElement);
 
-    string sTrace = string("Element: ") + sElement ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+    string sTrace = string("Element: ") + sElement;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
     // Have a look in 3BT for the element as a string
     //
-    string s2Def3BT = string("") ;
+    string s2Def3BT = string("");
     if (pThesaurus)
     {
-      bool bResult = FindClinicalTerm(pThesaurus, &sElement) ;
+      bool bResult = FindClinicalTerm(pThesaurus, &sElement);
       if (true == bResult)
       {
-        s2Def3BT = pThesaurus->getClasserString(sClassification) ;
-        sTrace = string("- 3 : ") + s2Def3BT ;
-        pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+        s2Def3BT = pThesaurus->getClasserString(sClassification);
+        sTrace = string("- 3 : ") + s2Def3BT;
+        pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
       }
     }
 
 		if (SOAPParser.findInLexiq(sElement))
 		{
-			string s2DefO = string("") ;
-      string s2DefP = string("") ;
-      string s2DefI = string("") ;
+			string s2DefO = string("");
+      string s2DefP = string("");
+      string s2DefI = string("");
 
 #ifndef _ENTERPRISE_DLL
-			NSEpiClasser EpiClasser(pContexte->getSuperviseur()) ;
+			NSEpiClasser EpiClasser(pContexte->getSuperviseur());
 #else
-      NSEpiClasserInfo EpiClasser ;
+      NSEpiClasserInfo EpiClasser;
 #endif
 
 			// à revoir
-			string sCodeLexiq = SOAPParser.getCodeLexiq(sElement) ;
-      string sCodeSens  = string("") ;
-			pContexte->getDico()->donneCodeSens(&sCodeLexiq, &sCodeSens) ;
+			string sCodeLexiq = SOAPParser.getCodeLexiq(sElement);
+      string sCodeSens  = string("");
+			pContexte->getDico()->donneCodeSens(&sCodeLexiq, &sCodeSens);
 
-      sTrace = string("- Lexique code: ") + sCodeLexiq ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("- Lexique code: ") + sCodeLexiq;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
 #ifndef _ENTERPRISE_DLL
-			EpiClasser.donneRelations(&s2DefO, sCodeSens, sClassification, "O") ;
-      sTrace = string("- O : ") + s2DefO ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefO, sCodeSens, sClassification, "O");
+      sTrace = string("- O : ") + s2DefO;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
-			EpiClasser.donneRelations(&s2DefP, sCodeSens, sClassification, "P") ;
-      sTrace = string("- P : ") + s2DefP ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefP, sCodeSens, sClassification, "P");
+      sTrace = string("- P : ") + s2DefP;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
-			EpiClasser.donneRelations(&s2DefI, sCodeSens, sClassification, "I") ;
-      sTrace = string("- I : ") + s2DefI ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefI, sCodeSens, sClassification, "I");
+      sTrace = string("- I : ") + s2DefI;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 #else
-			EpiClasser.donneRelations(&s2DefO, sCodeSens, sClassification, "O", pContexte->getSuperviseur()->getDatabaseManager()) ;
-      sTrace = string("- O : ") + s2DefO ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefO, sCodeSens, sClassification, "O", pContexte->getSuperviseur()->getDatabaseManager());
+      sTrace = string("- O : ") + s2DefO;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
-			EpiClasser.donneRelations(&s2DefP, sCodeSens, sClassification, "P", pContexte->getSuperviseur()->getDatabaseManager()) ;
-      sTrace = string("- P : ") + s2DefP ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefP, sCodeSens, sClassification, "P", pContexte->getSuperviseur()->getDatabaseManager());
+      sTrace = string("- P : ") + s2DefP;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
-			EpiClasser.donneRelations(&s2DefI, sCodeSens, sClassification, "I", pContexte->getSuperviseur()->getDatabaseManager()) ;
-      sTrace = string("- I : ") + s2DefI ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+			EpiClasser.donneRelations(&s2DefI, sCodeSens, sClassification, "I", pContexte->getSuperviseur()->getDatabaseManager());
+      sTrace = string("- I : ") + s2DefI;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 #endif
 
       // If this sentence element has not been found in 3BT, check if one of
@@ -3595,32 +3595,32 @@ try
       //
       if ((string("") == s2Def3BT) && (pThesaurus))
       {
-        bool bResult = FindFlexClinicalTerm(pThesaurus, &sCodeSens) ;
+        bool bResult = FindFlexClinicalTerm(pThesaurus, &sCodeSens);
         if (true == bResult)
         {
-          s2Def3BT = pThesaurus->getClasserString(sClassification) ;
-          sTrace = string("- 3 for \"") + pThesaurus->getLabelFr() + string("\": ") + s2Def3BT ;
-          pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+          s2Def3BT = pThesaurus->getClasserString(sClassification);
+          sTrace = string("- 3 for \"") + pThesaurus->getLabelFr() + string("\": ") + s2Def3BT;
+          pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
         }
       }
 
 			if ((string("") != s2DefO) || (string("") != s2DefP) || (string("") != s2DefI) || (string("") != s2Def3BT))
 			{
 				ParseCategory* pElemParser = new ParseCategory(iSize, sClassification, sPattern);
-				pElemParser->DefCritere(s2DefO, s2DefP, s2DefI, s2Def3BT) ;
-				push_back(pElemParser) ;
+				pElemParser->DefCritere(s2DefO, s2DefP, s2DefI, s2Def3BT);
+				push_back(pElemParser);
 			}
 		}
     else
     {
-      sTrace = string("- Not in Lexique.") ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+      sTrace = string("- Not in Lexique.");
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails);
 
       if (string("") != s2Def3BT)
 			{
 				ParseCategory* pElemParser = new ParseCategory(iSize, sClassification, sPattern);
-				pElemParser->DefCritere(string(""), string(""), string(""), s2Def3BT) ;
-				push_back(pElemParser) ;
+				pElemParser->DefCritere(string(""), string(""), string(""), s2Def3BT);
+				push_back(pElemParser);
 			}
     }
 	}
@@ -3628,19 +3628,19 @@ try
   if (pThesaurus)
   {
 #ifndef _ENTERPRISE_DLL
-    pThesaurus->lastError = pThesaurus->close() ;
+    pThesaurus->lastError = pThesaurus->close();
     if (DBIERR_NONE != pThesaurus->lastError)
-		  erreur("Clinical_Labels.db -- erreur à la fermeture de la base.", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		  erreur("Clinical_Labels.db -- erreur à la fermeture de la base.", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
-    delete pThesaurus ;
+    delete pThesaurus;
   }
 
-  return true ;
+  return true;
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeElements.", standardError) ;
-	return NULL ;
+	erreur("Exception TermsParser::ComputeElements.", standardError);
+	return NULL;
 }
 }
 
@@ -3653,53 +3653,53 @@ bool
 TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement)
 {
   if ((NULL == pClinicalBase) || (NULL == pElement) || (string("") == *pElement))
-    return false ;
+    return false;
 
-  string sLibelleReq = pseumaj(*pElement) ;
-  // size_t iLibelleLen = strlen(sLibelleReq.c_str()) ;
+  string sLibelleReq = pseumaj(*pElement);
+  // size_t iLibelleLen = strlen(sLibelleReq.c_str());
 
-  pClinicalBase->lastError = pClinicalBase->chercheClef(&sLibelleReq, "FrClinicalLabels", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+  pClinicalBase->lastError = pClinicalBase->chercheClef(&sLibelleReq, "FrClinicalLabels", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 
-  HWND hParentForMessages = 0 ;
+  HWND hParentForMessages = 0;
   if (NULL != pContexte->GetMainWindow())
-    hParentForMessages = pContexte->GetMainWindow()->GetHandle() ;
+    hParentForMessages = pContexte->GetMainWindow()->GetHandle();
 
   //
   // Testing DBIERR_EOF because it is what happens when searching for a "strange char" such as '¾'
   //
   if ((DBIERR_NONE != pClinicalBase->lastError) && (DBIERR_RECNOTFOUND != pClinicalBase->lastError) && (DBIERR_EOF != pClinicalBase->lastError))
 	{
-    string sErrorTxt = string("Clinical_Labels.DB -- erreur à la recherche dans la base Clinical_Labels.DB.") ;
-		erreur(sErrorTxt.c_str(), standardError, pClinicalBase->lastError, hParentForMessages) ;
-		return false ;
+    string sErrorTxt = string("Clinical_Labels.DB -- erreur à la recherche dans la base Clinical_Labels.DB.");
+		erreur(sErrorTxt.c_str(), standardError, pClinicalBase->lastError, hParentForMessages);
+		return false;
 	}
 
 	if ((DBIERR_RECNOTFOUND == pClinicalBase->lastError) || (DBIERR_EOF == pClinicalBase->lastError))
-		return false ;
+		return false;
 
-	pClinicalBase->lastError = pClinicalBase->getRecord() ;
+	pClinicalBase->lastError = pClinicalBase->getRecord();
 	if (DBIERR_NONE != pClinicalBase->lastError)
 	{
-		erreur("Clinical_Labels.DB -- erreur à la récupération del'enregistrement", standardError, pClinicalBase->lastError, hParentForMessages) ;
-		return false ;
+		erreur("Clinical_Labels.DB -- erreur à la récupération del'enregistrement", standardError, pClinicalBase->lastError, hParentForMessages);
+		return false;
 	}
 
-  string sLabel      = pClinicalBase->getLabelFr() ;
-  string sUpperLabel = pseumaj(sLabel) ;
+  string sLabel      = pClinicalBase->getLabelFr();
+  string sUpperLabel = pseumaj(sLabel);
 
-  return (sUpperLabel == sLibelleReq) ;
+  return (sUpperLabel == sLibelleReq);
 }
 
 string
 TermsParser::FindAllClinicalTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif)
 {
-  return string("") ;
+  return string("");
 }
 
 string
 TermsParser::FindAllSentinelTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif)
 {
-  return string("") ;
+  return string("");
 }
 
 // ----------------------------------------------------------
@@ -3709,28 +3709,28 @@ bool
 TermsParser::FindFlexClinicalTerm(NSThesaurus *pClinicalBase, string* pLexiqueCode)
 {
   if ((NULL == pClinicalBase) || (NULL == pLexiqueCode) || (string("") == *pLexiqueCode))
-    return false ;
+    return false;
 
-  VectString aFlexLabels ;
+  VectString aFlexLabels;
 
   // First step: get all flex labels for a given lexique code
   //
-  NSEpiFlechiesDB Flechies(pContexte) ;
-  bool bSuccess = Flechies.getAllLabelsForCode(*pLexiqueCode, &aFlexLabels) ;
+  NSEpiFlechiesDB Flechies(pContexte);
+  bool bSuccess = Flechies.getAllLabelsForCode(*pLexiqueCode, &aFlexLabels);
 
   if ((false == bSuccess) && (true == aFlexLabels.empty()))
-    return false ;
+    return false;
 
   if (true == aFlexLabels.empty())
-    return false ;
+    return false;
 
   // Second step: check if one of these labels exists in 3BT
   //
-  for (IterString it = aFlexLabels.begin() ; aFlexLabels.end() != it; it++)
+  for (IterString it = aFlexLabels.begin(); aFlexLabels.end() != it; it++)
     if (true == FindClinicalTerm(pClinicalBase, *it))
-      return true ;
+      return true;
 
-  return false ;
+  return false;
 }
 
 #else
@@ -3740,43 +3740,43 @@ TermsParser::FindClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pElement)
 {
   if ((NULL == pClinicalBase) || (NULL == pElement) || (string("") == *pElement))
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> empty parameters.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return false ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> empty parameters.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return false;
   }
 
-  string sLibelleReq = pseumaj(*pElement) ;
+  string sLibelleReq = pseumaj(*pElement);
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM clinical_labels WHERE FR_Clinical_Label = \"") + sLibelleReq + string("\"") ;
+  string sQuery = string("SELECT * FROM clinical_labels WHERE FR_Clinical_Label = \"") + sLibelleReq + string("\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> null ontology manager.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return false ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> null ontology manager.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return false;
   }
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> incorrect query ") + sQuery ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return false ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> incorrect query ") + sQuery;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return false;
   }
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   if (Row)
-    pClinicalBase->alimenteFiche(&Row) ;
+    pClinicalBase->alimenteFiche(&Row);
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  string sLabel      = pClinicalBase->getLabelFr() ;
-  string sUpperLabel = pseumaj(sLabel) ;
+  string sLabel      = pClinicalBase->getLabelFr();
+  string sUpperLabel = pseumaj(sLabel);
 
-  return (sUpperLabel == sLibelleReq) ;
+  return (sUpperLabel == sLibelleReq);
 }
 
 string
@@ -3784,87 +3784,87 @@ TermsParser::FindAllClinicalTermsStartingWith(NSThesaurusInfo *pClinicalBase, st
 {
   if ((NULL == pClinicalBase) || (NULL == pElement) || (string("") == *pElement))
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> empty parameters.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> empty parameters.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
-  string sLibelleReq = pseumaj(*pElement) ;
+  string sLibelleReq = pseumaj(*pElement);
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM clinical_labels WHERE FR_Clinical_Label LIKE \"") + sLibelleReq + string("%\"") ;
+  string sQuery = string("SELECT * FROM clinical_labels WHERE FR_Clinical_Label LIKE \"") + sLibelleReq + string("%\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> null ontology manager.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> null ontology manager.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
   MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
   {
-    string sTrace = string("TermsParser::FindClinicalTerm -> incorrect query ") + sQuery ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindClinicalTerm -> incorrect query ") + sQuery;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
-  size_t iStartLength = strlen(sLibelleReq.c_str()) ;
+  size_t iStartLength = strlen(sLibelleReq.c_str());
 
-  string sResult = string("") ;
+  string sResult = string("");
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   while (Row)
   {
-    pClinicalBase->alimenteFiche(&Row) ;
+    pClinicalBase->alimenteFiche(&Row);
 
-    string sMajLabel = pseumaj(pClinicalBase->_Donnees._labelFr) ;
+    string sMajLabel = pseumaj(pClinicalBase->_Donnees._labelFr);
 
-    bool bIsOk = false ;
+    bool bIsOk = false;
 
     // Perfect fit
     //
     if (sMajLabel == sLibelleReq)
-      bIsOk = true ;
+      bIsOk = true;
     //
     // Check that we don't include 'hemoculture' when "hémocult" is asked
     // char following start must not be a letter or a number
     //
     else
     {
-      size_t iLabelLength = strlen(sMajLabel.c_str()) ;
+      size_t iLabelLength = strlen(sMajLabel.c_str());
       if (iLabelLength > iStartLength)
       {
-        char nextChar = sMajLabel[iStartLength] ;
+        char nextChar = sMajLabel[iStartLength];
 
-        bool bIsChar = false ;
+        bool bIsChar = false;
         if ((nextChar >= 'A') && (nextChar <= 'Z'))
-          bIsChar = true ;
+          bIsChar = true;
 
-        bool bIsNum = false ;
+        bool bIsNum = false;
         if ((nextChar >= '0') && (nextChar <= '9'))
-          bIsNum = true ;
+          bIsNum = true;
 
-        bIsOk = !bIsChar && !bIsNum ;
+        bIsOk = !bIsChar && !bIsNum;
       }
     }
 
     if (bIsOk)
     {
-      string s2Def3BT = pClinicalBase->getClasserString(sClassif) ;
+      string s2Def3BT = pClinicalBase->getClasserString(sClassif);
 
       if (string("") != s2Def3BT)
-        sResult = sBasicOnlyAddNewcodes(sResult, s2Def3BT) ;
+        sResult = sBasicOnlyAddNewcodes(sResult, s2Def3BT);
     }
 
-    Row = mysql_fetch_row(pResult) ;
+    Row = mysql_fetch_row(pResult);
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  return sResult ;
+  return sResult;
 }
 
 string
@@ -3872,54 +3872,54 @@ TermsParser::FindAllSentinelTermsStartingWith(NSThesaurusInfo *pClinicalBase, st
 {
   if ((NULL == pClinicalBase) || (NULL == pElement) || (string("") == *pElement))
   {
-    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> empty parameters.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> empty parameters.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
-  string sLibelleReq = pseumaj(*pElement) ;
+  string sLibelleReq = pseumaj(*pElement);
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM sentinelles WHERE FR_Clinical_Label LIKE \"") + sLibelleReq + string("%\"") ;
+  string sQuery = string("SELECT * FROM sentinelles WHERE FR_Clinical_Label LIKE \"") + sLibelleReq + string("%\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
   {
-    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> null ontology manager.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> null ontology manager.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
   {
-    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> incorrect query ") + sQuery ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
-    return string("") ;
+    string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith -> incorrect query ") + sQuery;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
+    return string("");
   }
 
-  string sResult = string("") ;
+  string sResult = string("");
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   while (Row)
   {
-    pClinicalBase->alimenteFicheSentinelle(&Row) ;
+    pClinicalBase->alimenteFicheSentinelle(&Row);
 
-    // string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith, label = \"") + pClinicalBase->getLabelFr() + string("\", code = \"") + pClinicalBase->pDonnees->icpc2 + string("\"") ;
-    // pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails) ;
+    // string sTrace = string("TermsParser::FindAllSentinelTermsStartingWith, label = \"") + pClinicalBase->getLabelFr() + string("\", code = \"") + pClinicalBase->pDonnees->icpc2 + string("\"");
+    // pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails);
 
-    string s2Def3BT = pClinicalBase->getClasserString(sClassif) ;
+    string s2Def3BT = pClinicalBase->getClasserString(sClassif);
 
     if (string("") != s2Def3BT)
-      sResult = sBasicOnlyAddNewcodes(sResult, s2Def3BT) ;
+      sResult = sBasicOnlyAddNewcodes(sResult, s2Def3BT);
 
-    Row = mysql_fetch_row(pResult) ;
+    Row = mysql_fetch_row(pResult);
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  return sResult ;
+  return sResult;
 }
 
 // ----------------------------------------------------------
@@ -3929,28 +3929,28 @@ bool
 TermsParser::FindFlexClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pLexiqueCode)
 {
   if ((NULL == pClinicalBase) || (NULL == pLexiqueCode) || (string("") == *pLexiqueCode))
-    return false ;
+    return false;
 
-  VectString aFlexLabels ;
+  VectString aFlexLabels;
 
   // First step: get all flex labels for a given lexique code
   //
-  NSEpiFlechiesDB Flechies(pContexte) ;
-  bool bSuccess = Flechies.getAllLabelsForCode(*pLexiqueCode, &aFlexLabels) ;
+  NSEpiFlechiesDB Flechies(pContexte);
+  bool bSuccess = Flechies.getAllLabelsForCode(*pLexiqueCode, &aFlexLabels);
 
   if ((false == bSuccess) && (true == aFlexLabels.empty()))
-    return false ;
+    return false;
 
   if (true == aFlexLabels.empty())
-    return false ;
+    return false;
 
   // Second step: check if one of these labels exists in 3BT
   //
-  for (IterString it = aFlexLabels.begin() ; aFlexLabels.end() != it; it++)
+  for (IterString it = aFlexLabels.begin(); aFlexLabels.end() != it; it++)
     if (true == FindClinicalTerm(pClinicalBase, *it))
-      return true ;
+      return true;
 
-  return false ;
+  return false;
 }
 
 #endif
@@ -3959,24 +3959,24 @@ string
 TermsParser::sBasicOnlyAddNewcodes(string sExistingSet, string sIncomingSet)
 {
   if (string("") == sExistingSet)
-    return sIncomingSet ;
+    return sIncomingSet;
 
   if (string("") == sIncomingSet)
-    return sExistingSet ;
+    return sExistingSet;
 
-  ClasseStringVector StringVect ;
-  DecomposeChaine(&sIncomingSet, &StringVect, ";") ;
+  ClasseStringVector StringVect;
+  DecomposeChaine(&sIncomingSet, &StringVect, ";");
   if (StringVect.empty())
-    return sExistingSet ;
+    return sExistingSet;
 
-  for (iterClassString it = StringVect.begin() ; it != StringVect.end() ; it++)
+  for (iterClassString it = StringVect.begin(); it != StringVect.end(); it++)
   {
-    string sCode = (*it)->getItem() ;
+    string sCode = (*it)->getItem();
     if (string::npos == sExistingSet.find(sCode))
-      sExistingSet += string(";") + sCode ;
+      sExistingSet += string(";") + sCode;
   }
 
-  return sExistingSet ;
+  return sExistingSet;
 }
 
 // ----------------------------------------------------------
@@ -3991,21 +3991,21 @@ void
 TermsParser::ComputePUnion()
 {
   if (false == empty())
-    for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; TermIter++)
+    for (ParseCategoryIterator TermIter = begin(); end() != TermIter; TermIter++)
     {
-      ElemSetArray* pPossibleDomain = (*TermIter)->getPossibleDomain() ;
+      ElemSetArray* pPossibleDomain = (*TermIter)->getPossibleDomain();
       if (pPossibleDomain)
       {
         if (false == pPossibleDomain->isEmpty())
           // pPossible->insert( pPossible->end(),
           //                   (*TermIter)->getPossibleDomain()->begin(),
-          //                   (*TermIter)->getPossibleDomain()->end()) ;
-          for (ElemSetIterator it = pPossibleDomain->begin() ; pPossibleDomain->end() != it ; it++)
-            pPossible->push_back(new ElemSet(**it)) ;
+          //                   (*TermIter)->getPossibleDomain()->end());
+          for (ElemSetIterator it = pPossibleDomain->begin(); pPossibleDomain->end() != it; it++)
+            pPossible->push_back(new ElemSet(**it));
       }
     }
 
-  pPossible->ComputeUnion() ;
+  pPossible->ComputeUnion();
 }
 
 // ----------------------------------------------------------
@@ -4020,19 +4020,19 @@ void
 TermsParser::ComputeIUnion()
 {
   if (false == empty())
-    for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; TermIter++)
+    for (ParseCategoryIterator TermIter = begin(); end() != TermIter; TermIter++)
     {
-      ElemSetArray* pInterditDomain = (*TermIter)->getInterditDomain() ;
+      ElemSetArray* pInterditDomain = (*TermIter)->getInterditDomain();
       if (pInterditDomain)
       {
         if (false == pInterditDomain->isEmpty())
-          // pInterdit->insert(pInterdit->end(), (*TermIter)->getInterditDomain()->begin(), (*TermIter)->getInterditDomain()->end()) ;
-          for (ElemSetIterator it = pInterditDomain->begin() ; pInterditDomain->end() != it ; it++)
-            pInterdit->push_back(new ElemSet(**it)) ;
+          // pInterdit->insert(pInterdit->end(), (*TermIter)->getInterditDomain()->begin(), (*TermIter)->getInterditDomain()->end());
+          for (ElemSetIterator it = pInterditDomain->begin(); pInterditDomain->end() != it; it++)
+            pInterdit->push_back(new ElemSet(**it));
       }
     }
 
-  pInterdit->ComputeUnion() ;
+  pInterdit->ComputeUnion();
 }
 
 // ----------------------------------------------------------
@@ -4048,27 +4048,27 @@ TermsParser::ComputeOIntersection()
 {
   if (false == empty())
   {
-    for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; TermIter++)
+    for (ParseCategoryIterator TermIter = begin(); end() != TermIter; TermIter++)
     {
       if (pObligatoire->empty())
       {
-        ElemSetArray *pElemSetArray = (*TermIter)->getObligatoireDomain() ;
+        ElemSetArray *pElemSetArray = (*TermIter)->getObligatoireDomain();
         if ((false == pElemSetArray->empty()) && (false == pElemSetArray->isEmpty()))
-          // pObligatoire->insert(pObligatoire->end(), pElemSetArray->begin(), pElemSetArray->end()) ;
-          for (ElemSetIterator it = pElemSetArray->begin() ; pElemSetArray->end() != it ; it++)
-            pObligatoire->push_back(new ElemSet(**it)) ;
+          // pObligatoire->insert(pObligatoire->end(), pElemSetArray->begin(), pElemSetArray->end());
+          for (ElemSetIterator it = pElemSetArray->begin(); pElemSetArray->end() != it; it++)
+            pObligatoire->push_back(new ElemSet(**it));
       }
       else
       {
-        ElemSetArray* pResult = (*TermIter)->getObligatoireDomain()->ComputeIntersection(pObligatoire) ;
+        ElemSetArray* pResult = (*TermIter)->getObligatoireDomain()->ComputeIntersection(pObligatoire);
         if (NULL != pResult)
         {
-          *pObligatoire = *pResult ;
-          delete pResult ;
+          *pObligatoire = *pResult;
+          delete pResult;
         }
       }
     }
-    pObligatoire->ComputeUnion() ;
+    pObligatoire->ComputeUnion();
   }
 }
 
@@ -4077,26 +4077,26 @@ TermsParser::Compute3btIntersection()
 {
   if (false == empty())
   {
-    for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; TermIter++)
+    for (ParseCategoryIterator TermIter = begin(); end() != TermIter; TermIter++)
     {
       if (pObligatoire->empty())
       {
-        ElemSetArray *pElemSetArray = (*TermIter)->get3btDomain() ;
+        ElemSetArray *pElemSetArray = (*TermIter)->get3btDomain();
         if ((false == pElemSetArray->empty()) && (false == pElemSetArray->isEmpty()))
-          for (ElemSetIterator it = pElemSetArray->begin() ; pElemSetArray->end() != it ; it++)
-            pObligatoire->push_back(new ElemSet(**it)) ;
+          for (ElemSetIterator it = pElemSetArray->begin(); pElemSetArray->end() != it; it++)
+            pObligatoire->push_back(new ElemSet(**it));
       }
       else
       {
-        ElemSetArray* pResult = (*TermIter)->get3btDomain()->ComputeIntersection(pObligatoire) ;
+        ElemSetArray* pResult = (*TermIter)->get3btDomain()->ComputeIntersection(pObligatoire);
         if (NULL != pResult)
         {
-          *pObligatoire = *pResult ;
-          delete pResult ;
+          *pObligatoire = *pResult;
+          delete pResult;
         }
       }
     }
-    pObligatoire->ComputeUnion() ;
+    pObligatoire->ComputeUnion();
   }
 }
 
@@ -4113,28 +4113,28 @@ TermsParser::ComputePIntersection()
 {
   if (false == empty())
   {
-    for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; TermIter++)
+    for (ParseCategoryIterator TermIter = begin(); end() != TermIter; TermIter++)
     {
       if (pPossible->empty())
       {
-        ElemSetArray *pElemSetArray = (*TermIter)->getPossibleDomain() ;
+        ElemSetArray *pElemSetArray = (*TermIter)->getPossibleDomain();
         if ((false == pElemSetArray->empty()) && (false == pElemSetArray->isEmpty()))
-          // pPossible->insert(pPossible->end(), pElemSetArray->begin(), pElemSetArray->end()) ;
-          for (ElemSetIterator it = pElemSetArray->begin() ; pElemSetArray->end() != it ; it++)
-            pPossible->push_back(new ElemSet(**it)) ;
+          // pPossible->insert(pPossible->end(), pElemSetArray->begin(), pElemSetArray->end());
+          for (ElemSetIterator it = pElemSetArray->begin(); pElemSetArray->end() != it; it++)
+            pPossible->push_back(new ElemSet(**it));
       }
       else
-        // pPossible = (*TermIter)->getPossibleDomain()->ComputeIntersection(pPossible) ;
+        // pPossible = (*TermIter)->getPossibleDomain()->ComputeIntersection(pPossible);
       {
-        ElemSetArray* pResult = (*TermIter)->getPossibleDomain()->ComputeIntersection(pPossible) ;
+        ElemSetArray* pResult = (*TermIter)->getPossibleDomain()->ComputeIntersection(pPossible);
         if (NULL != pResult)
         {
-          *pPossible = *pResult ;
-          delete pResult ;
+          *pPossible = *pResult;
+          delete pResult;
         }
       }
     }
-    pPossible->ComputeUnion() ;
+    pPossible->ComputeUnion();
   }
 }
 
@@ -4149,28 +4149,28 @@ void
 TermsParser::CheckI(ElemSetArray *pResult)
 {
 	if (empty())
-		return ;
+		return;
 
-	for (ParseCategoryIterator TermIter = begin() ; end() != TermIter ; )
+	for (ParseCategoryIterator TermIter = begin(); end() != TermIter; )
 	{
-		ElemSetArray* pIDomain = (*TermIter)->getInterditDomain() ;
+		ElemSetArray* pIDomain = (*TermIter)->getInterditDomain();
 
 		if (pIDomain->empty())
-			TermIter++ ;
+			TermIter++;
 		else
 		{
 			if (pIDomain->isEmpty())
-				TermIter++ ;
+				TermIter++;
 			else
 			{
-				ElemSetArray *pTemp = pIDomain->ComputeIntersection(pResult) ;
+				ElemSetArray *pTemp = pIDomain->ComputeIntersection(pResult);
 
 				if (pTemp->empty() || pTemp->isEmpty())
-					TermIter++ ;
+					TermIter++;
 				else
-					pResult->minus(pTemp) ;
+					pResult->minus(pTemp);
 
-        delete pTemp ;
+        delete pTemp;
 			}
 		}
 	}
@@ -4180,12 +4180,12 @@ void
 TermsParser::vider()
 {
   if (empty())
-    return ;
+    return;
 
-  for (ParseCategoryIterator i = begin() ; end() != i ; )
+  for (ParseCategoryIterator i = begin(); end() != i; )
 	{
-		delete *i ;
-		erase(i) ;
+		delete *i;
+		erase(i);
 	}
 }
 
@@ -4200,17 +4200,17 @@ NSEpiFlechiesDB::NSEpiFlechiesDB(NSContexte* pCtx)
 try
 {
 #ifndef _ENTERPRISE_DLL
-	pPatho = pContexte->getDico()->donnePatholog("fr", &string("PTOTO")) ;
+	pPatho = pContexte->getDico()->donnePatholog("fr", &string("PTOTO"));
 #else
-  pPatho = 0 ;
+  pPatho = 0;
 #endif
-	pPhraseur = new NSPhraseur(pContexte) ;
-	pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-	pGenFR    = new NSGenerateurFr(pContexte, pPropos, "fr") ;
+	pPhraseur = new NSPhraseur(pContexte);
+	pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+	pGenFR    = new NSGenerateurFr(pContexte, pPropos, "fr");
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB ctor.", standardError) ;
+	erreur("Exception NSEpiFlechiesDB ctor.", standardError);
 }
 }
 
@@ -4223,10 +4223,10 @@ catch (...)
 // ----------------------------------------------------------
 NSEpiFlechiesDB::~NSEpiFlechiesDB()
 {
-	delete pGenFR ;
-	delete pPropos ;
+	delete pGenFR;
+	delete pPropos;
 	if (NULL != pPhraseur)
-		delete pPhraseur ;
+		delete pPhraseur;
 }
 
 #ifndef _ENTERPRISE_DLL
@@ -4244,12 +4244,12 @@ NSEpiFlechiesDB::CreateDatabaseFlechies(bool* pbContinuer, OWL::TEdit* pAffichag
 {
 try
 {
-	sIdCpt = "0000" ;
+	sIdCpt = "0000";
 	pPatho->lastError = pPatho->debut(dbiREADLOCK);
 	if ((pPatho->lastError != DBIERR_NONE) && (pPatho->lastError != DBIERR_EOF))
 	{
 		erreur("Erreur de positionnement.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
-		return ;
+		return;
 	}
 
 	bool bTourner = true;
@@ -4259,22 +4259,22 @@ try
 		if (pPatho->lastError != DBIERR_NONE)
 		{
 			erreur("Erreur de lecture dans la base.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
-			return ;
+			return;
 		}
 
 		if (pAffichage)
-			pAffichage->SetText(pPatho->_Donnees.libelle) ;
-		pContexte->getSuperviseur()->getApplication()->PumpWaitingMessages() ;
+			pAffichage->SetText(pPatho->_Donnees.libelle);
+		pContexte->getSuperviseur()->getApplication()->PumpWaitingMessages();
 
 		// remplissage de la base flechies.db
-		rempliDatabase(&(pPatho->_Donnees)) ;
+		rempliDatabase(&(pPatho->_Donnees));
 
 		// on se positionne sur le message suivant
 		pPatho->lastError = pPatho->suivant(dbiREADLOCK);
 		if ((pPatho->lastError != DBIERR_NONE) && (pPatho->lastError != DBIERR_EOF))
 		{
 			erreur("Erreur d'accès au message suivant.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
-			return ;
+			return;
 		}
 		if (pbContinuer)
 			bTourner = *pbContinuer;
@@ -4282,7 +4282,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::CreateDatabaseFlechies.", standardError, 0) ;
+	erreur("Exception NSEpiFlechiesDB::CreateDatabaseFlechies.", standardError, 0);
 }
 }
 
@@ -4299,12 +4299,12 @@ NSEpiFlechiesDB::rempliDatabase(NSPathologData *pDonnees)
 {
   // on a le code (dans pDonnees), maintenant on va appeler chacun des genres pour voir si il y a
   // une flexion qui existe pour ce genre là, si il y en a une, on la met dans la base flechies.db
-  for (int genre = 0 ; genre <= 7 ; genre++)
+  for (int genre = 0; genre <= 7; genre++)
   {
-    string  sLibelle ;
-    pGenFR->donneLibelleAffiche(&sLibelle, pDonnees, genre) ;
+    string  sLibelle;
+    pGenFR->donneLibelleAffiche(&sLibelle, pDonnees, genre);
     if (sLibelle != "")
-      traiteFormeFlechie("", sLibelle, pDonnees->code) ;
+      traiteFormeFlechie("", sLibelle, pDonnees->code);
   }
 }
 #endif  // _ENTERPRISE_DLL
@@ -4314,73 +4314,73 @@ NSEpiFlechiesDB::traiteFormeFlechie(string sAvant, string sLibelle, string sCode
 {
 	if (sLibelle == "")
 	{
-		rempliDatabaseFlechies(sAvant, sCode) ;
-		return true ;
+		rempliDatabaseFlechies(sAvant, sCode);
+		return true;
 	}
 
-	size_t	iPos	= sLibelle.find('-', iDep) ;
+	size_t	iPos	= sLibelle.find('-', iDep);
 
-	size_t	iTempPos = iPos ;
-	int			cpt = 1 ;
+	size_t	iTempPos = iPos;
+	int			cpt = 1;
 	while (iTempPos != string::npos)
 	{
-		iTempPos = sLibelle.find('-', iTempPos + 1) ;
-		cpt++ ;
+		iTempPos = sLibelle.find('-', iTempPos + 1);
+		cpt++;
 	}
 
 	if (cpt > 4)
 	{
-		rempliDatabaseFlechies(sLibelle, sCode) ;
-		return true ;
+		rempliDatabaseFlechies(sLibelle, sCode);
+		return true;
 	}
 
-	string	sTempLibelle ;
+	string	sTempLibelle;
 	string	sAvantLibelle	;
 
 	if (iPos != string::npos)
 	{
-		sTempLibelle	= string(sLibelle, iPos + 1, strlen(sLibelle.c_str()) - (iPos + 1)) ;
-		sAvantLibelle	= string(sLibelle, 0, iPos) ;
+		sTempLibelle	= string(sLibelle, iPos + 1, strlen(sLibelle.c_str()) - (iPos + 1));
+		sAvantLibelle	= string(sLibelle, 0, iPos);
 	}
 	else
 	{
-		sTempLibelle	= "" ;
-		sAvantLibelle	= sLibelle ;
-		iPos = strlen(sLibelle.c_str()) ;
+		sTempLibelle	= "";
+		sAvantLibelle	= sLibelle;
+		iPos = strlen(sLibelle.c_str());
 	}
 
 	if (sAvant != "")
 	{
-		int	iAvantLen = strlen(sAvant.c_str()) ;
+		int	iAvantLen = strlen(sAvant.c_str());
 
 		if ((sAvant[iAvantLen - 1] == ' ') && (sAvantLibelle != "") && (sAvantLibelle[0] == ' '))
 		{
-			traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode) ;
+			traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode);
 
-			strip(sAvant, stripRight) ;
-			strip(sAvantLibelle, stripLeft) ;
-			traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode) ;
-			return true ;
+			strip(sAvant, stripRight);
+			strip(sAvantLibelle, stripLeft);
+			traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode);
+			return true;
 		}
 
 		if ((sAvant[iAvantLen - 1] >= '0') && (sAvant[iAvantLen - 1] <= '9') &&
 				(sAvantLibelle != "") && (sAvantLibelle[0] >= '0') && (sAvantLibelle[0] <= '9'))
 		{
-			traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode) ;
-			traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode) ;
-			return true ;
+			traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode);
+			traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode);
+			return true;
 		}
 
-		traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode) ;
-		traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode) ;
-		traiteFormeFlechie(sAvant + sAvantLibelle, sTempLibelle, sCode) ;
+		traiteFormeFlechie(sAvant + ' ' + sAvantLibelle, sTempLibelle, sCode);
+		traiteFormeFlechie(sAvant + '-' + sAvantLibelle, sTempLibelle, sCode);
+		traiteFormeFlechie(sAvant + sAvantLibelle, sTempLibelle, sCode);
 	}
 	else
-		traiteFormeFlechie(string(sLibelle, 0, iPos), sTempLibelle, sCode) ;
+		traiteFormeFlechie(string(sLibelle, 0, iPos), sTempLibelle, sCode);
 
-	return true ;
+	return true;
 /*
-	rempliDatabaseFlechies(sLibelle, sCode) ;
+	rempliDatabaseFlechies(sLibelle, sCode);
 
 	// Traitement des '-' : on ajoute également une forme sans le '-' et
 	// une forme où le '-' est remplacé par un ' '
@@ -4444,26 +4444,26 @@ NSEpiFlechiesDB::traiteFormeFlechie(string sAvant, string sLibelle, string sCode
 void
 NSEpiFlechiesDB::incrementeIdCpt()
 {
-	int		iDigit	= 3 ;
-	bool	tourner	= true ;
+	int		iDigit	= 3;
+	bool	tourner	= true;
 
 	while (tourner)
 	{
-		(sIdCpt[iDigit])++ ;
+		(sIdCpt[iDigit])++;
 		if ((sIdCpt[iDigit] > '9') && (sIdCpt[iDigit] < 'A'))
 		{
-			sIdCpt[iDigit] = 'A' ;
-			tourner = false ;
+			sIdCpt[iDigit] = 'A';
+			tourner = false;
 		}
 		else
 		{
 			if (sIdCpt[iDigit] > 'Z')
 			{
-				sIdCpt[iDigit] = '0' ;
-				iDigit-- ;
+				sIdCpt[iDigit] = '0';
+				iDigit--;
 			}
 			else
-				tourner = false ;
+				tourner = false;
 		}
 	}
 }
@@ -4482,58 +4482,58 @@ ParseSOAP::getCodeLexiq(string sLibelle)
 try
 {
   if (string("") == sLibelle)
-    return string("") ;
+    return string("");
 
-  string sLibelleReq = ConvertitMajuscule(sLibelle) ;
+  string sLibelleReq = ConvertitMajuscule(sLibelle);
 
 #ifndef _ENTERPRISE_DLL
 
-  size_t iLibelleLen = strlen(sLibelleReq.c_str()) ;
+  size_t iLibelleLen = strlen(sLibelleReq.c_str());
 
-  NSFlechies baseFlechies(pContexte->getSuperviseur()) ;
+  NSFlechies baseFlechies(pContexte->getSuperviseur());
 
-	baseFlechies.lastError = baseFlechies.open() ;
+	baseFlechies.lastError = baseFlechies.open();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
 		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
-		return string("") ;
+		return string("");
 	}
 
-	baseFlechies.lastError = baseFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+	baseFlechies.lastError = baseFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 
 	if ((baseFlechies.lastError != DBIERR_NONE) && (baseFlechies.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		baseFlechies.close() ;
-		return string("") ;
+		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		baseFlechies.close();
+		return string("");
 	}
 
 	if (baseFlechies.lastError == DBIERR_RECNOTFOUND)
 	{
-		baseFlechies.lastError = baseFlechies.close() ;
+		baseFlechies.lastError = baseFlechies.close();
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return string("") ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return string("");
 	}
 
-	baseFlechies.lastError = baseFlechies.getRecord() ;
+	baseFlechies.lastError = baseFlechies.getRecord();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return string("") ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return string("");
 	}
 
-	string sLibelleTemp = ConvertitMajuscule(baseFlechies.getLabel()) ;
+	string sLibelleTemp = ConvertitMajuscule(baseFlechies.getLabel());
 
-	baseFlechies.lastError = baseFlechies.close() ;
+	baseFlechies.lastError = baseFlechies.close();
 	if (baseFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if ((strlen(sLibelleTemp.c_str()) >= iLibelleLen) &&
       (string(sLibelleReq, 0, iLibelleLen) == sLibelleTemp))
-		return baseFlechies.getCode() ;
+		return baseFlechies.getCode();
 
 #else
 
@@ -4541,37 +4541,37 @@ try
   //
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE = \"") + sLibelleReq + string("\"") ;
+  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE = \"") + sLibelleReq + string("\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
-    return string("") ;
+    return string("");
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
-    return string("") ;
+    return string("");
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   if (Row)
   {
-    NSFlechiesInfo flechiInfo ;
-    flechiInfo.alimenteFiche(&Row) ;
+    NSFlechiesInfo flechiInfo;
+    flechiInfo.alimenteFiche(&Row);
 
-    mysql_free_result(pResult) ;
+    mysql_free_result(pResult);
 
-    return flechiInfo.getCode() ;
+    return flechiInfo.getCode();
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
 #endif
 
-	return string("") ;
+	return string("");
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getCodeLexiq.", standardError) ;
-	return string("") ;
+	erreur("Exception ParseSOAP::getCodeLexiq.", standardError);
+	return string("");
 }
 }
 
@@ -4589,67 +4589,67 @@ NSEpiFlechiesDB::isInDB(string *sLibelle, INDBLEVEL* pLevel)
 try
 {
   if (NULL == sLibelle)
-    return false ;
+    return false;
 
 #ifndef _ENTERPRISE_DLL
 
-  NSFlechies  baseFlechies(pContexte->getSuperviseur()) ;
-	baseFlechies.lastError = baseFlechies.open() ;
+  NSFlechies  baseFlechies(pContexte->getSuperviseur());
+	baseFlechies.lastError = baseFlechies.open();
 
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
 		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
-    	*pLevel = INDBdatabaseError ;
+    	*pLevel = INDBdatabaseError;
 		return false;
 	}
 
-  string sLibelleReq = ConvertitMajuscule(*sLibelle) ;
-  size_t iLibelleLen = strlen(sLibelleReq.c_str()) ;
+  string sLibelleReq = ConvertitMajuscule(*sLibelle);
+  size_t iLibelleLen = strlen(sLibelleReq.c_str());
 
-	baseFlechies.lastError = baseFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+	baseFlechies.lastError = baseFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
   //
   // Testing DBIERR_EOF because it is what happens when searching for a "strange char" such as '¾'
   //
 	if ((baseFlechies.lastError != DBIERR_NONE) && (baseFlechies.lastError != DBIERR_RECNOTFOUND) && (baseFlechies.lastError != DBIERR_EOF))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		baseFlechies.close() ;
+		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		baseFlechies.close();
 		if (pLevel)
-    	*pLevel = INDBdatabaseError ;
-		return false ;
+    	*pLevel = INDBdatabaseError;
+		return false;
 	}
 
 	if ((baseFlechies.lastError == DBIERR_RECNOTFOUND) || (baseFlechies.lastError == DBIERR_EOF))
 	{
-		baseFlechies.lastError = baseFlechies.close() ;
+		baseFlechies.lastError = baseFlechies.close();
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
-    	*pLevel = INDBnotAtAll ;
-		return false ;
+    	*pLevel = INDBnotAtAll;
+		return false;
 	}
 
-	baseFlechies.lastError = baseFlechies.getRecord() ;
+	baseFlechies.lastError = baseFlechies.getRecord();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
-    	*pLevel = INDBdatabaseError ;
-		return false ;
+    	*pLevel = INDBdatabaseError;
+		return false;
 	}
 
-	string sLibelleTemp = ConvertitMajuscule(baseFlechies.getLabel()) ;
+	string sLibelleTemp = ConvertitMajuscule(baseFlechies.getLabel());
 
-	baseFlechies.lastError = baseFlechies.close() ;
+	baseFlechies.lastError = baseFlechies.close();
 	if (baseFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if (sLibelleTemp == sLibelleReq)
 	{
 		if (pLevel)
-    	*pLevel = INDBcompleteTerm ;
-		return true ;
+    	*pLevel = INDBcompleteTerm;
+		return true;
 	}
 
 	if (pLevel)
@@ -4658,103 +4658,103 @@ try
 		if ((strlen(sLibelleTemp.c_str()) > iLibelleLen) &&
         (string(sLibelleTemp, 0, iLibelleLen) == sLibelleReq) &&
         (sLibelleTemp[iLibelleLen] == ' '))
-    	*pLevel = INDBasABegining ;
+    	*pLevel = INDBasABegining;
 		else
-			*pLevel = INDBnotAtAll ;
+			*pLevel = INDBnotAtAll;
 	}
 
 #else
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE LIKE \"") + *sLibelle + string("%\"") ;
+  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE LIKE \"") + *sLibelle + string("%\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
   {
     if (pLevel)
-    	*pLevel = INDBdatabaseError ;
+    	*pLevel = INDBdatabaseError;
 
-    string sTrace = string("NSEpiFlechiesDB::isInDB -> null ontology manager.") ;
-    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
+    string sTrace = string("NSEpiFlechiesDB::isInDB -> null ontology manager.");
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
 
-    return false ;
+    return false;
   }
 
-  string sErrorMessage = string("") ;
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false, &sErrorMessage) ;
+  string sErrorMessage = string("");
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false, &sErrorMessage);
   if ((MYSQL_RES *) NULL == pResult)
   {
-    string sTrace = string("NSEpiFlechiesDB::isInDB \"") + *sLibelle + string("\" not found") ;
+    string sTrace = string("NSEpiFlechiesDB::isInDB \"") + *sLibelle + string("\" not found");
 
     if (string("") == sErrorMessage)
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails) ;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails);
     else
     {
-      sTrace += string(" -> ") + sErrorMessage ;
-      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
+      sTrace += string(" -> ") + sErrorMessage;
+      pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError);
     }
 
     if (pLevel)
-    	*pLevel = INDBdatabaseError ;
-    return false ;
+    	*pLevel = INDBdatabaseError;
+    return false;
   }
 
   // Don't do that, because mysql_num_rows cannot be called after mysql_use_result()
 /*
 
-  int totalrows = mysql_num_rows(pResult) ;
+  int totalrows = mysql_num_rows(pResult);
   if (0 == totalrows)
   {
     if (pLevel)
-    	*pLevel = INDBnotAtAll ;
-    return false ;
+    	*pLevel = INDBnotAtAll;
+    return false;
   }
 */
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
 
   if (NULL == Row)
   {
     if (pLevel)
-    	*pLevel = INDBnotAtAll ;
-    return false ;
+    	*pLevel = INDBnotAtAll;
+    return false;
   }
 
-  string sLibelleReq = ConvertitMajuscule(*sLibelle) ;
+  string sLibelleReq = ConvertitMajuscule(*sLibelle);
 
   while (Row)
   {
-    NSFlechiesInfo flechiInfo ;
-    flechiInfo.alimenteFiche(&Row) ;
+    NSFlechiesInfo flechiInfo;
+    flechiInfo.alimenteFiche(&Row);
 
-    string sLibelleTemp = ConvertitMajuscule(flechiInfo.getLabel()) ;
+    string sLibelleTemp = ConvertitMajuscule(flechiInfo.getLabel());
 
     if (sLibelleReq == sLibelleTemp)
     {
       if (pLevel)
-    	  *pLevel = INDBcompleteTerm ;
+    	  *pLevel = INDBcompleteTerm;
 
-      mysql_free_result(pResult) ;
-      return true ;
+      mysql_free_result(pResult);
+      return true;
     }
 
-    Row = mysql_fetch_row(pResult) ;
+    Row = mysql_fetch_row(pResult);
   }
 
   if (pLevel)
-    *pLevel = INDBasABegining ;
+    *pLevel = INDBasABegining;
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
 #endif
 
-	return false ;
+	return false;
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError) ;
-	return false ;
+	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+	return false;
 }
 }
 
@@ -4776,15 +4776,15 @@ try
   // on ouvre la table
   // -------------------------------------------------------------------------
 
-  NSFlechies Flechies(pContexte->getSuperviseur()) ;
+  NSFlechies Flechies(pContexte->getSuperviseur());
 
 #ifndef _ENTERPRISE_DLL
-  Flechies.lastError = Flechies.open() ;
+  Flechies.lastError = Flechies.open();
 
   if (Flechies.lastError != DBIERR_NONE)
   {
     erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
-    return false ;
+    return false;
   }
 
   // -------------------------------------------------------------------------
@@ -4792,37 +4792,37 @@ try
   // lettres accentuées
   // -------------------------------------------------------------------------
 
-  char *pcLibelleReq = new char[strlen(sLibelle->c_str()) + 1] ;
-  strcpy(pcLibelleReq, sLibelle->c_str()) ;
-  ConvertitMajuscule(pcLibelleReq) ;
-  string *sLibelleReq = new string(pcLibelleReq) ;
-  // int					iLibelleLen			= strlen(pcLibelleReq) ;
-  delete pcLibelleReq ;
+  char *pcLibelleReq = new char[strlen(sLibelle->c_str()) + 1];
+  strcpy(pcLibelleReq, sLibelle->c_str());
+  ConvertitMajuscule(pcLibelleReq);
+  string *sLibelleReq = new string(pcLibelleReq);
+  // int					iLibelleLen			= strlen(pcLibelleReq);
+  delete pcLibelleReq;
 
-  char  *pcLibelleTemp = 0 ;
-  string sLibelleTemp  = "" ;
+  char  *pcLibelleTemp = 0;
+  string sLibelleTemp  = "";
 
   // -------------------------------------------------------------------------
   // on exécute la recherche
   // -------------------------------------------------------------------------
 
-  Flechies.lastError = Flechies.chercheClef(sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+  Flechies.lastError = Flechies.chercheClef(sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
   if ((Flechies.lastError != DBIERR_NONE) && (Flechies.lastError != DBIERR_RECNOTFOUND))
   {
-    erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    delete sLibelleReq ;
-    Flechies.close() ;
-    return false ;
+    erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    delete sLibelleReq;
+    Flechies.close();
+    return false;
   }
 
   if (Flechies.lastError == DBIERR_RECNOTFOUND)
   {
-    Flechies.lastError = Flechies.close() ;
+    Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    delete sLibelleReq ;
-    Flechies.close() ;
-    return false ;
+      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    delete sLibelleReq;
+    Flechies.close();
+    return false;
   }
   else
   {
@@ -4831,20 +4831,20 @@ try
     // --> on récupère l'enregistrement
     // -----------------------------------------------------------------------
 
-    Flechies.lastError = Flechies.getRecord() ;
+    Flechies.lastError = Flechies.getRecord();
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-      delete sLibelleReq ;
-      Flechies.close() ;
-      return false ;
+      erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      delete sLibelleReq;
+      Flechies.close();
+      return false;
     }
 
-    pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1] ;
-    strcpy(pcLibelleTemp, Flechies.getLabel().c_str()) ;
-    ConvertitMajuscule(pcLibelleTemp) ;
-    sLibelleTemp = string(pcLibelleTemp) ;
-    delete[] pcLibelleTemp ;
+    pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1];
+    strcpy(pcLibelleTemp, Flechies.getLabel().c_str());
+    ConvertitMajuscule(pcLibelleTemp);
+    sLibelleTemp = string(pcLibelleTemp);
+    delete[] pcLibelleTemp;
 
     // -----------------------------------------------------------------------
     // on vérifie que le code correspondant au chapitre de code lexique
@@ -4855,29 +4855,29 @@ try
 
     if ((Flechies.getCode())[0] != cTypeCode)
     {
-      Flechies.lastError = Flechies.precedent(dbiREADLOCK) ;
+      Flechies.lastError = Flechies.precedent(dbiREADLOCK);
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        delete sLibelleReq ;
-        Flechies.close() ;
-        return false ;
+        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        delete sLibelleReq;
+        Flechies.close();
+        return false;
       }
 
-      Flechies.lastError = Flechies.getRecord() ;
+      Flechies.lastError = Flechies.getRecord();
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        delete sLibelleReq ;
-        Flechies.close() ;
-        return false ;
+        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        delete sLibelleReq;
+        Flechies.close();
+        return false;
       }
 
-      pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1] ;
-      strcpy(pcLibelleTemp, Flechies.getLabel().c_str()) ;
-      ConvertitMajuscule(pcLibelleTemp) ;
-      sLibelleTemp = string(pcLibelleTemp) ;
-      delete[] pcLibelleTemp ;
+      pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1];
+      strcpy(pcLibelleTemp, Flechies.getLabel().c_str());
+      ConvertitMajuscule(pcLibelleTemp);
+      sLibelleTemp = string(pcLibelleTemp);
+      delete[] pcLibelleTemp;
 
       // ---------------------------------------------------------------------
       // si le libellé ne correspond pas à la requête on revient sur le terme
@@ -4886,29 +4886,29 @@ try
 
       if (strcmp(sLibelleTemp.c_str(), sLibelleReq->c_str()) != 0)
       {
-        Flechies.lastError = Flechies.suivant(dbiREADLOCK) ;
+        Flechies.lastError = Flechies.suivant(dbiREADLOCK);
         if (Flechies.lastError != DBIERR_NONE)
         {
-          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-          delete sLibelleReq ;
-          Flechies.close() ;
-          return false ;
+          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+          delete sLibelleReq;
+          Flechies.close();
+          return false;
         }
 
-        Flechies.lastError = Flechies.getRecord() ;
+        Flechies.lastError = Flechies.getRecord();
         if (Flechies.lastError != DBIERR_NONE)
         {
-          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-          delete sLibelleReq ;
-          Flechies.close() ;
-          return false ;
+          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+          delete sLibelleReq;
+          Flechies.close();
+          return false;
         }
 
-        pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1] ;
-        strcpy(pcLibelleTemp, Flechies.getLabel().c_str()) ;
-        ConvertitMajuscule(pcLibelleTemp) ;
-        sLibelleTemp = string(pcLibelleTemp) ;
-        delete[] pcLibelleTemp ;
+        pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1];
+        strcpy(pcLibelleTemp, Flechies.getLabel().c_str());
+        ConvertitMajuscule(pcLibelleTemp);
+        sLibelleTemp = string(pcLibelleTemp);
+        delete[] pcLibelleTemp;
       }
     }
 
@@ -4920,42 +4920,42 @@ try
 
     while (((Flechies.getCode())[0] != cTypeCode) && (strcmp(sLibelleTemp.c_str(), sLibelleReq->c_str()) == 0))
     {
-      Flechies.lastError = Flechies.suivant(dbiREADLOCK) ;
+      Flechies.lastError = Flechies.suivant(dbiREADLOCK);
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        delete sLibelleReq ;
-        Flechies.close() ;
-        return false ;
+        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        delete sLibelleReq;
+        Flechies.close();
+        return false;
       }
 
-      Flechies.lastError = Flechies.getRecord() ;
+      Flechies.lastError = Flechies.getRecord();
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        delete sLibelleReq ;
-        Flechies.close() ;
-        return false ;
+        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        delete sLibelleReq;
+        Flechies.close();
+        return false;
       }
 
-      pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1] ;
-      strcpy(pcLibelleTemp, Flechies.getLabel().c_str()) ;
-      ConvertitMajuscule(pcLibelleTemp) ;
-      sLibelleTemp = string(pcLibelleTemp) ;
-      delete[] pcLibelleTemp ;
+      pcLibelleTemp = new char[strlen(Flechies.getLabel().c_str()) + 1];
+      strcpy(pcLibelleTemp, Flechies.getLabel().c_str());
+      ConvertitMajuscule(pcLibelleTemp);
+      sLibelleTemp = string(pcLibelleTemp);
+      delete[] pcLibelleTemp;
     }
 
-    pcLibelleTemp	= new char[strlen(Flechies.getLabel().c_str()) + 1] ;
-    string sCode = Flechies.getCode() ;
-    strcpy(pcLibelleTemp, Flechies.getLabel().c_str()) ;
-    ConvertitMajuscule(pcLibelleTemp) ;
-    sLibelleTemp = string(pcLibelleTemp) ;
-    delete[] pcLibelleTemp ;
+    pcLibelleTemp	= new char[strlen(Flechies.getLabel().c_str()) + 1];
+    string sCode = Flechies.getCode();
+    strcpy(pcLibelleTemp, Flechies.getLabel().c_str());
+    ConvertitMajuscule(pcLibelleTemp);
+    sLibelleTemp = string(pcLibelleTemp);
+    delete[] pcLibelleTemp;
 
-    Flechies.lastError = Flechies.close() ;
+    Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    Flechies.close() ;
+      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    Flechies.close();
 
     // -----------------------------------------------------------------------
     // on vérifie que le libellé correspond bien au libellé recherché et si le
@@ -4963,23 +4963,23 @@ try
     // -----------------------------------------------------------------------
     if ((strcmp(sLibelleReq->c_str(), sLibelleTemp.c_str()) == 0) && (sCode[0] == cTypeCode))
     {
-      delete sLibelleReq ;
-      return true ;
+      delete sLibelleReq;
+      return true;
     }
     else
     {
-      delete sLibelleReq ;
-      return false ;
+      delete sLibelleReq;
+      return false;
     }
   }
 #else
-  return false ;
+  return false;
 #endif
 }
 catch (...)
 {
-  erreur("Exception NSEpiFlechiesDB::isInDB.", standardError) ;
-  return false ;
+  erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+  return false;
 }
 }
 
@@ -4988,74 +4988,74 @@ NSEpiFlechiesDB::getCodeLexiq(string sLibelle)
 {
 try
 {
-  size_t iLibSize = strlen(sLibelle.c_str()) ;
+  size_t iLibSize = strlen(sLibelle.c_str());
   if ((0 == iLibSize) || (iLibSize > FLECHIES_LIBELLE_LEN))
-    return string("") ;
+    return string("");
 
-	string		 sResult = string("") ;
-	NSFlechies Flechies(pContexte->getSuperviseur()) ;
+	string		 sResult = string("");
+	NSFlechies Flechies(pContexte->getSuperviseur());
 
 #ifndef _ENTERPRISE_DLL
 
-  Flechies.lastError = Flechies.open() ;
+  Flechies.lastError = Flechies.open();
 	if (DBIERR_NONE != Flechies.lastError)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return sResult ;
+		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return sResult;
 	}
 
-	string sLibelleReq = ConvertitMajuscule(sLibelle) ;
+	string sLibelleReq = ConvertitMajuscule(sLibelle);
 
 	Flechies.lastError = Flechies.chercheClef(&sLibelleReq,
                                             "LIBELLES",
                                             NODEFAULTINDEX,
                                             keySEARCHGEQ,
-                                            dbiREADLOCK) ;
+                                            dbiREADLOCK);
 	if ((DBIERR_NONE != Flechies.lastError) && (DBIERR_RECNOTFOUND != Flechies.lastError))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		Flechies.close() ;
-		return sResult ;
+		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		Flechies.close();
+		return sResult;
 	}
 
 	if (DBIERR_RECNOTFOUND == Flechies.lastError)
 	{
-		Flechies.lastError = Flechies.close() ;
+		Flechies.lastError = Flechies.close();
 		if (DBIERR_NONE != Flechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return sResult ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return sResult;
 	}
 	else
 	{
-		Flechies.lastError = Flechies.getRecord() ;
+		Flechies.lastError = Flechies.getRecord();
 		if (DBIERR_NONE != Flechies.lastError)
 		{
-			erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-			Flechies.close() ;
-			return sResult ;
+			erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+			Flechies.close();
+			return sResult;
 		}
 
-		string sLibelleTemp = Flechies.getLabel() ;
-    sLibelleTemp = ConvertitMajuscule(sLibelleTemp) ;
+		string sLibelleTemp = Flechies.getLabel();
+    sLibelleTemp = ConvertitMajuscule(sLibelleTemp);
 
     if (sLibelleTemp == sLibelleReq)
-      sResult	= Flechies.getCode() ;
+      sResult	= Flechies.getCode();
 
-		Flechies.lastError = Flechies.close() ;
+		Flechies.lastError = Flechies.close();
 		if (DBIERR_NONE != Flechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
-    return sResult ;
+    return sResult;
 	}
 
 #else
-  return string("") ;
+  return string("");
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError) ;
-	return string("") ;
+	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+	return string("");
 }
 }
 
@@ -5073,188 +5073,188 @@ NSEpiFlechiesDB::getCodeLexiq(string sLibelle, char cTypeCode)
 {
 try
 {
-  size_t iLibSize = strlen(sLibelle.c_str()) ;
+  size_t iLibSize = strlen(sLibelle.c_str());
   if ((0 == iLibSize) || (iLibSize > FLECHIES_LIBELLE_LEN))
-    return string("") ;
+    return string("");
 
-  string sResult = "" ;
+  string sResult = "";
 
 	if ((sLibelle == string("")) || (strlen(sLibelle.c_str()) > PATHO_LIBELLE_LEN))
-		return sResult ;
+		return sResult;
 
 #ifndef _ENTERPRISE_DLL
 
-  NSFlechies dbFlechies(pContexte->getSuperviseur()) ;
+  NSFlechies dbFlechies(pContexte->getSuperviseur());
 
-	dbFlechies.lastError = dbFlechies.open() ;
+	dbFlechies.lastError = dbFlechies.open();
 	if (dbFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return sResult ;
+		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return sResult;
 	}
 
-	size_t _iLibSize = strlen(sLibelle.c_str()) ;
-  string sLibelleReq = "" ;
+	size_t _iLibSize = strlen(sLibelle.c_str());
+  string sLibelleReq = "";
 
   if (_iLibSize > 1)
-		sLibelleReq = ConvertitMajuscule(sLibelle) ;
+		sLibelleReq = ConvertitMajuscule(sLibelle);
 	else
-    sLibelleReq = sLibelle ;
+    sLibelleReq = sLibelle;
 
-	string sLibelleTemp = "" ;
+	string sLibelleTemp = "";
 
-	dbFlechies.lastError = dbFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+	dbFlechies.lastError = dbFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 	if ((dbFlechies.lastError != DBIERR_NONE) && (dbFlechies.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		dbFlechies.close() ;
-		return sResult ;
+		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		dbFlechies.close();
+		return sResult;
 	}
 
 	if (dbFlechies.lastError == DBIERR_RECNOTFOUND)
 	{
-		dbFlechies.lastError = dbFlechies.close() ;
+		dbFlechies.lastError = dbFlechies.close();
 		if (dbFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return string("") ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return string("");
 	}
 
-	dbFlechies.lastError = dbFlechies.getRecord() ;
+	dbFlechies.lastError = dbFlechies.getRecord();
   if (dbFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		dbFlechies.close() ;
-		return string("") ;
+		erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		dbFlechies.close();
+		return string("");
 	}
 
 	if (_iLibSize > 1)
-		sLibelleTemp = ConvertitMajuscule(dbFlechies.getLabel()) ;
+		sLibelleTemp = ConvertitMajuscule(dbFlechies.getLabel());
 	else
-		sLibelleTemp = dbFlechies.getLabel() ;
+		sLibelleTemp = dbFlechies.getLabel();
 
 	if ((dbFlechies.getCode())[0] != cTypeCode)
 	{
-		dbFlechies.lastError = dbFlechies.precedent(dbiREADLOCK) ;
+		dbFlechies.lastError = dbFlechies.precedent(dbiREADLOCK);
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
     	if (dbFlechies.lastError != DBIERR_BOF)
-				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-			dbFlechies.close() ;
-			return string("") ;
+				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+			dbFlechies.close();
+			return string("");
 		}
 
-		dbFlechies.lastError = dbFlechies.getRecord() ;
+		dbFlechies.lastError = dbFlechies.getRecord();
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ; ;
-			dbFlechies.close() ;
-			return string("") ;
+			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());;
+			dbFlechies.close();
+			return string("");
 		}
 
 		if (_iLibSize > 1)
-			sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel()) ;
+			sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel());
 		else
-			sLibelleTemp = dbFlechies.pDonnees->getLabel() ;
+			sLibelleTemp = dbFlechies.pDonnees->getLabel();
 
 		if (sLibelleTemp != sLibelleReq)
 		{
-			dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK) ;
+			dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK);
 			if (dbFlechies.lastError != DBIERR_NONE)
 			{
       	if (dbFlechies.lastError != DBIERR_EOF)
-					erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-				dbFlechies.close() ;
-        return string("") ;
+					erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+				dbFlechies.close();
+        return string("");
       }
 
-      dbFlechies.lastError = dbFlechies.getRecord() ;
+      dbFlechies.lastError = dbFlechies.getRecord();
 			if (dbFlechies.lastError != DBIERR_NONE)
 			{
-				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-				dbFlechies.close() ;
-				return string("") ;
+				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+				dbFlechies.close();
+				return string("");
 			}
 
 			if (_iLibSize > 1)
-				sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel()) ;
+				sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel());
 			else
-				sLibelleTemp = dbFlechies.pDonnees->getLabel() ;
+				sLibelleTemp = dbFlechies.pDonnees->getLabel();
     }
   }
 
 	while (((dbFlechies.getCode())[0] != cTypeCode) && (sLibelleTemp == sLibelleReq))
   {
-		dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK) ;
+		dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK);
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-      dbFlechies.close() ;
-      return string("") ;
+			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      dbFlechies.close();
+      return string("");
     }
 
-		dbFlechies.lastError = dbFlechies.getRecord() ;
+		dbFlechies.lastError = dbFlechies.getRecord();
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-			dbFlechies.close() ;
-      return string("") ;
+			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+			dbFlechies.close();
+      return string("");
     }
 
 		if (_iLibSize > 1)
-			sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel()) ;
+			sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel());
 		else
-			sLibelleTemp = dbFlechies.pDonnees->getLabel() ;
+			sLibelleTemp = dbFlechies.pDonnees->getLabel();
 	}
 
 	if (_iLibSize > 1)
-		sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel()) ;
+		sLibelleTemp = ConvertitMajuscule(dbFlechies.pDonnees->getLabel());
 	else
-		sLibelleTemp = dbFlechies.pDonnees->getLabel() ;
+		sLibelleTemp = dbFlechies.pDonnees->getLabel();
 
-	sResult = dbFlechies.getCode() ;
+	sResult = dbFlechies.getCode();
 
-	dbFlechies.lastError = dbFlechies.close() ;
+	dbFlechies.lastError = dbFlechies.close();
 	if (dbFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if ((sLibelleReq == sLibelleTemp) && (sResult[0] == cTypeCode))
-		return sResult ;
+		return sResult;
   else
-    return string("") ;
+    return string("");
 
 #else
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE = \"") + sLibelle + string("\" AND LEFT(CODE, 1) = \"") + string(1, cTypeCode) + string("\"") ;
+  string sQuery = string("SELECT * FROM flechies WHERE LIBELLE = \"") + sLibelle + string("\" AND LEFT(CODE, 1) = \"") + string(1, cTypeCode) + string("\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
-    return string("") ;
+    return string("");
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
-    return string("") ;
+    return string("");
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   if (Row)
   {
-    NSFlechiesInfo flechiesInfo ;
-    flechiesInfo.alimenteFiche(&Row) ;
+    NSFlechiesInfo flechiesInfo;
+    flechiesInfo.alimenteFiche(&Row);
 
-    sResult = flechiesInfo.getCode() ;
+    sResult = flechiesInfo.getCode();
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
-  return sResult ;
+  return sResult;
 
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::getCodeLexiq.", standardError) ;
-	return string("") ;
+	erreur("Exception NSEpiFlechiesDB::getCodeLexiq.", standardError);
+	return string("");
 }
 }
 
@@ -5271,112 +5271,112 @@ bool
 NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 {
   if ((string("") == sCode) || (NULL == pLabels))
-    return false ;
+    return false;
 
-  size_t iCodeSize = strlen(sCode.c_str()) ;
+  size_t iCodeSize = strlen(sCode.c_str());
   if (iCodeSize > FLECHIES_CODE_LEN)
-    return false ;
+    return false;
 
-  bool bExplore = true ;
+  bool bExplore = true;
 
 #ifndef _ENTERPRISE_DLL
 
-  NSFlechies dbFlechies(pContexte->getSuperviseur()) ;
+  NSFlechies dbFlechies(pContexte->getSuperviseur());
 
-  HWND hParentForMessages = 0 ;
+  HWND hParentForMessages = 0;
   if (NULL != pContexte->GetMainWindow())
-    hParentForMessages = pContexte->GetMainWindow()->GetHandle() ;
+    hParentForMessages = pContexte->GetMainWindow()->GetHandle();
 
-	dbFlechies.lastError = dbFlechies.open() ;
+	dbFlechies.lastError = dbFlechies.open();
 	if (DBIERR_NONE != dbFlechies.lastError)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, hParentForMessages) ;
-		return false ;
+		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, hParentForMessages);
+		return false;
 	}
 
-  dbFlechies.lastError = dbFlechies.chercheClef(&sCode, "CODES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+  dbFlechies.lastError = dbFlechies.chercheClef(&sCode, "CODES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 	if ((DBIERR_NONE != dbFlechies.lastError) && (DBIERR_RECNOTFOUND != dbFlechies.lastError))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages) ;
-		dbFlechies.close() ;
-		return false ;
+		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
+		dbFlechies.close();
+		return false;
 	}
 
 	if (DBIERR_RECNOTFOUND == dbFlechies.lastError)
 	{
-		dbFlechies.lastError = dbFlechies.close() ;
+		dbFlechies.lastError = dbFlechies.close();
 		if (DBIERR_NONE != dbFlechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages) ;
-		return true ;
+			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
+		return true;
 	}
 
   // Go from record to record while the code is good
   //
   while ((DBIERR_NONE == dbFlechies.lastError) && (true == bExplore))
   {
-	  dbFlechies.lastError = dbFlechies.getRecord() ;
+	  dbFlechies.lastError = dbFlechies.getRecord();
     if (dbFlechies.lastError != DBIERR_NONE)
 	  {
-		  erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, hParentForMessages) ;
-      bExplore = false ;
-		  break ;
+		  erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, hParentForMessages);
+      bExplore = false;
+		  break;
 	  }
 
     // Check that sRecordCode includes sCode as a begining
     //
-    string sRecordCode = dbFlechies.getCode() ;
+    string sRecordCode = dbFlechies.getCode();
     if (strlen(sRecordCode.c_str()) < iCodeSize)
-      break ;
+      break;
     if (string(sRecordCode, 0, iCodeSize) != sCode)
-      break ;
+      break;
 
-    pLabels->push_back(new string(dbFlechies.getLabel())) ;
+    pLabels->push_back(new string(dbFlechies.getLabel()));
 
-    dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK) ;
+    dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK);
     if (dbFlechies.lastError != DBIERR_NONE)
     {
       if (dbFlechies.lastError != DBIERR_EOF)
       {
-        erreur("flechies.db -- erreur au passage à l'enregistrement suivant", standardError, dbFlechies.lastError, hParentForMessages) ;
-        bExplore = false ;
+        erreur("flechies.db -- erreur au passage à l'enregistrement suivant", standardError, dbFlechies.lastError, hParentForMessages);
+        bExplore = false;
       }
     }
   }
 
-  dbFlechies.lastError = dbFlechies.close() ;
+  dbFlechies.lastError = dbFlechies.close();
 	if (dbFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages) ;
+		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
 
 #else
 
   // Looking for all codes that belong to given classification
   //
-  string sQuery = string("SELECT * FROM flechies WHERE CODE = \"") + sCode + string("\"") ;
+  string sQuery = string("SELECT * FROM flechies WHERE CODE = \"") + sCode + string("\"");
 
-  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager() ;
+  ontologyBaseManager* pOntologyManager = pContexte->getSuperviseur()->getDatabaseManager();
   if (NULL == pOntologyManager)
-    return false ;
+    return false;
 
-  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false) ;
+  MYSQL_RES *pResult = pOntologyManager->executeQuery(sQuery, false);
   if ((MYSQL_RES *) NULL == pResult)
-    return false ;
+    return false;
 
-  MYSQL_ROW Row = mysql_fetch_row(pResult) ;
+  MYSQL_ROW Row = mysql_fetch_row(pResult);
   while (Row)
   {
-    NSFlechiesInfo flechiesInfo ;
-    flechiesInfo.alimenteFiche(&Row) ;
+    NSFlechiesInfo flechiesInfo;
+    flechiesInfo.alimenteFiche(&Row);
 
-    pLabels->push_back(new string(flechiesInfo.getLabel())) ;
+    pLabels->push_back(new string(flechiesInfo.getLabel()));
 
-    Row = mysql_fetch_row(pResult) ;
+    Row = mysql_fetch_row(pResult);
   }
 
-  mysql_free_result(pResult) ;
+  mysql_free_result(pResult);
 
 #endif
 
-  return bExplore ;
+  return bExplore;
 }
 
 // ----------------------------------------------------------
@@ -5388,7 +5388,7 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 void
 NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
 {
-  for (size_t i = 0 ; i < strlen(chaine); i++)
+  for (size_t i = 0; i < strlen(chaine); i++)
   {
     switch (chaine[i])
     {
@@ -5399,7 +5399,7 @@ NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
 			case 'é' :
       case 'ë' :
       case 'è' :
-      case 'ê' : chaine[i] =  'E' ;
+      case 'ê' : chaine[i] =  'E';
                  break;
       case 'À' :
       case 'Á' :
@@ -5414,7 +5414,7 @@ NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
       case 'ä' :
       case 'å' :
       case 'æ' :
-      case 'á' : chaine[i] =  'A' ;
+      case 'á' : chaine[i] =  'A';
                  break;
       case 'Ì' :
       case 'Í' :
@@ -5422,7 +5422,7 @@ NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
       case 'Ï' :
       case 'í' :
       case 'î' :
-      case 'ï' : chaine[i] =  'I' ;
+      case 'ï' : chaine[i] =  'I';
                  break;
       case 'Ü' ://220
       case 'Û' :
@@ -5431,7 +5431,7 @@ NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
       case 'ú' :
       case 'û' :
       case 'ü' :
-      case 'ù' : chaine[i] =  'U' ;
+      case 'ù' : chaine[i] =  'U';
                  break;
       case 'Õ' : //213
       case 'Ö' :
@@ -5442,41 +5442,41 @@ NSEpiFlechiesDB::ConvertitMajuscule(char* chaine)
       case 'ó' :
       case 'ô' :
       case 'õ' :
-      case 'ö' : chaine[i] = 'O' ;
+      case 'ö' : chaine[i] = 'O';
                  break;
       case 'ñ' :
-      case 'Ñ' : chaine[i] = 'N' ; //209
+      case 'Ñ' : chaine[i] = 'N'; //209
                  break;
       case 'Ý' :
-      case 'ÿ' : chaine[i] = 'Y' ; //209
+      case 'ÿ' : chaine[i] = 'Y'; //209
                  break;
       case 'Ç' :
-      case 'ç' : chaine[i] = 'C' ; //209
+      case 'ç' : chaine[i] = 'C'; //209
                  break;
-      case 'Ð' : chaine[i] = 'D' ; //209
+      case 'Ð' : chaine[i] = 'D'; //209
                  break;
 #ifdef __linux__
-      default  : chaine[i] = toupper(chaine[i]) ;
+      default  : chaine[i] = toupper(chaine[i]);
 #endif
     }
   }
 #ifndef __linux__
-  chaine = strupr(chaine) ;
+  chaine = strupr(chaine);
 #endif
 }
 
 string
 NSEpiFlechiesDB::ConvertitMajuscule(string sChaine)
 {
-	char* pcChaine = new char[strlen(sChaine.c_str()) + 1] ;
-	strcpy(pcChaine, sChaine.c_str()) ;
+	char* pcChaine = new char[strlen(sChaine.c_str()) + 1];
+	strcpy(pcChaine, sChaine.c_str());
 
-  ConvertitMajuscule(pcChaine) ;
+  ConvertitMajuscule(pcChaine);
 
-  string sMajChaine = string(pcChaine) ;
-  delete[] pcChaine ;
+  string sMajChaine = string(pcChaine);
+  delete[] pcChaine;
 
-  return sMajChaine ;
+  return sMajChaine;
 }
 
 // ----------------------------------------------------------
@@ -5512,59 +5512,59 @@ try
   // s'ils n'ont pas de libelle identiques -- cette technique marche parce qu'on ajoute les enregistrements
   // code lexique par code lexique
 
-  NSFlechies Flechies(pContexte->getSuperviseur()) ;
+  NSFlechies Flechies(pContexte->getSuperviseur());
 
 #ifndef _ENTERPRISE_DLL
-  Flechies.lastError = Flechies.open() ;
+  Flechies.lastError = Flechies.open();
   if (Flechies.lastError != DBIERR_NONE)
   {
-    erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-		return false ;
+    erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+		return false;
   }
-  Flechies.lastError = Flechies.fin(dbiREADLOCK) ;
+  Flechies.lastError = Flechies.fin(dbiREADLOCK);
 
   // Fichier vide
   if (Flechies.lastError == DBIERR_BOF)
   {
-    Flechies.close() ;
-		return false ;
+    Flechies.close();
+		return false;
   }
 
   // Erreur anormale
   if (Flechies.lastError != DBIERR_NONE)
 	{
 		erreur("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
-		Flechies.close() ;
-		return false ;
+		Flechies.close();
+		return false;
 	}
 
-  Flechies.getRecord() ;
+  Flechies.getRecord();
   while (Flechies.getCode() == sCode)
   {
     if (Flechies.pDonnees->getLabel() == sLibelle)
     {
-      Flechies.close() ;
-      return true ;
+      Flechies.close();
+      return true;
     }
-    Flechies.precedent(dbiREADLOCK) ;
-    Flechies.getRecord() ;
+    Flechies.precedent(dbiREADLOCK);
+    Flechies.getRecord();
 
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-      Flechies.close() ;
-      return false ;
+      erreur("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      Flechies.close();
+      return false;
     }
   }
 
-  Flechies.close() ;
+  Flechies.close();
 #endif
-  return false ;
+  return false;
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::findElem.", standardError) ;
-	return false ;
+	erreur("Exception NSEpiFlechiesDB::findElem.", standardError);
+	return false;
 }
 }
 
@@ -5584,40 +5584,40 @@ try
 #ifndef _ENTERPRISE_DLL
   if (!findElem(sLibelle, sCode))
   {
-    incrementeIdCpt() ;
-    NSFlechies Flechies(pContexte->getSuperviseur()) ;
-    Flechies.lastError = Flechies.open() ;
+    incrementeIdCpt();
+    NSFlechies Flechies(pContexte->getSuperviseur());
+    Flechies.lastError = Flechies.open();
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-      return false ;
+      erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      return false;
     }
 
-    Flechies.pDonnees->setId(sIdCpt) ;
-    Flechies.pDonnees->setLabel(sLibelle) ;
-    Flechies.pDonnees->setCode(sCode) ;
+    Flechies.pDonnees->setId(sIdCpt);
+    Flechies.pDonnees->setLabel(sLibelle);
+    Flechies.pDonnees->setCode(sCode);
 
     // on l'insère dans la base Messages
-    Flechies.lastError = Flechies.appendRecord() ;
+    Flechies.lastError = Flechies.appendRecord();
     if (Flechies.lastError != DBIERR_NONE)
     {
       erreur("flechies.db -- Erreur à l'insertion du message dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
-      Flechies.close() ;
-      return false ;
+      Flechies.close();
+      return false;
     }
 
-    Flechies.lastError = Flechies.close() ;
+    Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
-    return true ;
+    return true;
   }
 #endif
-  return false ;
+  return false;
 }
 catch (...)
 {
-		erreur("Exception NSEpiFlechiesDB::rempliDatabaseFlechies.", standardError) ;
+		erreur("Exception NSEpiFlechiesDB::rempliDatabaseFlechies.", standardError);
 		return false;
 }
 }
@@ -5628,26 +5628,26 @@ catch (...)
 
 ParseElem::ParseElem(ParseElem& rv)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
-	bNotInFirst = rv.bNotInFirst ;
-	sContent    = rv.sContent ;
-	nbOfTerms   = rv.nbOfTerms ;
-	iPos        = rv.iPos ;
+	bNotInFirst = rv.bNotInFirst;
+	sContent    = rv.sContent;
+	nbOfTerms   = rv.nbOfTerms;
+	iPos        = rv.iPos;
 }
 
 ParseElem&
 ParseElem::operator=(ParseElem src)
 {
   if (&src == this)
-    return *this ;
+    return *this;
 
-	bNotInFirst = src.bNotInFirst ;
-	sContent    = src.sContent ;
-	nbOfTerms   = src.nbOfTerms ;
-	iPos        = src.iPos ;
+	bNotInFirst = src.bNotInFirst;
+	sContent    = src.sContent;
+	nbOfTerms   = src.nbOfTerms;
+	iPos        = src.iPos;
 
-	return *this ;
+	return *this;
 }
 
 // ----------------------------------------------------------
@@ -5660,42 +5660,42 @@ ParseElem::operator=(ParseElem src)
 // ----------------------------------------------------------
 ParseElemArray::ParseElemArray(vector<string *> *pList)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
 try
 {
 	if (!pList || (pList->empty()))
-		return ;
+		return;
 
-	for (vector<string *>::iterator pIter = pList->begin() ; pIter != pList->end() ; pIter++)
-		push_back(new ParseElem(**pIter)) ;
+	for (vector<string *>::iterator pIter = pList->begin(); pIter != pList->end(); pIter++)
+		push_back(new ParseElem(**pIter));
 
-	setAllPos() ;
+	setAllPos();
 }
 catch (...)
 {
-	erreur("Exception ParseElemArray ctor.", standardError) ;
+	erreur("Exception ParseElemArray ctor.", standardError);
 }
 }
 
 ParseElemArray::ParseElemArray(ParseElemArray& rv)
 {
-  lObjectCount++ ;
+  lObjectCount++;
 
 	if (!(rv.empty()))
-		for (ParseElemIter pIter = rv.begin() ; pIter != rv.end() ; pIter++)
-			push_back(new ParseElem(**pIter)) ;
+		for (ParseElemIter pIter = rv.begin(); pIter != rv.end(); pIter++)
+			push_back(new ParseElem(**pIter));
 }
 
 void
 ParseElemArray::setAllPos()
 {
 	if (empty())
-		return ;
+		return;
 
-	int iPos = 1 ;
-	for (ParseElemIter pIter = begin() ; pIter != end() ; pIter++, iPos++)
-		(*pIter)->setPos(iPos) ;
+	int iPos = 1;
+	for (ParseElemIter pIter = begin(); pIter != end(); pIter++, iPos++)
+		(*pIter)->setPos(iPos);
 }
 
 // ----------------------------------------------------------
@@ -5707,9 +5707,9 @@ ParseElemArray::setAllPos()
 // ----------------------------------------------------------
 ParseElemArray::~ParseElemArray()
 {
-	vider() ;
+	vider();
 
-  lObjectCount-- ;
+  lObjectCount--;
 }
 
 // ----------------------------------------------------------
@@ -5721,12 +5721,12 @@ ParseElemArray::~ParseElemArray()
 void    ParseElemArray::vider()
 {
 	if (empty())
-		return ;
+		return;
 
 	for (ParseElemIter i = begin(); i != end(); )
 	{
-		delete *i ;
-		erase(i) ;
+		delete *i;
+		erase(i);
 	}
 }
 
@@ -5734,15 +5734,15 @@ ParseElemArray&
 ParseElemArray::operator=(ParseElemArray src)
 {
   if (&src == this)
-    return *this ;
+    return *this;
 
-	vider() ;
+	vider();
 
 	if (false == src.empty())
-		for (ParseElemIter pIter = src.begin() ; pIter != src.end() ; pIter++)
-			push_back(new ParseElem(**pIter)) ;
+		for (ParseElemIter pIter = src.begin(); pIter != src.end(); pIter++)
+			push_back(new ParseElem(**pIter));
 
-	return *this ;
+	return *this;
 }
 
 // ----------------------------------------------------------
@@ -5758,12 +5758,12 @@ NSEpiClassifDB::NSEpiClassifDB(NSContexte *pCtx)
 {
 try
 {
-  pChap    = new ClassifElemArray ;
-  pLibelle = new ClassifElemArray ;
+  pChap    = new ClassifElemArray;
+  pLibelle = new ClassifElemArray;
 }
 catch (...)
 {
-		erreur("Exception NSEpiClassifDB ctor.", standardError) ;
+		erreur("Exception NSEpiClassifDB ctor.", standardError);
 }
 }
 
@@ -5777,10 +5777,10 @@ catch (...)
 NSEpiClassifDB::~NSEpiClassifDB()
 {
   // il faudrait aussi les vider
-  pChap->vider() ;
-  delete pChap ;
-  pLibelle->vider() ;
-  delete pLibelle ;
+  pChap->vider();
+  delete pChap;
+  pLibelle->vider();
+  delete pLibelle;
 }
 
 // ----------------------------------------------------------
@@ -5795,30 +5795,30 @@ NSEpiClassifDB::rempliClassifCISP(string sFileCISP)
 {
 try
 {
-		ifstream    inFile ;
-		string      sSepar = string("\t") ;
-		string      sCode ;
-		string      sLibelle ;
-		string      line_string ;
+		ifstream    inFile;
+		string      sSepar = string("\t");
+		string      sCode;
+		string      sLibelle;
+		string      line_string;
 
 #ifndef _ENTERPRISE_DLL
-		NSEpiClassif    *pClassif = new NSEpiClassif(pContexte->getSuperviseur()) ;
+		NSEpiClassif    *pClassif = new NSEpiClassif(pContexte->getSuperviseur());
 
 		// ouverture de la base
-		pClassif->lastError = pClassif->open() ;
+		pClassif->lastError = pClassif->open();
 		if (pClassif->lastError != DBIERR_NONE)
 		{
-				erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle()) ;
-				delete pClassif ;
-				return ;
+				erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+				delete pClassif;
+				return;
 		}
 
 		// ouverture du fichier
-		inFile.open(sFileCISP.c_str()) ;
+		inFile.open(sFileCISP.c_str());
 		if (!inFile.is_open())
 		{
-//        erreur("erreur à l'ouverture du fichier") ;
-				return ;
+//        erreur("erreur à l'ouverture du fichier");
+				return;
 		}
 
 		// parcours du fichier
@@ -5836,33 +5836,33 @@ try
 
 								// si c'est un titre de chapitre on le rajoute dans l'array des chapitres
 								if (strlen(sCode.c_str()) == 1)
-										pChap->push_back(new ClassifElem(sCode, sLibelle)) ;
+										pChap->push_back(new ClassifElem(sCode, sLibelle));
 
 							if (strlen(sCode.c_str()) == 3)
 							{
 										// si c'est un code générique, on le rajoute dans l'array des codes génériques
 										if (sCode.find("-") == 0)
-												pLibelle->push_back(new ClassifElem(sCode, sLibelle)) ;
+												pLibelle->push_back(new ClassifElem(sCode, sLibelle));
 										else
 										{
 												// on remplit l'enregistrement
-												pClassif->setClassification("6CISP") ;
-												pClassif->setCode(sCode) ;
-												pClassif->setLabel(sLibelle) ;
+												pClassif->setClassification("6CISP");
+												pClassif->setCode(sCode);
+												pClassif->setLabel(sLibelle);
 
 												// récupération du chapitre correspondant à partir du code
-												char sChap[5] ;
-												sprintf(sChap, "%c", (pClassif->getCode())[0]) ;
-												pClassif->setChapter(sChap) ;
+												char sChap[5];
+												sprintf(sChap, "%c", (pClassif->getCode())[0]);
+												pClassif->setChapter(sChap);
 
 												// on insère l'enregistrement
-												pClassif->lastError = pClassif->appendRecord() ;
+												pClassif->lastError = pClassif->appendRecord();
 												if (pClassif->lastError != DBIERR_NONE)
 												{
-														erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle()) ;
-														pClassif->close() ;
-														delete pClassif ;
-														return ;
+														erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+														pClassif->close();
+														delete pClassif;
+														return;
 												}
 										}
 								}
@@ -5871,42 +5871,42 @@ try
 		}
 
 		// parcours de l'array des chapitres et des codes génériques pour créer les codes propres à chaque chapitre
-		for (ClassifElemIter ChapIter = pChap->begin() ; ChapIter != pChap->end() ; ChapIter++)
+		for (ClassifElemIter ChapIter = pChap->begin(); ChapIter != pChap->end(); ChapIter++)
 		{
-				for (ClassifElemIter ProcIter = pLibelle->begin() ; ProcIter != pLibelle->end() ; ProcIter++)
+				for (ClassifElemIter ProcIter = pLibelle->begin(); ProcIter != pLibelle->end(); ProcIter++)
 				{
-						pClassif->setClassification("6CISP") ;
+						pClassif->setClassification("6CISP");
 
-						sCode = (*ChapIter)->getCode() + (*ProcIter)->getCode() ;
-						pClassif->setCode(sCode) ;
+						sCode = (*ChapIter)->getCode() + (*ProcIter)->getCode();
+						pClassif->setCode(sCode);
 
-						sLibelle = (*ProcIter)->getLibelle() + " (" + (*ChapIter)->getLibelle() + ")" ;
-						pClassif->setLabel(sLibelle) ;
+						sLibelle = (*ProcIter)->getLibelle() + " (" + (*ChapIter)->getLibelle() + ")";
+						pClassif->setLabel(sLibelle);
 
-						pClassif->setChapter((*ChapIter)->getCode()) ;
+						pClassif->setChapter((*ChapIter)->getCode());
 
-						pClassif->lastError = pClassif->appendRecord() ;
+						pClassif->lastError = pClassif->appendRecord();
 						if (pClassif->lastError != DBIERR_NONE)
 						{
-								erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle()) ;
-								pClassif->close() ;
-								delete pClassif ;
-								return ;
+								erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+								pClassif->close();
+								delete pClassif;
+								return;
 						}
 				}
 		}
-		pClassif->lastError = pClassif->close() ;
+		pClassif->lastError = pClassif->close();
 		if (pClassif->lastError != DBIERR_NONE)
-				erreur("classif.db -- erreur de fermeture de la base", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+				erreur("classif.db -- erreur de fermeture de la base", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
 
-		delete pClassif ;
+		delete pClassif;
 
-		inFile.close() ;
+		inFile.close();
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::rempliClassifCISP.", standardError) ;
+	erreur("Exception NSEpiClassifDB::rempliClassifCISP.", standardError);
 }
 }
 
@@ -5915,29 +5915,29 @@ NSEpiClassifDB::rempliClassifCIM(string sFileCIM)
 {
 try
 {
-  ifstream inFile ;
-  string   sSepar = string("\t") ;
-  string   sCode ;
-  string   sLibelle ;
-  string   line_string ;
+  ifstream inFile;
+  string   sSepar = string("\t");
+  string   sCode;
+  string   sLibelle;
+  string   line_string;
 
 #ifndef _ENTERPRISE_DLL
-  NSEpiClassif Classif(pContexte->getSuperviseur()) ;
+  NSEpiClassif Classif(pContexte->getSuperviseur());
 
   // ouverture de la base
-  Classif.lastError = Classif.open() ;
+  Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    return ;
+    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    return;
   }
 
   // ouverture du fichier
-  inFile.open(sFileCIM.c_str()) ;
+  inFile.open(sFileCIM.c_str());
   if (!inFile.is_open())
   {
-    erreur("erreur à l'ouverture du fichier", standardError, 0) ;
-    return ;
+    erreur("erreur à l'ouverture du fichier", standardError, 0);
+    return;
   }
 
   // parcours du fichier
@@ -5946,12 +5946,12 @@ try
     if (line_string != "")
     {
       // recherche du séparateur
-      size_t separPos = line_string.find(sSepar) ;
+      size_t separPos = line_string.find(sSepar);
       if ((separPos != NPOS) && (separPos != 0) && (separPos != strlen(line_string.c_str())))
       {
         // définition du code et du libellé
-        sCode    = string(line_string, 0, separPos) ;
-        sLibelle = string(line_string, separPos + 1, (strlen(line_string.c_str()) - (separPos + 1))) ;
+        sCode    = string(line_string, 0, separPos);
+        sLibelle = string(line_string, separPos + 1, (strlen(line_string.c_str()) - (separPos + 1)));
 
         // validation/modification du code
 
@@ -5968,29 +5968,29 @@ try
             {
               if (sCode[3] != '.')
                 sCode = string(sCode, 0, 3) + string(".")
-                               + string(sCode, 3, strlen(sCode.c_str())-3) ;
+                               + string(sCode, 3, strlen(sCode.c_str())-3);
 
               if (sCode[3] == '.')
               {
                 if (strlen(sCode.c_str()) == 4)
-                  sCode = "" ;
+                  sCode = "";
                 else if ((sCode[4] < '0') || (sCode[4] > '9'))
-                  sCode = "" ;
+                  sCode = "";
               }
             }
           }
           else
-            sCode = "" ;
+            sCode = "";
         }
         else
-          sCode = "" ;
+          sCode = "";
 
         if ((sCode != "") && (sLibelle != ""))
         {
           // on remplit l'enregistrement
-          Classif.setClassification("6CIMA") ;
-          Classif.setCode(sCode) ;
-          Classif.setLabel(sLibelle) ;
+          Classif.setClassification("6CIMA");
+          Classif.setCode(sCode);
+          Classif.setLabel(sLibelle);
 
           // récupération du chapitre correspondant à partir du code
           string sChap = "";
@@ -6004,11 +6004,11 @@ try
               if (strlen(sCode.c_str()) > 1)
               {
                 if (sCode[1] < '5')
-                  sChap = "2" ;
+                  sChap = "2";
                 else
-                  sChap = "3" ;
+                  sChap = "3";
               }
-              break ;
+              break;
             case 'E' : sChap = "4"; break;
             case 'F' : sChap = "5"; break;
             case 'G' : sChap = "6"; break;
@@ -6016,11 +6016,11 @@ try
               if (strlen(sCode.c_str()) > 1)
               {
                 if (sCode[1] < '6')
-                  sChap = "7" ;
+                  sChap = "7";
                 else
-                  sChap = "8" ;
+                  sChap = "8";
               }
-              break ;
+              break;
             case 'I' : sChap = "9"; break;
             case 'J' : sChap = "A"; break;
             case 'K' : sChap = "B"; break;
@@ -6040,31 +6040,31 @@ try
             case 'Y' : sChap = "I3"; break;
             case 'Z' : sChap = "J"; break;
           }
-          Classif.setChapter(sChap) ;
+          Classif.setChapter(sChap);
 
           // on insère l'enregistrement
-          Classif.lastError = Classif.appendRecord() ;
+          Classif.lastError = Classif.appendRecord();
           if (Classif.lastError != DBIERR_NONE)
           {
-            erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-            Classif.close() ;
-            return ;
+            erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+            Classif.close();
+            return;
           }
         }
       }
     }
   }
 
-  Classif.lastError = Classif.close() ;
+  Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur de fermeture de la base", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    erreur("classif.db -- erreur de fermeture de la base", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 
-  inFile.close() ;
+  inFile.close();
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::rempliClassifCIM.", standardError) ;
+	erreur("Exception NSEpiClassifDB::rempliClassifCIM.", standardError);
 }
 }
 
@@ -6079,11 +6079,11 @@ string  ClassifElem::getCode()
 {
   if (sCode.find("-") != NPOS)
   {
-    string sResult = sCode.substr(1, 2) ;
-    return sResult ;
+    string sResult = sCode.substr(1, 2);
+    return sResult;
   }
   else
-    return sCode ;
+    return sCode;
 }
 
 
@@ -6096,12 +6096,12 @@ string  ClassifElem::getCode()
 void    ClassifElemArray::vider()
 {
   if (empty())
-    return ;
+    return;
 
-  for (ClassifElemIter i = begin() ; end() != i ; )
+  for (ClassifElemIter i = begin(); end() != i; )
   {
-    delete *i ;
-    erase(i) ;
+    delete *i;
+    erase(i);
   }
 }
 
@@ -6114,9 +6114,9 @@ void    ClassifElemArray::vider()
 // ----------------------------------------------------------
 ClassifElemArray::~ClassifElemArray()
 {
-  vider() ;
+  vider();
 
-  lObjectCount-- ;
+  lObjectCount--;
 }
 
 // ----------------------------------------------------------
@@ -6132,97 +6132,97 @@ NSEpiClassifDB::searchDomainInClassif(string sClassification, ElemSetArray *pDom
 try
 {
   if ((NULL == pDomain) || pDomain->empty())
-    return ;
+    return;
 
 //      cette méthode doit, à partir d'un domaine, ajouter à l'array pArrayClassif (s'ils n'y sont pas déjà)
 //      les NSEpiClassifInfo des codes contenus dans le pDomain, en vérifiant qu'ils existent dans classif.db
 //      d'où array de NSepiClassifInfo
 #ifndef _ENTERPRISE_DLL
-  NSEpiClassif Classif(pContexte->getSuperviseur()) ;
-  Classif.lastError = Classif.open() ;
+  NSEpiClassif Classif(pContexte->getSuperviseur());
+  Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    return ;
+    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    return;
   }
 
-  for (ElemSetIterator DomainIter = pDomain->begin() ; DomainIter != pDomain->end() ; DomainIter++)
+  for (ElemSetIterator DomainIter = pDomain->begin(); DomainIter != pDomain->end(); DomainIter++)
   {
     if (false == (*DomainIter)->isEmptySet())
     {
-      string sBornInf = (*DomainIter)->getBegin() ;
-      string sBornSup = (*DomainIter)->getEnd() ;
+      string sBornInf = (*DomainIter)->getBegin();
+      string sBornSup = (*DomainIter)->getEnd();
 
       // définition de la clé de recherche
-      string cle = sClassification + sBornInf ;
+      string cle = sClassification + sBornInf;
 
       // recherche dans la base
-      Classif.lastError = Classif.chercheClef(&cle, "", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
+      Classif.lastError = Classif.chercheClef(&cle, "", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
       if ((Classif.lastError != DBIERR_NONE) && (Classif.lastError != DBIERR_RECNOTFOUND))
       {
-        erreur("classif.db -- erreur à la recherche dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        Classif.close() ;
-        return ;
+        erreur("classif.db -- erreur à la recherche dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+        Classif.close();
+        return;
       }
 
       // récupération de l'enregistrement
-      Classif.lastError = Classif.getRecord() ;
+      Classif.lastError = Classif.getRecord();
       if (Classif.lastError != DBIERR_NONE)
       {
-        erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-        Classif.close() ;
-        return ;
+        erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+        Classif.close();
+        return;
       }
 
       // on continue jusqu'à ce qu'on soit strictement supérieur à la borne supérieure de l'élément
       while (sBornSup >= Classif.getCode())
       {
-        NSEpiClassifInfo *pNewElem = new NSEpiClassifInfo(&Classif) ;
-        bool bElemAlreadyPresent = false ;
+        NSEpiClassifInfo *pNewElem = new NSEpiClassifInfo(&Classif);
+        bool bElemAlreadyPresent = false;
 
         // on vérifie si l'élément est pas déjà présent dans l'array que l'on renvoie
-        for (NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin() ; ClassifInfoIter != pArrayClassif->end() ; ClassifInfoIter++)
+        for (NSEpiClassifInfoIter ClassifInfoIter = pArrayClassif->begin(); ClassifInfoIter != pArrayClassif->end(); ClassifInfoIter++)
         {
           if (pNewElem == (*ClassifInfoIter))
-            bElemAlreadyPresent = true ;
+            bElemAlreadyPresent = true;
         }
 
         // si l'élément n'est pas déjà présent dans l'array on le rajoute
         if (bElemAlreadyPresent == false)
-          pArrayClassif->push_back(pNewElem) ;
+          pArrayClassif->push_back(pNewElem);
         else
-          delete pNewElem ;
+          delete pNewElem;
 
         // on passe à l'enregistrement suivant
-        Classif.lastError = Classif.suivant(dbiREADLOCK) ;
+        Classif.lastError = Classif.suivant(dbiREADLOCK);
         if (Classif.lastError != DBIERR_NONE)
         {
-          erreur("classif.db -- erreur d'accès au message suivant.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-          Classif.close() ;
-          return ;
+          erreur("classif.db -- erreur d'accès au message suivant.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+          Classif.close();
+          return;
         }
 
         // récupération de l'enregistrement suivant
-        Classif.lastError = Classif.getRecord() ;
+        Classif.lastError = Classif.getRecord();
         if (Classif.lastError != DBIERR_NONE)
         {
-          erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-          Classif.close() ;
-          return ;
+          erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+          Classif.close();
+          return;
         }
       }
     }
   }
 
   // on ferme la base
-  Classif.lastError = Classif.close() ;
+  Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError) ;
+	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
 }
 }
 
@@ -6232,57 +6232,57 @@ NSEpiClassifDB::searchCode(string sClassification, string sCode, NSEpiClassifInf
 try
 {
   if ((NULL == pClassifInfo) || (string("") == sClassification) || (string("") == sCode))
-    return false ;
+    return false;
 #ifndef _ENTERPRISE_DLL
-  NSEpiClassif Classif(pContexte->getSuperviseur()) ;
-  Classif.lastError = Classif.open() ;
+  NSEpiClassif Classif(pContexte->getSuperviseur());
+  Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    return false ;
+    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    return false;
   }
 
-  CURProps curProps ;
-  /* DBIResult lastError = */ DbiGetCursorProps(Classif.PrendCurseur(), curProps) ;
-  Byte* pIndexRec = new Byte[curProps.iRecBufSize] ;
-  memset(pIndexRec, 0, curProps.iRecBufSize) ;
-  DbiPutField(Classif.PrendCurseur(), CLASSIF_CLASSIF_FIELD, pIndexRec, (Byte*) sClassification.c_str()) ;
-  DbiPutField(Classif.PrendCurseur(), CLASSIF_CODE_FIELD,    pIndexRec, (Byte*) sCode.c_str()) ;
+  CURProps curProps;
+  /* DBIResult lastError = */ DbiGetCursorProps(Classif.PrendCurseur(), curProps);
+  Byte* pIndexRec = new Byte[curProps.iRecBufSize];
+  memset(pIndexRec, 0, curProps.iRecBufSize);
+  DbiPutField(Classif.PrendCurseur(), CLASSIF_CLASSIF_FIELD, pIndexRec, (Byte*) sClassification.c_str());
+  DbiPutField(Classif.PrendCurseur(), CLASSIF_CODE_FIELD,    pIndexRec, (Byte*) sCode.c_str());
 
   Classif.lastError = Classif.chercheClefComposite("",
                                                    0,
                                                    keySEARCHEQ,
                                                    dbiWRITELOCK,
-                                                   pIndexRec) ;
-  delete[] pIndexRec ;
+                                                   pIndexRec);
+  delete[] pIndexRec;
 
   if (DBIERR_NONE != Classif.lastError)
   {
-    Classif.close() ;
-    return false ;
+    Classif.close();
+    return false;
   }
 
-  Classif.lastError = Classif.getRecord() ;
+  Classif.lastError = Classif.getRecord();
   if (DBIERR_NONE != Classif.lastError)
   {
-  	erreur("Erreur à la lecture d'une fiche Classif.", standardError, Classif.lastError) ;
-    Classif.close() ;
-    return false ;
+  	erreur("Erreur à la lecture d'une fiche Classif.", standardError, Classif.lastError);
+    Classif.close();
+    return false;
   }
 
-  *pClassifInfo = Classif ;
+  *pClassifInfo = Classif;
 
   // on ferme la base
-  Classif.lastError = Classif.close() ;
+  Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
-  return true ;
+  return true;
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError) ;
-  return false ;
+	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
+  return false;
 }
 }
 

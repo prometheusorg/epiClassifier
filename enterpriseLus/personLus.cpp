@@ -33,28 +33,28 @@
 //---------------------------------------------------------------------------
 Person::Person(NSContexte* pCtx)
 {
-  _pContexte = pCtx ;
+  _pContexte = pCtx;
 
-  init() ;
+  init();
 }
 
 void
 Person::init()
 {
-  _sID                = string("") ;
-  _sPseudo            = string("") ;
-  _sFamilyName        = string("") ;
-  _sFirstName         = string("") ;
-  _sMaidenName        = string("") ;
-  _sGender            = string("") ;
-  _sAddress           = string("") ;
-  _sBirthDate         = string("") ;
-  _sMobilePhoneNumber = string("") ;
-  _sOfficePhoneNumber = string("") ;
-  _sFamilyStatus      = string("") ;
-  _sLang              = string("") ;
-  _sCivility          = string("") ;
-  _sFullName          = string("") ;
+  _sID                = string("");
+  _sPseudo            = string("");
+  _sFamilyName        = string("");
+  _sFirstName         = string("");
+  _sMaidenName        = string("");
+  _sGender            = string("");
+  _sAddress           = string("");
+  _sBirthDate         = string("");
+  _sMobilePhoneNumber = string("");
+  _sOfficePhoneNumber = string("");
+  _sFamilyStatus      = string("");
+  _sLang              = string("");
+  _sCivility          = string("");
+  _sFullName          = string("");
 }
 
 //---------------------------------------------------------------------------
@@ -64,22 +64,22 @@ Person::init()
 //---------------------------------------------------------------------------
 Person::Person(Person& rv)
 {
-  _pContexte     = rv._pContexte ;
+  _pContexte     = rv._pContexte;
 
-	_sID                = rv._sID ;
-  _sPseudo            = rv._sPseudo ;
-	_sFamilyName        = rv._sFamilyName ;
-	_sFirstName         = rv._sFirstName ;
-	_sGender            = rv._sGender ;
-	_sAddress           = rv._sAddress ;
-	_sBirthDate         = rv._sBirthDate ;
-	_sMobilePhoneNumber = rv._sMobilePhoneNumber ;
-	_sOfficePhoneNumber = rv._sOfficePhoneNumber ;
-	_sFamilyStatus      = rv._sFamilyStatus ;
-	_sLang              = rv._sLang ;
-	_sCivility          = rv._sCivility ;
-	_sFullName          = rv._sFullName ;
-	_sMaidenName        = rv._sMaidenName ;
+	_sID                = rv._sID;
+  _sPseudo            = rv._sPseudo;
+	_sFamilyName        = rv._sFamilyName;
+	_sFirstName         = rv._sFirstName;
+	_sGender            = rv._sGender;
+	_sAddress           = rv._sAddress;
+	_sBirthDate         = rv._sBirthDate;
+	_sMobilePhoneNumber = rv._sMobilePhoneNumber;
+	_sOfficePhoneNumber = rv._sOfficePhoneNumber;
+	_sFamilyStatus      = rv._sFamilyStatus;
+	_sLang              = rv._sLang;
+	_sCivility          = rv._sCivility;
+	_sFullName          = rv._sFullName;
+	_sMaidenName        = rv._sMaidenName;
 }
 
 //---------------------------------------------------------------------------
@@ -107,9 +107,9 @@ Person::operator == ( Person& o )
       (_sOfficePhoneNumber == o._sOfficePhoneNumber) &&
       (_sFullName          == o._sFullName)
       )
-      return 1 ;
+      return 1;
   else
-      return 0 ;
+      return 0;
 }
 
 //---------------------------------------------------------------------------
@@ -126,32 +126,32 @@ void Person::buildFullName(string sLang)
 {
 /*
 	if (string("") == sLang)
-		sLang = _pContexte->getUser()->donneLang() ;
+		sLang = _pContexte->getUser()->donneLang();
 */
 
 	// calcul de l'age du patient
-	bool bIsChild = false ;
+	bool bIsChild = false;
 
 	if ((string("") != _sBirthDate) && (string("00000000") != _sBirthDate))
 	{
-    string sToday = string("") ;
-    get_current_date(&sToday) ;
-		int age = get_age(&sToday, &_sBirthDate) ;
+    string sToday = string("");
+    get_current_date(&sToday);
+		int age = get_age(&sToday, &_sBirthDate);
 
 		if ((age >= 0) && (age <= 14))
-			bIsChild = true ;
+			bIsChild = true;
 	}
 
 	if (string("fr") == sLang)
 	{
 		if (bIsChild)
-			_sFullName = string("Enfant ") ;
+			_sFullName = string("Enfant ");
 		else
 		{
 			if (_sGender[0] == '2')
-				_sFullName = string("Mme ") ;
+				_sFullName = string("Mme ");
 			else
-				_sFullName = string("M. ") ;
+				_sFullName = string("M. ");
 		}
 	}
 
@@ -168,9 +168,9 @@ void Person::buildFullName(string sLang)
 		}
 	}
 
-	_sFullName += _sFamilyName ;
-	_sFullName += string(" ") ;
-	_sFullName += _sFirstName ;
+	_sFullName += _sFamilyName;
+	_sFullName += string(" ");
+	_sFullName += _sFirstName;
 }
 
 string
@@ -178,21 +178,21 @@ Person::buildCivility(bool /* bShort */, string sLang)
 {
 /*
 	if (string("") == sLang)
-		sLang = _pContexte->getUser()->donneLang() ;
+		sLang = _pContexte->getUser()->donneLang();
 */
 
 	if (string("") != _sCivility)
 	{
-		string sLibelleTrouve ;
-    _pContexte->getSuperviseur()->getDico()->donneLibelle(sLang, &_sCivility, &sLibelleTrouve) ;
+		string sLibelleTrouve;
+    _pContexte->getSuperviseur()->getDico()->donneLibelle(sLang, &_sCivility, &sLibelleTrouve);
     if (string("") != sLibelleTrouve)
     {
-    	sLibelleTrouve += string(" ") ;
-      return sLibelleTrouve ;
+    	sLibelleTrouve += string(" ");
+      return sLibelleTrouve;
     }
   }
 
-	return string("") ;
+	return string("");
 }
 
 //---------------------------------------------------------------------------
@@ -204,11 +204,11 @@ string
 Person::getTranslatedBirthDate(string sLang)
 {
   if (string("") == _sBirthDate)
-		return string("") ;
+		return string("");
 
-  string sFormat = _pContexte->getSuperviseur()->getText("0localInformation", "dateFormat", sLang, _pContexte) ;
+  string sFormat = _pContexte->getSuperviseur()->getText("0localInformation", "dateFormat", sLang, _pContexte);
 
-  return getFormatedDate(_sBirthDate, sLang, sFormat) ;
+  return getFormatedDate(_sBirthDate, sLang, sFormat);
 }
 
 //---------------------------------------------------------------------------
@@ -222,39 +222,39 @@ Person::getTitle(string sLang)
 {
 /*
 	if (string("") == sLang)
-		sLang = _pContexte->getUser()->donneLang() ;
+		sLang = _pContexte->getUser()->donneLang();
 */
 
 	if (string("") == _sFullName)
-		buildFullName() ;
+		buildFullName();
 
-	return _sFullName ;
+	return _sFullName;
 }
 
 Person&
 Person::operator=(Person src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
 	_pContexte          = src._pContexte;
 
-	_sID                = src._sID ;
-  _sPseudo            = src._sPseudo ;
-	_sFamilyName        = src._sFamilyName ;
-	_sFirstName         = src._sFirstName ;
-	_sGender            = src._sGender ;
-	_sAddress           = src._sAddress ;
-	_sBirthDate         = src._sBirthDate ;
-	_sMobilePhoneNumber = src._sMobilePhoneNumber ;
-	_sOfficePhoneNumber = src._sOfficePhoneNumber ;
-	_sFamilyStatus      = src._sFamilyStatus ;
-	_sLang              = src._sLang ;
-	_sCivility          = src._sCivility ;
-	_sFullName          = src._sFullName ;
-	_sMaidenName        = src._sMaidenName ;
+	_sID                = src._sID;
+  _sPseudo            = src._sPseudo;
+	_sFamilyName        = src._sFamilyName;
+	_sFirstName         = src._sFirstName;
+	_sGender            = src._sGender;
+	_sAddress           = src._sAddress;
+	_sBirthDate         = src._sBirthDate;
+	_sMobilePhoneNumber = src._sMobilePhoneNumber;
+	_sOfficePhoneNumber = src._sOfficePhoneNumber;
+	_sFamilyStatus      = src._sFamilyStatus;
+	_sLang              = src._sLang;
+	_sCivility          = src._sCivility;
+	_sFullName          = src._sFullName;
+	_sMaidenName        = src._sMaidenName;
 
-    return *this ;
+    return *this;
 }
 
 //***************************************************************************
@@ -269,11 +269,11 @@ string StringTitre(NSContexte* pContexte, string sTypeTitre, string sLang)
 	string titre("");
 
 	if (string("") == sTypeTitre)
-		return titre ;
+		return titre;
 
-	pContexte->getSuperviseur()->getDico()->donneLibelle(sLang, &sTypeTitre, &titre) ;
-  titre[0] = pseumaj(titre[0]) ;
-  titre += string(" ") ;
+	pContexte->getSuperviseur()->getDico()->donneLibelle(sLang, &sTypeTitre, &titre);
+  titre[0] = pseumaj(titre[0]);
+  titre += string(" ");
 
-	return titre ;
+	return titre;
 }

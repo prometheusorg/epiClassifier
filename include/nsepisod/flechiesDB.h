@@ -48,31 +48,31 @@ class NSFlechiesData
 {
   public:
 
-	  NSFlechiesData() ;
-	  NSFlechiesData(NSFlechiesData& rv) ;
-	  ~NSFlechiesData() ;
+	  NSFlechiesData();
+	  NSFlechiesData(NSFlechiesData& rv);
+	  ~NSFlechiesData();
 
-	  NSFlechiesData&	operator=(NSFlechiesData src) ;
-	  int							operator==(const NSFlechiesData& o) ;
+	  NSFlechiesData&	operator=(NSFlechiesData src);
+	  int							operator==(const NSFlechiesData& o);
 
-	  void 						metAZero() ;
+	  void 						metAZero();
 
-    string getId()    { return sId ; }
-    string getLabel() { return sLibelle ; }
-    string getCode()  { return sCode ; }
+    string getId()    { return sId; }
+    string getLabel() { return sLibelle; }
+    string getCode()  { return sCode; }
 
-    void setId(string sSt)    { sId      = sSt ; }
-    void setLabel(string sSt) { sLibelle = sSt ; }
-    void setCode(string sSt)  { sCode    = sSt ; }
+    void setId(string sSt)    { sId      = sSt; }
+    void setLabel(string sSt) { sLibelle = sSt; }
+    void setCode(string sSt)  { sCode    = sSt; }
 
 	  // variables
-	  string sId ;
-	  string sLibelle ;
-	  string sCode ;
-} ;
+	  string sId;
+	  string sLibelle;
+	  string sCode;
+};
 
 #ifndef _ENTERPRISE_DLL
-class NSFlechies ;
+class NSFlechies;
 #endif
 
 // -----------------------------------------------------------------------------
@@ -83,27 +83,27 @@ class NSFlechiesInfo
 {
   public:
 
-	  NSFlechiesInfo() ;
+	  NSFlechiesInfo();
 #ifndef _ENTERPRISE_DLL
-	  NSFlechiesInfo(NSFlechies *) ;
+	  NSFlechiesInfo(NSFlechies *);
 #endif
-	  NSFlechiesInfo(NSFlechiesInfo& rv) ;
-	  ~NSFlechiesInfo() ;
+	  NSFlechiesInfo(NSFlechiesInfo& rv);
+	  ~NSFlechiesInfo();
 
-	  NSFlechiesInfo& operator=(NSFlechiesInfo src) ;
-	  int 		      	operator==(const NSFlechiesInfo& o) ;
+	  NSFlechiesInfo& operator=(NSFlechiesInfo src);
+	  int 		      	operator==(const NSFlechiesInfo& o);
 
 #ifdef _ENTERPRISE_DLL
-	  void					  alimenteFiche(MYSQL_ROW *pRow) ;
+	  void					  alimenteFiche(MYSQL_ROW *pRow);
 #endif
 
-    string getID()    { return pDonnees->sId ; }
-    string getLabel() { return pDonnees->sLibelle ; }
-    string getCode()  { return pDonnees->sCode ; }
+    string getID()    { return pDonnees->sId; }
+    string getLabel() { return pDonnees->sLibelle; }
+    string getCode()  { return pDonnees->sCode; }
 
 	  // variables
-	  NSFlechiesData	*pDonnees ;
-} ;
+	  NSFlechiesData	*pDonnees;
+};
 
 // -----------------------------------------------------------------------------
 //  Classe NSEpiContact
@@ -123,29 +123,29 @@ class NSFlechies : public NSFlechiesInfo,
 {
   public:
 
- 	  enum BASEFLEX { flechies = 1, ortho, local, express } ;
+ 	  enum BASEFLEX { flechies = 1, ortho, local, express };
 
-	  int						iTypeBase ;
-	  string				sFileName ;
-	  string				sFileLib ;
+	  int						iTypeBase;
+	  string				sFileName;
+	  string				sFileLib;
 
-	  NSFlechies(NSSuper *pSuper, int iBase = flechies) ;
-	  NSFlechies(NSFlechies& rv) ;
-	  ~NSFlechies() ;
+	  NSFlechies(NSSuper *pSuper, int iBase = flechies);
+	  NSFlechies(NSFlechies& rv);
+	  ~NSFlechies();
 
 #ifndef _ENTERPRISE_DLL
-	  void					alimenteFiche() ;
-	  void					videFiche() ;
-	  DBIResult			open(bool bOpenShared = true) ;
+	  void					alimenteFiche();
+	  void					videFiche();
+	  DBIResult			open(bool bOpenShared = true);
 #else
-    void					alimenteFiche(MYSQL_ROW *pRow) ;
+    void					alimenteFiche(MYSQL_ROW *pRow);
 #endif
 
-	  virtual bool	Create() ;
-	  virtual bool	Modify() ;
+	  virtual bool	Create();
+	  virtual bool	Modify();
 
-	  NSFlechies&		operator=(NSFlechies src) ;
-	  int 	      	operator==(const NSFlechies& o) ;
-} ;
+	  NSFlechies&		operator=(NSFlechies src);
+	  int 	      	operator==(const NSFlechies& o);
+};
 
 #endif    // __FLECHIESDB_H__

@@ -118,29 +118,29 @@ class BBChemData
     //
     // Variables de stockage des valeurs
     //
-    char code[CH_CODE_LEN + 1] ;
-    char auteur[CH_AUTEUR_LEN + 1] ;
-    char chemin[CH_CHEMIN_LEN + 1] ;
-    char scenario[CH_SCENARIO_LEN + 1] ;
+    char code[CH_CODE_LEN + 1];
+    char auteur[CH_AUTEUR_LEN + 1];
+    char chemin[CH_CHEMIN_LEN + 1];
+    char scenario[CH_SCENARIO_LEN + 1];
 
-    void metAZero() ;
+    void metAZero();
 
-    BBChemData() { metAZero() ; }
-    BBChemData(BBChemData& rv) ;
-    ~BBChemData() ;
+    BBChemData() { metAZero(); }
+    BBChemData(BBChemData& rv);
+    ~BBChemData();
     
-    BBChemData& operator=(BBChemData src) ;
-    int         operator==(const BBChemData& o) ;
+    BBChemData& operator=(BBChemData src);
+    int         operator==(const BBChemData& o);
 
-		string getID()           { return string(code) ;     }
-    string getGroupID()      { return string(auteur) ;   }
-    string getSemanticPath() { return string(chemin) ;   }
-    string getValidityCase() { return string(scenario) ; }
+		string getID()           { return string(code);     }
+    string getGroupID()      { return string(auteur);   }
+    string getSemanticPath() { return string(chemin);   }
+    string getValidityCase() { return string(scenario); }
 
-    void setID(string sID)              { strcpy(code,     sID.c_str()) ;    }
-    void setGroupID(string sGroup)      { strcpy(auteur,   sGroup.c_str()) ; }
-    void setSemanticPath(string sPath)  { strcpy(chemin,   sPath.c_str()) ;  }
-    void setValidityCase(string sValid) { strcpy(scenario, sValid.c_str()) ; }
+    void setID(string sID)              { strcpy(code,     sID.c_str());    }
+    void setGroupID(string sGroup)      { strcpy(auteur,   sGroup.c_str()); }
+    void setSemanticPath(string sPath)  { strcpy(chemin,   sPath.c_str());  }
+    void setValidityCase(string sValid) { strcpy(scenario, sValid.c_str()); }
 };
 
 #ifndef _ENTERPRISE_DLL
@@ -155,17 +155,17 @@ class BBChem : public NSSuperRoot
 {
 	public :
 
-    BBChemData*	pDonnees ;	  // Donnees de la fiche PARADOX
+    BBChemData*	pDonnees;	  // Donnees de la fiche PARADOX
 
-    BBChem(NSSuper* pSuper) ;
-    ~BBChem() ;
+    BBChem(NSSuper* pSuper);
+    ~BBChem();
 
 #ifndef _ENTERPRISE_DLL
-    DBIResult open(string tableName) ;
-    DBIResult open() ;
+    DBIResult open(string tableName);
+    DBIResult open();
 #endif
-    void alimenteFiche() ;
-    void videFiche() ;
+    void alimenteFiche();
+    void videFiche();
 };
 
 //---------------------------------------------------------------------------
@@ -186,62 +186,62 @@ class BBItemData : public BBChemData
 		//
 		// Variables de stockage des valeurs
 		//
-    char commentaire[BB_COMMENTAIRE_LEN + 1] ;
-    char fichierDialogue[BB_FICHIER_DIALOGUE_LEN + 1] ;
-    char nomDialogue[BB_NOM_DIALOGUE_LEN + 1] ;
-    char ouvreDialogue[BB_OUVRE_DIALOGUE_LEN + 1] ;
-    char fichierFonction[BB_FICHIER_FONCTION_LEN + 1] ;
-    char nomFonction[BB_NOM_FONCTION_LEN + 1] ;
-    char decalageNiveau[BB_DECALAGE_NIVEAU_LEN + 1] ;
-    char fils[BB_FILS_LEN + 1] ;
-    char exclusion[BB_EXCLUSION_LEN + 1] ;
-    char automatique[BB_AUTOMATIQUE_LEN + 1] ;
-    char actif_vide[BB_ACTIF_VIDE_LEN + 1] ;
-    char unicite_lesion[BB_UNICITE_LESION_LEN + 1] ;
-    char impose[BB_IMPOSE_LEN + 1] ;
-    char tri[BB_TRI_LEN + 1] ;
+    char commentaire[BB_COMMENTAIRE_LEN + 1];
+    char fichierDialogue[BB_FICHIER_DIALOGUE_LEN + 1];
+    char nomDialogue[BB_NOM_DIALOGUE_LEN + 1];
+    char ouvreDialogue[BB_OUVRE_DIALOGUE_LEN + 1];
+    char fichierFonction[BB_FICHIER_FONCTION_LEN + 1];
+    char nomFonction[BB_NOM_FONCTION_LEN + 1];
+    char decalageNiveau[BB_DECALAGE_NIVEAU_LEN + 1];
+    char fils[BB_FILS_LEN + 1];
+    char exclusion[BB_EXCLUSION_LEN + 1];
+    char automatique[BB_AUTOMATIQUE_LEN + 1];
+    char actif_vide[BB_ACTIF_VIDE_LEN + 1];
+    char unicite_lesion[BB_UNICITE_LESION_LEN + 1];
+    char impose[BB_IMPOSE_LEN + 1];
+    char tri[BB_TRI_LEN + 1];
 
-    bool estAutomatique() { return ((automatique[0] == 'O') || (automatique[0] == 'o')) ; }
-    bool actifVide()      { return ((actif_vide[0] != 'N') && (actif_vide[0] != 'n')) ; }
-    bool uniciteLesion()  { return ((unicite_lesion[0] != 'N') && (unicite_lesion[0] != 'n')) ; }
-    bool ouvreDlg()       { return ((ouvreDialogue[0] == 'O') || (ouvreDialogue[0] == 'o')) ; }
-    bool ouvreArchetype() { return ((ouvreDialogue[0] == 'A') || (ouvreDialogue[0] == 'a')) ; }
-    bool estImpose()      { return ((impose[0] == 'O') || (impose[0] == 'o')) ; }
+    bool estAutomatique() { return ((automatique[0] == 'O') || (automatique[0] == 'o')); }
+    bool actifVide()      { return ((actif_vide[0] != 'N') && (actif_vide[0] != 'n')); }
+    bool uniciteLesion()  { return ((unicite_lesion[0] != 'N') && (unicite_lesion[0] != 'n')); }
+    bool ouvreDlg()       { return ((ouvreDialogue[0] == 'O') || (ouvreDialogue[0] == 'o')); }
+    bool ouvreArchetype() { return ((ouvreDialogue[0] == 'A') || (ouvreDialogue[0] == 'a')); }
+    bool estImpose()      { return ((impose[0] == 'O') || (impose[0] == 'o')); }
 
-    void metAZero() ;
+    void metAZero();
 
-    BBItemData() : BBChemData() { metAZero() ; }
-    BBItemData(BBItemData& rv) ;
-    ~BBItemData() ;
+    BBItemData() : BBChemData() { metAZero(); }
+    BBItemData(BBItemData& rv);
+    ~BBItemData();
 
-    BBItemData& operator=(BBItemData src) ;
-    int         operator==(const BBItemData& o) ;
+    BBItemData& operator=(BBItemData src);
+    int         operator==(const BBItemData& o);
 
 		string getLabel()      { return string(commentaire); }
-    string getDialogFile() { return string(fichierDialogue) ; }
-    string getDialogName() { return string(nomDialogue) ; }
-    string getFctFile()    { return string(fichierFonction) ; }
-    string getFctName()    { return string(nomFonction) ; }
-    string getLevelShift() { return string(decalageNiveau) ; }
-    string getSonsList()   { return string(fils) ; }
-    string getSonsRules()  { return string(exclusion) ; }
-    string getSortRules()  { return string(tri) ; }
+    string getDialogFile() { return string(fichierDialogue); }
+    string getDialogName() { return string(nomDialogue); }
+    string getFctFile()    { return string(fichierFonction); }
+    string getFctName()    { return string(nomFonction); }
+    string getLevelShift() { return string(decalageNiveau); }
+    string getSonsList()   { return string(fils); }
+    string getSonsRules()  { return string(exclusion); }
+    string getSortRules()  { return string(tri); }
 
-    void setLabel(string sLabel)      { strcpy(commentaire,     sLabel.c_str()) ; }
-    void setDialogFile(string sDlgF)  { strcpy(fichierDialogue, sDlgF.c_str()) ;  }
-    void setDialogName(string sDlgN)  { strcpy(nomDialogue,     sDlgN.c_str()) ;  }
-    void setFctFile(string sFctF)     { strcpy(fichierFonction, sFctF.c_str()) ;  }
-    void setFctName(string sFctN)     { strcpy(nomFonction,     sFctN.c_str()) ;  }
-    void setLevelShift(string sLevel) { strcpy(decalageNiveau,  sLevel.c_str()) ; }
-    void setSonsList(string sSons)    { strcpy(fils,            sSons.c_str()) ;  }
-    void setSonsRules(string sRules)  { strcpy(exclusion,       sRules.c_str()) ; }
-    void setSortRules(string sSort)   { strcpy(tri,             sSort.c_str()) ;  }
-    void setAutomatic(bool bAuto)     { (true == bAuto) ? strcpy(automatique, "O")     : strcpy(automatique, "N") ; }
-    void setEmptyActivation(bool bEA) { (true == bEA)   ? strcpy(actif_vide, "O")      : strcpy(actif_vide, "N") ; }
-    void setUnicity(bool bUniq)       { (true == bUniq) ? strcpy(unicite_lesion, "O")  : strcpy(unicite_lesion, "N") ; }
-    void setOpenDialog(bool bOpen)    { (true == bOpen) ? strcpy(ouvreDialogue, "O")   : strcpy(ouvreDialogue, "N") ; }
-    void setOpenArchetype(bool bOpen) { (true == bOpen) ? strcpy(ouvreDialogue, "A")   : strcpy(ouvreDialogue, "N") ; }
-    void setNeeded(bool bNeed)        { (true == bNeed) ? strcpy(impose, "O")          : strcpy(impose, "N") ; }
+    void setLabel(string sLabel)      { strcpy(commentaire,     sLabel.c_str()); }
+    void setDialogFile(string sDlgF)  { strcpy(fichierDialogue, sDlgF.c_str());  }
+    void setDialogName(string sDlgN)  { strcpy(nomDialogue,     sDlgN.c_str());  }
+    void setFctFile(string sFctF)     { strcpy(fichierFonction, sFctF.c_str());  }
+    void setFctName(string sFctN)     { strcpy(nomFonction,     sFctN.c_str());  }
+    void setLevelShift(string sLevel) { strcpy(decalageNiveau,  sLevel.c_str()); }
+    void setSonsList(string sSons)    { strcpy(fils,            sSons.c_str());  }
+    void setSonsRules(string sRules)  { strcpy(exclusion,       sRules.c_str()); }
+    void setSortRules(string sSort)   { strcpy(tri,             sSort.c_str());  }
+    void setAutomatic(bool bAuto)     { (true == bAuto) ? strcpy(automatique, "O")     : strcpy(automatique, "N"); }
+    void setEmptyActivation(bool bEA) { (true == bEA)   ? strcpy(actif_vide, "O")      : strcpy(actif_vide, "N"); }
+    void setUnicity(bool bUniq)       { (true == bUniq) ? strcpy(unicite_lesion, "O")  : strcpy(unicite_lesion, "N"); }
+    void setOpenDialog(bool bOpen)    { (true == bOpen) ? strcpy(ouvreDialogue, "O")   : strcpy(ouvreDialogue, "N"); }
+    void setOpenArchetype(bool bOpen) { (true == bOpen) ? strcpy(ouvreDialogue, "A")   : strcpy(ouvreDialogue, "N"); }
+    void setNeeded(bool bNeed)        { (true == bNeed) ? strcpy(impose, "O")          : strcpy(impose, "N"); }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -256,15 +256,15 @@ class BBFiche : public BBChem
 {
 	public :
 
-    BBFiche(NSSuper* pSuper) ;
-    ~BBFiche() ;
+    BBFiche(NSSuper* pSuper);
+    ~BBFiche();
 
 #ifndef _ENTERPRISE_DLL
-    DBIResult open(string tableName) ;
-    DBIResult open() ;
+    DBIResult open(string tableName);
+    DBIResult open();
 #endif
-    void alimenteFiche() ;
-    void videFiche() ;
+    void alimenteFiche();
+    void videFiche();
 };
 
 //
@@ -280,68 +280,68 @@ class BBItemInfo
   	//
     // Objet qui contient les donnees
     //
-    BBItemData* pDonnees ;
+    BBItemData* pDonnees;
 
-    BBItemInfo() ;
-		BBItemInfo(BBFiche*) ;
-		BBItemInfo(BBItemInfo& rv) ;
-    ~BBItemInfo() ;
+    BBItemInfo();
+		BBItemInfo(BBFiche*);
+		BBItemInfo(BBItemInfo& rv);
+    ~BBItemInfo();
 
-    BBItemInfo& operator=(BBItemInfo src) ;
-		int         operator == (BBItemInfo& o) ;
+    BBItemInfo& operator=(BBItemInfo src);
+		int         operator == (BBItemInfo& o);
 
     // Getters and Setters
     //
-    bool estAutomatique() { return pDonnees->estAutomatique() ; }
-    bool actifVide()      { return pDonnees->actifVide() ;      }
-    bool uniciteLesion()  { return pDonnees->uniciteLesion() ;  }
-    bool ouvreDlg()       { return pDonnees->ouvreDlg() ;       }
-    bool ouvreArchetype() { return pDonnees->ouvreArchetype() ; }
-    bool estImpose()      { return pDonnees->estImpose() ;      }
+    bool estAutomatique() { return pDonnees->estAutomatique(); }
+    bool actifVide()      { return pDonnees->actifVide();      }
+    bool uniciteLesion()  { return pDonnees->uniciteLesion();  }
+    bool ouvreDlg()       { return pDonnees->ouvreDlg();       }
+    bool ouvreArchetype() { return pDonnees->ouvreArchetype(); }
+    bool estImpose()      { return pDonnees->estImpose();      }
 
-    void metAZero()       { pDonnees->metAZero() ; }
+    void metAZero()       { pDonnees->metAZero(); }
 
-    string getID()           { return pDonnees->getID() ;           }
-    string getGroupID()      { return pDonnees->getGroupID() ;      }
-    string getSemanticPath() { return pDonnees->getSemanticPath() ; }
-    string getValidityCase() { return pDonnees->getValidityCase() ; }
+    string getID()           { return pDonnees->getID();           }
+    string getGroupID()      { return pDonnees->getGroupID();      }
+    string getSemanticPath() { return pDonnees->getSemanticPath(); }
+    string getValidityCase() { return pDonnees->getValidityCase(); }
 
-    void setID(string sID)              { pDonnees->setID(sID) ;              }
-    void setGroupID(string sGroup)      { pDonnees->setGroupID(sGroup) ;      }
-    void setSemanticPath(string sPath)  { pDonnees->setSemanticPath(sPath) ;  }
-    void setValidityCase(string sValid) { pDonnees->setValidityCase(sValid) ; }
+    void setID(string sID)              { pDonnees->setID(sID);              }
+    void setGroupID(string sGroup)      { pDonnees->setGroupID(sGroup);      }
+    void setSemanticPath(string sPath)  { pDonnees->setSemanticPath(sPath);  }
+    void setValidityCase(string sValid) { pDonnees->setValidityCase(sValid); }
 
-		string getLabel()      { return pDonnees->getLabel() ;      }
-    string getDialogFile() { return pDonnees->getDialogFile() ; }
-    string getDialogName() { return pDonnees->getDialogName() ; }
-    string getFctFile()    { return pDonnees->getFctFile() ;    }
-    string getFctName()    { return pDonnees->getFctName() ;    }
-    string getLevelShift() { return pDonnees->getLevelShift() ; }
-    string getSonsList()   { return pDonnees->getSonsList() ;   }
-    string getSonsRules()  { return pDonnees->getSonsRules() ;  }
-    string getSortRules()  { return pDonnees->getSortRules() ;  }
+		string getLabel()      { return pDonnees->getLabel();      }
+    string getDialogFile() { return pDonnees->getDialogFile(); }
+    string getDialogName() { return pDonnees->getDialogName(); }
+    string getFctFile()    { return pDonnees->getFctFile();    }
+    string getFctName()    { return pDonnees->getFctName();    }
+    string getLevelShift() { return pDonnees->getLevelShift(); }
+    string getSonsList()   { return pDonnees->getSonsList();   }
+    string getSonsRules()  { return pDonnees->getSonsRules();  }
+    string getSortRules()  { return pDonnees->getSortRules();  }
 
-    void setLabel(string sLabel)      { pDonnees->setLabel(sLabel) ;        }
-    void setDialogFile(string sDlgF)  { pDonnees->setDialogFile(sDlgF) ;    }
-    void setDialogName(string sDlgN)  { pDonnees->setDialogName(sDlgN) ;    }
-    void setFctFile(string sFctF)     { pDonnees->setFctFile(sFctF) ;       }
-    void setFctName(string sFctN)     { pDonnees->setFctName(sFctN) ;       }
-    void setLevelShift(string sLevel) { pDonnees->setLevelShift(sLevel) ;   }
-    void setSonsList(string sSons)    { pDonnees->setSonsList(sSons) ;      }
-    void setSonsRules(string sRules)  { pDonnees->setSonsRules(sRules) ;    }
-    void setSortRules(string sSort)   { pDonnees->setSortRules(sSort) ;     }
-    void setAutomatic(bool bAuto)     { pDonnees->setAutomatic(bAuto) ;     }
-    void setEmptyActivation(bool bEA) { pDonnees->setEmptyActivation(bEA) ; }
-    void setUnicity(bool bUniq)       { pDonnees->setUnicity(bUniq) ;       }
-    void setOpenDialog(bool bOpen)    { pDonnees->setOpenDialog(bOpen) ;    }
-    void setNeeded(bool bNeed)        { pDonnees->setNeeded(bNeed) ;        }
+    void setLabel(string sLabel)      { pDonnees->setLabel(sLabel);        }
+    void setDialogFile(string sDlgF)  { pDonnees->setDialogFile(sDlgF);    }
+    void setDialogName(string sDlgN)  { pDonnees->setDialogName(sDlgN);    }
+    void setFctFile(string sFctF)     { pDonnees->setFctFile(sFctF);       }
+    void setFctName(string sFctN)     { pDonnees->setFctName(sFctN);       }
+    void setLevelShift(string sLevel) { pDonnees->setLevelShift(sLevel);   }
+    void setSonsList(string sSons)    { pDonnees->setSonsList(sSons);      }
+    void setSonsRules(string sRules)  { pDonnees->setSonsRules(sRules);    }
+    void setSortRules(string sSort)   { pDonnees->setSortRules(sSort);     }
+    void setAutomatic(bool bAuto)     { pDonnees->setAutomatic(bAuto);     }
+    void setEmptyActivation(bool bEA) { pDonnees->setEmptyActivation(bEA); }
+    void setUnicity(bool bUniq)       { pDonnees->setUnicity(bUniq);       }
+    void setOpenDialog(bool bOpen)    { pDonnees->setOpenDialog(bOpen);    }
+    void setNeeded(bool bNeed)        { pDonnees->setNeeded(bNeed);        }
 };
 
 //
 // Definition de BBItemArray (Array de BBItemInfo)
 //
-typedef vector<BBItemInfo*> BBItemVector ;
-typedef BBItemVector::iterator BBItemIter ;
+typedef vector<BBItemInfo*> BBItemVector;
+typedef BBItemVector::iterator BBItemIter;
 
 #ifndef __linux__
 class _CLASSELEXI BBItemArray : public BBItemVector
@@ -353,12 +353,12 @@ class BBItemArray : public BBItemVector
 
 		// Constructeurs
     BBItemArray() : BBItemVector() {}
-    BBItemArray(BBItemArray& rv) ;
+    BBItemArray(BBItemArray& rv);
     // Destructeur
-    virtual ~BBItemArray() ;
+    virtual ~BBItemArray();
 
-    BBItemArray& operator=(BBItemArray src) ;
-    void vider() ;
+    BBItemArray& operator=(BBItemArray src);
+    void vider();
 };
 
 //---------------------------------------------------------------------------
@@ -379,26 +379,26 @@ class BBDecodeData : public BBChemData
     //
     // Variables de stockage des valeurs
     //
-    char commentaire[DKD_COMMENTAIRE_LEN + 1] ;
-    char fichier[DKD_FICHIER_LEN + 1] ;
-    char nomFonction[DKD_NOM_FONCTION_LEN + 1] ;
+    char commentaire[DKD_COMMENTAIRE_LEN + 1];
+    char fichier[DKD_FICHIER_LEN + 1];
+    char nomFonction[DKD_NOM_FONCTION_LEN + 1];
 
-    void metAZero() ;
+    void metAZero();
 
-    BBDecodeData() : BBChemData() { metAZero() ; }
-    BBDecodeData(BBDecodeData& rv) ;
-    ~BBDecodeData() ;
+    BBDecodeData() : BBChemData() { metAZero(); }
+    BBDecodeData(BBDecodeData& rv);
+    ~BBDecodeData();
 
-    BBDecodeData& operator=(BBDecodeData src) ;
-    int           operator==(const BBDecodeData& o) ;
+    BBDecodeData& operator=(BBDecodeData src);
+    int           operator==(const BBDecodeData& o);
 
-    string getLabel()        { return string(commentaire) ; }
-    string getFileName()     { return string(fichier) ;     }
-    string getFunctionName() { return string(nomFonction) ; }
+    string getLabel()        { return string(commentaire); }
+    string getFileName()     { return string(fichier);     }
+    string getFunctionName() { return string(nomFonction); }
 
-    void setLabel(string sLabel)       { strcpy(commentaire, sLabel.c_str()) ; }
-    void setFileName(string sDlgF)     { strcpy(fichier,     sDlgF.c_str()) ;  }
-    void setFunctionName(string sDlgN) { strcpy(nomFonction, sDlgN.c_str()) ;  }
+    void setLabel(string sLabel)       { strcpy(commentaire, sLabel.c_str()); }
+    void setFileName(string sDlgF)     { strcpy(fichier,     sDlgF.c_str());  }
+    void setFunctionName(string sDlgN) { strcpy(nomFonction, sDlgN.c_str());  }
 };
 
 #ifndef __linux__
@@ -409,15 +409,15 @@ class BBDecode : public BBChem
 {
 	public :
 
-    BBDecode(NSSuper* pSuper) ;
-    ~BBDecode() ;
+    BBDecode(NSSuper* pSuper);
+    ~BBDecode();
 
 #ifndef _ENTERPRISE_DLL
-    DBIResult open(string tableName) ;
-    DBIResult open() ;
+    DBIResult open(string tableName);
+    DBIResult open();
 #endif
-    void alimenteFiche() ;
-    void videFiche() ;
+    void alimenteFiche();
+    void videFiche();
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -434,26 +434,26 @@ class NSGroupGdData
   	//
     // Variables de stockage des valeurs
     //
-    char groupe[GRPGD_GROUPE_LEN + 1] ;
-    char libelle[GRPGD_LIBELLE_LEN + 1] ;
-    char date[GRPGD_DATE_LEN + 1] ;
-    char util[GRPGD_UTIL_LEN + 1] ;
+    char groupe[GRPGD_GROUPE_LEN + 1];
+    char libelle[GRPGD_LIBELLE_LEN + 1];
+    char date[GRPGD_DATE_LEN + 1];
+    char util[GRPGD_UTIL_LEN + 1];
 
-    NSGroupGdData() ;
-    NSGroupGdData(NSGroupGdData& rv) ;
+    NSGroupGdData();
+    NSGroupGdData(NSGroupGdData& rv);
 
-    NSGroupGdData& operator=(NSGroupGdData src) ;
-    int            operator==(const NSGroupGdData& o) ;
+    NSGroupGdData& operator=(NSGroupGdData src);
+    int            operator==(const NSGroupGdData& o);
 
-    string getGroup() { return string(groupe) ;  }
-    string getLabel() { return string(libelle) ; }
-    string getDate()  { return string(date) ;    }
-    string getUser()  { return string(util) ;    }
+    string getGroup() { return string(groupe);  }
+    string getLabel() { return string(libelle); }
+    string getDate()  { return string(date);    }
+    string getUser()  { return string(util);    }
 
-    void setGroup(string sGrpe)  { strcpy(groupe,  sGrpe.c_str()) ;  }
-    void setLabel(string sLabel) { strcpy(libelle, sLabel.c_str()) ; }
-    void setDate(string sDate)   { strcpy(date,    sDate.c_str()) ;  }
-    void setUser(string sUser)   { strcpy(util,    sUser.c_str()) ;  }
+    void setGroup(string sGrpe)  { strcpy(groupe,  sGrpe.c_str());  }
+    void setLabel(string sLabel) { strcpy(libelle, sLabel.c_str()); }
+    void setDate(string sDate)   { strcpy(date,    sDate.c_str());  }
+    void setUser(string sUser)   { strcpy(util,    sUser.c_str());  }
 };
 
 //
@@ -474,26 +474,26 @@ class NSGroupGd : public NSSuperRoot
 	  //
 	  // Variables de stockage des valeurs
 	  //
-	  NSGroupGdData* pDonnees ;
+	  NSGroupGdData* pDonnees;
 
-	  NSGroupGd(NSSuper* pSuper) ;
-	  ~NSGroupGd() ;
+	  NSGroupGd(NSSuper* pSuper);
+	  ~NSGroupGd();
 
 #ifndef _ENTERPRISE_DLL
-	  DBIResult open() ;
+	  DBIResult open();
 #endif
-	  void alimenteFiche() ;
-	  void videFiche() ;
+	  void alimenteFiche();
+	  void videFiche();
 
-    string getGroup() { return pDonnees->getGroup() ; }
-    string getLabel() { return pDonnees->getLabel() ; }
-    string getDate()  { return pDonnees->getDate() ;  }
-    string getUser()  { return pDonnees->getUser() ;  }
+    string getGroup() { return pDonnees->getGroup(); }
+    string getLabel() { return pDonnees->getLabel(); }
+    string getDate()  { return pDonnees->getDate();  }
+    string getUser()  { return pDonnees->getUser();  }
 
-    void setGroup(string sGrpe)  { pDonnees->setGroup(sGrpe) ;  }
-    void setLabel(string sLabel) { pDonnees->setLabel(sLabel) ; }
-    void setDate(string sDate)   { pDonnees->setDate(sDate) ;   }
-    void setUser(string sUser)   { pDonnees->setUser(sUser) ;   }
+    void setGroup(string sGrpe)  { pDonnees->setGroup(sGrpe);  }
+    void setLabel(string sLabel) { pDonnees->setLabel(sLabel); }
+    void setDate(string sDate)   { pDonnees->setDate(sDate);   }
+    void setUser(string sUser)   { pDonnees->setUser(sUser);   }
 };
 
 //
@@ -509,32 +509,32 @@ class NSGroupGdInfo
   	//
     // Objet qui contient les donnees
     //
-    NSGroupGdData* pDonnees ;
+    NSGroupGdData* pDonnees;
 
-    NSGroupGdInfo() ;
-		NSGroupGdInfo(NSGroupGd*) ;
-		NSGroupGdInfo(NSGroupGdInfo& rv) ;
-    ~NSGroupGdInfo() ;
+    NSGroupGdInfo();
+		NSGroupGdInfo(NSGroupGd*);
+		NSGroupGdInfo(NSGroupGdInfo& rv);
+    ~NSGroupGdInfo();
 
-    NSGroupGdInfo& operator=(NSGroupGdInfo src) ;
-		int            operator == ( const NSGroupGdInfo& o ) ;
+    NSGroupGdInfo& operator=(NSGroupGdInfo src);
+		int            operator == ( const NSGroupGdInfo& o );
 
-    string getGroup() { return pDonnees->getGroup() ; }
-    string getLabel() { return pDonnees->getLabel() ; }
-    string getDate()  { return pDonnees->getDate() ;  }
-    string getUser()  { return pDonnees->getUser() ;  }
+    string getGroup() { return pDonnees->getGroup(); }
+    string getLabel() { return pDonnees->getLabel(); }
+    string getDate()  { return pDonnees->getDate();  }
+    string getUser()  { return pDonnees->getUser();  }
 
-    void setGroup(string sGrpe)  { pDonnees->setGroup(sGrpe) ;  }
-    void setLabel(string sLabel) { pDonnees->setLabel(sLabel) ; }
-    void setDate(string sDate)   { pDonnees->setDate(sDate) ;   }
-    void setUser(string sUser)   { pDonnees->setUser(sUser) ;   }
+    void setGroup(string sGrpe)  { pDonnees->setGroup(sGrpe);  }
+    void setLabel(string sLabel) { pDonnees->setLabel(sLabel); }
+    void setDate(string sDate)   { pDonnees->setDate(sDate);   }
+    void setUser(string sUser)   { pDonnees->setUser(sUser);   }
 };
 
 //
 // Definition de NSGroupGdArray (Array de NSGroupGd)
 //
-typedef vector<NSGroupGdInfo*> NSGroupGdVector ;
-typedef NSGroupGdVector::iterator NSGroupGdIter ;
+typedef vector<NSGroupGdInfo*> NSGroupGdVector;
+typedef NSGroupGdVector::iterator NSGroupGdIter;
 
 #ifndef __linux__
 class _CLASSELEXI NSGroupGdArray : public NSGroupGdVector
@@ -545,12 +545,12 @@ class NSGroupGdArray : public NSGroupGdVector
 	public :
   	// Constructeurs
     NSGroupGdArray() : NSGroupGdVector() {}
-    NSGroupGdArray(NSGroupGdArray& rv) ;
+    NSGroupGdArray(NSGroupGdArray& rv);
     // Destructeur
-    virtual ~NSGroupGdArray() ;
+    virtual ~NSGroupGdArray();
 
-    NSGroupGdArray& operator=(NSGroupGdArray src) ;
-    void vider() ;
+    NSGroupGdArray& operator=(NSGroupGdArray src);
+    void vider();
 };
 
 #endif    // __NSGUIDE_H

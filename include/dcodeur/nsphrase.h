@@ -1,12 +1,12 @@
 #ifndef __NSPHRASE_H
 #define __NSPHRASE_H
 
-class NSPhraseur ;
-class NSGenerateur ;
+class NSPhraseur;
+class NSGenerateur;
 
-class NSPatPathoData ;
+class NSPatPathoData;
 
-class gereNum ;
+class gereNum;
 
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
@@ -23,122 +23,122 @@ class NSPhraseMot : public NSRoot
   public :
 
   enum TYPEARTICLE { articleSans = 1, articleDefini, articleIndefini,
-                                                            articlePartitif} ;
+                                                            articlePartitif};
 
-  enum FORCEPOSITION { posStandard = 1, posAvant, posApres } ;
+  enum FORCEPOSITION { posStandard = 1, posAvant, posApres };
 
-  enum NUMFORME { numTiret = 1, numSimple, numRelative } ;
+  enum NUMFORME { numTiret = 1, numSimple, numRelative };
 
   protected :
 
     // Les preposition "non traduisibles" comme EN decubitus ou A velo
     // n'ont pas d'interet a etre traitees avec le lexique puisqu'elles
     // sont artificielles
-    string _sPreposition ;
+    string _sPreposition;
     //
     // "dans la rue" mais "en decubitus"
     //
 
     // On a une string pour les textes libres.
-    string _sTexteLibre ;
+    string _sTexteLibre;
 
 
-    TYPEARTICLE _avecArticle ;
+    TYPEARTICLE _avecArticle;
 
     //
     // Pour forcer la position d'un adjectif par rapport au nom.
 
-    FORCEPOSITION _posForcee ;
+    FORCEPOSITION _posForcee;
 
     //
     // Variables de stockage des valeurs
     //
-    // char lexique[BASE_LEXIQUE_LEN + 1] ;
-    // char complement[BASE_COMPLEMENT_LEN + 1] ;
-    // char certitude[BASE_CERTITUDE_LEN + 1] ;
-    // char pluriel[BASE_PLURIEL_LEN + 1] ;
+    // char lexique[BASE_LEXIQUE_LEN + 1];
+    // char complement[BASE_COMPLEMENT_LEN + 1];
+    // char certitude[BASE_CERTITUDE_LEN + 1];
+    // char pluriel[BASE_PLURIEL_LEN + 1];
 
-    string _sLexique ;
-    string _sComplement ;
-    string _sCertitude ;
-    string _sPluriel ;
+    string _sLexique;
+    string _sComplement;
+    string _sCertitude;
+    string _sPluriel;
 
     // Pour les valeurs chiffrees
-    // char format[BASE_LEXIQUE_LEN + 1] ;
-    // char methode[BASE_LEXIQUE_LEN + 1] ;
-    // char unite[BASE_LEXIQUE_LEN + 1] ;
+    // char format[BASE_LEXIQUE_LEN + 1];
+    // char methode[BASE_LEXIQUE_LEN + 1];
+    // char unite[BASE_LEXIQUE_LEN + 1];
 
-    string _sFormat ;
-    string _sMethode ;
-    string _sUnite ;
+    string _sFormat;
+    string _sMethode;
+    string _sUnite;
 
-    NUMFORME _numForme ;
+    NUMFORME _numForme;
 
     // Complément de nom
     //
-    NSPhraseur* _pComplement ;
+    NSPhraseur* _pComplement;
 
     // Priorite de cet element dans la phrase
     //
-    int _iPriorite ;
+    int _iPriorite;
 
   public :
 
-    NSPhraseMot(NSContexte* pCtx) ;
-    NSPhraseMot(NSPhraseMot& rv) ;
+    NSPhraseMot(NSContexte* pCtx);
+    NSPhraseMot(NSPhraseMot& rv);
     // NSPhraseMot(NSPathoBaseData* pPathoBaseElement, NSContexte* pCtx);
-    NSPhraseMot(NSPatPathoData* pPatPathoElement, NSContexte* pCtx) ;
-    ~NSPhraseMot() ;
+    NSPhraseMot(NSPatPathoData* pPatPathoElement, NSContexte* pCtx);
+    ~NSPhraseMot();
 
-    void initFromNum(gereNum* pNum) ;
+    void initFromNum(gereNum* pNum);
 
-    void setPreposition(string sPrep)     { _sPreposition = sPrep ; }
-    void setArticle(TYPEARTICLE iArticle) { _avecArticle = iArticle ; }
-    void setLexique(string sLexi)         { _sLexique = sLexi ; }
-    void setComplement(string sCompl)     { _sComplement = sCompl ; }
-    void setCertitude(string sCert)       { _sCertitude = sCert ; }
-    void setPluriel(string sPlur)         { _sPluriel = sPlur ; }
-    void setFormat(string sForm)          { _sFormat = sForm ; }
-    void setMethode(string sMetho)        { _sMethode = sMetho ; }
-    void setUnite(string sUnit)           { _sUnite = sUnit ; }
-    void setPosition(FORCEPOSITION iPos)  { _posForcee = iPos ; }
-    void setTexteLibre(string sTexte)     { _sTexteLibre = sTexte ; }
-    void setNumForme(NUMFORME iforme)     { _numForme = iforme ; }
-    void setPriority(int iPrior)          { _iPriorite = iPrior ; }
+    void setPreposition(string sPrep)     { _sPreposition = sPrep; }
+    void setArticle(TYPEARTICLE iArticle) { _avecArticle = iArticle; }
+    void setLexique(string sLexi)         { _sLexique = sLexi; }
+    void setComplement(string sCompl)     { _sComplement = sCompl; }
+    void setCertitude(string sCert)       { _sCertitude = sCert; }
+    void setPluriel(string sPlur)         { _sPluriel = sPlur; }
+    void setFormat(string sForm)          { _sFormat = sForm; }
+    void setMethode(string sMetho)        { _sMethode = sMetho; }
+    void setUnite(string sUnit)           { _sUnite = sUnit; }
+    void setPosition(FORCEPOSITION iPos)  { _posForcee = iPos; }
+    void setTexteLibre(string sTexte)     { _sTexteLibre = sTexte; }
+    void setNumForme(NUMFORME iforme)     { _numForme = iforme; }
+    void setPriority(int iPrior)          { _iPriorite = iPrior; }
 
-    string        getPreposition() { return _sPreposition ; }
-    TYPEARTICLE   getArticle()     { return _avecArticle ; }
-    string        getLexique()     { return _sLexique ; }
-    string        getComplement()  { return _sComplement ; }
-    string        getCertitude()   { return _sCertitude ; }
-    string        getPluriel()     { return _sPluriel ; }
-    string        getFormat()      { return _sFormat ; }
-    string        getMethode()     { return _sMethode ; }
-    string        getUnite()       { return _sUnite ; }
-    FORCEPOSITION getPosition()    { return _posForcee ; }
-    string        getTexteLibre()  { return _sTexteLibre ; }
-    int           getNumForme()    { return _numForme ; }
-    int           getPriority()    { return _iPriorite ; }
+    string        getPreposition() { return _sPreposition; }
+    TYPEARTICLE   getArticle()     { return _avecArticle; }
+    string        getLexique()     { return _sLexique; }
+    string        getComplement()  { return _sComplement; }
+    string        getCertitude()   { return _sCertitude; }
+    string        getPluriel()     { return _sPluriel; }
+    string        getFormat()      { return _sFormat; }
+    string        getMethode()     { return _sMethode; }
+    string        getUnite()       { return _sUnite; }
+    FORCEPOSITION getPosition()    { return _posForcee; }
+    string        getTexteLibre()  { return _sTexteLibre; }
+    int           getNumForme()    { return _numForme; }
+    int           getPriority()    { return _iPriorite; }
 
-    void          setComplementPhr(NSPhraseur* pCompl) ;
-    NSPhraseur*   getComplementPhr()                   { return _pComplement ; }
+    void          setComplementPhr(NSPhraseur* pCompl);
+    NSPhraseur*   getComplementPhr()                   { return _pComplement; }
 
-    bool         estTexteLibre() ;
+    bool         estTexteLibre();
 
-    string       forceNombre(NSGenerateur* pGener) ;
+    string       forceNombre(NSGenerateur* pGener);
 
-    NSPhraseMot& operator=(NSPhraseMot src) ;
-    int          operator==(const NSPhraseMot& o) ;
+    NSPhraseMot& operator=(NSPhraseMot src);
+    int          operator==(const NSPhraseMot& o);
 
-    virtual void metAZero() ;
-    void         initComplement() ;
+    virtual void metAZero();
+    void         initComplement();
 
-    bool         estVide() ;
+    bool         estVide();
 };
 
-enum TIME_EVENT { TpsTypeUndefined = 0, TpsDuration, TpsDate } ;  // Dure 2h ou Dans 2h
-enum TIME_FORM  { TpsFormUndefined = 0, TpsInstant, TpsInterval } ; //
-enum TIME_FRAME { TpsFrameUndefined = 0, TpsPresent, TpsPast, TpsFutur } ;
+enum TIME_EVENT { TpsTypeUndefined = 0, TpsDuration, TpsDate };  // Dure 2h ou Dans 2h
+enum TIME_FORM  { TpsFormUndefined = 0, TpsInstant, TpsInterval }; //
+enum TIME_FRAME { TpsFrameUndefined = 0, TpsPresent, TpsPast, TpsFutur };
 
 class NSPhraseMotTime : public NSPhraseMot
 {
@@ -151,18 +151,18 @@ class NSPhraseMotTime : public NSPhraseMot
     // Pour une date precise, alors mettre valeurMin == valeurMax
     // For a sharp date, then set valeurMin == valeurMax
     //
-    TIME_EVENT iTypeTps ;
+    TIME_EVENT iTypeTps;
 
     //
     // Temps ponctuel ou intervalle de temps
     // Point or Duration
     //
-    TIME_FORM iFormeTps ;
+    TIME_FORM iFormeTps;
 
     //
     // Now, in the past or in the future
     //
-    TIME_FRAME iRepererTps ;
+    TIME_FRAME iRepererTps;
 
     //
     // Time position related to an event (event = lexique)
@@ -171,54 +171,54 @@ class NSPhraseMotTime : public NSPhraseMot
                          EventFarBefore, EventBefore, EventJustBefore,
                          EventDuring,
                          EventJustAfter, EventAfter, EventFarAfter,
-                         EventFarFrom } ;
-    TIME_POSITION iEventTps ;
+                         EventFarFrom };
+    TIME_POSITION iEventTps;
 
     //
     // Min time
     //
-    char valeurMin[BASE_COMPLEMENT_LEN + 1] ; // Valeur min - Min Value
-    char uniteMin[BASE_LEXIQUE_LEN + 1] ;     // Unite min  - Min value unit
-    char formatMin[BASE_LEXIQUE_LEN + 1] ;
+    char valeurMin[BASE_COMPLEMENT_LEN + 1]; // Valeur min - Min Value
+    char uniteMin[BASE_LEXIQUE_LEN + 1];     // Unite min  - Min value unit
+    char formatMin[BASE_LEXIQUE_LEN + 1];
     //
     // Le temps min est "maintenant"    : de maintenant a plus tard
     // Min time is "now"                : from now to max time
     //
-    bool bMinNow ;
+    bool bMinNow;
 
     //
     // Max time
     //
-    char valeurMax[BASE_COMPLEMENT_LEN + 1] ; // Valeur max  - Max Value
-    char uniteMax[BASE_LEXIQUE_LEN + 1] ;     // Unite max   - Max value unit
-    char formatMax[BASE_LEXIQUE_LEN + 1] ;
+    char valeurMax[BASE_COMPLEMENT_LEN + 1]; // Valeur max  - Max Value
+    char uniteMax[BASE_LEXIQUE_LEN + 1];     // Unite max   - Max value unit
+    char formatMax[BASE_LEXIQUE_LEN + 1];
     //
     // Le temps max est "maintenant"    : d'une date a maintenant
     // Max time is "now"                : from min time to now
     //
-    bool bMaxNow ;
+    bool bMaxNow;
 
     //
     // Duree (3 mois...)
     //
-    char valeurDuree[BASE_COMPLEMENT_LEN + 1] ; // Valeur max  - Max Value
-    char uniteDuree[BASE_LEXIQUE_LEN + 1] ;     // Unite max   - Max value unit
-    char formatDuree[BASE_LEXIQUE_LEN + 1] ;
+    char valeurDuree[BASE_COMPLEMENT_LEN + 1]; // Valeur max  - Max Value
+    char uniteDuree[BASE_LEXIQUE_LEN + 1];     // Unite max   - Max value unit
+    char formatDuree[BASE_LEXIQUE_LEN + 1];
 
 
-    NSPhraseMotTime(NSContexte* pCtx) ;
-    NSPhraseMotTime(NSPhraseMotTime& rv) ;
+    NSPhraseMotTime(NSContexte* pCtx);
+    NSPhraseMotTime(NSPhraseMotTime& rv);
     // NSPhraseMot(NSPathoBaseData* pPathoBaseElement, NSContexte* pCtx);
-    NSPhraseMotTime(NSPatPathoData* pPatPathoElement, NSContexte* pCtx) ;
-    ~NSPhraseMotTime() ;
+    NSPhraseMotTime(NSPatPathoData* pPatPathoElement, NSContexte* pCtx);
+    ~NSPhraseMotTime();
 
-    NSPhraseMotTime& operator=(NSPhraseMotTime src) ;
-    int 		     operator==(const NSPhraseMotTime& o) ;
+    NSPhraseMotTime& operator=(NSPhraseMotTime src);
+    int 		     operator==(const NSPhraseMotTime& o);
 
-    void metAZero() ;
-    void setSharpDate() ;
-    bool minEgalMax() ;
-    bool estVide() ;
+    void metAZero();
+    void setSharpDate();
+    bool minEgalMax();
+    bool estVide();
 };
 
 class NSPhraseMotTimeCycle : public NSPhraseMot
@@ -234,41 +234,41 @@ class NSPhraseMotTimeCycle : public NSPhraseMot
     // Regular : |XXX_____|XXX_____|XXX_____ : cycle duration + action duration
     // Free    : |XX__XX__|XX_XX___|_XX__XX_ : cycle duration + action duration + nb of actions in a cycle
     //
-    enum CYCLETYPE { CycNotInit = 0, CycRegular, CycFree } ;
-    CYCLETYPE iCycleType ;
+    enum CYCLETYPE { CycNotInit = 0, CycRegular, CycFree };
+    CYCLETYPE iCycleType;
 
     //
     // Cycle duration time
     //
-    char cycleDurationValue[BASE_COMPLEMENT_LEN + 1] ;
-    char cycleDurationUnit[BASE_LEXIQUE_LEN + 1] ;
-    char cycleDurationFormat[BASE_LEXIQUE_LEN + 1] ;
+    char cycleDurationValue[BASE_COMPLEMENT_LEN + 1];
+    char cycleDurationUnit[BASE_LEXIQUE_LEN + 1];
+    char cycleDurationFormat[BASE_LEXIQUE_LEN + 1];
     //
     // Action duration time
     //
-    char actionDurationValue[BASE_COMPLEMENT_LEN + 1] ;
-    char actionDurationUnit[BASE_LEXIQUE_LEN + 1] ;
-    char actionDurationFormat[BASE_LEXIQUE_LEN + 1] ;
+    char actionDurationValue[BASE_COMPLEMENT_LEN + 1];
+    char actionDurationUnit[BASE_LEXIQUE_LEN + 1];
+    char actionDurationFormat[BASE_LEXIQUE_LEN + 1];
     //
     // Action duration time
     //
-    char numberOfAction[BASE_COMPLEMENT_LEN + 1] ;
+    char numberOfAction[BASE_COMPLEMENT_LEN + 1];
 
-    NSPhraseMotTimeCycle(NSContexte* pCtx) ;
-    NSPhraseMotTimeCycle(NSPhraseMotTimeCycle& rv) ;
+    NSPhraseMotTimeCycle(NSContexte* pCtx);
+    NSPhraseMotTimeCycle(NSPhraseMotTimeCycle& rv);
     // NSPhraseMot(NSPathoBaseData* pPathoBaseElement, NSContexte* pCtx);
-    NSPhraseMotTimeCycle(NSPatPathoData* pPatPathoElement, NSContexte* pCtx) ;
-    ~NSPhraseMotTimeCycle() ;
+    NSPhraseMotTimeCycle(NSPatPathoData* pPatPathoElement, NSContexte* pCtx);
+    ~NSPhraseMotTimeCycle();
 
-    NSPhraseMotTimeCycle& operator=(NSPhraseMotTimeCycle src) ;
-    int                   operator==(const NSPhraseMotTimeCycle& o) ;
+    NSPhraseMotTimeCycle& operator=(NSPhraseMotTimeCycle src);
+    int                   operator==(const NSPhraseMotTimeCycle& o);
 
-    void metAZero() ;
-    bool estVide() ;
+    void metAZero();
+    bool estVide();
 };
 
-typedef vector<NSPhraseMot*> NSPhraMotArray ;
-typedef NSPhraMotArray::iterator iterPhraseMot ;
+typedef vector<NSPhraseMot*> NSPhraMotArray;
+typedef NSPhraMotArray::iterator iterPhraseMot;
 
 class NSPhraseMotArray : public NSPhraMotArray
 {
@@ -276,165 +276,165 @@ class NSPhraseMotArray : public NSPhraMotArray
 
     // Constructeurs
     NSPhraseMotArray() : NSPhraMotArray() {}
-    NSPhraseMotArray(NSPhraseMotArray& rv) ;
+    NSPhraseMotArray(NSPhraseMotArray& rv);
     // Destructeur
-    virtual ~NSPhraseMotArray() ;
-    NSPhraseMotArray& operator=(NSPhraseMotArray src) ;
+    virtual ~NSPhraseMotArray();
+    NSPhraseMotArray& operator=(NSPhraseMotArray src);
     //
-    void vider() ;
+    void vider();
 
-    void initPreposition() ;
+    void initPreposition();
 };
 
 class NSPhraseur : public NSRoot
 {
   public :
 
-    enum TYPEARTICLE { articleSans = 1, articleDefini, articleIndefini} ;
+    enum TYPEARTICLE { articleSans = 1, articleDefini, articleIndefini};
 
     // Qualification de la localisation (CC de lieu)
     // Caractéristique descriptive : la longueur "de la" jambe est de x cm
     // Localisation niveau : il existe un polype "au niveau du" côlon
     // Localisation à : il existe un ulcère "à" la jambe droite
     //
-    enum TYPELOCALISATION { locUndefined = 0, locCaractDescr, locNiveau, locA} ;
+    enum TYPELOCALISATION { locUndefined = 0, locCaractDescr, locNiveau, locA};
 
     // Phrase principale ou complement d'un nom
-    enum PHRTYPE { phrasePrincipale = 1, phraseComplement, phraseRelative} ;
-    PHRTYPE iPhraseType ;
+    enum PHRTYPE { phrasePrincipale = 1, phraseComplement, phraseRelative};
+    PHRTYPE iPhraseType;
 
     // Forme active ou passive
-    enum PHRFORME { formeActive = 1, formePassive } ;
-    PHRFORME iForme ;
+    enum PHRFORME { formeActive = 1, formePassive };
+    PHRFORME iForme;
 
-    NSPhraseMotArray Sujet ;
+    NSPhraseMotArray Sujet;
 
     // Sujet normal ou remplace par un article
-    enum SUJTYPE { sujetNormal = 1, sujetNoRepeat } ;
+    enum SUJTYPE { sujetNormal = 1, sujetNoRepeat };
     SUJTYPE iTypeSujet;
 
-    NSPhraseMotArray Verbe ;
+    NSPhraseMotArray Verbe;
     // Caracteristiques du verbe
 
-    enum VBTYPE { vbTypeNotInit = 0, vbTypeAction, vbTypeEtat} ;
-    enum VBETAT { vbEtatNotInit = 0, vbEtatReel, vbEtatApparent, vbEtatDure, vbEtatChange} ;
-    VBTYPE iVbType ;
-    VBETAT iVbEtat ;
+    enum VBTYPE { vbTypeNotInit = 0, vbTypeAction, vbTypeEtat};
+    enum VBETAT { vbEtatNotInit = 0, vbEtatReel, vbEtatApparent, vbEtatDure, vbEtatChange};
+    VBTYPE iVbType;
+    VBETAT iVbEtat;
 
     // Emploi du verbe : temps, aspect, mode, personne, negation
-    enum VBASPEC { aspectPonctuel = 1, aspectIntervalle} ;
+    enum VBASPEC { aspectPonctuel = 1, aspectIntervalle};
     enum VBTEMPS { tempsPasseRevolu = 1, tempsPasseActuel,
-                   tempsPresent, tempsFuturProche, tempsFuturLointain} ;
+                   tempsPresent, tempsFuturProche, tempsFuturLointain};
     enum VBMODE  { modeIndicatif = 1, modeSubjonctif, modeImperatif,
                    modeConditionnel, modeInfinitif, modeParticipe,
-                   modeGerondif} ;
-    enum VBPERSO { pers1S = 1, pers2S, pers3S, pers1P, pers2P, pers3P} ;
-    enum VBNEGAT { negationOui = 1, negationNon} ;
+                   modeGerondif};
+    enum VBPERSO { pers1S = 1, pers2S, pers3S, pers1P, pers2P, pers3P};
+    enum VBNEGAT { negationOui = 1, negationNon};
     enum VBPREPOCTX { prepUndefined = 0, prepLieu = 1, prepTemps, prepManiere, prepMoyen,
-              prepCause, prepBut, prepType, prepHypoth, prepChiffre} ;
-    VBTEMPS iVbTemps ;
-    VBASPEC iVbAspect ;
-    VBMODE  iVbMode ;
-    VBPERSO iVbPersonne ;
-    VBNEGAT iVbNegation ;
+              prepCause, prepBut, prepType, prepHypoth, prepChiffre};
+    VBTEMPS iVbTemps;
+    VBASPEC iVbAspect;
+    VBMODE  iVbMode;
+    VBPERSO iVbPersonne;
+    VBNEGAT iVbNegation;
 
     // Explications concernant un mot entre parentheses.
 
-    NSPhraseur* pParentheses ;
+    NSPhraseur* pParentheses;
 
     // Complements essentiels
-    NSPhraseMotArray    COD ;       // Complement d'Objet Direct
-    NSPhraseMotArray    COI ;       // Complement d'Objet Indirect
-    NSPhraseMotArray    COS ;       // Complement d'Objet Second
-    NSPhraseMotArray    AttSujet ;  // Attribut du sujet
+    NSPhraseMotArray    COD;       // Complement d'Objet Direct
+    NSPhraseMotArray    COI;       // Complement d'Objet Indirect
+    NSPhraseMotArray    COS;       // Complement d'Objet Second
+    NSPhraseMotArray    AttSujet;  // Attribut du sujet
                                     // "L'homme paraissait fatigue"
                                     // "Sa demarche etait lourde"
-    NSPhraseMotArray    AttCOD ;    // Attribut du COD
+    NSPhraseMotArray    AttCOD;    // Attribut du COD
                                     // "J'ai trouve vos propositions interessantes"
 
     // Complements circonstanciels : quand, ou, comment, avec quoi, pourquoi,
     // dans quel but
-    TYPELOCALISATION    iTypeLocalisation ;
-    NSPhraseMot         LiaisonLieu, PrepositionLieu ;
-    NSPhraseMotArray    CCLieu ;    // Complement circonstanciel de lieu
+    TYPELOCALISATION    iTypeLocalisation;
+    NSPhraseMot         LiaisonLieu, PrepositionLieu;
+    NSPhraseMotArray    CCLieu;    // Complement circonstanciel de lieu
 
-    NSPhraseMot         LiaisonTemps, PrepositionTemps ;
-    NSPhraseMotArray    CCTemps ;   // Complement circonstanciel de temps
+    NSPhraseMot         LiaisonTemps, PrepositionTemps;
+    NSPhraseMotArray    CCTemps;   // Complement circonstanciel de temps
 
-    NSPhraseMot         LiaisonManiere, PrepositionManiere ;
-    NSPhraseMotArray    CCManiere ; // Complement circonstanciel de maniere
+    NSPhraseMot         LiaisonManiere, PrepositionManiere;
+    NSPhraseMotArray    CCManiere; // Complement circonstanciel de maniere
                                     // Il mange avec delicatesse
 
-    NSPhraseMot         LiaisonMoyen, PrepositionMoyen ;
-    NSPhraseMotArray    CCMoyen ;   // Complement circonstanciel de moyen
+    NSPhraseMot         LiaisonMoyen, PrepositionMoyen;
+    NSPhraseMotArray    CCMoyen;   // Complement circonstanciel de moyen
                                     // Il mange avec des couverts en argent
 
-    NSPhraseMot         LiaisonCause, PrepositionCause ;
-    NSPhraseMotArray    CCCause ;   // Complement circonstanciel de cause
+    NSPhraseMot         LiaisonCause, PrepositionCause;
+    NSPhraseMotArray    CCCause;   // Complement circonstanciel de cause
                                     // Il tremble de peur
 
-    NSPhraseMot         LiaisonBut, PrepositionBut ;
-    NSPhraseMotArray    CCBut ;     // Complement circonstanciel de but
+    NSPhraseMot         LiaisonBut, PrepositionBut;
+    NSPhraseMotArray    CCBut;     // Complement circonstanciel de but
                                     // Il court pour maigrir
 
-    NSPhraseMot         LiaisonType, PrepositionType ;
-    NSPhraseMotArray    CCType ;    // Complement circonstanciel de type
+    NSPhraseMot         LiaisonType, PrepositionType;
+    NSPhraseMotArray    CCType;    // Complement circonstanciel de type
                                     // Douleur thoracique a type de douleur angineuse.
 
-    NSPhraseMot         LiaisonHypoth, PrepositionHypoth ;
-    NSPhraseMotArray    CCHypoth ;  // Complement circonstanciel d'hypothese
+    NSPhraseMot         LiaisonHypoth, PrepositionHypoth;
+    NSPhraseMotArray    CCHypoth;  // Complement circonstanciel d'hypothese
                                     // A prendre en cas de douleur.
 
-    NSPhraseMot         LiaisonChiffre, PrepositionChiffre ;
-    NSPhraseMotArray    CCChiffre ; // Valeur chiffree + valeur normale
+    NSPhraseMot         LiaisonChiffre, PrepositionChiffre;
+    NSPhraseMotArray    CCChiffre; // Valeur chiffree + valeur normale
 
     // Complement de la phrase apres ":".
     //
-    NSPhraseur*         pDeuxPoints ;
+    NSPhraseur*         pDeuxPoints;
 
     //
     // ------------- Variables specifiques des complements --------------
     //
-    NSPhraseMotArray    adjEpithete ;           // Epithete "Une belle journee"
-    NSPhraseMotArray    adjEpitheteAv ;         // Epithete "Une belle journee"
-    NSPhraseMotArray    adjEpitheteAp ;         // Epithete "Une maison rouge"
-    NSPhraseMot         adjNumeralCardinal ;    // Adjectif numeral cardinal : "3 pommes"
-    NSPhraseMot         adjNumeralOrdinal ;     // Adjectif numeral ordinal : "la troisieme pomme"
+    NSPhraseMotArray    adjEpithete;           // Epithete "Une belle journee"
+    NSPhraseMotArray    adjEpitheteAv;         // Epithete "Une belle journee"
+    NSPhraseMotArray    adjEpitheteAp;         // Epithete "Une maison rouge"
+    NSPhraseMot         adjNumeralCardinal;    // Adjectif numeral cardinal : "3 pommes"
+    NSPhraseMot         adjNumeralOrdinal;     // Adjectif numeral ordinal : "la troisieme pomme"
 
     // Complement du nom
-    NSPhraseMotArray    compNom ;               // "Suspicion d'endocartite"
+    NSPhraseMotArray    compNom;               // "Suspicion d'endocartite"
 
     // Adverbes qui peuvent completer un adjectif, un verbe ou un adverbe.
 
-    NSPhraseMotArray    adverbe ;               // "un homme tres grand", "ils marchent vite"
+    NSPhraseMotArray    adverbe;               // "un homme tres grand", "ils marchent vite"
 
     //
     // -------------------------- Methodes --------------------------------
     //
 
-    NSPhraseur(NSContexte* pCtx) ;
-    NSPhraseur(NSPhraseur& rv) ;
-    ~NSPhraseur() ;
+    NSPhraseur(NSContexte* pCtx);
+    NSPhraseur(NSPhraseur& rv);
+    ~NSPhraseur();
 
     // Pour mettre a zero toutes les prepositions.
-    void   nettoye() ;
+    void   nettoye();
 
-    void   initialise() ;
-    void   copieTout(NSPhraseur* pSrc) ;
+    void   initialise();
+    void   copieTout(NSPhraseur* pSrc);
 
-    void   initParentheses() ;
-    void   initDeuxPoints() ;
+    void   initParentheses();
+    void   initDeuxPoints();
 
-    void   classeAdjectif(NSGenerateur* pGener) ; // Classe les adjectifs en avant et apres
+    void   classeAdjectif(NSGenerateur* pGener); // Classe les adjectifs en avant et apres
 
-    NSPhraseur& operator=(NSPhraseur src) ;
+    NSPhraseur& operator=(NSPhraseur src);
 };
 
 class NsProposition : public NSRoot
 {
   public :
 
-    enum PROPOSITIONOBJECTTYPE { notSetObjType = 0, isPhraseur, isPropositionArray } ;
+    enum PROPOSITIONOBJECTTYPE { notSetObjType = 0, isPhraseur, isPropositionArray };
 
     enum PROPOSITIONTYPE
     {
@@ -471,7 +471,7 @@ class NsProposition : public NSRoot
       //
       // Relative : traitee en complement du nom
       // Participiale ? (pas de mot subordonnant : le travail acheve, ils partirent en vacance,
-      //                  fonctionne comme une circonstancielle sans subordonnant ; peut introduire
+      //                  fonctionne comme une circonstancielle sans subordonnant; peut introduire
       //                  des nuances de temps, cause, concession et condition)
       //
 
@@ -479,7 +479,7 @@ class NsProposition : public NSRoot
       // Deux points
       //
       deuxPoints, // tout va bien : la vie est belle
-    } ;
+    };
 
     enum CONJONCTIONTYPE
     {
@@ -499,30 +499,30 @@ class NsProposition : public NSRoot
       SCCE_Aspect,            // tel que, de meme que, si ... que
       SCCE_Quantite,          // autant que, aussi que
       SCCE_Temps,             // tant que
-    } ;
+    };
 
-    PROPOSITIONTYPE         iPropositionType ;
-    CONJONCTIONTYPE         iConjonctionType ;
+    PROPOSITIONTYPE         iPropositionType;
+    CONJONCTIONTYPE         iConjonctionType;
 
-    PROPOSITIONOBJECTTYPE   iObjectType ;
-    void*                   pProposition ;
-    bool                    bDeleteAtEnd ;
+    PROPOSITIONOBJECTTYPE   iObjectType;
+    void*                   pProposition;
+    bool                    bDeleteAtEnd;
 
-    string                  sPhrase, sLang ;
+    string                  sPhrase, sLang;
 
-    NSPhraseur**            pPhraDelAtEnd ;
+    NSPhraseur**            pPhraDelAtEnd;
 
-    NsProposition(NSContexte* pCtx) ;
-    NsProposition(NSContexte* pCtx, NSPhraseur** pPhrase, PROPOSITIONTYPE iPropType, CONJONCTIONTYPE iConjonct, bool bDelAtEnd = true) ;
-    NsProposition(NSContexte* pCtx, NSPhraseur* pPhrase, PROPOSITIONTYPE iPropType, CONJONCTIONTYPE iConjonct) ;
-    NsProposition(NsProposition& rv) ;
-    ~NsProposition() ;
+    NsProposition(NSContexte* pCtx);
+    NsProposition(NSContexte* pCtx, NSPhraseur** pPhrase, PROPOSITIONTYPE iPropType, CONJONCTIONTYPE iConjonct, bool bDelAtEnd = true);
+    NsProposition(NSContexte* pCtx, NSPhraseur* pPhrase, PROPOSITIONTYPE iPropType, CONJONCTIONTYPE iConjonct);
+    NsProposition(NsProposition& rv);
+    ~NsProposition();
 
-    NsProposition& operator=(NsProposition src) ;
+    NsProposition& operator=(NsProposition src);
 };
 
-typedef vector<NsProposition*> NSPropositionVector ;
-typedef NSPropositionVector::iterator iterProposition ;
+typedef vector<NsProposition*> NSPropositionVector;
+typedef NSPropositionVector::iterator iterProposition;
 
 typedef NTArray<NsProposition> NSPropositionArray;
 

@@ -301,7 +301,7 @@ namespace dti {
 				std::vector<iotarget*> vec;		// Vectors of pending I/O operations
 #ifdef _WIN32
 #  if defined(__BORLANDC__)  // Added by PA
-        unsigned long int threadid ;
+        unsigned long int threadid;
 #  else
 				uintptr_t threadid;				// Thread identifier
 #  endif

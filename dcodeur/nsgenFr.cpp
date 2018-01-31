@@ -20,13 +20,13 @@
 bool
 GenComplementSortByPriorityInf(NSGenComplement *pCompl1, NSGenComplement *pCompl2)
 {
-	return (pCompl1->iPriorite < pCompl2->iPriorite) ;
+	return (pCompl1->iPriorite < pCompl2->iPriorite);
 }
 
 bool
 GenComplementSortByPrioritySup(NSGenComplement *pCompl1, NSGenComplement *pCompl2)
 {
-	return (pCompl1->iPriorite > pCompl2->iPriorite) ;
+	return (pCompl1->iPriorite > pCompl2->iPriorite);
 }
 
 // -------------------------------------------------------------------------
@@ -36,8 +36,8 @@ GenComplementSortByPrioritySup(NSGenComplement *pCompl1, NSGenComplement *pCompl
 NSGenerateurFr::NSGenerateurFr(NSContexte* pCtx, NsProposition* pPropos, string sLangue)
                :NSGenerateur(pCtx, pPropos, sLangue)
 {
-  iTempsVerbe  = tempsPresentFr ;
-  iAspectVerbe = aspectMoment ;
+  iTempsVerbe  = tempsPresentFr;
+  iAspectVerbe = aspectMoment;
 }
 
 NSGenerateurFr::NSGenerateurFr(NSGenerateurFr& rv)
@@ -55,16 +55,16 @@ NSGenerateurFr&
 NSGenerateurFr::operator=(NSGenerateurFr rv)
 {
 	if (&rv == this)
-		return *this ;
+		return *this;
 
-	reinitialise() ;
+	reinitialise();
 
-	copieTout(&rv) ;
+	copieTout(&rv);
 
-	iTempsVerbe  = rv.iTempsVerbe ;
-	iAspectVerbe = rv.iAspectVerbe ;
+	iTempsVerbe  = rv.iTempsVerbe;
+	iAspectVerbe = rv.iAspectVerbe;
 
-	return *this ;
+	return *this;
 }
 
 // classeTout() : permet de remplir les arrays du generateur a partir de celles
@@ -77,30 +77,30 @@ NSGenerateurFr::classeTout()
 {
 try
 {
-  reinitialise() ;
+  reinitialise();
 
   // En francais, les adjectifs ayant une certitude sont toujours places apres le nom.
   //
   // Les adjectifs ont deja ete tries en avant et apres, donc on ne reverifie pas
   // qu'il s'agit bien d'adjectifs du lexique.
   //
-  dispatchArray(&(pPh->adjEpitheteAv), &pAdjEpitheteAvPos, &pAdjEpitheteAvNeg) ;
-  dispatchArray(&(pPh->adjEpitheteAp), &pAdjEpitheteApPos, &pAdjEpitheteApNeg) ;
+  dispatchArray(&(pPh->adjEpitheteAv), &pAdjEpitheteAvPos, &pAdjEpitheteAvNeg);
+  dispatchArray(&(pPh->adjEpitheteAp), &pAdjEpitheteApPos, &pAdjEpitheteApNeg);
 
-  dispatchArray(&(pPh->compNom), &pCompNomPos, &pCompNomNeg, isNoun) ;
+  dispatchArray(&(pPh->compNom), &pCompNomPos, &pCompNomNeg, isNoun);
 
-  dispatchArray(&(pPh->adverbe), &pAdverbePos, &pAdverbeNeg, isAdverb) ;
+  dispatchArray(&(pPh->adverbe), &pAdverbePos, &pAdverbeNeg, isAdverb);
 
-  dispatchArray(&(pPh->COD), &pCODPos, &pCODNeg, isNoun) ;
+  dispatchArray(&(pPh->COD), &pCODPos, &pCODNeg, isNoun);
 
-  dispatchArray(&(pPh->AttSujet), &pAttSujetPos, &pAttSujetNeg) ;
-  dispatchArray(&(pPh->AttCOD), &pAttCODPos, &pAttCODNeg) ;
+  dispatchArray(&(pPh->AttSujet), &pAttSujetPos, &pAttSujetNeg);
+  dispatchArray(&(pPh->AttCOD), &pAttCODPos, &pAttCODNeg);
 
-  pCCArray->classeTout() ;
+  pCCArray->classeTout();
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::classeTout", standardError) ;
+	erreur("Exception NSGenerateurFr::classeTout", standardError);
 }
 }
 
@@ -111,8 +111,8 @@ NSGenerateurFr::generePhrase(DCODETYPE iStyle)
 {
 try
 {
-  reinitialise() ;
-  sPhrase = string("") ;
+  reinitialise();
+  sPhrase = string("");
 
   bool     trouve;
   NSSuper* pSuper = pContexte->getSuperviseur();
@@ -124,17 +124,17 @@ try
   // La phrase est-elle affirmative ou negative ?
   // true pour phrase affirmative, false pour phrase negative.
 
-  bool    bPhraseAffirmative = true ;
-  string  sAdverbeModificateur    = string(" ") ;
-  string  sAdverbeModificateurAtt = string(" ") ;
+  bool    bPhraseAffirmative = true;
+  string  sAdverbeModificateur    = string(" ");
+  string  sAdverbeModificateurAtt = string(" ");
 
   NSPathologData Data;
 
-  string sVerbe = string("") ;
+  string sVerbe = string("");
 
   // Pour les adverbes du verbe
 
-  string sPhraseAdverbe = string("") ;
+  string sPhraseAdverbe = string("");
 
   // Avant de classer les compléments, on leur met la preposition lorsqu'il y
   // en a une d'imposée par le mot complété.
@@ -142,7 +142,7 @@ try
   // Il faut traiter les prépositions des complements circonstanciels.
 
   if      (false == pPh->Verbe.empty())
-    traitePostposition(*(pPh->Verbe.begin())) ;
+    traitePostposition(*(pPh->Verbe.begin()));
   else if (false == pPh->Sujet.empty())
   {
     if ((NSPhraseur::phrasePrincipale == pPh->iPhraseType) &&
@@ -152,30 +152,30 @@ try
       // S'il existe un complément de nombre et pas de verbe, on impose
       // le verbe "être" et on ajoute la préposition "de"
       // (le poids est de 70 kg)
-      NSPatPathoData PathoData ;
-      PathoData.setLexique("4ETRE1") ;
-      pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+      NSPatPathoData PathoData;
+      PathoData.setLexique("4ETRE1");
+      pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
 
-      pPh->PrepositionChiffre.setPreposition(string("de")) ;
+      pPh->PrepositionChiffre.setPreposition(string("de"));
 
-      // for (iterPhraseMot itNb = pPh->CCChiffre.begin() ; pPh->CCChiffre.end() != itNb ; itNb++)
+      // for (iterPhraseMot itNb = pPh->CCChiffre.begin(); pPh->CCChiffre.end() != itNb; itNb++)
       //  if (string("") == (*itNb)->getPreposition())
-      //    (*itNb)->setPreposition(string("de")) ;
+      //    (*itNb)->setPreposition(string("de"));
     }
   }
 
-  traitePrepositionCC(&(pPh->CCLieu),     &(pPh->PrepositionLieu),    NSPhraseur::prepLieu) ;
-  traitePrepositionCC(&(pPh->CCTemps),    &(pPh->PrepositionTemps),   NSPhraseur::prepTemps) ;
-  traitePrepositionCC(&(pPh->CCManiere),  &(pPh->PrepositionManiere), NSPhraseur::prepManiere) ;
-  traitePrepositionCC(&(pPh->CCMoyen),    &(pPh->PrepositionMoyen),   NSPhraseur::prepMoyen) ;
-  traitePrepositionCC(&(pPh->CCCause),    &(pPh->PrepositionCause),   NSPhraseur::prepCause) ;
-  traitePrepositionCC(&(pPh->CCBut),      &(pPh->PrepositionBut),     NSPhraseur::prepBut) ;
-  traitePrepositionCC(&(pPh->CCType),     &(pPh->PrepositionType),    NSPhraseur::prepType) ;
-  traitePrepositionCC(&(pPh->CCHypoth),   &(pPh->PrepositionHypoth),  NSPhraseur::prepHypoth) ;
-  traitePrepositionCC(&(pPh->CCChiffre),  &(pPh->PrepositionChiffre), NSPhraseur::prepChiffre) ;
+  traitePrepositionCC(&(pPh->CCLieu),     &(pPh->PrepositionLieu),    NSPhraseur::prepLieu);
+  traitePrepositionCC(&(pPh->CCTemps),    &(pPh->PrepositionTemps),   NSPhraseur::prepTemps);
+  traitePrepositionCC(&(pPh->CCManiere),  &(pPh->PrepositionManiere), NSPhraseur::prepManiere);
+  traitePrepositionCC(&(pPh->CCMoyen),    &(pPh->PrepositionMoyen),   NSPhraseur::prepMoyen);
+  traitePrepositionCC(&(pPh->CCCause),    &(pPh->PrepositionCause),   NSPhraseur::prepCause);
+  traitePrepositionCC(&(pPh->CCBut),      &(pPh->PrepositionBut),     NSPhraseur::prepBut);
+  traitePrepositionCC(&(pPh->CCType),     &(pPh->PrepositionType),    NSPhraseur::prepType);
+  traitePrepositionCC(&(pPh->CCHypoth),   &(pPh->PrepositionHypoth),  NSPhraseur::prepHypoth);
+  traitePrepositionCC(&(pPh->CCChiffre),  &(pPh->PrepositionChiffre), NSPhraseur::prepChiffre);
 
   // Ensuite on classe.
-  classeTout() ;
+  classeTout();
 
   //
   // PREPARATION DES COMPOSANTS
@@ -184,7 +184,7 @@ try
   // On transforme la gestion du verbe d'internationale a francaise.
   //
 
-  mapTempsVerbe() ;
+  mapTempsVerbe();
 
   // Dans tous les composants, on peut avoir des caracteres libres. Ceux-ci ont
   // le code "£C;020". Leur lexique est ce qu'il faut afficher.
@@ -192,38 +192,38 @@ try
   // Adverbes du verbe. (stockés dans le complément du verbe.)
 
   if (false == prepareVerbe(&sPhraseAdverbe, &sAdverbeModificateur, &bPhraseAffirmative, iStyle))
-    return false ;
+    return false;
 
   //
   // Sujet
   //
-  string sSujet      = "" ;
-  GENRE  iGenreSujet = genreNull ;
-  string sAttSujet   = "" ;
+  string sSujet      = "";
+  GENRE  iGenreSujet = genreNull;
+  string sAttSujet   = "";
 
   if (false == prepareSujet(&sSujet, &iGenreSujet, &sAttSujet, &sAdverbeModificateur, &bPhraseAffirmative, iStyle))
-    return false ;
+    return false;
 
   // On traite le COD.
   // On met d'abord les complements positifs, puis les négatifs, avec "mais pas de" entre.
   // S'il n'y a que des négatifs, la phrase devient négative.
   //
 
-  string sCOD      = string("") ;
-  string sAttCOD   = string("") ;
-  GENRE  iGenreCOD = genreNull ;
+  string sCOD      = string("");
+  string sAttCOD   = string("");
+  GENRE  iGenreCOD = genreNull;
 
   if (false == prepareCOD(&sCOD, &iGenreCOD, &sAttCOD, &sAdverbeModificateur, &bPhraseAffirmative, iStyle))
-    return false ;
+    return false;
 
   //
   // Compléments : quand, où, comment, avec quoi, pourquoi, dans quel but
   //
-  int iComplLevelThreshold = 101 ;
+  int iComplLevelThreshold = 101;
 
-  pCCArray->donnePhrase() ;
+  pCCArray->donnePhrase();
   if (false == pCCArray->empty())
-    sort(pCCArray->begin(), pCCArray->end(), GenComplementSortByPrioritySup) ;
+    sort(pCCArray->begin(), pCCArray->end(), GenComplementSortByPrioritySup);
 
   //
   // Cas de la phrase principale
@@ -249,12 +249,12 @@ try
             if ((*itCompl)->iPriorite >= 90)
             {
               if ((*itCompl)->sPositif != "")
-                sPhrase += (*itCompl)->sPositif + string(", ") ;
+                sPhrase += (*itCompl)->sPositif + string(", ");
               if ((*itCompl)->sNegatif != "")
-                sPhrase += string("pas ") + (*itCompl)->sNegatif + string(", ") ;
+                sPhrase += string("pas ") + (*itCompl)->sNegatif + string(", ");
             }
           }
-          iComplLevelThreshold = 90 ;
+          iComplLevelThreshold = 90;
         }
         //
         //     P
@@ -266,15 +266,15 @@ try
         {
           if (NSPhraseur::sujetNoRepeat == pPh->iTypeSujet)
           {
-            NSPhraseur::VBPERSO iPersonVb ;
+            NSPhraseur::VBPERSO iPersonVb;
             if ((genreFP == iGenreSujet) || (genreMP == iGenreSujet) || (genreNP == iGenreSujet))
-              iPersonVb = NSPhraseur::pers3P ;
+              iPersonVb = NSPhraseur::pers3P;
             else
-              iPersonVb = NSPhraseur::pers3S ;
-            sPhrase += donnePronomPersonnel(iGenreSujet, iPersonVb, STR_SUJET) ;
+              iPersonVb = NSPhraseur::pers3S;
+            sPhrase += donnePronomPersonnel(iGenreSujet, iPersonVb, STR_SUJET);
           }
           else
-            sPhrase += sSujet ;
+            sPhrase += sSujet;
 
           // Cas d'une vraie phrase (iStyle == dcPhrase)
           //
@@ -293,54 +293,54 @@ try
           //              est atypique   évoque un kyste
           //
           if ((string("") != sCOD) && (string("") != sAttSujet))
-            return false ;
+            return false;
 
           // L'existence d'un COD impose celle d'un verbe
           if ((string("") != sCOD) && (pPh->Verbe.empty()))
-            return false ;
+            return false;
 
           // S'il existe un attribut et pas de verbe, on impose
           // le verbe être
           if ((string("") != sAttSujet) && (pPh->Verbe.empty()))
           {
-            NSPatPathoData PathoData ;
-            PathoData.setLexique("4ETRE1") ;
-            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+            NSPatPathoData PathoData;
+            PathoData.setLexique("4ETRE1");
+            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
           }
 
           if ((genreFP == iGenreSujet) || (genreMP == iGenreSujet))
-            pPh->iVbPersonne = NSPhraseur::pers3P ;
+            pPh->iVbPersonne = NSPhraseur::pers3P;
           else
-            pPh->iVbPersonne = NSPhraseur::pers3S ;
+            pPh->iVbPersonne = NSPhraseur::pers3S;
 
           // On traite au passage le cas ou la phrase est negative
 
-          string sPrincipal, sAuxilliaire ;
-          donneVerbe(&sPrincipal, &sAuxilliaire) ;
+          string sPrincipal, sAuxilliaire;
+          donneVerbe(&sPrincipal, &sAuxilliaire);
           if (string("") != sAuxilliaire)
           {
             if (false == bPhraseAffirmative)
             {
               // L'auxilliaire (être ou avoir) ne commence jamais par un h.
               if (CommenceParVoyelle(&sAuxilliaire))
-                sVerbe += string("n'") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                sVerbe += string("n'") + sAuxilliaire + sAdverbeModificateur + string("pas");
               else
-                sVerbe += string("ne ") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                sVerbe += string("ne ") + sAuxilliaire + sAdverbeModificateur + string("pas");
 
               if (string("") != sPhraseAdverbe)
-                sVerbe += string(" ") + sPhraseAdverbe ;
+                sVerbe += string(" ") + sPhraseAdverbe;
 
               if (string("") != sPrincipal)
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
             }
             else
             {
-              sVerbe += sAuxilliaire ;
+              sVerbe += sAuxilliaire;
               if (sPrincipal != "")
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
 
               if (sPhraseAdverbe != "")
-                sVerbe += string(" ") + sPhraseAdverbe ;
+                sVerbe += string(" ") + sPhraseAdverbe;
             }
           }
           else
@@ -352,10 +352,10 @@ try
                 sVerbe += string("n'") + sPrincipal + sAdverbeModificateur + string("pas");
               else
               {
-                string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-                trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+                string sVb = (*(pPh->Verbe.begin()))->getLexique();
+                trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
                 if (false == trouve)
-                  return false ;
+                  return false;
                 if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
                   sVerbe += "n'" + string(" ") + sPrincipal + sAdverbeModificateur + string("pas");
                 else
@@ -363,20 +363,20 @@ try
               }
             }
             else
-              sVerbe += sPrincipal ;
+              sVerbe += sPrincipal;
 
             if (string("") != sPhraseAdverbe)
-              sVerbe += string(" ") + sPhraseAdverbe ;
+              sVerbe += string(" ") + sPhraseAdverbe;
           }
 
-          sPhrase += string(" ") + sVerbe ;
+          sPhrase += string(" ") + sVerbe;
 
           if (sCOD != "")
-            sPhrase += string(" ") + sCOD ;
+            sPhrase += string(" ") + sCOD;
           if (sAttCOD != "")
-            sPhrase += string(" ") + sAttCOD ;
+            sPhrase += string(" ") + sAttCOD;
           if (sAttSujet != "")
-            sPhrase += string(" ") + sAttSujet ;
+            sPhrase += string(" ") + sAttSujet;
         }
         else // Pas de sujet.
         {
@@ -388,34 +388,34 @@ try
             // Création d'un sujet virtuel : "on" pour les
             // verbes d'action et "il" pour les verbes d'état
 
-            string sTransitivite ;
-            string sConjugaison ;
-            string sActEtat ;
+            string sTransitivite;
+            string sConjugaison;
+            string sActEtat;
 
             if (false == donneVerbeClasse(*(pPh->Verbe.begin()), &sTransitivite, &sConjugaison, &sActEtat))
-              return false ;
+              return false;
 
             switch (pPh->iVbType)
             {
-              case NSPhraseur::vbTypeAction : sPhrase += string("on") ; break ;
-              case NSPhraseur::vbTypeEtat   : sPhrase += string("il") ; break ;
+              case NSPhraseur::vbTypeAction : sPhrase += string("on"); break;
+              case NSPhraseur::vbTypeEtat   : sPhrase += string("il"); break;
             }
-            pPh->iVbPersonne = NSPhraseur::pers3S ;
+            pPh->iVbPersonne = NSPhraseur::pers3S;
 
-            string sPrincipal, sAuxilliaire ;
-            donneVerbe(&sPrincipal, &sAuxilliaire) ;
+            string sPrincipal, sAuxilliaire;
+            donneVerbe(&sPrincipal, &sAuxilliaire);
 
             // Phrase affirmative
             //
             if (bPhraseAffirmative)
             {
               if (sAuxilliaire != "")
-                sVerbe = string(" ") + sAuxilliaire ;
+                sVerbe = string(" ") + sAuxilliaire;
               if (sPrincipal != "")
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
 
               if (sPhraseAdverbe != "")
-                sVerbe += string(" ") + sPhraseAdverbe ;
+                sVerbe += string(" ") + sPhraseAdverbe;
             }
             // Phrase négative
             //
@@ -429,30 +429,30 @@ try
                   sVerbe += string(" ne ") + sAuxilliaire + sAdverbeModificateur + string("pas");
 
                 if (sPhraseAdverbe != "")
-                  sVerbe += string(" ") + sPhraseAdverbe ;
+                  sVerbe += string(" ") + sPhraseAdverbe;
 
                 if (sPrincipal != "")
-                  sVerbe += string(" ") + sPrincipal ;
+                  sVerbe += string(" ") + sPrincipal;
               }
               else
               {
                 // On verifie si le verbe commence par une voyelle ou un h muet
                 if (CommenceParVoyelle(&sPrincipal))
-                  sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                  sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas");
                 else
                 {
-                  string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-                  trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+                  string sVb = (*(pPh->Verbe.begin()))->getLexique();
+                  trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
                   if (false == trouve)
-                    return false ;
+                    return false;
                   if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                    sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                    sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas");
                   else
-                    sVerbe += string(" ne ") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                    sVerbe += string(" ne ") + sPrincipal + sAdverbeModificateur + string("pas");
                 }
 
                 if (sPhraseAdverbe != "")
-                  sVerbe += string(" ") + sPhraseAdverbe ;
+                  sVerbe += string(" ") + sPhraseAdverbe;
               }
             }
           }
@@ -461,21 +461,21 @@ try
           //
           else if (string("") != sCOD)
           {
-            NSPatPathoData PathoData ;
-            PathoData.setLexique("4EXIS1") ;
-            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+            NSPatPathoData PathoData;
+            PathoData.setLexique("4EXIS1");
+            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
 
-            sPhrase += string("il") ;
-            pPh->iVbPersonne = NSPhraseur::pers3S ;
+            sPhrase += string("il");
+            pPh->iVbPersonne = NSPhraseur::pers3S;
 
-            string sPrincipal, sAuxilliaire ;
-            donneVerbe(&sPrincipal, &sAuxilliaire) ;
+            string sPrincipal, sAuxilliaire;
+            donneVerbe(&sPrincipal, &sAuxilliaire);
             if (bPhraseAffirmative)
             {
               if (string("") != sAuxilliaire)
-                sVerbe = string(" ") + sAuxilliaire ;
+                sVerbe = string(" ") + sAuxilliaire;
               if (string("") != sPrincipal)
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
             }
 
             // Phrase négative
@@ -485,43 +485,43 @@ try
               if (sAuxilliaire != "")
               {
                 if (CommenceParVoyelle(&sAuxilliaire))
-                  sVerbe += string(" n'") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                  sVerbe += string(" n'") + sAuxilliaire + sAdverbeModificateur + string("pas");
                 else
-                  sVerbe += string(" ne ") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                  sVerbe += string(" ne ") + sAuxilliaire + sAdverbeModificateur + string("pas");
 
                 if (sPrincipal != "")
-                  sVerbe += string(" ") + sPrincipal ;
+                  sVerbe += string(" ") + sPrincipal;
               }
               else
               {
                 // On vérifie si le verbe commence par une voyelle ou un h muet
                 if (CommenceParVoyelle(&sPrincipal))
-                  sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                  sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas");
                 else
                 {
-                  string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-                  trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+                  string sVb = (*(pPh->Verbe.begin()))->getLexique();
+                  trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
                   if (false == trouve)
-                    return false ;
+                    return false;
                   if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                    sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                    sVerbe += string(" n'") + sPrincipal + sAdverbeModificateur + string("pas");
                   else
-                    sVerbe += string(" ne ") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                    sVerbe += string(" ne ") + sPrincipal + sAdverbeModificateur + string("pas");
                 }
               }
             }
-            sPhrase += sVerbe ;
+            sPhrase += sVerbe;
             if (string("") != sCOD)
-              sPhrase += string(" ") + sCOD ;
+              sPhrase += string(" ") + sCOD;
             if (string("") != sAttCOD)
-              sPhrase += string(" ") + sAttCOD ;
+              sPhrase += string(" ") + sAttCOD;
           }
         }
       }
       //
       // FORME PASSIVE
       //
-      // Le sujet et le COD inversent leur rôle ; le temps est donné par
+      // Le sujet et le COD inversent leur rôle; le temps est donné par
       // le verbe être, le verbe est au participe passé
       //
       // Ex Jean construit la maison -> La maison est construite par Jean
@@ -530,22 +530,22 @@ try
       {
         // Il faut forcément un COD, sinon on se retrouve sans sujet
         if (sCOD == "")
-          return false ;
+          return false;
         // Il faut forcément un verbe
         if (pPh->Verbe.empty())
-          return false ;
+          return false;
 
         if (pPh->iTypeSujet == NSPhraseur::sujetNoRepeat)
         {
-          NSPhraseur::VBPERSO iPersonVb ;
+          NSPhraseur::VBPERSO iPersonVb;
           if ((iGenreCOD == genreFP) || (iGenreCOD == genreMP) || (iGenreCOD == genreNP))
-            iPersonVb = NSPhraseur::pers3P ;
+            iPersonVb = NSPhraseur::pers3P;
           else
-            iPersonVb = NSPhraseur::pers3S ;
-          sPhrase = donnePronomPersonnel(iGenreSujet, iPersonVb, STR_SUJET) ;
+            iPersonVb = NSPhraseur::pers3S;
+          sPhrase = donnePronomPersonnel(iGenreSujet, iPersonVb, STR_SUJET);
         }
         else
-          sPhrase = sCOD ;
+          sPhrase = sCOD;
 
         //
         // On prend le verbe au participe passé, c'est le verbe être
@@ -554,22 +554,22 @@ try
         // Il faut necessairement un verbe.
 
         if (pPh->Verbe.empty())
-          return false ;
+          return false;
 
-        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD) ;
+        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD);
 
-        pPh->Verbe.vider() ;
-        NSPatPathoData PathoData ;
-        PathoData.setLexique("4ETRE1") ;
-        pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+        pPh->Verbe.vider();
+        NSPatPathoData PathoData;
+        PathoData.setLexique("4ETRE1");
+        pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
 
         if ((genreFP == iGenreCOD) || (genreMP == iGenreCOD))
-          pPh->iVbPersonne = NSPhraseur::pers3P ;
+          pPh->iVbPersonne = NSPhraseur::pers3P;
         else
-          pPh->iVbPersonne = NSPhraseur::pers3S ;
+          pPh->iVbPersonne = NSPhraseur::pers3S;
 
-        string sPrincipal, sAuxilliaire ;
-        donneVerbe(&sPrincipal, &sAuxilliaire) ;
+        string sPrincipal, sAuxilliaire;
+        donneVerbe(&sPrincipal, &sAuxilliaire);
 
         // Phrase affirmative
 
@@ -581,9 +581,9 @@ try
         if (bPhraseAffirmative)
         {
           if (sAuxilliaire != "")
-            sVerbe = string(" ") + sAuxilliaire ;
+            sVerbe = string(" ") + sAuxilliaire;
           if (sPrincipal != "")
-            sVerbe += string(" ") + sPrincipal ;
+            sVerbe += string(" ") + sPrincipal;
         }
 
         // Phrase négative
@@ -593,47 +593,47 @@ try
           if (sAuxilliaire != "")
           {
             if (CommenceParVoyelle(&sAuxilliaire))
-              sVerbe += " n'" + sAuxilliaire + sAdverbeModificateur + "pas" ;
+              sVerbe += " n'" + sAuxilliaire + sAdverbeModificateur + "pas";
             else
-              sVerbe += " ne " + sAuxilliaire + sAdverbeModificateur + "pas" ;
+              sVerbe += " ne " + sAuxilliaire + sAdverbeModificateur + "pas";
 
             if (sPrincipal != "")
-              sVerbe += string(" ") + sPrincipal ;
+              sVerbe += string(" ") + sPrincipal;
           }
           else
           {
             // On verifie si le verbe commence par une voyelle ou un h muet
             if (CommenceParVoyelle(&sPrincipal))
-              sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas" ;
+              sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas";
             else
             {
-              string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-              trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+              string sVb = (*(pPh->Verbe.begin()))->getLexique();
+              trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
               if (false == trouve)
-                return false ;
+                return false;
               if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas" ;
+                sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas";
               else
-                sVerbe += " ne " + sPrincipal + sAdverbeModificateur + "pas" ;
+                sVerbe += " ne " + sPrincipal + sAdverbeModificateur + "pas";
             }
           }
         }
 
         if (bPhraseAffirmative)
         {
-          sPhrase += sVerbe + string(" ") + sVb ;
+          sPhrase += sVerbe + string(" ") + sVb;
 
           if (sPhraseAdverbe != "")
-            sPhrase += string(" ") + sPhraseAdverbe ;
+            sPhrase += string(" ") + sPhraseAdverbe;
         }
         else
         {
-          sPhrase += sVerbe ;
+          sPhrase += sVerbe;
 
           if (sPhraseAdverbe != "")
-            sPhrase += string(" ") + sPhraseAdverbe ;
+            sPhrase += string(" ") + sPhraseAdverbe;
 
-          sPhrase += string(" ") + sVb ;
+          sPhrase += string(" ") + sVb;
         }
 
         // Après le verbe, on met l'attribut du COD :
@@ -644,7 +644,7 @@ try
 
 
         if (string("") != sAttCOD)
-          sPhrase += string(" ") + sAttCOD ;
+          sPhrase += string(" ") + sAttCOD;
 
         //
         // S'il y a un sujet, on ajoute "par" devant.
@@ -652,7 +652,7 @@ try
         // "La vésicule est étudiée en decubitus dorsal"
         //
         if (string("") != sSujet)
-          sPhrase += string(" par ") + sSujet ;
+          sPhrase += string(" par ") + sSujet;
       }
     }
 
@@ -671,50 +671,50 @@ try
 
       // S'il y a un COD mais pas de verbe, c'est juste une énumeration.
       if (string("") != sCOD)
-        sPhrase = sCOD ;
+        sPhrase = sCOD;
 
       if (false == pPh->Verbe.empty())
       {
         // Il faut forcément un COD, sinon on se retrouve sans sujet
         if (string("") == sCOD)
-          return false ;
+          return false;
 
         //
         // On prend le verbe au participe passé
         //
-        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD) ;
+        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD);
 
         // Si la phrase est négative, on ajoute "pas", ou "absolument pas" etc...
         // juste avant le participe passé.
 
         if (false == bPhraseAffirmative)
         {
-          sPhrase += sAdverbeModificateur + string("pas ") ;
+          sPhrase += sAdverbeModificateur + string("pas ");
 
           if (string("") != sPhraseAdverbe)
-            sPhrase += sPhraseAdverbe += string(" ") ;
+            sPhrase += sPhraseAdverbe += string(" ");
 
-          sPhrase += sVb ;
+          sPhrase += sVb;
         }
         else
         {
-          sPhrase += string(" ") + sVb ;
+          sPhrase += string(" ") + sVb;
 
           if (string("") != sPhraseAdverbe)
-            sPhrase += string(" ") + sPhraseAdverbe ;
+            sPhrase += string(" ") + sPhraseAdverbe;
         }
 
         // Propositions trouvées intéressantes par Jean.
 
         if (sAttCOD != "")
-          sPhrase += string(" ") + sAttCOD ;
+          sPhrase += string(" ") + sAttCOD;
         //
         // S'il y a un sujet, on ajoute "par" devant.
         // Il peut ne pas y avoir de sujet, par exemple
         // "Vésicule étudiée en decubitus dorsal"
         //
         if (sSujet != "")
-          sPhrase += string(" par ") + sSujet ;
+          sPhrase += string(" par ") + sSujet;
       }
     }
   }
@@ -733,9 +733,9 @@ try
       if ((*itCompl)->iPriorite < iComplLevelThreshold)
       {
         if ((*itCompl)->sPositif != "")
-          sPhrase += " " + (*itCompl)->sPositif ;
+          sPhrase += " " + (*itCompl)->sPositif;
         if ((*itCompl)->sNegatif != "")
-          sPhrase += string(" mais pas ") + (*itCompl)->sNegatif ;
+          sPhrase += string(" mais pas ") + (*itCompl)->sNegatif;
       }
     }
   }
@@ -764,7 +764,7 @@ try
         //
         if (string("") != sSujet)
         {
-          sPhrase = string("qui") ;
+          sPhrase = string("qui");
           // Cas d'une vraie phrase (iStyle == dcPhrase)
           //
           //
@@ -782,54 +782,54 @@ try
           //              est atypique   évoque un kyste
           //
           if ((string("") != sCOD) && (string("") != sAttSujet))
-            return false ;
+            return false;
 
           // L'existence d'un COD impose celle d'un verbe
           if ((string("") != sCOD) && (pPh->Verbe.empty()))
-            return false ;
+            return false;
 
           // S'il existe un attribut et pas de verbe, on impose
           // le verbe être
           if ((string("") != sAttSujet) && (pPh->Verbe.empty()))
           {
-            NSPatPathoData PathoData ;
-            PathoData.setLexique("4ETRE1") ;
-            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+            NSPatPathoData PathoData;
+            PathoData.setLexique("4ETRE1");
+            pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
           }
 
           if ((genreFP == iGenreSujet) || (genreMP == iGenreSujet))
-            pPh->iVbPersonne = NSPhraseur::pers3P ;
+            pPh->iVbPersonne = NSPhraseur::pers3P;
           else
-            pPh->iVbPersonne = NSPhraseur::pers3S ;
+            pPh->iVbPersonne = NSPhraseur::pers3S;
 
           // On traite au passage le cas où la phrase est négative
 
-          string sPrincipal, sAuxilliaire ;
-          donneVerbe(&sPrincipal, &sAuxilliaire) ;
+          string sPrincipal, sAuxilliaire;
+          donneVerbe(&sPrincipal, &sAuxilliaire);
           if (string("") != sAuxilliaire)
           {
             if (false == bPhraseAffirmative)
             {
               // L'auxilliaire (être ou avoir) ne commence jamais par un h.
               if (CommenceParVoyelle(&sAuxilliaire))
-                sVerbe += string("n'") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                sVerbe += string("n'") + sAuxilliaire + sAdverbeModificateur + string("pas");
               else
-                sVerbe += string("ne ") + sAuxilliaire + sAdverbeModificateur + string("pas") ;
+                sVerbe += string("ne ") + sAuxilliaire + sAdverbeModificateur + string("pas");
 
               if (string("") != sPhraseAdverbe)
-                sVerbe += string(" ") + sPhraseAdverbe ;
+                sVerbe += string(" ") + sPhraseAdverbe;
 
               if (string("") != sPrincipal)
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
             }
             else
             {
-              sVerbe += sAuxilliaire ;
+              sVerbe += sAuxilliaire;
               if (string("") != sPrincipal)
-                sVerbe += string(" ") + sPrincipal ;
+                sVerbe += string(" ") + sPrincipal;
 
               if (string("") != sPhraseAdverbe)
-                sVerbe += string(" ") + sPhraseAdverbe ;
+                sVerbe += string(" ") + sPhraseAdverbe;
             }
           }
           else
@@ -838,40 +838,40 @@ try
             {
               // On vérifie si le verbe commence par une voyelle ou un h muet.
               if (CommenceParVoyelle(&sPrincipal))
-                sVerbe += string("n'") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                sVerbe += string("n'") + sPrincipal + sAdverbeModificateur + string("pas");
               else
               {
-                string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-                trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+                string sVb = (*(pPh->Verbe.begin()))->getLexique();
+                trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
                 if (false == trouve)
-                  return false ;
+                  return false;
                 if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                  sVerbe += "n'" + string(" ") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                  sVerbe += "n'" + string(" ") + sPrincipal + sAdverbeModificateur + string("pas");
                 else
-                  sVerbe += string("ne ") + sPrincipal + sAdverbeModificateur + string("pas") ;
+                  sVerbe += string("ne ") + sPrincipal + sAdverbeModificateur + string("pas");
               }
             }
             else
-              sVerbe += sPrincipal ;
+              sVerbe += sPrincipal;
 
             if (string("") != sPhraseAdverbe)
-              sVerbe += string(" ") + sPhraseAdverbe ;
+              sVerbe += string(" ") + sPhraseAdverbe;
           }
 
-          sPhrase += string(" ") + sVerbe ;
+          sPhrase += string(" ") + sVerbe;
 
           if (string("") != sCOD)
-            sPhrase += string(" ") + sCOD ;
+            sPhrase += string(" ") + sCOD;
           if (string("") != sAttCOD)
-            sPhrase += string(" ") + sAttCOD ;
+            sPhrase += string(" ") + sAttCOD;
           if (string("") != sAttSujet)
-            sPhrase += string(" ") + sAttSujet ;
+            sPhrase += string(" ") + sAttSujet;
         }
         // Pas de sujet. Impossible, puisqu'on a normalement rempli
         // la case sujet avant d'appeler generePhrase.
         //
         else
-          return false ;
+          return false;
       }
       //
       // FORME PASSIVE
@@ -884,13 +884,13 @@ try
       {
         // Il faut forcément un COD, sinon on se retrouve sans sujet.
         if (string("") == sCOD)
-          return false ;
+          return false;
 
         // Il faut forcément un verbe
         if (pPh->Verbe.empty())
-          return false ;
+          return false;
 
-        sPhrase = string("par qui ") + sCOD ;
+        sPhrase = string("par qui ") + sCOD;
 
         //
         // On prend le verbe au participe passé, c'est le verbe être
@@ -898,29 +898,29 @@ try
         //
         // Il faut nécessairement un verbe.
 
-        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD) ;
+        string sVb = donneParticipePasse(*(pPh->Verbe.begin()), iGenreCOD);
 
-        pPh->Verbe.vider() ;
-        NSPatPathoData PathoData ;
-        PathoData.setLexique("4ETRE1") ;
-        pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte)) ;
+        pPh->Verbe.vider();
+        NSPatPathoData PathoData;
+        PathoData.setLexique("4ETRE1");
+        pPh->Verbe.push_back(new NSPhraseMot(&PathoData, pContexte));
 
         if ((genreFP == iGenreCOD) || (genreMP == iGenreCOD))
-          pPh->iVbPersonne = NSPhraseur::pers3P ;
+          pPh->iVbPersonne = NSPhraseur::pers3P;
         else
-          pPh->iVbPersonne = NSPhraseur::pers3S ;
+          pPh->iVbPersonne = NSPhraseur::pers3S;
 
-        string sPrincipal, sAuxilliaire ;
-        donneVerbe(&sPrincipal, &sAuxilliaire) ;
+        string sPrincipal, sAuxilliaire;
+        donneVerbe(&sPrincipal, &sAuxilliaire);
 
         // Phrase affirmative
         //
         if (bPhraseAffirmative)
         {
           if (string("") != sAuxilliaire)
-            sVerbe = string(" ") + sAuxilliaire ;
+            sVerbe = string(" ") + sAuxilliaire;
           if (string("") != sPrincipal)
-            sVerbe += string(" ") + sPrincipal ;
+            sVerbe += string(" ") + sPrincipal;
         }
         //
         // Phrase negative
@@ -930,47 +930,47 @@ try
           if (string("") != sAuxilliaire)
           {
             if (CommenceParVoyelle(&sAuxilliaire))
-              sVerbe += " n'" + sAuxilliaire + sAdverbeModificateur + "pas" ;
+              sVerbe += " n'" + sAuxilliaire + sAdverbeModificateur + "pas";
             else
-              sVerbe += " ne " + sAuxilliaire + sAdverbeModificateur + "pas" ;
+              sVerbe += " ne " + sAuxilliaire + sAdverbeModificateur + "pas";
 
             if (string("") != sPrincipal)
-              sVerbe += string(" ") + sPrincipal ;
+              sVerbe += string(" ") + sPrincipal;
           }
           else
           {
             // On verifie si le verbe commence par une voyelle ou un h muet
             if (CommenceParVoyelle(&sPrincipal))
-              sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas" ;
+              sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas";
             else
             {
-              string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
-              trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data) ;
+              string sVb = (*(pPh->Verbe.begin()))->getLexique();
+              trouve = pContexte->getDico()->trouvePathologData(sLang, &sVb, &Data);
               if (false == trouve)
-                return false ;
+                return false;
               if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas" ;
+                sVerbe += " n'" + sPrincipal + sAdverbeModificateur + "pas";
               else
-                sVerbe += " ne " + sPrincipal + sAdverbeModificateur + "pas" ;
+                sVerbe += " ne " + sPrincipal + sAdverbeModificateur + "pas";
             }
           }
         }
 
         if (bPhraseAffirmative)
         {
-          sPhrase += sVerbe + string(" ") + sVb ;
+          sPhrase += sVerbe + string(" ") + sVb;
 
           if (string("") != sPhraseAdverbe)
-            sPhrase += string(" ") + sPhraseAdverbe ;
+            sPhrase += string(" ") + sPhraseAdverbe;
         }
         else
         {
-          sPhrase += sVerbe ;
+          sPhrase += sVerbe;
 
           if (string("") != sPhraseAdverbe)
-            sPhrase += string(" ") + sPhraseAdverbe ;
+            sPhrase += string(" ") + sPhraseAdverbe;
 
-          sPhrase += string(" ") + sVb ;
+          sPhrase += string(" ") + sVb;
         }
 
         // Apres le verbe, on met l'attribut du COD :
@@ -980,14 +980,14 @@ try
         // -> Vos propositions ont ete trouvees interessantes par moi.
         //
         if (string("") != sAttCOD)
-          sPhrase += string(" ") + sAttCOD ;
+          sPhrase += string(" ") + sAttCOD;
       }
     }
 
     else if (dcTiret == iStyle)
     {
       // Impossible : il faut un verbe dans une subordonnée relative.
-      return false ;
+      return false;
     }
   }
 
@@ -1000,54 +1000,54 @@ try
 
   if (pPh->pDeuxPoints)
   {
-    NsProposition  Propos(pContexte, &(pPh->pDeuxPoints), NsProposition::deuxPoints, NsProposition::notSetConjonct, false) ;
-    NSGenerateurFr GeneDeuxPoints(pContexte, &Propos, sLang) ;
-    GeneDeuxPoints.genereProposition(iStyle) ;
-    sPhrase += string(" : ") + GeneDeuxPoints.getPropositionPhrase() ;
+    NsProposition  Propos(pContexte, &(pPh->pDeuxPoints), NsProposition::deuxPoints, NsProposition::notSetConjonct, false);
+    NSGenerateurFr GeneDeuxPoints(pContexte, &Propos, sLang);
+    GeneDeuxPoints.genereProposition(iStyle);
+    sPhrase += string(" : ") + GeneDeuxPoints.getPropositionPhrase();
   }
 
   // Elimination des éventuels blancs initiaux
-  strip(sPhrase, stripLeft) ;
+  strip(sPhrase, stripLeft);
 
-  sPhrase = postTraitement(&sPhrase) ;
+  sPhrase = postTraitement(&sPhrase);
 
-  return true ;
+  return true;
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::generePhrase.", standardError) ;
-	return false ;
+	erreur("Exception NSGenerateurFr::generePhrase.", standardError);
+	return false;
 }
 }
 
 bool
 NSGenerateurFr::assembleProposition(DCODETYPE /* iStyle */, NsProposition* pPropos)
 {
-  NsProposition* pCurrentProp ;
+  NsProposition* pCurrentProp;
   if (pPropos)
-    pCurrentProp = pPropos ;
+    pCurrentProp = pPropos;
   else
-    pCurrentProp = pProposition ;
+    pCurrentProp = pProposition;
 
   if (NULL == pCurrentProp)
-    return false ;
+    return false;
 
   if (NsProposition::isPropositionArray != pCurrentProp->iObjectType)
-    return true ;
+    return true;
 
-  NSPropositionArray* pPropArray = (static_cast<NSPropositionArray*>(pCurrentProp->pProposition)) ;
+  NSPropositionArray* pPropArray = (static_cast<NSPropositionArray*>(pCurrentProp->pProposition));
   if (pPropArray->empty())
-    return true ;
+    return true;
 
-  iterProposition itPr = pPropArray->begin() ;
-  pCurrentProp->sPhrase = (*itPr)->sPhrase ;
+  iterProposition itPr = pPropArray->begin();
+  pCurrentProp->sPhrase = (*itPr)->sPhrase;
 
-  itPr++ ;
+  itPr++;
 
   while (pPropArray->end() != itPr)
   {
-    NsProposition* pItProp = *itPr ;
-    itPr++ ;
+    NsProposition* pItProp = *itPr;
+    itPr++;
 
     if (string("") != pItProp->sPhrase)
     {
@@ -1055,22 +1055,22 @@ NSGenerateurFr::assembleProposition(DCODETYPE /* iStyle */, NsProposition* pProp
       {
         case NsProposition::principale :
           if (pPropArray->end() != itPr)
-            pCurrentProp->sPhrase += string(", ") + pItProp->sPhrase ;
+            pCurrentProp->sPhrase += string(", ") + pItProp->sPhrase;
           else
-            pCurrentProp->sPhrase += string(" et ") + pItProp->sPhrase ;
-          break ;
+            pCurrentProp->sPhrase += string(" et ") + pItProp->sPhrase;
+          break;
         //
         // Completives
         //
         case NsProposition::completiveQue :                          // SCQ : Je veux que tu reviennes
-          pCurrentProp->sPhrase += string(" que ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" que ") + pItProp->sPhrase;
+          break;
         case NsProposition::completiveInfinitive :                   // SCI : J'entends les chats miauler
-          pCurrentProp->sPhrase += pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += pItProp->sPhrase;
+          break;
         case NsProposition::completiveInterrogative :                // SCN : Je voudrais savoir pourquoi tu ne veux pas
-          pCurrentProp->sPhrase += string(" pourquoi ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" pourquoi ") + pItProp->sPhrase;
+          break;
         //
         // Circonstancielles
         //
@@ -1079,107 +1079,107 @@ NSGenerateurFr::assembleProposition(DCODETYPE /* iStyle */, NsProposition* pProp
           switch (pItProp->iConjonctionType)
           {
             case NsProposition::SCTA_AvantQue :        // ---X---|
-              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCTA_JusteAvantQue :   // ------X|
-              pCurrentProp->sPhrase += string(" juste avant que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" juste avant que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCTA_JusquAceQue :     // --XXXXX|
-              pCurrentProp->sPhrase += string(" jusqu'à ce que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" jusqu'à ce que ") + pItProp->sPhrase;
+              break;
             default :
-              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase ;
+              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase;
           }
-          break ;
+          break;
         case NsProposition::circonstancielleTemporelleSimultanee :   // SCTS : Je chantais au moment où il arriva
-          pCurrentProp->sPhrase += string(" au moment où ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" au moment où ") + pItProp->sPhrase;
+          break;
         case NsProposition::circonstancielleTemporellePosterieure :  // SCTP : Je chanterai après que vous serez parti
           switch (pItProp->iConjonctionType)
           {
             case NsProposition::SCTP_ApresQue :          // ---|---X
-              pCurrentProp->sPhrase += string(" après que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" après que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCTP_DesQue :            // ---|X---
-              pCurrentProp->sPhrase += string(" dès que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" dès que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCTP_DepuisQue :         // ---|XXXX
-              pCurrentProp->sPhrase += string(" depuis que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" depuis que ") + pItProp->sPhrase;
+              break;
             default :
-              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase ;
+              pCurrentProp->sPhrase += string(" avant que ") + pItProp->sPhrase;
           }
-          break ;
+          break;
         // - Consécutive -> résultat de l'action
         case NsProposition::circonstancielleConsecutive :            // SCR : Il fait trop froid pour que je chante
-          pCurrentProp->sPhrase += string(" pour que ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" pour que ") + pItProp->sPhrase;
+          break;
         // - Causale -> cause de l'action
         case NsProposition::circonstancielleCausale :                // SCC : Il a réussi parce qu'il chantait bien
-          pCurrentProp->sPhrase += string(" parce que ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" parce que ") + pItProp->sPhrase;
+          break;
         // - Concessive -> relation inattendue
         case NsProposition::circonstancielleConcessive :             // SCS : Il a échoué bien qu'il chanta bien
-          pCurrentProp->sPhrase += string(" bien que ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" bien que ") + pItProp->sPhrase;
+          break;
         // - Finale -> but de l'action
         case NsProposition::circonstancielleFinale :                 // SCF : Il chante fort pour qu'on l'entende bien
-          pCurrentProp->sPhrase += string(" afin que ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" afin que ") + pItProp->sPhrase;
+          break;
         // - Comparative -> comparaison
         case NsProposition::circonstancielleComparativeProportion :  // SCCP : Vous chanterez d'autant plus fort que vous serez bien échauffé
           switch (pItProp->iConjonctionType)
           {
             case NsProposition::SCCP_AutantQuantite :    // suivant, selon, à mesure
-                pCurrentProp->sPhrase += string(" à mesure que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" à mesure que ") + pItProp->sPhrase;
+                break;
             case NsProposition::SCCP_Synchrone :         // au fur et à mesure
-                pCurrentProp->sPhrase += string(" au fur à mesure que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" au fur à mesure que ") + pItProp->sPhrase;
+                break;
             case NsProposition::SCCP_PlusQuantite :      // d'autant plus
-                pCurrentProp->sPhrase += string(" d'autant plus que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" d'autant plus que ") + pItProp->sPhrase;
+                break;
             case NsProposition::SCCP_PlusVite :          // d'autant plus vite
-                pCurrentProp->sPhrase += string(" d'autant plus vite que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" d'autant plus vite que ") + pItProp->sPhrase;
+                break;
             case NsProposition::SCCP_MoinsQuantite :      // d'autant moins
-                pCurrentProp->sPhrase += string(" d'autant moins que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" d'autant moins que ") + pItProp->sPhrase;
+                break;
             case NsProposition::SCCP_MoinsVite :          // d'autant moins vite
-                pCurrentProp->sPhrase += string(" d'autant moins vite que ") + pItProp->sPhrase ;
-                break ;
+                pCurrentProp->sPhrase += string(" d'autant moins vite que ") + pItProp->sPhrase;
+                break;
           }
-          break ;
+          break;
         case NsProposition::circonstancielleComparativeEgalite :     // SCCE : Vous chantez aussi fort que moi
           switch (pItProp->iConjonctionType)
           {
             case NsProposition::SCCE_Aspect :            // tel que, de même que, si ... que
-              pCurrentProp->sPhrase += string(" tel que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" tel que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCCE_Quantite :          // autant que, aussi que
-              pCurrentProp->sPhrase += string(" autant que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" autant que ") + pItProp->sPhrase;
+              break;
             case NsProposition::SCCE_Temps :             // tant que
-              pCurrentProp->sPhrase += string(" tant que ") + pItProp->sPhrase ;
-              break ;
+              pCurrentProp->sPhrase += string(" tant que ") + pItProp->sPhrase;
+              break;
           }
-          break ;
+          break;
         case NsProposition::circonstancielleComparativeRessemblance : // SCCR : Tu me regardes comme me regardait ta mère
-          pCurrentProp->sPhrase += string(" comme ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" comme ") + pItProp->sPhrase;
+          break;
         // - Conditionnelle -> condition
         case NsProposition::circonstancielleConditionnelleHypothese : // SCHH : il mange s'il a faim, il mangera s'il a faim
-          pCurrentProp->sPhrase += string(" si ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" si ") + pItProp->sPhrase;
+          break;
         case NsProposition::circonstancielleConditionnelleImaginee :  // SCHH : il mangerait s'il avait faim
-          pCurrentProp->sPhrase += string(" si ") + pItProp->sPhrase ;
-          break ;
+          pCurrentProp->sPhrase += string(" si ") + pItProp->sPhrase;
+          break;
         default :
-          pCurrentProp->sPhrase += string(", ") + pItProp->sPhrase ;
+          pCurrentProp->sPhrase += string(", ") + pItProp->sPhrase;
       }
     }
   }
-  return true ;
+  return true;
 }
 
 // donneLibelleAffiche : sert à faire les bons appels à donneLibelleAffiche de
@@ -1191,84 +1191,84 @@ NSGenerateurFr::donneLibelleAffiche(string* pLibelle, NSPathologData* pData, GEN
   // En francais, cette methode ne sert que pour les noms et les adjectifs.
   // Ceux-ci peuvent etre MS, MP, FS ou FP.
 
-  int iDeclinaison = 0 ;
-  *pLibelle = string("") ;
+  int iDeclinaison = 0;
+  *pLibelle = string("");
 
   if (NULL == pData)
-    return ;
+    return;
 
   if (pData->estNom())
   {
     if ((genreMP == iGenre) || (genreFP == iGenre))
-      pData->donneLibelleAffiche(pLibelle, declinaisonPluriel) ;
+      pData->donneLibelleAffiche(pLibelle, declinaisonPluriel);
     else
-      pData->donneLibelleAffiche(pLibelle, declinaisonSingulier) ;
+      pData->donneLibelleAffiche(pLibelle, declinaisonSingulier);
 
-    return ;
+    return;
   }
   else if (pData->estAdjectif())
   {
     switch (iGenre)
     {
-      case genreMP : iDeclinaison = declinaisonMP ; break ;
-      case genreFP : iDeclinaison = declinaisonFP ; break ;
-      case genreMS : iDeclinaison = declinaisonMS ; break ;
-      case genreFS : iDeclinaison = declinaisonFS ; break ;
-      default      : iDeclinaison = 0 ;
+      case genreMP : iDeclinaison = declinaisonMP; break;
+      case genreFP : iDeclinaison = declinaisonFP; break;
+      case genreMS : iDeclinaison = declinaisonMS; break;
+      case genreFS : iDeclinaison = declinaisonFS; break;
+      default      : iDeclinaison = 0;
     }
 
-    pData->donneLibelleAffiche(pLibelle, iDeclinaison) ;
-    return ;
+    pData->donneLibelleAffiche(pLibelle, iDeclinaison);
+    return;
   }
   else
-    pData->donneLibelleAffiche(pLibelle) ;
+    pData->donneLibelleAffiche(pLibelle);
 }
 
 bool
 NSGenerateurFr::prepareVerbe(string* psPhraseAdverbe, string* psAdverbeModificateur, bool* pbPhraseAffirmative, DCODETYPE /* iStyle */)
 {
   if ((pPh->Verbe).empty())
-    return true ;
+    return true;
 
   string          sCertitude;
   iterPhraseMot   iterMots;
   NSPathologData  Data;
 
-  string sPhrasePos = string("") ;
-  string sPhraseNeg = string("") ;
-  string sInterPos1 = string("") ;
-  string sInterPos2 = string("") ;
-  string sInterNeg1 = string("") ;
-  string sInterNeg2 = string("") ;
+  string sPhrasePos = string("");
+  string sPhraseNeg = string("");
+  string sInterPos1 = string("");
+  string sInterPos2 = string("");
+  string sInterNeg1 = string("");
+  string sInterNeg2 = string("");
 
   if ((*(pPh->Verbe.begin()))->getComplementPhr())
   {
-    NSPhraseur* pCompVerbe = (*(pPh->Verbe.begin()))->getComplementPhr() ;
+    NSPhraseur* pCompVerbe = (*(pPh->Verbe.begin()))->getComplementPhr();
 
     if (false == (pCompVerbe->adverbe).empty())
     {
-      NsProposition Propos(pContexte, &pCompVerbe, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-      NSGenerateurFr GeneAdverbe(pContexte, &Propos, sLang) ;
-      GeneAdverbe.classeTout() ;
+      NsProposition Propos(pContexte, &pCompVerbe, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+      NSGenerateurFr GeneAdverbe(pContexte, &Propos, sLang);
+      GeneAdverbe.classeTout();
 
       if (GeneAdverbe.pAdverbePos)
       {
         if (false == (GeneAdverbe.pAdverbePos)->empty())
         {
-          for (iterMots  = (GeneAdverbe.pAdverbePos)->begin() ;
-               iterMots != (GeneAdverbe.pAdverbePos)->end() ;
+          for (iterMots  = (GeneAdverbe.pAdverbePos)->begin();
+               iterMots != (GeneAdverbe.pAdverbePos)->end();
                iterMots++)
           {
             if (false == (*iterMots)->estTexteLibre())
-              sInterPos2 = donneAdverbeComplet(*iterMots) ;
+              sInterPos2 = donneAdverbeComplet(*iterMots);
             else
-              sInterPos2 = (*iterMots)->getTexteLibre() ;
+              sInterPos2 = (*iterMots)->getTexteLibre();
 
-            etDuMilieu(&sPhrasePos, &sInterPos1, &sInterPos2) ;
+            etDuMilieu(&sPhrasePos, &sInterPos1, &sInterPos2);
           }
-          etFinal(&sPhrasePos, &sInterPos1) ;
+          etFinal(&sPhrasePos, &sInterPos1);
 
-          *psPhraseAdverbe += sPhrasePos ;
+          *psPhraseAdverbe += sPhrasePos;
         }
       }
 
@@ -1280,20 +1280,20 @@ NSGenerateurFr::prepareVerbe(string* psPhraseAdverbe, string* psAdverbeModificat
           //
           if (string("") != sPhrasePos)
           {
-            for (iterMots  = (GeneAdverbe.pAdverbeNeg)->begin() ;
-                 iterMots != (GeneAdverbe.pAdverbeNeg)->end() ;
+            for (iterMots  = (GeneAdverbe.pAdverbeNeg)->begin();
+                 iterMots != (GeneAdverbe.pAdverbeNeg)->end();
                  iterMots++)
             {
               if (false == (*iterMots)->estTexteLibre())
-                sInterNeg2 = donneAdverbeComplet(*iterMots) ;
+                sInterNeg2 = donneAdverbeComplet(*iterMots);
               else
-                sInterNeg2 = (*iterMots)->getTexteLibre() ;
+                sInterNeg2 = (*iterMots)->getTexteLibre();
 
-              etDuMilieu(&sPhraseNeg, &sInterNeg1, &sInterNeg2) ;
+              etDuMilieu(&sPhraseNeg, &sInterNeg1, &sInterNeg2);
             }
-            etFinal(&sPhraseNeg, &sInterNeg1) ;
+            etFinal(&sPhraseNeg, &sInterNeg1);
 
-            *psPhraseAdverbe += string(" mais ") + sPhraseNeg ;
+            *psPhraseAdverbe += string(" mais ") + sPhraseNeg;
           }
 
           // s'il n'y a pas d'adverbe a sens positif,
@@ -1301,34 +1301,34 @@ NSGenerateurFr::prepareVerbe(string* psPhraseAdverbe, string* psAdverbeModificat
 
           else
           {
-            *pbPhraseAffirmative = false ;
+            *pbPhraseAffirmative = false;
 
             // On prend l'adverbe modificateur du premier adverbe
             // du COD négatif
 
             bool bPremier = true;
-            for (iterMots  = (GeneAdverbe.pAdverbeNeg)->begin() ;
-                 iterMots != (GeneAdverbe.pAdverbeNeg)->end() ;
+            for (iterMots  = (GeneAdverbe.pAdverbeNeg)->begin();
+                 iterMots != (GeneAdverbe.pAdverbeNeg)->end();
                  iterMots++)
             {
               sInterNeg2 = donneNomComplet(*iterMots, sansCertitude);
               if (strlen((*iterMots)->getCertitude().c_str()) >= 5)
-                sCertitude = string((*iterMots)->getCertitude(), 0, 5) ;
+                sCertitude = string((*iterMots)->getCertitude(), 0, 5);
               else
-                sCertitude = string("") ;
+                sCertitude = string("");
 
               if (string("") != sCertitude)
               {
                 if (bPremier)
                 {
-                  bPremier = false ;
+                  bPremier = false;
                   if (string("") != sCertitude)
                   {
                     if (sCertitude == "WCE00")
-                      *psAdverbeModificateur = string(" ") ;
+                      *psAdverbeModificateur = string(" ");
                     else if ((sCertitude > "WCE00") &&
                              (sCertitude < "WCE50"))
-                      *psAdverbeModificateur = " probablement " ;
+                      *psAdverbeModificateur = " probablement ";
                   }
                 }
                 else
@@ -1336,54 +1336,54 @@ NSGenerateurFr::prepareVerbe(string* psPhraseAdverbe, string* psAdverbeModificat
                   if (sCertitude != "")
                   {
                     if (sCertitude == "WCE00")
-                      sInterNeg2 = string("pas ") /* + sInter2*/ ;
+                      sInterNeg2 = string("pas ") /* + sInter2*/;
                     else if ((sCertitude > "WCE00") &&
                              (sCertitude < "WCE50"))
-                      sInterNeg2 = string("probablement pas ") /* + sInter2*/ ;
+                      sInterNeg2 = string("probablement pas ") /* + sInter2*/;
                   }
                 }
               }
-              etDuMilieu(&sPhraseNeg, &sInterNeg1, &sInterNeg2) ;
+              etDuMilieu(&sPhraseNeg, &sInterNeg1, &sInterNeg2);
             }
-            etFinal(&sPhraseNeg, &sInterNeg1) ;
+            etFinal(&sPhraseNeg, &sInterNeg1);
 
-            *psPhraseAdverbe = sPhraseNeg ;
+            *psPhraseAdverbe = sPhraseNeg;
           }
         }
       }
     }
   }
-  return true ;
+  return true;
 }
 
 bool
 NSGenerateurFr::prepareSujet(string* psSujet, GENRE* piGenreSujet, string* psAttSujet, string* psAdverbeModificateur, bool* pbPhraseAffirmative, DCODETYPE /* iStyle */)
 {
-  bool     trouve     = false ;
-  NSSuper* pSuper     = pContexte->getSuperviseur() ;
-  string   sLexique   = string("") ;
-  string   sPluriel   = string("") ;
-  string   sCertitude = string("") ;
-  GENRE    iGenre     = genreNull ;
+  bool     trouve     = false;
+  NSSuper* pSuper     = pContexte->getSuperviseur();
+  string   sLexique   = string("");
+  string   sPluriel   = string("");
+  string   sCertitude = string("");
+  GENRE    iGenre     = genreNull;
 
-  string   sAdverbeModificateurAtt = string(" ") ;
+  string   sAdverbeModificateurAtt = string(" ");
 
-  iterPhraseMot  iterMots ;
-  NSPathologData Data ;
+  iterPhraseMot  iterMots;
+  NSPathologData Data;
 
   //
   // Le sujet doit être un nom - Subject must be a noun
   //
   if (false == pPh->Sujet.empty())
   {
-    string sInter1 = string("") ;
-    string sInter2 = string("") ;
+    string sInter1 = string("");
+    string sInter2 = string("");
 
     // On itère sur tous les sujets
     //
-    for (iterMots = pPh->Sujet.begin() ; pPh->Sujet.end() != iterMots ; iterMots++)
+    for (iterMots = pPh->Sujet.begin(); pPh->Sujet.end() != iterMots; iterMots++)
     {
-      sLexique = (*iterMots)->getLexique() ;
+      sLexique = (*iterMots)->getLexique();
 
       // A propos de textes libres.
       // On donne le genre MS à tous les textes libres, par défaut.
@@ -1391,46 +1391,46 @@ NSGenerateurFr::prepareSujet(string* psSujet, GENRE* piGenreSujet, string* psAtt
 
       if (false == (*iterMots)->estTexteLibre())
       {
-        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
-        sPluriel = (*iterMots)->getPluriel() ;
+        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
+        sPluriel = (*iterMots)->getPluriel();
         if (false == trouve)
-          return false ;
+          return false;
         if (false == Data.estNom())
-          return false ;
-        Data.donneGenre(&iGenre) ;
+          return false;
+        Data.donneGenre(&iGenre);
 
         // Récupération du genre (composition du genre récupéré avec
         // le genre déjà existant)
 
         if (string("") != sPluriel)
-          Data.donneGenrePluriel(&iGenre) ;
+          Data.donneGenrePluriel(&iGenre);
 
-        string sForceNbr = (*iterMots)->forceNombre(this) ;
+        string sForceNbr = (*iterMots)->forceNombre(this);
 
         if      (FORCE_PLUR == sForceNbr)
-          Data.donneGenrePluriel(&iGenre) ;
+          Data.donneGenrePluriel(&iGenre);
         else if (FORCE_SING == sForceNbr)
-          Data.donneGenreSingulier(&iGenre) ;
+          Data.donneGenreSingulier(&iGenre);
       }
       else
-        iGenre = genreMS ;
+        iGenre = genreMS;
 
       // Premier genre attribué, prendre celui du sujet en cours
       // Attributing a gender for first time, take subject's gender
       //
       if (genreNull == *piGenreSujet)
-        *piGenreSujet = iGenre ;
+        *piGenreSujet = iGenre;
 
-      // Genre déjà attribué (donc déjà pluriel ou passe au pluriel) ; adapter selon celui du sujet en cours
-      // Gender already set (hence already plural or switch to plural) ; adapt it from current subject
+      // Genre déjà attribué (donc déjà pluriel ou passe au pluriel); adapter selon celui du sujet en cours
+      // Gender already set (hence already plural or switch to plural); adapt it from current subject
       //
       else
       {
         if (((genreFS == *piGenreSujet) || (genreFP == *piGenreSujet)) &&
                                                           (Data.estFeminin()))
-          *piGenreSujet = genreFP ;
+          *piGenreSujet = genreFP;
         else
-          *piGenreSujet = genreMP ;
+          *piGenreSujet = genreMP;
       }
 
       // L'article dépend du statut d'objet réel ou abstrait
@@ -1445,11 +1445,11 @@ NSGenerateurFr::prepareSujet(string* psSujet, GENRE* piGenreSujet, string* psAtt
           sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini);
       }
       else
-        sInter2 = (*iterMots)->getTexteLibre() ;
+        sInter2 = (*iterMots)->getTexteLibre();
 
       etDuMilieu(psSujet, &sInter1, &sInter2);
     }
-    etFinal(psSujet, &sInter1) ;
+    etFinal(psSujet, &sInter1);
   }
   // L'attribut du sujet est un adjectif qualificatif qui s'accorde avec le sujet
   //
@@ -1463,67 +1463,67 @@ NSGenerateurFr::prepareSujet(string* psSujet, GENRE* piGenreSujet, string* psAtt
   // ex : La valve n'est pas dilatée.
   // 		La valve est dilatée, mais pas détruite.
 
-  string sAttSujetPos = string("") ;
+  string sAttSujetPos = string("");
   if (pAttSujetPos)
   {
     if (false == pAttSujetPos->empty())
     {
       if (pPh->Sujet.empty())
-        return false ;
+        return false;
 
-      string sInter1 = string("") ;
-      string sInter2 = string("") ;
+      string sInter1 = string("");
+      string sInter2 = string("");
 
-      for (iterMots = pAttSujetPos->begin() ; pAttSujetPos->end() != iterMots ; iterMots++)
+      for (iterMots = pAttSujetPos->begin(); pAttSujetPos->end() != iterMots; iterMots++)
       {
         if (false == (*iterMots)->estTexteLibre())
           // On impose le genre du sujet
-          sInter2 = donneAdjectifComplet(*iterMots, *piGenreSujet) ;
+          sInter2 = donneAdjectifComplet(*iterMots, *piGenreSujet);
         else
-          sInter2 = (*iterMots)->getTexteLibre() ;
+          sInter2 = (*iterMots)->getTexteLibre();
 
-        etDuMilieu(&sAttSujetPos, &sInter1, &sInter2) ;
+        etDuMilieu(&sAttSujetPos, &sInter1, &sInter2);
       }
-      etFinal(&sAttSujetPos, &sInter1) ;
+      etFinal(&sAttSujetPos, &sInter1);
     }
   }
 
-  string sAttSujetNeg = string("") ;
+  string sAttSujetNeg = string("");
   if (pAttSujetNeg)
   {
     if (false == pAttSujetNeg->empty())
     {
       if (pPh->Sujet.empty())
-        return false ;
+        return false;
 
-      string sInter1 = string("") ;
-      string sInter2 = string("") ;
-      bool bPremier = true ;
+      string sInter1 = string("");
+      string sInter2 = string("");
+      bool bPremier = true;
 
-      for (iterMots = pAttSujetNeg->begin() ; pAttSujetNeg->end() != iterMots ; iterMots++)
+      for (iterMots = pAttSujetNeg->begin(); pAttSujetNeg->end() != iterMots; iterMots++)
       {
         // On impose le genre du sujet
-        sInter2 = donneAdjectifComplet(*iterMots, *piGenreSujet, sansCertitude) ;
+        sInter2 = donneAdjectifComplet(*iterMots, *piGenreSujet, sansCertitude);
 
-        sCertitude = string((*iterMots)->getCertitude(), 0, 5) ;
+        sCertitude = string((*iterMots)->getCertitude(), 0, 5);
 
         if (bPremier)
         {
-          bPremier = false ;
+          bPremier = false;
           if (string("") != sCertitude)
           {
             if (sCertitude == "WCE00")
-              sAdverbeModificateurAtt = string(" ") ;
+              sAdverbeModificateurAtt = string(" ");
             else if ((sCertitude > "WCE00") && (sCertitude < "WCE50"))
-              sAdverbeModificateurAtt = string(" probablement ") ;
+              sAdverbeModificateurAtt = string(" probablement ");
           }
         }
         else
-          sInter2 = donneCertitude(sCertitude) + string(" ") + sInter2 ;
+          sInter2 = donneCertitude(sCertitude) + string(" ") + sInter2;
 
-        etDuMilieu(&sAttSujetNeg, &sInter1, &sInter2) ;
+        etDuMilieu(&sAttSujetNeg, &sInter1, &sInter2);
       }
-      etFinal(&sAttSujetNeg, &sInter1) ;
+      etFinal(&sAttSujetNeg, &sInter1);
     }
   }
 
@@ -1533,87 +1533,87 @@ NSGenerateurFr::prepareSujet(string* psSujet, GENRE* piGenreSujet, string* psAtt
     {
       if (*pbPhraseAffirmative)
       {
-        *pbPhraseAffirmative   = false ;
-        *psAttSujet            = sAttSujetNeg ;
-        *psAdverbeModificateur = sAdverbeModificateurAtt ;
+        *pbPhraseAffirmative   = false;
+        *psAttSujet            = sAttSujetNeg;
+        *psAdverbeModificateur = sAdverbeModificateurAtt;
       }
       else
       {
         // il y a déjà un adverbe du verbe qui rend la phrase négative.
-        *psAttSujet = sAdverbeModificateurAtt + string("pas ") + sAttSujetNeg ;
+        *psAttSujet = sAdverbeModificateurAtt + string("pas ") + sAttSujetNeg;
         // on enlève les blancs initaux.
-        strip(*psAttSujet, stripLeft) ;
+        strip(*psAttSujet, stripLeft);
       }
     }
   }
   else
   {
-    *psAttSujet = sAttSujetPos ;
+    *psAttSujet = sAttSujetPos;
     if (string("") != sAttSujetNeg)
-      *psAttSujet += string(" mais") + sAdverbeModificateurAtt + string ("pas ") + sAttSujetNeg ;
+      *psAttSujet += string(" mais") + sAdverbeModificateurAtt + string ("pas ") + sAttSujetNeg;
   }
-  return true ;
+  return true;
 }
 
 bool
 NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, string* psAdverbeModificateur, bool* pbPhraseAffirmative, DCODETYPE iStyle)
 {
   if ((NULL == psCOD) || (NULL == piGenreCOD) || (NULL == psAttCOD))
-    return false ;
+    return false;
 
-  bool     trouve     = false ;
-  string   sPluriel   = string("") ;
-  string   sCertitude = string("") ;
-  GENRE    iGenre     = genreNull ;
+  bool     trouve     = false;
+  string   sPluriel   = string("");
+  string   sCertitude = string("");
+  GENRE    iGenre     = genreNull;
 
   iterPhraseMot  iterMots;
   NSPathologData Data;
 
-  *psCOD      = string("") ;
-  *psAttCOD   = string("") ;
-  *piGenreCOD = genreNull ;
+  *psCOD      = string("");
+  *psAttCOD   = string("");
+  *piGenreCOD = genreNull;
 
   // D'abord on va récuperer le genre du COD
 
   if (false == pPh->COD.empty())
   {
-    for (iterMots = pPh->COD.begin() ; pPh->COD.end() != iterMots ; iterMots++)
+    for (iterMots = pPh->COD.begin(); pPh->COD.end() != iterMots; iterMots++)
     {
-      string sLexique = (*iterMots)->getLexique() ;
+      string sLexique = (*iterMots)->getLexique();
 
       if (false == (*iterMots)->estTexteLibre())
       {
-        sPluriel = (*iterMots)->getPluriel() ;
-        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+        sPluriel = (*iterMots)->getPluriel();
+        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
         if (false == trouve)
-          return false ;
+          return false;
         if (false == Data.estNom())
-          return false ;
+          return false;
 
         // Récupération du genre (composition du genre récupéré avec
         // le genre déjà existant)
-        Data.donneGenre(&iGenre) ;
+        Data.donneGenre(&iGenre);
         if (string("") != sPluriel)
-          Data.donneGenrePluriel(&iGenre) ;
+          Data.donneGenrePluriel(&iGenre);
 
-        string sForceNbr = (*iterMots)->forceNombre(this) ;
+        string sForceNbr = (*iterMots)->forceNombre(this);
         if      (FORCE_PLUR == sForceNbr)
-          Data.donneGenrePluriel(&iGenre) ;
+          Data.donneGenrePluriel(&iGenre);
         else if (FORCE_SING == sForceNbr)
-          Data.donneGenreSingulier(&iGenre) ;
+          Data.donneGenreSingulier(&iGenre);
       }
       else
-        iGenre = genreMS ;
+        iGenre = genreMS;
 
       if (genreNull == *piGenreCOD)
-        *piGenreCOD = iGenre ;
+        *piGenreCOD = iGenre;
       else
       {
         if (((genreFS == *piGenreCOD) || (genreFP == *piGenreCOD)) &&
                      (Data.estFeminin()))
-          *piGenreCOD = genreFP ;
+          *piGenreCOD = genreFP;
         else
-          *piGenreCOD = genreMP ;
+          *piGenreCOD = genreMP;
       }
     }
   }
@@ -1622,23 +1622,23 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
   // à certitude negative.
   // Pour une dcTiret, il ne faut pas mettre d'article dans le COD.
 
-  string sCODPos = string("") ;
+  string sCODPos = string("");
 
   if (pCODPos)
   {
     if (false == pCODPos->empty())
     {
-      string sInter1 = string("") ;
-      string sInter2 = string("") ;
+      string sInter1 = string("");
+      string sInter2 = string("");
 
-      for (iterMots = pCODPos->begin() ; pCODPos->end() != iterMots ; iterMots++)
+      for (iterMots = pCODPos->begin(); pCODPos->end() != iterMots; iterMots++)
       {
         if (dcPhrase == iStyle)
         {
           if (false == (*iterMots)->estTexteLibre())
           {
             if (sPluriel == "")
-              sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle()) ;
+              sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle());
 
             else if (string(sPluriel, 0, 5) == "WPLUS")
               sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleDefini);
@@ -1646,25 +1646,25 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
               sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini);
           }
           else
-            sInter2 = (*iterMots)->getTexteLibre() ;
+            sInter2 = (*iterMots)->getTexteLibre();
         }
 
         else if (dcTiret == iStyle)
         {
           if (false == (*iterMots)->estTexteLibre())
-            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans) ;
+            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans);
           else
-            sInter2 = (*iterMots)->getTexteLibre() ;
+            sInter2 = (*iterMots)->getTexteLibre();
         }
 
-        etDuMilieu(&sCODPos, &sInter1, &sInter2) ;
+        etDuMilieu(&sCODPos, &sInter1, &sInter2);
       }
-      etFinal(&sCODPos, &sInter1) ;
-      *psCOD += sCODPos ;
+      etFinal(&sCODPos, &sInter1);
+      *psCOD += sCODPos;
     }
   }
 
-  string sCODNeg = string("") ;
+  string sCODNeg = string("");
 
   if (pCODNeg)
   {
@@ -1672,38 +1672,38 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
     {
       if ((string("") != sCODPos) || (!(*pbPhraseAffirmative)))
       {
-        string sInter1 = string("") ;
-        string sInter2 = string("") ;
+        string sInter1 = string("");
+        string sInter2 = string("");
 
         for (iterMots = pCODNeg->begin(); iterMots != pCODNeg->end(); iterMots++)
         {
           if (dcPhrase == iStyle)
           {
             if (string("") == sPluriel)
-              sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle()) ;
+              sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle());
             else if (string(sPluriel, 0, 5) == "WPLUS")
-              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleDefini) ;
+              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleDefini);
             else if (string(sPluriel, 0, 5) == "WPLUR")
-              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini) ;
+              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini);
           }
           else if (dcTiret == iStyle)
-            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans) ;
+            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans);
 
-          etDuMilieu(&sCODNeg, &sInter1, &sInter2) ;
+          etDuMilieu(&sCODNeg, &sInter1, &sInter2);
         }
-        etFinal(&sCODNeg, &sInter1) ;
-        *psCOD += string(" mais ") + sCODNeg ;
+        etFinal(&sCODNeg, &sInter1);
+        *psCOD += string(" mais ") + sCODNeg;
       }
       // Pas de COD à sens affirmatif
       else
       {
-        *pbPhraseAffirmative = false ;
+        *pbPhraseAffirmative = false;
 
         // On prend l'adverbe modificateur du premier nom du COD négatif
 
         bool bPremier = true;
-        string sInter1 = string("") ;
-        string sInter2 = string("") ;
+        string sInter1 = string("");
+        string sInter2 = string("");
         for (iterMots = pCODNeg->begin(); iterMots != pCODNeg->end(); iterMots++)
         {
           if (dcPhrase == iStyle)
@@ -1725,9 +1725,9 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
                 if (string("") != sCertitude)
                 {
                   if (string(sCertitude, 0 ,5) == "WCE00")
-                    *psAdverbeModificateur = string(" ") ;
+                    *psAdverbeModificateur = string(" ");
                   else if ((string(sCertitude, 0 ,5) > "WCE00") && (string(sCertitude, 0 ,5) < "WCE50"))
-                    *psAdverbeModificateur = string(" probablement ") ;
+                    *psAdverbeModificateur = string(" probablement ");
                 }
               }
               else
@@ -1735,46 +1735,46 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
                 if (string("") != sCertitude)
                 {
                   if (string(sCertitude, 0 ,5) == "WCE00")
-                    sInter2 = string("pas ") + sInter2 ;
+                    sInter2 = string("pas ") + sInter2;
                   else if ((string(sCertitude, 0 ,5) > "WCE00") && (string(sCertitude, 0 ,5) < "WCE50"))
-                    sInter2 = string("probablement pas ") + sInter2 ;
+                    sInter2 = string("probablement pas ") + sInter2;
                 }
               }
             }
           }
 
           else if (dcTiret == iStyle)
-            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans) ;
+            sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans);
 
-          etDuMilieu(&sCODNeg, &sInter1, &sInter2) ;
+          etDuMilieu(&sCODNeg, &sInter1, &sInter2);
         }
-        etFinal(&sCODNeg, &sInter1) ;
-        *psCOD = sCODNeg ;
+        etFinal(&sCODNeg, &sInter1);
+        *psCOD = sCODNeg;
       }
     }
   }
 
   // Attribut du COD (se place après les adjectifs qualificatifs qualifiant le COD).
 
-  string sAttCODPos = string("") ;
+  string sAttCODPos = string("");
 
   if (pAttCODPos)
   {
     if (false == pAttCODPos->empty())
     {
       if (pPh->COD.empty())
-        return false ;
+        return false;
 
-      string sInter1 = string("") ;
-      string sInter2 = string("") ;
+      string sInter1 = string("");
+      string sInter2 = string("");
 
-      for (iterMots = pAttCODPos->begin() ; pAttCODPos->end() != iterMots ; iterMots++)
+      for (iterMots = pAttCODPos->begin(); pAttCODPos->end() != iterMots; iterMots++)
       {
         if (false == (*iterMots)->estTexteLibre())
           // On impose le genre du COD
           sInter2 = donneAdjectifComplet(*iterMots, *piGenreCOD);
         else
-          sInter2 = (*iterMots)->getTexteLibre() ;
+          sInter2 = (*iterMots)->getTexteLibre();
 
         etDuMilieu(&sAttCODPos, &sInter1, &sInter2);
       }
@@ -1782,23 +1782,23 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
     }
   }
 
-  string sAttCODNeg = string("") ;
+  string sAttCODNeg = string("");
   if (pAttCODNeg)
   {
     if (false == pAttCODNeg->empty())
     {
       if (pPh->COD.empty())
-        return false ;
+        return false;
 
-      string sInter1 = string("") ;
-      string sInter2 = string("") ;
+      string sInter1 = string("");
+      string sInter2 = string("");
 
-      for (iterMots = pAttCODNeg->begin() ; pAttCODNeg->end() != iterMots ; iterMots++)
+      for (iterMots = pAttCODNeg->begin(); pAttCODNeg->end() != iterMots; iterMots++)
       {
         // On impose le genre du COD
-        sInter2 = donneAdjectifComplet(*iterMots, *piGenreCOD) ;
+        sInter2 = donneAdjectifComplet(*iterMots, *piGenreCOD);
 
-        etDuMilieu(&sAttCODNeg, &sInter1, &sInter2) ;
+        etDuMilieu(&sAttCODNeg, &sInter1, &sInter2);
       }
       etFinal(&sAttCODNeg, &sInter1);
     }
@@ -1807,16 +1807,16 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
   if (string("") == sAttCODPos)
   {
     if (string("") != sAttCODNeg)
-      *psAttCOD = sAttCODNeg ;
+      *psAttCOD = sAttCODNeg;
   }
   else
   {
-    *psAttCOD = sAttCODPos ;
+    *psAttCOD = sAttCODPos;
     if (string("") != sAttCODNeg)
-      *psAttCOD += string(" mais ") + sAttCODNeg ;
+      *psAttCOD += string(" mais ") + sAttCODNeg;
   }
 
-  return true ;
+  return true;
 }
 
 // donneNomComplet : méthode qui sert à fabriquer un nom, accompagné de tous ses
@@ -1831,73 +1831,73 @@ NSGenerateurFr::prepareCOD(string* psCOD, GENRE* piGenreCOD, string* psAttCOD, s
 string
 NSGenerateurFr::donneNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE iGereCertitude)
 {
-  string sLibel = string("") ;
-  NSPathologData Data ;
+  string sLibel = string("");
+  NSPathologData Data;
 
-  iterPhraseMot iterMots ;
+  iterPhraseMot iterMots;
 
-  string sCertitude = pMot->getCertitude() ;
+  string sCertitude = pMot->getCertitude();
   if ((string("") != sCertitude) && (strlen(sCertitude.c_str()) > 5))
-    sCertitude = string(sCertitude, 0, 5) ;
+    sCertitude = string(sCertitude, 0, 5);
 
-  string sLexique = pMot->getLexique() ;
-  string sPluriel = pMot->getPluriel() ;
-  GENRE iGenre ;
-  bool bPluriel = false ;
-  string sPrep = string("") ;
+  string sLexique = pMot->getLexique();
+  string sPluriel = pMot->getPluriel();
+  GENRE iGenre;
+  bool bPluriel = false;
+  string sPrep = string("");
 
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return string("") ;
+    return string("");
   if (false == Data.estNom())
-    return string("") ;
+    return string("");
   // Récupération du genre (composition du genre récupéré avec
   // le genre déjà existant)
-  Data.donneGenre(&iGenre) ;
+  Data.donneGenre(&iGenre);
   if (string("") != sPluriel)
-    Data.donneGenrePluriel(&iGenre) ;
+    Data.donneGenrePluriel(&iGenre);
 
   // On regarde si le nombre est forcé.
 
-  string sForceNbr = pMot->forceNombre(this) ;
+  string sForceNbr = pMot->forceNombre(this);
 
   if      (FORCE_PLUR == sForceNbr)
-    Data.donneGenrePluriel(&iGenre) ;
+    Data.donneGenrePluriel(&iGenre);
   else if (FORCE_SING == sForceNbr)
-    Data.donneGenreSingulier(&iGenre) ;
+    Data.donneGenreSingulier(&iGenre);
 
   //
-  donneLibelleAffiche(&sLibel, &Data, iGenre) ;
+  donneLibelleAffiche(&sLibel, &Data, iGenre);
 
   if (pMot->getComplementPhr())
   {
-    NsProposition Propos(pContexte, pMot->getComplementPhr(), NsProposition::notSetType, NsProposition::notSetConjonct) ;
-    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang) ;
-    traitePostposition(pMot) ;
+    NsProposition Propos(pContexte, pMot->getComplementPhr(), NsProposition::notSetType, NsProposition::notSetConjonct);
+    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang);
+    traitePostposition(pMot);
 
     // Le complément du nom est nécessairement introduit par une préposition.
     // Donc si on n'a pas de préposition, on en met une par défaut : "de".
     if (false == pMot->getComplementPhr()->compNom.empty())
     {
-      for (iterMots = pMot->getComplementPhr()->compNom.begin() ;
-                 pMot->getComplementPhr()->compNom.end() != iterMots ;
+      for (iterMots = pMot->getComplementPhr()->compNom.begin();
+                 pMot->getComplementPhr()->compNom.end() != iterMots;
                  iterMots++)
       {
         if (false == (*iterMots)->estTexteLibre())
         {
           if ((*iterMots)->getPreposition() == string(""))
-            (*iterMots)->setPreposition("de") ;
+            (*iterMots)->setPreposition("de");
         }
         else
         {
           if ((*iterMots)->getPreposition() == string(""))
-            (*iterMots)->setTexteLibre(string("de ") + (*iterMots)->getTexteLibre()) ;
+            (*iterMots)->setTexteLibre(string("de ") + (*iterMots)->getTexteLibre());
         }
       }
     }
 
     if (GeneCpl.genereNomComplet(pMot, iArticle, iGereCertitude))
-      sLibel = GeneCpl.getTempoPhrase() ;
+      sLibel = GeneCpl.getTempoPhrase();
   }
   //
   // Pas de complément
@@ -1906,10 +1906,10 @@ NSGenerateurFr::donneNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE i
   {
     if (iGereCertitude == avecCertitude)
     {
-      string sCertitudeEcrit = donneCertitude(sCertitude) ;
+      string sCertitudeEcrit = donneCertitude(sCertitude);
 
       if (string("") != sCertitudeEcrit)
-        sLibel = sCertitudeEcrit + string(" ") + sLibel ;
+        sLibel = sCertitudeEcrit + string(" ") + sLibel;
     }
 
     // On traite d'abord la préposition
@@ -1918,17 +1918,17 @@ NSGenerateurFr::donneNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE i
     if (string("") != sPrep)
     {
       if (pMot->getPreposition() != string(""))
-        pMot->setPreposition(pMot->getPreposition() + string(" ")) ;
-      pMot->setPreposition(pMot->getPreposition() + string(sPrep, 1, strlen(sPrep.c_str()) - 1)) ;
+        pMot->setPreposition(pMot->getPreposition() + string(" "));
+      pMot->setPreposition(pMot->getPreposition() + string(sPrep, 1, strlen(sPrep.c_str()) - 1));
     }
 
     if ((genreMP == iGenre) || (genreFP == iGenre) || (genreNP == iGenre))
-      bPluriel = true ;
+      bPluriel = true;
 
-    bool modifie = modifiePreposition(pMot, iArticle, bPluriel) ;
+    bool modifie = modifiePreposition(pMot, iArticle, bPluriel);
 
     if      (NSPhraseMot::articleDefini == iArticle)
-      sLibel = donneArticleDefini(pMot, bPluriel) + sLibel ;
+      sLibel = donneArticleDefini(pMot, bPluriel) + sLibel;
     else if (NSPhraseMot::articleIndefini == iArticle)
     {
       // A la forme négative, l'article indéfini est remplacé par un
@@ -1936,20 +1936,20 @@ NSGenerateurFr::donneNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE i
       // ex : il existe un polype -> il n'existe pas de polype
 //            if ((iGereCertitude == avecCertitude) && (sCertitude < "WCE50"))
       if ((string("") != sCertitude) && (sCertitude < "WCE50"))
-        sLibel = donneArticlePartitif(pMot, bPluriel) + sLibel ;
+        sLibel = donneArticlePartitif(pMot, bPluriel) + sLibel;
       else
-        sLibel = donneArticleIndefini(pMot, bPluriel) + sLibel ;
+        sLibel = donneArticleIndefini(pMot, bPluriel) + sLibel;
     }
     else if (NSPhraseMot::articlePartitif == iArticle)
-      sLibel = donneArticlePartitif(pMot, bPluriel) + sLibel ;
+      sLibel = donneArticlePartitif(pMot, bPluriel) + sLibel;
 
     if (modifie)
-      sLibel = pMot->getPreposition() + sLibel ;
+      sLibel = pMot->getPreposition() + sLibel;
     else if (pMot->getPreposition() != string(""))
-      sLibel = pMot->getPreposition() + string(" ") + sLibel ;
+      sLibel = pMot->getPreposition() + string(" ") + sLibel;
   }
 
-  return sLibel ;
+  return sLibel;
 }
 
 
@@ -1958,11 +1958,11 @@ NSGenerateurFr::donneNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE i
 bool
 NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE iGereCertitude)
 {
-  sPhrase = string("") ;
+  sPhrase = string("");
 
-  reinitialise() ;
+  reinitialise();
 
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  NSSuper* pSuper = pContexte->getSuperviseur();
 
   bool     bPluriel = false;
   string   sInter1 = "";
@@ -1971,63 +1971,63 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
   string   sCertitude = "";
   string   sCertitudeNom = "";
 
-  NSPathologData Data ;
+  NSPathologData Data;
 
-  NSPhraseur* pComp = pMot->getComplementPhr() ;
+  NSPhraseur* pComp = pMot->getComplementPhr();
 
   if (false == (pComp->adjEpithete).empty())
-    pComp->classeAdjectif(this) ;
+    pComp->classeAdjectif(this);
 
-  traitePrepositionCC(&pPh->CCLieu,    &pPh->PrepositionLieu,    NSPhraseur::prepLieu) ;
-  traitePrepositionCC(&pPh->CCTemps,   &pPh->PrepositionTemps,   NSPhraseur::prepTemps) ;
-  traitePrepositionCC(&pPh->CCManiere, &pPh->PrepositionManiere, NSPhraseur::prepManiere) ;
-  traitePrepositionCC(&pPh->CCMoyen,   &pPh->PrepositionMoyen,   NSPhraseur::prepMoyen) ;
-  traitePrepositionCC(&pPh->CCCause,   &pPh->PrepositionCause,   NSPhraseur::prepCause) ;
-  traitePrepositionCC(&pPh->CCBut,     &pPh->PrepositionBut,     NSPhraseur::prepBut) ;
-  traitePrepositionCC(&pPh->CCType,    &pPh->PrepositionType,    NSPhraseur::prepType) ;
-  traitePrepositionCC(&pPh->CCHypoth,  &pPh->PrepositionHypoth,  NSPhraseur::prepHypoth) ;
-  traitePrepositionCC(&pPh->CCChiffre, &pPh->PrepositionChiffre, NSPhraseur::prepChiffre) ;
+  traitePrepositionCC(&pPh->CCLieu,    &pPh->PrepositionLieu,    NSPhraseur::prepLieu);
+  traitePrepositionCC(&pPh->CCTemps,   &pPh->PrepositionTemps,   NSPhraseur::prepTemps);
+  traitePrepositionCC(&pPh->CCManiere, &pPh->PrepositionManiere, NSPhraseur::prepManiere);
+  traitePrepositionCC(&pPh->CCMoyen,   &pPh->PrepositionMoyen,   NSPhraseur::prepMoyen);
+  traitePrepositionCC(&pPh->CCCause,   &pPh->PrepositionCause,   NSPhraseur::prepCause);
+  traitePrepositionCC(&pPh->CCBut,     &pPh->PrepositionBut,     NSPhraseur::prepBut);
+  traitePrepositionCC(&pPh->CCType,    &pPh->PrepositionType,    NSPhraseur::prepType);
+  traitePrepositionCC(&pPh->CCHypoth,  &pPh->PrepositionHypoth,  NSPhraseur::prepHypoth);
+  traitePrepositionCC(&pPh->CCChiffre, &pPh->PrepositionChiffre, NSPhraseur::prepChiffre);
 
-  classeTout() ;
+  classeTout();
 
   //
   // Prise des informations sur le nom à compléter
   //
-  string sLexique = pMot->getLexique() ;
-  string sPluriel = pMot->getPluriel() ;
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  string sLexique = pMot->getLexique();
+  string sPluriel = pMot->getPluriel();
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return false ;
+    return false;
   if (false == Data.estNom())
-    return false ;
+    return false;
   //
   // Récupération du genre (composition du genre récupéré avec
   // le genre déjà existant)
-  Data.donneGenre(&iGenreNom) ;
+  Data.donneGenre(&iGenreNom);
   if (sPluriel != "")
-    Data.donneGenrePluriel(&iGenreNom) ;
+    Data.donneGenrePluriel(&iGenreNom);
 
   // On regarde si le nombre est force.
 
-  string sForceNbr = pMot->forceNombre(this) ;
+  string sForceNbr = pMot->forceNombre(this);
 
   if      (sForceNbr == FORCE_PLUR)
-    Data.donneGenrePluriel(&iGenreNom) ;
+    Data.donneGenrePluriel(&iGenreNom);
   else if (sForceNbr == FORCE_SING)
-    Data.donneGenreSingulier(&iGenreNom) ;
+    Data.donneGenreSingulier(&iGenreNom);
 
 
-  string sNom = string("") ;
+  string sNom = string("");
 
-  donneLibelleAffiche(&sNom, &Data, iGenreNom) ;
+  donneLibelleAffiche(&sNom, &Data, iGenreNom);
 
-  sCertitudeNom = string(pMot->getCertitude(), 0, 5) ;
+  sCertitudeNom = string(pMot->getCertitude(), 0, 5);
 
   //
   // Compléments : quand, où, comment, avec quoi, pourquoi, dans quel but
   //
 
-  pCCArray->donnePhrase() ;
+  pCCArray->donnePhrase();
 
   // Expansions du groupe nominal
   //
@@ -2075,13 +2075,13 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
       {
         // L'epithete s'accorde avec le nom qu'il qualifie.
         if (false == (*iterMotsAdj)->estTexteLibre())
-          sInterAvPos2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom) ;
+          sInterAvPos2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom);
         else
-          sInterAvPos2 = (*iterMotsAdj)->getTexteLibre() ;
+          sInterAvPos2 = (*iterMotsAdj)->getTexteLibre();
 
-        etDuMilieu(&sPhraseAvPos, &sInterAvPos1, &sInterAvPos2) ;
+        etDuMilieu(&sPhraseAvPos, &sInterAvPos1, &sInterAvPos2);
       }
-      etFinal(&sPhraseAvPos, &sInterAvPos1) ;
+      etFinal(&sPhraseAvPos, &sInterAvPos1);
     }
   }
 
@@ -2100,13 +2100,13 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
       {
         // L'epithete s'accorde avec le nom qu'il qualifie.
         if (false == (*iterMotsAdj)->estTexteLibre())
-          sInterApPos2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom) ;
+          sInterApPos2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom);
         else
-          sInterApPos2 = (*iterMotsAdj)->getTexteLibre() ;
+          sInterApPos2 = (*iterMotsAdj)->getTexteLibre();
 
-        etDuMilieu(&sPhraseApPos, &sInterApPos1, &sInterApPos2) ;
+        etDuMilieu(&sPhraseApPos, &sInterApPos1, &sInterApPos2);
       }
-      etFinal(&sPhraseApPos, &sInterApPos1) ;
+      etFinal(&sPhraseApPos, &sInterApPos1);
     }
   }
 
@@ -2120,23 +2120,23 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
       {
         // L'epithete s'accorde avec le nom qu'il qualifie.
 
-        sInterApNeg2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom) ;
+        sInterApNeg2 = donneAdjectifComplet(*iterMotsAdj, iGenreNom);
 
-        etDuMilieu(&sPhraseApNeg, &sInterApNeg1, &sInterApNeg2) ;
+        etDuMilieu(&sPhraseApNeg, &sInterApNeg1, &sInterApNeg2);
       }
-      etFinal(&sPhraseApNeg, &sInterApNeg1) ;
+      etFinal(&sPhraseApNeg, &sInterApNeg1);
     }
   }
 
-  sPhraseAv = sPhraseAvPos ;
-  sPhraseAp = sPhraseApPos ;
+  sPhraseAv = sPhraseAvPos;
+  sPhraseAp = sPhraseApPos;
 
   if (string("") != sPhraseApNeg)
   {
     if (string("") != sPhraseApPos)
-      sPhraseAp += string(" mais ") + sPhraseApNeg ;
+      sPhraseAp += string(" mais ") + sPhraseApNeg;
     else
-      sPhraseAp = sPhraseApNeg ;
+      sPhraseAp = sPhraseApNeg;
   }
 
   // On traite ensuite les complements du nom.
@@ -2165,24 +2165,24 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
                iterMotsCompNom != pCompNomPos->end();
                iterMotsCompNom++)
       {
-        sLexique = (*iterMotsCompNom)->getLexique() ;
+        sLexique = (*iterMotsCompNom)->getLexique();
 
         if (false == (*iterMotsCompNom)->estTexteLibre())
         {
-          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataCompNom) ;
+          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataCompNom);
           if (false == trouve)
-            return false ;
+            return false;
 
-          sCertitude = string((*iterMotsCompNom)->getCertitude(), 0, 5) ;
+          sCertitude = string((*iterMotsCompNom)->getCertitude(), 0, 5);
 
-          sInterCompNomPos2 = donneCertitude(sCertitude) + donneNomComplet(*iterMotsCompNom, (*iterMotsCompNom)->getArticle(), sansCertitude) ;
+          sInterCompNomPos2 = donneCertitude(sCertitude) + donneNomComplet(*iterMotsCompNom, (*iterMotsCompNom)->getArticle(), sansCertitude);
         }
         else
-          sInterCompNomPos2 = (*iterMotsCompNom)->getTexteLibre() ;
+          sInterCompNomPos2 = (*iterMotsCompNom)->getTexteLibre();
 
-        etDuMilieu(&sCompNomPos, &sInterCompNomPos1, &sInterCompNomPos2) ;
+        etDuMilieu(&sCompNomPos, &sInterCompNomPos1, &sInterCompNomPos2);
       }
-      etFinal(&sCompNomPos, &sInterCompNomPos1) ;
+      etFinal(&sCompNomPos, &sInterCompNomPos1);
     }
   }
 
@@ -2194,28 +2194,28 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
                iterMotsCompNom != pCompNomNeg->end();
                iterMotsCompNom++)
       {
-        sLexique = (*iterMotsCompNom)->getLexique() ;
-        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataCompNom) ;
+        sLexique = (*iterMotsCompNom)->getLexique();
+        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataCompNom);
         if (false == trouve)
-          return false ;
+          return false;
 
-        sCertitude = string((*iterMotsCompNom)->getCertitude(), 0, 5) ;
-        sInterCompNomNeg2 = donneCertitude(sCertitude) + donneNomComplet(*iterMotsCompNom, (*iterMotsCompNom)->getArticle(), sansCertitude) ;
+        sCertitude = string((*iterMotsCompNom)->getCertitude(), 0, 5);
+        sInterCompNomNeg2 = donneCertitude(sCertitude) + donneNomComplet(*iterMotsCompNom, (*iterMotsCompNom)->getArticle(), sansCertitude);
 
-        etDuMilieu(&sCompNomNeg, &sInterCompNomNeg1, &sInterCompNomNeg2) ;
+        etDuMilieu(&sCompNomNeg, &sInterCompNomNeg1, &sInterCompNomNeg2);
       }
-      etFinal(&sCompNomNeg, &sInterCompNomNeg1) ;
+      etFinal(&sCompNomNeg, &sInterCompNomNeg1);
     }
   }
 
-  sCompNom = sCompNomPos ;
+  sCompNom = sCompNomPos;
 
   if (string("") != sCompNomNeg)
   {
     if (string("") != sCompNomPos)
-      sCompNom += string(" mais ") + sCompNomNeg ;
+      sCompNom += string(" mais ") + sCompNomNeg;
     else
-      sCompNom = sCompNomNeg ;
+      sCompNom = sCompNomNeg;
   }
 
   string sCertitudeEcrit = donneCertitude(sCertitudeNom);
@@ -2272,12 +2272,12 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
 
   // On traite les adjectifs numéraux
   // char NumCard[BASE_COMPLEMENT_LEN + 1];
-  // strcpy(NumCard, pComp->adjNumeralCardinal.complement) ;
+  // strcpy(NumCard, pComp->adjNumeralCardinal.complement);
 
   if (string("") != pComp->adjNumeralCardinal.getComplement())
-    sPhrase = pComp->adjNumeralCardinal.getComplement() + string(" ") + sPhrase ;
+    sPhrase = pComp->adjNumeralCardinal.getComplement() + string(" ") + sPhrase;
 
-  // NSPhraseMot      adjNumeralOrdinal ;
+  // NSPhraseMot      adjNumeralOrdinal;
 
   // On traite d'abord la preposition
   string sPrep = Data.chercheGrammaire(PREPOSITION);
@@ -2285,11 +2285,11 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
   if (string("") != sPrep)
   {
     if (pMot->getPreposition() != "")
-      pMot->setPreposition(pMot->getPreposition() + string(" ")) ;
-    pMot->setPreposition(pMot->getPreposition() + string(sPrep, 1, strlen(sPrep.c_str()) - 1)) ;
+      pMot->setPreposition(pMot->getPreposition() + string(" "));
+    pMot->setPreposition(pMot->getPreposition() + string(sPrep, 1, strlen(sPrep.c_str()) - 1));
   }
 
-  bool modifie = modifiePreposition(pMot, iArticle, bPluriel) ;
+  bool modifie = modifiePreposition(pMot, iArticle, bPluriel);
 
   // On traite l'article
 
@@ -2300,39 +2300,39 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
   else if (iArticle == NSPhraseMot::articleIndefini)
   {
     if ((sCertitudeNom != "") && (sCertitudeNom < "WCE50") && (iGereCertitude == avecCertitude))
-      sPhrase = donneArticlePartitif(pMot, bPluriel, sansCertitude) + sPhrase ;
+      sPhrase = donneArticlePartitif(pMot, bPluriel, sansCertitude) + sPhrase;
     else
-      sPhrase = donneArticleIndefini(pMot, bPluriel, sansCertitude) + sPhrase ;
+      sPhrase = donneArticleIndefini(pMot, bPluriel, sansCertitude) + sPhrase;
   }
   else if (iArticle == NSPhraseMot::articlePartitif)
-    sPhrase = donneArticlePartitif(pMot, bPluriel, sansCertitude) + sPhrase ;
+    sPhrase = donneArticlePartitif(pMot, bPluriel, sansCertitude) + sPhrase;
 
   // Apres l'article, on traite la preposition.
 
   if (modifie)
-    sPhrase = pMot->getPreposition() + sPhrase ;
+    sPhrase = pMot->getPreposition() + sPhrase;
   else if (pMot->getPreposition() != "")
-    sPhrase = pMot->getPreposition() + string(" ") + sPhrase ;
+    sPhrase = pMot->getPreposition() + string(" ") + sPhrase;
 
   if (iGereCertitude == avecCertitude)
   {
-    sCertitude = string(pMot->getCertitude(), 0, 5) ;
+    sCertitude = string(pMot->getCertitude(), 0, 5);
     string sCertitudeEcrit = donneCertitude(sCertitude);
 
     if (string("") != sCertitudeEcrit)
-      sPhrase = sCertitudeEcrit + string(" ") + sPhrase ;
+      sPhrase = sCertitudeEcrit + string(" ") + sPhrase;
   }
 
   // Tout a la fin, on met le complement entre parentheses.
 
   if (pComp->pParentheses)
   {
-      NsProposition* pPropos = new NsProposition(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-      NSGenerateurFr* pGeneParentheses = new NSGenerateurFr(pContexte, pPropos, sLang) ;
-      pGeneParentheses->genereProposition(dcPhrase) ;
-      sPhrase += string(" (") + pGeneParentheses->getPropositionPhrase() + string(")") ;
-      delete pGeneParentheses ;
-      delete pPropos ;
+      NsProposition* pPropos = new NsProposition(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false);
+      NSGenerateurFr* pGeneParentheses = new NSGenerateurFr(pContexte, pPropos, sLang);
+      pGeneParentheses->genereProposition(dcPhrase);
+      sPhrase += string(" (") + pGeneParentheses->getPropositionPhrase() + string(")");
+      delete pGeneParentheses;
+      delete pPropos;
   }
 
   // On indique que le nom est complete par une subordonnee relative en donnant
@@ -2345,23 +2345,23 @@ NSGenerateurFr::genereNomComplet(NSPhraseMot* pMot, int iArticle, GERECERTITUDE 
 
   if (pComp->iPhraseType == NSPhraseur::phraseRelative)
   {
-    pComp->Sujet.vider() ;
+    pComp->Sujet.vider();
 
     // Si on ne supprime pas le complément, on tourne en rond
-    NSPhraseMot* pMotSujet = new NSPhraseMot(*pMot) ;
+    NSPhraseMot* pMotSujet = new NSPhraseMot(*pMot);
     if (pMotSujet->getComplementPhr())
     {
-      delete pMotSujet->getComplementPhr() ;
-      pMotSujet->setComplementPhr((NSPhraseur*) 0) ;
+      delete pMotSujet->getComplementPhr();
+      pMotSujet->setComplementPhr((NSPhraseur*) 0);
     }
-    pComp->Sujet.push_back(pMotSujet) ;
+    pComp->Sujet.push_back(pMotSujet);
 
     // pComp->Sujet.push_back(new NSPhraseMot(*pMot));
 
-    NsProposition Propos(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-    NSGenerateurFr GeneRelative(pContexte, &Propos, sLang) ;
-    GeneRelative.genereProposition(dcPhrase) ;
-    sPhrase += string(" ") + GeneRelative.getPropositionPhrase() ;
+    NsProposition Propos(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+    NSGenerateurFr GeneRelative(pContexte, &Propos, sLang);
+    GeneRelative.genereProposition(dcPhrase);
+    sPhrase += string(" ") + GeneRelative.getPropositionPhrase();
   }
   return true;
 }
@@ -2374,19 +2374,19 @@ string
 NSGenerateurFr::donneAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTITUDE iGereCertitude)
 {
   if (NULL == pMot)
-    return string("") ;
+    return string("");
 
-  string sLexique = pMot->getLexique() ;
+  string sLexique = pMot->getLexique();
 
   NSPathologData DataAdj;
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataAdj) ;
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataAdj);
   if (false == trouve)
-    return string("") ;
+    return string("");
 
   if (false == DataAdj.estAdjectif())
-    return string("") ;
+    return string("");
 
-  string sLibelle = "" ;
+  string sLibelle = "";
 
   donneLibelleAffiche(&sLibelle, &DataAdj, iGenre);
 
@@ -2394,53 +2394,53 @@ NSGenerateurFr::donneAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTIT
 
   if (pMot->getComplementPhr())
   {
-    NSPhraseur* pComp = pMot->getComplementPhr() ;
-    NsProposition Propos(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang) ;
+    NSPhraseur* pComp = pMot->getComplementPhr();
+    NsProposition Propos(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang);
     if (GeneCpl.genereAdjectifComplet(pMot, iGenre, iGereCertitude))
-      sLibelle = GeneCpl.getTempoPhrase() ;
+      sLibelle = GeneCpl.getTempoPhrase();
   }
   else
   {
     if (iGereCertitude == avecCertitude)
     {
-      string sCertitude = string(pMot->getCertitude(), 0, 5) ;
-      string sCertitudeEcrit = donneCertitude(sCertitude) ;
+      string sCertitude = string(pMot->getCertitude(), 0, 5);
+      string sCertitudeEcrit = donneCertitude(sCertitude);
 
       if (string("") != sCertitudeEcrit)
-        sLibelle = sCertitudeEcrit + string(" ") + sLibelle ;
+        sLibelle = sCertitudeEcrit + string(" ") + sLibelle;
     }
   }
-  return sLibelle ;
+  return sLibelle;
 }
 
 bool
 NSGenerateurFr::genereAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTITUDE iGereCertitude)
 {
-  sPhrase = string("") ;
+  sPhrase = string("");
 
-  reinitialise() ;
+  reinitialise();
 
-  NSPhraseur* pComp  = pMot->getComplementPhr() ;
+  NSPhraseur* pComp  = pMot->getComplementPhr();
 
-  NSPathologData Data ;
+  NSPathologData Data;
 
-  classeTout() ;
+  classeTout();
 
   //
   // Prise des informations sur l'adverbe à compléter
   //
-  string sLexique = pMot->getLexique() ;
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  string sLexique = pMot->getLexique();
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return false ;
+    return false;
   if (false == Data.estAdjectif())
-    return false ;
+    return false;
 
-  string sAdjectif = string("") ;
-  donneLibelleAffiche(&sAdjectif, &Data, iGenre) ;
+  string sAdjectif = string("");
+  donneLibelleAffiche(&sAdjectif, &Data, iGenre);
   if (string("") == sAdjectif)
-    return false ;
+    return false;
 
   // L'adjectif peut etre complété par des adverbes.
 
@@ -2465,22 +2465,22 @@ NSGenerateurFr::genereAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTI
                iterMotsComp != pAdverbePos->end();
                iterMotsComp++)
       {
-        sLexique = (*iterMotsComp)->getLexique() ;
+        sLexique = (*iterMotsComp)->getLexique();
 
         if (false == (*iterMotsComp)->estTexteLibre())
         {
-          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp) ;
+          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp);
           if (false == trouve)
-            return false ;
+            return false;
 
-          sInterCompPos2 = donneAdverbeComplet(*iterMotsComp) ;
+          sInterCompPos2 = donneAdverbeComplet(*iterMotsComp);
         }
         else
-          sInterCompPos2 = (*iterMotsComp)->getTexteLibre() ;
+          sInterCompPos2 = (*iterMotsComp)->getTexteLibre();
 
-        etDuMilieu(&sCompPos, &sInterCompPos1, &sInterCompPos2) ;
+        etDuMilieu(&sCompPos, &sInterCompPos1, &sInterCompPos2);
       }
-      etFinal(&sCompPos, &sInterCompPos1) ;
+      etFinal(&sCompPos, &sInterCompPos1);
     }
   }
 
@@ -2492,20 +2492,20 @@ NSGenerateurFr::genereAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTI
                iterMotsComp != pAdverbeNeg->end();
                iterMotsComp++)
       {
-        sLexique = (*iterMotsComp)->getLexique() ;
+        sLexique = (*iterMotsComp)->getLexique();
         trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp);
         if (false == trouve)
-          return false ;
+          return false;
 
-        sInterCompNeg2 = donneAdverbeComplet(*iterMotsComp) ;
+        sInterCompNeg2 = donneAdverbeComplet(*iterMotsComp);
 
-        etDuMilieu(&sCompNeg, &sInterCompNeg1, &sInterCompNeg2) ;
+        etDuMilieu(&sCompNeg, &sInterCompNeg1, &sInterCompNeg2);
       }
-      etFinal(&sCompNeg, &sInterCompNeg1) ;
+      etFinal(&sCompNeg, &sInterCompNeg1);
     }
   }
 
-  sComp = sCompPos ;
+  sComp = sCompPos;
 
   if (sCompNeg != "")
   {
@@ -2525,21 +2525,21 @@ NSGenerateurFr::genereAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTI
 
   if (pComp->pParentheses)
   {
-    NsProposition Propos(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-    NSGenerateurFr GeneParentheses(pContexte, &Propos, sLang) ;
-    GeneParentheses.genereProposition(dcPhrase) ;
-    sPhrase += string(" (") + GeneParentheses.getPropositionPhrase() + string(")") ;
+    NsProposition Propos(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false);
+    NSGenerateurFr GeneParentheses(pContexte, &Propos, sLang);
+    GeneParentheses.genereProposition(dcPhrase);
+    sPhrase += string(" (") + GeneParentheses.getPropositionPhrase() + string(")");
   }
 
   if (iGereCertitude == avecCertitude)
   {
-    string sCertitude = string(pMot->getCertitude(), 0, 5) ;
-    string sCertitudeEcrit = donneCertitude(sCertitude) ;
+    string sCertitude = string(pMot->getCertitude(), 0, 5);
+    string sCertitudeEcrit = donneCertitude(sCertitude);
 
     if (string("") != sCertitudeEcrit)
-      sPhrase = sCertitudeEcrit + string(" ") + sPhrase ;
+      sPhrase = sCertitudeEcrit + string(" ") + sPhrase;
   }
-  return true ;
+  return true;
 }
 
 // donneAdverbeComplet : pareil que pour les noms et les adjectifs, mais pour les adverbes.
@@ -2547,87 +2547,87 @@ NSGenerateurFr::genereAdjectifComplet(NSPhraseMot* pMot, GENRE iGenre, GERECERTI
 string
 NSGenerateurFr::donneAdverbeComplet(NSPhraseMot* pMot, GERECERTITUDE iGereCertitude)
 {
-  string sLibel = string("") ;
-  NSPathologData Data ;
+  string sLibel = string("");
+  NSPathologData Data;
 
-  string sCertitude ;
+  string sCertitude;
 
-  string sLexique = pMot->getLexique() ;
+  string sLexique = pMot->getLexique();
 
   bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return string("") ;
+    return string("");
   if (false == Data.estAdverbe())
-    return string("") ;
+    return string("");
 
-  donneLibelleAffiche(&sLibel, &Data) ;
+  donneLibelleAffiche(&sLibel, &Data);
 
   if (pMot->getComplementPhr())
   {
-    NsProposition Propos(pContexte, pMot->getComplementPhr(), NsProposition::notSetType, NsProposition::notSetConjonct) ;
-    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang) ;
+    NsProposition Propos(pContexte, pMot->getComplementPhr(), NsProposition::notSetType, NsProposition::notSetConjonct);
+    NSGenerateurFr GeneCpl(pContexte, &Propos, sLang);
     if (GeneCpl.genereAdverbeComplet(pMot, iGereCertitude))
-      sLibel = GeneCpl.getTempoPhrase() ;
+      sLibel = GeneCpl.getTempoPhrase();
   }
 
   if (iGereCertitude == avecCertitude)
   {
-    sCertitude = string(pMot->getCertitude(), 0, 5) ;
-    string sCertitudeEcrit = donneCertitude(sCertitude) ;
+    sCertitude = string(pMot->getCertitude(), 0, 5);
+    string sCertitudeEcrit = donneCertitude(sCertitude);
 
     if (sCertitudeEcrit != "")
-      sLibel = sCertitudeEcrit + string(" ") + sLibel ;
+      sLibel = sCertitudeEcrit + string(" ") + sLibel;
   }
 
-  return sLibel ;
+  return sLibel;
 }
 
 bool
 NSGenerateurFr::genereAdverbeComplet(NSPhraseMot* pMot, GERECERTITUDE /* iGereCertitude */)
 {
   if (NULL == pMot)
-    return false ;
+    return false;
 
-  sPhrase = string("") ;
+  sPhrase = string("");
 
-  reinitialise() ;
+  reinitialise();
 
-  NSPhraseur* pComp = pMot->getComplementPhr() ;
+  NSPhraseur* pComp = pMot->getComplementPhr();
 
-  NSPathologData Data ;
+  NSPathologData Data;
 
-  classeTout() ;
+  classeTout();
 
   //
   // Prise des informations sur l'adverbe à compléter
   //
-  string sLexique = pMot->getLexique() ;
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  string sLexique = pMot->getLexique();
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return false ;
+    return false;
   if (false == Data.estAdverbe())
-    return false ;
+    return false;
 
-  string sAdverbe = "" ;
+  string sAdverbe = "";
 
-  donneLibelleAffiche(&sAdverbe, &Data) ;
+  donneLibelleAffiche(&sAdverbe, &Data);
   if (string("") == sAdverbe)
-    return false ;
+    return false;
 
   // L'adverbe peut etre complété par des adverbes.
 
-  iterPhraseMot  iterMotsComp ;
-  NSPathologData DataComp ;
+  iterPhraseMot  iterMotsComp;
+  NSPathologData DataComp;
 
-  string sInterCompPos1 = "" ;
-  string sInterCompPos2 = "" ;
-  string sCompPos = "" ;
+  string sInterCompPos1 = "";
+  string sInterCompPos2 = "";
+  string sCompPos = "";
 
-  string sInterCompNeg1 = "" ;
-  string sInterCompNeg2 = "" ;
-  string sCompNeg = "" ;
+  string sInterCompNeg1 = "";
+  string sInterCompNeg2 = "";
+  string sCompNeg = "";
 
-  string sComp = "" ;
+  string sComp = "";
 
   if (pAdverbePos)
   {
@@ -2637,22 +2637,22 @@ NSGenerateurFr::genereAdverbeComplet(NSPhraseMot* pMot, GERECERTITUDE /* iGereCe
                iterMotsComp != pAdverbePos->end();
                iterMotsComp++)
       {
-        sLexique = (*iterMotsComp)->getLexique() ;
+        sLexique = (*iterMotsComp)->getLexique();
 
         if (false == (*iterMotsComp)->estTexteLibre())
         {
-          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp) ;
+          trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp);
           if (false == trouve)
-            return false ;
+            return false;
 
-          sInterCompPos2 = donneAdverbeComplet(*iterMotsComp) ;
+          sInterCompPos2 = donneAdverbeComplet(*iterMotsComp);
         }
         else
-          sInterCompPos2 = (*iterMotsComp)->getTexteLibre() ;
+          sInterCompPos2 = (*iterMotsComp)->getTexteLibre();
 
-        etDuMilieu(&sCompPos, &sInterCompPos1, &sInterCompPos2) ;
+        etDuMilieu(&sCompPos, &sInterCompPos1, &sInterCompPos2);
       }
-      etFinal(&sCompPos, &sInterCompPos1) ;
+      etFinal(&sCompPos, &sInterCompPos1);
     }
   }
 
@@ -2664,16 +2664,16 @@ NSGenerateurFr::genereAdverbeComplet(NSPhraseMot* pMot, GERECERTITUDE /* iGereCe
                iterMotsComp != pAdverbeNeg->end();
                iterMotsComp++)
       {
-        sLexique = (*iterMotsComp)->getLexique() ;
-        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp) ;
+        sLexique = (*iterMotsComp)->getLexique();
+        trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &DataComp);
         if (!trouve)
-          return false ;
+          return false;
 
-        sInterCompNeg2 = donneAdverbeComplet(*iterMotsComp) ;
+        sInterCompNeg2 = donneAdverbeComplet(*iterMotsComp);
 
-        etDuMilieu(&sCompNeg, &sInterCompNeg1, &sInterCompNeg2) ;
+        etDuMilieu(&sCompNeg, &sInterCompNeg1, &sInterCompNeg2);
       }
-      etFinal(&sCompNeg, &sInterCompNeg1) ;
+      etFinal(&sCompNeg, &sInterCompNeg1);
     }
   }
 
@@ -2682,28 +2682,28 @@ NSGenerateurFr::genereAdverbeComplet(NSPhraseMot* pMot, GERECERTITUDE /* iGereCe
   if (string("") != sCompNeg)
   {
     if (string("") != sCompPos)
-      sComp += string(" mais ") + sCompNeg ;
+      sComp += string(" mais ") + sCompNeg;
     else
-      sComp = sCompNeg ;
+      sComp = sCompNeg;
   }
 
-  sPhrase = sComp ;
+  sPhrase = sComp;
 
   if (string("") != sComp)
-    sPhrase += string(" ") ;
-  sPhrase += sAdverbe ;
+    sPhrase += string(" ");
+  sPhrase += sAdverbe;
 
   // Tout a la fin, on met le complement entre parentheses.
 
   if (pComp->pParentheses)
   {
-    NsProposition Propos(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-    NSGenerateurFr GeneParentheses(pContexte, &Propos, sLang) ;
-    GeneParentheses.genereProposition(dcPhrase) ;
-    sPhrase += string(" (") + GeneParentheses.getPropositionPhrase() + string(")") ;
+    NsProposition Propos(pContexte, &(pComp->pParentheses), NsProposition::notSetType, NsProposition::notSetConjonct, false);
+    NSGenerateurFr GeneParentheses(pContexte, &Propos, sLang);
+    GeneParentheses.genereProposition(dcPhrase);
+    sPhrase += string(" (") + GeneParentheses.getPropositionPhrase() + string(")");
   }
 
-  return true ;
+  return true;
 }
 
 
@@ -2761,49 +2761,49 @@ NSGenerateurFr::donnePhraseComplement(NSPhraseMot* pLiaison,
                                       NSPhraseMotArray* pCC,
                                       bool* bSucces)
 {
-  *bSucces = false ;
+  *bSucces = false;
 
-  string sInter1 = "" ;
-  string sInter2 = "" ;
-  string sPhr = "" ;
+  string sInter1 = "";
+  string sInter2 = "";
+  string sPhr = "";
 
-  bool     trouve ;
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
-  string   sLexique ;
-  string   sPluriel ;
-  GENRE    iGenre ;
+  bool     trouve;
+  NSSuper* pSuper = pContexte->getSuperviseur();
+  string   sLexique;
+  string   sPluriel;
+  GENRE    iGenre;
 
-  iterPhraseMot  iterMots ;
-  NSPathologData Data ;
+  iterPhraseMot  iterMots;
+  NSPathologData Data;
 
   if (false == pCC->empty())
   {
     for (iterMots = pCC->begin(); iterMots != pCC->end(); iterMots++)
     {
-      sInter2 = "" ;
+      sInter2 = "";
 
       // Est-ce une donnée chiffrée ?
-      string sFormat = (*iterMots)->getFormat() ;
+      string sFormat = (*iterMots)->getFormat();
 
       // Est-ce une structure de type NSPhraseMotTime ?
       // Is it a NSPhraseMotTime object
-      NSPhraseMotTime* pDate = dynamic_cast<NSPhraseMotTime*>(*iterMots) ;
+      NSPhraseMotTime* pDate = dynamic_cast<NSPhraseMotTime*>(*iterMots);
       if ( pDate )
       {
-        bool bSucces ;
-        string sTimeLibel = decodeTime(pDate, &bSucces) ;
+        bool bSucces;
+        string sTimeLibel = decodeTime(pDate, &bSucces);
         if (bSucces)
-          sInter2 = sTimeLibel ;
+          sInter2 = sTimeLibel;
       }
       else
       {
-        NSPhraseMotTimeCycle* pCycle = dynamic_cast<NSPhraseMotTimeCycle*>(*iterMots) ;
+        NSPhraseMotTimeCycle* pCycle = dynamic_cast<NSPhraseMotTimeCycle*>(*iterMots);
         if ( pCycle )
         {
-          bool bSucces ;
-          string sCycleLibel = decodeCycle(pCycle, &bSucces) ;
+          bool bSucces;
+          string sCycleLibel = decodeCycle(pCycle, &bSucces);
           if (bSucces)
-            sInter2 = sCycleLibel ;
+            sInter2 = sCycleLibel;
         }
         //
         // Ni valeur chiffrée, ni date
@@ -2811,8 +2811,8 @@ NSGenerateurFr::donnePhraseComplement(NSPhraseMot* pLiaison,
         //
         else if (string("") == sFormat)
         {
-          sLexique = (*iterMots)->getLexique() ;
-          sPluriel = (*iterMots)->getPluriel() ;
+          sLexique = (*iterMots)->getLexique();
+          sPluriel = (*iterMots)->getPluriel();
 
           if (false == (*iterMots)->estTexteLibre())
           {
@@ -2827,23 +2827,23 @@ NSGenerateurFr::donnePhraseComplement(NSPhraseMot* pLiaison,
             if ((*iterMots)->getArticle() != NSPhraseMot::articleSans)
             {
               if (sPluriel == "")
-                sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle(), sansCertitude) ;
+                sInter2 = donneNomComplet(*iterMots, (*iterMots)->getArticle(), sansCertitude);
               else if (string(sPluriel, 0, 5) == "WPLUR")
-                sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleDefini, sansCertitude) ;
+                sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleDefini, sansCertitude);
               else if (string(sPluriel, 0, 5) == "WPLUS")
-                sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini, sansCertitude) ;
+                sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleIndefini, sansCertitude);
             }
             else
-              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans, sansCertitude) ;
+              sInter2 = donneNomComplet(*iterMots, NSPhraseMot::articleSans, sansCertitude);
 
-            string sCertitude = string((*iterMots)->getCertitude(), 0, 5) ;
-            string sCertitudeEcrit = donneCertitude(sCertitude) ;
+            string sCertitude = string((*iterMots)->getCertitude(), 0, 5);
+            string sCertitudeEcrit = donneCertitude(sCertitude);
 
             if (sCertitudeEcrit != "")
-              sInter2 = sCertitudeEcrit + string(" ") + sInter2 ;
+              sInter2 = sCertitudeEcrit + string(" ") + sInter2;
           }
           else
-            sInter2 = (*iterMots)->getTexteLibre() ;
+            sInter2 = (*iterMots)->getTexteLibre();
         }
         else
         {
@@ -2854,8 +2854,8 @@ NSGenerateurFr::donnePhraseComplement(NSPhraseMot* pLiaison,
           if      ((sFormat[0] == '£') &&
                        ((sFormat[1] == dateMARK) || (sFormat[1] == dateHeureMARK)))
           {
-            string sComplement = (*iterMots)->getComplement() ;
-            string sUnite      = (*iterMots)->getUnite() ;
+            string sComplement = (*iterMots)->getComplement();
+            string sUnite      = (*iterMots)->getUnite();
 
             gereDateFr Date(pContexte->getSuperviseur(), sLang);
             Date.setDate(&sComplement);
@@ -2872,49 +2872,49 @@ NSGenerateurFr::donnePhraseComplement(NSPhraseMot* pLiaison,
           }
         }
       }
-      etDuMilieu(&sPhr, &sInter1, &sInter2) ;
+      etDuMilieu(&sPhr, &sInter1, &sInter2);
     }
-    etFinal(&sPhr, &sInter1) ;
+    etFinal(&sPhr, &sInter1);
 
     // Traitement de la préposition globale
-    sLexique = pPreposition->getLexique() ;
+    sLexique = pPreposition->getLexique();
     if (string("") != sLexique)
     {
-      sPluriel = pPreposition->getPluriel() ;
-      trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+      sPluriel = pPreposition->getPluriel();
+      trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
       if (false == trouve)
-        return string("") ;
-      Data.donneGenre(&iGenre) ;
+        return string("");
+      Data.donneGenre(&iGenre);
       if (sPluriel != "")
-        Data.donneGenrePluriel(&iGenre) ;
-      donneLibelleAffiche(&sInter2, &Data, iGenre) ;
-      sPhr = sInter2 + " " + sPhr ;
+        Data.donneGenrePluriel(&iGenre);
+      donneLibelleAffiche(&sInter2, &Data, iGenre);
+      sPhr = sInter2 + " " + sPhr;
     }
     // Traitement de l'élément de liaison
-    sLexique = pLiaison->getLexique() ;
+    sLexique = pLiaison->getLexique();
     if (string("") != sLexique)
     {
-      sPluriel = pLiaison->getPluriel() ;
-      trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+      sPluriel = pLiaison->getPluriel();
+      trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
       if (false == trouve)
-        return string("") ;
+        return string("");
       if (Data.estVerbe())
       {
-        sInter2 = donneParticipePresent(&Data) ;
-        sPhr = sInter2 + " " + sPhr ;
+        sInter2 = donneParticipePresent(&Data);
+        sPhr = sInter2 + " " + sPhr;
       }
       else
       {
-        Data.donneGenre(&iGenre) ;
+        Data.donneGenre(&iGenre);
         if (sPluriel != "")
-          Data.donneGenrePluriel(&iGenre) ;
-        donneLibelleAffiche(&sInter2, &Data, iGenre) ;
-        sPhr = sInter2 + " " + sPhr ;
+          Data.donneGenrePluriel(&iGenre);
+        donneLibelleAffiche(&sInter2, &Data, iGenre);
+        sPhr = sInter2 + " " + sPhr;
       }
     }
   }
-  *bSucces = true ;
-  return sPhr ;
+  *bSucces = true;
+  return sPhr;
 }
 
 string
@@ -2923,67 +2923,67 @@ NSGenerateurFr::donnePhraseChiffree(NSPhraseMot* pLiaison,
                                     NSPhraseMotArray* pCC,
                                     bool* bSucces)
 {
-  string sPhr = string("") ;
+  string sPhr = string("");
 
   if (pCC->empty())
-    return sPhr ;
+    return sPhr;
 
-  string sInter1 = "" ;
-  string sInter2 = "" ;
-  string sPhraseSimple = "" ;
+  string sInter1 = "";
+  string sInter2 = "";
+  string sPhraseSimple = "";
 
-  string sRelat1 = "" ;
-  string sRelat2 = "" ;
-  string sPhraseRelative = "" ;
-  string sVerbe          = "" ;
-  string sVerbePluriel   = "" ;
+  string sRelat1 = "";
+  string sRelat2 = "";
+  string sPhraseRelative = "";
+  string sVerbe          = "";
+  string sVerbePluriel   = "";
 
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  NSSuper* pSuper = pContexte->getSuperviseur();
   string   sPluriel;
   GENRE    iGenre;
 
-  for (iterPhraseMot iterMots = pCC->begin() ; pCC->end() != iterMots ; iterMots++)
+  for (iterPhraseMot iterMots = pCC->begin(); pCC->end() != iterMots; iterMots++)
   {
-    string sLexique = (*iterMots)->getLexique() ;
+    string sLexique = (*iterMots)->getLexique();
 
-    string sMesure = "" ;
-    GENRE  iGenreMesure ;
-    bool   bPluriel ;
+    string sMesure = "";
+    GENRE  iGenreMesure;
+    bool   bPluriel;
 
-    string sPrepOption = "" ;
+    string sPrepOption = "";
 
-    NSPathologData Data ;
+    NSPathologData Data;
 
     if (string("") != sLexique)
     {
-      bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+      bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
       if (false == trouve)
       {
-        *bSucces = false ;
-        return string("") ;
+        *bSucces = false;
+        return string("");
       }
       // Récupération du genre (composition du genre récupéré avec
       // le genre déjà existant)
-      Data.donneGenre(&iGenreMesure) ;
+      Data.donneGenre(&iGenreMesure);
       if (string("") != sPluriel)
-        Data.donneGenrePluriel(&iGenreMesure) ;
+        Data.donneGenrePluriel(&iGenreMesure);
 
       if ((string("") != sPluriel) || (Data.estPluriel()))
-        bPluriel = true ;
+        bPluriel = true;
       else
-        bPluriel = false ;
+        bPluriel = false;
       //
-      donneLibelleAffiche(&sMesure, &Data, iGenreMesure) ;
+      donneLibelleAffiche(&sMesure, &Data, iGenreMesure);
     }
 
     // Traitement du complement, en fonction de son format
     //
-    string sComplement = (*iterMots)->getComplement() ;
+    string sComplement = (*iterMots)->getComplement();
 
-    string sUnite  = (*iterMots)->getUnite() ;
-    string sFormat = (*iterMots)->getFormat() ;
+    string sUnite  = (*iterMots)->getUnite();
+    string sFormat = (*iterMots)->getFormat();
 
-    string sValeur = string("") ;
+    string sValeur = string("");
     //
     // Valeur numérique
     //
@@ -2991,10 +2991,10 @@ NSGenerateurFr::donnePhraseChiffree(NSPhraseMot* pLiaison,
     {
       if (nbMARK == sFormat[1])
       {
-        gereNum Num(pContexte->getSuperviseur(), sLang) ;
-        Num.instancier(&sComplement, &sUnite, &sFormat) ;
-        bool bSucces ;
-        sValeur = decodeNum(&Num, &bSucces) ;
+        gereNum Num(pContexte->getSuperviseur(), sLang);
+        Num.instancier(&sComplement, &sUnite, &sFormat);
+        bool bSucces;
+        sValeur = decodeNum(&Num, &bSucces);
 
         // On traite le cas ou la valeur chiffree est du type :
         // "dans 3 jours", "il y a 3 jours", "pendant 3 jours",
@@ -3029,8 +3029,8 @@ NSGenerateurFr::donnePhraseChiffree(NSPhraseMot* pLiaison,
       //
       else if ((sFormat[1] == dateMARK) || (sFormat[1] == dateHeureMARK))
       {
-        string sMessage = "" ;
-        string sIntro = "" ;
+        string sMessage = "";
+        string sIntro = "";
 
         gereDateFr Date(pContexte->getSuperviseur(), sLang);
         Date.setUnite(&sUnite);
@@ -3055,26 +3055,26 @@ NSGenerateurFr::donnePhraseChiffree(NSPhraseMot* pLiaison,
       }
     }
 
-    sLexique = (*iterMots)->getLexique() ;
+    sLexique = (*iterMots)->getLexique();
 
-    string sMethode      = (*iterMots)->getMethode() ;
-    string sLibelMethode = string("") ;
+    string sMethode      = (*iterMots)->getMethode();
+    string sLibelMethode = string("");
 
     if (string("") != sMethode)
     {
-      bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sMethode, &Data) ;
+      bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sMethode, &Data);
       if (false == trouve)
       {
-        *bSucces = false ;
-        return string("") ;
+        *bSucces = false;
+        return string("");
       }
       // Récupération du genre (composition du genre récupéré avec
       // le genre déjà existant)
       Data.donneGenre(&iGenre);
       if (sPluriel != "")
-        Data.donneGenrePluriel(&iGenre) ;
+        Data.donneGenrePluriel(&iGenre);
       //
-      donneLibelleAffiche(&sLibelMethode, &Data, iGenre) ;
+      donneLibelleAffiche(&sLibelMethode, &Data, iGenre);
     }
 
     //
@@ -3136,58 +3136,58 @@ NSGenerateurFr::donnePhraseChiffree(NSPhraseMot* pLiaison,
   if (string("") != sPhraseRelative)
   {
     if (string("") != sPhr)
-      sPhr += string(" ") ;
+      sPhr += string(" ");
 
     // Eviter "La sténose est peu serrée : dont le pic de vitesse est de..."
     //
     if (NsProposition::deuxPoints != pProposition->iPropositionType)
-      sPhr += string("dont ") ;
+      sPhr += string("dont ");
 
-    sPhr += sPhraseRelative ;
+    sPhr += sPhraseRelative;
   }
 
   // Traitement de la préposition
-  string sLexProp = pPreposition->getLexique() ;
+  string sLexProp = pPreposition->getLexique();
   if (string("") != sLexProp)
   {
-    sPluriel = pPreposition->getPluriel() ;
-    NSPathologData DataProp ;
-    bool bFound = pContexte->getDico()->trouvePathologData(sLang, &sLexProp, &DataProp) ;
+    sPluriel = pPreposition->getPluriel();
+    NSPathologData DataProp;
+    bool bFound = pContexte->getDico()->trouvePathologData(sLang, &sLexProp, &DataProp);
     if (false == bFound)
-      return string("") ;
-    DataProp.donneGenre(&iGenre) ;
+      return string("");
+    DataProp.donneGenre(&iGenre);
     if (string("") != sPluriel)
-      DataProp.donneGenrePluriel(&iGenre) ;
-    donneLibelleAffiche(&sInter2, &DataProp, iGenre) ;
-    sPhr = sInter2 + string(" ") + sPhr ;
+      DataProp.donneGenrePluriel(&iGenre);
+    donneLibelleAffiche(&sInter2, &DataProp, iGenre);
+    sPhr = sInter2 + string(" ") + sPhr;
   }
   else if (string("") != pPreposition->getPreposition())
-    sPhr = pPreposition->getPreposition() + " " + sPhr ;
+    sPhr = pPreposition->getPreposition() + " " + sPhr;
 
   // Traitement de l'élément de liaison
-  string sLexLink = pLiaison->getLexique() ;
+  string sLexLink = pLiaison->getLexique();
   if (string("") != sLexLink)
   {
-    sPluriel = pLiaison->getPluriel() ;
-    NSPathologData DataLink ;
-    bool bFoundLink = pContexte->getDico()->trouvePathologData(sLang, &sLexLink, &DataLink) ;
+    sPluriel = pLiaison->getPluriel();
+    NSPathologData DataLink;
+    bool bFoundLink = pContexte->getDico()->trouvePathologData(sLang, &sLexLink, &DataLink);
     if (false == bFoundLink)
-      return string("") ;
+      return string("");
     if (DataLink.estVerbe())
     {
       sInter2 = donneParticipePresent(&DataLink);
-      sPhr = sInter2 + string(" ") + sPhr ;
+      sPhr = sInter2 + string(" ") + sPhr;
     }
     else
     {
-      DataLink.donneGenre(&iGenre) ;
+      DataLink.donneGenre(&iGenre);
       if (string("") != sPluriel)
-        DataLink.donneGenrePluriel(&iGenre) ;
-      donneLibelleAffiche(&sInter2, &DataLink, iGenre) ;
-      sPhr = sInter2 + string(" ") + sPhr ;
+        DataLink.donneGenrePluriel(&iGenre);
+      donneLibelleAffiche(&sInter2, &DataLink, iGenre);
+      sPhr = sInter2 + string(" ") + sPhr;
     }
   }
-  return sPhr ;
+  return sPhr;
 }
 
 // donnePremierAdj : donne le premier des adjectifs qui completent un mot.
@@ -3204,17 +3204,17 @@ NSGenerateurFr::donnePremierAdj(NSPhraseur* pCompAdj, NSPhraseMot* pMotAdj)
 
     if (pCompAdj)
     {
-        NsProposition* pPropos = new NsProposition(pContexte, &pCompAdj, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-        NSGenerateurFr* pGeneCompl = new NSGenerateurFr(pContexte, pPropos, sLang) ;
-        pCompAdj->classeAdjectif(this) ;
-        pGeneCompl->classeTout() ;
+        NsProposition* pPropos = new NsProposition(pContexte, &pCompAdj, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+        NSGenerateurFr* pGeneCompl = new NSGenerateurFr(pContexte, pPropos, sLang);
+        pCompAdj->classeAdjectif(this);
+        pGeneCompl->classeTout();
 
         if (pGeneCompl->pAdjEpitheteAvPos)
         {
             if (!((pGeneCompl->pAdjEpitheteAvPos)->empty()))
             {
                 PremierAdj = *(*((pGeneCompl->pAdjEpitheteAvPos)->begin()));
-                sLexiqueAdj = PremierAdj.getLexique() ;
+                sLexiqueAdj = PremierAdj.getLexique();
 
                 // Si jamais le premier adjectif est un texte libre, on l'ignore,
                 // vu qu'on est incapable de le traiter grammaticalement.
@@ -3233,7 +3233,7 @@ NSGenerateurFr::donnePremierAdj(NSPhraseur* pCompAdj, NSPhraseMot* pMotAdj)
             if (!((pGeneCompl->pAdjEpitheteAvNeg)->empty()))
             {
                 PremierAdj = *(*((pGeneCompl->pAdjEpitheteAvNeg)->begin()));
-                sLexiqueAdj = PremierAdj.getLexique() ;
+                sLexiqueAdj = PremierAdj.getLexique();
 
                 if (PremierAdj.estTexteLibre())
                     return false;
@@ -3246,8 +3246,8 @@ NSGenerateurFr::donnePremierAdj(NSPhraseur* pCompAdj, NSPhraseMot* pMotAdj)
                 return true;
             }
 
-        delete pGeneCompl ;
-        delete pPropos ;
+        delete pGeneCompl;
+        delete pPropos;
     }
     return false;
 }
@@ -3267,17 +3267,17 @@ NSGenerateurFr::donnePremierAdv(NSPhraseur* pComp, NSPhraseMot* pMotAdv)
 
     if (pComp)
     {
-        NsProposition* pPropos = new NsProposition(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false) ;
-        NSGenerateurFr* pGeneCompl = new NSGenerateurFr(pContexte, pPropos, sLang) ;
-        pComp->classeAdjectif(this) ;
-        pGeneCompl->classeTout() ;
+        NsProposition* pPropos = new NsProposition(pContexte, &pComp, NsProposition::notSetType, NsProposition::notSetConjonct, false);
+        NSGenerateurFr* pGeneCompl = new NSGenerateurFr(pContexte, pPropos, sLang);
+        pComp->classeAdjectif(this);
+        pGeneCompl->classeTout();
 
         if (pGeneCompl->pAdverbePos)
         {
             if (!((pGeneCompl->pAdverbePos)->empty()))
             {
                 PremierAdv = *(*((pGeneCompl->pAdverbePos)->begin()));
-                sLexiqueAdv = PremierAdv.getLexique() ;
+                sLexiqueAdv = PremierAdv.getLexique();
 
                 // Si jamais le premier adverbe est un texte libre, on l'ignore,
                 // vu qu'on est incapable de le traiter grammaticalement.
@@ -3304,7 +3304,7 @@ NSGenerateurFr::donnePremierAdv(NSPhraseur* pComp, NSPhraseMot* pMotAdv)
             if (!((pGeneCompl->pAdverbeNeg)->empty()))
             {
                 PremierAdv = *(*((pGeneCompl->pAdverbeNeg)->begin()));
-                sLexiqueAdv = PremierAdv.getLexique() ;
+                sLexiqueAdv = PremierAdv.getLexique();
 
                 if (PremierAdv.estTexteLibre())
                     return false;
@@ -3325,8 +3325,8 @@ NSGenerateurFr::donnePremierAdv(NSPhraseur* pComp, NSPhraseMot* pMotAdv)
                 return true;
             }
 
-        delete pGeneCompl ;
-        delete pPropos ;
+        delete pGeneCompl;
+        delete pPropos;
     }
     return false;
 }
@@ -3337,71 +3337,71 @@ string
 NSGenerateurFr::decodeNum(gereNum* pNum, bool* bSucces)
 {
   if ((NULL == pNum) || (NULL == bSucces))
-    return string("") ;
+    return string("");
 
-  string sLibelle = string("") ;
-  *bSucces = true ;
+  string sLibelle = string("");
+  *bSucces = true;
 
   if ((pNum->estExact()) || (pNum->estInf()) || (pNum->estSup()))
   {
-    bool bPluriel = false ;
+    bool bPluriel = false;
 
     if (pNum->estExact())
     {
-      sLibelle = pNum->getNum("") ;
+      sLibelle = pNum->getNum("");
       if (pNum->getValeur() > 1)
-        bPluriel = true ;
+        bPluriel = true;
     }
     else
     {
       if ((pNum->estInf()) && (pNum->estSup()))
-        sLibelle = "entre " + pNum->getNumInf() + " et " + pNum->getNumSup() ;
+        sLibelle = "entre " + pNum->getNumInf() + " et " + pNum->getNumSup();
       else if (pNum->estInf())
-        sLibelle = "plus de " + pNum->getNumInf() ;
+        sLibelle = "plus de " + pNum->getNumInf();
       else if (pNum->estSup())
-        sLibelle = "moins de " + pNum->getNumSup() ;
+        sLibelle = "moins de " + pNum->getNumSup();
 
       if ((pNum->getValeurInf() > 1) || (pNum->getValeurSup() > 1))
-        bPluriel = true ;
+        bPluriel = true;
     }
     //
     // Libellé de l'unité de l'unité
     //
     if (string("") != sLibelle)
     {
-      string sUniteLibel = pNum->donneLibelleUnite(pContexte) ;
+      string sUniteLibel = pNum->donneLibelleUnite(pContexte);
 
       if (string("") != sUniteLibel)
-        sLibelle += string(" ") + sUniteLibel ;
+        sLibelle += string(" ") + sUniteLibel;
     }
   }
-  return sLibelle ;
+  return sLibelle;
 }
 
 string
 NSGenerateurFr::decodeTime(NSPhraseMotTime* pTime, bool* bSucces)
 {
-    string sInter2 ;
+    string sInter2;
 
-    string sComplement ;
-    string sUnite ;
-    string sFormat ;
+    string sComplement;
+    string sUnite;
+    string sFormat;
 
-    NSSuper* pSuper = pContexte->getSuperviseur() ;
+    NSSuper* pSuper = pContexte->getSuperviseur();
 
     if (pTime->valeurDuree[0] != '\0')
     {
-        sComplement = string(pTime->valeurDuree) ;
-        sUnite      = string(pTime->uniteDuree) ;
-        sFormat     = string(pTime->formatDuree) ;
+        sComplement = string(pTime->valeurDuree);
+        sUnite      = string(pTime->uniteDuree);
+        sFormat     = string(pTime->formatDuree);
 
-        gereNum numDuree(pContexte->getSuperviseur(), sLang) ;
-        numDuree.instancier(&sComplement, &sUnite, &sFormat) ;
-        bool bSucces ;
-        string sDurationValue = decodeNum(&numDuree, &bSucces) ;
+        gereNum numDuree(pContexte->getSuperviseur(), sLang);
+        numDuree.instancier(&sComplement, &sUnite, &sFormat);
+        bool bSucces;
+        string sDurationValue = decodeNum(&numDuree, &bSucces);
 
         if (bSucces)
-            sInter2 += string(" pendant ") + sDurationValue ;
+            sInter2 += string(" pendant ") + sDurationValue;
     }
 
     if (pTime->valeurMin[0] != '\0')
@@ -3423,91 +3423,91 @@ NSGenerateurFr::decodeTime(NSPhraseMotTime* pTime, bool* bSucces)
         // Min = max : date ou heure pile
         if (pTime->minEgalMax())
         {
-            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateNormal) ;
-            sInter2 += sIntroMin + sLibelMin ;
+            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateNormal);
+            sInter2 += sIntroMin + sLibelMin;
         }
         else if (pTime->valeurMax[0] != '\0')
         {
-            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateDeb) ;
+            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateDeb);
 
-            sComplement = string(pTime->valeurMax) ;
-            sUnite      = string(pTime->uniteMax) ;
-            sFormat     = string(pTime->formatMax) ;
+            sComplement = string(pTime->valeurMax);
+            sUnite      = string(pTime->uniteMax);
+            sFormat     = string(pTime->formatMax);
 
-            gereDateFr DateMax(pContexte->getSuperviseur(), sLang) ;
-            DateMax.setDate(&sComplement) ;
-            DateMax.setFormat(&sFormat) ;
+            gereDateFr DateMax(pContexte->getSuperviseur(), sLang);
+            DateMax.setDate(&sComplement);
+            DateMax.setFormat(&sFormat);
 
-            string sUniteSens = "" ;
-            pContexte->getDico()->donneCodeSens(&sUnite, &sUniteSens) ;
-            DateMax.setUnite(&sUniteSens) ;
+            string sUniteSens = "";
+            pContexte->getDico()->donneCodeSens(&sUnite, &sUniteSens);
+            DateMax.setUnite(&sUniteSens);
 
-            string sLibelMax, sIntroMax ;
+            string sLibelMax, sIntroMax;
 
-            DateMax.donne_date_claire(&sLibelMax, &sIntroMax, gereDateFr::DateFin) ;
+            DateMax.donne_date_claire(&sLibelMax, &sIntroMax, gereDateFr::DateFin);
 
-            sInter2 += sIntroMin + sLibelMin + string(" ") + sIntroMax + sLibelMax ;
+            sInter2 += sIntroMin + sLibelMin + string(" ") + sIntroMax + sLibelMax;
         }
         else if (pTime->bMaxNow)
         {
-            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateDeb) ;
-            sInter2 += " depuis" + sIntroMin + sLibelMin ;
+            DateMin.donne_date_claire(&sLibelMin, &sIntroMin, gereDateFr::DateDeb);
+            sInter2 += " depuis" + sIntroMin + sLibelMin;
         }
         else
         {
-            DateMin.donne_date_claire(&sLibelMin, &sIntroMin) ;
-            sInter2 += string("à partir de ") + sIntroMin + sLibelMin ;
+            DateMin.donne_date_claire(&sLibelMin, &sIntroMin);
+            sInter2 += string("à partir de ") + sIntroMin + sLibelMin;
         }
     }
     else if (pTime->valeurMax[0] != '\0')
     {
-        sComplement = string(pTime->valeurMax) ;
-        sUnite      = string(pTime->uniteMax) ;
-        sFormat     = string(pTime->formatMax) ;
+        sComplement = string(pTime->valeurMax);
+        sUnite      = string(pTime->uniteMax);
+        sFormat     = string(pTime->formatMax);
 
-        gereDateFr DateMax(pContexte->getSuperviseur(), sLang) ;
-        DateMax.setDate(&sComplement) ;
-        DateMax.setFormat(&sFormat) ;
+        gereDateFr DateMax(pContexte->getSuperviseur(), sLang);
+        DateMax.setDate(&sComplement);
+        DateMax.setFormat(&sFormat);
 
-        string sUniteSens = "" ;
-        pContexte->getDico()->donneCodeSens(&sUnite, &sUniteSens) ;
-        DateMax.setUnite(&sUniteSens) ;
+        string sUniteSens = "";
+        pContexte->getDico()->donneCodeSens(&sUnite, &sUniteSens);
+        DateMax.setUnite(&sUniteSens);
 
-        string sLibelMax, sIntroMax ;
+        string sLibelMax, sIntroMax;
 
         if (pTime->bMinNow)
         {
-            DateMax.donne_date_claire(&sLibelMax, &sIntroMax, gereDateFr::DateFin) ;
-            sInter2 += " jusqu'" + sIntroMax + sLibelMax ;
+            DateMax.donne_date_claire(&sLibelMax, &sIntroMax, gereDateFr::DateFin);
+            sInter2 += " jusqu'" + sIntroMax + sLibelMax;
         }
         else
         {
-            DateMax.donne_date_claire(&sLibelMax, &sIntroMax) ;
-            sInter2 += sIntroMax + sLibelMax ;
+            DateMax.donne_date_claire(&sLibelMax, &sIntroMax);
+            sInter2 += sIntroMax + sLibelMax;
         }
     }
-    *bSucces = true ;
-    return sInter2 ;
+    *bSucces = true;
+    return sInter2;
 }
 
 string
 NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
 {
-    string sInter2 = "" ;
+    string sInter2 = "";
 
-    string sAComplement = string(pCycle->actionDurationValue) ;
-    string sAUnite      = string(pCycle->actionDurationUnit) ;
-    string sAFormat     = string(pCycle->actionDurationFormat) ;
+    string sAComplement = string(pCycle->actionDurationValue);
+    string sAUnite      = string(pCycle->actionDurationUnit);
+    string sAFormat     = string(pCycle->actionDurationFormat);
 
-    gereNum numAction(pContexte->getSuperviseur(), sLang) ;
-    numAction.instancier(&sAComplement, &sAUnite, &sAFormat) ;
+    gereNum numAction(pContexte->getSuperviseur(), sLang);
+    numAction.instancier(&sAComplement, &sAUnite, &sAFormat);
 
-    string sCComplement = string(pCycle->cycleDurationValue) ;
-    string sCUnite      = string(pCycle->cycleDurationUnit) ;
-    string sCFormat     = string(pCycle->cycleDurationFormat) ;
+    string sCComplement = string(pCycle->cycleDurationValue);
+    string sCUnite      = string(pCycle->cycleDurationUnit);
+    string sCFormat     = string(pCycle->cycleDurationFormat);
 
-    gereNum numDuree(pContexte->getSuperviseur(), sLang) ;
-    numDuree.instancier(&sCComplement, &sCUnite, &sCFormat) ;
+    gereNum numDuree(pContexte->getSuperviseur(), sLang);
+    numDuree.instancier(&sCComplement, &sCUnite, &sCFormat);
 
     //
     // Cycle régulier - Regular cycle
@@ -3520,20 +3520,20 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
         {
             if (pCycle->actionDurationValue[0] != '\0')
             {
-                bool bGood ;
-                string sActionDurationValue = decodeNum(&numAction, &bGood) ;
+                bool bGood;
+                string sActionDurationValue = decodeNum(&numAction, &bGood);
 
                 if (bGood)
                 {
-                    sInter2 += sActionDurationValue ;
+                    sInter2 += sActionDurationValue;
 
                     if (pCycle->cycleDurationValue[0] != '\0')
                     {
-                        string sCycleLength = numDuree.getNum() ;
-                        sInter2 += string(" sur ") + sCycleLength ;
+                        string sCycleLength = numDuree.getNum();
+                        sInter2 += string(" sur ") + sCycleLength;
                     }
-                    *bSucces = true ;
-                    return sInter2 ;
+                    *bSucces = true;
+                    return sInter2;
                 }
             }
         }
@@ -3544,44 +3544,44 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
         {
             if (pCycle->actionDurationValue[0] != '\0')
             {
-                bool bGood ;
-                string sActionDurationValue = decodeNum(&numAction, &bGood) ;
+                bool bGood;
+                string sActionDurationValue = decodeNum(&numAction, &bGood);
 
                 if (bGood)
                 {
-                    sInter2 += sActionDurationValue ;
+                    sInter2 += sActionDurationValue;
 
                     if (pCycle->cycleDurationValue[0] != '\0')
                     {
                         if ((numDuree.estExact()) && (numDuree.getValeur() == 1))
                         {
-                            string sCycUnitLib = numDuree.donneLibelleUnite(pContexte) ;
-                            sInter2 += string(" par ") + sCycUnitLib ;
+                            string sCycUnitLib = numDuree.donneLibelleUnite(pContexte);
+                            sInter2 += string(" par ") + sCycUnitLib;
                         }
                         else
                         {
-                            string sCycleLength = decodeNum(&numDuree, &bGood) ;
+                            string sCycleLength = decodeNum(&numDuree, &bGood);
 
                             NSPathologData* pData = new NSPathologData;
                             NSSuper*        pSuper = pContexte->getSuperviseur();
                             bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sCUnite, pData);
                             if (trouve)
                             {
-                                GENRE iGenre ;
+                                GENRE iGenre;
                                 pData->donneGenre(&iGenre);
                                 if ((genreFS == iGenre) || (genreFP == iGenre))
-                                    sInter2 += string(" toutes les ") ;
+                                    sInter2 += string(" toutes les ");
                                 else
-                                    sInter2 += string(" tous les ") ;
+                                    sInter2 += string(" tous les ");
                             }
                             else
-                                sInter2 += string(" tous les ") ;
+                                sInter2 += string(" tous les ");
 
-                            sInter2 += sCycleLength ;
+                            sInter2 += sCycleLength;
                         }
                     }
-                    *bSucces = true ;
-                    return sInter2 ;
+                    *bSucces = true;
+                    return sInter2;
                 }
             }
         }
@@ -3598,20 +3598,20 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
         {
             if (pCycle->actionDurationValue[0] != '\0')
             {
-                bool bGood ;
-                string sActionDurationValue = decodeNum(&numAction, &bGood) ;
+                bool bGood;
+                string sActionDurationValue = decodeNum(&numAction, &bGood);
 
                 if (bGood)
                 {
-                    sInter2 += sActionDurationValue ;
+                    sInter2 += sActionDurationValue;
 
                     if (pCycle->cycleDurationValue[0] != '\0')
                     {
-                        string sCycleLength = numDuree.getNum() ;
-                        sInter2 += string(" sur ") + sCycleLength ;
+                        string sCycleLength = numDuree.getNum();
+                        sInter2 += string(" sur ") + sCycleLength;
                     }
-                    *bSucces = true ;
-                    return sInter2 ;
+                    *bSucces = true;
+                    return sInter2;
                 }
             }
         }
@@ -3621,50 +3621,50 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
         else
         {
             if (pCycle->numberOfAction[0] != '\0')
-                sInter2 += string(pCycle->numberOfAction) + string(" fois ") ;
+                sInter2 += string(pCycle->numberOfAction) + string(" fois ");
 
             // Durée d'action non nulle
             //
             if (pCycle->actionDurationValue[0] != '\0')
             {
-                bool bGood ;
-                string sActionDurationValue = decodeNum(&numAction, &bGood) ;
+                bool bGood;
+                string sActionDurationValue = decodeNum(&numAction, &bGood);
 
                 if (bGood)
                 {
-                    sInter2 += sActionDurationValue ;
+                    sInter2 += sActionDurationValue;
 
                     if (pCycle->cycleDurationValue[0] != '\0')
                     {
                         if ((numDuree.estExact()) && (numDuree.getValeur() == 1))
                         {
-                            string sCycUnitLib = numDuree.donneLibelleUnite(pContexte) ;
-                            sInter2 += string(" par ") + sCycUnitLib ;
+                            string sCycUnitLib = numDuree.donneLibelleUnite(pContexte);
+                            sInter2 += string(" par ") + sCycUnitLib;
                         }
                         else
                         {
-                            string sCycleLength = decodeNum(&numDuree, &bGood) ;
+                            string sCycleLength = decodeNum(&numDuree, &bGood);
 
                             NSPathologData* pData = new NSPathologData;
                             NSSuper*        pSuper = pContexte->getSuperviseur();
                             bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sCUnite, pData);
                             if (trouve)
                             {
-                                GENRE iGenre ;
-                                pData->donneGenre(&iGenre) ;
+                                GENRE iGenre;
+                                pData->donneGenre(&iGenre);
                                 if ((iGenre == genreFS) || (iGenre == genreFP))
-                                    sInter2 += string(" toutes les ") ;
+                                    sInter2 += string(" toutes les ");
                                 else
-                                    sInter2 += string(" tous les ") ;
+                                    sInter2 += string(" tous les ");
                             }
                             else
-                                sInter2 += string(" tous les ") ;
+                                sInter2 += string(" tous les ");
 
-                            sInter2 += sCycleLength ;
+                            sInter2 += sCycleLength;
                         }
                     }
-                    *bSucces = true ;
-                    return sInter2 ;
+                    *bSucces = true;
+                    return sInter2;
                 }
             }
             // Durée d'action nulle
@@ -3672,13 +3672,13 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
             {
                 if ((numDuree.estExact()) && (numDuree.getValeur() == 1))
                 {
-                    string sCycUnitLib = numDuree.donneLibelleUnite(pContexte) ;
-                    sInter2 += string(" par ") + sCycUnitLib ;
+                    string sCycUnitLib = numDuree.donneLibelleUnite(pContexte);
+                    sInter2 += string(" par ") + sCycUnitLib;
                 }
                 else
                 {
                     bool bGood;
-                    string sCycleLength = decodeNum(&numDuree, &bGood) ;
+                    string sCycleLength = decodeNum(&numDuree, &bGood);
                     /*
                     NSPathologData* pData = new NSPathologData;
                     NSSuper*        pSuper = pContexte->getSuperviseur();
@@ -3688,95 +3688,95 @@ NSGenerateurFr::decodeCycle(NSPhraseMotTimeCycle* pCycle, bool* bSucces)
                         int iGenre;
                         pData->donneGenre(&iGenre);
                         if ((iGenre == genreFS) || (iGenre == genreFP))
-                            sInter2 += string(" toutes les ") ;
+                            sInter2 += string(" toutes les ");
                         else
-                            sInter2 += string(" tous les ") ;
+                            sInter2 += string(" tous les ");
                     }
                     else
-                        sInter2 += string(" tous les ") ;
+                        sInter2 += string(" tous les ");
                     */
-                    sInter2 += string(" par intervalle de ") ;
-                    sInter2 += sCycleLength ;
+                    sInter2 += string(" par intervalle de ");
+                    sInter2 += sCycleLength;
                 }
-                *bSucces = true ;
-                return sInter2 ;
+                *bSucces = true;
+                return sInter2;
             }
         }
     }
 
-    *bSucces = false ;
-    return sInter2 ;
+    *bSucces = false;
+    return sInter2;
 }
 
 string
 NSGenerateurFr::donneArticleIndefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE /* iGereCertitude */)
 {
-  NSPathologData Data ;
+  NSPathologData Data;
 
-  string sLexique = pMot->getLexique() ;
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  string sLexique = pMot->getLexique();
+  NSSuper* pSuper = pContexte->getSuperviseur();
 
   bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return string("") ;
+    return string("");
 
   if (false == Data.estNom())
-    return string("") ;
+    return string("");
 
   if (bPluriel)
-    return string("des ") ;
+    return string("des ");
 
-  GENRE  iGenreNom ;
-  string sLibelle = string("") ;
-  Data.donneGenre(&iGenreNom) ;
-  donneLibelleAffiche(&sLibelle, &Data, iGenreNom) ;
+  GENRE  iGenreNom;
+  string sLibelle = string("");
+  Data.donneGenre(&iGenreNom);
+  donneLibelleAffiche(&sLibelle, &Data, iGenreNom);
 
   if (Data.estMasculin())
-    return string("un ") ;
+    return string("un ");
   if (Data.estFeminin())
     return string("une ");
 
-  return string("") ;
+  return string("");
 }
 
 string
 NSGenerateurFr::donneArticleDefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude)
 {
   if (NULL == pMot)
-    return string("") ;
+    return string("");
 
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  NSSuper* pSuper = pContexte->getSuperviseur();
 
-  string sLexique = pMot->getLexique() ;
-  NSPathologData Data ;
+  string sLexique = pMot->getLexique();
+  NSPathologData Data;
 
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return string("") ;
+    return string("");
 
   if (false == Data.estNom())
-    return string("") ;
+    return string("");
 
   if (bPluriel)
-    return string("les ") ;
+    return string("les ");
 
-  GENRE iGenreNom ;
-  string sLibelle = string("") ;
-  Data.donneGenre(&iGenreNom) ;
+  GENRE iGenreNom;
+  string sLibelle = string("");
+  Data.donneGenre(&iGenreNom);
 
-  donneLibelleAffiche(&sLibelle, &Data, iGenreNom) ;
+  donneLibelleAffiche(&sLibelle, &Data, iGenreNom);
 
-  bool bApostrophe = false ;
+  bool bApostrophe = false;
 
   // On commence par regarder si le nom commence par une voyelle ou par un h muet.
   //
   if (CommenceParVoyelle(&sLibelle))
-    bApostrophe = true ;
+    bApostrophe = true;
 
   if (('h' == sLibelle[0]) || ('H' == sLibelle[0]))
   {
     if (Data.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-      bApostrophe = true ;
+      bApostrophe = true;
   }
 
 
@@ -3787,59 +3787,59 @@ NSGenerateurFr::donneArticleDefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITU
     string sCertitudeNom = "";
     string sCertitudeAdv = "";
 
-    sCertitudeNom = string(pMot->getCertitude(), 0, 5) ;
+    sCertitudeNom = string(pMot->getCertitude(), 0, 5);
 
 
   if (pMot->getComplementPhr())
   {
-    NSPhraseMot MotAdj(pContexte) ;
+    NSPhraseMot MotAdj(pContexte);
 
-    bool bPremierAdjExiste = donnePremierAdj(pMot->getComplementPhr(), &MotAdj) ;
-    string sLexiqueAdj = MotAdj.getLexique() ;
+    bool bPremierAdjExiste = donnePremierAdj(pMot->getComplementPhr(), &MotAdj);
+    string sLexiqueAdj = MotAdj.getLexique();
 
     if (bPremierAdjExiste)
     {
-      string sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5) ;
+      string sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5);
 
       if (string("") != sCertitudeAdj)
       {
         // Le premier adjectif est precede d'une certitude, donc on ne
         // s'occupe pas de la premiere lettre de l'adjectif.
 
-        donneCertitude(sCertitudeAdj, &bApostrophe) ;
+        donneCertitude(sCertitudeAdj, &bApostrophe);
       }
       else if (MotAdj.getComplementPhr())
       {
-        NSPhraseMot MotAdv(pContexte) ;
+        NSPhraseMot MotAdv(pContexte);
 
-        bool bPremierAdvExiste = donnePremierAdv(MotAdj.getComplementPhr(), &MotAdv) ;
-        string sLexiqueAdv = MotAdv.getLexique() ;
+        bool bPremierAdvExiste = donnePremierAdv(MotAdj.getComplementPhr(), &MotAdv);
+        string sLexiqueAdv = MotAdv.getLexique();
 
         if (bPremierAdvExiste)
         {
-          string sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5) ;
+          string sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5);
 
           if (string("") != sCertitudeAdv)
           {
             // Le premier adverbe est precede d'une certitude, donc on ne
             // s'occupe pas de la premiere lettre de l'adverbe.
 
-            donneCertitude(sCertitudeAdv, &bApostrophe) ;
+            donneCertitude(sCertitudeAdv, &bApostrophe);
           }
           else
           {
             // On regarde si l'adverbe commence par une voyelle ou par un
             // h muet.
-            string sLibelleAdv = string("") ;
-            donneLibelleAffiche(&sLibelleAdv, &DataAdv) ;
+            string sLibelleAdv = string("");
+            donneLibelleAffiche(&sLibelleAdv, &DataAdv);
 
             if (CommenceParVoyelle(&sLibelleAdv))
-              bApostrophe = true ;
+              bApostrophe = true;
 
             else if (('h' == sLibelleAdv[0]) || ('H' == sLibelleAdv[0]))
             {
               if (DataAdv.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-                bApostrophe = true ;
+                bApostrophe = true;
             }
           }
         }
@@ -3847,16 +3847,16 @@ NSGenerateurFr::donneArticleDefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITU
         {
           // On regarde si l'adjectif commence par une voyelle ou par un
           // h muet.
-          string sLibelleAdj = string("") ;
-          donneLibelleAffiche(&sLibelleAdj, &DataAdj, iGenreNom) ;
+          string sLibelleAdj = string("");
+          donneLibelleAffiche(&sLibelleAdj, &DataAdj, iGenreNom);
 
           if (CommenceParVoyelle(&sLibelleAdj))
-            bApostrophe = true ;
+            bApostrophe = true;
 
           else if (('h' == sLibelleAdj[0]) || ('H' == sLibelleAdj[0]))
           {
             if (DataAdj.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-              bApostrophe = true ;
+              bApostrophe = true;
           }
         }
       }
@@ -3866,17 +3866,17 @@ NSGenerateurFr::donneArticleDefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITU
   // Si on gere la certitude du nom, celle-ci prend le dessus sur le reste.
 
   if (avecCertitude == iGereCertitude)
-    donneCertitude(sCertitudeNom, &bApostrophe) ;
+    donneCertitude(sCertitudeNom, &bApostrophe);
 
   if (bApostrophe)
-    return string("l'") ;
+    return string("l'");
 
   if (Data.estMasculin())
-    return string("le ") ;
+    return string("le ");
   if (Data.estFeminin())
-    return string("la ") ;
+    return string("la ");
 
-  return string("") ;
+  return string("");
 }
 
 string
@@ -3893,10 +3893,10 @@ NSGenerateurFr::donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTI
     string sLexiqueAdj = "";
     string sLexiqueAdv = "";
 
-    string sLexique = pMot->getLexique() ;
-    NSSuper* pSuper = pContexte->getSuperviseur() ;
+    string sLexique = pMot->getLexique();
+    NSSuper* pSuper = pContexte->getSuperviseur();
 
-    bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+    bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
     if (!trouve)
         return "";
 
@@ -3904,7 +3904,7 @@ NSGenerateurFr::donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTI
     string sCertitudeAdj = "";
     string sCertitudeAdv = "";
 
-    sCertitudeNom = string(pMot->getCertitude(), 0, 5) ;
+    sCertitudeNom = string(pMot->getCertitude(), 0, 5);
 
     if (!(Data.estNom()))
         return "";
@@ -3933,11 +3933,11 @@ NSGenerateurFr::donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTI
     if (pMot->getComplementPhr())
     {
         bool bPremierAdjExiste = donnePremierAdj(pMot->getComplementPhr(), &MotAdj);
-        sLexiqueAdj = MotAdj.getLexique() ;
+        sLexiqueAdj = MotAdj.getLexique();
 
         if (bPremierAdjExiste)
         {
-            sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5) ;
+            sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5);
 
             if (sCertitudeAdj != "")
             {
@@ -3949,12 +3949,12 @@ NSGenerateurFr::donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTI
 
             else if (MotAdj.getComplementPhr())
             {
-                bool bPremierAdvExiste = donnePremierAdv(MotAdj.getComplementPhr(), &MotAdv) ;
-                sLexiqueAdv = MotAdv.getLexique() ;
+                bool bPremierAdvExiste = donnePremierAdv(MotAdj.getComplementPhr(), &MotAdv);
+                sLexiqueAdv = MotAdv.getLexique();
 
                 if (bPremierAdvExiste)
                 {
-                    sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5) ;
+                    sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5);
 
                     if (sCertitudeAdv != "")
                     {
@@ -4033,27 +4033,27 @@ NSGenerateurFr::donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPerson
   {
     switch (iVbPersonne)
     {
-      case NSPhraseur::pers1S : return string("je") ;
-      case NSPhraseur::pers2S : return string("tu") ;
+      case NSPhraseur::pers1S : return string("je");
+      case NSPhraseur::pers2S : return string("tu");
       case NSPhraseur::pers3S :
         switch (iGenre)
         {
-          case genreMS : return string("il") ;
-          case genreFS : return string("elle") ;
-          case genreNS : return string("on") ;
-          default      : return string("") ;
+          case genreMS : return string("il");
+          case genreFS : return string("elle");
+          case genreNS : return string("on");
+          default      : return string("");
         }
-      case NSPhraseur::pers1P : return string("nous") ;
-      case NSPhraseur::pers2P : return string("vous") ;
+      case NSPhraseur::pers1P : return string("nous");
+      case NSPhraseur::pers2P : return string("vous");
       case NSPhraseur::pers3P :
         switch (iGenre)
         {
-          case genreMP : return string("ils") ;
-          case genreFP : return string("elles") ;
-          default      : return string("") ;
+          case genreMP : return string("ils");
+          case genreFP : return string("elles");
+          default      : return string("");
         }
     }
-    return string("") ;
+    return string("");
   }
   //
   // Pronom personnel en tant que COD de la phrase
@@ -4062,21 +4062,21 @@ NSGenerateurFr::donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPerson
   {
     switch (iVbPersonne)
     {
-      case NSPhraseur::pers1S : return string("me") ;
-      case NSPhraseur::pers2S : return string("te") ;
+      case NSPhraseur::pers1S : return string("me");
+      case NSPhraseur::pers2S : return string("te");
       case NSPhraseur::pers3S :
         switch (iGenre)
         {
-          case genreMS : return string("le") ;
-          case genreFS : return string("la") ;
-          case genreNS : return string("en") ; // en , y
-          default      : return string("") ;
+          case genreMS : return string("le");
+          case genreFS : return string("la");
+          case genreNS : return string("en"); // en , y
+          default      : return string("");
         }
-      case NSPhraseur::pers1P : return string("nous") ;
-      case NSPhraseur::pers2P : return string("vous") ;
-      case NSPhraseur::pers3P : return string("les") ;
+      case NSPhraseur::pers1P : return string("nous");
+      case NSPhraseur::pers2P : return string("vous");
+      case NSPhraseur::pers3P : return string("les");
     }
-    return string("") ;
+    return string("");
   }
   //
   // Pronom personnel en tant que COI de la phrase
@@ -4085,21 +4085,21 @@ NSGenerateurFr::donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPerson
   {
     switch (iVbPersonne)
     {
-      case NSPhraseur::pers1S : return string("me") ;
-      case NSPhraseur::pers2S : return string("te") ;
+      case NSPhraseur::pers1S : return string("me");
+      case NSPhraseur::pers2S : return string("te");
       case NSPhraseur::pers3S :
         switch (iGenre)
         {
-          case genreMS : return string("lui") ;
-          case genreFS : return string("lui") ;
-          case genreNS : return string("en") ; // en , y
-          default      : return string("") ;
+          case genreMS : return string("lui");
+          case genreFS : return string("lui");
+          case genreNS : return string("en"); // en , y
+          default      : return string("");
         }
-      case NSPhraseur::pers1P : return string("nous") ;
-      case NSPhraseur::pers2P : return string("vous") ;
-      case NSPhraseur::pers3P : return string("leur") ;
+      case NSPhraseur::pers1P : return string("nous");
+      case NSPhraseur::pers2P : return string("vous");
+      case NSPhraseur::pers3P : return string("leur");
     }
-    return string("") ;
+    return string("");
   }
   //
   // Pronom personnel en tant que CC de lieu de la phrase
@@ -4108,12 +4108,12 @@ NSGenerateurFr::donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPerson
   {
     switch (iVbPersonne)
     {
-      case NSPhraseur::pers3S : return string("en") ; // en , y
-      case NSPhraseur::pers3P : return string("en") ; // en , y
+      case NSPhraseur::pers3S : return string("en"); // en , y
+      case NSPhraseur::pers3P : return string("en"); // en , y
     }
-    return string("") ;
+    return string("");
   }
-  return string("") ;
+  return string("");
 }
 
 void
@@ -4132,19 +4132,19 @@ NSGenerateurFr::etFinal(string *type, string *type1)
 string
 NSGenerateurFr::donneParticipePresent(NSPathologData* pPathoData)
 {
-  string sVb = pPathoData->getLabel() ;
-  string sVerbe = string("") ;
+  string sVb = pPathoData->getLabel();
+  string sVerbe = string("");
 
   NSSuper* pSuper = pContexte->getSuperviseur();
-  string sLibelle ;
+  string sLibelle;
   if (pContexte->getDico()->donneLibelle(sLang, &sVb, &sLibelle) == false)
-    return string("") ;
+    return string("");
 
   // On recherche le type de conjugaison du verbe (son numero de Bescherell)
   // On ne peut pas le faire avec donneverbeclasse, vu qu'on n'a pas de pPhraseMot,
   // On le fait donc "a la main" avec chercheGrammaire.
 
-  string sConjugaison = pPathoData->chercheGrammaire("B") ;
+  string sConjugaison = pPathoData->chercheGrammaire("B");
 
     if (sConjugaison == "")
         return "";
@@ -4174,16 +4174,16 @@ NSGenerateurFr::donneParticipePresent(NSPathologData* pPathoData)
         sVerbe = string(sLibelle, 0, strlen(sLibelle.c_str())-2);
         sVerbe += string("ïssant");
     }
-    return sVerbe ;
+    return sVerbe;
 }
 
 string
 NSGenerateurFr::donneParticipePasse(NSPhraseMot* pPhraseMot, GENRE iGenre)
 {
-    string sVb = pPhraseMot->getLexique() ;
-    string sVerbe = "" ;
+    string sVb = pPhraseMot->getLexique();
+    string sVerbe = "";
 
-    string sTransitivite, sConjugaison, sActEtat ;
+    string sTransitivite, sConjugaison, sActEtat;
     if (donneVerbeClasse(pPhraseMot, &sTransitivite, &sConjugaison, &sActEtat) == false)
         return "";
 
@@ -4237,24 +4237,24 @@ NSGenerateurFr::mapTempsVerbe()
         case NSPhraseur::tempsPasseRevolu :
         case NSPhraseur::tempsPasseActuel :
         {
-            iTempsVerbe  = tempsPasseFr ;
-            iAspectVerbe = aspectMoment ;
-            break ;
+            iTempsVerbe  = tempsPasseFr;
+            iAspectVerbe = aspectMoment;
+            break;
         }
         case NSPhraseur::tempsPresent :
         {
-            iTempsVerbe = tempsPresentFr ;
-            iAspectVerbe = aspectMoment ;
-            break ;
+            iTempsVerbe = tempsPresentFr;
+            iAspectVerbe = aspectMoment;
+            break;
         }
         case NSPhraseur::tempsFuturProche :
         case NSPhraseur::tempsFuturLointain :
         {
-            iTempsVerbe = tempsFuturFr ;
-            iAspectVerbe = aspectMoment ;
-            break ;
+            iTempsVerbe = tempsFuturFr;
+            iAspectVerbe = aspectMoment;
+            break;
         }
-        default : return ;
+        default : return;
       }
     }
     case NSPhraseur::aspectIntervalle :
@@ -4264,27 +4264,27 @@ NSGenerateurFr::mapTempsVerbe()
         case NSPhraseur::tempsPasseRevolu :
         case NSPhraseur::tempsPasseActuel :
         {
-          iTempsVerbe  = tempsPasseFr ;
-          iAspectVerbe = aspectAccompli ;
-          break ;
+          iTempsVerbe  = tempsPasseFr;
+          iAspectVerbe = aspectAccompli;
+          break;
         }
         case NSPhraseur::tempsPresent :
         {
-          iTempsVerbe = tempsPresentFr ;
-          iAspectVerbe = aspectMoment ;
-          break ;
+          iTempsVerbe = tempsPresentFr;
+          iAspectVerbe = aspectMoment;
+          break;
         }
         case NSPhraseur::tempsFuturProche :
         case NSPhraseur::tempsFuturLointain :
         {
-          iTempsVerbe = tempsFuturFr ;
-          iAspectVerbe = aspectAccompli ;
-          break ;
+          iTempsVerbe = tempsFuturFr;
+          iAspectVerbe = aspectAccompli;
+          break;
         }
-        default : return ;
+        default : return;
       }
     }
-    default : return ;
+    default : return;
   }
 }
 
@@ -4293,15 +4293,15 @@ void
 NSGenerateurFr::donneVerbe(string* principal, string* auxilliaire)
 {
   if ((NULL == principal) || (NULL == auxilliaire))
-    return ;
+    return;
 
-  *principal   = string("") ;
-  *auxilliaire = string("") ;
+  *principal   = string("");
+  *auxilliaire = string("");
 
   if (pPh->Verbe.empty())
-    return ;
+    return;
 
-  string sVb = (*(pPh->Verbe.begin()))->getLexique() ;
+  string sVb = (*(pPh->Verbe.begin()))->getLexique();
   string sVerbe;
   NSSuper* pSuper = pContexte->getSuperviseur();
   pContexte->getDico()->donneCodeSens(&sVb, &sVerbe);
@@ -4321,24 +4321,24 @@ NSGenerateurFr::donneVerbe(string* principal, string* auxilliaire)
           {
             switch (pPh->iVbPersonne)
             {
-              case NSPhraseur::pers1S : *auxilliaire = "ai"    ; *principal = "été" ; return ;
-              case NSPhraseur::pers2S : *auxilliaire = "as"    ; *principal = "été" ; return ;
-              case NSPhraseur::pers3S : *auxilliaire = "a"     ; *principal = "été" ; return ;
-              case NSPhraseur::pers1P : *auxilliaire = "avons" ; *principal = "été" ; return ;
-              case NSPhraseur::pers2P : *auxilliaire = "avez"  ; *principal = "été" ; return ;
-              case NSPhraseur::pers3P : *auxilliaire = "ont"   ; *principal = "été" ; return ;
+              case NSPhraseur::pers1S : *auxilliaire = "ai"   ; *principal = "été"; return;
+              case NSPhraseur::pers2S : *auxilliaire = "as"   ; *principal = "été"; return;
+              case NSPhraseur::pers3S : *auxilliaire = "a"    ; *principal = "été"; return;
+              case NSPhraseur::pers1P : *auxilliaire = "avons"; *principal = "été"; return;
+              case NSPhraseur::pers2P : *auxilliaire = "avez" ; *principal = "été"; return;
+              case NSPhraseur::pers3P : *auxilliaire = "ont"  ; *principal = "été"; return;
             }
           }
           case aspectMoment :
           {
             switch (pPh->iVbPersonne)
             {
-              case NSPhraseur::pers1S : *principal = "étais" ;   return ;
-              case NSPhraseur::pers2S : *principal = "étais" ;   return ;
-              case NSPhraseur::pers3S : *principal = "était" ;   return ;
-              case NSPhraseur::pers1P : *principal = "étions" ;  return ;
-              case NSPhraseur::pers2P : *principal = "étiez" ;   return ;
-              case NSPhraseur::pers3P : *principal = "étaient" ; return ;
+              case NSPhraseur::pers1S : *principal = "étais";   return;
+              case NSPhraseur::pers2S : *principal = "étais";   return;
+              case NSPhraseur::pers3S : *principal = "était";   return;
+              case NSPhraseur::pers1P : *principal = "étions";  return;
+              case NSPhraseur::pers2P : *principal = "étiez";   return;
+              case NSPhraseur::pers3P : *principal = "étaient"; return;
             }
           }
         }
@@ -4348,27 +4348,27 @@ NSGenerateurFr::donneVerbe(string* principal, string* auxilliaire)
       {
         switch (pPh->iVbPersonne)
         {
-          case NSPhraseur::pers1S : *principal = "suis" ;   return ;
-          case NSPhraseur::pers2S : *principal = "es" ;     return ;
-          case NSPhraseur::pers3S : *principal = "est" ;    return ;
-          case NSPhraseur::pers1P : *principal = "sommes" ; return ;
-          case NSPhraseur::pers2P : *principal = "êtes" ;   return ;
-          case NSPhraseur::pers3P : *principal = "sont" ;   return ;
+          case NSPhraseur::pers1S : *principal = "suis";   return;
+          case NSPhraseur::pers2S : *principal = "es";     return;
+          case NSPhraseur::pers3S : *principal = "est";    return;
+          case NSPhraseur::pers1P : *principal = "sommes"; return;
+          case NSPhraseur::pers2P : *principal = "êtes";   return;
+          case NSPhraseur::pers3P : *principal = "sont";   return;
         }
-        break ;
+        break;
       }
       case tempsFuturFr   :
       {
         switch (pPh->iVbPersonne)
         {
-          case NSPhraseur::pers1S : *principal = "serai" ;  return ;
-          case NSPhraseur::pers2S : *principal = "seras" ;  return ;
-          case NSPhraseur::pers3S : *principal = "sera" ;   return ;
-          case NSPhraseur::pers1P : *principal = "serons" ; return ;
-          case NSPhraseur::pers2P : *principal = "serez" ;  return ;
-          case NSPhraseur::pers3P : *principal = "seront" ; return ;
+          case NSPhraseur::pers1S : *principal = "serai";  return;
+          case NSPhraseur::pers2S : *principal = "seras";  return;
+          case NSPhraseur::pers3S : *principal = "sera";   return;
+          case NSPhraseur::pers1P : *principal = "serons"; return;
+          case NSPhraseur::pers2P : *principal = "serez";  return;
+          case NSPhraseur::pers3P : *principal = "seront"; return;
         }
-        break ;
+        break;
       }
     }
   }
@@ -4387,12 +4387,12 @@ NSGenerateurFr::donneVerbe(string* principal, string* auxilliaire)
                   {
                       switch (pPh->iVbPersonne)
                       {
-                          case NSPhraseur::pers1S : *auxilliaire = "ai"    ; *principal = "eu";   return;
-                          case NSPhraseur::pers2S : *auxilliaire = "as"    ; *principal = "eu";   return;
-                          case NSPhraseur::pers3S : *auxilliaire = "a"     ; *principal = "eu";   return;
-                          case NSPhraseur::pers1P : *auxilliaire = "avons" ; *principal = "eu";  return;
-                          case NSPhraseur::pers2P : *auxilliaire = "avez"  ; *principal = "eu";   return;
-                          case NSPhraseur::pers3P : *auxilliaire = "ont"   ; *principal = "eu"; return;
+                          case NSPhraseur::pers1S : *auxilliaire = "ai"   ; *principal = "eu";   return;
+                          case NSPhraseur::pers2S : *auxilliaire = "as"   ; *principal = "eu";   return;
+                          case NSPhraseur::pers3S : *auxilliaire = "a"    ; *principal = "eu";   return;
+                          case NSPhraseur::pers1P : *auxilliaire = "avons"; *principal = "eu";  return;
+                          case NSPhraseur::pers2P : *auxilliaire = "avez" ; *principal = "eu";   return;
+                          case NSPhraseur::pers3P : *auxilliaire = "ont"  ; *principal = "eu"; return;
                       }
                   }
                   case aspectMoment :
@@ -4445,43 +4445,43 @@ NSGenerateurFr::donneVerbe(string* principal, string* auxilliaire)
   // T   pour Transitif
   // B15 pour groupe 15 du bescherell
   //
-  string sTransitivite ;
-  string sConjugaison ;
-  string sActEtat ;
+  string sTransitivite;
+  string sConjugaison;
+  string sActEtat;
 
   if (false == donneVerbeClasse(*(pPh->Verbe.begin()), &sTransitivite, &sConjugaison, &sActEtat))
-    return ;
+    return;
 
-  string sLibelle ;
+  string sLibelle;
   if (pContexte->getDico()->donneLibelle(sLang, &sVb, &sLibelle) == false)
-    return ;
+    return;
 
   // Verbes standards du 1er groupe
   if (sConjugaison == "B06")
   {
-    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2) ;
-    *principal = sRadical + donneVerbeTerminaison(1, "") ;
+    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2);
+    *principal = sRadical + donneVerbeTerminaison(1, "");
   }
   // Verbes en "ier" rien de particulier sauf iions et iiez à l'imparfait
   else if (sConjugaison == "B15")
   {
-    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2) ;
-    *principal = sRadical + donneVerbeTerminaison(1, "") ;
+    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2);
+    *principal = sRadical + donneVerbeTerminaison(1, "");
   }
   // Verbes en "uire" rien de particulier sauf un s au passé et au
   //                  présent pluriel : il induisait - nous induisons
   else if (sConjugaison == "B82")
   {
-    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2) ;
+    string sRadical = string(sLibelle, 0, strlen(sLibelle.c_str())-2);
     if      (iTempsVerbe == tempsPasseFr)
-      *principal = sRadical + string("s") + donneVerbeTerminaison(3, "") ;
+      *principal = sRadical + string("s") + donneVerbeTerminaison(3, "");
     else if ((iTempsVerbe == tempsPresentFr) &&
              ((pPh->iVbPersonne == NSPhraseur::pers1P) ||
               (pPh->iVbPersonne == NSPhraseur::pers2P) ||
               (pPh->iVbPersonne == NSPhraseur::pers3P)))
-      *principal = sRadical + string("s") + donneVerbeTerminaison(3, "") ;
+      *principal = sRadical + string("s") + donneVerbeTerminaison(3, "");
     else
-      *principal = sRadical + donneVerbeTerminaison(3, "") ;
+      *principal = sRadical + donneVerbeTerminaison(3, "");
   }
 }
 
@@ -4661,15 +4661,15 @@ NSGenerateurFr::donneVerbeClasse(NSPhraseMot* /* pPhraseMot */, string* psTransi
   string sEtat = "";
   string sAction = "";
 
-	string sLexique = (*(pPh->Verbe.begin()))->getLexique() ;
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+	string sLexique = (*(pPh->Verbe.begin()))->getLexique();
+  NSSuper* pSuper = pContexte->getSuperviseur();
 
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (!trouve)
-    return false ;
+    return false;
 
   if (!(Data.estVerbe()))
-    return false ;
+    return false;
 
     sTransitif     = Data.chercheGrammaire("T");
     sIntransitif   = Data.chercheGrammaire("I");
@@ -4744,39 +4744,39 @@ NSGenerateurFr::donneAuxilliaire(string* Auxilliaire, int iVbTemps, int /* iVbAs
       case tempsPasseFr   :
         switch (iVbPersonne)
         {
-          case NSPhraseur::pers1S : return string("étais") ;
-          case NSPhraseur::pers2S : return string("étais") ;
-          case NSPhraseur::pers3S : return string("était") ;
-          case NSPhraseur::pers1P : return string("étions") ;
-          case NSPhraseur::pers2P : return string("étiez") ;
-          case NSPhraseur::pers3P : return string("étaient") ;
+          case NSPhraseur::pers1S : return string("étais");
+          case NSPhraseur::pers2S : return string("étais");
+          case NSPhraseur::pers3S : return string("était");
+          case NSPhraseur::pers1P : return string("étions");
+          case NSPhraseur::pers2P : return string("étiez");
+          case NSPhraseur::pers3P : return string("étaient");
         }
-        break ;
+        break;
       case tempsPresentFr :
         switch (iVbPersonne)
         {
-          case NSPhraseur::pers1S : return string("suis") ;
-          case NSPhraseur::pers2S : return string("es") ;
-          case NSPhraseur::pers3S : return string("est") ;
-          case NSPhraseur::pers1P : return string("sommes") ;
-          case NSPhraseur::pers2P : return string("êtes") ;
-          case NSPhraseur::pers3P : return string("sont") ;
+          case NSPhraseur::pers1S : return string("suis");
+          case NSPhraseur::pers2S : return string("es");
+          case NSPhraseur::pers3S : return string("est");
+          case NSPhraseur::pers1P : return string("sommes");
+          case NSPhraseur::pers2P : return string("êtes");
+          case NSPhraseur::pers3P : return string("sont");
         }
-        break ;
+        break;
       case tempsFuturFr   :
         switch (iVbPersonne)
         {
-          case NSPhraseur::pers1S : return string("serai") ;
-          case NSPhraseur::pers2S : return string("seras") ;
-          case NSPhraseur::pers3S : return string("sera") ;
-          case NSPhraseur::pers1P : return string("serons") ;
-          case NSPhraseur::pers2P : return string("serez") ;
-          case NSPhraseur::pers3P : return string("seront") ;
+          case NSPhraseur::pers1S : return string("serai");
+          case NSPhraseur::pers2S : return string("seras");
+          case NSPhraseur::pers3S : return string("sera");
+          case NSPhraseur::pers1P : return string("serons");
+          case NSPhraseur::pers2P : return string("serez");
+          case NSPhraseur::pers3P : return string("seront");
         }
         break;
     }
   }
-  return string("") ;
+  return string("");
 }
 
 
@@ -4795,7 +4795,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
     iterPhraseMot  iterMots;
     NSPathologData Data;
     bool trouve;
-    string sLexique = pMot->getLexique() ;
+    string sLexique = pMot->getLexique();
     string sPostposition = "";
 
     trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
@@ -4814,7 +4814,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
 
     if (pMot->getComplementPhr())
     {
-        NSPhraseur* pComp = pMot->getComplementPhr() ;
+        NSPhraseur* pComp = pMot->getComplementPhr();
 
         if (!(pComp->compNom.empty()))
         {
@@ -4827,7 +4827,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
                     // On rajoute la preposition dans le libelle du texte libre.
                     (*iterMots)->setPreposition(sPostposition);
                     (*iterMots)->setTexteLibre(sPostposition + string(" ")
-                                                + (*iterMots)->getTexteLibre()) ;
+                                                + (*iterMots)->getTexteLibre());
                 }
             }
         }
@@ -4849,7 +4849,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
                     // On rajoute la preposition dans le libelle du texte libre.
                     (*iterMots)->setPreposition(sPostposition);
                     (*iterMots)->setTexteLibre(sPostposition + string(" ")
-                                                + (*iterMots)->getTexteLibre()) ;
+                                                + (*iterMots)->getTexteLibre());
                 }
             }
         }
@@ -4866,7 +4866,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
                     // On rajoute la preposition dans le libelle du texte libre.
                     (*iterMots)->setPreposition(sPostposition);
                     (*iterMots)->setTexteLibre(sPostposition + string(" ")
-                                                + (*iterMots)->getTexteLibre()) ;
+                                                + (*iterMots)->getTexteLibre());
                 }
             }
         }
@@ -4886,7 +4886,7 @@ NSGenerateurFr::traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifi
                     // On rajoute la preposition dans le libelle du texte libre.
                     (*iterMots)->setPreposition(sPostposition);
                     (*iterMots)->setTexteLibre(sPostposition + string(" ")
-                                                + (*iterMots)->getTexteLibre()) ;
+                                                + (*iterMots)->getTexteLibre());
                 }
             }
         }
@@ -4908,15 +4908,15 @@ NSGenerateurFr::traitePrepositionCC(NSPhraseMotArray* pCompC, NSPhraseMot* pPrep
   {
     if (pPreposition->getLexique() != string(""))
     {
-      traitePostposition(pPreposition, pCompC) ;
-      return true ;
+      traitePostposition(pPreposition, pCompC);
+      return true;
     }
   }
 
   // Si on n'a pas specifie de preposition, il faut au moins avoir specifie un contexte.
 
   if (NSPhraseur::prepUndefined == iContexte)
-    return false ;
+    return false;
 
   // Si on a specifie un contexte, on met une preposition par defaut en fonction du
   // contexte.
@@ -4932,25 +4932,25 @@ NSGenerateurFr::traitePrepositionCC(NSPhraseMotArray* pCompC, NSPhraseMot* pPrep
     {
       if (false == pCompC->empty())
       {
-        string sPrepos = string("à") ;
+        string sPrepos = string("à");
         if (NSPhraseur::phraseComplement == pPh->iPhraseType)
-          string sPrepos = string("de") ;
+          string sPrepos = string("de");
 
-        for (iterMots = pCompC->begin(); pCompC->end() != iterMots ; iterMots++)
+        for (iterMots = pCompC->begin(); pCompC->end() != iterMots; iterMots++)
         {
           if (false == (*iterMots)->estTexteLibre())
           {
-            (*iterMots)->setPreposition(sPrepos) ;
-            (*iterMots)->setArticle(NSPhraseMot::articleDefini) ;
+            (*iterMots)->setPreposition(sPrepos);
+            (*iterMots)->setArticle(NSPhraseMot::articleDefini);
           }
           else
           {
             // On rajoute la preposition dans le libelle du texte libre.
-            (*iterMots)->setPreposition(sPrepos) ;
-            (*iterMots)->setTexteLibre(sPrepos + string(" ") + (*iterMots)->getTexteLibre()) ;
+            (*iterMots)->setPreposition(sPrepos);
+            (*iterMots)->setTexteLibre(sPrepos + string(" ") + (*iterMots)->getTexteLibre());
           }
         }
-        return true ;
+        return true;
       }
     }
   }
@@ -4960,8 +4960,8 @@ NSGenerateurFr::traitePrepositionCC(NSPhraseMotArray* pCompC, NSPhraseMot* pPrep
   // Pour la maniere, on met "avec"
   else if (NSPhraseur::prepManiere == iContexte)
   {
-    (pPh->PrepositionManiere).setLexique("0AVEC1") ;
-    return traitePrepositionCC(pCompC, &(pPh->PrepositionManiere)) ;
+    (pPh->PrepositionManiere).setLexique("0AVEC1");
+    return traitePrepositionCC(pCompC, &(pPh->PrepositionManiere));
   }
 
   // Pour la cause, mettre "a cause de".
@@ -4971,16 +4971,16 @@ NSGenerateurFr::traitePrepositionCC(NSPhraseMotArray* pCompC, NSPhraseMot* pPrep
 
   else if (NSPhraseur::prepType == iContexte)
   {
-    (pPh->PrepositionType).setLexique("0ATYP1") ;
-    return traitePrepositionCC(pCompC, &(pPh->PrepositionManiere)) ;
+    (pPh->PrepositionType).setLexique("0ATYP1");
+    return traitePrepositionCC(pCompC, &(pPh->PrepositionManiere));
   }
   else if (NSPhraseur::prepHypoth == iContexte)
   {
-    (pPh->PrepositionHypoth).setLexique("KEVEI2") ;
-    return traitePrepositionCC(pCompC, &(pPh->PrepositionHypoth)) ;
+    (pPh->PrepositionHypoth).setLexique("KEVEI2");
+    return traitePrepositionCC(pCompC, &(pPh->PrepositionHypoth));
   }
 
-  return false ;
+  return false;
 }
 
 
@@ -4990,66 +4990,66 @@ bool
 NSGenerateurFr::modifiePreposition(NSPhraseMot* pMot, int iArticle, bool bPluriel)
 {
   if (NULL == pMot)
-    return false ;
+    return false;
 
-  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  NSSuper* pSuper = pContexte->getSuperviseur();
 
-  string sLibelle    = string("") ;
-  bool   bApostrophe = false ;
-  GENRE  iGenreNom   = genreNull ;
+  string sLibelle    = string("");
+  bool   bApostrophe = false;
+  GENRE  iGenreNom   = genreNull;
 
-  NSPhraseMot    MotAdj(pContexte) ;
-  NSPhraseMot    MotAdv(pContexte) ;
+  NSPhraseMot    MotAdj(pContexte);
+  NSPhraseMot    MotAdv(pContexte);
 
-  NSPathologData DataAdj ;
-  NSPathologData DataAdv ;
+  NSPathologData DataAdj;
+  NSPathologData DataAdv;
 
-  string sLexiqueAdj = "" ;
-  string sLexiqueAdv = "" ;
+  string sLexiqueAdj = "";
+  string sLexiqueAdv = "";
 
-  string sCertitudeAdj = "" ;
-  string sCertitudeAdv = "" ;
+  string sCertitudeAdj = "";
+  string sCertitudeAdv = "";
 
-  string sCertitudeNom = string(pMot->getCertitude(), 0, 5) ;
+  string sCertitudeNom = string(pMot->getCertitude(), 0, 5);
 
-  string sLexique = pMot->getLexique() ;
-  NSPathologData Data ;
+  string sLexique = pMot->getLexique();
+  NSPathologData Data;
 
-  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data) ;
+  bool trouve = pContexte->getDico()->trouvePathologData(sLang, &sLexique, &Data);
   if (false == trouve)
-    return false ;
+    return false;
 
-  Data.donneGenre(&iGenreNom) ;
-  donneLibelleAffiche(&sLibelle, &Data) ;
+  Data.donneGenre(&iGenreNom);
+  donneLibelleAffiche(&sLibelle, &Data);
 
   // En francais, on n'a que le "de" à changer parfois en "d'".
 
-  string sPreposition = pMot->getPreposition() ;
+  string sPreposition = pMot->getPreposition();
 
   // Soit "de", soit une preposition qui se termine par " de"
   //
   if ((string("de") != sPreposition) ||
       ((strlen(sPreposition.c_str()) > 2) &&
        (string(sPreposition, strlen(sPreposition.c_str())-3, 3) != " de")))
-    return false ;
+    return false;
 
   if (NSPhraseMot::articleDefini == iArticle)
-    return false ;
+    return false;
 
   if (NSPhraseMot::articleIndefini == iArticle)
   {
     if (false == bPluriel)
     {
-      sPreposition.replace(strlen(sPreposition.c_str())-2, 2, "d'") ;
-      pMot->setPreposition(sPreposition) ;
-      return true ;
+      sPreposition.replace(strlen(sPreposition.c_str())-2, 2, "d'");
+      pMot->setPreposition(sPreposition);
+      return true;
     }
     else
-      return false ;
+      return false;
   }
 
   if (CommenceParVoyelle(&sLibelle))
-    bApostrophe = true ;
+    bApostrophe = true;
 
 
   if (('h' == sLibelle[0]) || ('H' == sLibelle[0]))
@@ -5060,12 +5060,12 @@ NSGenerateurFr::modifiePreposition(NSPhraseMot* pMot, int iArticle, bool bPlurie
 
   if (pMot->getComplementPhr())
   {
-    bool bPremierAdjExiste = donnePremierAdj(pMot->getComplementPhr(), &MotAdj) ;
-    sLexiqueAdj = MotAdj.getLexique() ;
+    bool bPremierAdjExiste = donnePremierAdj(pMot->getComplementPhr(), &MotAdj);
+    sLexiqueAdj = MotAdj.getLexique();
 
     if (bPremierAdjExiste)
     {
-      sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5) ;
+      sCertitudeAdj = string(MotAdj.getCertitude(), 0, 5);
 
       if (string("") != sCertitudeAdj)
       {
@@ -5077,28 +5077,28 @@ NSGenerateurFr::modifiePreposition(NSPhraseMot* pMot, int iArticle, bool bPlurie
       else if (MotAdj.getComplementPhr())
       {
         bool bPremierAdvExiste = donnePremierAdv(MotAdj.getComplementPhr(), &MotAdv);
-        sLexiqueAdv = MotAdv.getLexique() ;
+        sLexiqueAdv = MotAdv.getLexique();
 
         if (bPremierAdvExiste)
         {
-          sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5) ;
+          sCertitudeAdv = string(MotAdv.getCertitude(), 0, 5);
 
           if (string("") != sCertitudeAdv)
           {
             // Le premier adverbe est precede d'une certitude, donc on ne
             // s'occupe pas de la premiere lettre de l'adverbe.
 
-            donneCertitude(sCertitudeAdv, &bApostrophe) ;
+            donneCertitude(sCertitudeAdv, &bApostrophe);
           }
           else
           {
             // On regarde si l'adverbe commence par une voyelle ou par un
             // h muet.
-            string sLibelleAdv = string("") ;
-            donneLibelleAffiche(&sLibelleAdv, &DataAdv) ;
+            string sLibelleAdv = string("");
+            donneLibelleAffiche(&sLibelleAdv, &DataAdv);
 
             if (CommenceParVoyelle(&sLibelleAdv))
-              bApostrophe = true ;
+              bApostrophe = true;
 
             else if (('h' == sLibelleAdv[0]) || ('H' == sLibelleAdv[0]))
             {
@@ -5111,16 +5111,16 @@ NSGenerateurFr::modifiePreposition(NSPhraseMot* pMot, int iArticle, bool bPlurie
         {
           // On regarde si l'adjectif commence par une voyelle ou par un
           // h muet.
-          string sLibelleAdj = string("") ;
-          donneLibelleAffiche(&sLibelleAdj, &DataAdj, iGenreNom) ;
+          string sLibelleAdj = string("");
+          donneLibelleAffiche(&sLibelleAdj, &DataAdj, iGenreNom);
 
           if (CommenceParVoyelle(&sLibelleAdj))
-            bApostrophe = true ;
+            bApostrophe = true;
 
           else if (('h' == sLibelleAdj[0]) || ('H' == sLibelleAdj[0]))
           {
             if (DataAdj.chercheGrammaire(VALEUR_DE_H) == H_MUET)
-              bApostrophe = true ;
+              bApostrophe = true;
           }
         }
       }
@@ -5129,49 +5129,49 @@ NSGenerateurFr::modifiePreposition(NSPhraseMot* pMot, int iArticle, bool bPlurie
 
   if (bApostrophe)
   {
-    sPreposition.replace(strlen(sPreposition.c_str())-2, 2, "d'") ;
-    pMot->setPreposition(sPreposition) ;
-    return true ;
+    sPreposition.replace(strlen(sPreposition.c_str())-2, 2, "d'");
+    pMot->setPreposition(sPreposition);
+    return true;
   }
 
-  return false ;
+  return false;
 }
 
 string
 NSGenerateurFr::postTraitement(string *psEntree)
 {
   if ((NULL == psEntree) || (string("") == *psEntree))
-    return string("") ;
+    return string("");
 
-  string sSortie = *psEntree ;
+  string sSortie = *psEntree;
 
   // Contraction de la forme "de le " en "du "
   //
-  contracting(&sSortie, string("de le "), string("du ")) ;
+  contracting(&sSortie, string("de le "), string("du "));
 
   // Contraction de la forme "de les " en "des "
   //
-  contracting(&sSortie, string("de les "), string("des ")) ;
+  contracting(&sSortie, string("de les "), string("des "));
 
   // Contraction de la forme "de des " en "des "
   //
-  contracting(&sSortie, string("de des "), string("des ")) ;
+  contracting(&sSortie, string("de des "), string("des "));
 
   // Contraction de la forme "à les " en "aux " et "à le " en "au "
   //
-  contracting(&sSortie, string("à le "), string("au ")) ;
-  contracting(&sSortie, string("à les "), string("aux ")) ;
+  contracting(&sSortie, string("à le "), string("au "));
+  contracting(&sSortie, string("à les "), string("aux "));
 
   // Contraction de "est non " en "n'est pas "
   //
-  contracting(&sSortie, string("est non "), string("n'est pas ")) ;
+  contracting(&sSortie, string("est non "), string("n'est pas "));
 
   // Contraction de "de un " en "d'un " et de "de une " en "d'une "
   //
-  contracting(&sSortie, string("de un "), string("d'un ")) ;
-  contracting(&sSortie, string("de une "), string("d'une ")) ;
+  contracting(&sSortie, string("de un "), string("d'un "));
+  contracting(&sSortie, string("de une "), string("d'une "));
 
-  return sSortie ;
+  return sSortie;
 }
 
 //
@@ -5184,7 +5184,7 @@ NSGenerateurFr::postTraitement(string *psEntree)
 gereDateFr::gereDateFr(const gereDateFr& src)
 		       :gereDate(src._pSuper, src.sLang)
 {
-  gereDate(*this) = (gereDate) src ;
+  gereDate(*this) = (gereDate) src;
 }
 
 //
@@ -5194,11 +5194,11 @@ gereDateFr&
 gereDateFr::operator=(const gereDateFr& src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-  gereDate(*this) = (gereDate) src ;
+  gereDate(*this) = (gereDate) src;
   
-  return *this ;
+  return *this;
 }
 
 //  +-----------------------------------------------------------------+
@@ -5209,10 +5209,10 @@ void
 gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
 {
   if ((NULL == pMessage) || (NULL == pIntro))
-    return ;
+    return;
 
-  *pMessage   = "" ;
-  *pIntro     = "" ;
+  *pMessage   = "";
+  *pIntro     = "";
   //
   // Date au format AAAAMMJJ
 	//
@@ -5220,39 +5220,39 @@ gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
   	{
         // Date vide
         if (sDate == "00000000")
-      	    return ;
+      	    return;
         // Juste AAAA -> "en 2001"
         else if (string(sDate, 4, 4) == "0000")
         {
-      	    *pMessage = string(sDate, 0, 4) ;
+      	    *pMessage = string(sDate, 0, 4);
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "en " ;
-                    break ;
+                    *pIntro = "en ";
+                    break;
                 case DateDeb :
-                    *pIntro = "de " ;
-                    break ;
+                    *pIntro = "de ";
+                    break;
                 case DateFin :
-                    *pIntro = "à " ;
-                    break ;
+                    *pIntro = "à ";
+                    break;
             }
         }
         // MM/AAAA -> "en juillet 2001"
         else if (string(sDate, 6, 2) == "00")
         {
-      	    *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4) ;
+      	    *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4);
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "en " ;
-                    break ;
+                    *pIntro = "en ";
+                    break;
                 case DateDeb :
-                    *pIntro = "du " ;
-                    break ;
+                    *pIntro = "du ";
+                    break;
                 case DateFin :
-                    *pIntro = "au " ;
-                    break ;
+                    *pIntro = "au ";
+                    break;
             }
         }
         // JJ/MM/AAAA -> "le 25/07/2001"
@@ -5262,14 +5262,14 @@ gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "le " ;
-                    break ;
+                    *pIntro = "le ";
+                    break;
                 case DateDeb :
-                    *pIntro = "du " ;
-                    break ;
+                    *pIntro = "du ";
+                    break;
                 case DateFin :
-                    *pIntro = "au " ;
-                    break ;
+                    *pIntro = "au ";
+                    break;
             }
         }
     }
@@ -5280,39 +5280,39 @@ gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
   	{
         // Date vide
         if (sDate == "00000000")
-      	    return ;
+      	    return;
         // Juste AAAA -> "en 2001"
         else if (string(sDate, 4, 4) == "0000")
         {
-      	    *pMessage = string(sDate, 0, 4) ;
+      	    *pMessage = string(sDate, 0, 4);
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "en " ;
-                    break ;
+                    *pIntro = "en ";
+                    break;
                 case DateDeb :
-                    *pIntro = "de " ;
-                    break ;
+                    *pIntro = "de ";
+                    break;
                 case DateFin :
-                    *pIntro = "à " ;
-                    break ;
+                    *pIntro = "à ";
+                    break;
             }
         }
         // MM/AAAA -> "en juillet 2001"
         else if (string(sDate, 6, 2) == "00")
         {
-      	    *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4) ;
+      	    *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4);
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "en " ;
-                    break ;
+                    *pIntro = "en ";
+                    break;
                 case DateDeb :
-                    *pIntro = "du " ;
-                    break ;
+                    *pIntro = "du ";
+                    break;
                 case DateFin :
-                    *pIntro = "au " ;
-                    break ;
+                    *pIntro = "au ";
+                    break;
             }
         }
         // JJ/MM/AAAA -> "le 25/07/2001"
@@ -5322,26 +5322,26 @@ gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
             switch (iType)
             {
                 case DateNormal :
-                    *pIntro = "le " ;
-                    break ;
+                    *pIntro = "le ";
+                    break;
                 case DateDeb :
-                    *pIntro = "du " ;
-                    break ;
+                    *pIntro = "du ";
+                    break;
                 case DateFin :
-                    *pIntro = "au " ;
-                    break ;
+                    *pIntro = "au ";
+                    break;
             }
-            string sHeure = "" ;
+            string sHeure = "";
             // gestion de l'heure
             if      (strlen(sDate.c_str()) == 10)
-                sHeure = string(sDate, 8, 2) + string("h") ;
+                sHeure = string(sDate, 8, 2) + string("h");
             else if (strlen(sDate.c_str()) == 12)
-                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) ;
+                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2);
             else if (strlen(sDate.c_str()) == 14)
-                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 
             if (sHeure != "")
-                *pMessage += string(" à ") + sHeure ;
+                *pMessage += string(" à ") + sHeure;
         }
     }
     //
@@ -5350,23 +5350,23 @@ gereDateFr::donne_date_breve(string* pMessage, string* pIntro, int iType)
     else if ((sUnite == "2HE01") || (sUnite == "2HE00"))
     {
         if (sUnite == "2HE01")
-            *pMessage = string(sDate, 0, 2) + string(":") + string(sDate, 2, 2) ;
+            *pMessage = string(sDate, 0, 2) + string(":") + string(sDate, 2, 2);
         if (sUnite == "2HE00")
-            *pMessage = sDate + string(":") ;
+            *pMessage = sDate + string(":");
 
         if ((*pMessage)[0] == '0')
-            *pMessage = string(*pMessage, 1, strlen(pMessage->c_str()) - 1) ;
+            *pMessage = string(*pMessage, 1, strlen(pMessage->c_str()) - 1);
 
         switch (iType)
         {
             case DateNormal :
-                *pIntro = "à " ;
+                *pIntro = "à ";
                 break;
             case DateDeb :
-                *pIntro = "de " ;
+                *pIntro = "de ";
                 break;
             case DateFin :
-                *pIntro = "à " ;
+                *pIntro = "à ";
                 break;
         }
     }
@@ -5465,7 +5465,7 @@ gereDateFr::donne_date_claire(string* pMessage, string* pIntro, int iType)
         if (strlen(sDate.c_str()) < 8)
             return;
 
-        string sHeure = "" ;
+        string sHeure = "";
 
         switch (iType)
         {
@@ -5512,11 +5512,11 @@ gereDateFr::donne_date_claire(string* pMessage, string* pIntro, int iType)
 
             // gestion de l'heure
             if      (strlen(sDate.c_str()) == 10)
-                sHeure = string(sDate, 8, 2) + string(" heures") ;
+                sHeure = string(sDate, 8, 2) + string(" heures");
             else if (strlen(sDate.c_str()) == 12)
-                sHeure = string(sDate, 8, 2) + string(" heures ") + string(sDate, 10, 2) ;
+                sHeure = string(sDate, 8, 2) + string(" heures ") + string(sDate, 10, 2);
             else if (strlen(sDate.c_str()) == 14)
-                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 		}
 		else
 			*pMessage = "?? ";
@@ -5540,7 +5540,7 @@ gereDateFr::donne_date_claire(string* pMessage, string* pIntro, int iType)
 		}
 
         if (sHeure != "")
-            *pMessage += string(" à ") + sHeure ;
+            *pMessage += string(" à ") + sHeure;
     }
     //
   	// Heure au format HHmm ou HH
@@ -5548,23 +5548,23 @@ gereDateFr::donne_date_claire(string* pMessage, string* pIntro, int iType)
     else if ((sUnite == "2HE01") || (sUnite == "2HE00"))
     {
         if (sUnite == "2HE01")
-            *pMessage = string(sDate, 0, 2) + string("h") + string(sDate, 2, 2) ;
+            *pMessage = string(sDate, 0, 2) + string("h") + string(sDate, 2, 2);
         if (sUnite == "2HE00")
-            *pMessage = sDate + string("h") ;
+            *pMessage = sDate + string("h");
 
         if ((*pMessage)[0] == '0')
-            *pMessage = string(*pMessage, 1, strlen(pMessage->c_str()) - 1) ;
+            *pMessage = string(*pMessage, 1, strlen(pMessage->c_str()) - 1);
 
         switch (iType)
         {
             case DateNormal :
-                *pIntro = "à " ;
+                *pIntro = "à ";
                 break;
             case DateDeb :
-                *pIntro = "de " ;
+                *pIntro = "de ";
                 break;
             case DateFin :
-                *pIntro = "à " ;
+                *pIntro = "à ";
                 break;
         }
     }

@@ -34,8 +34,8 @@ ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPas
 {
     std::cout << "ontologyBaseManager::ontologyBaseManager(string sHost, string sUser, string sPass, string sDB, unsigned int uiPort)" << std::endl;
 
-    //_sqlConnector     = (MYSQL *) 0 ;
-    //_iInstanceCounter = 0 ;
+    //_sqlConnector     = (MYSQL *) 0;
+    //_iInstanceCounter = 0;
 
     _host             = sHost.c_str();
     _user             = sUser.c_str();
@@ -68,7 +68,7 @@ bool ontologyBaseManager::initBase()
     _sMysqlError = mysql_error(_sqlConnector);
     std::cout << _sMysqlError << std::endl;
 
-    return false ;
+    return false;
 }
 
 
@@ -185,12 +185,12 @@ bool ontologyBaseManager::openBase()
         return false;
     }
 
-    //MYSQL *pReturnedConnector = mysql_real_connect(_sqlConnector, _host, _user, _pass, _database, 0, NULL, 0) ;
+    //MYSQL *pReturnedConnector = mysql_real_connect(_sqlConnector, _host, _user, _pass, _database, 0, NULL, 0);
 
     //if ((MYSQL *) NULL == pReturnedConnector)
     //{
-    //  _sMysqlError = mysql_error(_sqlConnector) ;
-    //  return false ;
+    //  _sMysqlError = mysql_error(_sqlConnector);
+    //  return false;
     //}
     if (!mysql_set_character_set(_sqlConnector, cCharset))
     {
@@ -233,7 +233,7 @@ MYSQL_RES * ontologyBaseManager::executeQuery(const string sQuery,
     strcpy(szQueryBuffer, sQuery.c_str());
 
     if (pErrorMessage)
-        *pErrorMessage = string("") ;
+        *pErrorMessage = string("");
 
     int iAttemptCount = 1;
 
@@ -247,29 +247,29 @@ MYSQL_RES * ontologyBaseManager::executeQuery(const string sQuery,
     //
     if ((CR_SERVER_GONE_ERROR == iQueryError) || (CR_SERVER_LOST == iQueryError))
     {
-        iAttemptCount++ ;
+        iAttemptCount++;
 
-        iQueryError = mysql_query(_sqlConnector, sQuery.c_str()) ;
+        iQueryError = mysql_query(_sqlConnector, sQuery.c_str());
         if (0 == iQueryError)
-            return mysql_use_result(_sqlConnector) ;
+            return mysql_use_result(_sqlConnector);
     }
 
-    string sMysqlErrorMessage = mysql_error(_sqlConnector) ;
+    string sMysqlErrorMessage = mysql_error(_sqlConnector);
 
     if (pErrorMessage)
     {
-        *pErrorMessage += sMysqlErrorMessage ;
+        *pErrorMessage += sMysqlErrorMessage;
         if (iAttemptCount > 1)
-            *pErrorMessage += string(" (at second attempt)") ;
+            *pErrorMessage += string(" (at second attempt)");
     }
 
     if (bVerbose)
     {
         string sErreurMsg = string("Error for query [") + sQuery + string("] -> ") + sMysqlErrorMessage;
-        erreur(sErreurMsg.c_str(), standardError) ;
+        erreur(sErreurMsg.c_str(), standardError);
     }
 
-    return (MYSQL_RES *) 0 ;
+    return (MYSQL_RES *) 0;
 }
 
 /*
@@ -277,20 +277,20 @@ bool
 ontologyBaseManager::insertMessage(messageData message)
 {
   if (isMessageInBase(message))
-    return false ;
+    return false;
 
   if ((message.getFName() == "") || (message.getLName() == "") || (message.getID() == "") || (message.getIPP() == "") || (message.getIEP() == "") || (message.getDate() == ""))
-    return false ;
-  string sFName = string(message.getFName(), 0, 15) ;
-  string sLName = string(message.getLName(), 0, 15) ;
-  char szQueryBuffer[5120] ;
-  sprintf(szQueryBuffer, "insert into %s (msgID, msgDate, msgIPP, msgIEP, msgFName, msgLName, msg) values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", _table.c_str(), message.getID().c_str(), message.getDate().c_str(), message.getIPP().c_str(), message.getIEP().c_str(), sFName.c_str(), sLName.c_str(), message.getMessage().c_str()) ;
-//  IHEGlobal::PrintReport("query to store message is : " + string(szQueryBuffer)) ;
-  int mysqlError = mysql_query(_sqlConnector, szQueryBuffer) ;
+    return false;
+  string sFName = string(message.getFName(), 0, 15);
+  string sLName = string(message.getLName(), 0, 15);
+  char szQueryBuffer[5120];
+  sprintf(szQueryBuffer, "insert into %s (msgID, msgDate, msgIPP, msgIEP, msgFName, msgLName, msg) values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", _table.c_str(), message.getID().c_str(), message.getDate().c_str(), message.getIPP().c_str(), message.getIEP().c_str(), sFName.c_str(), sLName.c_str(), message.getMessage().c_str());
+//  IHEGlobal::PrintReport("query to store message is : " + string(szQueryBuffer));
+  int mysqlError = mysql_query(_sqlConnector, szQueryBuffer);
   if (mysqlError == 0)
-    return true ;
+    return true;
   else
-    return false ;
+    return false;
 }
 */
 
@@ -307,7 +307,7 @@ bool ontologyBaseManager::closeBase()
     if (_iInstanceCounter > 1)
     {
         _iInstanceCounter--;
-        return true ;
+        return true;
     }
 
     // Closes opened connection and deallocates the connection handle
@@ -319,6 +319,6 @@ bool ontologyBaseManager::closeBase()
 
     _iInstanceCounter = 0;
 
-    return true ;
+    return true;
 }
 

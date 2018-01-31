@@ -20,7 +20,7 @@ NSFlechiesData::NSFlechiesData()
 	//
 	// Met les champs de données à zéro
 	//
-	metAZero() ;
+	metAZero();
 }
 
 // -----------------------------------------------------------------------------
@@ -28,9 +28,9 @@ NSFlechiesData::NSFlechiesData()
 // -----------------------------------------------------------------------------
 NSFlechiesData::NSFlechiesData(NSFlechiesData& rv)
 {
-	sId			 = rv.sId ;
-	sLibelle = rv.sLibelle ;
-	sCode  	 = rv.sCode ;
+	sId			 = rv.sId;
+	sLibelle = rv.sLibelle;
+	sCode  	 = rv.sCode;
 }
 
 // -----------------------------------------------------------------------------
@@ -47,13 +47,13 @@ NSFlechiesData&
 NSFlechiesData::operator=(NSFlechiesData src)
 {
   if (this == &src)
-    return *this ;
+    return *this;
 
-	sId			 = src.sId ;
-	sLibelle = src.sLibelle ;
-	sCode  	 = src.sCode ;
+	sId			 = src.sId;
+	sLibelle = src.sLibelle;
+	sCode  	 = src.sCode;
 
-	return (*this) ;
+	return (*this);
 }
 
 // -----------------------------------------------------------------------------
@@ -65,9 +65,9 @@ NSFlechiesData::operator==(const NSFlechiesData& o)
 	if ((sId			== o.sId)      &&
 			(sLibelle == o.sLibelle) &&
 			(sCode    == o.sCode))
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -76,9 +76,9 @@ NSFlechiesData::operator==(const NSFlechiesData& o)
 void
 NSFlechiesData::metAZero()
 {
-	sId      = string("") ;
-	sLibelle = string("") ;
-	sCode    = string("") ;
+	sId      = string("");
+	sLibelle = string("");
+	sCode    = string("");
 }
 
 // -----------------------------------------------------------------------------
@@ -92,25 +92,25 @@ NSFlechies::NSFlechies(NSSuper* pSuper, int iBase)
 {
 	switch (iTypeBase)
 	{
-		case flechies	:	sFileName   = string("flechies.db") ;
-										sFileLib    = string("formes fléchies") ;
-										break ;
+		case flechies	:	sFileName   = string("flechies.db");
+										sFileLib    = string("formes fléchies");
+										break;
 
-		case ortho		:	sFileName   = string("flxortho.db") ;
-										sFileLib    = string("fautes d'orthographes classiques") ;
-										break ;
+		case ortho		:	sFileName   = string("flxortho.db");
+										sFileLib    = string("fautes d'orthographes classiques");
+										break;
 
-		case local		:	sFileName   = string("flxlocal.db") ;
-										sFileLib    = string("termes locaux") ;
-										break ;
+		case local		:	sFileName   = string("flxlocal.db");
+										sFileLib    = string("termes locaux");
+										break;
 
-		case express	: sFileName   = string("flxexpre.db") ;
-										sFileLib    = string("expressions classiques") ;
-										break ;
+		case express	: sFileName   = string("flxexpre.db");
+										sFileLib    = string("expressions classiques");
+										break;
 
-		default				: sFileName   = string("flechies.db") ;
-										sFileLib    = string("formes fléchies") ;
-										break ;
+		default				: sFileName   = string("flechies.db");
+										sFileLib    = string("formes fléchies");
+										break;
   }
 }
 #else
@@ -121,25 +121,25 @@ NSFlechies::NSFlechies(NSSuper* pSuper, int iBase)
 {
 	switch (iTypeBase)
 	{
-		case flechies	:	sFileName   = string("flechies") ;
-										sFileLib    = string("formes fléchies") ;
-										break ;
+		case flechies	:	sFileName   = string("flechies");
+										sFileLib    = string("formes fléchies");
+										break;
 
-		case ortho		:	sFileName   = string("flxortho") ;
-										sFileLib    = string("fautes d'orthographes classiques") ;
-										break ;
+		case ortho		:	sFileName   = string("flxortho");
+										sFileLib    = string("fautes d'orthographes classiques");
+										break;
 
-		case local		:	sFileName   = string("flxlocal") ;
-										sFileLib    = string("termes locaux") ;
-										break ;
+		case local		:	sFileName   = string("flxlocal");
+										sFileLib    = string("termes locaux");
+										break;
 
-		case express	: sFileName   = string("flxexpre") ;
-										sFileLib    = string("expressions classiques") ;
-										break ;
+		case express	: sFileName   = string("flxexpre");
+										sFileLib    = string("expressions classiques");
+										break;
 
-		default				: sFileName   = string("flechies") ;
-										sFileLib    = string("formes fléchies") ;
-										break ;
+		default				: sFileName   = string("flechies");
+										sFileLib    = string("formes fléchies");
+										break;
   }
 }
 #endif
@@ -155,8 +155,8 @@ NSFlechies::NSFlechies(NSFlechies& rv)
 		        NSSuperRoot(rv._pSuper)
 #endif
 {
-  iTypeBase = rv.iTypeBase ;
-  sFileName = rv.sFileName ;
+  iTypeBase = rv.iTypeBase;
+  sFileName = rv.sFileName;
 }
 
 // -----------------------------------------------------------------------------
@@ -173,25 +173,25 @@ NSFlechies::~NSFlechies()
 void
 NSFlechies::alimenteFiche(MYSQL_ROW *pRow)
 {
-	pDonnees->sId			 = (*pRow)[FLECHIES_ID_FIELD - 1] ;
-	pDonnees->sLibelle = (*pRow)[FLECHIES_LIBELLE_FIELD - 1] ;
-	pDonnees->sCode		 = (*pRow)[FLECHIES_CODE_FIELD - 1] ;
+	pDonnees->sId			 = (*pRow)[FLECHIES_ID_FIELD - 1];
+	pDonnees->sLibelle = (*pRow)[FLECHIES_LIBELLE_FIELD - 1];
+	pDonnees->sCode		 = (*pRow)[FLECHIES_CODE_FIELD - 1];
 }
 #else
 void
 NSFlechies::alimenteFiche()
 {
-  char id[FLECHIES_ID_LEN + 1] ;
-	char libelle[FLECHIES_LIBELLE_LEN + 1] ;
-	char code[FLECHIES_CODE_LEN + 1] ;
+  char id[FLECHIES_ID_LEN + 1];
+	char libelle[FLECHIES_LIBELLE_LEN + 1];
+	char code[FLECHIES_CODE_LEN + 1];
 
-	alimenteChamp(id,      FLECHIES_ID_FIELD,      FLECHIES_ID_LEN) ;
-	alimenteChamp(libelle, FLECHIES_LIBELLE_FIELD, FLECHIES_LIBELLE_LEN) ;
-	alimenteChamp(code,    FLECHIES_CODE_FIELD,    FLECHIES_CODE_LEN) ;
+	alimenteChamp(id,      FLECHIES_ID_FIELD,      FLECHIES_ID_LEN);
+	alimenteChamp(libelle, FLECHIES_LIBELLE_FIELD, FLECHIES_LIBELLE_LEN);
+	alimenteChamp(code,    FLECHIES_CODE_FIELD,    FLECHIES_CODE_LEN);
 
-  pDonnees->setId(id) ;
-  pDonnees->setLabel(libelle) ;
-  pDonnees->setCode(code) ;
+  pDonnees->setId(id);
+  pDonnees->setLabel(libelle);
+  pDonnees->setCode(code);
 }
 // -----------------------------------------------------------------------------
 //  Transfère le contenu des valeurs de la fiche dans pRecBuff
@@ -199,9 +199,9 @@ NSFlechies::alimenteFiche()
 void
 NSFlechies::videFiche()
 {
-	videChamp((char*)pDonnees->getId().c_str(),    FLECHIES_ID_FIELD,      FLECHIES_ID_LEN) ;
-	videChamp((char*)pDonnees->getLabel().c_str(), FLECHIES_LIBELLE_FIELD, FLECHIES_LIBELLE_LEN) ;
-	videChamp((char*)pDonnees->getCode().c_str(),  FLECHIES_CODE_FIELD,    FLECHIES_CODE_LEN) ;
+	videChamp((char*)pDonnees->getId().c_str(),    FLECHIES_ID_FIELD,      FLECHIES_ID_LEN);
+	videChamp((char*)pDonnees->getLabel().c_str(), FLECHIES_LIBELLE_FIELD, FLECHIES_LIBELLE_LEN);
+	videChamp((char*)pDonnees->getCode().c_str(),  FLECHIES_CODE_FIELD,    FLECHIES_CODE_LEN);
 }
 
 // -----------------------------------------------------------------------------
@@ -214,9 +214,9 @@ NSFlechies::open(bool bOpenShared)
 	// Appelle la fonction open() de la classe de base pour ouvrir
 	// l'index primaire
 	//
-	lastError = NSFiche::open(sFileName.c_str(), NSF_GUIDES, bOpenShared) ;
+	lastError = NSFiche::open(sFileName.c_str(), NSF_GUIDES, bOpenShared);
 
-	return (lastError) ;
+	return (lastError);
 }
 #endif
 
@@ -225,7 +225,7 @@ NSFlechies::open(bool bOpenShared)
 bool
 NSFlechies::Create()
 {
-	return true ;
+	return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -233,7 +233,7 @@ NSFlechies::Create()
 bool
 NSFlechies::Modify()
 {
-	return true ;
+	return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -242,9 +242,9 @@ NSFlechies::Modify()
 NSFlechies&
 NSFlechies::operator=(NSFlechies src)
 {
-	*pDonnees = *(src.pDonnees) ;
-	iTypeBase = src.iTypeBase ;
-	return *this ;
+	*pDonnees = *(src.pDonnees);
+	iTypeBase = src.iTypeBase;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -274,11 +274,11 @@ NSFlechiesInfo::NSFlechiesInfo(NSFlechies *pFlechies)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new NSFlechiesData() ;
+	pDonnees = new NSFlechiesData();
 	//
 	// Copie les valeurs du NSEpiContact
 	//
-	*pDonnees = *(pFlechies->pDonnees) ;
+	*pDonnees = *(pFlechies->pDonnees);
 }
 #endif
 
@@ -288,10 +288,10 @@ NSFlechiesInfo::NSFlechiesInfo(NSFlechies *pFlechies)
 NSFlechiesInfo::NSFlechiesInfo(NSFlechiesInfo& rv)
 {
 	// Crée l'objet de données
-	pDonnees = new NSFlechiesData() ;
+	pDonnees = new NSFlechiesData();
 
 	// Copie les valeurs du NSFlechiesInfo d'origine
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 // -----------------------------------------------------------------------------
@@ -299,7 +299,7 @@ NSFlechiesInfo::NSFlechiesInfo(NSFlechiesInfo& rv)
 // -----------------------------------------------------------------------------
 NSFlechiesInfo::~NSFlechiesInfo()
 {
-	delete pDonnees ;
+	delete pDonnees;
 }
 
 // -----------------------------------------------------------------------------
@@ -309,11 +309,11 @@ NSFlechiesInfo&
 NSFlechiesInfo::operator=(NSFlechiesInfo src)
 {
   if (this == &src)
-    return *this ;
+    return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
   
-	return *this ;
+	return *this;
 }
 
 // -----------------------------------------------------------------------------
@@ -322,7 +322,7 @@ NSFlechiesInfo::operator=(NSFlechiesInfo src)
 int
 NSFlechiesInfo::operator==(const NSFlechiesInfo& o)
 {
-	 return (*pDonnees == *(o.pDonnees)) ;
+	 return (*pDonnees == *(o.pDonnees));
 }
 
 #ifdef _ENTERPRISE_DLL
@@ -330,11 +330,11 @@ void
 NSFlechiesInfo::alimenteFiche(MYSQL_ROW *pRow)
 {
   if ((MYSQL_ROW*) NULL == pRow)
-    return ;
+    return;
 
-  pDonnees->setId((*pRow)[FLECHIES_ID_FIELD - 1]) ;
-  pDonnees->setLabel((*pRow)[FLECHIES_LIBELLE_FIELD - 1]) ;
-	pDonnees->setCode((*pRow)[FLECHIES_CODE_FIELD - 1]) ;
+  pDonnees->setId((*pRow)[FLECHIES_ID_FIELD - 1]);
+  pDonnees->setLabel((*pRow)[FLECHIES_LIBELLE_FIELD - 1]);
+	pDonnees->setCode((*pRow)[FLECHIES_CODE_FIELD - 1]);
 }
 #endif
 

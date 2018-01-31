@@ -13,15 +13,15 @@
 #endif
 #endif
 
-class BBItemData ;
-class BBItemInfo ;
-class BBDecodeData ;
-class BBChemData ;
+class BBItemData;
+class BBItemInfo;
+class BBDecodeData;
+class BBChemData;
 //vecteur de string
 
-typedef vector<string*> EquiItem ;
-typedef EquiItem::iterator       EquiItemIter ;
-typedef EquiItem::const_iterator ConstEquiItemIter ;
+typedef vector<string*> EquiItem;
+typedef EquiItem::iterator       EquiItemIter;
+typedef EquiItem::const_iterator ConstEquiItemIter;
 
 #ifndef __linux__
 class _CLASSELEXI VecteurString : public EquiItem
@@ -31,24 +31,24 @@ class VecteurString : public EquiItem
 {
   public:
 
-    VecteurString() ;
-    VecteurString(char* iniTab[]) ; // Initialisation a partir d'un tableau de char*
-    ~VecteurString() ;
+    VecteurString();
+    VecteurString(char* iniTab[]); // Initialisation a partir d'un tableau de char*
+    ~VecteurString();
 
-    VecteurString(VecteurString& src) ;
+    VecteurString(VecteurString& src);
     // Surcharge de l'operateur d'affectation
-    VecteurString& operator=(const VecteurString& src) ;
-    void vider() ;
-    bool ItemDansUnVecteur(string sItem) ;
-    string ItemStrictementInferieur(string sItem) ;
-    string ItemStrictementSuperieur(string sItem) ;
+    VecteurString& operator=(const VecteurString& src);
+    void vider();
+    bool ItemDansUnVecteur(string sItem);
+    string ItemStrictementInferieur(string sItem);
+    string ItemStrictementSuperieur(string sItem);
     //donner le nombre d'items communs a deux chaines
-    int NbElementCommun(VecteurString* pVectItemCible) ;
+    int NbElementCommun(VecteurString* pVectItemCible);
 };
 
 //vecteur de BBItemData
-typedef vector<BBItemData*> EquiData ;
-typedef EquiData::iterator EquiDataIter ;
+typedef vector<BBItemData*> EquiData;
+typedef EquiData::iterator EquiDataIter;
 typedef NTArray<BBItemData> VecteurData;
 
 /*
@@ -56,19 +56,19 @@ class VecteurData : public EquiData
 {
     public:
 
-        VecteurData() ;
-        ~VecteurData() ;
-        VecteurData(VecteurData& src) ;
+        VecteurData();
+        ~VecteurData();
+        VecteurData(VecteurData& src);
         // Surcharge de l'opérateur d'affectation
-        VecteurData& operator=(VecteurData src) ;
-        void vider() ;
+        VecteurData& operator=(VecteurData src);
+        void vider();
 };    */
 
 //
 // Definition de BBFicheArray (Array de BBItemInfo*)
 //
-typedef vector<BBItemInfo*> BBFicheVector ;
-typedef BBFicheVector::iterator BBFicheIter ;
+typedef vector<BBItemInfo*> BBFicheVector;
+typedef BBFicheVector::iterator BBFicheIter;
 
 #ifndef __linux__
 class _CLASSELEXI BBFicheArray : public BBFicheVector
@@ -80,45 +80,45 @@ class BBFicheArray : public BBFicheVector
 
 	    // Constructeurs
 	    BBFicheArray() : BBFicheVector() {}
-	    BBFicheArray(BBFicheArray& rv) ;
+	    BBFicheArray(BBFicheArray& rv);
 	    // Destructeur
-	    virtual ~BBFicheArray() ;
+	    virtual ~BBFicheArray();
 
-        BBFicheArray& operator=(BBFicheArray src) ;
-        void vider() ;
+        BBFicheArray& operator=(BBFicheArray src);
+        void vider();
 };
 
 //vecteur de BBDecodeData
-typedef vector<BBDecodeData*> EquiDecode ;
-typedef EquiDecode::iterator EquiDecodeIter ;
+typedef vector<BBDecodeData*> EquiDecode;
+typedef EquiDecode::iterator EquiDecodeIter;
 
 class VecteurDecode : public EquiDecode
 {
     public:
 
-        VecteurDecode() ;
-        ~VecteurDecode() ;
-        VecteurDecode(VecteurDecode& src) ;
+        VecteurDecode();
+        ~VecteurDecode();
+        VecteurDecode(VecteurDecode& src);
         // Surcharge de l'opérateur d'affectation
-        VecteurDecode& operator=(VecteurDecode src) ;
-        void vider() ;
+        VecteurDecode& operator=(VecteurDecode src);
+        void vider();
 };
 
 //vecteur de vecteur de string
-typedef vector <VecteurString*> EquiItemVector ;
-typedef EquiItemVector::iterator EquiItemVectorIter ;
+typedef vector <VecteurString*> EquiItemVector;
+typedef EquiItemVector::iterator EquiItemVectorIter;
 
 class VecteurItem : public EquiItemVector
 {
     public:
 
-        VecteurItem() ;
-        ~VecteurItem() ;
-        VecteurItem(VecteurItem& src) ;
+        VecteurItem();
+        ~VecteurItem();
+        VecteurItem(VecteurItem& src);
         // Surcharge de l'operateur d'affectation
-        VecteurItem& operator=(VecteurItem src) ;
-        void    vider() ;
-        size_t  NbElementSemantiqueCommun(VecteurString* pVectItemCible) ;
+        VecteurItem& operator=(VecteurItem src);
+        void    vider();
+        size_t  NbElementSemantiqueCommun(VecteurString* pVectItemCible);
 };
 
 // RechercheSelonCritere : Critere	->	recherche semantique
@@ -132,30 +132,30 @@ class  RechercheMere
 {
     public:
 
-        string 		    sEtiquette ;
-        bool	        trouve ;
-        VecteurItem*    pEquivalentTrie ; //vecteur des equivalents tries
-        VecteurItem*	pEquivalentBrut ; //vecteur des equivalents non tries
+        string 		    sEtiquette;
+        bool	        trouve;
+        VecteurItem*    pEquivalentTrie; //vecteur des equivalents tries
+        VecteurItem*	pEquivalentBrut; //vecteur des equivalents non tries
 
-        RechercheMere(string sEtiquette = "", bool trouve = false) ;
-        ~RechercheMere() ;
-        RechercheMere(const RechercheMere& src) ;
-        RechercheMere& operator=(RechercheMere src) ;
-        string ChaineStrictementSuperieur(VecteurString* pVectItemCible, string sDernierItemPere) ;
+        RechercheMere(string sEtiquette = "", bool trouve = false);
+        ~RechercheMere();
+        RechercheMere(const RechercheMere& src);
+        RechercheMere& operator=(RechercheMere src);
+        string ChaineStrictementSuperieur(VecteurString* pVectItemCible, string sDernierItemPere);
 };
 
 class  RechercheSelonCritereData : public RechercheMere
 {
     public:
 
-        BBItemData*		pDonnees ;	  // Donnees de la fiche PARADOX GUIDE
-        VecteurData*	pVecteurData ;
+        BBItemData*		pDonnees;	  // Donnees de la fiche PARADOX GUIDE
+        VecteurData*	pVecteurData;
 
-        RechercheSelonCritereData(string sEtiquette = "", bool trouve = false) ;
-        ~RechercheSelonCritereData() ;
-        RechercheSelonCritereData(const RechercheSelonCritereData& src) ;
-        RechercheSelonCritereData& operator=(RechercheSelonCritereData src) ;
-        string ChaineStrictementSuperieur(VecteurString* pVectItemCible, string sDernierItemPere) ;
+        RechercheSelonCritereData(string sEtiquette = "", bool trouve = false);
+        ~RechercheSelonCritereData();
+        RechercheSelonCritereData(const RechercheSelonCritereData& src);
+        RechercheSelonCritereData& operator=(RechercheSelonCritereData src);
+        string ChaineStrictementSuperieur(VecteurString* pVectItemCible, string sDernierItemPere);
 };
 
 class  RechercheSelonCritereDecode : public RechercheMere
@@ -163,7 +163,7 @@ class  RechercheSelonCritereDecode : public RechercheMere
 	public:
    BBDecodeData*	pDonnees;	  // Donnees de la fiche PARADOX DECODE
    VecteurDecode*	pVecteurData;
-   RechercheSelonCritereDecode(string sEtiquette = "", bool trouve = false) ;
+   RechercheSelonCritereDecode(string sEtiquette = "", bool trouve = false);
    ~RechercheSelonCritereDecode();
    RechercheSelonCritereDecode(const RechercheSelonCritereDecode& src);
    RechercheSelonCritereDecode& operator=(RechercheSelonCritereDecode src);

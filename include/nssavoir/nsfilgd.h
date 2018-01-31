@@ -8,28 +8,28 @@
 
 #include <vector>
 
-typedef char DBITBLNAME[261] ;
+typedef char DBITBLNAME[261];
   
 #define	GUIDE  string("GUIDE")
 #define	DECODE string("DECODE")
 
-class NSContexte ;
-class BBChem ;
-class BBFiche ;
-class BBDecode ;
-class NSPatPathoArray ;
-class ClasseStringVector ;
-class VectString ;
-class VecteurItem ;
-class VecteurString ;
-class NSPhraseur ;
-class NsProposition ;
-class NSGenerateur ;
-class ChoixPathoDialog ;
-class NSPatholog ;
-class NSLexiMed ;
-class NSPathologData ;
-class NSSavoir ;
+class NSContexte;
+class BBChem;
+class BBFiche;
+class BBDecode;
+class NSPatPathoArray;
+class ClasseStringVector;
+class VectString;
+class VecteurItem;
+class VecteurString;
+class NSPhraseur;
+class NsProposition;
+class NSGenerateur;
+class ChoixPathoDialog;
+class NSPatholog;
+class NSLexiMed;
+class NSPathologData;
+class NSSavoir;
 
 #include "nssavoir/nsvarray.h"
 
@@ -43,7 +43,7 @@ class NSSavoir ;
   // #include "nautilus\nssuper.h"
 #endif
 
-bool inferieure(string* s, string* b) ;
+bool inferieure(string* s, string* b);
 
 //
 // Classe d'acces au dictionnaire
@@ -56,82 +56,82 @@ class NSDico : public NSRoot
 {
 	public:
 
-  	enum DCODETYPE { dcPhrase, dcTiret } ;
+  	enum DCODETYPE { dcPhrase, dcTiret };
 
     // Boite de dialogue de choix des elements du lexique
-    ChoixPathoDialog* _pDicoDialog ;
+    ChoixPathoDialog* _pDicoDialog;
 
     // Objet d'acces a la base de donnees Lexique pour l'utilisateur
-    string            _sUserLang ;
-    NSPhraseur*       _pPhraseur ;
-    NsProposition*    _pProposition ;
-    NSGenerateur*     _pGenerateur ;
-    NSPatholog* 	    _pPatho ;         // lexique
-    NSLexiMed* 		    _pLexiMed ;       // base des medicaments
+    string            _sUserLang;
+    NSPhraseur*       _pPhraseur;
+    NsProposition*    _pProposition;
+    NSGenerateur*     _pGenerateur;
+    NSPatholog* 	    _pPatho;         // lexique
+    NSLexiMed* 		    _pLexiMed;       // base des medicaments
 
     // Objet d'acces pour une langue autre que celle de l'utilisateur
-    string            _sLangBis ;
-    NSPatholog* 	    _pPathoBis ;      // lexique
-    NSLexiMed* 		    _pLexiMedBis ;    // base des medicaments
+    string            _sLangBis;
+    NSPatholog* 	    _pPathoBis;      // lexique
+    NSLexiMed* 		    _pLexiMedBis;    // base des medicaments
 
-    bool   			      _bOuvreFerme ;
+    bool   			      _bOuvreFerme;
 
     // Constructeur et destructeur
-    NSDico(NSContexte* pCtx) ;
-    ~NSDico() ;
+    NSDico(NSContexte* pCtx);
+    ~NSDico();
 
     // Fonction de prise de main
-    bool Prend() ;
-    void Relache() ;
-    bool UserChanged() ;
+    bool Prend();
+    void Relache();
+    bool UserChanged();
 
     // Fonctions utilitaires
 
-    enum LibelleType { brut, choisi, affiche } ;
+    enum LibelleType { brut, choisi, affiche };
 
     // Trouve le bon Lexique
-    NSPatholog* donnePatholog(string sLang, string* pCodeLexique) ;
+    NSPatholog* donnePatholog(string sLang, string* pCodeLexique);
     // Trouve le libelle d'un element dont on connait le code
-    bool donneLibelle(string sLang, string* codeLexique, string* libelleTrouve, int precision = affiche, GENRE *pGenre = 0) ;
+    bool donneLibelle(string sLang, string* codeLexique, string* libelleTrouve, int precision = affiche, GENRE *pGenre = 0);
     // Trouve le libelle brut du lexique
-    bool donneLibelleLexique(string sLang, string* codeLexique, string* libelleTrouve) ;
+    bool donneLibelleLexique(string sLang, string* codeLexique, string* libelleTrouve);
     // Trouve le libelle d'un chemin de codes lexiques
-    bool donneLibelleChemin(string sLang, string chemin, string* libelle, string sep = "/") ;
+    bool donneLibelleChemin(string sLang, string chemin, string* libelle, string sep = "/");
 
     // Trouve le plus court libelle d'un element dont on connait le code
-    bool donneShortLibelle(string sLang, string* codeLexique, string* libelleTrouve, int precision = affiche, int *pGenre = 0) ;
+    bool donneShortLibelle(string sLang, string* codeLexique, string* libelleTrouve, int precision = affiche, int *pGenre = 0);
 
-    bool trouvePathologData(string sLang, string* pCode, NSPathologData* pData, bool afficheErreur = true) ;
+    bool trouvePathologData(string sLang, string* pCode, NSPathologData* pData, bool afficheErreur = true);
     // Trouve le code d'un element dont on connait le libelle
-    bool donneCode(string sLang, string* libelleLexique, string* codeTrouve) ;
+    bool donneCode(string sLang, string* libelleLexique, string* codeTrouve);
 
     // Donne la categorie
-    static string CodeCategorie(string sChaine) ;
+    static string CodeCategorie(string sChaine);
 
-    bool   isDrug(string* pCodeLexiqueOrSens) ;
-    bool   isDrugOrTreatment(string* pCodeLexiqueOrSens) ;
+    bool   isDrug(string* pCodeLexiqueOrSens);
+    bool   isDrugOrTreatment(string* pCodeLexiqueOrSens);
 
     // Donne le code Sens en fonction du code lexique
-    static void   donneCodeSens(string* pCodeLexique, string* pCodeSens) ;
-    static void   donneCodeSens(string& sCode) ;
-    static string donneCodeSens(string* pCodeLexique) ;
-    static void   donneCodeComplet(string& sCode) ;
+    static void   donneCodeSens(string* pCodeLexique, string* pCodeSens);
+    static void   donneCodeSens(string& sCode);
+    static string donneCodeSens(string* pCodeLexique);
+    static void   donneCodeComplet(string& sCode);
 
     // chercher dans la patpatho de synthese le complement correspondant a sItem
     // exemple si sItem = VPOIDS retourner la valeur du poids
-    static string SetData(string sItem, string* pUnite, NSPatPathoArray* pPathoDocEnCours) ;
+    static string SetData(string sItem, string* pUnite, NSPatPathoArray* pPathoDocEnCours);
 
     // Decompose PGABA1/WCE501/WPLUR1 en ses composants
-    void separe(string* psChaine, string* psLexique, string* psCertitude, string* psPluriel) ;
+    void separe(string* psChaine, string* psLexique, string* psCertitude, string* psPluriel);
 
     bool Decoder(string sLang, string sChemin, NSPatPathoArray* pSousPatPatho,
-                       ClasseStringVector* pVect, int precision = dcTiret) ;
+                       ClasseStringVector* pVect, int precision = dcTiret);
 
-    NSPatholog*       getPatholog()	  { return _pPatho ; }
-    NSLexiMed*        getLexiMed()    { return _pLexiMed ; }
-    NSGenerateur*     getGenerateur() { return _pGenerateur ; }
-    ChoixPathoDialog* getDicoDialog() { return _pDicoDialog ; }
-    void              setDicoDialog(ChoixPathoDialog* pPD) { _pDicoDialog = pPD ; }
+    NSPatholog*       getPatholog()	  { return _pPatho; }
+    NSLexiMed*        getLexiMed()    { return _pLexiMed; }
+    NSGenerateur*     getGenerateur() { return _pGenerateur; }
+    ChoixPathoDialog* getDicoDialog() { return _pDicoDialog; }
+    void              setDicoDialog(ChoixPathoDialog* pPD) { _pDicoDialog = pPD; }
 };
 
 #define	pathDistanceExact              0  // term to term
@@ -151,33 +151,33 @@ class SemanticSearchElement
 {
   protected:
 
-    string     _sCode ;
-    string     _sRelation ;
-    DBITBLNAME _sensCle ;
+    string     _sCode;
+    string     _sRelation;
+    DBITBLNAME _sensCle;
 
-    VectString _resultVecteurString ;
+    VectString _resultVecteurString;
 
   public:
 
-    SemanticSearchElement() ;
-    SemanticSearchElement(string sCode, string sRelation, DBITBLNAME sensCle, VectString *pVectString) ;
-    SemanticSearchElement(SemanticSearchElement& rv) ;
-    ~SemanticSearchElement() ;
+    SemanticSearchElement();
+    SemanticSearchElement(string sCode, string sRelation, DBITBLNAME sensCle, VectString *pVectString);
+    SemanticSearchElement(SemanticSearchElement& rv);
+    ~SemanticSearchElement();
 
-    bool isSameSearch(const SemanticSearchElement& o) ;
-    bool isSameSearch(const string sCode, const string sRelation, const DBITBLNAME sensCle) ;
+    bool isSameSearch(const SemanticSearchElement& o);
+    bool isSameSearch(const string sCode, const string sRelation, const DBITBLNAME sensCle);
 
-    VectString* getResultVecteurString() { return &_resultVecteurString ; }
+    VectString* getResultVecteurString() { return &_resultVecteurString; }
 
-	  SemanticSearchElement& operator=(SemanticSearchElement src) ;
-	  int 			  	         operator==(const SemanticSearchElement& o) ;
-} ;
+	  SemanticSearchElement& operator=(SemanticSearchElement src);
+	  int 			  	         operator==(const SemanticSearchElement& o);
+};
 
 // array of base blocks
 //
-typedef vector<SemanticSearchElement *>       SemanticSearchElementVector ;
-typedef SemanticSearchElementVector::iterator SemanticSearchElementIter ;
-typedef NTArray<SemanticSearchElement>        NSSemanticSearchElementArray ;
+typedef vector<SemanticSearchElement *>       SemanticSearchElementVector;
+typedef SemanticSearchElementVector::iterator SemanticSearchElementIter;
+typedef NTArray<SemanticSearchElement>        NSSemanticSearchElementArray;
 
 #define maxSearchElement 20
 
@@ -189,21 +189,21 @@ class SemanticSearchElementArray : public NSSemanticSearchElementArray
 {
   protected:
 
-  void addElement(string sCode, string sRelation, DBITBLNAME sensCle, VectString* pVectString) ;
+  void addElement(string sCode, string sRelation, DBITBLNAME sensCle, VectString* pVectString);
 
   public:
 
   // Constructeurs
 	SemanticSearchElementArray() : NSSemanticSearchElementArray() {}
-	SemanticSearchElementArray(SemanticSearchElementArray& rv) ;
-  SemanticSearchElementArray& operator=(SemanticSearchElementArray src) ;
+	SemanticSearchElementArray(SemanticSearchElementArray& rv);
+  SemanticSearchElementArray& operator=(SemanticSearchElementArray src);
 
-  VectString* getExistingResult(string sCode, string sRelation, DBITBLNAME sensCle) ;
-  void        addResult(string sCode, string sRelation, DBITBLNAME sensCle, VectString* pVectString) ;
+  VectString* getExistingResult(string sCode, string sRelation, DBITBLNAME sensCle);
+  void        addResult(string sCode, string sRelation, DBITBLNAME sensCle, VectString* pVectString);
 
 	// Destructeur
-  ~SemanticSearchElementArray() ;
-} ;
+  ~SemanticSearchElementArray();
+};
 
 //
 // Classe d'acces aux fils guides et au reseau semantique
@@ -216,7 +216,7 @@ class NSFilGuide : public NSSuperRoot
 {
   protected:
 
-    SemanticSearchElementArray aSearchEltsArray ;
+    SemanticSearchElementArray aSearchEltsArray;
 
 	public:
 
@@ -226,45 +226,45 @@ class NSFilGuide : public NSSuperRoot
     BBChem*	 		 pBBFiche;
 
     // Objet d'acces a la base de donnees du reseau semantique
-    NSSavoir* 	 pSavoir ;
-    VecteurItem* pVecEquivalentItemDuPere ; //
+    NSSavoir* 	 pSavoir;
+    VecteurItem* pVecEquivalentItemDuPere; //
                                             //vecteur contenant les vecteurs des
                                             //equivalents au sens semantique des
                                             //items dans la chaine du pere
                                             //
 
-    bool   	 		bOuvreFerme ;
-    enum compTYPE { compStrict, compReseau, compObjet } ;
+    bool   	 		bOuvreFerme;
+    enum compTYPE { compStrict, compReseau, compObjet };
 
     // Constructeur et destructeur
-    NSFilGuide(NSSuper* pSuper, string sTypeBase) ;
-    ~NSFilGuide() ;
+    NSFilGuide(NSSuper* pSuper, string sTypeBase);
+    ~NSFilGuide();
 
     // Fonction de prise de main
-    bool Prend() ;
-    void Relache() ;
+    bool Prend();
+    void Relache();
 
     // inverser une chaine
-    void InverseChaine(string* Localisation, string* pInverse) ;
+    void InverseChaine(string* Localisation, string* pInverse);
 
-    int  pathDistance(string* psTarget, string* psSource, bool bWithSemantic = true, DBITBLNAME sensCle = "FLECHE") ;
+    int  pathDistance(string* psTarget, string* psSource, bool bWithSemantic = true, DBITBLNAME sensCle = "FLECHE");
     int  specificPathDistance(VecteurString* pVectItemTarget,
                                     VecteurItem* pEquivalentSource,
-                                        VecteurString* pVectItemSource) ;
+                                        VecteurString* pVectItemSource);
 
     // egalite au sens reseau
     bool testeEgaliteChemin(VecteurString* pVectItemCible, EquiItemIter IterCible,
-                     VecteurItem* EquivalentSource, EquiItemVectorIter vect) ;
+                     VecteurItem* EquivalentSource, EquiItemVectorIter vect);
 
-    void DecomposeChaine(string* pChaine, VecteurString* pVect ) ;
-    bool comparerItem(string sItem2, VecteurString* pEquivalentItem) ; //comparaison de deux items
+    void DecomposeChaine(string* pChaine, VecteurString* pVect );
+    bool comparerItem(string sItem2, VecteurString* pEquivalentItem); //comparaison de deux items
 
 #ifndef _ENTERPRISE_DLL
     void chercheEquivalent(string sQualifie, VecteurString* pEquivalentItem,
-                               string sLien, DBITBLNAME sensCle = "FLECHE") ;
+                               string sLien, DBITBLNAME sensCle = "FLECHE");
 #else
     void chercheEquivalent(string sQualifie, VecteurString* pEquivalentItem,
-                               string sLien, string sensCle = string("FLECHE")) ;
+                               string sLien, string sensCle = string("FLECHE"));
 #endif
                                // ranger dans pEquivalent
                                // les equivalents au sens reseau de
@@ -272,50 +272,50 @@ class NSFilGuide : public NSSuperRoot
 
     //cas de sous chaines
     void testeEgaliteChaineCible(VecteurRechercheSelonCritere* pVecteurSelonCritere,
-                               int NBSeparateur, string* pCheminRecherche, string pCible) ;
+                               int NBSeparateur, string* pCheminRecherche, string pCible);
 
-    void chercheCheminReseau(string* pChaine, VecteurRechercheSelonCritere* VecteurSelonCriter) ; //chercher dans le filguide
+    void chercheCheminReseau(string* pChaine, VecteurRechercheSelonCritere* VecteurSelonCriter); //chercher dans le filguide
 
     //cherche chemin : semantique
     void chercheChemin(string* pChemin,
                            VecteurRechercheSelonCritere* VecteurSelonCriter,
-                           int precision = compReseau) ;
+                           int precision = compReseau);
 
     //par objet
     void chercheCheminObjet(string* pChemin,
-                                VecteurRechercheSelonCritere* VecteurSelonCriter) ;
+                                VecteurRechercheSelonCritere* VecteurSelonCriter);
 
     //egalite stricte
-    void chercheCheminEgaliteStricte(string* pChaine, VecteurRechercheSelonCritere* VecteurSelonCriter) ;
+    void chercheCheminEgaliteStricte(string* pChaine, VecteurRechercheSelonCritere* VecteurSelonCriter);
 
-    void ChoisirMeilleureProposition(VecteurRechercheSelonCritere* pVecteurSelonCritere) ;
+    void ChoisirMeilleureProposition(VecteurRechercheSelonCritere* pVecteurSelonCritere);
 
     // Fonction de comparaison entre chemins
-    bool estEgal(string* pChaine, string* pModele, int niveau = compStrict) ;
+    bool estEgal(string* pChaine, string* pModele, int niveau = compStrict);
 
-    void MettreAjourEquivalent(int NombreElementEnCommun) ;
-    int  NombreSeparateurDansUneChaine(string *pChaine) ;
+    void MettreAjourEquivalent(int NombreElementEnCommun);
+    int  NombreSeparateurDansUneChaine(string *pChaine);
 
     bool RechercheFicheSuivante(VecteurString* pVectItemPere,
                     string sCible, VecteurRechercheSelonCritere* pVecteurSelonCritere,
-                    int NombreElementEnCommun) ;
+                    int NombreElementEnCommun);
 
     string NouvelleCible(VecteurString* pVectItemPere, int NombreElementEnCommun,
-                        VecteurRechercheSelonCritere* pVecteurSelonCritere) ;
+                        VecteurRechercheSelonCritere* pVecteurSelonCritere);
 
     //savoir si sCode1 et sCode2 sont lies par sRelation
-    bool VraiOuFaux(string sCode1, string sRelation, string sCode2, DBITBLNAME sensCle = "FLECHE", bool bPumpMessages = true) ;
-    bool InverseVraiOuFaux(string sCode1, string sRelation, string sCode2, DBITBLNAME sensCle = "ENVERS", bool bPumpMessages = true) ;
+    bool VraiOuFaux(string sCode1, string sRelation, string sCode2, DBITBLNAME sensCle = "FLECHE", bool bPumpMessages = true);
+    bool InverseVraiOuFaux(string sCode1, string sRelation, string sCode2, DBITBLNAME sensCle = "ENVERS", bool bPumpMessages = true);
 
     //mettre tous les items lies à sCode1 par sRelation dans pVecteurString
-    void TousLesVrais(string sCode1, string sRelation, VectString* pVecteurString, DBITBLNAME sensCle = "FLECHE", bool bPumpMessages = true) ;
-    void InverseTousLesVrais(string sCode1, string sRelation, VectString* pVecteurString, DBITBLNAME sensCle = "ENVERS", bool bPumpMessages = true) ;
+    void TousLesVrais(string sCode1, string sRelation, VectString* pVecteurString, DBITBLNAME sensCle = "FLECHE", bool bPumpMessages = true);
+    void InverseTousLesVrais(string sCode1, string sRelation, VectString* pVecteurString, DBITBLNAME sensCle = "ENVERS", bool bPumpMessages = true);
 
     //premier item lie a sCode1 par sRelation
-    string PremierVrai(string sCode1, string sRelation, DBITBLNAME sensCle = "FLECHE") ;
-    string InversePremierVrai(string sCode1, string sRelation, DBITBLNAME sensCle = "ENVERS") ;
+    string PremierVrai(string sCode1, string sRelation, DBITBLNAME sensCle = "FLECHE");
+    string InversePremierVrai(string sCode1, string sRelation, DBITBLNAME sensCle = "ENVERS");
 
-    string chercheQualifiant(string sQualifie, string sLien, DBITBLNAME sensCle = "FLECHE") ;
+    string chercheQualifiant(string sQualifie, string sLien, DBITBLNAME sensCle = "FLECHE");
 };
 
 #endif

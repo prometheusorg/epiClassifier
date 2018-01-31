@@ -103,7 +103,7 @@
 // Constructeurs
 NSLocalisedChapter::NSLocalisedChapter(NSLocalisedChapter& rv)
 {
-  aLocalTexts = rv.aLocalTexts ;
+  aLocalTexts = rv.aLocalTexts;
 }
 
 // Opérateurs
@@ -111,34 +111,34 @@ NSLocalisedChapter&
 NSLocalisedChapter::operator=(NSLocalisedChapter& src)
 {
   if (&src == this)
-    return *this ;
+    return *this;
 
-  aLocalTexts.clear() ;
+  aLocalTexts.clear();
   for (std::map<std::string, std::string >::iterator i = src.aLocalTexts.begin(); i != src.aLocalTexts.end(); i++)
-    addText((*i).first, (*i).second ) ;
+    addText((*i).first, (*i).second );
 
-  return *this ;
+  return *this;
 }
 
 // Destructeur
 NSLocalisedChapter::~NSLocalisedChapter()
 {
-	aLocalTexts.clear() ;
+	aLocalTexts.clear();
 }
 
 void
 NSLocalisedChapter::addText(std::string sCod, std::string sTxt)
 {
-  aLocalTexts[sCod] = sTxt ;
+  aLocalTexts[sCod] = sTxt;
 }
 
 std::string
 NSLocalisedChapter::getLocalText(std::string sCod)
 {
   if ( aLocalTexts.find(sCod) != aLocalTexts.end() )
-    return aLocalTexts[sCod] ;
+    return aLocalTexts[sCod];
     
-  return "" ;
+  return "";
 }
 
 //***************************************************************************
@@ -153,14 +153,14 @@ void
 NSLocalChapterArray::vider()
 {
   if (_chapters.empty())
-    return ;
+    return;
 
-  for (std::map<std::string, NSLocalisedChapter* >::iterator i = _chapters.begin(); _chapters.end() != i ; i++)
+  for (std::map<std::string, NSLocalisedChapter* >::iterator i = _chapters.begin(); _chapters.end() != i; i++)
   {
-    delete (*i).second ;
-    (*i).second = NULL ;
+    delete (*i).second;
+    (*i).second = NULL;
   }
-  _chapters.clear() ;
+  _chapters.clear();
 }
 
 void
@@ -168,72 +168,71 @@ NSLocalChapterArray::addText(string sChap, string sCod, string sTxt)
 {
   if ( _chapters.find(sChap) != _chapters.end() )
   {
-    _chapters[sChap]->addText(sCod, sTxt) ;
-    return ;
+    _chapters[sChap]->addText(sCod, sTxt);
+    return;
   }
-  NSLocalisedChapter* pChapter = new NSLocalisedChapter() ;
-  pChapter->addText(sCod, sTxt) ;
-  _chapters[sChap] = pChapter ;
+  NSLocalisedChapter* pChapter = new NSLocalisedChapter();
+  pChapter->addText(sCod, sTxt);
+  _chapters[sChap] = pChapter;
 }
 
-string
-NSLocalChapterArray::getLocalText(string sChap, string sCod, bool bSendTextBackIfNotFound)
-{
-	if ((string("") == sChap) || (string("") == sCod))
-  	return string("") ;
+string NSLocalChapterArray::getLocalText(string sChap, string sCod,
+                                         bool bSendTextBackIfNotFound) {
+  if ((string("") == sChap) || (string("") == sCod))
+  	return string("");
 
   if (_chapters.empty())
-  	return string("") ;
+  	return string("");
 
   if (_chapters.find(sChap) != _chapters.end())
-  	return _chapters[sChap]->getLocalText(sCod) ;
+  	return _chapters[sChap]->getLocalText(sCod);
 
-	if (false == bSendTextBackIfNotFound)
-		return string("") ;
+  if (false == bSendTextBackIfNotFound)
+    return string("");
 
-  for (size_t i = 0 ; i < strlen(sCod.c_str()) ; i++)
+  for (size_t i = 0; i < strlen(sCod.c_str()); i++)
   {
     if (isupper(sCod[i]))
     {
-      sCod = string(sCod, 0, i) + string(" ") + string(sCod, i, strlen(sCod.c_str()) - i) ;
+      sCod = string(sCod, 0, i) + string(" ") + string(sCod, i, strlen(sCod.c_str()) - i);
 
       if ((i+2 < strlen(sCod.c_str())) && (false == isupper(sCod[i+1])))
-      	sCod[i+1] = tolower(sCod[i+1]) ;
+      	sCod[i+1] = tolower(sCod[i+1]);
 
-      i++ ;
+      i++;
     }
   }
-  sCod[0] = pseumaj(sCod[0]) ;
+  sCod[0] = pseumaj(sCod[0]);
 
-	return sCod ;
+	return sCod;
 }
 
 NSLocalisedChapter*
 NSLocalChapterArray::getChapter(string sChapterTitle)
 {
   if ((string("") == sChapterTitle) || _chapters.empty())
-    return (NSLocalisedChapter*) 0 ;
+    return (NSLocalisedChapter*) 0;
 
-  NSLocalChapterArrayIter it = _chapters.find(sChapterTitle) ;
+  NSLocalChapterArrayIter it = _chapters.find(sChapterTitle);
   if (_chapters.end() == it)
-    return (NSLocalisedChapter*) 0 ;
+    return (NSLocalisedChapter*) 0;
 
-  return (*it).second ;
+  return (*it).second;
 }
 
 NSLocalisedChapter*
 NSLocalChapterArray::getChapterWhereText(string sText, string sValue)
 {
   if ((string("") == sText) || _chapters.empty())
-    return (NSLocalisedChapter*) 0 ;
+    return (NSLocalisedChapter*) 0;
 
-  NSLocalChapterArrayIter it = _chapters.begin() ;
-  for ( ; (_chapters.end() != it) && ((*it).second->getLocalText(sText) != sValue) ; it++) ;
+  NSLocalChapterArrayIter it = _chapters.begin();
+  for (; (_chapters.end() != it) && ((*it).second->getLocalText(sText) != sValue); it++);
 
   if (_chapters.end() == it)
-    return (NSLocalisedChapter*) 0 ;
+    return (NSLocalisedChapter*) 0;
 
-  return (*it).second ;
+  return (*it).second;
 }
 
 void
@@ -242,32 +241,32 @@ NSLocalChapterArray::init(ifstream * pInFile, string *psErrorMsg)
   if ((ifstream*) NULL == pInFile)
   {
     if (psErrorMsg)
-      *psErrorMsg = string("null file pointer") ;
-    return ;
+      *psErrorMsg = string("null file pointer");
+    return;
   }
   if (pInFile->eof())
   {
     if (psErrorMsg)
-      *psErrorMsg = string("empty file") ;
-    return ;
+      *psErrorMsg = string("empty file");
+    return;
   }
 
-  string sCurrentChapter = string("") ;
+  string sCurrentChapter = string("");
   if (psErrorMsg)
-    *psErrorMsg = string("no chapter found") ;
+    *psErrorMsg = string("no chapter found");
 
-  string sLine ;
+  string sLine;
   while (!(pInFile->eof()))
   {
-    getline(*pInFile, sLine) ;
-    strip(sLine) ;
+    getline(*pInFile, sLine);
+    strip(sLine);
 
-    size_t iLineLen = strlen(sLine.c_str()) ;
+    size_t iLineLen = strlen(sLine.c_str());
 
     while ((iLineLen > 0) && (('\n' == sLine[iLineLen-1]) || ('\r' == sLine[iLineLen-1])))
     {
-      sLine = string(sLine, 0, iLineLen - 1) ;
-      iLineLen-- ;
+      sLine = string(sLine, 0, iLineLen - 1);
+      iLineLen--;
     }
 
     if (string("") != sLine)
@@ -281,31 +280,31 @@ NSLocalChapterArray::init(ifstream * pInFile, string *psErrorMsg)
         else if (('[' == sLine[0]) && (']' == sLine[iLineLen-1]))
         {
           // Chapitre
-          sCurrentChapter = string(sLine, 1, iLineLen - 2) ;
+          sCurrentChapter = string(sLine, 1, iLineLen - 2);
 
           if (psErrorMsg)
-            *psErrorMsg = string("") ;
+            *psErrorMsg = string("");
         }
         else if (string("") != sCurrentChapter)
         {
           // Valeur
-          size_t iRecherche = sLine.find('=') ;
-          size_t iRechText = iRecherche + 1 ;
+          size_t iRecherche = sLine.find('=');
+          size_t iRechText = iRecherche + 1;
 
           // on doit éliminer les tabulations
           while (('\t' == sLine[iRechText]) || (' ' == sLine[iRechText]))
-            iRechText += 1 ;
+            iRechText += 1;
 
           if ((string::npos != iRecherche) && (iRecherche < iLineLen - 1))
           {
             // On sépare la chaine en Nom et Contenu
             //	Ex : "Font1=Times New Roman,120"
             // -> Nom : "Font1" et Contenu = "Times New Roman,120"
-            string sChaineNom     = string(sLine, 0, iRecherche) ;
-            string sChaineContenu = string(sLine, iRechText, iLineLen - iRechText) ;
-            strip(sChaineNom) ;
-            strip(sChaineContenu) ;
-            addText(sCurrentChapter, sChaineNom, sChaineContenu) ;
+            string sChaineNom     = string(sLine, 0, iRecherche);
+            string sChaineContenu = string(sLine, iRechText, iLineLen - iRechText);
+            strip(sChaineNom);
+            strip(sChaineContenu);
+            addText(sCurrentChapter, sChaineNom, sChaineContenu);
           }
         }
       }
@@ -316,27 +315,27 @@ NSLocalChapterArray::init(ifstream * pInFile, string *psErrorMsg)
 void
 NSLocalChapterArray::init(string sFileName, string *psErrorMsg)
 {
-  vider() ;
+  vider();
 
   if (string("") == sFileName)
   {
     if (psErrorMsg)
-      *psErrorMsg = string("empty filename") ;
-    return ;
+      *psErrorMsg = string("empty filename");
+    return;
   }
 
-  ifstream file ;
-  file.open(sFileName.c_str(), ofstream::in) ;
+  ifstream file;
+  file.open(sFileName.c_str(), ofstream::in);
   if (false == file.is_open())
   {
     if (psErrorMsg)
-      *psErrorMsg = string("Cannot open file ") + sFileName ;
-    return ;
+      *psErrorMsg = string("Cannot open file ") + sFileName;
+    return;
   }
 
-  init(&file, psErrorMsg) ;
+  init(&file, psErrorMsg);
 
-  file.close() ;
+  file.close();
 }
 
 #ifndef _ENTERPRISE_DLL
@@ -344,54 +343,54 @@ bool
 NSLocalChapterArray::writeToFile(string sFileName, NSSuper *pSuper)
 {
   if ((string("") == sFileName) || (NULL == pSuper))
-    return false ;
+    return false;
 
   if (empty())
-    return false ;
+    return false;
 
 try
 {
-  ofstream outFile ;
-	outFile.open(sFileName.c_str(), ios::out) ;
+  ofstream outFile;
+	outFile.open(sFileName.c_str(), ios::out);
   if (!outFile)
   {
-  	string sErrorText = pSuper->getText("fileErrors", "errorOpeningOutputFile") ;
-    sErrorText += string(" (") + sFileName + string(")") ;
-    pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
-    erreur(sErrorText.c_str(), standardError) ;
-    return false ;
+  	string sErrorText = pSuper->getText("fileErrors", "errorOpeningOutputFile");
+    sErrorText += string(" (") + sFileName + string(")");
+    pSuper->trace(&sErrorText, 1, NSSuper::trError);
+    erreur(sErrorText.c_str(), standardError);
+    return false;
   }
 
-  std::map<std::string, NSLocalisedChapter*>::iterator chapIter = _chapters.begin() ;
-  for ( ; _chapters.end() != chapIter ; chapIter++)
+  std::map<std::string, NSLocalisedChapter*>::iterator chapIter = _chapters.begin();
+  for (; _chapters.end() != chapIter; chapIter++)
   {
-    string              sChapterLabel = (*chapIter).first ;
-    NSLocalisedChapter* pChapter      = (*chapIter).second ;
+    string              sChapterLabel = (*chapIter).first;
+    NSLocalisedChapter* pChapter      = (*chapIter).second;
 
-    outFile << (string("[") + sChapterLabel + string("]") + string("\n")) ;
+    outFile << (string("[") + sChapterLabel + string("]") + string("\n"));
 
     if (false == pChapter->empty())
-      for (std::map<std::string, std::string >::iterator i = pChapter->getLocalTexts()->begin() ; pChapter->getLocalTexts()->end() != i ; i++)
-        outFile << ((*i).first + string("= ") + (*i).second + string("\n")) ;
+      for (std::map<std::string, std::string >::iterator i = pChapter->getLocalTexts()->begin(); pChapter->getLocalTexts()->end() != i; i++)
+        outFile << ((*i).first + string("= ") + (*i).second + string("\n"));
 
-    outFile << string("\n") ;
+    outFile << string("\n");
   }
 
-  outFile.close() ;
+  outFile.close();
 
-	return true ;
+	return true;
 }
 catch (...)
 {
-  erreur("Exception NSLocalChapterArray::writeToFile.", standardError) ;
-  return false ;
+  erreur("Exception NSLocalChapterArray::writeToFile.", standardError);
+  return false;
 }
 }
 #endif
 
 NSLocalChapterArray::~NSLocalChapterArray()
 {
-	vider() ;
+	vider();
 }
 
 NSLocalChapterArray&
@@ -400,18 +399,18 @@ NSLocalChapterArray::operator=(NSLocalChapterArray& rv)
 try
 {
   if (this == &rv)
-    return *this ;
+    return *this;
 
-  vider() ;
+  vider();
 
   for (std::map<std::string,NSLocalisedChapter*>::iterator i = rv._chapters.begin(); i != rv._chapters.end(); i++)
-    _chapters[ (*i).first] =  new NSLocalisedChapter( *((*i).second)) ;
+    _chapters[ (*i).first] =  new NSLocalisedChapter( *((*i).second));
 
-  return *this ;
+  return *this;
 }
 catch (...)
 {
-  return *this ;
+  return *this;
 }
 }
 

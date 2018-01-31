@@ -14,23 +14,23 @@
 #define DOC_CODE_DOCUM_LEN 6
 #define OBJECT_ID_LEN      PIDS_NSS_LEN + DOC_CODE_DOCUM_LEN
 
-class NSSuper ;
+class NSSuper;
 
 class NSSuperRoot
 {
 public:
 
-    NSSuper* _pSuper ;
+    NSSuper* _pSuper;
     NSSuperRoot(NSSuper* pSuper) : _pSuper(pSuper) {}
 };
 
-class NSContexte ;
+class NSContexte;
 
 class NSRoot
 {
 public:
 
-    NSContexte* pContexte ;
+    NSContexte* pContexte;
     NSRoot(NSContexte* pCtx) : pContexte(pCtx) {}
 };
 
@@ -48,11 +48,11 @@ const int UTILISATEUR   = 2;
 const int PATIENT_ID    = 3;
 const int FICHE_PATIENT = 4;
 
-const char nodeSeparationMARK      = '|' ;
-const char cheminSeparationMARK    = '/' ;
-const char intranodeSeparationMARK = '.' ;
+const char nodeSeparationMARK      = '|';
+const char cheminSeparationMARK    = '/';
+const char intranodeSeparationMARK = '.';
 
-enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, genreNP, genreIT } ;
+enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, genreNP, genreIT };
 
 //---------------------------------------------------------------------------
 //  Variables globales
@@ -61,8 +61,8 @@ enum GENRE { genreNull = 0, genreMS = 1, genreFS, genreNS, genreMP, genreFP, gen
 #define NS_LEXIQUE_TAILLE 6
 #define NS_LEXIQUE_SIGNIF 5
 
-extern char	sDate [2], sTime [2], sAMPM [2][5] ;
-extern int	iDate, iTime ;
+extern char	sDate [2], sTime [2], sAMPM [2][5];
+extern int	iDate, iTime;
 
 // pour les string
 

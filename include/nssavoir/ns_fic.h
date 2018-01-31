@@ -55,23 +55,23 @@ class NSSavFicheData : public NSPathoBaseData
     //
     // Variables de stockage des valeurs
     //
-    // char sens[FICHE_SENS_LEN + 1] ;
+    // char sens[FICHE_SENS_LEN + 1];
 
-    string _sSens ;
+    string _sSens;
 
 	public :
 
-    NSSavFicheData() ;
-    NSSavFicheData(NSSavFicheData& rv) ;
-    ~NSSavFicheData() ;
+    NSSavFicheData();
+    NSSavFicheData(NSSavFicheData& rv);
+    ~NSSavFicheData();
 
-    void metAZero() ;
+    void metAZero();
 
-    string getSens()            { return _sSens ; }
-    void   setSens(string sVal) { setFixedSizeValue(&_sSens, FICHE_SENS_LEN, sVal) ; }
+    string getSens()            { return _sSens; }
+    void   setSens(string sVal) { setFixedSizeValue(&_sSens, FICHE_SENS_LEN, sVal); }
 
-    NSSavFicheData& operator=(NSSavFicheData src) ;
-    int             operator==(const NSSavFicheData& o) ;
+    NSSavFicheData& operator=(NSSavFicheData src);
+    int             operator==(const NSSavFicheData& o);
 };
 
 //
@@ -85,37 +85,37 @@ class _CLASSELEXI NSSavFiche : public NSFiche
 		//
     // Objet qui contient les donnees
     //
-    NSSavFicheData* pDonnees ;
+    NSSavFicheData* pDonnees;
 
-    NSSavFiche(NSSuper* pSuper) ;
-    NSSavFiche(NSSavFiche& rv) ;
-    ~NSSavFiche() ;
+    NSSavFiche(NSSuper* pSuper);
+    NSSavFiche(NSSavFiche& rv);
+    ~NSSavFiche();
 
-    void alimenteFiche() ;
-    void videFiche() ;
-    DBIResult open() ;
+    void alimenteFiche();
+    void videFiche();
+    DBIResult open();
 
-    DBIResult getPatRecord() ;
+    DBIResult getPatRecord();
 
-    string getSens()            { return pDonnees->getSens() ; }
-    void   setSens(string sVal) { pDonnees->setSens(sVal) ; }
+    string getSens()            { return pDonnees->getSens(); }
+    void   setSens(string sVal) { pDonnees->setSens(sVal); }
 
-    string getLexique()      { return pDonnees->getLexique() ; }
-    string getComplement()   { return pDonnees->getComplement() ; }
-    string getUnit()         { return pDonnees->getUnit() ; }
-    string getCertitude()    { return pDonnees->getCertitude() ; }
-    string getInteret()      { return pDonnees->getInteret() ; }
-    string getPluriel()      { return pDonnees->getPluriel() ; }
-    string getVisible()      { return pDonnees->getVisible() ; }
-    string getType()         { return pDonnees->getTypeString() ; }
-    string getLocalisation() { return pDonnees->getLocalisation() ; }
+    string getLexique()      { return pDonnees->getLexique(); }
+    string getComplement()   { return pDonnees->getComplement(); }
+    string getUnit()         { return pDonnees->getUnit(); }
+    string getCertitude()    { return pDonnees->getCertitude(); }
+    string getInteret()      { return pDonnees->getInteret(); }
+    string getPluriel()      { return pDonnees->getPluriel(); }
+    string getVisible()      { return pDonnees->getVisible(); }
+    string getType()         { return pDonnees->getTypeString(); }
+    string getLocalisation() { return pDonnees->getLocalisation(); }
 
-    virtual bool Create() ;
-    virtual bool Modify() ;
+    virtual bool Create();
+    virtual bool Modify();
 
-    NSSavFiche& operator=(NSSavFiche src) ;
-    int operator == ( const NSSavFiche& o ) ;
-} ;
+    NSSavFiche& operator=(NSSavFiche src);
+    int operator == ( const NSSavFiche& o );
+};
 #endif // #ifndef __linux__
 
 //---------------------------------------------------------------------------
@@ -132,44 +132,44 @@ class NSSavFicheInfo
     //
     // Objet qui contient les donnees
 		//
-		NSSavFicheData* pDonnees ;
+		NSSavFicheData* pDonnees;
 
 	public:
 
-		NSSavFicheInfo() ;
+		NSSavFicheInfo();
 #ifndef __linux__
-		NSSavFicheInfo(NSSavFiche*) ;
+		NSSavFicheInfo(NSSavFiche*);
 #endif
-		NSSavFicheInfo(NSSavFicheInfo& rv) ;
-    ~NSSavFicheInfo() ;
+		NSSavFicheInfo(NSSavFicheInfo& rv);
+    ~NSSavFicheInfo();
 
-    string getSens()         { return pDonnees->getSens() ; }
-    string getLexique()      { return pDonnees->getLexique() ; }
-    string getComplement()   { return pDonnees->getComplement() ; }
-    string getUnit()         { return pDonnees->getUnit() ; }
-    string getCertitude()    { return pDonnees->getCertitude() ; }
-    string getInteret()      { return pDonnees->getInteret() ; }
-    string getPluriel()      { return pDonnees->getPluriel() ; }
-    string getVisible()      { return pDonnees->getVisible() ; }
-    string getType()         { return pDonnees->getTypeString() ; }
-    string getLocalisation() { return pDonnees->getLocalisation() ; }
+    string getSens()         { return pDonnees->getSens(); }
+    string getLexique()      { return pDonnees->getLexique(); }
+    string getComplement()   { return pDonnees->getComplement(); }
+    string getUnit()         { return pDonnees->getUnit(); }
+    string getCertitude()    { return pDonnees->getCertitude(); }
+    string getInteret()      { return pDonnees->getInteret(); }
+    string getPluriel()      { return pDonnees->getPluriel(); }
+    string getVisible()      { return pDonnees->getVisible(); }
+    string getType()         { return pDonnees->getTypeString(); }
+    string getLocalisation() { return pDonnees->getLocalisation(); }
 
-    void   setSens(string sSens)           { pDonnees->setSens(sSens) ; }
-    void   setLexique(string sLexique)     { pDonnees->setLexique(sLexique) ; }
-    void   setComplement(string sCplmnt)   { pDonnees->setComplement(sCplmnt) ; }
-    void   setUnit(string sUnit)           { pDonnees->setUnit(sUnit) ; }
-    void   setCertitude(string sCertitude) { pDonnees->setCertitude(sCertitude) ; }
-    void   setInteret(string sInteret)     { pDonnees->setInteret(sInteret) ; }
-    void   setPluriel(string sPluriel)     { pDonnees->setPluriel(sPluriel) ; }
-    void   setVisible(string sVisible)     { pDonnees->setVisible(sVisible) ; }
-    void   setType(string sType)           { pDonnees->setTypeString(sType) ; }
-    void   setLocalisation(string sLocalisation) { pDonnees->setLocalisation(sLocalisation) ; }
+    void   setSens(string sSens)           { pDonnees->setSens(sSens); }
+    void   setLexique(string sLexique)     { pDonnees->setLexique(sLexique); }
+    void   setComplement(string sCplmnt)   { pDonnees->setComplement(sCplmnt); }
+    void   setUnit(string sUnit)           { pDonnees->setUnit(sUnit); }
+    void   setCertitude(string sCertitude) { pDonnees->setCertitude(sCertitude); }
+    void   setInteret(string sInteret)     { pDonnees->setInteret(sInteret); }
+    void   setPluriel(string sPluriel)     { pDonnees->setPluriel(sPluriel); }
+    void   setVisible(string sVisible)     { pDonnees->setVisible(sVisible); }
+    void   setType(string sType)           { pDonnees->setTypeString(sType); }
+    void   setLocalisation(string sLocalisation) { pDonnees->setLocalisation(sLocalisation); }
 
-		NSSavFicheInfo& operator=(NSSavFicheInfo src) ;
-		int operator == ( const NSSavFicheInfo& o ) ;
-} ;
+		NSSavFicheInfo& operator=(NSSavFicheInfo src);
+		int operator == ( const NSSavFicheInfo& o );
+};
 
-class NSPatPathoArray ;
+class NSPatPathoArray;
 
 //
 // Objet de gestion des fiches
@@ -179,16 +179,16 @@ class _CLASSELEXI NSFicheManager : public NSSuperRoot
 {
 	public :
 
-		NSSavFiche* pCurseur ;
+		NSSavFiche* pCurseur;
 
-		NSFicheManager(NSSuper* pSuper) ;
-		NSFicheManager(NSFicheManager& rv) ;
-		~NSFicheManager() ;
+		NSFicheManager(NSSuper* pSuper);
+		NSFicheManager(NSFicheManager& rv);
+		~NSFicheManager();
 
-		bool getFiche(string sSens, NSPatPathoArray* pPPTarray, bool bVerbose = true) ;
-		bool setFiche(string sSens, NSPatPathoArray* pPPTarray) ;
-		void updateFiche(NSPatPathoArray* pFiche, string sChapter, string sSubChapter, NSPatPathoArray* pPPTvalues) ;
-} ;
+		bool getFiche(string sSens, NSPatPathoArray* pPPTarray, bool bVerbose = true);
+		bool setFiche(string sSens, NSPatPathoArray* pPPTarray);
+		void updateFiche(NSPatPathoArray* pFiche, string sChapter, string sSubChapter, NSPatPathoArray* pPPTvalues);
+};
 #endif // #ifndef __linux__
 
 //---------------------------------------------------------------------------

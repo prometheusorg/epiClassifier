@@ -40,24 +40,24 @@
 //-------------------------------------------------------------------------
 dkdNoyau::dkdNoyau(NSContexte* pCtx) : NSRoot(pCtx)
 {
-  pPatPathoArray = 0 ;
-  itDcode 	     = (PatPathoIter) 0 ;
-  itMDcode 	     = (PatPathoIter) 0 ;
-  codeLexique    = complement = "" ;
+  pPatPathoArray = 0;
+  itDcode 	     = (PatPathoIter) 0;
+  itMDcode 	     = (PatPathoIter) 0;
+  codeLexique    = complement = "";
 
-  locLesion 	   = "" ;
+  locLesion 	   = "";
 
-  codeLexUtil    = "" ;
-  codeUtilValid  = false ;
-  codeLexDecal   = complDecal = "" ;
+  codeLexUtil    = "";
+  codeUtilValid  = false;
+  codeLexDecal   = complDecal = "";
 
-  pDkdPhrases    = 0 ;
-  pPhraLes	     = 0 ;
-  pPhrases	     = 0 ;
-  sDcodeur	     = "" ;
-  iBon		       = 1 ;
-  iCorrigeAnnule = 0 ;
-  bRecupFenetre  = false ;
+  pDkdPhrases    = 0;
+  pPhraLes	     = 0;
+  pPhrases	     = 0;
+  sDcodeur	     = "";
+  iBon		       = 1;
+  iCorrigeAnnule = 0;
+  bRecupFenetre  = false;
 }
 
 dkdNoyau::~dkdNoyau()
@@ -91,19 +91,19 @@ try
   bCreateur = true;
   setDsFichier(true);
   pPhraseur = new NSPhraseur(pCtx);
-  pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct) ;
+  pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct);
   sLangue   = sLang;
   //
   // Warning : pGenerateur must be instanciated, we use the french one as default
   //
   if (sLangue == "en")
-  	pGenerateur = new NSGenerateurEn(pCtx, pPropos, string("en")) ;
+  	pGenerateur = new NSGenerateurEn(pCtx, pPropos, string("en"));
   else
   	pGenerateur = new NSGenerateurFr(pCtx, pPropos, string("fr"));
 }
 catch (...)
 {
-  erreur("Exception à la création de l'objet de décodage.", standardError) ;
+  erreur("Exception à la création de l'objet de décodage.", standardError);
 }
 }
 
@@ -115,22 +115,22 @@ decodageBase::decodageBase(decodageBase* ptr)
 {
 try
 {
-	pNoyau 	  = ptr->pNoyau ;
-  bCreateur = false ;
-  pPhraseur = new NSPhraseur(ptr->pContexte) ;
-  pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct) ;
-  sLangue   = ptr->sLangue ;
+	pNoyau 	  = ptr->pNoyau;
+  bCreateur = false;
+  pPhraseur = new NSPhraseur(ptr->pContexte);
+  pPropos   = new NsProposition(pContexte, &pPhraseur, NsProposition::notSetType, NsProposition::notSetConjonct);
+  sLangue   = ptr->sLangue;
   //
   // Warning : pGenerateur must be instanciated, we use the french one as default
   //
   if (sLangue == "en")
-  	pGenerateur = new NSGenerateurEn(ptr->pContexte, pPropos, string("en")) ;
+  	pGenerateur = new NSGenerateurEn(ptr->pContexte, pPropos, string("en"));
   else
-  	pGenerateur = new NSGenerateurFr(ptr->pContexte, pPropos, string("fr")) ;
+  	pGenerateur = new NSGenerateurFr(ptr->pContexte, pPropos, string("fr"));
 }
 catch (...)
 {
-  erreur("Exception à la création de l'objet de décodage.", standardError) ;
+  erreur("Exception à la création de l'objet de décodage.", standardError);
 }
 }
 
@@ -140,16 +140,16 @@ catch (...)
 decodageBase::~decodageBase()
 {
 	if (bCreateur)
-  	delete pNoyau ;
+  	delete pNoyau;
 
   if (pPropos)
-  	delete pPropos ;
+  	delete pPropos;
 
 	// if (pPhraseur)
-  //    delete pPhraseur ;
+  //    delete pPhraseur;
 
   if (pGenerateur)
-  	delete pGenerateur ;
+  	delete pGenerateur;
 }
 
 //
@@ -165,48 +165,48 @@ void
 decodageBase::Avance(int nbPositions)
 {
 	if (nbPositions <= 0)
-  	return ;
+  	return;
 
 	if ((NULL == pNoyau->pPatPathoArray) || (pNoyau->pPatPathoArray->empty()))
-  	return ;
+  	return;
 
-	pNoyau->codeUtilValid = false ;
+	pNoyau->codeUtilValid = false;
 	//
 	// On avance de nbPositions lignes
 	//
 	// itDcode pointe sur le premier élément de la ligne
 	//
-	int ligne = (*(pNoyau->itDcode))->getLigne() ;
+	int ligne = (*(pNoyau->itDcode))->getLigne();
 	int i = 0;
 	while ((i < nbPositions) &&
            (pNoyau->itDcode != pNoyau->pPatPathoArray->end()))
 	{
-  	pNoyau->itDcode++ ;
+  	pNoyau->itDcode++;
     if ((pNoyau->itDcode != pNoyau->pPatPathoArray->end()) &&
       	    ((*(pNoyau->itDcode))->getLigne() != ligne))
     {
-    	i++ ;
-      ligne = (*(pNoyau->itDcode))->getLigne() ;
+    	i++;
+      ligne = (*(pNoyau->itDcode))->getLigne();
     }
 	}
   if (i < nbPositions)
   {
-  	pNoyau->codeLexique = "" ;
-    return ;
+  	pNoyau->codeLexique = "";
+    return;
 	}
   //
   // On est positionné sur le premier élément de la ligne, on traite toute
   // la ligne avec un autre itérateur pour laisser itDcode en 1ère position
   // (sinon getCol serait faux)
   //
-  pNoyau->codeLexique = "" ;
+  pNoyau->codeLexique = "";
   //
   // On synchronise itDcodeTemp avec itDcode
   //
 
-	PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin() ;
+	PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin();
 	while ((*itDcodeTemp)->getLocalisation() != (*(pNoyau->itDcode))->getLocalisation())
-		itDcodeTemp++ ;
+		itDcodeTemp++;
   //
   // On remplit codeLexique tant qu'on est sur la même ligne
   //
@@ -214,18 +214,18 @@ decodageBase::Avance(int nbPositions)
              ((*itDcodeTemp)->getLigne() == ligne))
 	{
 		if (!(pNoyau->codeLexique == string("")))
-    	pNoyau->codeLexique += string(1, cheminSeparationMARK) ;
+    	pNoyau->codeLexique += string(1, cheminSeparationMARK);
 
-    pNoyau->codeLexique += (*itDcodeTemp)->getLexique() ;
+    pNoyau->codeLexique += (*itDcodeTemp)->getLexique();
 
 		if (string("") != (*itDcodeTemp)->getCertitude())
     	pNoyau->codeLexique += string(1, cheminSeparationMARK) +
-                        							(*itDcodeTemp)->getCertitude() ;
+                        							(*itDcodeTemp)->getCertitude();
 
     if (string("") != (*itDcodeTemp)->getPluriel())
     	pNoyau->codeLexique += string(1, cheminSeparationMARK) +
-                            					(*itDcodeTemp)->getPluriel() ;
-    itDcodeTemp++ ;
+                            					(*itDcodeTemp)->getPluriel();
+    itDcodeTemp++;
 	}
 }
 
@@ -233,68 +233,68 @@ void
 decodageBase::Recule(int nbPositions)
 {
 	if (nbPositions <= 0)
-		return ;
+		return;
 
 	if (pNoyau->itDcode == pNoyau->pPatPathoArray->begin())
-		return ;
+		return;
 
-	pNoyau->codeUtilValid = false ;
+	pNoyau->codeUtilValid = false;
   //
   // On recule de nbPositions lignes
   //
   // itDcode pointe sur le premier élément de la ligne
   //
-	int  ligne = (*(pNoyau->itDcode))->getLigne() ;
+	int  ligne = (*(pNoyau->itDcode))->getLigne();
 	int  i 		 = 0;
-	bool ontourne = true ;
+	bool ontourne = true;
 	while ((i < nbPositions) && ontourne)
 	{
-  	pNoyau->itDcode-- ;
+  	pNoyau->itDcode--;
     if ((*(pNoyau->itDcode))->getLigne() != ligne)
     {
-    	i++ ;
-      ligne = (*(pNoyau->itDcode))->getLigne() ;
+    	i++;
+      ligne = (*(pNoyau->itDcode))->getLigne();
     }
     if (pNoyau->itDcode == pNoyau->pPatPathoArray->begin())
-    	ontourne = false ;
+    	ontourne = false;
 	}
 
-	pNoyau->codeLexique = "" ;
+	pNoyau->codeLexique = "";
 
 	if (i < nbPositions)
-		return ;
+		return;
 
 	//
 	// On remplit codeLexique tant qu'on est sur la même ligne
 	//
-	string sNouvEl = "" ;
-	ontourne = true ;
+	string sNouvEl = "";
+	ontourne = true;
 	while (((*(pNoyau->itDcode))->getLigne() == ligne) && ontourne)
 	{
-  	sNouvEl = (*(pNoyau->itDcode))->getLexique() ;
+  	sNouvEl = (*(pNoyau->itDcode))->getLexique();
 
     if (string("") != (*(pNoyau->itDcode))->getCertitude())
     	sNouvEl += string(1, cheminSeparationMARK) +
-      											(*(pNoyau->itDcode))->getCertitude() ;
+      											(*(pNoyau->itDcode))->getCertitude();
 
     if (string("") != (*(pNoyau->itDcode))->getPluriel())
     	sNouvEl += string(1, cheminSeparationMARK) +
-                  					(*(pNoyau->itDcode))->getPluriel() ;
+                  					(*(pNoyau->itDcode))->getPluriel();
 
     if (!(pNoyau->codeLexique == string("")))
     	pNoyau->codeLexique = string(1, cheminSeparationMARK)
-         									 								+ pNoyau->codeLexique ;
+         									 								+ pNoyau->codeLexique;
 
-    pNoyau->codeLexique = sNouvEl + pNoyau->codeLexique ;
+    pNoyau->codeLexique = sNouvEl + pNoyau->codeLexique;
 
     if (pNoyau->itDcode == pNoyau->pPatPathoArray->begin())
-    	ontourne = false ;
+    	ontourne = false;
     else
-    	pNoyau->itDcode-- ;
+    	pNoyau->itDcode--;
 	}
 
 	if (ontourne)
-		pNoyau->itDcode++ ;
+		pNoyau->itDcode++;
 }
 
 // Passe à l'élément suivant, éventuellement sur la même ligne, alors que
@@ -302,8 +302,8 @@ decodageBase::Recule(int nbPositions)
 void
 decodageBase::Suivant()
 {
-	pNoyau->itDcode++ ;
-	pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique() ;
+	pNoyau->itDcode++;
+	pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique();
 }
 
 // Passe à l'élément précédent, éventuellement sur la même ligne, alors que
@@ -311,8 +311,8 @@ decodageBase::Suivant()
 void
 decodageBase::Precedent()
 {
-	pNoyau->itDcode-- ;
-	pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique() ;
+	pNoyau->itDcode--;
+	pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique();
 }
 
 //
@@ -323,82 +323,82 @@ decodageBase::getSt()
 {
 	if (!(pNoyau->codeUtilValid))
 	{
-		pContexte->getDico()->donneCodeSens(&(pNoyau->codeLexique), &(pNoyau->codeLexUtil)) ;
-		pNoyau->codeUtilValid = true ;
+		pContexte->getDico()->donneCodeSens(&(pNoyau->codeLexique), &(pNoyau->codeLexUtil));
+		pNoyau->codeUtilValid = true;
 	}
 
-	return &(pNoyau->codeLexUtil) ;
+	return &(pNoyau->codeLexUtil);
 }
 
 int
 decodageBase::getCol()
 {
 	if (pNoyau->itDcode != pNoyau->pPatPathoArray->end())
-		return (*(pNoyau->itDcode))->getColonne() ;
+		return (*(pNoyau->itDcode))->getColonne();
 	else
-		return -1 ;
+		return -1;
 }
 
 void
 decodageBase::setPPtArray(NSPatPathoArray* pPPtArray)
 {
 	if (NULL == pPPtArray)
-    return ;
+    return;
 
-  pNoyau->pPatPathoArray = pPPtArray ;
-  pNoyau->itDcode = pNoyau->pPatPathoArray->begin() ;
+  pNoyau->pPatPathoArray = pPPtArray;
+  pNoyau->itDcode = pNoyau->pPatPathoArray->begin();
 }
 
 string*
 decodageBase::getCpl()
 {
-	pNoyau->complement = (*(pNoyau->itDcode))->getComplement() ;
-	return &(pNoyau->complement) ;
+	pNoyau->complement = (*(pNoyau->itDcode))->getComplement();
+	return &(pNoyau->complement);
 }
 
 void
 decodageBase::getCert(string* pCert)
 {
 	if (NULL == pCert)
-		return ;
+		return;
 
-	*pCert = (*(pNoyau->itDcode))->getCertitude() ;
+	*pCert = (*(pNoyau->itDcode))->getCertitude();
 }
 
 void
 decodageBase::getPlur(string* pPlur)
 {
 	if (NULL == pPlur)
-		return ;
+		return;
 
-	*pPlur = (*(pNoyau->itDcode))->getPluriel() ;
+	*pPlur = (*(pNoyau->itDcode))->getPluriel();
 }
 
 void
 decodageBase::MetMarque()
 {
-	pNoyau->itMDcode = pNoyau->itDcode ;
+	pNoyau->itMDcode = pNoyau->itDcode;
 }
 
 void
 decodageBase::VaMarque()
 {
-	pNoyau->itDcode = pNoyau->itMDcode ;
-  pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique() ;
-  pNoyau->codeUtilValid = false ;
-  int ligne = (*(pNoyau->itDcode))->getLigne() ;
+	pNoyau->itDcode = pNoyau->itMDcode;
+  pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique();
+  pNoyau->codeUtilValid = false;
+  int ligne = (*(pNoyau->itDcode))->getLigne();
   //
   // On est positionné sur le premier élément de la ligne, on traite toute
   // la ligne avec un autre itérateur pour laisser itDcode en 1ère position
   // (sinon getCol serait faux)
   //
-  pNoyau->codeLexique = "" ;
+  pNoyau->codeLexique = "";
   //
   // On synchronise itDcodeTemp avec itDcode
   //
-  PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin() ;
+  PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin();
   while ((*itDcodeTemp)->getLocalisation() != (*(pNoyau->itDcode))->getLocalisation())
-  	itDcodeTemp++ ;
+  	itDcodeTemp++;
   //
   // On remplit codeLexique tant qu'on est sur la même ligne
   //
@@ -406,18 +406,18 @@ decodageBase::VaMarque()
    		   ((*itDcodeTemp)->getLigne() == ligne))
   {
   	if (!(pNoyau->codeLexique == string("")))
-    	pNoyau->codeLexique += string(1, cheminSeparationMARK) ;
+    	pNoyau->codeLexique += string(1, cheminSeparationMARK);
 
-    pNoyau->codeLexique += (*itDcodeTemp)->getLexique() ;
+    pNoyau->codeLexique += (*itDcodeTemp)->getLexique();
 
     if (string("") != (*itDcodeTemp)->getCertitude())
     	pNoyau->codeLexique += string(1, cheminSeparationMARK) +
-      																	(*itDcodeTemp)->getCertitude() ;
+      																	(*itDcodeTemp)->getCertitude();
 
     if (string("") != (*itDcodeTemp)->getPluriel())
     	pNoyau->codeLexique += string(1, cheminSeparationMARK) +
-                  											(*itDcodeTemp)->getPluriel() ;
-    itDcodeTemp++ ;
+                  											(*itDcodeTemp)->getPluriel();
+    itDcodeTemp++;
   }
 }
 
@@ -430,10 +430,10 @@ void
 decodageBase::initialiseIterateurs()
 {
   if ((NULL == pNoyau) || (NULL == pNoyau->pPatPathoArray) || pNoyau->pPatPathoArray->empty())
-    return ;
+    return;
 
-	pNoyau->itDcode  = pNoyau->pPatPathoArray->begin() ;
-	pNoyau->itMDcode = pNoyau->pPatPathoArray->begin() ;
+	pNoyau->itDcode  = pNoyau->pPatPathoArray->begin();
+	pNoyau->itMDcode = pNoyau->pPatPathoArray->begin();
 
   if (pNoyau->pPatPathoArray->end() != pNoyau->itDcode) {
     pNoyau->codeLexique = (*(pNoyau->itDcode))->getLexique();
@@ -441,7 +441,7 @@ decodageBase::initialiseIterateurs()
     pNoyau->codeLexique = "";
   }
     
-	set_iBon(1) ;
+	set_iBon(1);
 }
 
 void
@@ -470,7 +470,7 @@ decodageBase::metPhrase(string decDeb, string decFin, int sautLigne)
 bool
 decodageBase::metUnCar(char cCar)
 {
-   return false ;
+   return false;
 }
 
 void
@@ -510,14 +510,14 @@ decodageBase::getSt(int decal)
 	pNoyau->itMDcode = pNoyau->itDcode;
 
 	for (int i = 0; (i < decal) && (pNoyau->itMDcode != pNoyau->pPatPathoArray->end()); i++)
-		pNoyau->itMDcode++ ;
+		pNoyau->itMDcode++;
 
 	if (pNoyau->itMDcode != pNoyau->pPatPathoArray->end())
-		pNoyau->codeLexDecal = (*(pNoyau->itDcode))->getLexique() ;
+		pNoyau->codeLexDecal = (*(pNoyau->itDcode))->getLexique();
 	else
-		pNoyau->codeLexDecal = string("") ;
+		pNoyau->codeLexDecal = string("");
 
-	return &(pNoyau->codeLexDecal) ;
+	return &(pNoyau->codeLexDecal);
 }
 
 //  +-----------------------------------------------------------------+
@@ -527,13 +527,13 @@ decodageBase::getSt(int decal)
 string*
 decodageBase::getStL(int decal)
 {
-	pNoyau->itMDcode = pNoyau->itDcode ;
+	pNoyau->itMDcode = pNoyau->itDcode;
 
 	for (int i = 0; (i < decal) && (pNoyau->itMDcode != pNoyau->pPatPathoArray->end()); i++)
-		pNoyau->itMDcode++ ;
+		pNoyau->itMDcode++;
 
 	if (pNoyau->itMDcode != pNoyau->pPatPathoArray->end())
-		pNoyau->codeLexDecal = (*(pNoyau->itDcode))->getLexique() ;
+		pNoyau->codeLexDecal = (*(pNoyau->itDcode))->getLexique();
 	else
 		pNoyau->codeLexDecal = "";
 
@@ -549,17 +549,17 @@ DBIResult
 decodageBase::getMateriel(NSMaterielInfo* pMatInfo)
 {
 	if (NULL == pMatInfo)
-  	return DBIERR_NONE ;
+  	return DBIERR_NONE;
 
-	pMatInfo->reset() ;
+	pMatInfo->reset();
 
   if (*getSt() != "£SGMA")
-    return DBIERR_NONE ;
+    return DBIERR_NONE;
 
-  string sCode = *getCpl() ;
-	pMatInfo->initialiseDepuisObjet(pContexte->getSuperviseur(), sCode) ;
+  string sCode = *getCpl();
+	pMatInfo->initialiseDepuisObjet(pContexte->getSuperviseur(), sCode);
 
-	return DBIERR_NONE ;
+	return DBIERR_NONE;
 }
 #endif
 
@@ -572,40 +572,40 @@ DBIResult
 decodageBase::getCIM10(NSCim10Info* pCimInfo, NSCim10* pCim)
 {
   if (NULL == pCimInfo)
-    return DBIERR_NONE ;
+    return DBIERR_NONE;
 
-	pCimInfo->pDonnees->metAZero() ;
+	pCimInfo->pDonnees->metAZero();
 
 	if (*getSt() != "£CI")
-		return DBIERR_NONE ;
+		return DBIERR_NONE;
 
-	DBIResult Erreur ;
+	DBIResult Erreur;
 
 	//
 	// Ouverture du fichier
 	//
-	bool bOuvreFerme ;
-	NSCim10* pCim10 ;
+	bool bOuvreFerme;
+	NSCim10* pCim10;
 
 	if (pCim)
 	{
-		bOuvreFerme = false ;
+		bOuvreFerme = false;
 		pCim10 = pCim;
 	}
 	else
 	{
-		bOuvreFerme = true ;
-		pCim10 = new NSCim10(pContexte->getSuperviseur()) ;
+		bOuvreFerme = true;
+		pCim10 = new NSCim10(pContexte->getSuperviseur());
 		if (NULL == pCim10)
-			return DBIERR_NONE ;
+			return DBIERR_NONE;
 
-		pCim10->lastError = pCim10->open() ;
+		pCim10->lastError = pCim10->open();
 		if (pCim10->lastError != DBIERR_NONE)
 		{
-    	Erreur = pCim10->lastError ;
-			erreur("Erreur à l'ouverture du fichier CIM10.", standardError, pCim10->lastError) ;
-			delete pCim10 ;
-			return Erreur ;
+    	Erreur = pCim10->lastError;
+			erreur("Erreur à l'ouverture du fichier CIM10.", standardError, pCim10->lastError);
+			delete pCim10;
+			return Erreur;
     }
 	}
 	//
@@ -615,42 +615,42 @@ decodageBase::getCIM10(NSCim10Info* pCimInfo, NSCim10* pCim)
                                           "",
                                        		0,
                                        		keySEARCHEQ,
-                                       		dbiWRITELOCK) ;
+                                       		dbiWRITELOCK);
 	if (pCim10->lastError != DBIERR_NONE)
 	{
-  	Erreur = pCim10->lastError ;
-		erreur("Erreur à la recherche du code CIM10.", standardError, pCim10->lastError) ;
+  	Erreur = pCim10->lastError;
+		erreur("Erreur à la recherche du code CIM10.", standardError, pCim10->lastError);
 		if (bOuvreFerme)
     {
-    	pCim10->close() ;
-      delete pCim10 ;
+    	pCim10->close();
+      delete pCim10;
     }
-		return Erreur ;
+		return Erreur;
 	}
-	pCim10->lastError = pCim10->getRecord() ;
+	pCim10->lastError = pCim10->getRecord();
 	if (pCim10->lastError != DBIERR_NONE)
 	{
-  	Erreur = pCim10->lastError ;
-		erreur("Erreur à la lecture du code CIM10.", standardError, pCim10->lastError) ;
+  	Erreur = pCim10->lastError;
+		erreur("Erreur à la lecture du code CIM10.", standardError, pCim10->lastError);
 		if (bOuvreFerme)
     {
-    	pCim10->close() ;
-      delete pCim10 ;
+    	pCim10->close();
+      delete pCim10;
     }
-		return Erreur ;
+		return Erreur;
 	}
 	//
   // Si tout a bien marché, on met à jour pMatInfo
   //
-	*(pCimInfo->pDonnees) = *(pCim10->pDonnees) ;
+	*(pCimInfo->pDonnees) = *(pCim10->pDonnees);
 
 	if (bOuvreFerme)
 	{
-		pCim10->close() ;
-		delete pCim10 ;
+		pCim10->close();
+		delete pCim10;
 	}
 
-	return DBIERR_NONE ;
+	return DBIERR_NONE;
 }
 #endif
 
@@ -663,18 +663,18 @@ DBIResult
 decodageBase::getCcam(NSCcamInfo* pCcamInfo, NSCcam* pCcam)
 {
 	if (!pCcamInfo)
-		return DBIERR_NONE ;
+		return DBIERR_NONE;
 
-	pCcamInfo->pDonnees->metAZero() ;
+	pCcamInfo->pDonnees->metAZero();
 
 	if (*getSt() != "6CCAM")
-		return DBIERR_NONE ;
+		return DBIERR_NONE;
 
 	if (pCcam)
-  	return pCcam->getRecordByCode(*(getCpl()), pCcamInfo, false) ;
+  	return pCcam->getRecordByCode(*(getCpl()), pCcamInfo, false);
 
-  NSCcam CCAM(pContexte->getSuperviseur()) ;
-  return CCAM.getRecordByCode(*(getCpl()), pCcamInfo, true) ;
+  NSCcam CCAM(pContexte->getSuperviseur());
+  return CCAM.getRecordByCode(*(getCpl()), pCcamInfo, true);
 }
 #endif
 
@@ -687,23 +687,23 @@ bool
 decodageBase::getCorresp(NSPersonInfo* pPersonInfo)
 {
 #ifndef _ENTERPRISE_DLL
-	// pCorInfo->pDonnees->metAZero() ;
+	// pCorInfo->pDonnees->metAZero();
 
 	if (*getSt() != "£SGDR")
-  	return false ;
+  	return false;
 
-	string sPersonId = *getCpl() ;
+	string sPersonId = *getCpl();
   if (string("") == sPersonId)
-		return false ;
+		return false;
 
-	NSPersonInfo* pPersonInfoPtr = pContexte->getPersonArray()->getPerson(pContexte, sPersonId, pidsCorresp) ;
+	NSPersonInfo* pPersonInfoPtr = pContexte->getPersonArray()->getPerson(pContexte, sPersonId, pidsCorresp);
   if (NULL == pPersonInfoPtr)
-  	return false ;
+  	return false;
 
-	*pPersonInfo = *pPersonInfoPtr ;
+	*pPersonInfo = *pPersonInfoPtr;
 #endif
 
-	return true ;
+	return true;
 }
 
 //---------------------------------------------------------------------------
@@ -720,17 +720,17 @@ void
 decodageBase::etDuMilieu(string *type, string *type1, string *type2, string entre)
 {
 	if ((NULL == type) || (NULL == type1) || (NULL == type2))
-		return ;
+		return;
 
 	if (string("") == *type2)
-		return ;
+		return;
 
 	if (*type != "")
-		*type += entre ;
-	*type += *type1 ;
-	*type1 = *type2 ;
+		*type += entre;
+	*type += *type1;
+	*type1 = *type2;
 
-	*type2 = string("") ;
+	*type2 = string("");
 }
 
 //---------------------------------------------------------------------------
@@ -747,15 +747,15 @@ void
 decodageBase::etFinal(string *type, string *type1, string fin)
 {
   if ((NULL == type) || (NULL == type1))
-    return ;
+    return;
 	if (string("") == *type1)
-		return ;
+		return;
 
 	if (string("") != *type)
-		*type += fin ;
-	*type += *type1 ;
+		*type += fin;
+	*type += *type1;
 
-  *type1 = string("") ;
+  *type1 = string("");
 }
 
 //  +-----------------------------------------------------------------+
@@ -766,24 +766,24 @@ void
 decodageBase::donneDimension(int colonne, gereNum* pNum)
 {
 	if (NULL == pNum)
-		return ;
+		return;
 
 	if (getCol() <= colonne)
-		return ;
+		return;
 
-	string sUnite  = "" ;
-  string sFormat = "" ;
-  string sValeur = "" ;
+	string sUnite  = "";
+  string sFormat = "";
+  string sValeur = "";
 
-  int iIndice = -1 ;
+  int iIndice = -1;
 
   // If it is not a numerical information, we have to come back here
   //
-  MetMarque() ;
+  MetMarque();
 
   // On traite les éventuelles valeurs normales
   //
-	int refCol = getCol() ;
+	int refCol = getCol();
 
 	while ((getCol() > colonne) && iBon())
 	{
@@ -791,69 +791,69 @@ decodageBase::donneDimension(int colonne, gereNum* pNum)
     //
   	if 	    ((*getSt())[0] == '£')
     {
-    	sFormat = (*getitDcode())->getLexique() ;
-      sValeur = (*getitDcode())->getComplement() ;
-      sUnite  = (*getitDcode())->getUnit() ;
-      Avance() ;
+    	sFormat = (*getitDcode())->getLexique();
+      sValeur = (*getitDcode())->getComplement();
+      sUnite  = (*getitDcode())->getUnit();
+      Avance();
 
       // sFormat est du type £N0;03
       //
     	if ((sFormat == "") || (sFormat[1] != 'N'))
     	{
-      	VaMarque() ;
-      	Recupere() ;
-   	    return ;
+      	VaMarque();
+      	Recupere();
+   	    return;
     	}
 
-      iIndice++ ;
+      iIndice++;
 
-    	pNum->instancier(&sValeur, &sUnite, &sFormat, iIndice) ;
+    	pNum->instancier(&sValeur, &sUnite, &sFormat, iIndice);
     }
     //
     // Normal values
     //
     else if (*getSt() == "VNOMA")
     {
-    	Avance() ;
-      gereNum* pNormale = new gereNum(pContexte->getSuperviseur(), sLangue) ;
-      donneDimension(refCol, pNormale) ;
+    	Avance();
+      gereNum* pNormale = new gereNum(pContexte->getSuperviseur(), sLangue);
+      donneDimension(refCol, pNormale);
       if (!pNum->setNormale(pNormale, iIndice))
-      	delete pNormale ;
+      	delete pNormale;
     }
     else if (*getSt() == "VNOMI")
     {
-    	Avance() ;
-      gereNum* pNormInf = new gereNum(pContexte->getSuperviseur(), sLangue) ;
-      donneDimension(refCol, pNormInf) ;
+    	Avance();
+      gereNum* pNormInf = new gereNum(pContexte->getSuperviseur(), sLangue);
+      donneDimension(refCol, pNormInf);
       if (!pNum->setNormInf(pNormInf, iIndice))
-      	delete pNormInf ;
+      	delete pNormInf;
     }
     else if (*getSt() == "VNOMS")
     {
-    	Avance() ;
-      gereNum* pNormSup = new gereNum(pContexte->getSuperviseur(), sLangue) ;
-      donneDimension(refCol, pNormSup) ;
+    	Avance();
+      gereNum* pNormSup = new gereNum(pContexte->getSuperviseur(), sLangue);
+      donneDimension(refCol, pNormSup);
       if (!pNum->setNormSup(pNormSup, iIndice))
-      	delete pNormSup ;
+      	delete pNormSup;
     }
     //
     // Value time stamp
     //
     else if (*getSt() == "KDARE")
     {
-    	Avance() ;
-      gereDate* pDate = new gereDate(pContexte->getSuperviseur(), sLangue) ;
-      donneDate(refCol, pDate) ;
-      pNum->setDate(pDate) ;
+    	Avance();
+      gereDate* pDate = new gereDate(pContexte->getSuperviseur(), sLangue);
+      donneDate(refCol, pDate);
+      pNum->setDate(pDate);
     }
     else
-    	break ;
+    	break;
   }
 
   if (iIndice == -1)
   {
-  	VaMarque() ;
-  	Recupere() ;
+  	VaMarque();
+  	Recupere();
   }
 }
 
@@ -865,36 +865,36 @@ void
 decodageBase::donneDate(int colonne, gereDate* pDate)
 {
 	if ((getCol() <= colonne) || (NULL == pDate))
-    return ;
+    return;
 
 	string sUnite  = "";
 	string sFormat = "";
 	string sValeur = "";
 
-  string sTemp ;
+  string sTemp;
 
-  string sLexique = (*(pNoyau->itDcode))->getLexique() ;
+  string sLexique = (*(pNoyau->itDcode))->getLexique();
   if ((string("") != sLexique) && ('£' == sLexique[0]))
   {
-  	sTemp   = (*(pNoyau->itDcode))->getLexique() ;
-    pContexte->getDico()->donneCodeSens(&sTemp, &sFormat) ;
-    sValeur = (*(pNoyau->itDcode))->getComplement() ;
-    sTemp   = (*(pNoyau->itDcode))->getUnit() ;
-    pContexte->getDico()->donneCodeSens(&sTemp, &sUnite) ;
+  	sTemp   = (*(pNoyau->itDcode))->getLexique();
+    pContexte->getDico()->donneCodeSens(&sTemp, &sFormat);
+    sValeur = (*(pNoyau->itDcode))->getComplement();
+    sTemp   = (*(pNoyau->itDcode))->getUnit();
+    pContexte->getDico()->donneCodeSens(&sTemp, &sUnite);
 	}
 
 	// sFormat est du type £D0;10 ou bien £T0;19
 	if ((sValeur == "") || (sFormat == "") || ((sFormat[1] != 'D') && (sFormat[1] != 'T')))
 	{
-    Recupere() ;
-  	return ;
+    Recupere();
+  	return;
 	}
 
-	pDate->setDate(&sValeur) ;
-	pDate->setFormat(&sFormat) ;
-	pDate->setUnite(&sUnite) ;
+	pDate->setDate(&sValeur);
+	pDate->setFormat(&sFormat);
+	pDate->setUnite(&sUnite);
 
-	Avance() ;
+	Avance();
 }
 
 //  +-----------------------------------------------------------------+
@@ -905,36 +905,36 @@ void
 decodageBase::donneHeure(int colonne, gereHeure* pHeure)
 {
 	if ((getCol() <= colonne) || (NULL == pHeure))
-		return ;
+		return;
 
 	string sUnite  = "";
 	string sFormat = "";
 	string sValeur = "";
 
-  string sTemp ;
+  string sTemp;
 
-  string sLexique = (*(pNoyau->itDcode))->getLexique() ;
+  string sLexique = (*(pNoyau->itDcode))->getLexique();
   if ((string("") != sLexique) && ('£' == sLexique[0]))
   {
-  	sTemp   = (*(pNoyau->itDcode))->getLexique() ;
-    pContexte->getDico()->donneCodeSens(&sTemp, &sFormat) ;
-    sValeur = (*(pNoyau->itDcode))->getComplement() ;
-    sTemp   = (*(pNoyau->itDcode))->getUnit() ;
-    pContexte->getDico()->donneCodeSens(&sTemp, &sUnite) ;
+  	sTemp   = (*(pNoyau->itDcode))->getLexique();
+    pContexte->getDico()->donneCodeSens(&sTemp, &sFormat);
+    sValeur = (*(pNoyau->itDcode))->getComplement();
+    sTemp   = (*(pNoyau->itDcode))->getUnit();
+    pContexte->getDico()->donneCodeSens(&sTemp, &sUnite);
   }
 
   // sFormat est du type £D0;03
   if ((sFormat == "") || (sFormat[1] != 'H'))
   {
-  	Recupere() ;
-    return ;
+  	Recupere();
+    return;
   }
 
-  pHeure->setHeure(&sValeur) ;
-  pHeure->setFormat(&sFormat) ;
-  pHeure->setUnite(&sUnite) ;
+  pHeure->setHeure(&sValeur);
+  pHeure->setFormat(&sFormat);
+  pHeure->setUnite(&sUnite);
 
-  Avance() ;
+  Avance();
 }
 
 //
@@ -945,46 +945,46 @@ void
 decodageBase::donneCode(int colonne, gereCode* pCode)
 {
 	if ((getCol() <= colonne) || (NULL == pCode))
-		return ;
+		return;
 
-  string sClassif = string("") ;
-  string sCode    = string("") ;
-	NSSuper* pSuper = pContexte->getSuperviseur() ;
+  string sClassif = string("");
+  string sCode    = string("");
+	NSSuper* pSuper = pContexte->getSuperviseur();
 
 	//
   // Recuperation du code et de la classification
 	// Getting code and classification
 	//
-	string sTemp = (*(pNoyau->itDcode))->getLexique() ;
+	string sTemp = (*(pNoyau->itDcode))->getLexique();
 	NSDico::donneCodeSens(&sTemp, &sClassif);
-	sCode = (*(pNoyau->itDcode))->getComplement() ;
+	sCode = (*(pNoyau->itDcode))->getComplement();
 
 	// Il faut un code - Must have a code
   if (string("") == sCode)
 	{
-		Recupere() ;
-    return ;
+		Recupere();
+    return;
 	}
   // La classification doit etre connue - Must have a known classification
   if (false == pSuper->getFilGuide()->VraiOuFaux(sClassif, string("ES"), string("0CODE")))
 	{
-  	Recupere() ;
-    return ;
+  	Recupere();
+    return;
 	}
 
-	pCode->setCode(&sCode) ;
-	pCode->setClassification(&sClassif) ;
+	pCode->setCode(&sCode);
+	pCode->setClassification(&sClassif);
 
-	Avance() ;
+	Avance();
 }
 
 void
 decodageBase::getGereDate(gereDate** ppDate)
 {
 	if (sLangue == "fr")
-		*ppDate = new gereDateFr(pContexte->getSuperviseur(), sLangue) ;
+		*ppDate = new gereDateFr(pContexte->getSuperviseur(), sLangue);
 	else if (sLangue == "en")
-		*ppDate = new gereDateEn(pContexte->getSuperviseur(), sLangue) ;
+		*ppDate = new gereDateEn(pContexte->getSuperviseur(), sLangue);
 }
 
 //  +-----------------------------------------------------------------+
@@ -995,36 +995,36 @@ void
 decodageBase::donneCarLibre(int colonne, string* carLibre, GENRE* pGenre)
 {
   if (NULL == carLibre)
-    return ;
-  *carLibre = "" ;
+    return;
+  *carLibre = "";
 
-	string sContenu = "" ;
+	string sContenu = "";
 
-	NSSuper* pSuper = pContexte->getSuperviseur() ;
+	NSSuper* pSuper = pContexte->getSuperviseur();
 
 	while ((getCol() > colonne) && pNoyau->iBon)
 	{
 		// Texte libre
 		if (*getSt() == "£??")
     {
-    	*carLibre = getTexteLibre() ;
-      Avance() ;
+    	*carLibre = getTexteLibre();
+      Avance();
 
       if (NULL != pGenre)
-      	*pGenre = genreNull ;
+      	*pGenre = genreNull;
     }
     else
     {
-    	NSPathologData Data ;
-      bool trouve = pContexte->getDico()->trouvePathologData(pGenerateur->getLang(), getStL(), &Data) ;
+    	NSPathologData Data;
+      bool trouve = pContexte->getDico()->trouvePathologData(pGenerateur->getLang(), getStL(), &Data);
       if (trouve)
       {
-      	pGenerateur->donneLibelleAffiche(carLibre, &Data) ;
+      	pGenerateur->donneLibelleAffiche(carLibre, &Data);
         if (NULL != pGenre)
-          Data.donneGenre(pGenre) ;
+          Data.donneGenre(pGenre);
       }
 
-      Avance() ;
+      Avance();
     }
   }
 }
@@ -1039,36 +1039,36 @@ decodageBase::Recupere()
 #ifndef _ENTERPRISE_DLL
 	if (getRecupFen())
 	{
-  	AideDecode* pAideDecode = new AideDecode(0, this) ;
-    pAideDecode->Execute() ;
-    delete pAideDecode ;
+  	AideDecode* pAideDecode = new AideDecode(0, this);
+    pAideDecode->Execute();
+    delete pAideDecode;
 	}
 #endif
-	pNoyau->iBon = false ;
+	pNoyau->iBon = false;
 }
 
 void
 decodageBase::ajLL()
 {
 	if (pNoyau->itDcode == pNoyau->pPatPathoArray->end())
-		return ;
+		return;
 	if (NULL == ((*(pNoyau->itDcode))->getDataTank()))
-		return ;
+		return;
 
 	if (pNoyau->locLesion != "")
-		pNoyau->locLesion += "/" ;
-	pNoyau->locLesion += (*(pNoyau->itDcode))->getLocalisation() ;
+		pNoyau->locLesion += "/";
+	pNoyau->locLesion += (*(pNoyau->itDcode))->getLocalisation();
 
-	string sChemin = pNoyau->pPatPathoArray->donneCheminItem(pNoyau->itDcode) ;
+	string sChemin = pNoyau->pPatPathoArray->donneCheminItem(pNoyau->itDcode);
 	if (string("") != sChemin)
-		pNoyau->locPath += string(1, '[') + sChemin + string(1, ']') ;
+		pNoyau->locPath += string(1, '[') + sChemin + string(1, ']');
 }
 
 bool
 decodageBase::CommenceParVoyelle(string* pLib)
 {
 	if ((NULL == pLib) || (strlen(pLib->c_str()) == 0))
-		return false ;
+		return false;
 
 	switch ((*pLib)[0])
 	{
@@ -1132,33 +1132,33 @@ decodageBase::CommenceParVoyelle(string* pLib)
      case 'Ý' :
      case 'y' :
      case 'Y' :
-     case 'ÿ' :  return true ;
+     case 'ÿ' :  return true;
 	}
-	return false ;
+	return false;
 }
 
 int
 decodageBase::donneCertitude(string sCert)
 {
 	if ((sCert == "") || (strlen(sCert.c_str()) < 5))
-		return 100 ;
+		return 100;
 	if (string(sCert, 0, 3) != "WCE")
-		return 100 ;
-	string sScore = string(sCert, 3, 2) ;
+		return 100;
+	string sScore = string(sCert, 3, 2);
 	if (sScore == "ZZ")
-		return -1 ;
+		return -1;
 	if ((sScore > "99") || (sScore < "00"))
-		return 100 ;
-	return (10 * donneDigit(sScore[0]) + donneDigit(sScore[1])) ;
+		return 100;
+	return (10 * donneDigit(sScore[0]) + donneDigit(sScore[1]));
 }
 
 string
 decodageBase::intenseAdjectif(AdjIntens* pAdj1, AdjIntens* pAdj2)
 {
   if ((NULL == pAdj1) || (NULL == pAdj2))
-    return string("") ;
+    return string("");
 
-  string sPhrase ;
+  string sPhrase;
   string sNom1 = "";
   string sNom2 = "";
   //
@@ -1168,8 +1168,8 @@ decodageBase::intenseAdjectif(AdjIntens* pAdj1, AdjIntens* pAdj2)
   //
   if ((pAdj1->sIntensite == "WCE00") && (pAdj2->sIntensite == "WCE00"))
   {
-    sPhrase = "ne paraît ni " + pAdj1->sAdjectif + ", ni " + pAdj2->sAdjectif ;
-    return sPhrase ;
+    sPhrase = "ne paraît ni " + pAdj1->sAdjectif + ", ni " + pAdj2->sAdjectif;
+    return sPhrase;
   }
   //
   //
@@ -1177,15 +1177,15 @@ decodageBase::intenseAdjectif(AdjIntens* pAdj1, AdjIntens* pAdj2)
   if ((pAdj1->sIntensite != "WCE00") && (pAdj1->sIntensite != ""))
   {
     if      (pAdj1->sIntensite == "WCEA0")
-      sNom1 = pAdj1->sAdjectif ;
+      sNom1 = pAdj1->sAdjectif;
     else if (pAdj1->sIntensite == "1MINI")
-      sNom1 = "discrètement " + pAdj1->sAdjectif ;
+      sNom1 = "discrètement " + pAdj1->sAdjectif;
     else if (pAdj1->sIntensite == "1MODE")
-      sNom1 = "modérément " + pAdj1->sAdjectif ;
+      sNom1 = "modérément " + pAdj1->sAdjectif;
     else if (pAdj1->sIntensite == "1MOYE")
-      sNom1 = "nettement " + pAdj1->sAdjectif ;
+      sNom1 = "nettement " + pAdj1->sAdjectif;
     else if (pAdj1->sIntensite == "1IMPO")
-      sNom1 = "très " + pAdj1->sAdjectif ;
+      sNom1 = "très " + pAdj1->sAdjectif;
   }
   if ((pAdj2->sIntensite != "WCE00") && (pAdj2->sIntensite != ""))
   {
@@ -1203,143 +1203,143 @@ decodageBase::intenseAdjectif(AdjIntens* pAdj1, AdjIntens* pAdj2)
 
   if (pAdj1->sIntensite == "WCE00")
   {
-    sPhrase = "ne paraît pas " + pAdj1->sAdjectif ;
+    sPhrase = "ne paraît pas " + pAdj1->sAdjectif;
     if (sNom2 != "")
-      sPhrase += ", mais paraît " + sNom2 ;
-    return sPhrase ;
+      sPhrase += ", mais paraît " + sNom2;
+    return sPhrase;
   }
   if (pAdj2->sIntensite == "WCE00")
   {
-    sPhrase = "ne paraît pas " + pAdj2->sAdjectif ;
+    sPhrase = "ne paraît pas " + pAdj2->sAdjectif;
     if (sNom1 != "")
-      sPhrase += ", mais paraît " + sNom1 ;
-    return sPhrase ;
+      sPhrase += ", mais paraît " + sNom1;
+    return sPhrase;
   }
   if (sNom1 != "")
   {
-    sPhrase = "paraît " + sNom1 ;
+    sPhrase = "paraît " + sNom1;
     if (sNom2 != "")
-      sPhrase += " et " + sNom2 ;
-    return sPhrase ;
+      sPhrase += " et " + sNom2;
+    return sPhrase;
   }
   if (sNom2 != "")
-    sPhrase = "paraît " + sNom2 ;
-  return sPhrase ;
+    sPhrase = "paraît " + sNom2;
+  return sPhrase;
 }
 
 bool
 decodageBase::isTexteLibre()
 {
-	return (*getSt() ==	"#TLI#") ;
+	return (*getSt() ==	"#TLI#");
 }
 
 bool
 decodageBase::isChampLibre()
 {
-	return (*getSt() ==	"£C;") ;
+	return (*getSt() ==	"£C;");
 }
 
 bool
 decodageBase::isDimension()
 {
-	return (isComplementAvecUnite('N')) ;
+	return (isComplementAvecUnite('N'));
 }
 
 bool
 decodageBase::isDate()
 {
-	return (isComplementAvecUnite('D')) ;
+	return (isComplementAvecUnite('D'));
 }
 
 bool
 decodageBase::isHeure()
 {
-	return (isComplementAvecUnite('H')) ;
+	return (isComplementAvecUnite('H'));
 }
 
 bool
 decodageBase::isCode()
 {
-	return (isComplementSansUnite('O')) ;
+	return (isComplementSansUnite('O'));
 }
 
 bool
 decodageBase::isComplementAvecUnite(char cCategorie)
 {
-	int ligne = (*(pNoyau->itDcode))->getLigne() ;
+	int ligne = (*(pNoyau->itDcode))->getLigne();
   //
   // On synchronise itDcodeTemp avec itDcode
   //
-  PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin() ;
+  PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin();
   while ((*itDcodeTemp)->getLocalisation() != (*(pNoyau->itDcode))->getLocalisation())
-  	itDcodeTemp++ ;
+  	itDcodeTemp++;
 	//
   // On remplit codeLexique tant qu'on est sur la même ligne
   //
-  bool bPresenceUnite = false ;
-  bool bPresenceValeur = false ;
-	string sFormat = "" ;
+  bool bPresenceUnite = false;
+  bool bPresenceValeur = false;
+	string sFormat = "";
 
 	while ((itDcodeTemp != pNoyau->pPatPathoArray->end()) &&
            ((*itDcodeTemp)->getLigne() == ligne))
 	{
-    string sLexique = (*itDcodeTemp)->getLexique() ;
+    string sLexique = (*itDcodeTemp)->getLexique();
     if ((string("") != sLexique) && ('£' == sLexique[0]))
     {
-    	sFormat = sLexique ;
+    	sFormat = sLexique;
       if ((*itDcodeTemp)->getComplement() != "")
-      	bPresenceValeur = true ;
+      	bPresenceValeur = true;
       if ((*itDcodeTemp)->getUnit() != "")
-      	bPresenceUnite = true ;
-      break ;
+      	bPresenceUnite = true;
+      break;
     }
-    itDcodeTemp++ ;
+    itDcodeTemp++;
 	}
 	if (!bPresenceUnite || !bPresenceValeur)
-		return false ;
+		return false;
 	if (sFormat[1] != cCategorie)
-		return false ;
-	return true ;
+		return false;
+	return true;
 }
 
 bool
 decodageBase::isComplementSansUnite(char cCategorie)
 {
-	int ligne = (*(pNoyau->itDcode))->getLigne() ;
+	int ligne = (*(pNoyau->itDcode))->getLigne();
 	//
 	// On synchronise itDcodeTemp avec itDcode
 	//
-	PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin() ;
+	PatPathoIter itDcodeTemp = pNoyau->pPatPathoArray->begin();
 	while ((*itDcodeTemp)->getLocalisation() != (*(pNoyau->itDcode))->getLocalisation())
-		itDcodeTemp++ ;
+		itDcodeTemp++;
 	//
 	// On remplit codeLexique tant qu'on est sur la même ligne
 	//
-	bool bPresenceValeur = false ;
-	string sFormat = "" ;
+	bool bPresenceValeur = false;
+	string sFormat = "";
 
 	while ((itDcodeTemp != pNoyau->pPatPathoArray->end()) &&
            ((*itDcodeTemp)->getLigne() == ligne))
 	{
-    string sLexique = (*itDcodeTemp)->getLexique() ;
+    string sLexique = (*itDcodeTemp)->getLexique();
     if (string("") != sLexique)
     {
 		  switch (sLexique[0])
       {
     	  case '£' :
-      	  bPresenceValeur = true ;
-          sFormat = sLexique ;
-          break ;
-        default  : return false ;
+      	  bPresenceValeur = true;
+          sFormat = sLexique;
+          break;
+        default  : return false;
       }
     }
-    itDcodeTemp++ ;
+    itDcodeTemp++;
 	}
 	if (!bPresenceValeur)
-  	return false ;
+  	return false;
 	if (sFormat[1] != cCategorie)
-		return false ;
-	return true ;
+		return false;
+	return true;
 }
 
 //  -------------------------------------------------------------------
@@ -1348,140 +1348,140 @@ decodageBase::isComplementSansUnite(char cCategorie)
 
 numStorage::numStorage()
 {
-	pNormale  = 0 ;
-  pNormInf  = 0 ;
-  pNormSup  = 0 ;
+	pNormale  = 0;
+  pNormInf  = 0;
+  pNormSup  = 0;
 
-	initToBlank() ;
+	initToBlank();
 }
 
 void
 numStorage::initToBlank()
 {
 	if (pNormale)
-  	delete pNormale ;
-	pNormale  = 0 ;
+  	delete pNormale;
+	pNormale  = 0;
 
   if (pNormInf)
-  	delete pNormInf ;
-  pNormInf  = 0 ;
+  	delete pNormInf;
+  pNormInf  = 0;
 
   if (pNormSup)
-  	delete pNormSup ;
-  pNormSup  = 0 ;
+  	delete pNormSup;
+  pNormSup  = 0;
 
-  sNum      = string("") ;
-  sNumInf   = string("") ;
-  sNumSup   = string("") ;
+  sNum      = string("");
+  sNumInf   = string("");
+  sNumSup   = string("");
 
-  valeur    = 0 ;
-  valeurInf = 0 ;
-  valeurSup = 0 ;
+  valeur    = 0;
+  valeurInf = 0;
+  valeurSup = 0;
 
-  bExact    = false ;
-  bInf      = false ;
-  bSup      = false ;
-  bInfEgal  = false ;
-  bSupEgal  = false ;
+  bExact    = false;
+  bInf      = false;
+  bSup      = false;
+  bInfEgal  = false;
+  bSupEgal  = false;
 
-	sFormatage = string("") ;
-  sUnite     = string("") ;
+	sFormatage = string("");
+  sUnite     = string("");
 }
 
 numStorage::numStorage(const numStorage& src)
 {
-	init(&src) ;
+	init(&src);
 }
 
 numStorage::~numStorage()
 {
 	if (NULL != pNormale)
-  	delete pNormale ;
+  	delete pNormale;
   if (NULL != pNormInf)
-  	delete pNormInf ;
+  	delete pNormInf;
   if (NULL != pNormSup)
-  	delete pNormSup ;
+  	delete pNormSup;
 }
 
 void
 numStorage::init(const numStorage* pSrc)
 {
 	if (NULL == pSrc->pNormale)
-		pNormale  = 0 ;
+		pNormale  = 0;
   else
-  	pNormale  = new gereNum(*(pSrc->pNormale)) ;
+  	pNormale  = new gereNum(*(pSrc->pNormale));
 
   if (NULL == pSrc->pNormInf)
-		pNormInf  = 0 ;
+		pNormInf  = 0;
   else
-  	pNormInf  = new gereNum(*(pSrc->pNormInf)) ;
+  	pNormInf  = new gereNum(*(pSrc->pNormInf));
 
   if (NULL == pSrc->pNormSup)
-		pNormSup  = 0 ;
+		pNormSup  = 0;
   else
-  	pNormSup  = new gereNum(*(pSrc->pNormSup)) ;
+  	pNormSup  = new gereNum(*(pSrc->pNormSup));
 
-  sNum      = pSrc->sNum ;
-  sNumInf   = pSrc->sNumInf ;
-  sNumSup   = pSrc->sNumSup ;
+  sNum      = pSrc->sNum;
+  sNumInf   = pSrc->sNumInf;
+  sNumSup   = pSrc->sNumSup;
 
-  valeur    = pSrc->valeur ;
-  valeurInf = pSrc->valeurInf ;
-  valeurSup = pSrc->valeurSup ;
+  valeur    = pSrc->valeur;
+  valeurInf = pSrc->valeurInf;
+  valeurSup = pSrc->valeurSup;
 
-  bExact    = pSrc->bExact ;
-  bInf      = pSrc->bInf ;
-  bSup      = pSrc->bSup ;
-  bInfEgal  = pSrc->bInfEgal ;
-  bSupEgal  = pSrc->bSupEgal ;
+  bExact    = pSrc->bExact;
+  bInf      = pSrc->bInf;
+  bSup      = pSrc->bSup;
+  bInfEgal  = pSrc->bInfEgal;
+  bSupEgal  = pSrc->bSupEgal;
 
-	sFormatage = pSrc->sFormatage ;
-  sUnite     = pSrc->sUnite ;
+	sFormatage = pSrc->sFormatage;
+  sUnite     = pSrc->sUnite;
 }
 
 void
 numStorage::setNormale(gereNum* pNorm)
 {
 	if (NULL != pNormale)
-  	delete pNormale ;
+  	delete pNormale;
 
-	pNormale = pNorm ;
+	pNormale = pNorm;
 }
 
 void
 numStorage::setNormInf(gereNum* pNorm)
 {
 	if (NULL != pNormInf)
-  	delete pNormInf ;
+  	delete pNormInf;
 
-	pNormInf = pNorm ;
+	pNormInf = pNorm;
 }
 
 void
 numStorage::setNormSup(gereNum* pNorm)
 {
 	if (NULL != pNormSup)
-  	delete pNormSup ;
+  	delete pNormSup;
 
-	pNormSup = pNorm ;
+	pNormSup = pNorm;
 }
 
 numStorage&
 numStorage::operator =(const numStorage& src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
   if (pNormale)
-  	delete pNormale ;
+  	delete pNormale;
   if (pNormInf)
-  	delete pNormInf ;
+  	delete pNormInf;
   if (pNormSup)
-  	delete pNormSup ;
+  	delete pNormSup;
 
-  init(&src) ;
+  init(&src);
 
-  return *this ;
+  return *this;
 }
 
 //  -------------------------------------------------------------------
@@ -1491,47 +1491,47 @@ numStorage::operator =(const numStorage& src)
 gereNum::gereNum(NSSuper* pSup, string sLangue)
         :NSSuperRoot(pSup)
 {
-	_sLang    = sLangue ;
-  _pDateRef = (gereDate*) 0 ;
-  initialise() ;
+	_sLang    = sLangue;
+  _pDateRef = (gereDate*) 0;
+  initialise();
 }
 
 gereNum::~gereNum()
 {
 	if (_pDateRef)
-		delete _pDateRef ;
+		delete _pDateRef;
 }
 
 gereNum::gereNum(gereNum& src)
         :NSSuperRoot(src._pSuper)
 {
-	_aValues = src._aValues ;
-  _sLang   = src._sLang ;
+	_aValues = src._aValues;
+  _sLang   = src._sLang;
 
   if (NULL == src._pDateRef)
-  	_pDateRef = (gereDate*) 0 ;
+  	_pDateRef = (gereDate*) 0;
   else
-  	_pDateRef = new gereDate(*(src._pDateRef)) ;
+  	_pDateRef = new gereDate(*(src._pDateRef));
 }
 
 gereNum&
 gereNum::operator=(gereNum& src)
 {
 	if (this == &src)
-  	return *this ;
+  	return *this;
 
-	_aValues = src._aValues ;
-  _sLang   = src._sLang ;
+	_aValues = src._aValues;
+  _sLang   = src._sLang;
 
   if (_pDateRef)
-  	delete _pDateRef ;
+  	delete _pDateRef;
 
   if (NULL == src._pDateRef)
-  	_pDateRef = (gereDate*) 0 ;
+  	_pDateRef = (gereDate*) 0;
   else
-  	_pDateRef = new gereDate(*(src._pDateRef)) ;
+  	_pDateRef = new gereDate(*(src._pDateRef));
 
-	return *this ;
+	return *this;
 }
 
 //  +-----------------------------------------------------------------+
@@ -1541,42 +1541,42 @@ gereNum::operator=(gereNum& src)
 string
 gereNum::donneLibelleUnite(NSContexte *pContexte, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if ((NULL == pStorage) || (string("") == pStorage->sUnite))
-  	return string("") ;
+  	return string("");
 
-  NSPathologData Data ;
-  bool trouve = pContexte->getDico()->trouvePathologData(_sLang, &(pStorage->sUnite), &Data) ;
+  NSPathologData Data;
+  bool trouve = pContexte->getDico()->trouvePathologData(_sLang, &(pStorage->sUnite), &Data);
 
   if (false == trouve)
-  	return string("") ;
+  	return string("");
 
-  GENRE iGenre ;
-	Data.donneGenre(&iGenre) ;
+  GENRE iGenre;
+	Data.donneGenre(&iGenre);
 
-	bool bPluriel = false ;
+	bool bPluriel = false;
 
 	if 	  ((pStorage->bExact) && (pStorage->valeur > 1))
-		bPluriel = true ;
+		bPluriel = true;
 	else if ((pStorage->bInf || pStorage->bSup) &&
            ((pStorage->valeurInf > 1) || (pStorage->valeurSup > 1)))
-  	bPluriel = true ;
+  	bPluriel = true;
 
 	if (bPluriel)
-  	Data.donneGenrePluriel(&iGenre) ;
+  	Data.donneGenrePluriel(&iGenre);
 
-	string sUniteLibel ;
+	string sUniteLibel;
 	if (Data.estNom())
 	{
   	if ((genreMP == iGenre) || (genreFP == iGenre) || (genreNP == iGenre))
-    	Data.donneLibelleAffiche(&sUniteLibel, 1 /*declinaisonPluriel*/) ;
+    	Data.donneLibelleAffiche(&sUniteLibel, 1 /*declinaisonPluriel*/);
     else
-    	Data.donneLibelleAffiche(&sUniteLibel, 0 /*declinaisonSingulier*/) ;
+    	Data.donneLibelleAffiche(&sUniteLibel, 0 /*declinaisonSingulier*/);
 	}
 	else
-		Data.donneLibelleAffiche(&sUniteLibel, 0 /*declinaisonSingulier*/) ;
+		Data.donneLibelleAffiche(&sUniteLibel, 0 /*declinaisonSingulier*/);
 
-	return sUniteLibel ;
+	return sUniteLibel;
 }
 
 //  +-----------------------------------------------------------------+
@@ -1587,10 +1587,10 @@ void
 gereNum::initialise()
 {
 	if (_pDateRef)
-  	delete _pDateRef ;
-	_pDateRef = (gereDate*) 0 ;
+  	delete _pDateRef;
+	_pDateRef = (gereDate*) 0;
 
-  _aValues.vider() ;
+  _aValues.vider();
 }
 
 //  +-----------------------------------------------------------------+
@@ -1600,60 +1600,60 @@ gereNum::initialise()
 void
 gereNum::instancier(string* pNum, string* pUnit, string* pFrmt, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL == pStorage)
-  	return ;
+  	return;
 
-  pStorage->initToBlank() ;
+  pStorage->initToBlank();
 
-	pStorage->sUnite 	   = *pUnit ;
-	pStorage->sFormatage = *pFrmt ;
+	pStorage->sUnite 	   = *pUnit;
+	pStorage->sFormatage = *pFrmt;
 
   if (*pNum == string(""))
-		return ;
+		return;
 
-	string sValeur = *pNum ;
+	string sValeur = *pNum;
 
-	size_t pos = sValeur.find("<<") ;
+	size_t pos = sValeur.find("<<");
   if (pos == NPOS)
   {
-  	pos = sValeur.find("[<") ;
+  	pos = sValeur.find("[<");
     if (pos == NPOS)
     {
-    	pos = sValeur.find("<[") ;
+    	pos = sValeur.find("<[");
       if (pos == NPOS)
       {
-      	pos = sValeur.find("[[") ;
+      	pos = sValeur.find("[[");
         if (pos != NPOS)
         {
-        	pStorage->bInfEgal = true ;
-          pStorage->bSupEgal = true ;
+        	pStorage->bInfEgal = true;
+          pStorage->bSupEgal = true;
         }
       }
       else
-      	pStorage->bSupEgal = true ;
+      	pStorage->bSupEgal = true;
     }
     else
-    	pStorage->bInfEgal = true ;
+    	pStorage->bInfEgal = true;
   }
 
   // cas des intervalles avec borne inf et borne sup
   if (NPOS != pos)
 	{
-  	string sSSValeur ;
+  	string sSSValeur;
 
     if (pos > 0)
     {
-    	sSSValeur = string(sValeur, 0, pos) ;
-      pStorage->bInf = true ;
-      strToDble(&sSSValeur, &(pStorage->sNumInf), &(pStorage->valeurInf)) ;
+    	sSSValeur = string(sValeur, 0, pos);
+      pStorage->bInf = true;
+      strToDble(&sSSValeur, &(pStorage->sNumInf), &(pStorage->valeurInf));
     }
 
     if (pos < strlen(sValeur.c_str()) - 2)
     {
-    	sSSValeur = string(sValeur, pos + 2, strlen(sValeur.c_str())-pos-2) ;
-      pStorage->bSup = true ;
-      strToDble(&sSSValeur, &(pStorage->sNumSup), &(pStorage->valeurSup)) ;
+    	sSSValeur = string(sValeur, pos + 2, strlen(sValeur.c_str())-pos-2);
+      pStorage->bSup = true;
+      strToDble(&sSSValeur, &(pStorage->sNumSup), &(pStorage->valeurSup));
     }
   }
   //
@@ -1661,329 +1661,329 @@ gereNum::instancier(string* pNum, string* pUnit, string* pFrmt, int iIndice)
   //
   else if (sValeur[0] == '<')
   {
-  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1) ;
-    pStorage->bSup = true ;
-    strToDble(&sValeur, &(pStorage->sNumSup), &(pStorage->valeurSup)) ;
+  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1);
+    pStorage->bSup = true;
+    strToDble(&sValeur, &(pStorage->sNumSup), &(pStorage->valeurSup));
   }
   //
   // Valeur du type "<=1"
   //
   else if (sValeur[0] == '[')
   {
-  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1) ;
-    pStorage->bSup     = true ;
-    pStorage->bSupEgal = true ;
-    strToDble(&sValeur, &(pStorage->sNumSup), &(pStorage->valeurSup)) ;
+  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1);
+    pStorage->bSup     = true;
+    pStorage->bSupEgal = true;
+    strToDble(&sValeur, &(pStorage->sNumSup), &(pStorage->valeurSup));
   }
   //
   // Valeur du type ">1"
   //
   else if (sValeur[0] == '>')
   {
-  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1) ;
-    pStorage->bInf = true ;
-    strToDble(&sValeur, &(pStorage->sNumInf), &(pStorage->valeurInf)) ;
+  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1);
+    pStorage->bInf = true;
+    strToDble(&sValeur, &(pStorage->sNumInf), &(pStorage->valeurInf));
   }
   //
   // Valeur du type ">=1"
   //
   else if (sValeur[0] == ']')
   {
-  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1) ;
-    pStorage->bInf	   = true ;
-    pStorage->bInfEgal = true ;
-    strToDble(&sValeur, &(pStorage->sNumInf), &(pStorage->valeurInf)) ;
+  	sValeur = string(sValeur, 1, strlen(sValeur.c_str()) - 1);
+    pStorage->bInf	   = true;
+    pStorage->bInfEgal = true;
+    strToDble(&sValeur, &(pStorage->sNumInf), &(pStorage->valeurInf));
   }
   //
   // Valeur exacte (sans intervalle)
   //
   else
   {
-  	strToDble(&sValeur, &(pStorage->sNum), &(pStorage->valeur)) ;
-    pStorage->bExact = true ;
+  	strToDble(&sValeur, &(pStorage->sNum), &(pStorage->valeur));
+    pStorage->bExact = true;
   }
 }
 
 void
 gereNum::strToDble(string* pNum, string* pBonNum, double* dValeur)
 {
-	string sEntier = "" ;
-  string sDecima = "" ;
+	string sEntier = "";
+  string sDecima = "";
 
-  *pBonNum = *pNum ;
+  *pBonNum = *pNum;
 
-  size_t i = pNum->find(".") ;
+  size_t i = pNum->find(".");
   if (i == NPOS)
-  	sEntier = *pNum ;
+  	sEntier = *pNum;
   else
   {
   	if (i > 0)
-    	sEntier = string(*pNum, 0, i) ;
-    sDecima = string(*pNum, i+1, strlen(pNum->c_str())-i-1) ;
+    	sEntier = string(*pNum, 0, i);
+    sDecima = string(*pNum, i+1, strlen(pNum->c_str())-i-1);
 
-    (*pBonNum)[i] = ',' ;
+    (*pBonNum)[i] = ',';
   }
   //
   // Calcul de la valeur
   //
-  *dValeur = 0 ;
+  *dValeur = 0;
   // Partie entière
   for (size_t i = 0; i < strlen(sEntier.c_str()); i++)
   {
   	if (!isdigit(sEntier[i]))
-    	return ;
-    *dValeur = (*dValeur * double(10)) + double(donneDigit(sEntier[i])) ;
+    	return;
+    *dValeur = (*dValeur * double(10)) + double(donneDigit(sEntier[i]));
   }
   // Partie décimale
-  double multi = double(1) ;
+  double multi = double(1);
   for (size_t i = 0; i < strlen(sDecima.c_str()); i++)
   {
   	if (!isdigit(sDecima[i]))
-    	return ;
-    multi = multi * 0.1 ;
-    *dValeur += double(donneDigit(sDecima[i])) * multi ;
+    	return;
+    multi = multi * 0.1;
+    *dValeur += double(donneDigit(sDecima[i])) * multi;
 	}
 }
 
 void
 gereNum::setNum(string* nouvNum, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
-		pStorage->sNum = *nouvNum ;
+		pStorage->sNum = *nouvNum;
 }
 
 void
 gereNum::setUnite(string* nouvUnit, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
-		pStorage->sUnite = *nouvUnit ;
+		pStorage->sUnite = *nouvUnit;
 }
 
 void
 gereNum::setFormt(string* nouvFrmt, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
-		pStorage->sFormatage = *nouvFrmt ;
+		pStorage->sFormatage = *nouvFrmt;
 }
 
 void
 gereNum::setVal(double nouVal, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
-		pStorage->valeur = nouVal ;
+		pStorage->valeur = nouVal;
 }
 
 bool
 gereNum::setNormale(gereNum* pNorm, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
   {
-		pStorage->setNormale(pNorm) ;
-    return true ;
+		pStorage->setNormale(pNorm);
+    return true;
   }
   else
-  	return false ;
+  	return false;
 }
 
 bool
 gereNum::setNormInf(gereNum* pNorm, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
   {
-		pStorage->setNormInf(pNorm) ;
-    return true ;
+		pStorage->setNormInf(pNorm);
+    return true;
   }
   else
-  	return false ;
+  	return false;
 }
 
 bool
 gereNum::setNormSup(gereNum* pNorm, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice, true) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice, true);
   if (NULL != pStorage)
   {
-		pStorage->setNormSup(pNorm) ;
-    return true ;
+		pStorage->setNormSup(pNorm);
+    return true;
   }
   else
-  	return false ;
+  	return false;
 }
 
 string
 gereNum::getNum(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->sNum ;
+		return pStorage->sNum;
   else
-  	return string("") ;
+  	return string("");
 }
 
 string
 gereNum::getNumInf(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->sNumInf ;
+		return pStorage->sNumInf;
   else
-  	return string("") ;
+  	return string("");
 }
 
 string
 gereNum::getNumSup(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->sNumSup ;
+		return pStorage->sNumSup;
   else
-  	return string("") ;
+  	return string("");
 }
 
 gereNum*
 gereNum::getNorm(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->getNormale() ;
+		return pStorage->getNormale();
   else
-  	return NULL ;
+  	return NULL;
 }
 
 gereNum*
 gereNum::getNormInf(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->getNormInf() ;
+		return pStorage->getNormInf();
   else
-  	return NULL ;
+  	return NULL;
 }
 
 gereNum*
 gereNum::getNormSup(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->getNormSup() ;
+		return pStorage->getNormSup();
   else
-  	return NULL ;
+  	return NULL;
 }
 
 double
 gereNum::getValeur(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->valeur ;
+		return pStorage->valeur;
   else
-  	return double(0) ;
+  	return double(0);
 }
 
 double
 gereNum::getValeurInf(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->valeurInf ;
+		return pStorage->valeurInf;
   else
-  	return double(0) ;
+  	return double(0);
 }
 
 double
 gereNum::getValeurSup(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL != pStorage)
-		return pStorage->valeurSup ;
+		return pStorage->valeurSup;
   else
-  	return double(0) ;
+  	return double(0);
 }
 
 bool
 gereNum::estExact(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return false ;
+		return false;
 
-	return pStorage->bExact ;
+	return pStorage->bExact;
 }
 
 bool
 gereNum::estInf(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return false ;
+		return false;
 
-	return pStorage->bInf ;
+	return pStorage->bInf;
 }
 
 bool
 gereNum::estSup(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return false ;
+		return false;
 
-	return pStorage->bSup ;
+	return pStorage->bSup;
 }
 
 bool
 gereNum::estInfEgal(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return false ;
+		return false;
 
-	return (pStorage->bInf && pStorage->bInfEgal)  ;
+	return (pStorage->bInf && pStorage->bInfEgal) ;
 }
 
 bool
 gereNum::estSupEgal(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return false ;
+		return false;
 
-	return (pStorage->bSup && pStorage->bInfEgal)  ;
+	return (pStorage->bSup && pStorage->bInfEgal) ;
 }
 
 string
 gereNum::getUnite(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return string("") ;
+		return string("");
 
-	return pStorage->sUnite ;
+	return pStorage->sUnite;
 }
 
 string
 gereNum::getFormat(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return string("") ;
+		return string("");
 
-	return pStorage->sFormatage ;
+	return pStorage->sFormatage;
 }
 
 bool
 gereNum::estVide(int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage)
-		return true ;
+		return true;
 
-	return !(pStorage->bExact || pStorage->bInf || pStorage->bSup)  ;
+	return !(pStorage->bExact || pStorage->bInf || pStorage->bSup) ;
 }
 
 numStorage*
@@ -1992,32 +1992,32 @@ gereNum::getStorageFromIndice(int iIndice, bool bAutoCreate)
 	if (_aValues.empty())
   {
   	if (!bAutoCreate || (iIndice > 0))
-			return NULL ;
-    _aValues.push_back(new numStorage) ;
-  	return _aValues.back() ;
+			return NULL;
+    _aValues.push_back(new numStorage);
+  	return _aValues.back();
   }
 
-  IterNumStorage storeIter = _aValues.begin() ;
-  int            i         = 0 ;
-  for (; (storeIter != _aValues.end()) && (i < iIndice) ; i++, storeIter++) ;
+  IterNumStorage storeIter = _aValues.begin();
+  int            i         = 0;
+  for (; (storeIter != _aValues.end()) && (i < iIndice); i++, storeIter++);
 
   if (storeIter != _aValues.end())
-  	return *storeIter ;
+  	return *storeIter;
 
   if (!bAutoCreate || (iIndice > i))
-  	return NULL ;
+  	return NULL;
 
-  _aValues.push_back(new numStorage) ;
+  _aValues.push_back(new numStorage);
 
-  return _aValues.back() ;
+  return _aValues.back();
 }
 
 void
 gereNum::setDate(gereDate* pDate)
 {
 	if (NULL != _pDateRef)
-  	delete _pDateRef ;
-	_pDateRef = pDate ;
+  	delete _pDateRef;
+	_pDateRef = pDate;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2027,41 +2027,41 @@ gereNum::setDate(gereDate* pDate)
 string
 gereNum::getNum(string sFormatage, EXTENSIONS eExtensions, int iIndice)
 {
-	numStorage* pStorage = getStorageFromIndice(iIndice) ;
+	numStorage* pStorage = getStorageFromIndice(iIndice);
   if (NULL == pStorage) {
-  	return string("") ;
+  	return string("");
   }
 
 	if (eExtensions == RIEN)
-  	return pStorage->sNum ;
+  	return pStorage->sNum;
 
 	if (eExtensions == NORMALES)
 	{
-  	string sRetour = pStorage->sNum ;
+  	string sRetour = pStorage->sNum;
     if ((pStorage->getNormInf() != 0) || (pStorage->getNormSup() != 0))
     {
-    	string sNI = "" ;
-      string sNS = "" ;
+    	string sNI = "";
+      string sNS = "";
       if (pStorage->getNormInf() != 0)
-      	sNI = pStorage->getNormInf()->getNum(sFormatage) ;
+      	sNI = pStorage->getNormInf()->getNum(sFormatage);
       if (pStorage->getNormSup() != 0)
-      	sNS = pStorage->getNormSup()->getNum(sFormatage) ;
+      	sNS = pStorage->getNormSup()->getNum(sFormatage);
 
       if ((sNI != "") && (sNS != ""))
       {
       	if (sNI == sNS)
-        	sRetour += " (N=" + sNI + ")" ;
+        	sRetour += " (N=" + sNI + ")";
         else
-        	sRetour += " (" + sNI + "<N<" + sNS + ")" ;
+        	sRetour += " (" + sNI + "<N<" + sNS + ")";
       }
       else if (sNI != "")
-      	sRetour += " (N>" + sNI + ")" ;
+      	sRetour += " (N>" + sNI + ")";
       else if (sNS != "")
-      	sRetour += " (N<" + sNS + ")" ;
+      	sRetour += " (N<" + sNS + ")";
     }
-    return sRetour ;
+    return sRetour;
 	}
-	return string("") ;
+	return string("");
 }
 
 //  -------------------------------------------------------------------
@@ -2071,8 +2071,8 @@ gereNum::getNum(string sFormatage, EXTENSIONS eExtensions, int iIndice)
 gereDate::gereDate(NSSuper* pSuper, string sLangue)
          :NSSuperRoot(pSuper)
 {
-  sLang = sLangue ;
-  initialise() ;
+  sLang = sLangue;
+  initialise();
 }
 
 //  +-----------------------------------------------------------------+
@@ -2082,9 +2082,9 @@ gereDate::gereDate(NSSuper* pSuper, string sLangue)
 gereDate::gereDate(const gereDate& src)
          :NSSuperRoot(src._pSuper)
 {
-  sDate      = src.sDate ;
-  sFormatage = src.sFormatage ;
-  sLibelle   = src.sLibelle ;
+  sDate      = src.sDate;
+  sFormatage = src.sFormatage;
+  sLibelle   = src.sLibelle;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2095,13 +2095,13 @@ gereDate&
 gereDate::operator=(const gereDate& src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-  sDate      = src.sDate ;
-  sFormatage = src.sFormatage ;
-  sLibelle   = src.sLibelle ;
+  sDate      = src.sDate;
+  sFormatage = src.sFormatage;
+  sLibelle   = src.sLibelle;
 
-  return *this ;
+  return *this;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2136,7 +2136,7 @@ gereDate::donne_date_breve(string* pMessage, string* pIntro)
   	{
         // Date vide
         if (sDate == "00000000")
-            return ;
+            return;
 
         if (sLang == "fr")
         {
@@ -2185,8 +2185,8 @@ gereDate::donne_date_breve(string* pMessage, string* pIntro)
         //
         // langue non traitée : on renvoie JJ/MM/AAAA
         //
-        *pMessage = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4) ;
-        return ;
+        *pMessage = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4);
+        return;
     }
     //
   	// Date au format AAAAMMJJhhmmss
@@ -2195,39 +2195,39 @@ gereDate::donne_date_breve(string* pMessage, string* pIntro)
   	{
         // Date vide
         if (sDate == "00000000")
-            return ;
+            return;
 
         if (sLang == "fr")
         {
             // Juste AAAA
             if (string(sDate, 4, 4) == "0000")
             {
-      	        *pMessage = string(sDate, 0, 4) ;
-                *pIntro 	 = "en " ;
+      	        *pMessage = string(sDate, 0, 4);
+                *pIntro 	 = "en ";
             }
             // MM/AAAA
             else if (string(sDate, 6, 2) == "00")
             {
-      	        *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4) ;
-                *pIntro 	 = "en " ;
+      	        *pMessage = donne_mois(string(sDate, 4, 2)) + " " + string(sDate, 0, 4);
+                *pIntro 	 = "en ";
             }
             // JJ/MM/AAAA
             else
             {
-                *pIntro     = "le " ;
-      	        *pMessage   = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4) ;
+                *pIntro     = "le ";
+      	        *pMessage   = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4);
 
-                string sHeure = "" ;
+                string sHeure = "";
                 // gestion de l'heure
                 if      (strlen(sDate.c_str()) == 10)
-                    sHeure = string(sDate, 8, 2) + string("h") ;
+                    sHeure = string(sDate, 8, 2) + string("h");
                 else if (strlen(sDate.c_str()) == 12)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2);
                 else if (strlen(sDate.c_str()) == 14)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 
                 if (sHeure != "")
-                    *pMessage += string(" à ") + sHeure ;
+                    *pMessage += string(" à ") + sHeure;
             }
             return;
         }
@@ -2251,35 +2251,35 @@ gereDate::donne_date_breve(string* pMessage, string* pIntro)
                 *pIntro   = "on the ";
       	        *pMessage = string(sDate, 4, 2) + "/" + string(sDate, 6, 2) + "/" + string(sDate, 0, 4);
 
-                string sHeure = "" ;
+                string sHeure = "";
                 // gestion de l'heure
                 if      (strlen(sDate.c_str()) == 10)
-                    sHeure = string(sDate, 8, 2) + string("h") ;
+                    sHeure = string(sDate, 8, 2) + string("h");
                 else if (strlen(sDate.c_str()) == 12)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2);
                 else if (strlen(sDate.c_str()) == 14)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 
                 if (sHeure != "")
-                    *pMessage += string(" at ") + sHeure ;
+                    *pMessage += string(" at ") + sHeure;
             }
             return;
         }
         //
         // langue non traitée : on renvoie JJ/MM/AAAA hh:mm:ss
         //
-        *pMessage = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4) ;
+        *pMessage = string(sDate, 6, 2) + "/" + string(sDate, 4, 2) + "/" + string(sDate, 0, 4);
 
-        string sHeure = "" ;
+        string sHeure = "";
         // gestion de l'heure
         if      (strlen(sDate.c_str()) == 10)
-            sHeure = string(sDate, 8, 2) + string(":??:??") ;
+            sHeure = string(sDate, 8, 2) + string(":??:??");
         else if (strlen(sDate.c_str()) == 12)
-            sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":??") ;
+            sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":??");
         else if (strlen(sDate.c_str()) == 14)
-            sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+            sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 
-        return ;
+        return;
     }
   	return;
 }
@@ -2310,8 +2310,8 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
 
         if (sLang == "fr")
         {
-            *pIntro = "le " ;
-            string sHeure = "" ;
+            *pIntro = "le ";
+            string sHeure = "";
 		    //
 		    // Jour
 		    //
@@ -2338,11 +2338,11 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
 
                 // gestion de l'heure
                 if      (strlen(sDate.c_str()) == 10)
-                    sHeure = string(sDate, 8, 2) + string(" heures") ;
+                    sHeure = string(sDate, 8, 2) + string(" heures");
                 else if (strlen(sDate.c_str()) == 12)
-                    sHeure = string(sDate, 8, 2) + string(" heures ") + string(sDate, 10, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(" heures ") + string(sDate, 10, 2);
                 else if (strlen(sDate.c_str()) == 14)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 		    }
 		    else
 			    *pMessage = "?? ";
@@ -2366,14 +2366,14 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
 		    }
 
             if (sHeure != "")
-                *pMessage += string(" à ") + sHeure ;
+                *pMessage += string(" à ") + sHeure;
 
             return;
         }
         else if (sLang == "en")
         {
             *pIntro = "on ";
-            string sHeure = "" ;
+            string sHeure = "";
             //
 		    // Mois
 		    //
@@ -2412,11 +2412,11 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
 			    }
                 // gestion de l'heure
                 if      (strlen(sDate.c_str()) == 10)
-                    sHeure = string(sDate, 8, 2) ;
+                    sHeure = string(sDate, 8, 2);
                 else if (strlen(sDate.c_str()) == 12)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2);
                 else if (strlen(sDate.c_str()) == 14)
-                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2) ;
+                    sHeure = string(sDate, 8, 2) + string(":") + string(sDate, 10, 2) + string(":") + string(sDate, 12, 2);
 		    }
 		    else
 			    *pMessage += "?? ";
@@ -2433,7 +2433,7 @@ gereDate::donne_date_claire(string* pMessage, string* pIntro)
 		    }
 
             if (sHeure != "")
-                *pMessage += string(" at ") + sHeure ;
+                *pMessage += string(" at ") + sHeure;
 
             return;
         }
@@ -2511,8 +2511,8 @@ gereDate::donne_mois(int iMois)
 gereHeure::gereHeure(NSSuper* pSuper, string sLangue)
           :NSSuperRoot(pSuper)
 {
-  sLang = sLangue ;
-  initialise() ;
+  sLang = sLangue;
+  initialise();
 }
 
 //  +-----------------------------------------------------------------+
@@ -2522,9 +2522,9 @@ gereHeure::gereHeure(NSSuper* pSuper, string sLangue)
 gereHeure::gereHeure(const gereHeure& src)
           :NSSuperRoot(src._pSuper)
 {
-  sHeure 	   = src.sHeure ;
-	sFormatage = src.sFormatage ;
-  sLibelle   = src.sLibelle ;
+  sHeure 	   = src.sHeure;
+	sFormatage = src.sFormatage;
+  sLibelle   = src.sLibelle;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2535,13 +2535,13 @@ gereHeure&
 gereHeure::operator=(const gereHeure& src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
-  sHeure     = src.sHeure ;
-  sFormatage = src.sFormatage ;
-  sLibelle   = src.sLibelle ;
+  sHeure     = src.sHeure;
+  sFormatage = src.sFormatage;
+  sLibelle   = src.sLibelle;
 
-  return *this ;
+  return *this;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2614,12 +2614,12 @@ gereCode&
 gereCode::operator=(const gereCode& src)
 {
   if (this == &src)
-		return *this ;
+		return *this;
 
   sCode 	        = src.sCode;
   sClassification = src.sClassification;
 
-  return *this ;
+  return *this;
 }
 
 //  +-----------------------------------------------------------------+
@@ -2641,58 +2641,58 @@ void
 gereCode::donne_code(string* pMessage, bool bAvecCode)
 {
 #ifndef _ENTERPRISE_DLL
-  string sLibelle = "" ;
+  string sLibelle = "";
 
-  NSEpiClassif DBcurseur(pContexte->getSuperviseur()) ;
+  NSEpiClassif DBcurseur(pContexte->getSuperviseur());
 
   // open table
-  DBcurseur.lastError = DBcurseur.open() ;
+  DBcurseur.lastError = DBcurseur.open();
   if (DBcurseur.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    return ;
+    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    return;
   }
 
   // définition de la clé de recherche
-  string cle = sClassification + sCode ;
+  string cle = sClassification + sCode;
 
   // recherche dans la base
   DBcurseur.lastError = DBcurseur.chercheClef(&cle,
                                               "",
                                               NODEFAULTINDEX,
                                               keySEARCHEQ,
-                                              dbiREADLOCK) ;
+                                              dbiREADLOCK);
   if ((DBcurseur.lastError != DBIERR_NONE) &&
       (DBcurseur.lastError != DBIERR_RECNOTFOUND))
   {
-    erreur("classif.db -- erreur à la recherche dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle()) ;
-    DBcurseur.close() ;
-    return ;
+    erreur("classif.db -- erreur à la recherche dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    DBcurseur.close();
+    return;
   }
 
   // récupération de l'enregistrement
-  DBcurseur.lastError = DBcurseur.getRecord() ;
+  DBcurseur.lastError = DBcurseur.getRecord();
   if (DBcurseur.lastError != DBIERR_NONE)
   {
     erreur("classif.db -- erreur de lecture dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-    DBcurseur.close() ;
-    return ;
+    DBcurseur.close();
+    return;
   }
 
   if (bAvecCode)
-    sLibelle = sCode + string(" (") + DBcurseur.getLabel() + string(")") ;
+    sLibelle = sCode + string(" (") + DBcurseur.getLabel() + string(")");
   else
-    sLibelle = DBcurseur.getLabel() ;
+    sLibelle = DBcurseur.getLabel();
 
   // on ferme la base
-  DBcurseur.lastError = DBcurseur.close() ;
+  DBcurseur.lastError = DBcurseur.close();
   if (DBcurseur.lastError != DBIERR_NONE)
     erreur("classif.db -- erreur à la fermeture de la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
-  *pMessage = sLibelle ;
+  *pMessage = sLibelle;
 #endif
 
-  return ;
+  return;
 }
 
 #ifndef _ENTERPRISE_DLL
@@ -2709,85 +2709,85 @@ END_RESPONSE_TABLE;
 AideDecode::AideDecode(TWindow* pere,  decodageBase* pDecode)
            :TDialog(pere, IDD_DECODE, pNSDLLModule), NSRoot(pDecode->pContexte)
 {
-	_pImages = (OWL::TImageList*) 0 ;
-  _Aparent = pere ;
+	_pImages = (OWL::TImageList*) 0;
+  _Aparent = pere;
   // set client window style
   //
-  uint32 style = GetStyle() ;
-  SetStyle(style |= WS_CLIPSIBLINGS | WS_CLIPCHILDREN) ;
+  uint32 style = GetStyle();
+  SetStyle(style |= WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 
   // set treeview window style
   //
-  style = TVS_HASLINES | TVS_HASBUTTONS ;
+  style = TVS_HASLINES | TVS_HASBUTTONS;
 #if defined(BI_PLAT_WIN32)
-	style |= TVS_LINESATROOT ;
+	style |= TVS_LINESATROOT;
 #endif
 
-	_pDecodageBase = pDecode ;
-	_pTreeWind = new TTreeWindow(this, IDC_TREEV_DECODE, pNSDLLModule) ;
+	_pDecodageBase = pDecode;
+	_pTreeWind = new TTreeWindow(this, IDC_TREEV_DECODE, pNSDLLModule);
 }
 
 
 AideDecode::~AideDecode()
 {
   if (_pImages)
-    delete _pImages ;
+    delete _pImages;
 
   if (_pTreeWind)
-   	delete _pTreeWind ;
+   	delete _pTreeWind;
 }
 
 void
 AideDecode::CmCorrige()
 {
-	_pDecodageBase->setCorrAnnu(iCorrige) ;
-	CloseWindow(IDOK) ;
+	_pDecodageBase->setCorrAnnu(iCorrige);
+	CloseWindow(IDOK);
 }
 
 void
 AideDecode::CmAnnule()
 {
-  _pDecodageBase->setCorrAnnu(iAnnule) ;
-	CloseWindow(IDOK) ;
+  _pDecodageBase->setCorrAnnu(iAnnule);
+	CloseWindow(IDOK);
 }
 
 void
 AideDecode::CmAutomatique()
 {
-  _pDecodageBase->setCorrAnnu(iAutomatique) ;
+  _pDecodageBase->setCorrAnnu(iAutomatique);
 
-  NSPatPathoArray* pPatPathoArray = _pDecodageBase->getPPtArray() ;
+  NSPatPathoArray* pPatPathoArray = _pDecodageBase->getPPtArray();
   if (pPatPathoArray->empty())
   {
-    CloseWindow(IDOK) ;
-    return ;
+    CloseWindow(IDOK);
+    return;
   }
-  PatPathoIter iterTReeView = pPatPathoArray->begin() ;
+  PatPathoIter iterTReeView = pPatPathoArray->begin();
   //
   // On passe en revue la PatPathoArray jusqu'à l'élément fautif
   //
 	while (pPatPathoArray->end() != iterTReeView)
   {
     if ((*iterTReeView) == *(_pDecodageBase->getitDcode()))
-      break ;
-    iterTReeView++ ;
+      break;
+    iterTReeView++;
   }
   if (pPatPathoArray->end() != iterTReeView)
-    pPatPathoArray->SupprimerItem(iterTReeView) ;
+    pPatPathoArray->SupprimerItem(iterTReeView);
 
-  CloseWindow(IDOK) ;
+  CloseWindow(IDOK);
 }
 
 void
 AideDecode::Cmok()
 {
-  CloseWindow(IDOK) ;
+  CloseWindow(IDOK);
 }
 
 void
 AideDecode::SetupWindow()
 {
-	TDialog::SetupWindow() ;
+	TDialog::SetupWindow();
 
 /*   for(int j = IDB_NORMAL; j<= IDB_ERREUR; j++)
    {
@@ -2802,86 +2802,86 @@ AideDecode::SetupWindow()
    }
 */
 
- 	NSPatPathoArray* pPatPathoArray = _pDecodageBase->getPPtArray() ;
+ 	NSPatPathoArray* pPatPathoArray = _pDecodageBase->getPPtArray();
  	if ((NULL == pPatPathoArray) || pPatPathoArray->empty())
- 		return ;
+ 		return;
 
-	string sLang = string("") ;
+	string sLang = string("");
 	if (pContexte)
-		sLang = pContexte->getUserLanguage() ;
+		sLang = pContexte->getUserLanguage();
 
-	_pImages = new TImageList(NS_CLASSLIB::TSize(20, 16), ILC_COLOR4, 15, 5) ;
-	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_NORMAL)) ;
-	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_ERREUR)) ;
-	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_QUESTION)) ;
-	_pTreeWind->SetImageList(TTreeWindow::Normal, *_pImages) ;
+	_pImages = new TImageList(NS_CLASSLIB::TSize(20, 16), ILC_COLOR4, 15, 5);
+	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_NORMAL));
+	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_ERREUR));
+	_pImages->Add(OWL::TBitmap(*pNSDLLModule, IDB_QUESTION));
+	_pTreeWind->SetImageList(TTreeWindow::Normal, *_pImages);
 
-	VectTTreeNode* pVectTTreeNode = new VectTTreeNode ;
+	VectTTreeNode* pVectTTreeNode = new VectTTreeNode;
 
 	string      sEtiquettePatPere; //étiquette du  père
 	string      sLibellePatPere;
-	string      sEtiquettePatFils ; //étiquette du  fils
+	string      sEtiquettePatFils; //étiquette du  fils
 	string      sLibellePatFils;
-  string			sUnit ;
-  string			sUnitLib ;
+  string			sUnit;
+  string			sUnitLib;
 	int         colonne;
-	NSSuper*    pSuper = pContexte->getSuperviseur() ;
+	NSSuper*    pSuper = pContexte->getSuperviseur();
 
-	PatPathoIter iterTReeView   = pPatPathoArray->begin() ;
-	PatPathoIter dernierElement = pPatPathoArray->begin() ;
+	PatPathoIter iterTReeView   = pPatPathoArray->begin();
+	PatPathoIter dernierElement = pPatPathoArray->begin();
 
 	//traitement pour GECHY
 /*
-	sEtiquettePatPere = (*iterTReeView)->getLexique() ;
-	pSuper->getDico()->donneLibelle(sLang, &sEtiquettePatPere, &sLibellePatPere) ;
+	sEtiquettePatPere = (*iterTReeView)->getLexique();
+	pSuper->getDico()->donneLibelle(sLang, &sEtiquettePatPere, &sLibellePatPere);
 
-	string sComplement ;
+	string sComplement;
 	if ((*iterTReeView)->getComplement() == string(""))
-		sComplement = string("") ;
+		sComplement = string("");
 	else
 		sComplement = string(1, cheminSeparationMARK) +
-      		                    (*iterTReeView)->getComplement() ;
+      		                    (*iterTReeView)->getComplement();
 
 	string sCertitudeProvisoir;
 	if ((*iterTReeView)->getCertitude() == string(""))
 		sCertitudeProvisoir = string("");
 	else
 		sCertitudeProvisoir = string(1, cheminSeparationMARK) +
-      		                    			(*iterTReeView)->getCertitude() ;
+      		                    			(*iterTReeView)->getCertitude();
 
 	string sPlurielProvisoir;
 	if ((*iterTReeView)->getPluriel() == string(""))
-		sPlurielProvisoir = string("") ;
+		sPlurielProvisoir = string("");
 	else
 		sPlurielProvisoir = string(1, cheminSeparationMARK) +
-                                		(*iterTReeView)->getPluriel() ;
+                                		(*iterTReeView)->getPluriel();
 
 
 	// Traiter le cas où il ya : certitude et/ou pluriel
-	sEtiquettePatPere = sEtiquettePatPere + sPlurielProvisoir + sCertitudeProvisoir + sComplement ;
-	sLibellePatPere += sPlurielProvisoir + sCertitudeProvisoir + sComplement ;
+	sEtiquettePatPere = sEtiquettePatPere + sPlurielProvisoir + sCertitudeProvisoir + sComplement;
+	sLibellePatPere += sPlurielProvisoir + sCertitudeProvisoir + sComplement;
 */
 
-  sLibellePatPere = buildLabel(iterTReeView) ;
+  sLibellePatPere = buildLabel(iterTReeView);
 
 	//NSTreeNode ayant pour étiquette sEtiquettePatPere et dont la colonne est 1
-	TTreeNode root  = _pTreeWind->GetRoot() ;
-	TTreeNode GECHY = root.AddChild(TTreeNode(*_pTreeWind, sLibellePatPere.c_str())) ;
+	TTreeNode root  = _pTreeWind->GetRoot();
+	TTreeNode GECHY = root.AddChild(TTreeNode(*_pTreeWind, sLibellePatPere.c_str()));
 
 	if ((*iterTReeView) != *(_pDecodageBase->getitDcode()))
 	{
-		GECHY.SetImageIndex(0) ;
-		GECHY.SetSelectedImageIndex(0, true) ;
+		GECHY.SetImageIndex(0);
+		GECHY.SetSelectedImageIndex(0, true);
 	}
 	else
 	{
-		GECHY.SetImageIndex(1) ;
-		GECHY.SetSelectedImageIndex(1, true) ;
+		GECHY.SetImageIndex(1);
+		GECHY.SetSelectedImageIndex(1, true);
 	}
-	iterTReeView++ ;
+	iterTReeView++;
 
-	int refLigne ;
-	int imageIndex = 0 ;
+	int refLigne;
+	int imageIndex = 0;
 	//
 	// On passe en revue la PatPathoArray
 	//
@@ -2895,11 +2895,11 @@ AideDecode::SetupWindow()
     	//
       // On vide le vecteur de pères
       //
-      pVectTTreeNode->vider() ;
-      dernierElement = iterTReeView ;
+      pVectTTreeNode->vider();
+      dernierElement = iterTReeView;
 
       sEtiquettePatPere = "";
-      refLigne = (*iterTReeView)->getLigne() ;
+      refLigne = (*iterTReeView)->getLigne();
       //
       // On assemble tous les éléments situés sur la même ligne
       //
@@ -2910,39 +2910,39 @@ AideDecode::SetupWindow()
         // On fabrique l'étiquette
         //
         if (string("") != sEtiquettePatPere)
-          sEtiquettePatPere += string(" | ") ;
+          sEtiquettePatPere += string(" | ");
 
-        sEtiquettePatPere = buildLabel(iterTReeView) ;
+        sEtiquettePatPere = buildLabel(iterTReeView);
 
         //
         // On regarde si l'élément est l'élément fautif
         //
         if ((*iterTReeView) == *(_pDecodageBase->getitDcode()))
-        	imageIndex = 1 ;
+        	imageIndex = 1;
 
         //
         // On avance d'un cran
         //
         if (pPatPathoArray->end() != iterTReeView)
-        	iterTReeView++ ;
+        	iterTReeView++;
       }
       //
       // On ajoute l'étiquette à la treenode (sous la racine)
       //
-      TTreeNode* fils = new TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str()) ;
-      *fils = GECHY.AddChild(TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str())) ;
+      TTreeNode* fils = new TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str());
+      *fils = GECHY.AddChild(TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str()));
       //
       // On référence le noeud comme futur père
       //
-      pVectTTreeNode->push_back(fils) ;
+      pVectTTreeNode->push_back(fils);
       //
       // On fixe son icone
       //
-      fils->SetImageIndex(imageIndex) ;
-      fils->SetSelectedImageIndex(imageIndex, true) ;
+      fils->SetImageIndex(imageIndex);
+      fils->SetSelectedImageIndex(imageIndex, true);
 
       if (1 == imageIndex)
-      	imageIndex++ ;
+      	imageIndex++;
     }
     //
     // Elément ordinaire (situé à distance de la racine)
@@ -2953,26 +2953,26 @@ AideDecode::SetupWindow()
       // On ôte de l'array de pères tous les éléments qui ne sont
       // pas plus anciens que l'élément en cours
       //
-      colonne = (*iterTReeView)->getColonne() ;
-      int derniereColonne = (*dernierElement)->getColonne() ;
+      colonne = (*iterTReeView)->getColonne();
+      int derniereColonne = (*dernierElement)->getColonne();
 
       if (colonne <= derniereColonne)
       {
         // Take care, if columns are badly set, not to pop_back all fathers
         //
-        size_t iDelta = derniereColonne - colonne + 1 ;
-        size_t iVect  = pVectTTreeNode->size() ;
-        size_t iBack  = min(iDelta, iVect - 1) ;
+        size_t iDelta = derniereColonne - colonne + 1;
+        size_t iVect  = pVectTTreeNode->size();
+        size_t iBack  = min(iDelta, iVect - 1);
 
       	for (int i = 0; i < iBack; i++)
-        	pVectTTreeNode->pop_back() ;
+        	pVectTTreeNode->pop_back();
       }
 
-      dernierElement = iterTReeView ;
+      dernierElement = iterTReeView;
       //
       //
-      sEtiquettePatPere = "" ;
-      refLigne = (*iterTReeView)->getLigne() ;
+      sEtiquettePatPere = "";
+      refLigne = (*iterTReeView)->getLigne();
       //
       // On assemble tous les éléments situés sur la même ligne
       //
@@ -2983,150 +2983,150 @@ AideDecode::SetupWindow()
         // On fabrique l'étiquette
         //
         if (string("") != sEtiquettePatPere)
-          sEtiquettePatPere += string(" | ") ;
+          sEtiquettePatPere += string(" | ");
 
-        sEtiquettePatPere = buildLabel(iterTReeView) ;
+        sEtiquettePatPere = buildLabel(iterTReeView);
 
 /*
         if (!(sEtiquettePatPere == string("")))
         {
-        	sEtiquettePatPere += string(1, cheminSeparationMARK) ;
-          sEtiquettePatPere += (*iterTReeView)->getLexique() ;
+        	sEtiquettePatPere += string(1, cheminSeparationMARK);
+          sEtiquettePatPere += (*iterTReeView)->getLexique();
         }
         else
         {
-        	sLibellePatPere = (*iterTReeView)->getLexique() ;
+        	sLibellePatPere = (*iterTReeView)->getLexique();
 
-          bool bSuccess = false ;
+          bool bSuccess = false;
           if ((string("") != sLibellePatPere) && ('£' != sLibellePatPere[0]))
-          	bSuccess = pSuper->getDico()->donneLibelle(sLang, &sLibellePatPere, &sEtiquettePatPere) ;
+          	bSuccess = pSuper->getDico()->donneLibelle(sLang, &sLibellePatPere, &sEtiquettePatPere);
           if (false == bSuccess)
-          	sEtiquettePatPere = sLibellePatPere ;
+          	sEtiquettePatPere = sLibellePatPere;
         }
 
         if (string("") != (*iterTReeView)->getCertitude())
         	sEtiquettePatPere += string(1, cheminSeparationMARK) +
-      																	(*iterTReeView)->getCertitude() ;
+      																	(*iterTReeView)->getCertitude();
 
         if (string("") != (*iterTReeView)->getPluriel())
         	sEtiquettePatPere += string(1, cheminSeparationMARK) +
-                  			    						(*iterTReeView)->getPluriel() ;
+                  			    						(*iterTReeView)->getPluriel();
 
         if (string("") != (*iterTReeView)->getComplement())
         	sEtiquettePatPere += string("(") +
                				    				(*iterTReeView)->getComplement() +
-                                        string(")") ;
+                                        string(")");
         if ((*iterTReeView)->getUnit() != string(""))
         {
-        	sUnit = (*iterTReeView)->getUnit() ;
+        	sUnit = (*iterTReeView)->getUnit();
           pSuper->getDico()->donneLibelle(sLang, &sUnit, &sUnitLib);
-          sEtiquettePatPere += string(" ") + sUnitLib ;
+          sEtiquettePatPere += string(" ") + sUnitLib;
         }
 */
         //
         // On regarde si l'élément est l'élément fautif
         //
         if ((*iterTReeView) == *(_pDecodageBase->getitDcode()))
-        	imageIndex = 1 ;
+        	imageIndex = 1;
         //
         // On avance d'un cran
         //
         if (pPatPathoArray->end() != iterTReeView)
-        	iterTReeView++ ;
+        	iterTReeView++;
       }
       //
       // On prend comme père le plus jeune des aïeuls
       //
-      TTreeNode* pere = pVectTTreeNode->back() ; //dernier élément de pVectTTreeNode
-      TTreeNode* fils = new TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str()) ;
+      TTreeNode* pere = pVectTTreeNode->back(); //dernier élément de pVectTTreeNode
+      TTreeNode* fils = new TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str());
       //
       // L'élément est ajouté à l'array des pères
       //
-      *fils = pere->AddChild(TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str())) ;
-      pVectTTreeNode->push_back(fils ) ;
+      *fils = pere->AddChild(TTreeNode(*_pTreeWind, sEtiquettePatPere.c_str()));
+      pVectTTreeNode->push_back(fils );
       //
       // On fixe son icone
       //
-      fils->SetImageIndex(imageIndex) ;
-      fils->SetSelectedImageIndex(imageIndex, true) ;
+      fils->SetImageIndex(imageIndex);
+      fils->SetSelectedImageIndex(imageIndex, true);
 
       if (imageIndex == 1)
       {
-      	imageIndex++ ;
-        fils->EnsureVisible() ;
+      	imageIndex++;
+        fils->EnsureVisible();
       }
     }
   }
-  delete pVectTTreeNode ;
-  pVectTTreeNode = 0 ;
+  delete pVectTTreeNode;
+  pVectTTreeNode = 0;
 }
 
 string
 AideDecode::buildLabel(PatPathoIter iterTReeView)
 {
-  string sLang = string("") ;
+  string sLang = string("");
 	if (pContexte)
-		sLang = pContexte->getUserLanguage() ;
+		sLang = pContexte->getUserLanguage();
 
-  string sEtiquettePatPere = (*iterTReeView)->getLexique() ;
+  string sEtiquettePatPere = (*iterTReeView)->getLexique();
 
-  string sLibellePatPere = string("") ;
-  bool bSuccess = false ;
+  string sLibellePatPere = string("");
+  bool bSuccess = false;
   if ((string("") != sEtiquettePatPere) && ('£' != sEtiquettePatPere[0]))
-    bSuccess = pContexte->getDico()->donneLibelle(sLang, &sEtiquettePatPere, &sLibellePatPere) ;
+    bSuccess = pContexte->getDico()->donneLibelle(sLang, &sEtiquettePatPere, &sLibellePatPere);
   if (false == bSuccess)
-    sLibellePatPere = sEtiquettePatPere ;
+    sLibellePatPere = sEtiquettePatPere;
 
-	string sComplement = string("") ;
+	string sComplement = string("");
 	if ((*iterTReeView)->getComplement() != string(""))
 		sComplement = string(1, cheminSeparationMARK) +
-      		                                (*iterTReeView)->getComplement() ;
+      		                                (*iterTReeView)->getComplement();
 
-	string sCertitudeProvisoir = string("") ;
+	string sCertitudeProvisoir = string("");
 	if ((*iterTReeView)->getCertitude() != string(""))
 		sCertitudeProvisoir = string(1, cheminSeparationMARK) +
-      		                    			        (*iterTReeView)->getCertitude() ;
+      		                    			        (*iterTReeView)->getCertitude();
 
-	string sPlurielProvisoir = string("") ;
+	string sPlurielProvisoir = string("");
 	if ((*iterTReeView)->getPluriel() != string(""))
 		sPlurielProvisoir = string(1, cheminSeparationMARK) +
-                                		         (*iterTReeView)->getPluriel() ;
+                                		         (*iterTReeView)->getPluriel();
 
-	sLibellePatPere += sPlurielProvisoir + sCertitudeProvisoir + sComplement ;
+	sLibellePatPere += sPlurielProvisoir + sCertitudeProvisoir + sComplement;
 
-  return sLibellePatPere ;
+  return sLibellePatPere;
 }
 
 #endif
 
 AdjIntens::AdjIntens()
 {
-	sAdjectif  = "" ;
-	sIntensite = "" ;
+	sAdjectif  = "";
+	sIntensite = "";
 }
 
 ////////////////// NSDkdPhrase ////////////////////
 
 NSDkdPhrase::NSDkdPhrase()
 {
-  categorie  = -1 ;
-  sTexte     = "" ;
-  sEtiquette = "" ;
-  decDeb     = "" ;
-  decFin     = "" ;
-  sautLigne  = -1 ;
-  locLesion  = "" ;
+  categorie  = -1;
+  sTexte     = "";
+  sEtiquette = "";
+  decDeb     = "";
+  decFin     = "";
+  sautLigne  = -1;
+  locLesion  = "";
 }
 
 NSDkdPhrase::NSDkdPhrase(NSDkdPhrase& rv)
 {
-  categorie  = rv.categorie ;
-  sTexte     = rv.sTexte ;
-  sEtiquette = rv.sEtiquette ;
-  decDeb     = rv.decDeb ;
-  decFin     = rv.decFin ;
-  sautLigne  = rv.sautLigne ;
-  locLesion  = rv.locLesion ;
+  categorie  = rv.categorie;
+  sTexte     = rv.sTexte;
+  sEtiquette = rv.sEtiquette;
+  decDeb     = rv.decDeb;
+  decFin     = rv.decFin;
+  sautLigne  = rv.sautLigne;
+  locLesion  = rv.locLesion;
 }
 
 NSDkdPhrase::~NSDkdPhrase()
@@ -3137,17 +3137,17 @@ NSDkdPhrase&
 NSDkdPhrase::operator=(NSDkdPhrase src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	categorie  = src.categorie ;
-  sTexte     = src.sTexte ;
-  sEtiquette = src.sEtiquette ;
-  decDeb     = src.decDeb ;
-  decFin     = src.decFin ;
-  sautLigne  = src.sautLigne ;
-  locLesion  = src.locLesion ;
+	categorie  = src.categorie;
+  sTexte     = src.sTexte;
+  sEtiquette = src.sEtiquette;
+  decDeb     = src.decDeb;
+  decFin     = src.decFin;
+  sautLigne  = src.sautLigne;
+  locLesion  = src.locLesion;
 
-	return *this ;
+	return *this;
 }
 
 int
@@ -3155,8 +3155,8 @@ NSDkdPhrase::operator == (const NSDkdPhrase& o)
 {
 	if ((sTexte     == o.sTexte) &&
       (sEtiquette == o.sEtiquette))
-		return 1 ;
-	return 0 ;
+		return 1;
+	return 0;
 }
 
 

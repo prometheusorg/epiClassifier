@@ -21,7 +21,7 @@
 
 #include  "mysql/mysql.h"
 
-using namespace std ;
+using namespace std;
 
 #ifndef __linux__
 # if defined(_DANSSGBDDLL)
@@ -42,30 +42,30 @@ class ontologyBaseManager
   ontologyBaseManager(string sHost, string sUser, string sPass, string sDB, unsigned int uiPort);
   ~ontologyBaseManager();
 
-  bool initBase() ;
-  // bool insertMessage(messageData message) ;
-  // bool isMessageInBase(messageData message) ;
-  bool openBase() ;
-  bool closeBase() ;
+  bool initBase();
+  // bool insertMessage(messageData message);
+  // bool isMessageInBase(messageData message);
+  bool openBase();
+  bool closeBase();
 
-  MYSQL * getConnector() { return _sqlConnector ; }
-  string  getMysqlError() { return _sMysqlError ; }
+  MYSQL * getConnector() { return _sqlConnector; }
+  string  getMysqlError() { return _sMysqlError; }
 
-  MYSQL_RES * executeQuery(const string sQuery, bool bVerbose = true, string *pErrorMessage = (string*) 0) ;
+  MYSQL_RES * executeQuery(const string sQuery, bool bVerbose = true, string *pErrorMessage = (string*) 0);
 
  protected:
 
-  MYSQL * _sqlConnector ;
-  int     _iInstanceCounter ;
+  MYSQL * _sqlConnector;
+  int     _iInstanceCounter;
 
-  const char *  _host ;
-  const char *  _user ;
-  const char *  _password ;
-  const char *  _database ;
+  const char *  _host;
+  const char *  _user;
+  const char *  _password;
+  const char *  _database;
   unsigned int _port;
 
-  string  _sMysqlError ;
-} ;
+  string  _sMysqlError;
+};
 
 #endif // !__NSSQL_H__
 

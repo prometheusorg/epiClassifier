@@ -46,19 +46,19 @@ class NSObjectData
 {
     public :
 
-        char objectID[OBJECT_ID_LEN + 1] ;
-        char noeud[PPD_NOEUD_LEN + 1] ;
-        char type[BASE_TYPE_LEN + 1] ;
-   	    char lexique[BASE_LEXIQUE_LEN + 1] ;
-     	char complement[BASE_COMPLEMENT_LEN + 1] ;
-	  	char certitude[BASE_CERTITUDE_LEN + 1] ;
-        char pluriel[BASE_PLURIEL_LEN + 1] ;
-        char tran_new[TRAN_CODE_LEN + 1] ;
-        char tran_del[TRAN_CODE_LEN + 1] ;
-        char unit[BASE_UNIT_LEN + 1] ;
+        char objectID[OBJECT_ID_LEN + 1];
+        char noeud[PPD_NOEUD_LEN + 1];
+        char type[BASE_TYPE_LEN + 1];
+   	    char lexique[BASE_LEXIQUE_LEN + 1];
+     	char complement[BASE_COMPLEMENT_LEN + 1];
+	  	char certitude[BASE_CERTITUDE_LEN + 1];
+        char pluriel[BASE_PLURIEL_LEN + 1];
+        char tran_new[TRAN_CODE_LEN + 1];
+        char tran_del[TRAN_CODE_LEN + 1];
+        char unit[BASE_UNIT_LEN + 1];
 
 		NSObjectData() { metAZero(); }
-		NSObjectData(NSObjectData& rv) ;
+		NSObjectData(NSObjectData& rv);
 
 		NSObjectData& operator=(NSObjectData src);
 		int 		  operator==(const NSObjectData& o);
@@ -101,23 +101,23 @@ class NSObjectDatInfo
     //
     // Objet qui contient les donnees
 		//
-		NSObjectData* pDonnees ;
+		NSObjectData* pDonnees;
 
-		NSObjectDatInfo() ;
-		// NSObjectDatInfo(NSObjectDat* pObjDat) ;
-		NSObjectDatInfo(NSObjectDatInfo& rv) ;
+		NSObjectDatInfo();
+		// NSObjectDatInfo(NSObjectDat* pObjDat);
+		NSObjectDatInfo(NSObjectDatInfo& rv);
 
-    string getID()   { return pDonnees->getID() ; }
-    string getNode() { return pDonnees->getNode() ; }
+    string getID()   { return pDonnees->getID(); }
+    string getNode() { return pDonnees->getNode(); }
 
-		NSObjectDatInfo& operator=(NSObjectDatInfo src) ;
-		int operator == (const NSObjectDatInfo& o) ;
-    int operator == (const NSPatPathoInfo& o) ;
-    ~NSObjectDatInfo() ;
+		NSObjectDatInfo& operator=(NSObjectDatInfo src);
+		int operator == (const NSObjectDatInfo& o);
+    int operator == (const NSPatPathoInfo& o);
+    ~NSObjectDatInfo();
 };
 
-typedef vector<NSObjectDatInfo*> NSObjectDatInfoArray ;
-typedef NSObjectDatInfoArray::iterator ObjectDatIter ;
+typedef vector<NSObjectDatInfo*> NSObjectDatInfoArray;
+typedef NSObjectDatInfoArray::iterator ObjectDatIter;
 
 class NSObjectDatArray : public NSObjectDatInfoArray, public NSRoot
 {
@@ -126,21 +126,21 @@ class NSObjectDatArray : public NSObjectDatInfoArray, public NSRoot
     //
     // Constructeurs
     //
-    NSObjectDatArray(NSContexte* pCtx = 0) ;
-    NSObjectDatArray(NSObjectDatArray& rv) ;
+    NSObjectDatArray(NSContexte* pCtx = 0);
+    NSObjectDatArray(NSObjectDatArray& rv);
     //
     // Destructeur
     //
-    ~NSObjectDatArray() ;
-    void vider() ;
+    ~NSObjectDatArray();
+    void vider();
     //
     // Operateurs
     //
-    NSObjectDatArray& operator=(NSObjectDatArray src) ;
+    NSObjectDatArray& operator=(NSObjectDatArray src);
     //
     // Fonctions de gestion du vecteur
     //
-    bool ajouteElement(NSObjectDatInfo* pObjDat) ;
+    bool ajouteElement(NSObjectDatInfo* pObjDat);
 };
 
 //
@@ -184,16 +184,16 @@ class NSObjectLocInfo
         //
 		// Objet qui contient les données
 		//
-		NSObjectLocData* pDonnees ;
+		NSObjectLocData* pDonnees;
 
-		NSObjectLocInfo() ;
-		NSObjectLocInfo(NSObjectLocInfo& rv) ;
+		NSObjectLocInfo();
+		NSObjectLocInfo(NSObjectLocInfo& rv);
 
-		NSObjectLocInfo&    operator=(NSObjectLocInfo src) ;
-		int                 operator==(const NSObjectLocInfo& o) ;
-        ~NSObjectLocInfo() ;
+		NSObjectLocInfo&    operator=(NSObjectLocInfo src);
+		int                 operator==(const NSObjectLocInfo& o);
+        ~NSObjectLocInfo();
 
-        string getID()   { return pDonnees->getID() ; }
+        string getID()   { return pDonnees->getID(); }
 };
 
 typedef vector<NSObjectLocInfo*> NSObjectLocInfoArray;
@@ -294,7 +294,7 @@ class NSObjectTLibreBase : public NSRoot
     // Variables de stockage des valeurs
     //
 
-    NSObjectTLibreInfo* pNSTexteLibre ;
+    NSObjectTLibreInfo* pNSTexteLibre;
     NSObjectTLibreBase(NSContexte* pCtx);
     NSObjectTLibreBase(NSObjectTLibreBase& rv);
     ~NSObjectTLibreBase();

@@ -49,18 +49,18 @@ CodeStructure::CodeStructure(const CodeStructure& src)
 CodeStructure& CodeStructure::operator= (CodeStructure src)
 {
   if (this == &src)
-    return *this ;
+    return *this;
 
-	dValeur = src.dValeur ;
-	sCode 	= src.sCode ;
-	sUnite 	= src.sUnite ;
+	dValeur = src.dValeur;
+	sCode 	= src.sCode;
+	sUnite 	= src.sUnite;
 
-	return *this ;
+	return *this;
 }
 
 CodeStructure::CodeStructure(string sChaine , double dVal, string sUnit)
 {
-	dValeur = dVal ;
+	dValeur = dVal;
 	sCode  	= sChaine;
 	sUnite 	= sUnit;
 }
@@ -84,13 +84,13 @@ void
 VectorCodeStructure::vider()
 {
 	if (empty())
-		return ;
+		return;
 
-	iterCode i = begin() ;
+	iterCode i = begin();
 	while (end() != i)
 	{
-		delete *i ;
-		erase(i) ;
+		delete *i;
+		erase(i);
 	}
 }
 
@@ -98,21 +98,21 @@ VectorCodeStructure&
 VectorCodeStructure::operator=(VectorCodeStructure src)
 {
   if (this == &src)
-    return *this ;
+    return *this;
 
-	vider() ;
+	vider();
 	if (false == src.empty())
-		for (iterCode i = src.begin() ; src.end() != i ; i++)
-			push_back(new CodeStructure(*(*i))) ;
+		for (iterCode i = src.begin(); src.end() != i; i++)
+			push_back(new CodeStructure(*(*i)));
 
-	return *this ;
+	return *this;
 }
 
 VectorCodeStructure::VectorCodeStructure(VectorCodeStructure& src)
 {
 	if (false == src.empty())
-		for (iterCode i = src.begin() ; src.end() != i ; i++)
-			push_back(new CodeStructure(*(*i))) ;
+		for (iterCode i = src.begin(); src.end() != i; i++)
+			push_back(new CodeStructure(*(*i)));
 }
 
 //-----------------------------------------------------------------
@@ -123,11 +123,11 @@ double
 VectorCodeStructure::donneValeur(string sItem)
 {
 	if (false == empty())
-		for (iterCode i = begin() ; end() != i ; i++)
+		for (iterCode i = begin(); end() != i; i++)
 			if (sItem == (*i)->sCode)
-				return (*i)->dValeur ;
+				return (*i)->dValeur;
 
-	return -11111111 ;
+	return -11111111;
 }
 
 //-----------------------------------------------------------------
@@ -137,18 +137,18 @@ bool
 VectorCodeStructure::Appartient(string sItem, CodeStructure* pResultat)
 {
 	if (empty())
-    return false ;
+    return false;
 
-  for (iterCode i = begin() ; end() != i ; i++)
+  for (iterCode i = begin(); end() != i; i++)
   {
     if (sItem == (*i)->sCode)
     {
-      *pResultat = *(*i) ;
-      return true ;
+      *pResultat = *(*i);
+      return true;
     }
   }
 
-	return false ;
+	return false;
 }
 
 //***************************************************************************
@@ -164,24 +164,24 @@ NSCVData::NSCVData(NSCVData& rv)
 {
 #ifndef _ENTERPRISE_DLL
 
-	strcpy(resultat,  rv.resultat) ;
-	strcpy(operation, rv.operation) ;
-	strcpy(apartir,   rv.apartir) ;
-	strcpy(quantite,  rv.quantite) ;
+	strcpy(resultat,  rv.resultat);
+	strcpy(operation, rv.operation);
+	strcpy(apartir,   rv.apartir);
+	strcpy(quantite,  rv.quantite);
 
-	strcpy(formule,   rv.formule) ;
-	strcpy(methode,   rv.methode) ;
-	strcpy(unite,	 		rv.unite) ;
+	strcpy(formule,   rv.formule);
+	strcpy(methode,   rv.methode);
+	strcpy(unite,	 		rv.unite);
 
 #else
 
-  _sResult     = rv._sResult ;
-  _sOperator   = rv._sOperator ;
-  _sFrom       = rv._sFrom ;
-  _sForConcept = rv._sForConcept ;
-  _sFormula    = rv._sFormula ;
-  _sMethod     = rv._sMethod ;
-  _sUnit       = rv._sUnit ;
+  _sResult     = rv._sResult;
+  _sOperator   = rv._sOperator;
+  _sFrom       = rv._sFrom;
+  _sForConcept = rv._sForConcept;
+  _sFormula    = rv._sFormula;
+  _sMethod     = rv._sMethod;
+  _sUnit       = rv._sUnit;
 
 #endif
 }
@@ -198,32 +198,32 @@ NSCVData&
 NSCVData::operator=(NSCVData rv)
 {
 	if (this == &rv)
-		return *this ;
+		return *this;
 
 #ifndef _ENTERPRISE_DLL
 
-	strcpy(resultat,  rv.resultat) ;
-	strcpy(operation, rv.operation) ;
-	strcpy(apartir,   rv.apartir) ;
-	strcpy(quantite,  rv.quantite) ;
+	strcpy(resultat,  rv.resultat);
+	strcpy(operation, rv.operation);
+	strcpy(apartir,   rv.apartir);
+	strcpy(quantite,  rv.quantite);
 
-	strcpy(formule,   rv.formule) ;
-	strcpy(methode,   rv.methode) ;
-	strcpy(unite,	    rv.unite) ;
+	strcpy(formule,   rv.formule);
+	strcpy(methode,   rv.methode);
+	strcpy(unite,	    rv.unite);
 
 #else
 
-  _sResult     = rv._sResult ;
-  _sOperator   = rv._sOperator ;
-  _sFrom       = rv._sFrom ;
-  _sForConcept = rv._sForConcept ;
-  _sFormula    = rv._sFormula ;
-  _sMethod     = rv._sMethod ;
-  _sUnit       = rv._sUnit ;
+  _sResult     = rv._sResult;
+  _sOperator   = rv._sOperator;
+  _sFrom       = rv._sFrom;
+  _sForConcept = rv._sForConcept;
+  _sFormula    = rv._sFormula;
+  _sMethod     = rv._sMethod;
+  _sUnit       = rv._sUnit;
 
 #endif
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -252,9 +252,9 @@ NSCVData::operator == ( const NSCVData& rv )
       (_sUnit       == rv._sUnit))
 #endif
 
-		return 1 ;
+		return 1;
 	else
-		return 0 ;
+		return 0;
 }
 
 //---------------------------------------------------------------------------
@@ -270,23 +270,23 @@ NSCVData::metAZero()
 	//
 #ifndef _ENTERPRISE_DLL
 
-	memset( resultat,   0, CV_RESULTAT_LEN ) ;
-	memset( operation,  0, CV_OPERATION_LEN ) ;
-	memset( apartir,    0, CV_APARTIRDE_LEN ) ;
-	memset( quantite,   0, CV_LIEALAQUANTITE_LEN ) ;
-	memset( formule,    0, CV_FORMULE_LEN ) ;
-	memset( methode,    0, CV_METHODE_LEN  ) ;
-	memset( unite,      0, CV_UNITE_LEN  ) ;
+	memset( resultat,   0, CV_RESULTAT_LEN );
+	memset( operation,  0, CV_OPERATION_LEN );
+	memset( apartir,    0, CV_APARTIRDE_LEN );
+	memset( quantite,   0, CV_LIEALAQUANTITE_LEN );
+	memset( formule,    0, CV_FORMULE_LEN );
+	memset( methode,    0, CV_METHODE_LEN  );
+	memset( unite,      0, CV_UNITE_LEN  );
 
 #else
 
-  _sResult     = string("") ;
-  _sOperator   = string("") ;
-  _sFrom       = string("") ;
-  _sForConcept = string("") ;
-  _sFormula    = string("") ;
-  _sMethod     = string("") ;
-  _sUnit       = string("") ;
+  _sResult     = string("");
+  _sOperator   = string("");
+  _sFrom       = string("");
+  _sForConcept = string("");
+  _sFormula    = string("");
+  _sMethod     = string("");
+  _sUnit       = string("");
 
 #endif
 }
@@ -301,7 +301,7 @@ NSCVData::metAZero()
 NSCVInfo::NSCVInfo()
 {
 	// Crée l'objet de données
-	pDonnees = new NSCVData() ;
+	pDonnees = new NSCVData();
 }
 
 //---------------------------------------------------------------------------
@@ -312,7 +312,7 @@ NSCVInfo::NSCVInfo(NSCV* pCVcursor)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new NSCVData(*(pCVcursor->pDonnees)) ;
+	pDonnees = new NSCVData(*(pCVcursor->pDonnees));
 }
 
 //---------------------------------------------------------------------------
@@ -323,18 +323,18 @@ NSCVInfo::NSCVInfo(NSCVInfo& rv)
 	//
 	// Crée l'objet de données
 	//
-	pDonnees = new NSCVData() ;
+	pDonnees = new NSCVData();
 	//
 	// Copie les valeurs du NSCVInfo d'origine
 	//
-	*pDonnees = *(rv.pDonnees) ;
+	*pDonnees = *(rv.pDonnees);
 }
 
 //destructeur
 NSCVInfo::~NSCVInfo()
 {
 	if (pDonnees)
-		delete pDonnees ;
+		delete pDonnees;
 }
 
 //---------------------------------------------------------------------------
@@ -344,11 +344,11 @@ NSCVInfo&
 NSCVInfo::operator=(NSCVInfo src)
 {
 	if (this == &src)
-		return *this ;
+		return *this;
 
-	*pDonnees = *(src.pDonnees) ;
+	*pDonnees = *(src.pDonnees);
 
-	return *this ;
+	return *this;
 }
 
 //---------------------------------------------------------------------------
@@ -356,7 +356,7 @@ NSCVInfo::operator=(NSCVInfo src)
 //---------------------------------------------------------------------------
 int NSCVInfo::operator == ( const NSCVInfo& o )
 {
-	return (*pDonnees == *(o.pDonnees)) ;
+	return (*pDonnees == *(o.pDonnees));
 }
 
 //***************************************************************************
@@ -373,7 +373,7 @@ NSCV::NSCV(NSSuper* pSuper) : NSFiche(pSuper)
 NSCV::NSCV(NSSuper* pSuper) : NSSuperRoot(pSuper)
 #endif
 {
-	pDonnees = new NSCVData() ;
+	pDonnees = new NSCVData();
 }
 
 //---------------------------------------------------------------------------
@@ -384,7 +384,7 @@ NSCV::NSCV(NSSuper* pSuper) : NSSuperRoot(pSuper)
 NSCV::~NSCV()
 {
 	if (pDonnees)
-		delete pDonnees ;
+		delete pDonnees;
 }
 
 #ifndef _ENTERPRISE_DLL
@@ -397,13 +397,13 @@ NSCV::~NSCV()
 void
 NSCV::alimenteFiche()
 {
-	alimenteChamp(pDonnees->resultat,   CV_RESULTAT_FIELD,CV_RESULTAT_LEN ) ;
-	alimenteChamp(pDonnees->operation,  CV_OPERATION_FIELD,CV_OPERATION_LEN ) ;
-	alimenteChamp(pDonnees->apartir,    CV_APARTIRDE_FIELD,CV_APARTIRDE_LEN ) ;
-	alimenteChamp(pDonnees->quantite,   CV_LIEALAQUANTITE_FIELD,CV_LIEALAQUANTITE_LEN ) ;
-	alimenteChamp(pDonnees->formule,    CV_FORMULE_FIELD,CV_FORMULE_LEN) ;
-	alimenteChamp(pDonnees->methode,    CV_METHODE_FIELD,CV_METHODE_LEN ) ;
-	alimenteChamp(pDonnees->unite,      CV_UNITE_FIELD, CV_UNITE_LEN ) ;
+	alimenteChamp(pDonnees->resultat,   CV_RESULTAT_FIELD,CV_RESULTAT_LEN );
+	alimenteChamp(pDonnees->operation,  CV_OPERATION_FIELD,CV_OPERATION_LEN );
+	alimenteChamp(pDonnees->apartir,    CV_APARTIRDE_FIELD,CV_APARTIRDE_LEN );
+	alimenteChamp(pDonnees->quantite,   CV_LIEALAQUANTITE_FIELD,CV_LIEALAQUANTITE_LEN );
+	alimenteChamp(pDonnees->formule,    CV_FORMULE_FIELD,CV_FORMULE_LEN);
+	alimenteChamp(pDonnees->methode,    CV_METHODE_FIELD,CV_METHODE_LEN );
+	alimenteChamp(pDonnees->unite,      CV_UNITE_FIELD, CV_UNITE_LEN );
 }
 
 //---------------------------------------------------------------------------
@@ -414,13 +414,13 @@ NSCV::alimenteFiche()
 void
 NSCV::videFiche()
 {
-	videChamp(pDonnees->resultat,   CV_RESULTAT_FIELD,CV_RESULTAT_LEN ) ;
-	videChamp(pDonnees->operation,  CV_OPERATION_FIELD,CV_OPERATION_LEN ) ;
-	videChamp(pDonnees->apartir,    CV_APARTIRDE_FIELD,CV_APARTIRDE_LEN ) ;
-	videChamp(pDonnees->quantite,   CV_LIEALAQUANTITE_FIELD,CV_LIEALAQUANTITE_LEN ) ;
-	videChamp(pDonnees->formule,    CV_FORMULE_FIELD,CV_FORMULE_LEN) ;
-	videChamp(pDonnees->methode,    CV_METHODE_FIELD,CV_METHODE_LEN ) ;
-	videChamp(pDonnees->unite,      CV_UNITE_FIELD, CV_UNITE_LEN ) ;
+	videChamp(pDonnees->resultat,   CV_RESULTAT_FIELD,CV_RESULTAT_LEN );
+	videChamp(pDonnees->operation,  CV_OPERATION_FIELD,CV_OPERATION_LEN );
+	videChamp(pDonnees->apartir,    CV_APARTIRDE_FIELD,CV_APARTIRDE_LEN );
+	videChamp(pDonnees->quantite,   CV_LIEALAQUANTITE_FIELD,CV_LIEALAQUANTITE_LEN );
+	videChamp(pDonnees->formule,    CV_FORMULE_FIELD,CV_FORMULE_LEN);
+	videChamp(pDonnees->methode,    CV_METHODE_FIELD,CV_METHODE_LEN );
+	videChamp(pDonnees->unite,      CV_UNITE_FIELD, CV_UNITE_LEN );
 }
 
 //---------------------------------------------------------------------------
@@ -433,13 +433,13 @@ NSCV::videFiche()
 DBIResult
 NSCV::open()
 {
-	char tableName[] = "CONVERT.DB" ;
+	char tableName[] = "CONVERT.DB";
 	//
 	// Appelle la fonction open() de la classe de base pour ouvrir
 	// l'index primaire
 	//
-	lastError = NSFiche::open(tableName, NSF_GUIDES) ;
-	return(lastError) ;
+	lastError = NSFiche::open(tableName, NSF_GUIDES);
+	return(lastError);
 }
 #endif
 
@@ -462,25 +462,25 @@ bool
 NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sLieA)
 {
 	if (NULL == pValeur)
-		return false ;
+		return false;
 
 	if (sResultat == sUnite)
-		return true ;
+		return true;
 
-	string sCode ;
+	string sCode;
 
-	string sCodeSens ;
-	NSDico::donneCodeSens(&sResultat, &sCodeSens) ;
-	string sUnitSens ;
-	NSDico::donneCodeSens(&sUnite, &sUnitSens) ;
+	string sCodeSens;
+	NSDico::donneCodeSens(&sResultat, &sCodeSens);
+	string sUnitSens;
+	NSDico::donneCodeSens(&sUnite, &sUnitSens);
 
 	if (sCodeSens == sUnitSens)
-		return true ;
+		return true;
 
-	string sLieASens ;
-	NSDico::donneCodeSens(&sLieA, &sLieASens) ;
+	string sLieASens;
+	NSDico::donneCodeSens(&sLieA, &sLieASens);
 
-	bool bTrouve = false ;
+	bool bTrouve = false;
 
 #ifndef _ENTERPRISE_DLL
 	//
@@ -488,7 +488,7 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
 	//
 	if (sLieA != "")
 	{
-		sCode = sCodeSens + "CV" + sUnitSens + sLieASens ;
+		sCode = sCodeSens + "CV" + sUnitSens + sLieASens;
 		lastError = chercheClef(&sCode,
                             "",
                             0,
@@ -496,11 +496,11 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
                             dbiWRITELOCK
                            		);
 		if (lastError == DBIERR_NONE)
-    	bTrouve = true ;
+    	bTrouve = true;
 	}
 	if (!bTrouve)
 	{
-		sCode = sCodeSens + "CV" + sUnitSens ;
+		sCode = sCodeSens + "CV" + sUnitSens;
 		lastError = chercheClef(&sCode,
                             "",
                             0,
@@ -508,19 +508,19 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
                             dbiWRITELOCK
                             	);
     if (lastError == DBIERR_NONE)
-    	bTrouve = true ;
+    	bTrouve = true;
 	}
 #endif
 
 	if (!bTrouve)
-		return false ;
+		return false;
 
 #ifndef _ENTERPRISE_DLL
-	lastError = getRecord() ;
+	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Le fichier de conversion semble endommagé.", standardError, lastError) ;
-    return false ;
+		erreur("Le fichier de conversion semble endommagé.", standardError, lastError);
+    return false;
 	}
 #endif
 
@@ -529,23 +529,23 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
   		(pDonnees->getOperator() != "CV") ||
       (pDonnees->getFrom()     != sUnitSens) ||
 			((pDonnees->getConcept() != sLieASens) && (pDonnees->getConcept() != "")))
-		return false ;
+		return false;
 
 
 	// 100 niveaux de piles
-	double val[100] ;
-	string ope[100] ;
-	int	   nbNiv = 100 ;
+	double val[100];
+	string ope[100];
+	int	   nbNiv = 100;
 	for (int j = 0; j < nbNiv; j++)
 	{
-  	val[j] = 0 ;
-    ope[j] = "" ;
+  	val[j] = 0;
+    ope[j] = "";
 	}
 
-	string sFormule = pDonnees->getFormula() ;
-	size_t  i = 0 ;
-	int     pileur = 0 ;
-	bool tourner = true ;
+	string sFormule = pDonnees->getFormula();
+	size_t  i = 0;
+	int     pileur = 0;
+	bool tourner = true;
 	while (tourner)
 	{
 		// Parenthèse ouvrante : on empile
@@ -554,20 +554,20 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
     {
     	for (int j = nbNiv - 1; j > pileur; j++)
       {
-      	val[j] = val[j-1] ;
-				ope[j] = ope[j-1] ;
+      	val[j] = val[j-1];
+				ope[j] = ope[j-1];
       }
-      val[pileur] = 0 ;
-      ope[pileur] = "" ;
-      i++ ;
+      val[pileur] = 0;
+      ope[pileur] = "";
+      i++;
     }
     //
     // Opérateurs + - * / ^x, etc
     //
     else if (isOperator(sFormule[i]))
     {
-    	ope[pileur] = string(1, sFormule[i]) ;
-      i++ ;
+    	ope[pileur] = string(1, sFormule[i]);
+      i++;
     }
     //
     // Parenthèse fermante : on dépile
@@ -576,89 +576,89 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
     {
     	while (ope[pileur+1] != "")
       {
-      	val[pileur] = Operation(val[pileur+1], val[pileur], ope[pileur+1]) ;
+      	val[pileur] = Operation(val[pileur+1], val[pileur], ope[pileur+1]);
         for (int j = pileur+1; j < nbNiv-1; j++)
         {
-        	val[j] = val[j+1] ;
-          ope[j] = ope[j+1] ;
+        	val[j] = val[j+1];
+          ope[j] = ope[j+1];
         }
-        val[nbNiv-1] = 0 ;
-        ope[nbNiv-1] = "" ;
+        val[nbNiv-1] = 0;
+        ope[nbNiv-1] = "";
       }
-      i++ ;
+      i++;
     }
     //
     // Crochet : valeur à convertir
     //
     else if (sFormule[i] == '[')
     {
-    	i++ ;
-      string sCode = "" ;
+    	i++;
+      string sCode = "";
       while ((i < strlen(sFormule.c_str())) && (sFormule[i] != ']'))
       {
-      	sCode += string(1, sFormule[i]) ;
-        i++ ;
+      	sCode += string(1, sFormule[i]);
+        i++;
       }
       if (sFormule[i] == ']')
-      	i++ ;
+      	i++;
       else
-      	return false ;
+      	return false;
 
       if (sCode != sUnitSens)
-      	return false ;
+      	return false;
 
       if (ope[pileur] != "")
-      	val[pileur] = Operation(val[pileur], *pValeur, ope[pileur]) ;
+      	val[pileur] = Operation(val[pileur], *pValeur, ope[pileur]);
       else
-      	val[pileur] = *pValeur ;
+      	val[pileur] = *pValeur;
     }
     else if ((sFormule[i] >= '0') && (sFormule[i] <= '9'))
     {
-    	string sNbre = string(1, sFormule[i]) ;
-      i++ ;
+    	string sNbre = string(1, sFormule[i]);
+      i++;
       while ((i < strlen(sFormule.c_str())) &&
             	   (((sFormule[i] >= '0') && (sFormule[i] <= '9')) ||
                    	(sFormule[i] == '.')))
       {
-      	sNbre += string(1, sFormule[i]) ;
-        i++ ;
+      	sNbre += string(1, sFormule[i]);
+        i++;
       }
-      double dNbre = StringToDouble(sNbre) ;
+      double dNbre = StringToDouble(sNbre);
       if (ope[pileur] != "")
-      	val[pileur] = Operation(val[pileur], dNbre, ope[pileur]) ;
+      	val[pileur] = Operation(val[pileur], dNbre, ope[pileur]);
       else
-      	val[pileur] = dNbre ;
+      	val[pileur] = dNbre;
     }
     else
-    	i++ ;
+    	i++;
 
     if (i >= strlen(sFormule.c_str()))
-    	tourner = false ;
+    	tourner = false;
   }
   
-  *pValeur = val[pileur] ;
-	return true ;
+  *pValeur = val[pileur];
+	return true;
 }
 
 double
 NSCV::Operation(double dOperande, double dOperateur, string sOperation)
 {
 	if 		(sOperation == string("+"))
-		return dOperande + dOperateur ;
+		return dOperande + dOperateur;
 	if (sOperation == string("-"))
-		return dOperande - dOperateur ;
+		return dOperande - dOperateur;
 	if (sOperation == string("*"))
-		return dOperande * dOperateur ;
+		return dOperande * dOperateur;
 	if (sOperation == string("/"))
-		return dOperande / dOperateur ;
+		return dOperande / dOperateur;
 	if (sOperation == string("^"))
-		return pow(dOperande, dOperateur) ;
+		return pow(dOperande, dOperateur);
   if (sOperation == string("£"))
   {
     if (double(10) == dOperande)
-      return log10(dOperateur) ;
+      return log10(dOperateur);
   }
-	return 0 ;
+	return 0;
 }
 
 bool
@@ -672,7 +672,7 @@ NSCV::isOperator(char cChar)
     case '/' :
     case '^' :
     case '£' :
-      return true ;
+      return true;
   }
-  return false ;
+  return false;
 }

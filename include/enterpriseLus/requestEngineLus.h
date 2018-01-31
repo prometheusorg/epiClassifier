@@ -90,38 +90,38 @@ class RequestEngine
 {
   public:
 
-    enum TRACETYPE { trNone = -1, trError = 0, trWarning, trSteps, trSubSteps, trDetails, trSubDetails } ;
+    enum TRACETYPE { trNone = -1, trError = 0, trWarning, trSteps, trSubSteps, trDetails, trSubDetails };
 
   protected:
 
 	  // Information storage strings
     //
-    TRACETYPE   _iTrace ;
+    TRACETYPE   _iTrace;
 
-    std::string _sEnterprisePort ;
-    int         _iEnterprisePort ;
+    std::string _sEnterprisePort;
+    int         _iEnterprisePort;
 
-    dti::sockets::tcp_listener* _pSocketListener ;
+    dti::sockets::tcp_listener* _pSocketListener;
 
   public:
 
-	  RequestEngine() ;
-    ~RequestEngine() ;
+	  RequestEngine();
+    ~RequestEngine();
 
-    void   mainLoop() ;
-    std::string processCommand(std::string sInput) ;
-    std::string processURL(std::string sQuery) ;
+    void   mainLoop();
+    std::string processCommand(std::string sInput);
+    std::string processURL(std::string sQuery);
 
-    virtual std::string processCommands(std::map<std::string, std::string> *pCommands) = 0 ;
+    virtual std::string processCommands(std::map<std::string, std::string> *pCommands) = 0;
 
-    void   Init(std::string sInitFileName) ;
-    void   LoadInitParams(std::string sInitFileName) ;
-    void   initSocketManager() ;
+    void   Init(std::string sInitFileName);
+    void   LoadInitParams(std::string sInitFileName);
+    void   initSocketManager();
 
-    void   trace(std::string pTracePtr[], int nbString, TRACETYPE iTraceLevel) ;
+    void   trace(std::string pTracePtr[], int nbString, TRACETYPE iTraceLevel);
 
-    TRACETYPE getTraceLevel() { return _iTrace ; }
-} ;
+    TRACETYPE getTraceLevel() { return _iTrace; }
+};
 
 #endif // __REQUESTENGINELUS_H
 

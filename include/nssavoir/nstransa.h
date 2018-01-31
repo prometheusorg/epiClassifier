@@ -54,20 +54,20 @@ class NSTransacData
     //
 	  // Variables de stockage des valeurs
 	  //
-    char patient[TRAN_PATIENT_LEN + 1] ;
-	  char code[TRAN_CODE_LEN + 1] ;
-	  char operateur[TRAN_OPERATEUR_LEN + 1] ;
-	  char dateDeb[TRAN_DATE_DEB_LEN + 1] ;
-    char dateFin[TRAN_DATE_FIN_LEN + 1] ;
+    char patient[TRAN_PATIENT_LEN + 1];
+	  char code[TRAN_CODE_LEN + 1];
+	  char operateur[TRAN_OPERATEUR_LEN + 1];
+	  char dateDeb[TRAN_DATE_DEB_LEN + 1];
+    char dateFin[TRAN_DATE_FIN_LEN + 1];
 
-	  NSTransacData() ;
-	  NSTransacData(NSTransacData& rv) ;
-    ~NSTransacData() ;
+	  NSTransacData();
+	  NSTransacData(NSTransacData& rv);
+    ~NSTransacData();
 
-	  NSTransacData& operator=(NSTransacData src) ;
-	  int            operator==(const NSTransacData& o) ;
+	  NSTransacData& operator=(NSTransacData src);
+	  int            operator==(const NSTransacData& o);
 
-    void metAZero() ;
+    void metAZero();
 };
 
 //

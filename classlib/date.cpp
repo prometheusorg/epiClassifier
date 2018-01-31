@@ -16,7 +16,7 @@
 #include <ctype.h>
 // #include <tchar.h>
 
-using namespace ClassLib ;
+using namespace ClassLib;
 
 /****************************************************************
  *                                                              *
@@ -214,7 +214,7 @@ const _TCHAR *TDate::MonthName( MonthTy monthNumber )
 static int FindMatch( const _TCHAR *str, const _TCHAR**candidates, int icand )
 {
     // unsigned len = _tcslen(str);
-  unsigned len = strlen(str) ;
+  unsigned len = strlen(str);
 
   while(icand--)
   {

@@ -8,21 +8,21 @@
 #if !defined(__NSCLASSER_H__)
 #define __NSCLASSER_H__
 
-class ParseElem ;
-class ParseElemArray ;
-class NSEpiFlechiesDB ;
-//class NVLdVTemps ;
-class NSThesaurus ;
-class NSThesaurusInfo ;
-class NSPatholog ;
-class NSPhraseur ;
-class NsProposition ;
-class NSGenerateurFr ;
-class NSEpiClassifInfoArray ;
-class NSEpiClassifInfo ;
-class NSEpiClassif ;
-class VectString ;
-class NSPathologData ;
+class ParseElem;
+class ParseElemArray;
+class NSEpiFlechiesDB;
+//class NVLdVTemps;
+class NSThesaurus;
+class NSThesaurusInfo;
+class NSPatholog;
+class NSPhraseur;
+class NsProposition;
+class NSGenerateurFr;
+class NSEpiClassifInfoArray;
+class NSEpiClassifInfo;
+class NSEpiClassif;
+class VectString;
+class NSPathologData;
 
 #include "partage/nsvector.h"
 
@@ -32,7 +32,7 @@ class NSPathologData ;
   #include "nsepisod/eptables.h"
 #else
   #include "enterpriseLus/nsglobalLus.h"
-  using namespace std ;
+  using namespace std;
   // #include "enterpriseLus/nsglobalLus.h"
 #endif
 
@@ -44,7 +44,7 @@ class NSPathologData ;
 # endif
 #endif
 
-enum INDBLEVEL { INDBdatabaseError = 1, INDBnotAtAll, INDBasABegining, INDBcompleteTerm } ;
+enum INDBLEVEL { INDBdatabaseError = 1, INDBnotAtAll, INDBasABegining, INDBcompleteTerm };
 
 #ifndef __linux__
 class _EPISODUS Classify : public NSRoot
@@ -54,32 +54,32 @@ class Classify : public NSRoot
 {
   public:
 
-    Classify(NSContexte* pCtx, string* psClassif, string* psConcept, string* psPath) ;
-    ~Classify() ;
+    Classify(NSContexte* pCtx, string* psClassif, string* psConcept, string* psPath);
+    ~Classify();
 
     void             computeParsing( string  *psClassifResultO,
                                      string  *psClassifResultP,
-                                     string  *psClassifResultI) ;
+                                     string  *psClassifResultI);
 
-    void             searchTermsInLexique(string *sLibelle, string *psClassifResultO, string *psClassifResultP, std::string *psClassifResultI) ;
-    vector<string *> *Purge(string *sLibelle) ;
+    void             searchTermsInLexique(string *sLibelle, string *psClassifResultO, string *psClassifResultP, std::string *psClassifResultI);
+    vector<string *> *Purge(string *sLibelle);
 
-    bool             findInLexiq(string s2Find) ;
-    string           getCodeLexiq(string s2Find) ;
+    bool             findInLexiq(string s2Find);
+    string           getCodeLexiq(string s2Find);
 
-    ParseElem        *findGroup(ParseElem *pElem, ParseElemArray *pArray) ;
+    ParseElem        *findGroup(ParseElem *pElem, ParseElemArray *pArray);
 
   protected:
 
-    std::string pResultCodeClassif ;
-    std::string *psClassification ;     // Classification
-    std::string *psSOAPChemin ;
-    std::string *psSOAP2Parse ;
-    std::string *psResultParsing ;
+    std::string pResultCodeClassif;
+    std::string *psClassification;     // Classification
+    std::string *psSOAPChemin;
+    std::string *psSOAP2Parse;
+    std::string *psResultParsing;
 
-    std::string *pElement ;
-    std::string *pChemin ;
-} ;
+    std::string *pElement;
+    std::string *pChemin;
+};
 
 #ifndef __linux__
 class _EPISODUS ParseSOAP : public NSRoot
@@ -92,56 +92,56 @@ class ParseSOAP : public NSRoot
 		ParseSOAP(NSContexte* pCtx, string *sClassifier);
 		~ParseSOAP();
 
-		void                ChangeSOAPEdit(std::string *psSOAPEdit) ;
+		void                ChangeSOAPEdit(std::string *psSOAPEdit);
 
 		bool                ParsingEq();
 		std::string         *getLibelleParsing();
 		std::string         *getCodeParsing();
     void                ConvertitMajuscule(char* chaine);
-    std::string         ConvertitMajuscule(string sChaine) ;
+    std::string         ConvertitMajuscule(string sChaine);
 
     void    computeParsing( std::string  *sLibelle,
                             std::string  *sChemin,
                             std::string  *psClassifResultO,
                             std::string  *psClassifResultP,
                             std::string  *psClassifResultI,
-                            std::string  *psClassifResult3) ;
+                            std::string  *psClassifResult3);
 
     bool    computeParsingElem( std::string  *sLibelle,
                                 std::string  *sChemin,
                                 std::string  *psClassifResultO,
                                 std::string  *psClassifResultP,
                                 std::string  *psClassifResultI,
-                                std::string  *psClassifResult3) ;
+                                std::string  *psClassifResult3);
 
-  	void                searchTermsInLexique(std::string *sLibelle, std::string *psClassifResultO, std::string *psClassifResultP, std::string *psClassifResultI, std::string *psClassifResult3, bool bUse3BT = true) ;
-		vector<string *>*   Purge(string *sLibelle) ;
-    void								initParseElemArray(string* psLibelle, ParseElemArray* pParseResult) ;
-    void								initGroupElemArray(ParseElemArray* pLoneWords, ParseElemArray* pGroups) ;
-    void                cleanGroupElemArray(ParseElemArray* pGroups) ;
+  	void                searchTermsInLexique(std::string *sLibelle, std::string *psClassifResultO, std::string *psClassifResultP, std::string *psClassifResultI, std::string *psClassifResult3, bool bUse3BT = true);
+		vector<string *>*   Purge(string *sLibelle);
+    void								initParseElemArray(string* psLibelle, ParseElemArray* pParseResult);
+    void								initGroupElemArray(ParseElemArray* pLoneWords, ParseElemArray* pGroups);
+    void                cleanGroupElemArray(ParseElemArray* pGroups);
 
-		bool                findInLexiq(string s2Find, NSEpiFlechiesDB* pFlechies = 0, INDBLEVEL* pLevel = 0) ;
-		string              getCodeLexiq(string s2Find) ;
+		bool                findInLexiq(string s2Find, NSEpiFlechiesDB* pFlechies = 0, INDBLEVEL* pLevel = 0);
+		string              getCodeLexiq(string s2Find);
 
-		ParseElem*          findLargerGroup(ParseElem *pElem, ParseElemArray *pArray, NSEpiFlechiesDB* pFlechies = 0) ;
-    void          			addAllGroups(ParseElemArray *pLoneArray, ParseElemArray *pGroupArray, NSEpiFlechiesDB* pFlechies = 0) ;
+		ParseElem*          findLargerGroup(ParseElem *pElem, ParseElemArray *pArray, NSEpiFlechiesDB* pFlechies = 0);
+    void          			addAllGroups(ParseElemArray *pLoneArray, ParseElemArray *pGroupArray, NSEpiFlechiesDB* pFlechies = 0);
 
 	protected:
 
-		string              pResultCodeClassif ;
-		string              *psClassifier ;         // Classification
-		string              *psSOAPChemin ;
-		string              *psSOAP2Parse ;
-		string              *psResultParsing ;
+		string              pResultCodeClassif;
+		string              *psClassifier;         // Classification
+		string              *psSOAPChemin;
+		string              *psSOAP2Parse;
+		string              *psResultParsing;
 
-		NSPatholog          *pPatho ;
-} ;
+		NSPatholog          *pPatho;
+};
 
-class ElemSet ;
-class ElemSetArray ;
+class ElemSet;
+class ElemSetArray;
 
-typedef vector<string *> pstringVector ;
-typedef pstringVector::iterator pstringIterator ;
+typedef vector<string *> pstringVector;
+typedef pstringVector::iterator pstringIterator;
 
 #ifndef __linux__
 class _EPISODUS ParseCategory
@@ -152,51 +152,51 @@ class ParseCategory
   public:
 
 //        ParseCategory(string sObligatoire, string sPossible, string sInterdit);
-    ParseCategory(int nb, string label, string pattern) ;
-    ~ParseCategory() ;
+    ParseCategory(int nb, string label, string pattern);
+    ~ParseCategory();
 
-    void             DefObligatoire(string sDefine) ;
-    void             DefObligatoire(ElemSetArray *pElemSetArray) ;
+    void             DefObligatoire(string sDefine);
+    void             DefObligatoire(ElemSetArray *pElemSetArray);
 
-    void             DefPossible(string sDefine) ;
-    void             DefPossible(ElemSetArray *pElemSetArray) ;
+    void             DefPossible(string sDefine);
+    void             DefPossible(ElemSetArray *pElemSetArray);
 
-    void             DefInterdit(string sDefine) ;
-    void             DefInterdit(ElemSetArray *pElemSetArray) ;
+    void             DefInterdit(string sDefine);
+    void             DefInterdit(ElemSetArray *pElemSetArray);
 
-    void             Def3BT(string sDefine) ;
-    void             Def3BT(ElemSetArray *pElemSetArray) ;
+    void             Def3BT(string sDefine);
+    void             Def3BT(ElemSetArray *pElemSetArray);
 
-    void             DefCritere(string sDefO, string sDefP, string sDefI, string sDef3) ;
+    void             DefCritere(string sDefO, string sDefP, string sDefI, string sDef3);
 
-    ElemSetArray     *DefDomain(string sDomain) ;
+    ElemSetArray     *DefDomain(string sDomain);
 
-    ElemSetArray     *getObligatoireDomain() { return pDomainObligatoire ; }
-    string           getsObligatoire()       { return sObligatoire ; }
-    ElemSetArray     *getPossibleDomain()    { return pDomainPossible ; }
-    string           getsPossible()          { return sPossible ; }
-    ElemSetArray     *getInterditDomain()    { return pDomainInterdit ; }
-    string           getsInterdit()          { return sInterdit ; }
-    ElemSetArray     *get3btDomain()         { return pDomain3BT ; }
-    string           get3BT()                { return s3BT ; }
+    ElemSetArray     *getObligatoireDomain() { return pDomainObligatoire; }
+    string           getsObligatoire()       { return sObligatoire; }
+    ElemSetArray     *getPossibleDomain()    { return pDomainPossible; }
+    string           getsPossible()          { return sPossible; }
+    ElemSetArray     *getInterditDomain()    { return pDomainInterdit; }
+    string           getsInterdit()          { return sInterdit; }
+    ElemSetArray     *get3btDomain()         { return pDomain3BT; }
+    string           get3BT()                { return s3BT; }
 
-    vector<string *> *getPattern()           { return psPattern ; }
+    vector<string *> *getPattern()           { return psPattern; }
 
   protected:
 
-    int              nbDigit ;
-    string           sLabel ;
-    vector<string *> *psPattern ;
+    int              nbDigit;
+    string           sLabel;
+    vector<string *> *psPattern;
 
-    string           sObligatoire ;
-    ElemSetArray     *pDomainObligatoire ;
-    string           sPossible ;
-    ElemSetArray     *pDomainPossible ;
-    string           sInterdit ;
-    ElemSetArray     *pDomainInterdit ;
-    string           s3BT ;
-    ElemSetArray     *pDomain3BT ;
-} ;
+    string           sObligatoire;
+    ElemSetArray     *pDomainObligatoire;
+    string           sPossible;
+    ElemSetArray     *pDomainPossible;
+    string           sInterdit;
+    ElemSetArray     *pDomainInterdit;
+    string           s3BT;
+    ElemSetArray     *pDomain3BT;
+};
 
 //
 // Represente un element de classification ou un intervalle
@@ -209,63 +209,63 @@ class ElemSet
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
   public:
 
-    ElemSet(string sElem) ;
-    ElemSet(string sElemBegin, string sElemEnd) ;
-    ElemSet(string sElemBegin, string sElemEnd, bool bElemEmpty) ;
+    ElemSet(string sElem);
+    ElemSet(string sElemBegin, string sElemEnd);
+    ElemSet(string sElemBegin, string sElemEnd, bool bElemEmpty);
 
-    ElemSet(ElemSet& rv) ;
+    ElemSet(ElemSet& rv);
 
-    ~ElemSet() { lObjectCount-- ; } ;
+    ~ElemSet() { lObjectCount--; };
 
 //        int                 CountJoker(string sElem);
 //        ElemSetArray        *ComputeJoker(vector<string *> *psPattern);
-    void         ComputeJoker(vector<string *> psPattern, ElemSetArray *pElemSetResult) ;
+    void         ComputeJoker(vector<string *> psPattern, ElemSetArray *pElemSetResult);
 //        void                ComputeJokerInterval();
 //        void                ReplaceJoker(string sBorn, string s2Replace);
 
-    bool         HasJoker() ;
+    bool         HasJoker();
 
-    string       getBegin()                 { return sBegin ; }
-    void         setBegin(string s2Replace) { sBegin = s2Replace ; }
-    string       getEnd()                   { return sEnd ; } ;
-    void         setEnd(string s2Replace)   { sEnd = s2Replace ; }
+    string       getBegin()                 { return sBegin; }
+    void         setBegin(string s2Replace) { sBegin = s2Replace; }
+    string       getEnd()                   { return sEnd; };
+    void         setEnd(string s2Replace)   { sEnd = s2Replace; }
 
-    bool         isEmptySet()                { return bEmptySet ; }
-    void         setEmptySet(bool b2Replace) { bEmptySet = b2Replace ; }
+    bool         isEmptySet()                { return bEmptySet; }
+    void         setEmptySet(bool b2Replace) { bEmptySet = b2Replace; }
 
-    string       toString() ;
+    string       toString();
 
-    bool         intersect(ElemSet *pElem) ;
-    ElemSet      *Smaller(ElemSet* pElem) ;
-    ElemSetArray *inter(ElemSetArray *Elems) ;
+    bool         intersect(ElemSet *pElem);
+    ElemSet      *Smaller(ElemSet* pElem);
+    ElemSetArray *inter(ElemSetArray *Elems);
 
-    ElemSetArray *minus(ElemSet *pElem) ;
+    ElemSetArray *minus(ElemSet *pElem);
 
-    void         ComputeUnion(ElemSetArray *pElems) ;
+    void         ComputeUnion(ElemSetArray *pElems);
 
-    bool         doesContain(string sCode) ;
+    bool         doesContain(string sCode);
 
-    void         reorder() ;
+    void         reorder();
 
-    ElemSet&     operator=(ElemSet src) ;
-    bool         operator==(ElemSet src) ;
+    ElemSet&     operator=(ElemSet src);
+    bool         operator==(ElemSet src);
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
 
   protected:
 
-    string sBegin ;
-    string sEnd ;
-    bool   bEmptySet ;
-} ;
+    string sBegin;
+    string sEnd;
+    bool   bEmptySet;
+};
 
-typedef vector<ElemSet*> ElemSetVector ;
-typedef ElemSetVector::iterator ElemSetIterator ;
+typedef vector<ElemSet*> ElemSetVector;
+typedef ElemSetVector::iterator ElemSetIterator;
 
 //
 // Represente un ensemble d'elements ou d'intervalles
@@ -278,39 +278,39 @@ class ElemSetArray : public ElemSetVector
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
   public:
 
-    ElemSetArray() : ElemSetVector() { lObjectCount++ ; } ;
+    ElemSetArray() : ElemSetVector() { lObjectCount++; };
     ElemSetArray(string sDomaine);
-    ~ElemSetArray() ;
+    ~ElemSetArray();
 
-    ElemSetArray(ElemSetArray& rv) ;
+    ElemSetArray(ElemSetArray& rv);
 
-    ElemSetArray *ComputeIntersection(ElemSetArray *pElems) ;
-    void         ComputeUnion() ;
+    ElemSetArray *ComputeIntersection(ElemSetArray *pElems);
+    void         ComputeUnion();
 
-    void         minus(ElemSet *pTerm) ;
-    void         minus(ElemSetArray *pTerms) ;
+    void         minus(ElemSet *pTerm);
+    void         minus(ElemSetArray *pTerms);
 
-    void         print(char *) ;
-    string       toString() ;
+    void         print(char *);
+    string       toString();
 
-    bool         isEmpty() ;
+    bool         isEmpty();
 
     bool         doesContain(string sCode);
 
-    void         vider() ;
+    void         vider();
 
-    ElemSetArray& operator=(ElemSetArray src) ;
+    ElemSetArray& operator=(ElemSetArray src);
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
-} ;
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
+};
 
-typedef vector<ParseCategory *>       ParseCategoryVector ;
-typedef ParseCategoryVector::iterator ParseCategoryIterator ;
+typedef vector<ParseCategory *>       ParseCategoryVector;
+typedef ParseCategoryVector::iterator ParseCategoryIterator;
 
 #ifndef __linux__
 class _EPISODUS TermsParser : public ParseCategoryVector, public NSRoot
@@ -320,63 +320,63 @@ class TermsParser : public ParseCategoryVector, public NSRoot
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
   public:
 
-    TermsParser(NSContexte* pCtx, string sClassif, bool bUse3bt = true) ;
-    ~TermsParser() ;
+    TermsParser(NSContexte* pCtx, string sClassif, bool bUse3bt = true);
+    ~TermsParser();
 
-    ElemSetArray *Compute() ;
-    ElemSetArray *ComputeWithPIntersection() ;
-    ElemSetArray *ComputeWithPUnion() ;
+    ElemSetArray *Compute();
+    ElemSetArray *ComputeWithPIntersection();
+    ElemSetArray *ComputeWithPUnion();
 
-    ElemSetArray *Compute(ParseElemArray *) ;
-    ElemSetArray *ComputeWithPIntersection(ParseElemArray *) ;
-    ElemSetArray *ComputeWithPUnion(ParseElemArray *) ;
-    bool         ComputeElements(ParseElemArray *) ;
+    ElemSetArray *Compute(ParseElemArray *);
+    ElemSetArray *ComputeWithPIntersection(ParseElemArray *);
+    ElemSetArray *ComputeWithPUnion(ParseElemArray *);
+    bool         ComputeElements(ParseElemArray *);
 
 #ifndef _ENTERPRISE_DLL
-    bool         FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement) ;
-    string       FindAllClinicalTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif) ;
-    string       FindAllSentinelTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif) ;
-    bool         FindFlexClinicalTerm(NSThesaurus *pClinicalBase, string* pLexiqueCode) ;
+    bool         FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement);
+    string       FindAllClinicalTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif);
+    string       FindAllSentinelTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif);
+    bool         FindFlexClinicalTerm(NSThesaurus *pClinicalBase, string* pLexiqueCode);
 #else
-    bool         FindClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pElement) ;
-    string       FindAllClinicalTermsStartingWith(NSThesaurusInfo *pClinicalBase, string* pElement, string sClassif) ;
-    string       FindAllSentinelTermsStartingWith(NSThesaurusInfo *pClinicalBase, string* pElement, string sClassif) ;
-    bool         FindFlexClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pLexiqueCode) ;
+    bool         FindClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pElement);
+    string       FindAllClinicalTermsStartingWith(NSThesaurusInfo *pClinicalBase, string* pElement, string sClassif);
+    string       FindAllSentinelTermsStartingWith(NSThesaurusInfo *pClinicalBase, string* pElement, string sClassif);
+    bool         FindFlexClinicalTerm(NSThesaurusInfo *pClinicalBase, string* pLexiqueCode);
 #endif
 
-    void         ComputePUnion() ;
-    void         ComputePIntersection() ;
+    void         ComputePUnion();
+    void         ComputePIntersection();
 
-    void         ComputeIUnion() ;
-    void         ComputeOIntersection() ;
-    void         Compute3btIntersection() ;
-    void         CheckI(ElemSetArray *pResult) ;
+    void         ComputeIUnion();
+    void         ComputeOIntersection();
+    void         Compute3btIntersection();
+    void         CheckI(ElemSetArray *pResult);
 
-    string       getsObligatoire() { return pObligatoire->toString() ; }
-    string       getsPossible() { return pPossible->toString() ; }
-    string       getsInterdit() { return pInterdit->toString() ; }
+    string       getsObligatoire() { return pObligatoire->toString(); }
+    string       getsPossible() { return pPossible->toString(); }
+    string       getsInterdit() { return pInterdit->toString(); }
 
-    void         vider() ;
+    void         vider();
 
-    string       sBasicOnlyAddNewcodes(string sExistingSet, string incomingSet) ;
+    string       sBasicOnlyAddNewcodes(string sExistingSet, string incomingSet);
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
 
   protected:
 
-    string       sClassification ;
+    string       sClassification;
 
-    ElemSetArray *pObligatoire ;
-    ElemSetArray *pPossible ;
-    ElemSetArray *pInterdit ;
+    ElemSetArray *pObligatoire;
+    ElemSetArray *pPossible;
+    ElemSetArray *pInterdit;
 
-    bool         _bUse3bt ;
-} ;
+    bool         _bUse3bt;
+};
 
 #ifndef __linux__
 class _EPISODUS NSEpiFlechiesDB : public NSRoot
@@ -386,39 +386,39 @@ class NSEpiFlechiesDB : public NSRoot
 {
   public:
 
-    NSEpiFlechiesDB(NSContexte* pCtx) ;
-    ~NSEpiFlechiesDB() ;
+    NSEpiFlechiesDB(NSContexte* pCtx);
+    ~NSEpiFlechiesDB();
 
 #ifndef _ENTERPRISE_DLL
-    void   CreateDatabaseFlechies(bool* pContinuer = 0, OWL::TEdit* pAffichage = 0) ;
-    void   rempliDatabase(NSPathologData *pDonnees) ;
+    void   CreateDatabaseFlechies(bool* pContinuer = 0, OWL::TEdit* pAffichage = 0);
+    void   rempliDatabase(NSPathologData *pDonnees);
 #endif
-    bool   traiteFormeFlechie(string sAvant, string sApres, string sCode, int iDep = 0) ;
-    bool   rempliDatabaseFlechies(string sLibelle, string sCode) ;
-    bool   findElem(string sLibelle, string sCode) ;
+    bool   traiteFormeFlechie(string sAvant, string sApres, string sCode, int iDep = 0);
+    bool   rempliDatabaseFlechies(string sLibelle, string sCode);
+    bool   findElem(string sLibelle, string sCode);
 
-    bool   isInDB(string *sLibelle, INDBLEVEL* pLevel = 0) ;
-    bool   isInDB(string *sLibelle, char cTypeCode) ;
-    string getCodeLexiq(string sLibelle) ;
-    string getCodeLexiq(string sLibelle, char cTypeCode) ;
+    bool   isInDB(string *sLibelle, INDBLEVEL* pLevel = 0);
+    bool   isInDB(string *sLibelle, char cTypeCode);
+    string getCodeLexiq(string sLibelle);
+    string getCodeLexiq(string sLibelle, char cTypeCode);
 
-    bool   getAllLabelsForCode(string sCode, VectString *pLabels) ;
+    bool   getAllLabelsForCode(string sCode, VectString *pLabels);
 
-    void   ConvertitMajuscule(char* chaine) ;
-    string ConvertitMajuscule(string sChaine) ;
-    string getCodeSens(string sLibelle) ;
+    void   ConvertitMajuscule(char* chaine);
+    string ConvertitMajuscule(string sChaine);
+    string getCodeSens(string sLibelle);
 
-    void	 incrementeIdCpt() ;
+    void	 incrementeIdCpt();
 
   private:
 
-    NSPatholog*     pPatho ;
-    NSPhraseur*     pPhraseur ;
-    NsProposition*  pPropos ;
-    NSGenerateurFr* pGenFR ;
+    NSPatholog*     pPatho;
+    NSPhraseur*     pPhraseur;
+    NsProposition*  pPropos;
+    NSGenerateurFr* pGenFR;
 
-    string          sIdCpt ;
-} ;
+    string          sIdCpt;
+};
 
 #ifndef __linux__
 class _EPISODUS ParseElem
@@ -428,41 +428,41 @@ class ParseElem
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
   public:
 
-    ParseElem(string sElem) { lObjectCount++ ; sContent = sElem ; bNotInFirst = false ; nbOfTerms = 1 ; iPos = 0 ; }
-    ParseElem(string sElem, int nbTerms, int Pos) { lObjectCount++ ; sContent = sElem ; bNotInFirst = false ; nbOfTerms = nbTerms ; iPos = Pos ; }
-    ParseElem(ParseElem& rv) ;
-    ~ParseElem() { lObjectCount-- ; } ;
+    ParseElem(string sElem) { lObjectCount++; sContent = sElem; bNotInFirst = false; nbOfTerms = 1; iPos = 0; }
+    ParseElem(string sElem, int nbTerms, int Pos) { lObjectCount++; sContent = sElem; bNotInFirst = false; nbOfTerms = nbTerms; iPos = Pos; }
+    ParseElem(ParseElem& rv);
+    ~ParseElem() { lObjectCount--; };
 
-    ParseElem& operator=(ParseElem src) ;
+    ParseElem& operator=(ParseElem src);
 
-    bool    getNotInFirst()            { return bNotInFirst ; }
-    void    setNotInFirst(bool bValue) { bNotInFirst = bValue ; }
+    bool    getNotInFirst()            { return bNotInFirst; }
+    void    setNotInFirst(bool bValue) { bNotInFirst = bValue; }
 
-    string  getContent()               { return sContent ; }
+    string  getContent()               { return sContent; }
 
-    int     getNbOfTerms()             { return nbOfTerms ; }
-    void    setNbOfTerms(int i)        { nbOfTerms = i ; }
+    int     getNbOfTerms()             { return nbOfTerms; }
+    void    setNbOfTerms(int i)        { nbOfTerms = i; }
 
-    int     getPos()                   { return iPos ; }
-    void    setPos(int Pos)            { iPos = Pos ; }
+    int     getPos()                   { return iPos; }
+    void    setPos(int Pos)            { iPos = Pos; }
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
 
   protected:
 
-    bool   bNotInFirst ;
-    string sContent ;
-    int    nbOfTerms ;
-    int    iPos ;
-} ;
+    bool   bNotInFirst;
+    string sContent;
+    int    nbOfTerms;
+    int    iPos;
+};
 
-typedef vector<ParseElem *>         ParseElemVector ;
-typedef ParseElemVector::iterator   ParseElemIter ;
+typedef vector<ParseElem *>         ParseElemVector;
+typedef ParseElemVector::iterator   ParseElemIter;
 
 #ifndef __linux__
 class _EPISODUS ParseElemArray : public ParseElemVector
@@ -472,23 +472,23 @@ class ParseElemArray : public ParseElemVector
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
 	public:
 
-		ParseElemArray() { lObjectCount++ ; } ;
-		ParseElemArray(vector<string *> *pList) ;
-    ParseElemArray(ParseElemArray& rv) ;
-		~ParseElemArray() ;
+		ParseElemArray() { lObjectCount++; };
+		ParseElemArray(vector<string *> *pList);
+    ParseElemArray(ParseElemArray& rv);
+		~ParseElemArray();
 
-		void vider() ;
-    void setAllPos() ;
+		void vider();
+    void setAllPos();
 
-		ParseElemArray& operator=(ParseElemArray src) ;
+		ParseElemArray& operator=(ParseElemArray src);
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
-} ;
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
+};
 
 #ifndef __linux__
 class _EPISODUS ClassifElem
@@ -498,25 +498,25 @@ class ClassifElem
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
-    string  sCode ;
-		string  sLibelle ;
+    string  sCode;
+		string  sLibelle;
 
 	public:
 
-		ClassifElem(string s2Code, string s2Libelle) { lObjectCount++ ; sCode = s2Code ; sLibelle = s2Libelle ; }
-		~ClassifElem() { lObjectCount-- ; }
+		ClassifElem(string s2Code, string s2Libelle) { lObjectCount++; sCode = s2Code; sLibelle = s2Libelle; }
+		~ClassifElem() { lObjectCount--; }
 
-		string  getCode() ;
-		string  getLibelle() { return sLibelle ; }
+		string  getCode();
+		string  getLibelle() { return sLibelle; }
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
-} ;
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
+};
 
-typedef vector<ClassifElem *>       ClassifElemVector ;
-typedef ClassifElemVector::iterator ClassifElemIter ;
+typedef vector<ClassifElem *>       ClassifElemVector;
+typedef ClassifElemVector::iterator ClassifElemIter;
 
 #ifndef __linux__
 class _EPISODUS ClassifElemArray : public ClassifElemVector
@@ -526,18 +526,18 @@ class ClassifElemArray : public ClassifElemVector
 {
   private:
 
-    static long lObjectCount ;
+    static long lObjectCount;
 
 	public:
 
-		ClassifElemArray() { lObjectCount++ ; }
-		~ClassifElemArray() ;
+		ClassifElemArray() { lObjectCount++; }
+		~ClassifElemArray();
 
-		void    vider() ;
+		void    vider();
 
-    static long  getNbInstance()  { return lObjectCount ; }
-    static void  initNbInstance() { lObjectCount = 0 ; }
-} ;
+    static long  getNbInstance()  { return lObjectCount; }
+    static void  initNbInstance() { lObjectCount = 0; }
+};
 
 #ifndef __linux__
 class _EPISODUS NSEpiClassifDB : public NSRoot
@@ -547,25 +547,25 @@ class NSEpiClassifDB : public NSRoot
 {
   public:
 
-    NSEpiClassifDB(NSContexte* pCtx) ;
-    ~NSEpiClassifDB() ;
+    NSEpiClassifDB(NSContexte* pCtx);
+    ~NSEpiClassifDB();
 
     // rempli la table avec les codes CISP
-    void    rempliClassifCISP(string sFileCISP) ;
-    void    rempliClassifCIM(string sFileCIM) ;
+    void    rempliClassifCISP(string sFileCISP);
+    void    rempliClassifCIM(string sFileCIM);
 
-    void    searchDomainInClassif(string sClassification, ElemSetArray *pDomain, NSEpiClassifInfoArray *pArrayClassif) ;
+    void    searchDomainInClassif(string sClassification, ElemSetArray *pDomain, NSEpiClassifInfoArray *pArrayClassif);
 //        cette methode doit a partir d'un domaine ajouter a l'array pArrayClassif (s'ils n'y sont pas deja)
 //        les NSEpiClassifInfo des codes contenus dans le pDomain, en verifiant qu'ils existent dans classif.db
 //        d'ou array de NSepiClassifInfo
 
-    bool    searchCode(string sClassification, string sCode, NSEpiClassifInfo *pClassifInfo) ;
+    bool    searchCode(string sClassification, string sCode, NSEpiClassifInfo *pClassifInfo);
 
   private:
 
-    ClassifElemArray *pChap ;
-    ClassifElemArray *pLibelle ;
-} ;
+    ClassifElemArray *pChap;
+    ClassifElemArray *pLibelle;
+};
 
 class SOAPObject;
 
@@ -577,49 +577,49 @@ class classifExpert : public NSRoot
 {
   public:
 
-    enum NIVEAU { niveauPreselection = 1, niveauAutorises, niveauTous} ;
+    enum NIVEAU { niveauPreselection = 1, niveauAutorises, niveauTous};
 
-    classifExpert(NSContexte* pCtx) ;
-    ~classifExpert() ;
+    classifExpert(NSContexte* pCtx);
+    ~classifExpert();
 
-    string  donnePattern(string sClassification) ;
-    int     donneCodeSize(string sClassification) ;
+    string  donnePattern(string sClassification);
+    int     donneCodeSize(string sClassification);
 
     void    donneInterdits(string sClassification, string sCase,
-                           ElemSetArray *pForbidenDomain) ;
+                           ElemSetArray *pForbidenDomain);
 
     void    donneClassifArray(SOAPObject* pObjet,
                               NSEpiClassifInfoArray *pArrayClassif,
-                              int iNiveau) ;
+                              int iNiveau);
     void    fillList(string sClassification, ElemSetArray *pDomain,
                                     NSEpiClassifInfoArray *pArrayClassif,
-                                    string sCase) ;
+                                    string sCase);
 
     /*string  chooseCode(string sClassification, ElemSetArray* pDomain,
                                                             string sCase);
 
     string  chooseCode(string sClassif, string sDomain, string sCase); */
 
-    string  chooseCode(SOAPObject* pObjet) ;
+    string  chooseCode(SOAPObject* pObjet);
 
-    void    setDomain(string sClassification, string sDomain, ElemSetArray* pDomain) ;
+    void    setDomain(string sClassification, string sDomain, ElemSetArray* pDomain);
 
 /*    void    setControlString(string* pCtrlData, string sClassification, string sCase,
                         string sTexteInitial, int iInitialLevel,
                         NSEpiClassifInfoArray* pArrayClassif,
                         NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
-                        string sResult, string sCodeSens = "") ;*/
+                        string sResult, string sCodeSens = "");*/
 /*    void    setControlString(string* pCtrlData, SOAPObject* pObjet,
                         int iInitialLevel, NSEpiClassifInfoArray* pArrayClassif,
                         NVLdVTemps* pTpsDebut, NVLdVTemps* pTpsFin,
-                        string sResult, string sCodeSens = "") ;*/
-    void    storeControlData(string sCtrlData) ;
+                        string sResult, string sCodeSens = "");*/
+    void    storeControlData(string sCtrlData);
 
   protected:
 
 #ifndef _ENTERPRISE_DLL
-    NSEpiClassif _DBcurseur ;
+    NSEpiClassif _DBcurseur;
 #endif
-} ;
+};
 
 #endif		// __NSCLASSER_H__

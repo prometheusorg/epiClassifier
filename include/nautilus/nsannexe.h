@@ -8,7 +8,7 @@
 #ifndef __NSANNEXE_H
 #define __NSANNEXE_H
 
-class NSTypeMimeData ;
+class NSTypeMimeData;
 
 //
 // Taille des champs du fichier TYPEMIME
@@ -63,38 +63,38 @@ class NSTypeMimeData
     // char mime[MIM_MIME_LEN + 1];
     // char type[MIM_TYPE_LEN + 1];
 
-    string _sExtension ;
-    string _sLibelle ;
-    string _sMime ;
-    string _sType ;
+    string _sExtension;
+    string _sLibelle;
+    string _sMime;
+    string _sType;
 
   public :
 
-    NSTypeMimeData() ;
-    NSTypeMimeData(const NSTypeMimeData& rv) ;
+    NSTypeMimeData();
+    NSTypeMimeData(const NSTypeMimeData& rv);
 
-    string getExtension() { return _sExtension ; }
-    string getLibelle()   { return _sLibelle ; }
-    string getMime()      { return _sMime ; }
-    string getType()      { return _sType ; }
+    string getExtension() { return _sExtension; }
+    string getLibelle()   { return _sLibelle; }
+    string getMime()      { return _sMime; }
+    string getType()      { return _sType; }
 
-    // char*  getExtensionPtr() { return extension ; }
-    // char*  getLibellePtr()   { return libelle ; }
-    // char*  getMimePtr()      { return mime ; }
-    // char*  getTypePtr()      { return type ; }
+    // char*  getExtensionPtr() { return extension; }
+    // char*  getLibellePtr()   { return libelle; }
+    // char*  getMimePtr()      { return mime; }
+    // char*  getTypePtr()      { return type; }
 
-    void   setExtension(string sVar) { _sExtension = sVar ; }
-    void   setLibelle(string sVar)   { _sLibelle   = sVar ; }
-    void   setMime(string sVar)      { _sMime      = sVar ; }
-    void   setType(string sVar)      { _sType      = sVar ; }
+    void   setExtension(string sVar) { _sExtension = sVar; }
+    void   setLibelle(string sVar)   { _sLibelle   = sVar; }
+    void   setMime(string sVar)      { _sMime      = sVar; }
+    void   setType(string sVar)      { _sType      = sVar; }
 
-    NSTypeMimeData& operator=(const NSTypeMimeData& src) ;
-    int 			      operator==(const NSTypeMimeData& o) const ;
+    NSTypeMimeData& operator=(const NSTypeMimeData& src);
+    int 			      operator==(const NSTypeMimeData& o) const;
 
-    void metAZero() ;
+    void metAZero();
 };
 
-class NSTypeMime ;
+class NSTypeMime;
 
 class NSTypeMimeInfo
 {
@@ -103,27 +103,27 @@ class NSTypeMimeInfo
     //
     // Objet qui contient les données
     //
-    NSTypeMimeData _Donnees ;
+    NSTypeMimeData _Donnees;
 
   public :
 
-    string getExtension() { return _Donnees.getExtension() ; }
-    string getLibelle()   { return _Donnees.getLibelle() ; }
-    string getMime()      { return _Donnees.getMime() ; }
-    string getType()      { return _Donnees.getType() ; }
+    string getExtension() { return _Donnees.getExtension(); }
+    string getLibelle()   { return _Donnees.getLibelle(); }
+    string getMime()      { return _Donnees.getMime(); }
+    string getType()      { return _Donnees.getType(); }
 
-    void   setExtension(string sVar) { _Donnees.setExtension(sVar) ; }
-    void   setLibelle(string sVar)   { _Donnees.setLibelle(sVar) ; }
-    void   setMime(string sVar)      { _Donnees.setMime(sVar) ; }
-    void   setType(string sVar)      { _Donnees.setType(sVar) ; }
+    void   setExtension(string sVar) { _Donnees.setExtension(sVar); }
+    void   setLibelle(string sVar)   { _Donnees.setLibelle(sVar); }
+    void   setMime(string sVar)      { _Donnees.setMime(sVar); }
+    void   setType(string sVar)      { _Donnees.setType(sVar); }
 
-    NSTypeMimeInfo() ;
-		NSTypeMimeInfo(NSTypeMime*) ;    // OBSOLETE
-		NSTypeMimeInfo(const NSTypeMimeInfo& rv) ;
-    ~NSTypeMimeInfo() ;
+    NSTypeMimeInfo();
+		NSTypeMimeInfo(NSTypeMime*);    // OBSOLETE
+		NSTypeMimeInfo(const NSTypeMimeInfo& rv);
+    ~NSTypeMimeInfo();
 
-    NSTypeMimeInfo& operator=(const NSTypeMimeInfo& src) ;
-		int             operator==(const NSTypeMimeInfo& o) const ;
+    NSTypeMimeInfo& operator=(const NSTypeMimeInfo& src);
+		int             operator==(const NSTypeMimeInfo& o) const;
 };
 
 //---------------------------------------------------------------------------

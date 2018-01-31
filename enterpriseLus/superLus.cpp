@@ -38,9 +38,9 @@
 #include <cstdlib>
 #include <libconfig.h++>
 
-using std::string ;
+using std::string;
 
-// using namespace std ;
+// using namespace std;
 
 #include "enterpriseLus/superLus.h"
 
@@ -74,45 +74,45 @@ NSSuper::NSSuper(short sStatus)
 {
     try
     {
-        _statut              = sStatus ;
+        _statut              = sStatus;
 
-        _sNumVersion         = std::string("0.00.0002") ;
+        _sNumVersion         = std::string("0.00.0002");
 
-        _pDico               = (NSDico *) 0 ;
-        _pFilGuide           = (NSFilGuide *) 0 ;
-        _pFilDecode          = (NSFilGuide *) 0 ;
+        _pDico               = (NSDico *) 0;
+        _pFilGuide           = (NSFilGuide *) 0;
+        _pFilDecode          = (NSFilGuide *) 0;
 
-        _iTraceConsole       = trNone ;
-        _iTrace              = trWarning  ;
+        _iTraceConsole       = trNone;
+        _iTrace              = trWarning ;
 
-        _ontologyManager     = (ontologyBaseManager*) 0 ;
+        _ontologyManager     = (ontologyBaseManager*) 0;
 
-        // _pLocalStrings       = new NSLocalChapterArray(NULL) ;
+        // _pLocalStrings       = new NSLocalChapterArray(NULL);
 
-        loadLocalisationString("") ;
+        loadLocalisationString("");
 
-        _pClassifExpert      = (classifExpert *) 0 ;
+        _pClassifExpert      = (classifExpert *) 0;
 
-        // _aContextArray       = new NSContextArray ;
+        // _aContextArray       = new NSContextArray;
 
-        // _bVerboseErrorMessages = true ;
+        // _bVerboseErrorMessages = true;
 
-        _bToDoLocked         = false ;
+        _bToDoLocked         = false;
 
-        // m_hStdOut	= (HANDLE) 0 ;
+        // m_hStdOut	= (HANDLE) 0;
     }
     catch (...)
     {
-        erreur("Exception NSSuper ctor.", standardError) ;
+        erreur("Exception NSSuper ctor.", standardError);
     }
 }
 
 void
 NSSuper::InitPointers()
 {
-    _pDico       = new NSDico(NULL) ;
-    _pFilGuide   = new NSFilGuide(this, GUIDE) ;
-    _pFilDecode  = new NSFilGuide(this, DECODE) ;
+    _pDico       = new NSDico(NULL);
+    _pFilGuide   = new NSFilGuide(this, GUIDE);
+    _pFilDecode  = new NSFilGuide(this, DECODE);
 }
 
 //---------------------------------------------------------------------------
@@ -123,7 +123,7 @@ NSSuper::NSSuper(NSSuper& srcNSSuper)
       _pDico(srcNSSuper._pDico),
       _pFilGuide(srcNSSuper._pFilGuide)
 {
-    _bToDoLocked    = false ;
+    _bToDoLocked    = false;
 }
 
 //---------------------------------------------------------------------------
@@ -133,15 +133,15 @@ NSSuper&
 NSSuper::operator=(NSSuper& srcNSSuper)
 {
     if (this == &srcNSSuper)
-        return *this ;
+        return *this;
 
-    _statut           = srcNSSuper._statut ;
-    _pDico    		    = srcNSSuper._pDico ;
-    _pFilGuide   	    = srcNSSuper._pFilGuide ;
+    _statut           = srcNSSuper._statut;
+    _pDico    		    = srcNSSuper._pDico;
+    _pFilGuide   	    = srcNSSuper._pFilGuide;
 
-    _bToDoLocked       = false ;
+    _bToDoLocked       = false;
 
-    return (*this) ;
+    return (*this);
 }
 
 //---------------------------------------------------------------------------
@@ -149,12 +149,12 @@ NSSuper::operator=(NSSuper& srcNSSuper)
 //---------------------------------------------------------------------------
 NSSuper::~NSSuper()
 {
-    // closeBlackboard(NULL) ;
+    // closeBlackboard(NULL);
 
-    delete _pDico ;
-    _pDico = 0 ;
-    delete _pFilGuide ;
-    delete _pFilDecode ;
+    delete _pDico;
+    _pDico = 0;
+    delete _pFilGuide;
+    delete _pFilDecode;
 }
 
 //
@@ -175,17 +175,17 @@ NSSuper::trace(string pTracePtr[], int nbString, TRACETYPE iTraceLevel)
     try
     {
         if (iTraceLevel > _iTrace)
-            return ;
+            return;
 
         if ((NULL == pTracePtr) || (string("") == pTracePtr[0]))
-            return ;
+            return;
 
-        string sTraceFileName = string("traceNau.inf") ;
+        string sTraceFileName = string("traceNau.inf");
 
-        ofstream outFile ;
-        outFile.open(sTraceFileName.c_str(), ios::app) ;
+        ofstream outFile;
+        outFile.open(sTraceFileName.c_str(), ios::app);
         if (!outFile)
-            return ;
+            return;
 
         // calcul de l'heure systeme - get system time
         // calcul de l'heure système - get system time
@@ -193,45 +193,45 @@ NSSuper::trace(string pTracePtr[], int nbString, TRACETYPE iTraceLevel)
     struct  date dateSys;
     struct  time heureSys;
   */
-        char    msg[255] ;
+        char    msg[255];
 
-        PRTime         now = PR_Now() ;
-        PRExplodedTime et_tmp ;
-        PR_ExplodeTime(now, PR_GMTParameters, &et_tmp) ;
+        PRTime         now = PR_Now();
+        PRExplodedTime et_tmp;
+        PR_ExplodeTime(now, PR_GMTParameters, &et_tmp);
         sprintf(msg, "%02d/%02d/%4d - %02d:%02d:%02d,%02d>", et_tmp.tm_mday,
                 et_tmp.tm_month,
                 et_tmp.tm_year,
                 et_tmp.tm_hour,
                 et_tmp.tm_min,
                 et_tmp.tm_sec,
-                et_tmp.tm_usec) ;
+                et_tmp.tm_usec);
         /*
-    getdate(&dateSys) ;
-    gettime(&heureSys) ;
+    getdate(&dateSys);
+    gettime(&heureSys);
     sprintf(msg, "%02d/%02d/%4d - %02d:%02d:%02d,%02d>", dateSys.da_day, dateSys.da_mon,
                 dateSys.da_year, heureSys.ti_hour, heureSys.ti_min,
-                heureSys.ti_sec, heureSys.ti_hund) ;
+                heureSys.ti_sec, heureSys.ti_hund);
 */
 
-        int iNbre = nbString ;
+        int iNbre = nbString;
         if (-1 == iNbre)
-            iNbre = 50 ;
+            iNbre = 50;
 
-        outFile << string(msg) ;
+        outFile << string(msg);
 
-        for (int i = 0 ; (i < iNbre) && (string("") != pTracePtr[i]) ; i++)
+        for (int i = 0; (i < iNbre) && (string("") != pTracePtr[i]); i++)
         {
-            for (int j = 0 ; j < iTraceLevel ; j++)
-                outFile << string("\t") ;
-            outFile << pTracePtr[i] ;
+            for (int j = 0; j < iTraceLevel; j++)
+                outFile << string("\t");
+            outFile << pTracePtr[i];
         }
 
-        outFile << string("\n") ;
-        outFile.close() ;
+        outFile << string("\n");
+        outFile.close();
     }
     catch (...)
     {
-        erreur("Exception NSSuper::trace.", standardError) ;
+        erreur("Exception NSSuper::trace.", standardError);
     }
 }
 
@@ -239,65 +239,65 @@ void
 NSSuper::CheckZeroObjectCount(string sObjectName, long lInstanceCounter)
 {
     if ((long)0 == lInstanceCounter)
-        return ;
+        return;
 
-    char buf[255] = {0} ;
-    sprintf(buf, "%ld", lInstanceCounter) ;
+    char buf[255] = {0};
+    sprintf(buf, "%ld", lInstanceCounter);
 
     string sTrace = string("Memory leak for object ") + sObjectName +
-            string(" (Instance counter = ") + string(buf) + string(")") ;
-    trace(&sTrace, 1) ;
+            string(" (Instance counter = ") + string(buf) + string(")");
+    trace(&sTrace, 1);
 }
 
 bool
 NSSuper::loadLocalisationString(std::string sLangage, NSLocalChapterArray* pLocStrings)
 {
     /*
-  NSLocalChapterArray* pActualLocStrings = pLocalStrings ;
+  NSLocalChapterArray* pActualLocStrings = pLocalStrings;
   if (NULL != pLocStrings)
-    pActualLocStrings = pLocStrings ;
+    pActualLocStrings = pLocStrings;
   else if ((sLangage == sLang) && (false == pLocalStrings->empty()))
-        return true ;
+        return true;
 
-    ifstream inFile1 ;
+    ifstream inFile1;
 
     if (sLangage != "")
     {
-        string sFichier = string("localisation_") + sLangage + string(".dat") ;
-        inFile1.open(sFichier.c_str()) ;
+        string sFichier = string("localisation_") + sLangage + string(".dat");
+        inFile1.open(sFichier.c_str());
     }
     else
     {
-        inFile1.open("localisation.dat") ;
+        inFile1.open("localisation.dat");
         if (!inFile1)
-        return false ;
+        return false;
     }
 
     if (!inFile1)
     {
-        ifstream inFile2 ;
+        ifstream inFile2;
 
-        string sFichier = string("localisation.dat") ;
-        inFile2.open(sFichier.c_str()) ;
+        string sFichier = string("localisation.dat");
+        inFile2.open(sFichier.c_str());
         if (!inFile2)
-            return false ;
+            return false;
 
-        pActualLocStrings->init(&inFile2) ;
+        pActualLocStrings->init(&inFile2);
 
-        inFile2.close() ;
+        inFile2.close();
     }
     else
     {
-        pActualLocStrings->init(&inFile1) ;
+        pActualLocStrings->init(&inFile1);
 
-        inFile1.close() ;
+        inFile1.close();
     }
 
   if (NULL != pLocStrings)
-    sLang = sLangage ;
+    sLang = sLangage;
 
 */
-    return true ;
+    return true;
 }
 
 std::string
@@ -307,22 +307,22 @@ NSSuper::getText(std::string sChapter, std::string sCode, std::string sLang, NSC
   if (string("") == sLang)
   {
       if (NULL != pLocalStrings)
-          return pLocalStrings->getLocalText(sChapter, sCode, true) ;
+          return pLocalStrings->getLocalText(sChapter, sCode, true);
     else
-      return string("") ;
+      return string("");
   }
 
   if (NULL == pCtx)
-    return string("") ;
+    return string("");
 
-  NSLocalChapterArray aLocStrings(pCtx) ;
+  NSLocalChapterArray aLocStrings(pCtx);
   if (false == loadLocalisationString(sLang, &aLocStrings))
-    return string("") ;
+    return string("");
 
-  return aLocStrings.getLocalText(sChapter, sCode, true) ;
+  return aLocStrings.getLocalText(sChapter, sCode, true);
 */
 
-    return std::string("") ;
+    return std::string("");
 }
 
 bool NSSuper::InitDatabase()
@@ -378,8 +378,8 @@ bool NSSuper::InitDatabase()
 
     try
     {
-        std::string ps = std::string("Entering InitDatabase") ;
-        trace(&ps, 1, trSteps) ;
+        std::string ps = std::string("Entering InitDatabase");
+        trace(&ps, 1, trSteps);
 
         _ontologyManager = new ontologyBaseManager(credentials["host"],
                 credentials["user"],
@@ -387,30 +387,30 @@ bool NSSuper::InitDatabase()
                 credentials["database"],
                 uiPort);
         if ((ontologyBaseManager *) NULL == _ontologyManager)
-            return false ;
+            return false;
 
-        bool bBaseOpened = _ontologyManager->openBase() ;
+        bool bBaseOpened = _ontologyManager->openBase();
         if (bBaseOpened)
         {
             ps = std::string("Database connexion done");
             std::cout << ps << std::endl;
-            trace(&ps, 1, trSteps) ;
+            trace(&ps, 1, trSteps);
 
             _ontologyManager->closeBase();
 
-            return true ;
+            return true;
         }
 
         ps = std::string("Database connexion failed ") + _ontologyManager->getMysqlError();
         std::cout << ps << std::endl;
-        trace(&ps, 1, trError) ;
+        trace(&ps, 1, trError);
 
-        return false ;
+        return false;
     }
     catch (...)
     {
-        erreur("Exception Supervisor::InitDatabase.", standardError) ;
-        return false ;
+        erreur("Exception Supervisor::InitDatabase.", standardError);
+        return false;
     }
 }
 
@@ -426,17 +426,17 @@ NSSuper::estEgal(std::string* pChaine, std::string* pModele)
 {
     // Cas simple : égalité stricte
     if (*pChaine == *pModele)
-        return true ;
+        return true;
 
     // On compare les deux chaines de gauche à droite, jusqu'à trouver
     // un élément du modèle qui ne se ramène pas à un élément de la chaine
     // par une relation "est un"
-    std::string Chaine = *pChaine ;
-    std::string Modele = *pModele ;
+    std::string Chaine = *pChaine;
+    std::string Modele = *pModele;
 
     // On "simplifie" les chaines en supprimant les redondances
     // (par exemple "ETT/Valve cardiaque/Mitrale" devient "ETT/Mitrale")
-    return false ;
+    return false;
 }
 
 void
@@ -444,21 +444,21 @@ NSSuper::initInstanceCounters()
 {
     /*
     // Counters from NautilusPilot.hpp
-    NSBasicAttribute::initNbInstance() ;
-    NSBasicAttributeArray::initNbInstance() ;
-    NSPersonsAttributesArray::initNbInstance() ;
+    NSBasicAttribute::initNbInstance();
+    NSBasicAttributeArray::initNbInstance();
+    NSPersonsAttributesArray::initNbInstance();
 
   // counters from nsmanager.h
-    NSDataTree::initNbInstance() ;
-    NSDataTreeArray::initNbInstance() ;
-    NSDataGraph::initNbInstance() ;
-    NSObjectGraphManager::initNbInstance() ;
-    NSPersonGraphManager::initNbInstance() ;
+    NSDataTree::initNbInstance();
+    NSDataTreeArray::initNbInstance();
+    NSDataGraph::initNbInstance();
+    NSObjectGraphManager::initNbInstance();
+    NSPersonGraphManager::initNbInstance();
 
   // counters from nspatpat.h
-    NSPatPathoInfo::initNbInstance() ;
-    NSPatPathoArray::initNbInstance() ;
-    NSVectPatPathoArray::initNbInstance() ;
+    NSPatPathoInfo::initNbInstance();
+    NSPatPathoArray::initNbInstance();
+    NSVectPatPathoArray::initNbInstance();
 */
 }
 
@@ -468,21 +468,21 @@ NSSuper::creePilot()
     /*
 try
 {
-    std::string ps = std::string("Starting, release : ") + _sNumVersion ;
-  trace(&ps, 1) ;
+    std::string ps = std::string("Starting, release : ") + _sNumVersion;
+  trace(&ps, 1);
 
-  _pPilot = new NautilusPilot(this) ;
+  _pPilot = new NautilusPilot(this);
 
-  _pPilot->setEpisodusVersion(_sNumVersion) ;
+  _pPilot->setEpisodusVersion(_sNumVersion);
 
-  _pPilot->initAgentList() ;
+  _pPilot->initAgentList();
 
-  _pPilot->setServiceList() ;
+  _pPilot->setServiceList();
 }
 catch (...)
 {
-  erreur("Exception Supervisor::creePilot.", standardError) ;
-  return ;
+  erreur("Exception Supervisor::creePilot.", standardError);
+  return;
 }
 */
 }
@@ -491,24 +491,24 @@ catch (...)
 void
 NSContexte::setUser(Person* pUti)
 {
-    _pUser = pUti ;
+    _pUser = pUti;
 }
 */
 
 NSToDoTask::NSToDoTask()
 {
-    _sWhatToDo = string("") ;
-    _sParam1   = string("") ;
-    _sParam2   = string("") ;
-    _pPointer1 = (void *) 0 ;
-    _pPointer2 = (void *) 0 ;
-    _deleteP1  = false ;
-    _deleteP2  = false ;
+    _sWhatToDo = string("");
+    _sParam1   = string("");
+    _sParam2   = string("");
+    _pPointer1 = (void *) 0;
+    _pPointer2 = (void *) 0;
+    _deleteP1  = false;
+    _deleteP2  = false;
 }
 
 NSToDoTask::NSToDoTask(NSToDoTask& src)
 {
-    initFromTask(&src) ;
+    initFromTask(&src);
 }
 
 NSToDoTask::~NSToDoTask()
@@ -517,38 +517,38 @@ NSToDoTask::~NSToDoTask()
     // en fonction de deleteP1 faire un delete sur pPointer1
     // verifier qu'on passe dans le destructeur reel de l'objet pPointer1
     if (_deleteP1 && _pPointer1)
-        delete (void *) _pPointer1 ;
+        delete (void *) _pPointer1;
 
     // en fonction de deleteP2 faire un delete sur pPointer2
     if (_deleteP2 && _pPointer2)
-        delete (void *) _pPointer2 ;
+        delete (void *) _pPointer2;
 }
 
 void
 NSToDoTask::sendMe(NSSuper *pSuper, bool bSend)
 {
     if (NULL == pSuper)
-        return ;
+        return;
 
     /* Try to find a non-window specific function
-  TMyApp *pNSApplication = pSuper->getApplication() ;
+  TMyApp *pNSApplication = pSuper->getApplication();
 
   while (pNSApplication && pSuper->isToDoLocked())
-        pNSApplication->PumpWaitingMessages() ;
+        pNSApplication->PumpWaitingMessages();
 */
 
-    pSuper->lockToDo() ;
-    pSuper->addToDoTask(this) ;
-    pSuper->unlockToDo() ;
+    pSuper->lockToDo();
+    pSuper->addToDoTask(this);
+    pSuper->unlockToDo();
 
     string ps = string("addToDo ") + _sWhatToDo +
             string(" sP1=") + _sParam1 +
-            string(" sP2=") + _sParam2 ;
-    pSuper->trace(&ps, 1, NSSuper::trSubDetails) ;
+            string(" sP2=") + _sParam2;
+    pSuper->trace(&ps, 1, NSSuper::trSubDetails);
 
     /* Try to find a non-window specific function
     if (bSend)
-        pNSApplication->GetMainWindow()->PostMessage(WM_COMMAND, IDM_TODO) ;
+        pNSApplication->GetMainWindow()->PostMessage(WM_COMMAND, IDM_TODO);
 */
 }
 
@@ -556,90 +556,90 @@ void
 NSToDoTask::sendBB1BBInterface(BB1BBInterfaceForKs* pKsDesc, NSSuper *pSuper, bool bSend, bool bDeleteKsDesc)
 {
     if ((NULL == pSuper) || (NULL == pKsDesc))
-        return ;
+        return;
 
-    reinit() ;
+    reinit();
 
-    _sWhatToDo = "KS_Archetype" ;
-    _pPointer1 = pKsDesc ;
-    _deleteP1  = bDeleteKsDesc ;
+    _sWhatToDo = "KS_Archetype";
+    _pPointer1 = pKsDesc;
+    _deleteP1  = bDeleteKsDesc;
 
-    sendMe(pSuper, bSend) ;
+    sendMe(pSuper, bSend);
 }
 
 void
 NSToDoTask::sendBB1BBDecisionTree(BB1BBInterfaceForKs* pKsDesc, NSSuper *pSuper, bool bSend, bool bDeleteKsDesc)
 {
     if ((NULL == pSuper) || (NULL == pKsDesc))
-        return ;
+        return;
 
-    reinit() ;
+    reinit();
 
-    _sWhatToDo = "KS_DecisionTree" ;
-    _pPointer1 = pKsDesc ;
-    _deleteP1  = bDeleteKsDesc ;
+    _sWhatToDo = "KS_DecisionTree";
+    _pPointer1 = pKsDesc;
+    _deleteP1  = bDeleteKsDesc;
 
-    sendMe(pSuper, bSend) ;
+    sendMe(pSuper, bSend);
 }
 
 NSToDoTask&
 NSToDoTask::operator=(NSToDoTask& src)
 {
     if (this == &src)
-        return *this ;
+        return *this;
 
-    initFromTask(&src) ;
+    initFromTask(&src);
 
-    return (*this) ;
+    return (*this);
 }
 
 void
 NSToDoTask::initFromTask(NSToDoTask *pSrc)
 {
     if (NULL == pSrc)
-        return ;
+        return;
 
-    _sWhatToDo = pSrc->_sWhatToDo ;
-    _sParam1   = pSrc->_sParam1 ;
-    _sParam2   = pSrc->_sParam2 ;
-    _pPointer1 = pSrc->_pPointer1 ;
-    _pPointer2 = pSrc->_pPointer2 ;
+    _sWhatToDo = pSrc->_sWhatToDo;
+    _sParam1   = pSrc->_sParam1;
+    _sParam2   = pSrc->_sParam2;
+    _pPointer1 = pSrc->_pPointer1;
+    _pPointer2 = pSrc->_pPointer2;
 
     //
     // Tricky thing: only one object must delete the pointer
     //               we assume it is the new one
     //
-    _deleteP1  = pSrc->_deleteP1 ;
+    _deleteP1  = pSrc->_deleteP1;
     if (_deleteP1)
-        pSrc->_deleteP1 = false ;
-    _deleteP2  = pSrc->_deleteP2 ;
+        pSrc->_deleteP1 = false;
+    _deleteP2  = pSrc->_deleteP2;
     if (_deleteP2)
-        pSrc->_deleteP2 = false ;
+        pSrc->_deleteP2 = false;
 }
 
 void
 NSToDoTask::reinit()
 {
-    _sWhatToDo = string("") ;
-    _sParam1   = string("") ;
-    _sParam2   = string("") ;
+    _sWhatToDo = string("");
+    _sParam1   = string("");
+    _sParam2   = string("");
 
     if (_pPointer1)
     {
         if (_deleteP1)
-            delete (void *) _pPointer1 ;
-        _pPointer1 = 0 ;
+            delete (void *) _pPointer1;
+        _pPointer1 = 0;
     }
 
     if (_pPointer2)
     {
         if (_deleteP2)
-            delete (void *) _pPointer2 ;
-        _pPointer2 = 0 ;
+            delete (void *) _pPointer2;
+        _pPointer2 = 0;
     }
 
-    _deleteP1 = false ;
-    _deleteP2 = false ;
+    _deleteP1 = false;
+    _deleteP2 = false;
 }
 
 void
@@ -647,61 +647,61 @@ NSSuper::StartDebugConsole(int nWidth, int nHeight, const char* /*pszfname*/)
 {
     /*
   if (m_hStdOut)
-    return ;
+    return;
 
-  AllocConsole() ;
-  SetConsoleTitle("Debug Window") ;
-  m_hStdOut = GetStdHandle(STD_OUTPUT_HANDLE) ;
+  AllocConsole();
+  SetConsoleTitle("Debug Window");
+  m_hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
-  COORD co = {(short) nWidth, (short) nHeight } ;
-  SetConsoleScreenBufferSize(m_hStdOut, co) ;
+  COORD co = {(short) nWidth, (short) nHeight };
+  SetConsoleScreenBufferSize(m_hStdOut, co);
 
-  co.X = co.Y = 0 ;
-  SetConsoleCursorPosition(m_hStdOut,co) ;
+  co.X = co.Y = 0;
+  SetConsoleCursorPosition(m_hStdOut,co);
 */
 }
 
 bool
 NSSuper::typeDocument(std::string sType, CLASSDOCTYPES categ)
 {
-    bool res = false ;
+    bool res = false;
 
-    DBITBLNAME sensCle = "FLECHE" ;
+    DBITBLNAME sensCle = "FLECHE";
 
     switch (categ)
     {
-    case isTree         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDA"), sensCle) ; break ;
-    case isFile         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDF"), sensCle) ; break ;
-    case isCompta       : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDC"), sensCle) ; break ;
-    case isHTML         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDH"), sensCle) ; break ;
-    case isText         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZTXT0"), sensCle) ; break ;
-    case isImage        : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIMA0"), sensCle) ; break ;
-    case isImageFixe    : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIF00"), sensCle) ; break ;
-    case isImageAnimee  : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIA00"), sensCle) ; break ;
-    case isURL          : return false ;
+    case isTree         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDA"), sensCle); break;
+    case isFile         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDF"), sensCle); break;
+    case isCompta       : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDC"), sensCle); break;
+    case isHTML         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("0CLDH"), sensCle); break;
+    case isText         : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZTXT0"), sensCle); break;
+    case isImage        : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIMA0"), sensCle); break;
+    case isImageFixe    : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIF00"), sensCle); break;
+    case isImageAnimee  : res = _pFilGuide->VraiOuFaux(sType, string("ES"), string("ZIA00"), sensCle); break;
+    case isURL          : return false;
     }
-    return res ;
+    return res;
 }
 
 void
 NSSuper::voidDebugPrintf(TRACETYPE traceLevel, const char *szfmt,...)
 {
     if (_iTraceConsole > traceLevel)
-        return ;
+        return;
 
     char s[300];
     va_list argptr;
 
-    va_start(argptr, szfmt) ;
-    /* int cnt = */ vsprintf(s, szfmt, argptr) ;
-    va_end(argptr) ;
+    va_start(argptr, szfmt);
+    /* int cnt = */ vsprintf(s, szfmt, argptr);
+    va_end(argptr);
 
     /*
-  DWORD cCharsWritten ;
+  DWORD cCharsWritten;
   if (m_hStdOut)
   {
-    DebugNewLine() ;
-    WriteConsole(m_hStdOut, s, strlen(s), &cCharsWritten, NULL) ;
+    DebugNewLine();
+    WriteConsole(m_hStdOut, s, strlen(s), &cCharsWritten, NULL);
   }
 */
 }
@@ -712,32 +712,32 @@ NSSuper::DebugNewLine()
     /*
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
   if (! GetConsoleScreenBufferInfo(m_hStdOut, &csbiInfo))
-    return ;
-  csbiInfo.dwCursorPosition.X = 0 ;
+    return;
+  csbiInfo.dwCursorPosition.X = 0;
 
   // If it is the last line in the screen buffer, scroll
   // the buffer up.
   if ((csbiInfo.dwSize.Y - 1) == csbiInfo.dwCursorPosition.Y)
   {
-    SMALL_RECT srctWindow ;
+    SMALL_RECT srctWindow;
     if (csbiInfo.srWindow.Top > 0)
     {
-      srctWindow.Top    = -1 ;      // move top up by one row
-      srctWindow.Bottom = -1 ;   // move bottom up by one row
-      srctWindow.Left   = 0 ;      // no change
-      srctWindow.Right  = 0 ;     // no change
+      srctWindow.Top    = -1;      // move top up by one row
+      srctWindow.Bottom = -1;   // move bottom up by one row
+      srctWindow.Left   = 0;      // no change
+      srctWindow.Right  = 0;     // no change
       if (! SetConsoleWindowInfo(
           m_hStdOut,      // screen buffer handle
           FALSE,        // deltas, not absolute
           &srctWindow)) // specifies new location
-        return ;
+        return;
     }
   }
   // Otherwise, advance the cursor to the next line.
   else
-    csbiInfo.dwCursorPosition.Y++ ;
+    csbiInfo.dwCursorPosition.Y++;
   if (! SetConsoleCursorPosition(m_hStdOut, csbiInfo.dwCursorPosition))
-    return ;
+    return;
 */
 }
 
@@ -746,28 +746,28 @@ void
 NSSuper::addToDo(NSToDoTask* pTask, bool bSend)
 {
     if (NULL == pTask)
-        return ;
+        return;
 
   // Try to find a non-window specific function
     while (bToDoLocked)
-        pNSApplication->PumpWaitingMessages() ;
+        pNSApplication->PumpWaitingMessages();
 
-    _bToDoLocked = true ;
-    _aToDo->push_back(pTask) ;
-    _bToDoLocked = false ;
+    _bToDoLocked = true;
+    _aToDo->push_back(pTask);
+    _bToDoLocked = false;
 
-  std::string sWhatToDo ;
-  std::string sParam1 ;
-  std::string sParam2 ;
+  std::string sWhatToDo;
+  std::string sParam1;
+  std::string sParam2;
 
   std::string ps = std::string("addToDo ") + pTask->getWhatToDo() +
                              std::string(" sP1=") + pTask->getParam1() +
-                   std::string(" sP2=") + pTask->getParam2() ;
+                   std::string(" sP2=") + pTask->getParam2();
     trace(&ps, 1, trSubDetails);
 
   // Try to find a non-window specific function
     if (bSend)
-        pNSApplication->GetMainWindow()->PostMessage(WM_COMMAND, IDM_TODO) ;
+        pNSApplication->GetMainWindow()->PostMessage(WM_COMMAND, IDM_TODO);
 }
 */
 
@@ -775,20 +775,20 @@ void
 NSContexte::addToDoBbk(NSToDoTask* pTask, bool bSend)
 {
     if (NULL == pTask)
-        return ;
+        return;
 
     /* Try to find a non-window specific function
     while (bBBKToDoLocked)
-        pNSApplication->PumpWaitingMessages() ;
+        pNSApplication->PumpWaitingMessages();
 */
 
-    _bBBKToDoLocked = true ;
-    _aBBKToDo.push_back(pTask) ;
-    _bBBKToDoLocked = false ;
+    _bBBKToDoLocked = true;
+    _aBBKToDo.push_back(pTask);
+    _bBBKToDoLocked = false;
 
     /* Try to find a non-window specific function
     if (bSend)
-        blackboardInterface->PostMessage(WM_COMMAND, IDM_BBKTODO) ;
+        blackboardInterface->PostMessage(WM_COMMAND, IDM_BBKTODO);
 */
 }
 
@@ -799,25 +799,25 @@ NSContexte::BbkAskUser(std::string sArchetype, int iTypeArc)
     {
         /*
     if ((!pNSApplication) || (!(pNSApplication->GetMainWindow())))
-        return false ;
+        return false;
 
-    char szType[10] ;
-    itoa(iTypeArc, szType, 10) ;
+    char szType[10];
+    itoa(iTypeArc, szType, 10);
 
-    NSToDoTask* pTask = new NSToDoTask ;
+    NSToDoTask* pTask = new NSToDoTask;
 
-    pTask->sWhatToDo = "Archetype" ;
-    pTask->sParam1   = sArchetype ;
-    pTask->sParam2   = string(szType) ;
+    pTask->sWhatToDo = "Archetype";
+    pTask->sParam1   = sArchetype;
+    pTask->sParam2   = string(szType);
 
-    addToDo(pTask) ;
+    addToDo(pTask);
 */
-        return true ;
+        return true;
     }
     catch (...)
     {
-        erreur("Exception Supervisor::BbkAskUser.", standardError) ;
-        return false ;
+        erreur("Exception Supervisor::BbkAskUser.", standardError);
+        return false;
     }
 }
 
@@ -827,29 +827,29 @@ NSContexte::bbkToDo(int iTypeArc, std::string ssWhatToDo, std::string ssParam1, 
     try
     {
         //	if ((!pNSApplication) || (!(pNSApplication->GetMainWindow())))
-        //		return false ;
+        //		return false;
 
-        // char szType[10] ;
-        // itoa(iTypeArc, szType, 10) ;
+        // char szType[10];
+        // itoa(iTypeArc, szType, 10);
 
-        NSToDoTask* pTask = new NSToDoTask ;
+        NSToDoTask* pTask = new NSToDoTask;
 
-        pTask->setWhatToDo(ssWhatToDo) ;
-        pTask->setParam1(ssParam1) ;
-        pTask->setParam2(ssParam2) ;
-        pTask->setPointer1(ppPointer1) ;
-        pTask->setToDeleteP1(p1) ;
-        pTask->setPointer2(ppPointer2) ;
-        pTask->setToDeleteP2(p2) ;
+        pTask->setWhatToDo(ssWhatToDo);
+        pTask->setParam1(ssParam1);
+        pTask->setParam2(ssParam2);
+        pTask->setPointer1(ppPointer1);
+        pTask->setToDeleteP1(p1);
+        pTask->setPointer2(ppPointer2);
+        pTask->setToDeleteP2(p2);
 
-        addToDoBbk(pTask) ;
+        addToDoBbk(pTask);
 
-        return true ;
+        return true;
     }
     catch (...)
     {
-        erreur("Exception Supervisor::bbkToDo.", standardError) ;
-        return false ;
+        erreur("Exception Supervisor::bbkToDo.", standardError);
+        return false;
     }
 }
 
@@ -858,19 +858,19 @@ NSContexte::BbkShowReferential(std::string sReferential)
 {
     try
     {
-        NSToDoTask* pTask = new NSToDoTask ;
+        NSToDoTask* pTask = new NSToDoTask;
 
-        pTask->setWhatToDo(string("Referential")) ;
-        pTask->setParam1(sReferential) ;
+        pTask->setWhatToDo(string("Referential"));
+        pTask->setParam1(sReferential);
 
-        pTask->sendMe(_pSuper) ;
+        pTask->sendMe(_pSuper);
 
-        return true ;
+        return true;
     }
     catch (...)
     {
-        erreur("Exception Supervisor::BbkShowReferential.", standardError) ;
-        return false ;
+        erreur("Exception Supervisor::BbkShowReferential.", standardError);
+        return false;
     }
 }
 
@@ -883,7 +883,7 @@ NSContexte::BbkShowReferential(std::string sReferential)
 /*
 NSUserPatRelation::NSUserPatRelation()
 {
-    reinit() ;
+    reinit();
 }
 
 bool
@@ -891,32 +891,32 @@ NSUserPatRelation::isAdministred(int iAngle, int iDistance)
 {
     for (int j = 0; j <= iDistance; j++)
     if (1 == adminPosit[iAngle][j])
-        return true ;
+        return true;
 
-    return false ;
+    return false;
 }
 
 bool
 NSUserPatRelation::isPresent(int iAngle, int iDistance)
 {
-    return (1 == existPosit[iAngle][iDistance]) ;
+    return (1 == existPosit[iAngle][iDistance]);
 }
 
 void
 NSUserPatRelation::reinit()
 {
-  bPatientIsTheUser        = false ;
-  bUserActiveInHealthTeam  = false ;
-  bUserPresentInHealthTeam = false ;
-  bUserIsAdministrator     = false ;
-  bUserIsRootAdministrator = false ;
+  bPatientIsTheUser        = false;
+  bUserActiveInHealthTeam  = false;
+  bUserPresentInHealthTeam = false;
+  bUserIsAdministrator     = false;
+  bUserIsRootAdministrator = false;
 
-  for (int i = 0 ; i < 24 ; i++)
+  for (int i = 0; i < 24; i++)
   {
     for (int j = 0; j < 3; j++)
     {
-      adminPosit[i][j] = 0 ;
-      existPosit[i][j] = 0 ;
+      adminPosit[i][j] = 0;
+      existPosit[i][j] = 0;
     }
   }
 }
@@ -926,56 +926,56 @@ NSUserPatRelation::reinit()
 // NSUserPatRelation::init(NSContexte* /*pContexte*/)
 // {
 /*
-    reinit() ;
+    reinit();
 
-    string sUserId 	= pContexte->getUtilisateurID() ;
-    NSPatientChoisi*	pPatChoisi = pContexte->getPatient() ;
-    string sPatId	= pPatChoisi->pGraphPerson->getPersonID() ;
+    string sUserId 	= pContexte->getUtilisateurID();
+    NSPatientChoisi*	pPatChoisi = pContexte->getPatient();
+    string sPatId	= pPatChoisi->pGraphPerson->getPersonID();
 
-    bPatientIsTheUser = (sUserId == sPatId) ;
+    bPatientIsTheUser = (sUserId == sPatId);
 
 
-    NSHealthTeam*		pHealthTeam = pPatChoisi->pHealthTeam ;
-    NSHealthTeamMember*	pMember = pHealthTeam->getUserAsMember(pContexte) ;
+    NSHealthTeam*		pHealthTeam = pPatChoisi->pHealthTeam;
+    NSHealthTeamMember*	pMember = pHealthTeam->getUserAsMember(pContexte);
     if (!pMember)
-        return ;
+        return;
 
-    bUserPresentInHealthTeam = true ;
+    bUserPresentInHealthTeam = true;
 
-    NSHTMMandateArray aMandates ;
-    pMember->getActiveMandates(&aMandates) ;
+    NSHTMMandateArray aMandates;
+    pMember->getActiveMandates(&aMandates);
     if (!(aMandates.empty()))
     {
-        bUserActiveInHealthTeam = true ;
+        bUserActiveInHealthTeam = true;
 
-        NSHTMMandateIter iter = aMandates.begin() ;
-        for (; iter != aMandates.end() ; )
+        NSHTMMandateIter iter = aMandates.begin();
+        for (; iter != aMandates.end(); )
         {
-        int						iAngle	= (*iter)->getAngle() ;
-      DistanceType	iDist		= (*iter)->getDistance() ;
+        int						iAngle	= (*iter)->getAngle();
+      DistanceType	iDist		= (*iter)->getDistance();
 
-            NSHealthTeamMandate::mandateType iType	= (*iter)->getType() ;
+            NSHealthTeamMandate::mandateType iType	= (*iter)->getType();
 
-            int iRayon = -1 ;
+            int iRayon = -1;
             switch(iDist)
             {
-                case patDist 	: iRayon = 0 ; break ;
-                case nearDist	: iRayon = 1 ; break ;
-                case farDist 	: iRayon = 2 ; break ;
+                case patDist 	: iRayon = 0; break;
+                case nearDist	: iRayon = 1; break;
+                case farDist 	: iRayon = 2; break;
             }
 
             if (iRayon >= 0)
             {
-                existPosit[iAngle][iRayon] = 1 ;
+                existPosit[iAngle][iRayon] = 1;
                 if (iType == NSHealthTeamMandate::root)
                 {
-                    adminPosit[iAngle][iRayon] = 1 ;
-                    bUserIsAdministrator = true ;
+                    adminPosit[iAngle][iRayon] = 1;
+                    bUserIsAdministrator = true;
                     if (iRayon == 0)
-                        bUserIsRootAdministrator = true ;
+                        bUserIsRootAdministrator = true;
                 }
             }
-      aMandates.erase(iter) ;
+      aMandates.erase(iter);
         }
     }
 */
@@ -987,34 +987,34 @@ NSUserPatRelation::reinit()
 
 NSContexte::NSContexte() : _pPerson(NULL), _pUser(NULL), _pSuper(NULL)
 {
-    _sTransaction = std::string("") ;
-    _sToken       = std::string("") ;
+    _sTransaction = std::string("");
+    _sToken       = std::string("");
 }
 
 NSContexte::NSContexte(NSSuper* pSup) : _pPerson(NULL), _pUser(NULL), _pSuper(pSup)
 {
-    _sTransaction = std::string("") ;
-    _sToken       = std::string("") ;
+    _sTransaction = std::string("");
+    _sToken       = std::string("");
 }
 
 NSContexte::NSContexte(NSSuper* pSup, std::string sPersonId) : _pSuper(pSup)
 {
-    _pPerson = new Person(this) ;
-    _pUser   = new Person(this) ;
+    _pPerson = new Person(this);
+    _pUser   = new Person(this);
 
-    _pPerson->setId(sPersonId) ;
-    _pUser->setId(sPersonId) ;
+    _pPerson->setId(sPersonId);
+    _pUser->setId(sPersonId);
 
-    _sTransaction = std::string("") ;
-    _sToken       = std::string("") ;
+    _sTransaction = std::string("");
+    _sToken       = std::string("");
 }
 
 NSContexte::NSContexte(NSContexte& rv) : //_pPerson(rv._pPerson),
     //_pUser(rv._pUser),
     _pSuper(rv._pSuper)
 {
-    _sTransaction = rv._sTransaction ;
-    _sToken       = rv._sToken ;
+    _sTransaction = rv._sTransaction;
+    _sToken       = rv._sToken;
 }
 
 bool
@@ -1022,20 +1022,20 @@ NSContexte::Ob1AskUser(BB1BBInterfaceForKs* pKsDesc)
 {
     try
     {
-        NSToDoTask* pTask = new NSToDoTask ;
+        NSToDoTask* pTask = new NSToDoTask;
 
-        pTask->setWhatToDo(string("KS_Archetype")) ;
-        pTask->setPointer1(pKsDesc) ;
-        pTask->setToDeleteP1(false) ;
+        pTask->setWhatToDo(string("KS_Archetype"));
+        pTask->setPointer1(pKsDesc);
+        pTask->setToDeleteP1(false);
 
-        pTask->sendMe(_pSuper) ;
+        pTask->sendMe(_pSuper);
 
-        return true ;
+        return true;
     }
     catch (...)
     {
-        erreur("Exception NSContexte::Ob1AskUser.", standardError) ;
-        return false ;
+        erreur("Exception NSContexte::Ob1AskUser.", standardError);
+        return false;
     }
 }
 
@@ -1043,66 +1043,66 @@ NSContexte::PERSONCLASSES
 NSContexte::getPersonClass(std::string sPersonID)
 {
     if (sPersonID == "")
-        return isUnknown ;
+        return isUnknown;
 
     switch(sPersonID[0])
     {
-    case '#' : return isMemory ;
-    case '_' : return isLocal ;		// Historical value
-    case '-' : return isLocal ;
+    case '#' : return isMemory;
+    case '_' : return isLocal;		// Historical value
+    case '-' : return isLocal;
     }
 
-    return isGlobal ;
+    return isGlobal;
 }
 
 std::string
 NSContexte::getPersonID()
 {
     if ((Person*) NULL != _pPerson)
-        return _pPerson->getId() ;
+        return _pPerson->getId();
 
-    return std::string("") ;
+    return std::string("");
 }
 
 void
 NSContexte::setPersonID(std::string sId)
 {
     if ((Person*) NULL != _pPerson)
-        _pPerson->setId(sId) ;
+        _pPerson->setId(sId);
 }
 
 std::string
 NSContexte::getUserID()
 {
     if ((Person*) NULL != _pUser)
-        return _pUser->getId() ;
-    return std::string("") ;
+        return _pUser->getId();
+    return std::string("");
 }
 
 void
 NSContexte::setUserID(std::string sId)
 {
     if ((Person*) NULL != _pUser)
-        _pUser->setId(sId) ;
+        _pUser->setId(sId);
 }
 
 string
 NSContexte::getUserLanguage()
 {
     if (NULL == _pUser)
-        return string("") ;
-    return _pUser->donneLang() ;
+        return string("");
+    return _pUser->donneLang();
 }
 
 bool
 NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::string /*s1*/, std::string /*s2*/, void* /*p1*/, void* /*p2*/)
 {
-    return true ;
+    return true;
 
     /*
 
-    string sPatId	= pPatient->pGraphPerson->getPersonID() ;
-  PERSONCLASSES iPatClass = getPersonClass(sPatId) ;
+    string sPatId	= pPatient->pGraphPerson->getPersonID();
+  PERSONCLASSES iPatClass = getPersonClass(sPatId);
 
   if (iPatClass == isLocal)
   {
@@ -1111,17 +1111,17 @@ NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::s
         case modifyDocument :
       case suppresDocument :
         if (s1 == "$JustAccessToInterface$")
-          return true ;
-        return (s1 == getUtilisateurID()) ;
+          return true;
+        return (s1 == getUtilisateurID());
     }
-    return true ;
+    return true;
   }
   else
   {
     switch(doThat)
     {
       case openPatient :
-          return relationship.bUserPresentInHealthTeam ;
+          return relationship.bUserPresentInHealthTeam;
       //
       // Document opening : s1 = document author's ID
       //
@@ -1130,8 +1130,8 @@ NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::s
       //
       case openDocument :
         if (s1 == "$JustAccessToInterface$")
-          return relationship.bUserPresentInHealthTeam ;
-        return ((s1 == getUtilisateurID()) || relationship.bUserActiveInHealthTeam) ;
+          return relationship.bUserPresentInHealthTeam;
+        return ((s1 == getUtilisateurID()) || relationship.bUserActiveInHealthTeam);
       //
       // Document modification : s1 = document author's ID
       //
@@ -1141,8 +1141,8 @@ NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::s
       case modifyDocument :
       case suppresDocument :
         if (s1 == "$JustAccessToInterface$")
-          return relationship.bUserActiveInHealthTeam ;
-        return (s1 == getUtilisateurID()) ;
+          return relationship.bUserActiveInHealthTeam;
+        return (s1 == getUtilisateurID());
       case createDocument :
       case modifyLdV :
       case viewConcerns :
@@ -1160,26 +1160,26 @@ NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::s
       case viewSynthesis :
       case modifySynthesis :
       case viewAdminData :
-        return relationship.bUserActiveInHealthTeam ;
+        return relationship.bUserActiveInHealthTeam;
       case modifyAdminData :
-        return relationship.bPatientIsTheUser ;
+        return relationship.bPatientIsTheUser;
       case viewProData :
-        return true ;
+        return true;
       case modifyProData :
-        return relationship.bPatientIsTheUser ;
+        return relationship.bPatientIsTheUser;
       case viewHealthTeam :
-        return relationship.bUserActiveInHealthTeam ;
+        return relationship.bUserActiveInHealthTeam;
       case createHTMember :
       case createMandate :
       case modifyMandate :
-        return relationship.bUserIsAdministrator ;
+        return relationship.bUserIsAdministrator;
       case createRosace :
       case modifyRosace :
-        return true ;
+        return true;
       case createUser :
-        return false ;
+        return false;
     }
-    return relationship.bUserActiveInHealthTeam ;
+    return relationship.bUserActiveInHealthTeam;
   }
 
 */
@@ -1192,64 +1192,64 @@ NSContexte::userHasPrivilege(RIGHTSTO /*doThat*/, int /*i1*/, int /*i2*/, std::s
 NSContextArray::NSContextArray(const NSContextArray& rv)
 {
     if (false == rv.empty())
-        for (CtxConstIter i = rv.begin() ; rv.end() != i ; i++)
-            push_back(new NSContexte(*(*i))) ;
+        for (CtxConstIter i = rv.begin(); rv.end() != i; i++)
+            push_back(new NSContexte(*(*i)));
 }
 
 NSContextArray::~NSContextArray()
 {
-    vider() ;
+    vider();
 }
 
 NSContexte*
 NSContextArray::getContextFromToken(std::string sToken)
 {
     if (empty())
-        return (NSContexte *) 0 ;
+        return (NSContexte *) 0;
 
-    for (CtxIter i = begin() ; end() != i ; i++)
+    for (CtxIter i = begin(); end() != i; i++)
         if ((*i)->getToken() == sToken)
-            return *i ;
+            return *i;
 
-    return (NSContexte *) 0 ;
+    return (NSContexte *) 0;
 }
 
 NSContexte*
 NSContextArray::getContextFromUser(std::string sUserId)
 {
     if (empty())
-        return (NSContexte *) 0 ;
+        return (NSContexte *) 0;
 
-    for (CtxIter i = begin() ; end() != i ; i++)
+    for (CtxIter i = begin(); end() != i; i++)
         if ((*i)->getUserID() == sUserId)
-            return *i ;
+            return *i;
 
-    return (NSContexte *) 0 ;
+    return (NSContexte *) 0;
 }
 
 NSContexte*
 NSContextArray::getContextFromPatient(std::string sPatId)
 {
     if (empty())
-        return (NSContexte *) 0 ;
+        return (NSContexte *) 0;
 
-    for (CtxIter i = begin() ; end() != i ; i++)
+    for (CtxIter i = begin(); end() != i; i++)
         if ((*i)->getPersonID() == sPatId)
-            return *i ;
+            return *i;
 
-    return (NSContexte *) 0 ;
+    return (NSContexte *) 0;
 }
 
 void
 NSContextArray::vider()
 {
     if (empty())
-        return ;
+        return;
 
-    for (CtxIter i = begin() ; end() != i ; )
+    for (CtxIter i = begin(); end() != i; )
     {
-        delete *i ;
-        erase(i) ;
+        delete *i;
+        erase(i);
     }
 }
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-using namespace std ;
+using namespace std;
 
 #endif		// __NS_VECTOR_H
 

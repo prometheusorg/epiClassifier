@@ -102,86 +102,86 @@ class NSPathologData
 #ifndef _ENTERPRISE_DLL
 
 	// Variables de stockage des valeurs
-	char libelle[PATHO_LIBELLE_LEN + 1] ;
-	char code[PATHO_CODE_LEN + 1] ;
-	char grammaire[PATHO_GRAMMAIRE_LEN + 1] ;
-	char freq[PATHO_FREQ_LEN + 1] ;
+	char libelle[PATHO_LIBELLE_LEN + 1];
+	char code[PATHO_CODE_LEN + 1];
+	char grammaire[PATHO_GRAMMAIRE_LEN + 1];
+	char freq[PATHO_FREQ_LEN + 1];
 
-  bool estNom()        { return ((grammaire[0] == 'M') || (grammaire[0] == 'F') || (grammaire[0] == 'N')) ; }
-	bool estAdjectif()   { return (strcmp(grammaire, "ADJ") == 0) ; }
-	bool estVerbe()      { return (grammaire[0] == 'V') ; }
-	bool estInvariable() { return (grammaire[0] == 'I') ; }
-	bool estAdverbe()    { return (strcmp(grammaire, "ADV") == 0) ; }
+  bool estNom()        { return ((grammaire[0] == 'M') || (grammaire[0] == 'F') || (grammaire[0] == 'N')); }
+	bool estAdjectif()   { return (strcmp(grammaire, "ADJ") == 0); }
+	bool estVerbe()      { return (grammaire[0] == 'V'); }
+	bool estInvariable() { return (grammaire[0] == 'I'); }
+	bool estAdverbe()    { return (strcmp(grammaire, "ADV") == 0); }
 
-	bool estMasculin()   { return ((strcmp(grammaire, "MS") == 0) || (strcmp(grammaire, "MP") == 0)) ; }
-	bool estFeminin()    { return ((strcmp(grammaire, "FS") == 0) || (strcmp(grammaire, "FP") == 0)) ; }
-	bool estNeutre()     { return ((strcmp(grammaire, "NS") == 0) || (strcmp(grammaire, "NP") == 0)) ; }
-	bool estSingulier()  { return ((strcmp(grammaire, "MS") == 0) || (strcmp(grammaire, "FS") == 0) || (strcmp(grammaire, "NS") == 0)) ; }
-	bool estPluriel()    { return ((strcmp(grammaire, "MP") == 0) || (strcmp(grammaire, "FP") == 0) || (strcmp(grammaire, "NP") == 0)) ; }
+	bool estMasculin()   { return ((strcmp(grammaire, "MS") == 0) || (strcmp(grammaire, "MP") == 0)); }
+	bool estFeminin()    { return ((strcmp(grammaire, "FS") == 0) || (strcmp(grammaire, "FP") == 0)); }
+	bool estNeutre()     { return ((strcmp(grammaire, "NS") == 0) || (strcmp(grammaire, "NP") == 0)); }
+	bool estSingulier()  { return ((strcmp(grammaire, "MS") == 0) || (strcmp(grammaire, "FS") == 0) || (strcmp(grammaire, "NS") == 0)); }
+	bool estPluriel()    { return ((strcmp(grammaire, "MP") == 0) || (strcmp(grammaire, "FP") == 0) || (strcmp(grammaire, "NP") == 0)); }
 
-  string getLabel()     { return string(libelle) ; }
-  string getCode()      { return string(code) ; }
-  string getGrammar()   { return string(grammaire) ; }
-  string getFrequency() { return string(freq) ; }
+  string getLabel()     { return string(libelle); }
+  string getCode()      { return string(code); }
+  string getGrammar()   { return string(grammaire); }
+  string getFrequency() { return string(freq); }
 
 #else
 
-  string sLabel ;
-  string sCode ;
-  string sGrammar ;
-  string sFrequency ;
+  string sLabel;
+  string sCode;
+  string sGrammar;
+  string sFrequency;
 
-  bool estNom()        { return (('M' == sLabel[0]) || ('F' == sLabel[0]) || ('N' == sLabel[0])) ; }
-	bool estAdjectif()   { return (string("ADJ") == sGrammar) ; }
-	bool estVerbe()      { return ('V' == sGrammar[0]) ; }
-	bool estInvariable() { return ('I' == sGrammar[0]) ; }
-	bool estAdverbe()    { return (string("ADV") == sGrammar) ; }
+  bool estNom()        { return (('M' == sLabel[0]) || ('F' == sLabel[0]) || ('N' == sLabel[0])); }
+	bool estAdjectif()   { return (string("ADJ") == sGrammar); }
+	bool estVerbe()      { return ('V' == sGrammar[0]); }
+	bool estInvariable() { return ('I' == sGrammar[0]); }
+	bool estAdverbe()    { return (string("ADV") == sGrammar); }
 
-	bool estMasculin()   { return ((string("MS") == sGrammar) || (string("MP") == sGrammar)) ; }
-	bool estFeminin()    { return ((string("FS") == sGrammar) || (string("FP") == sGrammar)) ; }
-	bool estNeutre()     { return ((string("NS") == sGrammar) || (string("NP") == sGrammar)) ; }
-	bool estSingulier()  { return ((string("MS") == sGrammar) || (string("FS") == sGrammar) || (string("NS") == sGrammar)) ; }
-	bool estPluriel()    { return ((string("MP") == sGrammar) || (string("FP") == sGrammar) || (string("NP") == sGrammar)) ; }
+	bool estMasculin()   { return ((string("MS") == sGrammar) || (string("MP") == sGrammar)); }
+	bool estFeminin()    { return ((string("FS") == sGrammar) || (string("FP") == sGrammar)); }
+	bool estNeutre()     { return ((string("NS") == sGrammar) || (string("NP") == sGrammar)); }
+	bool estSingulier()  { return ((string("MS") == sGrammar) || (string("FS") == sGrammar) || (string("NS") == sGrammar)); }
+	bool estPluriel()    { return ((string("MP") == sGrammar) || (string("FP") == sGrammar) || (string("NP") == sGrammar)); }
 
 #endif
 
-	string libelleLong ;
+	string libelleLong;
 
-	NSPathologData() ;
-	NSPathologData(NSPathologData& rv) ;
-	~NSPathologData() ;
+	NSPathologData();
+	NSPathologData(NSPathologData& rv);
+	~NSPathologData();
 
-	NSPathologData& operator=(NSPathologData src) ;
-	int 						operator==(const NSPathologData& o) ;
+	NSPathologData& operator=(NSPathologData src);
+	int 						operator==(const NSPathologData& o);
 
-	void						metABlanc() ;
-	void						fabriqueLibelleLong() ;
-	void						donneLibelleChoix(string *pLibelle) ;
-	void						donneLibelleAffiche(string *pLibelle, int iDeclinaison = 0) ;
-	void						traiteOrthographe(string *pMot, string *pOrthographe, int iDeclinaison) ;
+	void						metABlanc();
+	void						fabriqueLibelleLong();
+	void						donneLibelleChoix(string *pLibelle);
+	void						donneLibelleAffiche(string *pLibelle, int iDeclinaison = 0);
+	void						traiteOrthographe(string *pMot, string *pOrthographe, int iDeclinaison);
 
-	void						donneGenre(GENRE *pGenre) ;
-	void 						donneGenrePluriel(GENRE *pGenre) ;
-	void 						donneGenreSingulier(GENRE *pGenre) ;
+	void						donneGenre(GENRE *pGenre);
+	void 						donneGenrePluriel(GENRE *pGenre);
+	void 						donneGenreSingulier(GENRE *pGenre);
 
-	string					chercheGrammaire(string sAChercher) ;
+	string					chercheGrammaire(string sAChercher);
 
-	bool						estReel() ;
+	bool						estReel();
 
 #ifdef _ENTERPRISE_DLL
 
-  string getLabel()     { return sLabel ; }
-  string getCode()      { return sCode ; }
-  string getGrammar()   { return sGrammar ; }
-  string getFrequency() { return sFrequency ; }
+  string getLabel()     { return sLabel; }
+  string getCode()      { return sCode; }
+  string getGrammar()   { return sGrammar; }
+  string getFrequency() { return sFrequency; }
 
-  void   setLabel(string sSt)     { sLabel     = sSt ; }
-  void   setCode(string sSt)      { sCode      = sSt ; }
-  void   setGrammar(string sSt)   { sGrammar   = sSt ; }
-  void   setFrequency(string sSt) { sFrequency = sSt ; }
+  void   setLabel(string sSt)     { sLabel     = sSt; }
+  void   setCode(string sSt)      { sCode      = sSt; }
+  void   setGrammar(string sSt)   { sGrammar   = sSt; }
+  void   setFrequency(string sSt) { sFrequency = sSt; }
 
 #endif
-} ;
+};
 
 // Objet dérivé de NSFiche servant aux accès de base de données
 
@@ -197,63 +197,63 @@ class NSPatholog : public NSSuperRoot
 {
  public:
 	// Objet qui contient les données
-	NSPathologData _Donnees ;
+	NSPathologData _Donnees;
 
 	NSPatholog(NSSuper* pSuper, string sLangue);
 	NSPatholog(NSPatholog& rv);
 	~NSPatholog();
 
-	void					metABlanc() 					{ _Donnees.metABlanc() ; }
+	void					metABlanc() 					{ _Donnees.metABlanc(); }
 
-	void					alimenteFiche() ;
-	void					videFiche() ;
-
-#ifndef _ENTERPRISE_DLL
-	DBIResult			open() ;
-	DBIResult			getPatRecord() ;
-
-  bool					trouvePathologData(string *pCode, NSPathologData *pData, bool afficheErreur = true) ;
-	DBIResult			trouveCode(string *pCode, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK, bool bErrMessage = true) ;
-	DBIResult			trouveLibelle(string *pLibelle, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK) ;
-#else
-  bool					trouvePathologData(string sLang, string *pCode, NSPathologData *pData, bool afficheErreur = true) ;
-  bool          trouveCode(string sLang, string *pCode, bool bVerbose = true) ;
-	bool          trouveLibelle(string sLang, string *pLibelle) ;
-  bool          trouveLibelleApproche(string sLang, string *pLibelle) ;
-#endif
-
-  string				*donneLibelle()				{ return &(_Donnees.libelleLong) ; }
+	void					alimenteFiche();
+	void					videFiche();
 
 #ifndef _ENTERPRISE_DLL
-	string  			donneLibelleLexique() { return string(_Donnees.libelle) ; }
-	char					*donneCode() 	 				{ return _Donnees.code ; }
-#else
-  string  			donneLibelleLexique() { return _Donnees.getLabel() ; }
+	DBIResult			open();
+	DBIResult			getPatRecord();
 
-  string getLabel()     { return _Donnees.getLabel() ; }
-  string getCode()      { return _Donnees.getCode() ; }
-  string getGrammar()   { return _Donnees.getGrammar() ; }
-  string getFrequency() { return _Donnees.getFrequency() ; }
+  bool					trouvePathologData(string *pCode, NSPathologData *pData, bool afficheErreur = true);
+	DBIResult			trouveCode(string *pCode, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK, bool bErrMessage = true);
+	DBIResult			trouveLibelle(string *pLibelle, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK);
+#else
+  bool					trouvePathologData(string sLang, string *pCode, NSPathologData *pData, bool afficheErreur = true);
+  bool          trouveCode(string sLang, string *pCode, bool bVerbose = true);
+	bool          trouveLibelle(string sLang, string *pLibelle);
+  bool          trouveLibelleApproche(string sLang, string *pLibelle);
 #endif
 
-	virtual bool	Create() ;
-	virtual bool	Modify() ;
+  string				*donneLibelle()				{ return &(_Donnees.libelleLong); }
 
-	NSPatholog& 	operator=(NSPatholog src) ;
-	int						operator==( const NSPatholog& o ) ;
+#ifndef _ENTERPRISE_DLL
+	string  			donneLibelleLexique() { return string(_Donnees.libelle); }
+	char					*donneCode() 	 				{ return _Donnees.code; }
+#else
+  string  			donneLibelleLexique() { return _Donnees.getLabel(); }
+
+  string getLabel()     { return _Donnees.getLabel(); }
+  string getCode()      { return _Donnees.getCode(); }
+  string getGrammar()   { return _Donnees.getGrammar(); }
+  string getFrequency() { return _Donnees.getFrequency(); }
+#endif
+
+	virtual bool	Create();
+	virtual bool	Modify();
+
+	NSPatholog& 	operator=(NSPatholog src);
+	int						operator==( const NSPatholog& o );
 
  protected:
 
-	string _sLangue ;
+	string _sLangue;
 
 #ifdef _ENTERPRISE_DLL
-  string getTableName(string sLanguage) ;
-  void alimenteFiche(MYSQL_ROW *pRow) ;
-  bool executeQuery(string sQuery, bool bVerbose) ;
+  string getTableName(string sLanguage);
+  void alimenteFiche(MYSQL_ROW *pRow);
+  bool executeQuery(string sQuery, bool bVerbose);
 
-  string _sTableName ;
+  string _sTableName;
 #endif
-} ;
+};
 
 //---------------------------------------------------------------------------
 //  Classe NSPatInfo  (destinée à être stockée dans une Array)
@@ -266,29 +266,29 @@ class NSPathologInfo
 {
  public:
 	// Objet qui contient les données
-	NSPathologData _Donnees ;
+	NSPathologData _Donnees;
 
-	NSPathologInfo() ;
-	NSPathologInfo(NSPatholog *) ;
-	NSPathologInfo(NSPathologInfo& rv) ;
-	~NSPathologInfo() ;
+	NSPathologInfo();
+	NSPathologInfo(NSPatholog *);
+	NSPathologInfo(NSPathologInfo& rv);
+	~NSPathologInfo();
 
-	string					*donneLibelle() { return &(_Donnees.libelleLong) ; }
+	string					*donneLibelle() { return &(_Donnees.libelleLong); }
 
 #ifndef _ENTERPRISE_DLL
-	char						*donneCode() 	  { return _Donnees.code ; }
+	char						*donneCode() 	  { return _Donnees.code; }
 #endif
 
-	NSPathologInfo&	operator=(NSPathologInfo src) ;
-	int							operator==( const NSPathologInfo& o) ;
+	NSPathologInfo&	operator=(NSPathologInfo src);
+	int							operator==( const NSPathologInfo& o);
 
 #ifdef _ENTERPRISE_DLL
-  string getLabel()     { return _Donnees.getLabel() ; }
-  string getCode()      { return _Donnees.getCode() ; }
-  string getGrammar()   { return _Donnees.getGrammar() ; }
-  string getFrequency() { return _Donnees.getFrequency() ; }
+  string getLabel()     { return _Donnees.getLabel(); }
+  string getCode()      { return _Donnees.getCode(); }
+  string getGrammar()   { return _Donnees.getGrammar(); }
+  string getFrequency() { return _Donnees.getFrequency(); }
 #endif
-} ;
+};
 
 //---------------------------------------------------------------------------
 //  Classe NSSavoir
@@ -307,59 +307,59 @@ class NSSavoirData
 #ifndef _ENTERPRISE_DLL
 
 	// Variables de stockage des valeurs
-	char	code[SAVOIR_CODE_LEN + 1] ;
-	char	qualifie[SAVOIR_QUALIFIE_LEN + 1] ;
-	char	lien[SAVOIR_LIEN_LEN + 1] ;
-	char	qualifiant[SAVOIR_QUALIFIANT_LEN + 1] ;
-	char	degre[SAVOIR_DEGRE_LEN + 1] ;
-	char	classe[SAVOIR_CLASSE_LEN + 1] ;
-	char	scenario[SAVOIR_SCENARIO_LEN + 1] ;
+	char	code[SAVOIR_CODE_LEN + 1];
+	char	qualifie[SAVOIR_QUALIFIE_LEN + 1];
+	char	lien[SAVOIR_LIEN_LEN + 1];
+	char	qualifiant[SAVOIR_QUALIFIANT_LEN + 1];
+	char	degre[SAVOIR_DEGRE_LEN + 1];
+	char	classe[SAVOIR_CLASSE_LEN + 1];
+	char	scenario[SAVOIR_SCENARIO_LEN + 1];
 
-  string getCode()      { return string(code) ; }
-	string getQualified() { return string(qualifie) ; }
-	string getLink()      { return string(lien) ; }
-	string getQualifier() { return string(qualifiant) ; }
-	string getLevel()     { return string(degre) ; }
-	string getClass()     { return string(classe) ; }
-	string getScenario()  { return string(scenario) ; }
+  string getCode()      { return string(code); }
+	string getQualified() { return string(qualifie); }
+	string getLink()      { return string(lien); }
+	string getQualifier() { return string(qualifiant); }
+	string getLevel()     { return string(degre); }
+	string getClass()     { return string(classe); }
+	string getScenario()  { return string(scenario); }
 
 #else
 
-  string _sCode ;
-	string _sQualified ;
-	string _sLink ;
-	string _sQualifier ;
-	string _sLevel ;
-	string _sClass ;
-	string _sScenario ;
+  string _sCode;
+	string _sQualified;
+	string _sLink;
+	string _sQualifier;
+	string _sLevel;
+	string _sClass;
+	string _sScenario;
 
-  string getCode()      { return _sCode ; }
-	string getQualified() { return _sQualified ; }
-	string getLink()      { return _sLink ; }
-	string getQualifier() { return _sQualifier ; }
-	string getLevel()     { return _sLevel ; }
-	string getClass()     { return _sClass ; }
-	string getScenario()  { return _sScenario ; }
+  string getCode()      { return _sCode; }
+	string getQualified() { return _sQualified; }
+	string getLink()      { return _sLink; }
+	string getQualifier() { return _sQualifier; }
+	string getLevel()     { return _sLevel; }
+	string getClass()     { return _sClass; }
+	string getScenario()  { return _sScenario; }
 
-  void   setCode(string sC)      { _sCode      = sC ; }
-	void   setQualified(string sC) { _sQualified = sC ; }
-	void   setLink(string sC)      { _sLink      = sC ; }
-	void   setQualifier(string sC) { _sQualifier = sC ; }
-	void   setLevel(string sC)     { _sLevel     = sC ; }
-	void   setClass(string sC)     { _sClass     = sC ; }
-	void   setScenario(string sC)  { _sScenario  = sC ; }
+  void   setCode(string sC)      { _sCode      = sC; }
+	void   setQualified(string sC) { _sQualified = sC; }
+	void   setLink(string sC)      { _sLink      = sC; }
+	void   setQualifier(string sC) { _sQualifier = sC; }
+	void   setLevel(string sC)     { _sLevel     = sC; }
+	void   setClass(string sC)     { _sClass     = sC; }
+	void   setScenario(string sC)  { _sScenario  = sC; }
 
 #endif
 
-	NSSavoirData() ;
-	NSSavoirData(NSSavoirData& rv) ;
-	~NSSavoirData() ;
+	NSSavoirData();
+	NSSavoirData(NSSavoirData& rv);
+	~NSSavoirData();
 
-	NSSavoirData& operator=(NSSavoirData src) ;
-	int 		  		operator==(const NSSavoirData& o) ;
+	NSSavoirData& operator=(NSSavoirData src);
+	int 		  		operator==(const NSSavoirData& o);
 
-	void					metABlanc() ;
-} ;
+	void					metABlanc();
+};
 
 // accés à la base des médicaments
 
@@ -371,13 +371,13 @@ class NSLexiMed : public NSPatholog
 {
  public:
 	// Objet qui contient les données
-	NSLexiMed(NSSuper* pSuper, string sLangue) ;
-	NSLexiMed(NSLexiMed& rv) ;
-	~NSLexiMed() ;
+	NSLexiMed(NSSuper* pSuper, string sLangue);
+	NSLexiMed(NSLexiMed& rv);
+	~NSLexiMed();
 #ifndef _ENTERPRISE_DLL
-	DBIResult	open() ;		//ne redefénir qu cette fonction
+	DBIResult	open();		//ne redefénir qu cette fonction
 #endif
-} ;
+};
 
 // Objet dérivé de NSFiche servant aux accès de base de données
 
@@ -393,38 +393,38 @@ class NSSavoir : public NSSuperRoot
 {
  public:
 	// Objet qui contient les données
-	NSSavoirData	*pDonnees ;
+	NSSavoirData	*pDonnees;
 
-	NSSavoir(NSSuper* pSuper) ;
-	NSSavoir(NSSavoir& rv) ;
-	~NSSavoir() ;
+	NSSavoir(NSSuper* pSuper);
+	NSSavoir(NSSavoir& rv);
+	~NSSavoir();
 
-	void 					metABlanc() { pDonnees->metABlanc() ; }
+	void 					metABlanc() { pDonnees->metABlanc(); }
 
-	void 					alimenteFiche() ;
-	void 					videFiche() ;
+	void 					alimenteFiche();
+	void 					videFiche();
 #ifndef _ENTERPRISE_DLL
-	DBIResult 		open() ;
-	DBIResult 		getPatRecord() ;
+	DBIResult 		open();
+	DBIResult 		getPatRecord();
 #else
-  void          alimenteFiche(MYSQL_ROW *pRow) ;
-  bool          executeQuery(string sQuery, bool bVerbose) ;
+  void          alimenteFiche(MYSQL_ROW *pRow);
+  bool          executeQuery(string sQuery, bool bVerbose);
 #endif
 
 	virtual bool	Create();
 	virtual bool	Modify();
 
-	NSSavoir&			operator=(NSSavoir src) ;
-	int						operator==(const NSSavoir& o) ;
+	NSSavoir&			operator=(NSSavoir src);
+	int						operator==(const NSSavoir& o);
 
-  string getCode()      { return pDonnees->getCode() ; }
-	string getQualified() { return pDonnees->getQualified() ; }
-	string getLink()      { return pDonnees->getLink() ; }
-	string getQualifier() { return pDonnees->getQualifier() ; }
-	string getLevel()     { return pDonnees->getLevel() ; }
-	string getClass()     { return pDonnees->getClass() ; }
-	string getScenario()  { return pDonnees->getScenario() ; }
-} ;
+  string getCode()      { return pDonnees->getCode(); }
+	string getQualified() { return pDonnees->getQualified(); }
+	string getLink()      { return pDonnees->getLink(); }
+	string getQualifier() { return pDonnees->getQualifier(); }
+	string getLevel()     { return pDonnees->getLevel(); }
+	string getClass()     { return pDonnees->getClass(); }
+	string getScenario()  { return pDonnees->getScenario(); }
+};
 
 
 // -----------------------------------------------------------------------------
@@ -438,16 +438,16 @@ class NSSavoirInfo
 {
  public:
 	// Objet qui contient les données
-	NSSavoirData	*pDonnees ;
+	NSSavoirData	*pDonnees;
 
-	NSSavoirInfo() ;
-	NSSavoirInfo(NSSavoir *) ;
-	NSSavoirInfo(NSSavoirInfo& rv) ;
-	~NSSavoirInfo() ;
+	NSSavoirInfo();
+	NSSavoirInfo(NSSavoir *);
+	NSSavoirInfo(NSSavoirInfo& rv);
+	~NSSavoirInfo();
 
-	NSSavoirInfo& operator=(NSSavoirInfo src) ;
-	int						operator==(const NSSavoirInfo& o) ;
-} ;
+	NSSavoirInfo& operator=(NSSavoirInfo src);
+	int						operator==(const NSSavoirInfo& o);
+};
 
 #endif    // __NSPATHO_H
 

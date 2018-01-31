@@ -72,17 +72,17 @@
 #ifndef __PERSONLUS_H
 #define __PERSONLUS_H
 
-class NSPersonGraphManager ;
-class NSPatPathoArray ;
-class NSBasicAttributeArray ;
-class NSHealthTeam ;
-class NSHealthTeamDocument ;
-class NSSearchStruct ;
-class NSContexte ;
-class NSHISTODocument ;
-class NSDocumentHisto ;
-class NSFrameDocumentsArray ;
-// class NSChemiseArray ;
+class NSPersonGraphManager;
+class NSPatPathoArray;
+class NSBasicAttributeArray;
+class NSHealthTeam;
+class NSHealthTeamDocument;
+class NSSearchStruct;
+class NSContexte;
+class NSHISTODocument;
+class NSDocumentHisto;
+class NSFrameDocumentsArray;
+// class NSChemiseArray;
 
 // # include <cstring.h>
 
@@ -90,8 +90,8 @@ class NSFrameDocumentsArray ;
 # include "../nautilus/nsanxary.h"
 # include "../nsbb/nspatpat.h"
 
-const char LocalPatient  = '-' ;
-const char INMEMORY_CHAR = '#' ;
+const char LocalPatient  = '-';
+const char INMEMORY_CHAR = '#';
 
 # define PAT_NSS_LEN         PIDS_NSS_LEN
 
@@ -109,130 +109,130 @@ class Person
 
 	  // Information storage strings
     //
-    string _sID ;
-    string _sPseudo ;
-    string _sFamilyName ;
-    string _sFirstName ;
-    string _sCode ;
-    string _sMaidenName ;
-    string _sGender ;
-    string _sAddress ;
-    string _sBirthDate ;
-    string _sMobilePhoneNumber ;
-    string _sOfficePhoneNumber ;
-    string _sFamilyStatus ;
-    string _sLang ;
-    string _sCivility ;
-    string _sFullName ;
+    string _sID;
+    string _sPseudo;
+    string _sFamilyName;
+    string _sFirstName;
+    string _sCode;
+    string _sMaidenName;
+    string _sGender;
+    string _sAddress;
+    string _sBirthDate;
+    string _sMobilePhoneNumber;
+    string _sOfficePhoneNumber;
+    string _sFamilyStatus;
+    string _sLang;
+    string _sCivility;
+    string _sFullName;
 
-    string _sProJob ;
-    string _sProSpeciality ;
-    string _sProMajor ;
-		string _sProActivity ;
-    string _sProTitle ;
-    string _sProCivility ;
-    string _sProRoles ;
-    string _sProAddress ;
-    string _sProCity ;
+    string _sProJob;
+    string _sProSpeciality;
+    string _sProMajor;
+		string _sProActivity;
+    string _sProTitle;
+    string _sProCivility;
+    string _sProRoles;
+    string _sProAddress;
+    string _sProCity;
 
-    NSContexte*           _pContexte ;
+    NSContexte*           _pContexte;
 
-    string                _sContribution ;
+    string                _sContribution;
 
   public:
 
-	  Person(NSContexte* pCtx) ;
-	  Person(Person& rv) ;
+	  Person(NSContexte* pCtx);
+	  Person(Person& rv);
 
-    ~Person() ;
+    ~Person();
 
-    void    init() ;
+    void    init();
 
-	  Person& operator=(Person src) ;
-	  int     operator==(Person& o) ;
+	  Person& operator=(Person src);
+	  int     operator==(Person& o);
 
-    void    buildFullName(string sLang = "") ;
-    string  buildCivility(bool bShort, string sLang = "") ;
-    int     donneNaissance(char *dateNaiss) ;
+    void    buildFullName(string sLang = "");
+    string  buildCivility(bool bShort, string sLang = "");
+    int     donneNaissance(char *dateNaiss);
 
     // Indique si le patient est local
-    inline bool IsLocal()    { return (LocalPatient  == _sID[0]) ; }
+    inline bool IsLocal()    { return (LocalPatient  == _sID[0]); }
     // Indique si le patient est en memoire
-    inline bool IsInMemory() { return (INMEMORY_CHAR == _sID[0]) ; }
+    inline bool IsInMemory() { return (INMEMORY_CHAR == _sID[0]); }
     // Indique si le patient est collectif
-    inline bool IsGlobal()   { return (!IsInMemory() && !IsLocal()) ; }
+    inline bool IsGlobal()   { return (!IsInMemory() && !IsLocal()); }
 
-    bool    isMale()    { return (string("HMASC1") == _sGender) ; }
-    bool 		isFemale()  { return (string("HFEMI1") == _sGender) ; }
-    void 		setMale()   { _sGender = string("HMASC1") ; }
-    void 		setFemale() { _sGender = string("HFEMI1") ; }
+    bool    isMale()    { return (string("HMASC1") == _sGender); }
+    bool 		isFemale()  { return (string("HFEMI1") == _sGender); }
+    void 		setMale()   { _sGender = string("HMASC1"); }
+    void 		setFemale() { _sGender = string("HFEMI1"); }
 
     // donnees "traduites" en français
-    string  donneSitFam(string sLang = "") ;
-    string 	getTranslatedBirthDate(string sLang = "") ;
-    string 	getTitle(string sLang = "") ;
+    string  donneSitFam(string sLang = "");
+    string 	getTranslatedBirthDate(string sLang = "");
+    string 	getTitle(string sLang = "");
 
-    bool    getReadOnly() ;
-    bool    getADebloquer() ;
-    void    setReadOnly(bool bRO) ;
-    void    setADebloquer(bool bAD) ;
+    bool    getReadOnly();
+    bool    getADebloquer();
+    void    setReadOnly(bool bRO);
+    void    setADebloquer(bool bAD);
 
-    void    GetDocPatho(NSPatPathoArray *pPatho, string sRootSens) ;
-    void    DonnePathoSynthese(NSPatPathoArray *pPathoSynthese) { GetDocPatho(pPathoSynthese, string("ZSYNT")) ; } /* Fills a patpaho with synthese */
+    void    GetDocPatho(NSPatPathoArray *pPatho, string sRootSens);
+    void    DonnePathoSynthese(NSPatPathoArray *pPathoSynthese) { GetDocPatho(pPathoSynthese, string("ZSYNT")); } /* Fills a patpaho with synthese */
 
 
-    NSContexte*           getContext()     { return _pContexte ; }
+    NSContexte*           getContext()     { return _pContexte; }
 
-    string  donneLang()      	 { return _sLang ; }
-    string  getPseudo()        { return _sPseudo ; }
-    string  getId()            { return _sID ; }
-    string  getFamilyName()    { return _sFamilyName ; }
-    string  getFirstName()     { return _sFirstName ; }
-    string  getCode()          { return _sCode ; }
-    string  getGender()        { return _sGender ; }
-    string  getAddress()       { return _sAddress ; }
-    string  getBirthDate()     { return _sBirthDate ; }
-    string  getMobilePhone()   { return _sMobilePhoneNumber ; }
-    string  getOfficePhone()   { return _sOfficePhoneNumber ; }
-    string  getFamilyStatus()  { return _sFamilyStatus ; }
-    string	getCivility()			 { return _sCivility ; }
-    string  getFullName()      { return _sFullName ; }
-    string	getMaidenName()    { return _sMaidenName ; }
+    string  donneLang()      	 { return _sLang; }
+    string  getPseudo()        { return _sPseudo; }
+    string  getId()            { return _sID; }
+    string  getFamilyName()    { return _sFamilyName; }
+    string  getFirstName()     { return _sFirstName; }
+    string  getCode()          { return _sCode; }
+    string  getGender()        { return _sGender; }
+    string  getAddress()       { return _sAddress; }
+    string  getBirthDate()     { return _sBirthDate; }
+    string  getMobilePhone()   { return _sMobilePhoneNumber; }
+    string  getOfficePhone()   { return _sOfficePhoneNumber; }
+    string  getFamilyStatus()  { return _sFamilyStatus; }
+    string	getCivility()			 { return _sCivility; }
+    string  getFullName()      { return _sFullName; }
+    string	getMaidenName()    { return _sMaidenName; }
 
-    string  getProJob()        { return _sProJob ; }
-    string  getProSpeciality() { return _sProSpeciality ; }
-    string  getProMajor()      { return _sProMajor ; }
-		string  getProActivity()   { return _sProActivity ; }
-    string  getProTitle()      { return _sProTitle ; }
-    string  getProCivility()   { return _sProCivility ; }
-    string  getProRoles()      { return _sProRoles ; }
-    string  getProAddress()    { return _sProAddress ; }
-    string  getProCity()       { return _sProCity ; }
+    string  getProJob()        { return _sProJob; }
+    string  getProSpeciality() { return _sProSpeciality; }
+    string  getProMajor()      { return _sProMajor; }
+		string  getProActivity()   { return _sProActivity; }
+    string  getProTitle()      { return _sProTitle; }
+    string  getProCivility()   { return _sProCivility; }
+    string  getProRoles()      { return _sProRoles; }
+    string  getProAddress()    { return _sProAddress; }
+    string  getProCity()       { return _sProCity; }
 
-    void setId(string sVal)           { _sID                = sVal ; }
-    void setPseudo(string sVal)       { _sPseudo            = sVal ; }
-    void setFamilyName(string sVal)   { _sFamilyName        = sVal ; }
-    void setFirstName(string sVal)    { _sFirstName         = sVal ; }
-    void setCode(string sVal)         { _sCode              = sVal ; }
-    void setMaidenName(string sVal)   { _sMaidenName        = sVal ; }
-    void setGender(string sVal)       { _sGender            = sVal ; }
-    void setAddress(string sVal)      { _sAddress           = sVal ; }
-    void setBirthDate(string sVal)    { _sBirthDate         = sVal ; }
-    void setMobilePhone(string sVal)  { _sMobilePhoneNumber = sVal ; }
-    void setOfficePhone(string sVal)  { _sOfficePhoneNumber = sVal ; }
-    void setFamilyStatus(string sVal) { _sFamilyStatus      = sVal ; }
-    void setLang(string sVal)         { _sLang              = sVal ; }
-    void setCivility(string sVal)     { _sCivility          = sVal ; }
-    void setFullName(string sVal)     { _sFullName          = sVal ; }
+    void setId(string sVal)           { _sID                = sVal; }
+    void setPseudo(string sVal)       { _sPseudo            = sVal; }
+    void setFamilyName(string sVal)   { _sFamilyName        = sVal; }
+    void setFirstName(string sVal)    { _sFirstName         = sVal; }
+    void setCode(string sVal)         { _sCode              = sVal; }
+    void setMaidenName(string sVal)   { _sMaidenName        = sVal; }
+    void setGender(string sVal)       { _sGender            = sVal; }
+    void setAddress(string sVal)      { _sAddress           = sVal; }
+    void setBirthDate(string sVal)    { _sBirthDate         = sVal; }
+    void setMobilePhone(string sVal)  { _sMobilePhoneNumber = sVal; }
+    void setOfficePhone(string sVal)  { _sOfficePhoneNumber = sVal; }
+    void setFamilyStatus(string sVal) { _sFamilyStatus      = sVal; }
+    void setLang(string sVal)         { _sLang              = sVal; }
+    void setCivility(string sVal)     { _sCivility          = sVal; }
+    void setFullName(string sVal)     { _sFullName          = sVal; }
 
-    NSDocumentHisto* GetDocument(string sRootSens) ;
+    NSDocumentHisto* GetDocument(string sRootSens);
 
-    bool             getArray(string sNode, NSPatPathoArray *pPPT) ;
-    bool             getSubArray(string sNode, NSPatPathoArray *pPPT) ;
+    bool             getArray(string sNode, NSPatPathoArray *pPPT);
+    bool             getSubArray(string sNode, NSPatPathoArray *pPPT);
 
-    //bool             FermeContribution() ;
-    //string           getContribution() { return _sContribution ; }
-} ;
+    //bool             FermeContribution();
+    //string           getContribution() { return _sContribution; }
+};
 
 #endif // !__PERSONLUS_H
 

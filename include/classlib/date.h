@@ -16,7 +16,7 @@ using std::string;
 
 namespace ClassLib {
 
-class TTime ;
+class TTime;
 // class _BIDSCLASS ipstream;
 // class _BIDSCLASS opstream;
 
@@ -25,8 +25,8 @@ typedef unsigned MonthTy;
 typedef unsigned YearTy;
 typedef unsigned long JulTy;
 
-typedef char     _TCHAR ;
-typedef unsigned _TUCHAR ;
+typedef char     _TCHAR;
+typedef unsigned _TUCHAR;
 
 static const JulTy jul1901 = 2415386L;  // Julian day for 1/1/1901
 

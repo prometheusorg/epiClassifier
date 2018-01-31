@@ -125,38 +125,38 @@ class NSEpiClasserData
   protected:
 
     // variables
-    string _sCode ;
-    string _sClassification ;
-    string _sCriteria ;
-    string _sRelation ;
+    string _sCode;
+    string _sClassification;
+    string _sCriteria;
+    string _sRelation;
 
   public:
 
     // constructors/destructor
-    NSEpiClasserData() ;
-    NSEpiClasserData(const NSEpiClasserData& rv) ;
-    ~NSEpiClasserData() ;
+    NSEpiClasserData();
+    NSEpiClasserData(const NSEpiClasserData& rv);
+    ~NSEpiClasserData();
 
     // operators
-    NSEpiClasserData& operator=(const NSEpiClasserData& src) ;
-    int 		          operator==(const NSEpiClasserData& o) ;
+    NSEpiClasserData& operator=(const NSEpiClasserData& src);
+    int 		          operator==(const NSEpiClasserData& o);
 
     // functions
-    void                metAZero() ;
+    void                metAZero();
 
-    string getCode()           { return _sCode ; }
-    string getClassification() { return _sClassification ; }
-    string getCriteria()       { return _sCriteria ; }
-    string getRelation()       { return _sRelation ; }
+    string getCode()           { return _sCode; }
+    string getClassification() { return _sClassification; }
+    string getCriteria()       { return _sCriteria; }
+    string getRelation()       { return _sRelation; }
 
-    void   setCode(string sSt)           { _sCode           = sSt ; }
-    void   setClassification(string sSt) { _sClassification = sSt ; }
-    void   setCriteria(string sSt)       { _sCriteria       = sSt ; }
-    void   setRelation(string sSt)       { _sRelation       = sSt ; }
-} ;
+    void   setCode(string sSt)           { _sCode           = sSt; }
+    void   setClassification(string sSt) { _sClassification = sSt; }
+    void   setCriteria(string sSt)       { _sCriteria       = sSt; }
+    void   setRelation(string sSt)       { _sRelation       = sSt; }
+};
 
 #ifndef _ENTERPRISE_DLL
-class NSEpiClasser ;
+class NSEpiClasser;
 #endif
 
 // -----------------------------------------------------------------------------
@@ -167,35 +167,35 @@ class NSEpiClasserInfo
 {
   public:
 
-    NSEpiClasserData _Donnees ;
+    NSEpiClasserData _Donnees;
 
     // constructors/destructor
-    NSEpiClasserInfo() ;
+    NSEpiClasserInfo();
 #ifndef _ENTERPRISE_DLL
-    NSEpiClasserInfo(NSEpiClasser *) ;
+    NSEpiClasserInfo(NSEpiClasser *);
 #endif
-    NSEpiClasserInfo(NSEpiClasserInfo& rv) ;
-    ~NSEpiClasserInfo() ;
+    NSEpiClasserInfo(NSEpiClasserInfo& rv);
+    ~NSEpiClasserInfo();
 
 #ifdef _ENTERPRISE_DLL
-    void alimenteFiche(MYSQL_ROW *pRow) ;
-    bool donneRelations(string *pResult, string sCode, string sClassification, string sCritere, ontologyBaseManager* pOntologyManager) ;
+    void alimenteFiche(MYSQL_ROW *pRow);
+    bool donneRelations(string *pResult, string sCode, string sClassification, string sCritere, ontologyBaseManager* pOntologyManager);
 #endif
 
-    string getCode()           { return _Donnees.getCode() ; }
-    string getClassification() { return _Donnees.getClassification() ; }
-    string getCriteria()       { return _Donnees.getCriteria() ; }
-    string getRelation()       { return _Donnees.getRelation() ; }
+    string getCode()           { return _Donnees.getCode(); }
+    string getClassification() { return _Donnees.getClassification(); }
+    string getCriteria()       { return _Donnees.getCriteria(); }
+    string getRelation()       { return _Donnees.getRelation(); }
 
-    void   setCode(string sSt)           { _Donnees.setCode(sSt) ; }
-    void   setClassification(string sSt) { _Donnees.setClassification(sSt) ; }
-    void   setCriteria(string sSt)       { _Donnees.setCriteria(sSt) ; }
-    void   setRelation(string sSt)       { _Donnees.setRelation(sSt) ; }
+    void   setCode(string sSt)           { _Donnees.setCode(sSt); }
+    void   setClassification(string sSt) { _Donnees.setClassification(sSt); }
+    void   setCriteria(string sSt)       { _Donnees.setCriteria(sSt); }
+    void   setRelation(string sSt)       { _Donnees.setRelation(sSt); }
 
     // operators
-    NSEpiClasserInfo& operator=(NSEpiClasserInfo src) ;
-    int 		          operator==(const NSEpiClasserInfo& o) ;
-} ;
+    NSEpiClasserInfo& operator=(NSEpiClasserInfo src);
+    int 		          operator==(const NSEpiClasserInfo& o);
+};
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
@@ -208,23 +208,23 @@ class _EPISODUS NSEpiClasser : public NSEpiClasserInfo,
   public:
 
     // constructors/destructor
-    NSEpiClasser(NSSuper *pSuper) ;
-    NSEpiClasser(NSEpiClasser& rv) ;
-    ~NSEpiClasser() ;
+    NSEpiClasser(NSSuper *pSuper);
+    NSEpiClasser(NSEpiClasser& rv);
+    ~NSEpiClasser();
 
     // operators
-    NSEpiClasser& operator=(NSEpiClasser src) ;
-    int 	        operator==(const NSEpiClasser& o) ;
+    NSEpiClasser& operator=(NSEpiClasser src);
+    int 	        operator==(const NSEpiClasser& o);
 
     // functions
-    DBIResult     donneRelations(string *pResult, string sCode, string sClassification, string sCritere) ;
-    void          alimenteFiche() ;
-    void          videFiche() ;
-    DBIResult     open() ;
+    DBIResult     donneRelations(string *pResult, string sCode, string sClassification, string sCritere);
+    void          alimenteFiche();
+    void          videFiche();
+    DBIResult     open();
 
-    virtual bool  Create() ;
-    virtual bool  Modify() ;
-} ;
+    virtual bool  Create();
+    virtual bool  Modify();
+};
 #endif
 
 // -----------------------------------------------------------------------------
@@ -245,39 +245,39 @@ class NSThesaurusData
 {
   public:
 
-    int    _iId ;
-    string _sOrigine ;
-    string _ibui ;
-    string _labelFr ;
-    string _labelNl ;
-    string _icpc2 ;
-    string _icd10 ;
-    string _icpc2_2 ;
-    string _icd10_2 ;
-    string _icpc2_1X ;
-    string _icd10_1X ;
-    string _icpc2_2X ;
-    string _icd10_2X ;
-    string _icpc2_1Y ;
-    string _icd10_1Y ;
-    string _icpc2_2Y ;
-    string _icd10_2Y ;
+    int    _iId;
+    string _sOrigine;
+    string _ibui;
+    string _labelFr;
+    string _labelNl;
+    string _icpc2;
+    string _icd10;
+    string _icpc2_2;
+    string _icd10_2;
+    string _icpc2_1X;
+    string _icd10_1X;
+    string _icpc2_2X;
+    string _icd10_2X;
+    string _icpc2_1Y;
+    string _icd10_1Y;
+    string _icpc2_2Y;
+    string _icd10_2Y;
 
     // constructors/destructor
-    NSThesaurusData() ;
-    NSThesaurusData(NSThesaurusData& rv) ;
-    ~NSThesaurusData() ;
+    NSThesaurusData();
+    NSThesaurusData(NSThesaurusData& rv);
+    ~NSThesaurusData();
 
     // operators
-    NSThesaurusData& operator=(NSThesaurusData src) ;
-    int 		         operator==(const NSThesaurusData& o) ;
+    NSThesaurusData& operator=(NSThesaurusData src);
+    int 		         operator==(const NSThesaurusData& o);
 
     // functions
-    void             metAZero() ;
-} ;
+    void             metAZero();
+};
 
 #ifndef _ENTERPRISE_DLL
-class NSThesaurus ;
+class NSThesaurus;
 #endif
 
 // -----------------------------------------------------------------------------
@@ -292,35 +292,35 @@ class NSThesaurusInfo
   public:
 
     // variables
-    NSThesaurusData _Donnees ;
+    NSThesaurusData _Donnees;
 
     // constructors/destructor
-    NSThesaurusInfo() ;
+    NSThesaurusInfo();
 #ifndef _ENTERPRISE_DLL
-    NSThesaurusInfo(NSThesaurus *) ;
+    NSThesaurusInfo(NSThesaurus *);
 #endif
-    NSThesaurusInfo(NSThesaurusInfo& rv) ;
-    ~NSThesaurusInfo() ;
+    NSThesaurusInfo(NSThesaurusInfo& rv);
+    ~NSThesaurusInfo();
 
     // arrange the result "as a" Classer record for a given classification
     //
-    string           getClasserString(string sClassif) ;
+    string           getClasserString(string sClassif);
 
-    string           getLabelFr() { return _Donnees._labelFr ; }
+    string           getLabelFr() { return _Donnees._labelFr; }
 
     // operators
-    NSThesaurusInfo& operator=(NSThesaurusInfo src) ;
-    int 		       	 operator==(const NSThesaurusInfo& o) ;
+    NSThesaurusInfo& operator=(NSThesaurusInfo src);
+    int 		       	 operator==(const NSThesaurusInfo& o);
 
 #ifdef _ENTERPRISE_DLL
-    void             alimenteFiche(MYSQL_ROW *pRow) ;
-    void             alimenteFicheSentinelle(MYSQL_ROW *pRow) ;
+    void             alimenteFiche(MYSQL_ROW *pRow);
+    void             alimenteFicheSentinelle(MYSQL_ROW *pRow);
 #endif
 
   protected:
 
-    void             addALaClasser(string* pResult, string sCode) ;
-} ;
+    void             addALaClasser(string* pResult, string sCode);
+};
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
@@ -333,22 +333,22 @@ class _EPISODUS NSThesaurus : public NSThesaurusInfo,
   public:
 
     // constructors/destructor
-    NSThesaurus(NSSuper *pSuper) ;
-    NSThesaurus(NSThesaurus& rv) ;
-    ~NSThesaurus() ;
+    NSThesaurus(NSSuper *pSuper);
+    NSThesaurus(NSThesaurus& rv);
+    ~NSThesaurus();
 
     // operators
-    NSThesaurus&    		operator=(NSThesaurus src) ;
-    int 	           		operator==(const NSThesaurus& o) ;
+    NSThesaurus&    		operator=(NSThesaurus src);
+    int 	           		operator==(const NSThesaurus& o);
 
     // functions
-    void                alimenteFiche() ;
-    void                videFiche() ;
-    DBIResult           open() ;
+    void                alimenteFiche();
+    void                videFiche();
+    DBIResult           open();
 
-    virtual bool        Create() ;
-    virtual bool        Modify() ;
-} ;
+    virtual bool        Create();
+    virtual bool        Modify();
+};
 #endif
 
 // -----------------------------------------------------------------------------
@@ -363,42 +363,42 @@ class NSEpiClassifData
 {
   protected:
 
-    string _sClassification ;
-    string _sCode ;
-    string _sLabel ;
-    string _sChapter ;
+    string _sClassification;
+    string _sCode;
+    string _sLabel;
+    string _sChapter;
 
   public:
 
     // constructors/destructor
-    NSEpiClassifData() ;
-    NSEpiClassifData(const NSEpiClassifData& rv) ;
-    ~NSEpiClassifData() ;
+    NSEpiClassifData();
+    NSEpiClassifData(const NSEpiClassifData& rv);
+    ~NSEpiClassifData();
 
     // operators
-    NSEpiClassifData&   operator=(const NSEpiClassifData& src) ;
-    int 		            operator==(const NSEpiClassifData& o) ;
+    NSEpiClassifData&   operator=(const NSEpiClassifData& src);
+    int 		            operator==(const NSEpiClassifData& o);
 
     // functions
-    void                metAZero() ;
+    void                metAZero();
 
-    string getClassification() { return _sClassification ; }
-    string getCode()           { return _sCode ; }
-    string getLabel()          { return _sLabel ; }
-    string getChapter()        { return _sChapter ; }
+    string getClassification() { return _sClassification; }
+    string getCode()           { return _sCode; }
+    string getLabel()          { return _sLabel; }
+    string getChapter()        { return _sChapter; }
 
-    void   setClassification(string sSt) { _sClassification = sSt ; }
-    void   setCode(string sSt)           { _sCode           = sSt ; }
-    void   setLabel(string sSt)          { _sLabel          = sSt ; }
-    void   setChapter(string sSt)        { _sChapter        = sSt ; }
-} ;
+    void   setClassification(string sSt) { _sClassification = sSt; }
+    void   setCode(string sSt)           { _sCode           = sSt; }
+    void   setLabel(string sSt)          { _sLabel          = sSt; }
+    void   setChapter(string sSt)        { _sChapter        = sSt; }
+};
 
 #ifndef _ENTERPRISE_DLL
-class NSEpiClassif ;
+class NSEpiClassif;
 #endif
 
-enum ICPC_CATEGORY  { IcpcUndefined = 0, IcpcSymptom, IcpcProcedure, IcpcPathology } ;
-enum ICPC_PATHOLOGY { IcpcUndefinedPatho = 0, IcpcInfection, IcpcNeoplasm, IcpcTraumatism, IcpcCongenital, IcpcOtherPatho } ;
+enum ICPC_CATEGORY  { IcpcUndefined = 0, IcpcSymptom, IcpcProcedure, IcpcPathology };
+enum ICPC_PATHOLOGY { IcpcUndefinedPatho = 0, IcpcInfection, IcpcNeoplasm, IcpcTraumatism, IcpcCongenital, IcpcOtherPatho };
 
 // -----------------------------------------------------------------------------
 // Classe NSEpiClassifInfo  (destinee a etre stockee dans une Array)
@@ -409,50 +409,50 @@ class _EPISODUS NSEpiClassifInfo
 class NSEpiClassifInfo
 #endif
 {
-  friend class NSEpiClassifArray ;
+  friend class NSEpiClassifArray;
 
   protected:
 
     // variables
-    NSEpiClassifData _Donnees ;
+    NSEpiClassifData _Donnees;
 
   public:
 
     // constructors/destructor
-    NSEpiClassifInfo() ;
+    NSEpiClassifInfo();
 #ifndef _ENTERPRISE_DLL
-    NSEpiClassifInfo(NSEpiClassif *) ;
+    NSEpiClassifInfo(NSEpiClassif *);
 #endif
-    NSEpiClassifInfo(NSEpiClassifInfo& rv) ;
-    ~NSEpiClassifInfo() ;
+    NSEpiClassifInfo(NSEpiClassifInfo& rv);
+    ~NSEpiClassifInfo();
 
-    string getClassification() { return _Donnees.getClassification() ; }
-    string getCode()           { return _Donnees.getCode() ; }
-    string getLabel()          { return _Donnees.getLabel() ; }
-    string getChapter()        { return _Donnees.getChapter() ; }
+    string getClassification() { return _Donnees.getClassification(); }
+    string getCode()           { return _Donnees.getCode(); }
+    string getLabel()          { return _Donnees.getLabel(); }
+    string getChapter()        { return _Donnees.getChapter(); }
 
-    void   setClassification(string sSt) { _Donnees.setClassification(sSt) ; }
-    void   setCode(string sSt)           { _Donnees.setCode(sSt) ; }
-    void   setLabel(string sSt)          { _Donnees.setLabel(sSt) ; }
-    void   setChapter(string sSt)        { _Donnees.setChapter(sSt) ; }
+    void   setClassification(string sSt) { _Donnees.setClassification(sSt); }
+    void   setCode(string sSt)           { _Donnees.setCode(sSt); }
+    void   setLabel(string sSt)          { _Donnees.setLabel(sSt); }
+    void   setChapter(string sSt)        { _Donnees.setChapter(sSt); }
 
-    ICPC_CATEGORY  getIcpcCategory() ;
-    ICPC_PATHOLOGY getIcpcPathology() ;
+    ICPC_CATEGORY  getIcpcCategory();
+    ICPC_PATHOLOGY getIcpcPathology();
 
     // operators
-    NSEpiClassifInfo&   operator=(const NSEpiClassifInfo& src) ;
+    NSEpiClassifInfo&   operator=(const NSEpiClassifInfo& src);
 #ifndef _ENTERPRISE_DLL
-    NSEpiClassifInfo&   operator=(const NSEpiClassif& src) ;
+    NSEpiClassifInfo&   operator=(const NSEpiClassif& src);
 #endif
-    int 		            operator==(const NSEpiClassifInfo& o) ;
+    int 		            operator==(const NSEpiClassifInfo& o);
 
 #ifdef _ENTERPRISE_DLL
-    void                alimenteFiche(MYSQL_ROW *pRow) ;
+    void                alimenteFiche(MYSQL_ROW *pRow);
 #endif
-} ;
+};
 
-typedef vector<NSEpiClassifInfo *>          NSEpiClassifInfoVector ;
-typedef NSEpiClassifInfoVector::iterator    NSEpiClassifInfoIter ;
+typedef vector<NSEpiClassifInfo *>          NSEpiClassifInfoVector;
+typedef NSEpiClassifInfoVector::iterator    NSEpiClassifInfoIter;
 
 #ifndef __linux__
 class _EPISODUS NSEpiClassifInfoArray : public NSEpiClassifInfoVector
@@ -462,12 +462,12 @@ class NSEpiClassifInfoArray : public NSEpiClassifInfoVector
 {
   public:
 
-    NSEpiClassifInfoArray() : NSEpiClassifInfoVector() {} ;
-    ~NSEpiClassifInfoArray() ;
+    NSEpiClassifInfoArray() : NSEpiClassifInfoVector() {};
+    ~NSEpiClassifInfoArray();
 
-    bool ajouteElement(NSEpiClassifInfo *pElement) ;
-    void vider() ;
-} ;
+    bool ajouteElement(NSEpiClassifInfo *pElement);
+    void vider();
+};
 
 #ifndef __linux__
 class _EPISODUS NSEpiClassifArray : public NSEpiClassifInfoVector
@@ -478,24 +478,24 @@ class NSEpiClassifArray : public NSEpiClassifInfoVector
   public:
 
     // constructors/destructor
-    NSEpiClassifArray() ;
-    NSEpiClassifArray(string sFile) ;
-    ~NSEpiClassifArray() ;
+    NSEpiClassifArray();
+    NSEpiClassifArray(string sFile);
+    ~NSEpiClassifArray();
 
     // functions
-    bool fillArray() ;
-    bool searchKey(string sClassif, string sCode) ;
-    bool vider() ;
+    bool fillArray();
+    bool searchKey(string sClassif, string sCode);
+    bool vider();
 
-    string getClassification() { return _Donnees.getClassification() ; }
-    string getCode()           { return _Donnees.getCode() ; }
-    string getLabel()          { return _Donnees.getLabel() ; }
-    string getChapter()        { return _Donnees.getChapter() ; }
+    string getClassification() { return _Donnees.getClassification(); }
+    string getCode()           { return _Donnees.getCode(); }
+    string getLabel()          { return _Donnees.getLabel(); }
+    string getChapter()        { return _Donnees.getChapter(); }
 
     // variables
-    string           _sFileName ;
-    NSEpiClassifData _Donnees ;
-} ;
+    string           _sFileName;
+    NSEpiClassifData _Donnees;
+};
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
@@ -507,47 +507,47 @@ class _EPISODUS NSEpiClassif : public NSEpiClassifInfo, public NSFiche
   public:
 
     // constructors/destructor
-    NSEpiClassif(NSSuper *pSuper) ;
-    NSEpiClassif(NSEpiClassif& rv) ;
-    ~NSEpiClassif() ;
+    NSEpiClassif(NSSuper *pSuper);
+    NSEpiClassif(NSEpiClassif& rv);
+    ~NSEpiClassif();
 
     // operators
-    NSEpiClassif& operator=(NSEpiClassif src) ;
-    int           operator==(const NSEpiClassif& o) ;
+    NSEpiClassif& operator=(NSEpiClassif src);
+    int           operator==(const NSEpiClassif& o);
 
   // functions
 #ifdef _ENTERPRISE_DLL
-    void          alimenteFiche(MYSQL_ROW *pRow) ;
+    void          alimenteFiche(MYSQL_ROW *pRow);
 #else
-    void          alimenteFiche() ;
-    void          videFiche() ;
-    DBIResult     open() ;
+    void          alimenteFiche();
+    void          videFiche();
+    DBIResult     open();
 #endif
 
-    virtual bool  Create() ;
-    virtual bool  Modify() ;
+    virtual bool  Create();
+    virtual bool  Modify();
 
-    bool          initArrayFromCodeList(string sClassification, ClasseStringVector* pVectCodes, NSEpiClassifArray* pResultArray) ;
-} ;
+    bool          initArrayFromCodeList(string sClassification, ClasseStringVector* pVectCodes, NSEpiClassifArray* pResultArray);
+};
 #endif
 
 // -----------------------------------------------------------------------------
 // Définition de NSCodPrestArray (Array de NSCodPrestInfo(s))
 // -----------------------------------------------------------------------------
 /*
-typedef vector<NSCodPrestInfo *>            NSFicheCodPrestArray ;
-typedef NSFicheCodPrestArray::iterator      NSCodPrestIter ;
+typedef vector<NSCodPrestInfo *>            NSFicheCodPrestArray;
+typedef NSFicheCodPrestArray::iterator      NSCodPrestIter;
 
 class NSCodPrestArray : public NSFicheCodPrestArray
 {
  public:
   // constructors/destructor
   NSCodPrestArray() : NSFicheCodPrestArray() {}
-  NSCodPrestArray(NSCodPrestArray& rv) ;
-  virtual ~NSCodPrestArray() ;
+  NSCodPrestArray(NSCodPrestArray& rv);
+  virtual ~NSCodPrestArray();
 
-  void                vider() ;
-} ;
+  void                vider();
+};
 */
 
 // -----------------------------------------------------------------------------

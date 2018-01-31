@@ -1,9 +1,9 @@
 #ifndef __NSPATHOR_H
 #define __NSPATHOR_H
 
-class NSDico ;
-class NSEditDicoGlobal ;
-class NSPathologInfo ;
+class NSDico;
+class NSEditDicoGlobal;
+class NSPathologInfo;
 
 #include <vector>
 
@@ -40,27 +40,27 @@ class NSPathoArray : public NSPathoInfoArray
 
     // Constructeurs
     NSPathoArray() : NSPathoInfoArray() {}
-    NSPathoArray(NSPathoArray& rv) ;
+    NSPathoArray(NSPathoArray& rv);
     // Destructeur
-    virtual ~NSPathoArray() ;
-    NSPathoArray& operator=(NSPathoArray src) ;
+    virtual ~NSPathoArray();
+    NSPathoArray& operator=(NSPathoArray src);
     //
-    void vider() ;
+    void vider();
 };
 
 class NSListPathoInfo : public NSPathologInfo
 {
   public :
 
-    bool ammorce ;
+    bool ammorce;
 
-		NSListPathoInfo() ;
-		NSListPathoInfo(NSPatholog*) ;
-		NSListPathoInfo(NSListPathoInfo& rv) ;
-    ~NSListPathoInfo() ;
+		NSListPathoInfo();
+		NSListPathoInfo(NSPatholog*);
+		NSListPathoInfo(NSListPathoInfo& rv);
+    ~NSListPathoInfo();
 
-		NSListPathoInfo& operator=(NSListPathoInfo src) ;
-		int operator == ( const NSListPathoInfo& o ) ;
+		NSListPathoInfo& operator=(NSListPathoInfo src);
+		int operator == ( const NSListPathoInfo& o );
 };
 
 //
@@ -71,8 +71,8 @@ class NSListPathoInfo : public NSPathologInfo
 
 //typedef vector<NSListPathoInfo*> NSListPathoInfoArray;
 
-typedef vector<NSListPathoInfo*> NSListPathoInfoArray ;
-typedef NSListPathoInfoArray::iterator iterNSListPathoInfoArray ;
+typedef vector<NSListPathoInfo*> NSListPathoInfoArray;
+typedef NSListPathoInfoArray::iterator iterNSListPathoInfoArray;
 
 class NSListPathoArray : public NSListPathoInfoArray
 {
@@ -80,11 +80,11 @@ class NSListPathoArray : public NSListPathoInfoArray
 
     // Constructeurs
     NSListPathoArray() : NSListPathoInfoArray() {}
-    NSListPathoArray(NSListPathoArray& rv) ;
+    NSListPathoArray(NSListPathoArray& rv);
     // Destructeur
-    virtual ~NSListPathoArray() ;
-    NSListPathoArray& operator=(NSListPathoArray src) ;
-    void vider() ;
+    virtual ~NSListPathoArray();
+    NSListPathoArray& operator=(NSListPathoArray src);
+    void vider();
 };
 
 #endif
