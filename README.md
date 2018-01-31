@@ -19,14 +19,14 @@ ICPC is the International Classification of Primary Care.
 [promethe.org](http://promethe.org) is based on the original version, prior to the modifications recorded on this git
 
 #### Current version
-The current version is not yet ready for an online demo. If you want to test it and/or contribute to the development, you can build it yourself
+The current version is not yet ready for an online demo. If you want to test it and/or contribute to the development, you can build it yourself and use the default credentials giving access to the online database.
 
 #### Database
 You can use the online test database with the default credentials from config/sql.cfg.sample (you need to rename this file to sql.cfg). Don't use real medical data with this test database as it cannot handle TLS encryption yet. If the database is down, please let us know.
 
 ### Future
 
-* We are coding a SOAP API based on gSOAP that will allow any web based or standalone software running on any OS to use epiClassifier as a service
+* We are coding a RESTful API based on Casablanca C++ REST SDK that will allow any web based or standalone software running on any OS to use epiClassifier as a service
 * epiClassifier will be packaged for Debian & Ubuntu
 * Anyone willing to package epiClassifier for a free software distribution is welcome, we will provide help on a best effort basis
 * This is free software, you are free to build it for any OS you wish without limitation, but we might not be available to help you deal with proprietary operating systems
@@ -39,12 +39,12 @@ You can use the online test database with the default credentials from config/sq
 
 epiClassifier relies on a MySQL/MariaDB database composed of several tables:
 
-* 3BT: Bilingual Biclassified Belgian Terminology (License: unknown)
+* 3BT: Bilingual Biclassified Belgian Terminology (License: unknown) This thesaurus contains clinicals labels in French and Dutch linked to ICPC-2 and ICD-10.
 * Episodus ontology (License: open source)
 * ICPC
 * ICD-10
 
-We are in the process of securing their release under open source licences. Until then, you can contact us to get the databases for development or research purposes.
+We are in the process of securing their release under open source licences.
 
 ### Contact
 
