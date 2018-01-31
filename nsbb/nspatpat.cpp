@@ -115,7 +115,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception (NSVectPatPathoArray copy ctor).", standardError);
+    error("Exception (NSVectPatPathoArray copy ctor).", standardError);
 }
 }
 
@@ -167,7 +167,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception (op = NSVectPatPathoArray).", standardError);
+    error("Exception (op = NSVectPatPathoArray).", standardError);
     return *this;
 }
 }
@@ -234,7 +234,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception (NSPatPathoArray copy ctor).", standardError);
+    error("Exception (NSPatPathoArray copy ctor).", standardError);
 }
 }
 
@@ -305,7 +305,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception (op = NSPatPathoArray).", standardError);
+  error("Exception (op = NSPatPathoArray).", standardError);
   return *this;
 }
 }
@@ -352,7 +352,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception (op == NSPatPathoArray).", standardError);
+  error("Exception (op == NSPatPathoArray).", standardError);
   return 0;
 }
 }
@@ -374,7 +374,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSPatPathoArray::ajouteElement.", standardError);
+    error("Exception NSPatPathoArray::ajouteElement.", standardError);
     return false;
 }
 }
@@ -445,7 +445,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception (NSPatPathoArray ajouteVecteur).", standardError);
+    error("Exception (NSPatPathoArray ajouteVecteur).", standardError);
 }
 }
 
@@ -485,7 +485,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception (NSPatPathoArray ajoutePatho 1).", standardError);
+    error("Exception (NSPatPathoArray ajoutePatho 1).", standardError);
 }
 }
 
@@ -574,7 +574,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ajoutePatho 2", standardError);
+    error("Exception NSPatPathoArray ajoutePatho 2", standardError);
 }
 }
 
@@ -639,7 +639,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ExtrairePatPatho 1.", standardError);
+    error("Exception NSPatPathoArray ExtrairePatPatho 1.", standardError);
 }
 }
 
@@ -779,7 +779,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ExtrairePatPathoFreres.", standardError);
+    error("Exception NSPatPathoArray ExtrairePatPathoFreres.", standardError);
 }
 }
 
@@ -856,7 +856,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ExtraireVecteurPatPathoFreres.", standardError);
+    error("Exception NSPatPathoArray ExtraireVecteurPatPathoFreres.", standardError);
 }
 }
 
@@ -918,7 +918,7 @@ try
       for (; (end() != iterAvant) && (*iterAvant != pPathAvant); iterAvant++);
       if (iterAvant == end())
       {
-        erreur("Erreur lors de l'insertion d'un arbre : le noeud d'insertion n'est plus présent.", standardError);
+        error("Erreur lors de l'insertion d'un arbre : le noeud d'insertion n'est plus présent.", standardError);
         return;
       }
     }
@@ -1003,7 +1003,7 @@ try
         for (; (end() != iterAvant) && (*iterAvant != pPathAvant); iterAvant++);
         if (end() == iterAvant)
         {
-            erreur("Erreur lors de l'insertion d'un arbre : le noeud d'insertion n'est plus présent.", standardError);
+            error("Erreur lors de l'insertion d'un arbre : le noeud d'insertion n'est plus présent.", standardError);
           break;
         }
       }
@@ -1012,7 +1012,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray InserePathPatho.", standardError);
+    error("Exception NSPatPathoArray InserePathPatho.", standardError);
 }
 }
 
@@ -1271,7 +1271,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ChaineDansPatpatho.", standardError);
+    error("Exception NSPatPathoArray ChaineDansPatpatho.", standardError);
   return end();
 }
 }
@@ -1622,7 +1622,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray AjouterChemin 1.", standardError);
+    error("Exception NSPatPathoArray AjouterChemin 1.", standardError);
 }
 }
 
@@ -1814,7 +1814,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray AjouterChemin 2.", standardError);
+    error("Exception NSPatPathoArray AjouterChemin 2.", standardError);
 }
 }
 
@@ -1869,7 +1869,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray donnePatpatho.", standardError);
+    error("Exception NSPatPathoArray donnePatpatho.", standardError);
 }
 }
 
@@ -2091,7 +2091,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray SousPatpatho.", standardError);
+    error("Exception NSPatPathoArray SousPatpatho.", standardError);
 }
 }
 
@@ -2588,7 +2588,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ajoutePatho 1.", standardError);
+    error("Exception NSPatPathoArray ajoutePatho 1.", standardError);
 }
 }
 
@@ -2613,7 +2613,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ajoutePatho 2.", standardError);
+    error("Exception NSPatPathoArray ajoutePatho 2.", standardError);
 }
 }
 
@@ -2675,7 +2675,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ajoutePatho 3.", standardError);
+    error("Exception NSPatPathoArray ajoutePatho 3.", standardError);
 }
 }
 
@@ -2805,7 +2805,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray ajouteTitre.", standardError);
+    error("Exception NSPatPathoArray ajouteTitre.", standardError);
 }
 }
 
@@ -3450,7 +3450,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray SupprimerPere.", standardError);
+    error("Exception NSPatPathoArray SupprimerPere.", standardError);
 }
 }
 
@@ -3625,7 +3625,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray CheminDansPatpatho 1.", standardError);
+    error("Exception NSPatPathoArray CheminDansPatpatho 1.", standardError);
     return false;
 }
 }
@@ -3814,7 +3814,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray CheminDansPatpatho 2.", standardError);
+    error("Exception NSPatPathoArray CheminDansPatpatho 2.", standardError);
 	return false;
 }
 }
@@ -3955,7 +3955,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray CheminDansPatpatho 1.", standardError);
+    error("Exception NSPatPathoArray CheminDansPatpatho 1.", standardError);
 	return false;
 }
 }
@@ -4064,7 +4064,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray genereChaine.", standardError);
+    error("Exception NSPatPathoArray genereChaine.", standardError);
 }
 }
 #endif
@@ -4132,7 +4132,7 @@ NSPatPathoArray::initialiseDepuisChaine(NSContexte *pContexte, string* pChaine, 
             index++;
           if (index >= MAXNODEELTS)
           {
-            erreur("Le fichier à importer contient une PatPatho erronée (un noeud a trop d'éléments).", standardError);
+            error("Le fichier à importer contient une PatPatho erronée (un noeud a trop d'éléments).", standardError);
             return;
           }
         }
@@ -4142,8 +4142,8 @@ NSPatPathoArray::initialiseDepuisChaine(NSContexte *pContexte, string* pChaine, 
 
       if (n >= strlen(pChaine->c_str()))
       {
-        // erreur("Le fichier à importer contient une PatPatho erronée.", standardError, 0, _pSuper->donneMainWindow()->GetHandle());
-        erreur("Le fichier à importer contient une PatPatho erronée (pas de balise finale).", standardError);
+        // error("Le fichier à importer contient une PatPatho erronée.", standardError, 0, _pSuper->donneMainWindow()->GetHandle());
+        error("Le fichier à importer contient une PatPatho erronée (pas de balise finale).", standardError);
         return;
       }
 try
@@ -4209,7 +4209,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoArray::initialiseDepuisChaine.", standardError);
+    error("Exception NSPatPathoArray::initialiseDepuisChaine.", standardError);
     return;
 }
 		}
@@ -4740,7 +4740,7 @@ NSPatPathoArray::isNumericExpressionTrue(string sOperator, string sValue, string
     // string sErrorText = pContexte->getSuperviseur()->getText("referentialErrors", "invalidOperatorForExpressions");
     // sErrorText += string(" -> ") + sOper + string(" in ") + sExp;
     // pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError);
-    // erreur(sErrorText.c_str(), standardError, 0);
+    // error(sErrorText.c_str(), standardError, 0);
 
     if (NULL != pbExpressionIsValid)
       *pbExpressionIsValid = false;
@@ -4909,7 +4909,7 @@ NSPatPathoArray::getNumericalValueForUnit(string sUnit, double *pdValue, string 
   DBIResult Resultat = NsCv.open();
   if (DBIERR_NONE != Resultat)
   {
-    erreur("Erreur à l'ouverture de la base convert.", standardError, Resultat);
+    error("Erreur à l'ouverture de la base convert.", standardError, Resultat);
     return false;
   }
 #endif
@@ -5045,7 +5045,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception (NSVectFatheredPatPathoArray copy ctor).", standardError);
+    error("Exception (NSVectFatheredPatPathoArray copy ctor).", standardError);
 }
 }
 
@@ -5097,7 +5097,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception (op = NSVectFatheredPatPathoArray).", standardError);
+    error("Exception (op = NSVectFatheredPatPathoArray).", standardError);
     return *this;
 }
 }
@@ -5554,7 +5554,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoInfo ctor.", standardError);
+    error("Exception NSPatPathoInfo ctor.", standardError);
 }
 }
 
@@ -5589,7 +5589,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoInfo ctor(NSSavFiche*).", standardError);
+    error("Exception NSPatPathoInfo ctor(NSSavFiche*).", standardError);
 }
 }
 #endif // #ifndef __linux__
@@ -5617,7 +5617,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSPatPathoInfo copy ctor.", standardError);
+    error("Exception NSPatPathoInfo copy ctor.", standardError);
 }
 }
 
@@ -5811,7 +5811,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSPatPathoInfo::addTemporaryLink", standardError);
+    error("Exception NSPatPathoInfo::addTemporaryLink", standardError);
 }
 }
 
@@ -5830,7 +5830,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSPatPathoInfo::addTemporaryLink", standardError);
+    error("Exception NSPatPathoInfo::addTemporaryLink", standardError);
 }
 }
 
@@ -5845,7 +5845,7 @@ NSPatPathoInfo::numberTemporaryNodes(NSLinkManager* pLinkManager)
 
 	if (getNodeID() == string(""))
 	{
-    erreur("Un noeud à relier ne possède pas d'identifiant.", standardError);
+    error("Un noeud à relier ne possède pas d'identifiant.", standardError);
     return false;
 	}
 
@@ -5862,7 +5862,7 @@ NSPatPathoInfo::numberTemporaryNodes(NSLinkManager* pLinkManager)
     if (string("") == (*i)->sOtherNode)
     {
     	if (NULL == (*i)->pOtherTemporaryNode)
-        erreur("Un lien en attente ne possède pas d'adresse.", standardError);
+        error("Un lien en attente ne possède pas d'adresse.", standardError);
       else
       {
         NSPatPathoInfo* pOtherInfo = (*i)->pOtherTemporaryNode;
@@ -5892,7 +5892,7 @@ NSPatPathoInfo::numberTemporaryNodes(NSLinkManager* pLinkManager)
         }
 
         if (bNotPresent)
-            erreur("Un noeud à relier n'est pas présent dans le noeud destination.", standardError);
+            error("Un noeud à relier n'est pas présent dans le noeud destination.", standardError);
       }
     }
 #ifndef __linux__
@@ -5905,7 +5905,7 @@ NSPatPathoInfo::numberTemporaryNodes(NSLinkManager* pLinkManager)
         bLinkResult = pLinkManager->etablirLien((*i)->sOtherNode, (*i)->iLinkType, sNodeSource);
 
       if (false == bLinkResult)
-        erreur("Impossible d'initialiser le lien en attente.", standardError);
+        error("Impossible d'initialiser le lien en attente.", standardError);
     }
 #endif
   }
@@ -5932,7 +5932,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSCutPastTLArray copy ctor.", standardError, 0);
+    error("Exception NSCutPastTLArray copy ctor.", standardError, 0);
 }
 }
 
@@ -5970,7 +5970,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSCutPastTLArray = op.", standardError, 0);
+    error("Exception NSCutPastTLArray = op.", standardError, 0);
 }
     return *this;
 }
@@ -5994,7 +5994,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSCutPaste copy ctor.", standardError);
+    error("Exception NSCutPaste copy ctor.", standardError);
 }
 }
 
@@ -6112,7 +6112,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSLinkedNodeArray copy ctor.", standardError);
+    error("Exception NSLinkedNodeArray copy ctor.", standardError);
 }
 }
 
@@ -6153,7 +6153,7 @@ try
 } // try
 catch (...)
 {
-    erreur("Exception NSLinkedNodeArray = op.", standardError);
+    error("Exception NSLinkedNodeArray = op.", standardError);
 }
     return *this;
 }

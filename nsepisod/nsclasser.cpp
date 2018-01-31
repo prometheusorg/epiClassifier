@@ -65,9 +65,7 @@ classifExpert::~classifExpert()
 {
 }
 
-string
-classifExpert::donnePattern(string sClassification)
-{
+string classifExpert::donnePattern(string sClassification) {
   // ICPC-2 (Fr CISP-2)
   if (sClassification == "6CISP")
     return string("ABDFHKLNPRSTUWXYZ 0123456789 0123456789");
@@ -290,7 +288,7 @@ try
 	_DBcurseur.lastError = _DBcurseur.open();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
-		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 		return;
 	}
 
@@ -313,7 +311,7 @@ try
 	if ((_DBcurseur.lastError != DBIERR_NONE) &&
         (_DBcurseur.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 		_DBcurseur.close();
 		return;
 	}
@@ -322,7 +320,7 @@ try
 	_DBcurseur.lastError = _DBcurseur.getRecord();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
-		erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 		_DBcurseur.close();
 		return;
 	}
@@ -351,7 +349,7 @@ try
 		{
 			if (_DBcurseur.lastError != DBIERR_EOF)
 			{
-				erreur("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+                error("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 				_DBcurseur.close();
 				return;
 			}
@@ -362,7 +360,7 @@ try
 			_DBcurseur.lastError = _DBcurseur.getRecord();
 			if (_DBcurseur.lastError != DBIERR_NONE)
 			{
-				erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+                error("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 				_DBcurseur.close();
 				return;
 			}
@@ -372,7 +370,7 @@ try
 	// on ferme la base
 	_DBcurseur.lastError = _DBcurseur.close();
 	if (_DBcurseur.lastError != DBIERR_NONE)
-		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
 #else
 
@@ -410,7 +408,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception classifExpert::donneClassifArray.", standardError);
+    error("Exception classifExpert::donneClassifArray.", standardError);
 }
 }
 
@@ -434,7 +432,7 @@ try
 	_DBcurseur.lastError = _DBcurseur.open();
 	if (_DBcurseur.lastError != DBIERR_NONE)
 	{
-		erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- Erreur à l'ouverture du fichier.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 		return;
 	}
 
@@ -464,7 +462,7 @@ try
 			if ((_DBcurseur.lastError != DBIERR_NONE) &&
           (_DBcurseur.lastError != DBIERR_RECNOTFOUND))
 			{
-				erreur("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+                error("classif.db -- erreur à la recherche dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
         _DBcurseur.close();
         return;
       }
@@ -473,7 +471,7 @@ try
 			_DBcurseur.lastError = _DBcurseur.getRecord();
 			if (_DBcurseur.lastError != DBIERR_NONE)
 			{
-      	erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
         _DBcurseur.close();
         return;
       }
@@ -515,7 +513,7 @@ try
         {
         	if (_DBcurseur.lastError != DBIERR_EOF)
           {
-          	erreur("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("classif.db -- erreur d'accès au message suivant.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
             _DBcurseur.close();
             return;
           }
@@ -526,7 +524,7 @@ try
           _DBcurseur.lastError = _DBcurseur.getRecord();
           if (_DBcurseur.lastError != DBIERR_NONE)
           {
-          	erreur("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("classif.db -- erreur de lecture dans la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
             _DBcurseur.close();
             return;
           }
@@ -538,7 +536,7 @@ try
 	// on ferme la base
 	_DBcurseur.lastError = _DBcurseur.close();
 	if (_DBcurseur.lastError != DBIERR_NONE)
-		erreur("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur à la fermeture de la base.", standardError, _DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
 #else
 
@@ -611,7 +609,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception classifExpert::fillList.", standardError);
+    error("Exception classifExpert::fillList.", standardError);
 }
 }
 
@@ -676,12 +674,12 @@ try
 catch(TWindow::TXWindow& e)
 {
   string sErr = string("Exception classifExpert::chooseCode : ") + e.why();
-  erreur(sErr.c_str(), standardError, 0);
+  error(sErr.c_str(), standardError, 0);
   return "";
 }
 catch (...)
 {
-	erreur("Exception classifExpert::chooseCode.", standardError, 0);
+    error("Exception classifExpert::chooseCode.", standardError, 0);
 	return "";
 }
 #else
@@ -783,7 +781,7 @@ classifExpert::storeControlData(string sCtrlData)
    	{
         string sErrMess = string("Erreur d'ouverture en écriture du fichier ")
                                                                     + sFichier;
-        erreur(sErrMess.c_str(), standardError);
+        error(sErrMess.c_str(), standardError);
    		return;
    	}
     //
@@ -889,7 +887,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception Classify::computeParsing.", standardError);
+    error("Exception Classify::computeParsing.", standardError);
 }
 }
 
@@ -1090,7 +1088,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::searchTermsInLexique.", standardError);
+    error("Exception ParseSOAP::searchTermsInLexique.", standardError);
 }
 }
 
@@ -1346,7 +1344,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::findLargerGroup.", standardError);
+    error("Exception ParseSOAP::findLargerGroup.", standardError);
 	return NULL;
 }
 }
@@ -1402,7 +1400,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::addAllGroups.", standardError);
+    error("Exception ParseSOAP::addAllGroups.", standardError);
 	return;
 }
 }
@@ -1440,7 +1438,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::findInLexiq.", standardError);
+    error("Exception ParseSOAP::findInLexiq.", standardError);
 	return false;
 }
 }
@@ -1558,7 +1556,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::Purge.", standardError);
+    error("Exception ParseSOAP::Purge.", standardError);
 	return NULL;
 }
 }
@@ -1603,7 +1601,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::computeParsingElem.", standardError);
+    error("Exception ParseSOAP::computeParsingElem.", standardError);
 	return false;
 }
 }
@@ -1710,7 +1708,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception ParseSOAP::ParsingEq.", standardError);
+  error("Exception ParseSOAP::ParsingEq.", standardError);
   return false;
 }
 }
@@ -1736,7 +1734,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getLibelleParsing.", standardError);
+    error("Exception ParseSOAP::getLibelleParsing.", standardError);
 	return NULL;
 }
 }
@@ -1763,7 +1761,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getCodeParsing.", standardError);
+    error("Exception ParseSOAP::getCodeParsing.", standardError);
 	return NULL;
 }
 }
@@ -1932,7 +1930,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception ParseCategory ctor.", standardError);
+  error("Exception ParseCategory ctor.", standardError);
 }
 }
 
@@ -2169,7 +2167,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseCategory::DefDomain.", standardError);
+    error("Exception ParseCategory::DefDomain.", standardError);
 	return NULL;
 }
 }
@@ -2454,7 +2452,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ElemSet::ComputeJoker.", standardError);
+    error("Exception ElemSet::ComputeJoker.", standardError);
 }
 }
 
@@ -2744,7 +2742,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception ElemSet::Smaller.", standardError);
+  error("Exception ElemSet::Smaller.", standardError);
   return NULL;
 }
 }
@@ -2778,7 +2776,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ElemSet::inter.", standardError);
+    error("Exception ElemSet::inter.", standardError);
 	return NULL;
 }
 }
@@ -2836,7 +2834,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception ElemSet::ComputeUnion.", standardError);
+  error("Exception ElemSet::ComputeUnion.", standardError);
 }
 }
 
@@ -2968,7 +2966,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception ElemSet::minus.", standardError);
+  error("Exception ElemSet::minus.", standardError);
   return NULL;
 }
 }
@@ -3024,7 +3022,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ElemSetArray::ComputeIntersection.", standardError);
+    error("Exception ElemSetArray::ComputeIntersection.", standardError);
 	return NULL;
 }
 }
@@ -3090,7 +3088,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ElemSetArray::minus.", standardError);
+    error("Exception ElemSetArray::minus.", standardError);
 }
 }
 
@@ -3227,7 +3225,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception TermsParser ctor.", standardError);
+  error("Exception TermsParser ctor.", standardError);
 }
 }
 
@@ -3307,7 +3305,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception TermsParser::Compute 1.", standardError);
+  error("Exception TermsParser::Compute 1.", standardError);
   return NULL;
 }
 }
@@ -3341,7 +3339,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception TermsParser::Compute 1.", standardError);
+  error("Exception TermsParser::Compute 1.", standardError);
   return NULL;
 }
 }
@@ -3404,7 +3402,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeWithPUnion.", standardError);
+    error("Exception TermsParser::ComputeWithPUnion.", standardError);
 	return NULL;
 }
 }
@@ -3464,7 +3462,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeWithPIntersection.", standardError);
+    error("Exception TermsParser::ComputeWithPIntersection.", standardError);
 	return NULL;
 }
 }
@@ -3506,7 +3504,7 @@ try
     pThesaurus->lastError = pThesaurus->open();
     if (DBIERR_NONE != pThesaurus->lastError)
 	  {
-		  erreur("Clinical_Labels.db -- Erreur à l'ouverture du fichier Clinical_Labels.db", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
+          error("Clinical_Labels.db -- Erreur à l'ouverture du fichier Clinical_Labels.db", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
 		  delete pThesaurus;
       pThesaurus = 0;
 	  }
@@ -3630,7 +3628,7 @@ try
 #ifndef _ENTERPRISE_DLL
     pThesaurus->lastError = pThesaurus->close();
     if (DBIERR_NONE != pThesaurus->lastError)
-		  erreur("Clinical_Labels.db -- erreur à la fermeture de la base.", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
+          error("Clinical_Labels.db -- erreur à la fermeture de la base.", standardError, pThesaurus->lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
     delete pThesaurus;
   }
@@ -3639,7 +3637,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception TermsParser::ComputeElements.", standardError);
+    error("Exception TermsParser::ComputeElements.", standardError);
 	return NULL;
 }
 }
@@ -3649,9 +3647,8 @@ catch (...)
 // ----------------------------------------------------------
 #ifndef _ENTERPRISE_DLL
 
-bool
-TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement)
-{
+bool TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase,
+                                   string* pElement) {
   if ((NULL == pClinicalBase) || (NULL == pElement) || (string("") == *pElement))
     return false;
 
@@ -3670,7 +3667,7 @@ TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement)
   if ((DBIERR_NONE != pClinicalBase->lastError) && (DBIERR_RECNOTFOUND != pClinicalBase->lastError) && (DBIERR_EOF != pClinicalBase->lastError))
 	{
     string sErrorTxt = string("Clinical_Labels.DB -- erreur à la recherche dans la base Clinical_Labels.DB.");
-		erreur(sErrorTxt.c_str(), standardError, pClinicalBase->lastError, hParentForMessages);
+        error(sErrorTxt.c_str(), standardError, pClinicalBase->lastError, hParentForMessages);
 		return false;
 	}
 
@@ -3680,7 +3677,7 @@ TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement)
 	pClinicalBase->lastError = pClinicalBase->getRecord();
 	if (DBIERR_NONE != pClinicalBase->lastError)
 	{
-		erreur("Clinical_Labels.DB -- erreur à la récupération del'enregistrement", standardError, pClinicalBase->lastError, hParentForMessages);
+        error("Clinical_Labels.DB -- erreur à la récupération del'enregistrement", standardError, pClinicalBase->lastError, hParentForMessages);
 		return false;
 	}
 
@@ -3690,9 +3687,9 @@ TermsParser::FindClinicalTerm(NSThesaurus *pClinicalBase, string* pElement)
   return (sUpperLabel == sLibelleReq);
 }
 
-string
-TermsParser::FindAllClinicalTermsStartingWith(NSThesaurus *pClinicalBase, string* pElement, string sClassif)
-{
+string TermsParser::FindAllClinicalTermsStartingWith(NSThesaurus *pClinicalBase,
+                                                     string* pElement,
+                                                     string sClassif) {
   return string("");
 }
 
@@ -4210,7 +4207,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB ctor.", standardError);
+    error("Exception NSEpiFlechiesDB ctor.", standardError);
 }
 }
 
@@ -4248,7 +4245,7 @@ try
 	pPatho->lastError = pPatho->debut(dbiREADLOCK);
 	if ((pPatho->lastError != DBIERR_NONE) && (pPatho->lastError != DBIERR_EOF))
 	{
-		erreur("Erreur de positionnement.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
+        error("Erreur de positionnement.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
 		return;
 	}
 
@@ -4258,7 +4255,7 @@ try
 		pPatho->lastError = pPatho->getRecord();
 		if (pPatho->lastError != DBIERR_NONE)
 		{
-			erreur("Erreur de lecture dans la base.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
+            error("Erreur de lecture dans la base.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
 			return;
 		}
 
@@ -4273,7 +4270,7 @@ try
 		pPatho->lastError = pPatho->suivant(dbiREADLOCK);
 		if ((pPatho->lastError != DBIERR_NONE) && (pPatho->lastError != DBIERR_EOF))
 		{
-			erreur("Erreur d'accès au message suivant.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
+            error("Erreur d'accès au message suivant.", standardError, pPatho->lastError, pContexte->GetMainWindow()->GetHandle());
 			return;
 		}
 		if (pbContinuer)
@@ -4282,7 +4279,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::CreateDatabaseFlechies.", standardError, 0);
+    error("Exception NSEpiFlechiesDB::CreateDatabaseFlechies.", standardError, 0);
 }
 }
 
@@ -4495,7 +4492,7 @@ try
 	baseFlechies.lastError = baseFlechies.open();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return string("");
 	}
 
@@ -4503,7 +4500,7 @@ try
 
 	if ((baseFlechies.lastError != DBIERR_NONE) && (baseFlechies.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		baseFlechies.close();
 		return string("");
 	}
@@ -4512,16 +4509,16 @@ try
 	{
 		baseFlechies.lastError = baseFlechies.close();
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return string("");
 	}
 
 	baseFlechies.lastError = baseFlechies.getRecord();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return string("");
 	}
 
@@ -4529,7 +4526,7 @@ try
 
 	baseFlechies.lastError = baseFlechies.close();
 	if (baseFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if ((strlen(sLibelleTemp.c_str()) >= iLibelleLen) &&
       (string(sLibelleReq, 0, iLibelleLen) == sLibelleTemp))
@@ -4570,7 +4567,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseSOAP::getCodeLexiq.", standardError);
+    error("Exception ParseSOAP::getCodeLexiq.", standardError);
 	return string("");
 }
 }
@@ -4598,7 +4595,7 @@ try
 
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
     	*pLevel = INDBdatabaseError;
 		return false;
@@ -4613,7 +4610,7 @@ try
   //
 	if ((baseFlechies.lastError != DBIERR_NONE) && (baseFlechies.lastError != DBIERR_RECNOTFOUND) && (baseFlechies.lastError != DBIERR_EOF))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		baseFlechies.close();
 		if (pLevel)
     	*pLevel = INDBdatabaseError;
@@ -4624,7 +4621,7 @@ try
 	{
 		baseFlechies.lastError = baseFlechies.close();
 		if (baseFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
     	*pLevel = INDBnotAtAll;
 		return false;
@@ -4633,7 +4630,7 @@ try
 	baseFlechies.lastError = baseFlechies.getRecord();
 	if (baseFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
     if (pLevel)
     	*pLevel = INDBdatabaseError;
 		return false;
@@ -4643,7 +4640,7 @@ try
 
 	baseFlechies.lastError = baseFlechies.close();
 	if (baseFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, baseFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if (sLibelleTemp == sLibelleReq)
 	{
@@ -4753,7 +4750,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+    error("Exception NSEpiFlechiesDB::isInDB.", standardError);
 	return false;
 }
 }
@@ -4783,7 +4780,7 @@ try
 
   if (Flechies.lastError != DBIERR_NONE)
   {
-    erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
     return false;
   }
 
@@ -4809,7 +4806,7 @@ try
   Flechies.lastError = Flechies.chercheClef(sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
   if ((Flechies.lastError != DBIERR_NONE) && (Flechies.lastError != DBIERR_RECNOTFOUND))
   {
-    erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
     delete sLibelleReq;
     Flechies.close();
     return false;
@@ -4819,7 +4816,7 @@ try
   {
     Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
     delete sLibelleReq;
     Flechies.close();
     return false;
@@ -4834,7 +4831,7 @@ try
     Flechies.lastError = Flechies.getRecord();
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
       delete sLibelleReq;
       Flechies.close();
       return false;
@@ -4858,7 +4855,7 @@ try
       Flechies.lastError = Flechies.precedent(dbiREADLOCK);
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
         delete sLibelleReq;
         Flechies.close();
         return false;
@@ -4867,7 +4864,7 @@ try
       Flechies.lastError = Flechies.getRecord();
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
         delete sLibelleReq;
         Flechies.close();
         return false;
@@ -4889,7 +4886,7 @@ try
         Flechies.lastError = Flechies.suivant(dbiREADLOCK);
         if (Flechies.lastError != DBIERR_NONE)
         {
-          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+          error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
           delete sLibelleReq;
           Flechies.close();
           return false;
@@ -4898,7 +4895,7 @@ try
         Flechies.lastError = Flechies.getRecord();
         if (Flechies.lastError != DBIERR_NONE)
         {
-          erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+          error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
           delete sLibelleReq;
           Flechies.close();
           return false;
@@ -4923,7 +4920,7 @@ try
       Flechies.lastError = Flechies.suivant(dbiREADLOCK);
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
         delete sLibelleReq;
         Flechies.close();
         return false;
@@ -4932,7 +4929,7 @@ try
       Flechies.lastError = Flechies.getRecord();
       if (Flechies.lastError != DBIERR_NONE)
       {
-        erreur("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération del'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
         delete sLibelleReq;
         Flechies.close();
         return false;
@@ -4954,7 +4951,7 @@ try
 
     Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
     Flechies.close();
 
     // -----------------------------------------------------------------------
@@ -4978,7 +4975,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+  error("Exception NSEpiFlechiesDB::isInDB.", standardError);
   return false;
 }
 }
@@ -5000,7 +4997,7 @@ try
   Flechies.lastError = Flechies.open();
 	if (DBIERR_NONE != Flechies.lastError)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return sResult;
 	}
 
@@ -5013,7 +5010,7 @@ try
                                             dbiREADLOCK);
 	if ((DBIERR_NONE != Flechies.lastError) && (DBIERR_RECNOTFOUND != Flechies.lastError))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		Flechies.close();
 		return sResult;
 	}
@@ -5022,7 +5019,7 @@ try
 	{
 		Flechies.lastError = Flechies.close();
 		if (DBIERR_NONE != Flechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return sResult;
 	}
 	else
@@ -5030,7 +5027,7 @@ try
 		Flechies.lastError = Flechies.getRecord();
 		if (DBIERR_NONE != Flechies.lastError)
 		{
-			erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- erreur à la récupération de l'enregistrement", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 			Flechies.close();
 			return sResult;
 		}
@@ -5043,7 +5040,7 @@ try
 
 		Flechies.lastError = Flechies.close();
 		if (DBIERR_NONE != Flechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
     return sResult;
 	}
@@ -5054,7 +5051,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::isInDB.", standardError);
+    error("Exception NSEpiFlechiesDB::isInDB.", standardError);
 	return string("");
 }
 }
@@ -5089,7 +5086,7 @@ try
 	dbFlechies.lastError = dbFlechies.open();
 	if (dbFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return sResult;
 	}
 
@@ -5106,7 +5103,7 @@ try
 	dbFlechies.lastError = dbFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 	if ((dbFlechies.lastError != DBIERR_NONE) && (dbFlechies.lastError != DBIERR_RECNOTFOUND))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		dbFlechies.close();
 		return sResult;
 	}
@@ -5115,14 +5112,14 @@ try
 	{
 		dbFlechies.lastError = dbFlechies.close();
 		if (dbFlechies.lastError != DBIERR_NONE)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return string("");
 	}
 
 	dbFlechies.lastError = dbFlechies.getRecord();
   if (dbFlechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		dbFlechies.close();
 		return string("");
 	}
@@ -5138,7 +5135,7 @@ try
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
     	if (dbFlechies.lastError != DBIERR_BOF)
-				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+                error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 			dbFlechies.close();
 			return string("");
 		}
@@ -5146,7 +5143,7 @@ try
 		dbFlechies.lastError = dbFlechies.getRecord();
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());;
+            error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());;
 			dbFlechies.close();
 			return string("");
 		}
@@ -5162,7 +5159,7 @@ try
 			if (dbFlechies.lastError != DBIERR_NONE)
 			{
       	if (dbFlechies.lastError != DBIERR_EOF)
-					erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+                    error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 				dbFlechies.close();
         return string("");
       }
@@ -5170,7 +5167,7 @@ try
       dbFlechies.lastError = dbFlechies.getRecord();
 			if (dbFlechies.lastError != DBIERR_NONE)
 			{
-				erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+                error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 				dbFlechies.close();
 				return string("");
 			}
@@ -5187,7 +5184,7 @@ try
 		dbFlechies.lastError = dbFlechies.suivant(dbiREADLOCK);
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
       dbFlechies.close();
       return string("");
     }
@@ -5195,7 +5192,7 @@ try
 		dbFlechies.lastError = dbFlechies.getRecord();
 		if (dbFlechies.lastError != DBIERR_NONE)
 		{
-			erreur("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("flechies.db -- NSEpiFlechiesDB::getCodeLexiq(string *, char) -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 			dbFlechies.close();
       return string("");
     }
@@ -5215,7 +5212,7 @@ try
 
 	dbFlechies.lastError = dbFlechies.close();
 	if (dbFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
 	if ((sLibelleReq == sLibelleTemp) && (sResult[0] == cTypeCode))
 		return sResult;
@@ -5253,7 +5250,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::getCodeLexiq.", standardError);
+    error("Exception NSEpiFlechiesDB::getCodeLexiq.", standardError);
 	return string("");
 }
 }
@@ -5290,14 +5287,14 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 	dbFlechies.lastError = dbFlechies.open();
 	if (DBIERR_NONE != dbFlechies.lastError)
 	{
-		erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, hParentForMessages);
+        error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, dbFlechies.lastError, hParentForMessages);
 		return false;
 	}
 
   dbFlechies.lastError = dbFlechies.chercheClef(&sCode, "CODES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
 	if ((DBIERR_NONE != dbFlechies.lastError) && (DBIERR_RECNOTFOUND != dbFlechies.lastError))
 	{
-		erreur("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
+        error("flechies.db -- erreur à la recherche dans la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
 		dbFlechies.close();
 		return false;
 	}
@@ -5306,7 +5303,7 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 	{
 		dbFlechies.lastError = dbFlechies.close();
 		if (DBIERR_NONE != dbFlechies.lastError)
-			erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
+            error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
 		return true;
 	}
 
@@ -5317,7 +5314,7 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 	  dbFlechies.lastError = dbFlechies.getRecord();
     if (dbFlechies.lastError != DBIERR_NONE)
 	  {
-		  erreur("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, hParentForMessages);
+          error("flechies.db -- erreur à la récupération de l'enregistrement", standardError, dbFlechies.lastError, hParentForMessages);
       bExplore = false;
 		  break;
 	  }
@@ -5337,7 +5334,7 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
     {
       if (dbFlechies.lastError != DBIERR_EOF)
       {
-        erreur("flechies.db -- erreur au passage à l'enregistrement suivant", standardError, dbFlechies.lastError, hParentForMessages);
+        error("flechies.db -- erreur au passage à l'enregistrement suivant", standardError, dbFlechies.lastError, hParentForMessages);
         bExplore = false;
       }
     }
@@ -5345,7 +5342,7 @@ NSEpiFlechiesDB::getAllLabelsForCode(string sCode, VectString *pLabels)
 
   dbFlechies.lastError = dbFlechies.close();
 	if (dbFlechies.lastError != DBIERR_NONE)
-		erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
+        error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, dbFlechies.lastError, hParentForMessages);
 
 #else
 
@@ -5518,7 +5515,7 @@ try
   Flechies.lastError = Flechies.open();
   if (Flechies.lastError != DBIERR_NONE)
   {
-    erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		return false;
   }
   Flechies.lastError = Flechies.fin(dbiREADLOCK);
@@ -5533,7 +5530,7 @@ try
   // Erreur anormale
   if (Flechies.lastError != DBIERR_NONE)
 	{
-		erreur("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 		Flechies.close();
 		return false;
 	}
@@ -5551,7 +5548,7 @@ try
 
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur de positionnement dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
       Flechies.close();
       return false;
     }
@@ -5563,7 +5560,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiFlechiesDB::findElem.", standardError);
+    error("Exception NSEpiFlechiesDB::findElem.", standardError);
 	return false;
 }
 }
@@ -5589,7 +5586,7 @@ try
     Flechies.lastError = Flechies.open();
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur à l'ouverture du fichier flechies.db", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
       return false;
     }
 
@@ -5601,14 +5598,14 @@ try
     Flechies.lastError = Flechies.appendRecord();
     if (Flechies.lastError != DBIERR_NONE)
     {
-      erreur("flechies.db -- Erreur à l'insertion du message dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur à l'insertion du message dans la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
       Flechies.close();
       return false;
     }
 
     Flechies.lastError = Flechies.close();
     if (Flechies.lastError != DBIERR_NONE)
-      erreur("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
+      error("flechies.db -- Erreur de fermeture de la base flechies.db.", standardError, Flechies.lastError, pContexte->GetMainWindow()->GetHandle());
 
     return true;
   }
@@ -5617,7 +5614,7 @@ try
 }
 catch (...)
 {
-		erreur("Exception NSEpiFlechiesDB::rempliDatabaseFlechies.", standardError);
+        error("Exception NSEpiFlechiesDB::rempliDatabaseFlechies.", standardError);
 		return false;
 }
 }
@@ -5674,7 +5671,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception ParseElemArray ctor.", standardError);
+    error("Exception ParseElemArray ctor.", standardError);
 }
 }
 
@@ -5763,7 +5760,7 @@ try
 }
 catch (...)
 {
-		erreur("Exception NSEpiClassifDB ctor.", standardError);
+        error("Exception NSEpiClassifDB ctor.", standardError);
 }
 }
 
@@ -5808,7 +5805,7 @@ try
 		pClassif->lastError = pClassif->open();
 		if (pClassif->lastError != DBIERR_NONE)
 		{
-				erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+                error("classif.db -- Erreur à l'ouverture du fichier.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
 				delete pClassif;
 				return;
 		}
@@ -5817,7 +5814,7 @@ try
 		inFile.open(sFileCISP.c_str());
 		if (!inFile.is_open())
 		{
-//        erreur("erreur à l'ouverture du fichier");
+//        error("erreur à l'ouverture du fichier");
 				return;
 		}
 
@@ -5859,7 +5856,7 @@ try
 												pClassif->lastError = pClassif->appendRecord();
 												if (pClassif->lastError != DBIERR_NONE)
 												{
-														erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+                                                        error("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
 														pClassif->close();
 														delete pClassif;
 														return;
@@ -5888,7 +5885,7 @@ try
 						pClassif->lastError = pClassif->appendRecord();
 						if (pClassif->lastError != DBIERR_NONE)
 						{
-								erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+                                error("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
 								pClassif->close();
 								delete pClassif;
 								return;
@@ -5897,7 +5894,7 @@ try
 		}
 		pClassif->lastError = pClassif->close();
 		if (pClassif->lastError != DBIERR_NONE)
-				erreur("classif.db -- erreur de fermeture de la base", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
+                error("classif.db -- erreur de fermeture de la base", standardError, pClassif->lastError, pContexte->GetMainWindow()->GetHandle());
 
 		delete pClassif;
 
@@ -5906,7 +5903,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::rempliClassifCISP.", standardError);
+    error("Exception NSEpiClassifDB::rempliClassifCISP.", standardError);
 }
 }
 
@@ -5928,7 +5925,7 @@ try
   Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
     return;
   }
 
@@ -5936,7 +5933,7 @@ try
   inFile.open(sFileCIM.c_str());
   if (!inFile.is_open())
   {
-    erreur("erreur à l'ouverture du fichier", standardError, 0);
+    error("erreur à l'ouverture du fichier", standardError, 0);
     return;
   }
 
@@ -6046,7 +6043,7 @@ try
           Classif.lastError = Classif.appendRecord();
           if (Classif.lastError != DBIERR_NONE)
           {
-            erreur("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+            error("classif.db -- Erreur à l'insertion de l'enregistrement dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
             Classif.close();
             return;
           }
@@ -6057,14 +6054,14 @@ try
 
   Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur de fermeture de la base", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur de fermeture de la base", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 
   inFile.close();
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::rempliClassifCIM.", standardError);
+    error("Exception NSEpiClassifDB::rempliClassifCIM.", standardError);
 }
 }
 
@@ -6142,7 +6139,7 @@ try
   Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
     return;
   }
 
@@ -6160,7 +6157,7 @@ try
       Classif.lastError = Classif.chercheClef(&cle, "", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK);
       if ((Classif.lastError != DBIERR_NONE) && (Classif.lastError != DBIERR_RECNOTFOUND))
       {
-        erreur("classif.db -- erreur à la recherche dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur à la recherche dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
         Classif.close();
         return;
       }
@@ -6169,7 +6166,7 @@ try
       Classif.lastError = Classif.getRecord();
       if (Classif.lastError != DBIERR_NONE)
       {
-        erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+        error("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
         Classif.close();
         return;
       }
@@ -6197,7 +6194,7 @@ try
         Classif.lastError = Classif.suivant(dbiREADLOCK);
         if (Classif.lastError != DBIERR_NONE)
         {
-          erreur("classif.db -- erreur d'accès au message suivant.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+          error("classif.db -- erreur d'accès au message suivant.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
           Classif.close();
           return;
         }
@@ -6206,7 +6203,7 @@ try
         Classif.lastError = Classif.getRecord();
         if (Classif.lastError != DBIERR_NONE)
         {
-          erreur("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+          error("classif.db -- erreur de lecture dans la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
           Classif.close();
           return;
         }
@@ -6217,12 +6214,12 @@ try
   // on ferme la base
   Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
+    error("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
 }
 }
 
@@ -6238,7 +6235,7 @@ try
   Classif.lastError = Classif.open();
   if (Classif.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- Erreur à l'ouverture du fichier.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
     return false;
   }
 
@@ -6265,7 +6262,7 @@ try
   Classif.lastError = Classif.getRecord();
   if (DBIERR_NONE != Classif.lastError)
   {
-  	erreur("Erreur à la lecture d'une fiche Classif.", standardError, Classif.lastError);
+    error("Erreur à la lecture d'une fiche Classif.", standardError, Classif.lastError);
     Classif.close();
     return false;
   }
@@ -6275,13 +6272,13 @@ try
   // on ferme la base
   Classif.lastError = Classif.close();
   if (Classif.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur à la fermeture de la base.", standardError, Classif.lastError, pContexte->GetMainWindow()->GetHandle());
 #endif
   return true;
 }
 catch (...)
 {
-	erreur("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
+    error("Exception NSEpiClassifDB::searchDomainInClassif.", standardError);
   return false;
 }
 }

@@ -519,7 +519,7 @@ NSCV::ConvertirUnite(double* pValeur, string sResultat, string sUnite, string sL
 	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Le fichier de conversion semble endommagé.", standardError, lastError);
+		error("Le fichier de conversion semble endommagé.", standardError, lastError);
     return false;
 	}
 #endif

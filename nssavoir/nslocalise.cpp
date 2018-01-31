@@ -357,7 +357,7 @@ try
   	string sErrorText = pSuper->getText("fileErrors", "errorOpeningOutputFile");
     sErrorText += string(" (") + sFileName + string(")");
     pSuper->trace(&sErrorText, 1, NSSuper::trError);
-    erreur(sErrorText.c_str(), standardError);
+    error(sErrorText.c_str(), standardError);
     return false;
   }
 
@@ -382,7 +382,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception NSLocalChapterArray::writeToFile.", standardError);
+  error("Exception NSLocalChapterArray::writeToFile.", standardError);
   return false;
 }
 }

@@ -116,7 +116,7 @@ NSDico::Prend()
         string sErrorText = pContexte->getSuperviseur()->getText("lexiqueErrors", "errorOpeningLexique");
       sErrorText += string(" (") + _sUserLang + string(")");
       pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError);
-            erreur(sErrorText.c_str(), standardError, _pPatho->lastError);
+            error(sErrorText.c_str(), standardError, _pPatho->lastError);
 
             delete _pPatho;
       _pPatho = (NSPatholog*) 0;
@@ -139,7 +139,7 @@ NSDico::Prend()
             string sErrorText = pContexte->getSuperviseur()->getText("lexiqueErrors", "errorOpeningDrugsLexique");
       sErrorText += string(" (") + _sUserLang + string(")");
       pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError);
-            erreur(sErrorText.c_str(), standardError, _pPatho->lastError);
+            error(sErrorText.c_str(), standardError, _pPatho->lastError);
 
             delete _pLexiMed;
       _pLexiMed = (NSLexiMed*) 0;
@@ -287,7 +287,7 @@ NSDico::donnePatholog(string sLang, string* pCodeLexique)
 	{
   	string sErreur = string("Erreur à l'ouverture du lexique + (Langue = ")
                                 + _sLangBis + string(")");
-    erreur(sErreur.c_str(), standardError, _pPathoBis->lastError);
+    error(sErreur.c_str(), standardError, _pPathoBis->lastError);
 
     delete _pPathoBis;
     _pPathoBis = (NSPatholog*) 0;
@@ -301,7 +301,7 @@ NSDico::donnePatholog(string sLang, string* pCodeLexique)
 	{
   	string sErreur = string("Erreur à l'ouverture de la base des médicaments + (Langue = ")
                                 + _sLangBis + string(")");
-    erreur(sErreur.c_str(), standardError, _pLexiMedBis->lastError);
+    error(sErreur.c_str(), standardError, _pLexiMedBis->lastError);
 
     delete _pLexiMedBis;
     _pLexiMedBis = (NSLexiMed*) 0;
@@ -848,7 +848,7 @@ try
       pBBCommeFiche->lastError = pBBCommeFiche->open();
       if (pBBCommeFiche->lastError != DBIERR_NONE)
       {
-        erreur("Erreur à l'ouverture du Fil guide.", standardError, pBBCommeFiche->lastError);
+        error("Erreur à l'ouverture du Fil guide.", standardError, pBBCommeFiche->lastError);
         delete pBBFiche;
         pBBFiche = 0;
         return false;
@@ -861,7 +861,7 @@ try
       pBBCommeDecode->lastError = pBBCommeDecode->open();
       if (pBBCommeDecode->lastError != DBIERR_NONE)
       {
-        erreur("Erreur à l'ouverture du Décodeur.", standardError, pBBCommeDecode->lastError);
+        error("Erreur à l'ouverture du Décodeur.", standardError, pBBCommeDecode->lastError);
         delete pBBFiche;
         pBBFiche = 0;
         return false;
@@ -871,7 +871,7 @@ try
 }
 catch (...)
 {
-    erreur("NSFilGuide::Prend : ouverture de la table 1.", standardError, 0);
+    error("NSFilGuide::Prend : ouverture de la table 1.", standardError, 0);
   return false;
 }
 
@@ -884,7 +884,7 @@ try
   pSavoir->lastError = pSavoir->open();
   if (pSavoir->lastError != DBIERR_NONE)
   {
-    erreur("Erreur à l'ouverture du réseau sémantique : pSavoir", standardError, pSavoir->lastError);
+    error("Erreur à l'ouverture du réseau sémantique : pSavoir", standardError, pSavoir->lastError);
     delete pSavoir;
     pSavoir = 0;
     return false;
@@ -892,7 +892,7 @@ try
 }
 catch (...)
 {
-    erreur("NSFilGuide::Prend : ouverture de la table 2.", standardError, 0);
+    error("NSFilGuide::Prend : ouverture de la table 2.", standardError, 0);
   return false;
 }
     return true;
@@ -944,7 +944,7 @@ void NSFilGuide::chercheCheminEgaliteStricte(string* pCheminPere,
         pBBFiche->lastError = pBBFiche->getRecord();
         if (pBBFiche->lastError != DBIERR_NONE)
         {
-          erreur("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
+          error("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
           (*iter)->trouve = false;
           return;
         }
@@ -1100,7 +1100,7 @@ try
   DBIResult lastError = DbiGetCursorProps(pSavoir->PrendCurseur(), curProps);
   if (lastError != DBIERR_NONE)
   {
-  	erreur("Le fichier nssavoir.db est inutilisable.", standardError, lastError);
+  	error("Le fichier nssavoir.db est inutilisable.", standardError, lastError);
     return;
   }
     Byte* pIndexRec = new Byte[curProps.iRecBufSize];
@@ -1136,7 +1136,7 @@ try
       pEquivalentItem->push_back(new SousCheminNonVide );
     }
     if (ErrDBI != DBIERR_RECNOTFOUND)
-        erreur("Le fichier nssavoir.db est inutilisable.", standardError, ErrDBI);
+        error("Le fichier nssavoir.db est inutilisable.", standardError, ErrDBI);
 
     delete[] pIndexRec;
     return;
@@ -1145,7 +1145,7 @@ try
     pSavoir->lastError = pSavoir->getRecord();
 	if (pSavoir->lastError != DBIERR_NONE)
 	{
-    erreur("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
+    error("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
     delete[] pIndexRec;
     return;
 	}
@@ -1180,7 +1180,7 @@ try
         pSavoir->lastError = pSavoir->getRecord();
       if (pSavoir->lastError != DBIERR_NONE)
       {
-        erreur("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
+        error("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
         delete[] pIndexRec;
         return;
       }
@@ -1240,7 +1240,7 @@ try
             for (; (iter != pEquivalentItem->end()) && (**iter != sIndex); iter++);
             if (iter == pEquivalentItem->end())
             {
-              erreur("Erreur lors du redimensionnement : le noeud d'insertion n'est plus présent.", standardError, 0);
+              error("Erreur lors du redimensionnement : le noeud d'insertion n'est plus présent.", standardError, 0);
               return;
             }
           }
@@ -1261,7 +1261,7 @@ try
             pSavoir->lastError = pSavoir->getRecord();
             if (pSavoir->lastError != DBIERR_NONE)
             {
-              erreur("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
+              error("Le fichier nssavoir.db est inutilisable.", standardError, pSavoir->lastError);
               delete[] pIndexRec;
               return;
             }
@@ -1270,7 +1270,7 @@ try
       }
       else if (ErrDBI != DBIERR_RECNOTFOUND)
       {
-        erreur("Le fichier nssavoir.db est inutilisable.", standardError, ErrDBI);
+        error("Le fichier nssavoir.db est inutilisable.", standardError, ErrDBI);
         delete[] pIndexRec;
         return;
       }
@@ -1290,7 +1290,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSFilGuide::chercheEquivalent", standardError, 0);
+	error("Exception NSFilGuide::chercheEquivalent", standardError, 0);
   return;
 }
 }
@@ -1352,7 +1352,7 @@ try
   else
   {
     string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector());
-    erreur(sErreurMsg.c_str(), standardError);
+    error(sErreurMsg.c_str(), standardError);
 
     if ((string("ES") == sLien) && (string("FLECHE") == sensCle))
     {
@@ -1454,7 +1454,7 @@ try
             for (; (iter != pEquivalentItem->end()) && (**iter != sIndex); iter++);
             if (iter == pEquivalentItem->end())
             {
-              erreur("Erreur lors du redimensionnement : le noeud d'insertion n'est plus présent.", standardError);
+              error("Erreur lors du redimensionnement : le noeud d'insertion n'est plus présent.", standardError);
               return;
             }
           }
@@ -1493,7 +1493,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::chercheEquivalent", standardError);
+    error("Exception NSFilGuide::chercheEquivalent", standardError);
   return;
 }
 }
@@ -2035,7 +2035,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::testeEgaliteChaineCible", standardError);
+    error("Exception NSFilGuide::testeEgaliteChaineCible", standardError);
   return;
 }
 }
@@ -2082,14 +2082,14 @@ try
     {
         for( iter = pVecteurSelonCritere->begin(); iter != pVecteurSelonCritere->end(); iter++)
         (*iter)->trouve = false;
-      erreur("Le fichier des guides semble vide.", standardError, pBBFiche->lastError);
+      error("Le fichier des guides semble vide.", standardError, pBBFiche->lastError);
       return;
     }
 	}
     pBBFiche->lastError = pBBFiche->getRecord();
 	if (pBBFiche->lastError != DBIERR_NONE)
 	{
-		erreur("Le fichier nsguides.db inutilisable.", standardError, pBBFiche->lastError);
+		error("Le fichier nsguides.db inutilisable.", standardError, pBBFiche->lastError);
     for (iter = pVecteurSelonCritere->begin(); iter != pVecteurSelonCritere->end(); iter++)
         (*iter)->trouve = false;
     return;
@@ -2230,7 +2230,7 @@ try
         pBBFiche->lastError = pBBFiche->getRecord();
         if (pBBFiche->lastError != DBIERR_NONE)
         {
-            erreur("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
+            error("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
           pBBFiche->detruireBookMarks(2);
           return;
         }
@@ -2328,7 +2328,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::chercheCheminReseau", standardError, 0);
+    error("Exception NSFilGuide::chercheCheminReseau", standardError, 0);
 }
 #endif
 }
@@ -3008,7 +3008,7 @@ try
     pBBFiche->lastError = pBBFiche->getRecord();
     if (pBBFiche->lastError != DBIERR_NONE)
   	{
-        erreur("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
+        error("Le fichier de script est inutilisable (guides.db).", standardError, pBBFiche->lastError);
         return false;
 		}
 	}
@@ -3019,7 +3019,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::RechercheFicheSuivante", standardError, 0);
+    error("Exception NSFilGuide::RechercheFicheSuivante", standardError, 0);
     return false;
 }
 #else
@@ -3226,7 +3226,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::VraiOuFaux", standardError);
+    error("Exception NSFilGuide::VraiOuFaux", standardError);
     return false;
 }
 }
@@ -3319,7 +3319,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::TousLesVrais", standardError);
+    error("Exception NSFilGuide::TousLesVrais", standardError);
     return;
 }
 }
@@ -3373,7 +3373,7 @@ try
   DBIResult lastError = DbiGetCursorProps(pSavoir->PrendCurseur(), curProps);
   if (lastError != DBIERR_NONE)
   {
-    erreur("Le fichier nssavoir.db inutilisable.", standardError, lastError);
+    error("Le fichier nssavoir.db inutilisable.", standardError, lastError);
     return "";
   }
   Byte* pIndex = new Byte[curProps.iRecBufSize];
@@ -3394,7 +3394,7 @@ try
   pSavoir->lastError = pSavoir->getRecord();
   if (pSavoir->lastError != DBIERR_NONE)
   {
-    erreur("Le fichier nssavoir.db inutilisable.", standardError, pSavoir->lastError);
+    error("Le fichier nssavoir.db inutilisable.", standardError, pSavoir->lastError);
     delete[] pIndex;
     return "";
   }
@@ -3404,7 +3404,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSFilGuide::chercheQualifiant", standardError, 0);
+    error("Exception NSFilGuide::chercheQualifiant", standardError, 0);
   return "";
 }
 #else

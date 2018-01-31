@@ -103,7 +103,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception à la création de l'objet de décodage.", standardError);
+  error("Exception à la création de l'objet de décodage.", standardError);
 }
 }
 
@@ -130,7 +130,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception à la création de l'objet de décodage.", standardError);
+  error("Exception à la création de l'objet de décodage.", standardError);
 }
 }
 
@@ -603,7 +603,7 @@ decodageBase::getCIM10(NSCim10Info* pCimInfo, NSCim10* pCim)
 		if (pCim10->lastError != DBIERR_NONE)
 		{
     	Erreur = pCim10->lastError;
-			erreur("Erreur à l'ouverture du fichier CIM10.", standardError, pCim10->lastError);
+            error("Erreur à l'ouverture du fichier CIM10.", standardError, pCim10->lastError);
 			delete pCim10;
 			return Erreur;
     }
@@ -619,7 +619,7 @@ decodageBase::getCIM10(NSCim10Info* pCimInfo, NSCim10* pCim)
 	if (pCim10->lastError != DBIERR_NONE)
 	{
   	Erreur = pCim10->lastError;
-		erreur("Erreur à la recherche du code CIM10.", standardError, pCim10->lastError);
+        error("Erreur à la recherche du code CIM10.", standardError, pCim10->lastError);
 		if (bOuvreFerme)
     {
     	pCim10->close();
@@ -631,7 +631,7 @@ decodageBase::getCIM10(NSCim10Info* pCimInfo, NSCim10* pCim)
 	if (pCim10->lastError != DBIERR_NONE)
 	{
   	Erreur = pCim10->lastError;
-		erreur("Erreur à la lecture du code CIM10.", standardError, pCim10->lastError);
+        error("Erreur à la lecture du code CIM10.", standardError, pCim10->lastError);
 		if (bOuvreFerme)
     {
     	pCim10->close();
@@ -2649,7 +2649,7 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
   DBcurseur.lastError = DBcurseur.open();
   if (DBcurseur.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- Erreur à l'ouverture du fichier.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- Erreur à l'ouverture du fichier.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
     return;
   }
 
@@ -2665,7 +2665,7 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
   if ((DBcurseur.lastError != DBIERR_NONE) &&
       (DBcurseur.lastError != DBIERR_RECNOTFOUND))
   {
-    erreur("classif.db -- erreur à la recherche dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur à la recherche dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
     DBcurseur.close();
     return;
   }
@@ -2674,7 +2674,7 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
   DBcurseur.lastError = DBcurseur.getRecord();
   if (DBcurseur.lastError != DBIERR_NONE)
   {
-    erreur("classif.db -- erreur de lecture dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur de lecture dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
     DBcurseur.close();
     return;
   }
@@ -2687,7 +2687,7 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
   // on ferme la base
   DBcurseur.lastError = DBcurseur.close();
   if (DBcurseur.lastError != DBIERR_NONE)
-    erreur("classif.db -- erreur à la fermeture de la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+    error("classif.db -- erreur à la fermeture de la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
 
   *pMessage = sLibelle;
 #endif

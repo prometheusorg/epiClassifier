@@ -245,7 +245,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurEn::classeTout", standardError);
+	error("Exception NSGenerateurEn::classeTout", standardError);
 }
 }
 

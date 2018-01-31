@@ -858,7 +858,7 @@ NSPatholog::executeQuery(string sQuery, bool bVerbose)
   else if (bVerbose)
   {
     string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector());
-    erreur(sErreurMsg.c_str(), standardError);
+    error(sErreurMsg.c_str(), standardError);
     bSucces = false;
   }
 
@@ -886,7 +886,7 @@ NSPatholog::trouvePathologData(string* pCode, NSPathologData* pData, bool affich
     if (afficheErreur)
     {
     	string sErreurMsg = string("Erreur à la recherche du code [") + *pCode + string("]");
-			erreur(sErreurMsg.c_str(), standardError, lastError);
+            error(sErreurMsg.c_str(), standardError, lastError);
     }
 		return false;
 	}
@@ -894,7 +894,7 @@ NSPatholog::trouvePathologData(string* pCode, NSPathologData* pData, bool affich
 	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la lecture du lexique.", standardError, lastError);
+        error("Erreur à la lecture du lexique.", standardError, lastError);
 		return false;
 	}
 
@@ -943,7 +943,7 @@ NSPatholog::trouveCode(string* pCode, DBISearchCond searchMode, DBILockType Bloc
     if (bErrMessage)
     {
       sprintf(msg, "Erreur à la recherche du code : [%s]", sCode.c_str());
-		  erreur(msg, standardError, lastError);
+          error(msg, standardError, lastError);
     }
 		return lastError;
 	}
@@ -951,7 +951,7 @@ NSPatholog::trouveCode(string* pCode, DBISearchCond searchMode, DBILockType Bloc
 	if (lastError != DBIERR_NONE)
 	{
     if (bErrMessage)
-		  erreur("Erreur à la lecture du lexique.", standardError, lastError);
+          error("Erreur à la lecture du lexique.", standardError, lastError);
 		return lastError;
 	}
   return (lastError);
@@ -984,14 +984,14 @@ NSPatholog::trouveLibelle(string* pLibelle, DBISearchCond searchMode, DBILockTyp
   lastError = chercheClef((unsigned char *)pLibelle->c_str(), "", 0, searchMode, Blocage);
   if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la recherche de l'ammorce.", standardError, lastError);
+        error("Erreur à la recherche de l'ammorce.", standardError, lastError);
 		return lastError;
 	}
 
 	lastError = getRecord();
 	if (lastError != DBIERR_NONE)
 	{
-		erreur("Erreur à la lecture du lexique.", standardError, lastError);
+        error("Erreur à la lecture du lexique.", standardError, lastError);
 		return lastError;
 	}
   return (lastError);
@@ -1390,7 +1390,7 @@ NSSavoir::executeQuery(string sQuery, bool bVerbose)
   else if (bVerbose)
   {
     string sErreurMsg = string("Error when fetching row for query [") + sQuery + string("] -> ") + mysql_error(_pSuper->getDatabaseManager()->getConnector());
-    erreur(sErreurMsg.c_str(), standardError);
+    error(sErreurMsg.c_str(), standardError);
     bSucces = false;
   }
 

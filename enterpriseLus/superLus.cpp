@@ -103,7 +103,7 @@ NSSuper::NSSuper(short sStatus)
     }
     catch (...)
     {
-        erreur("Exception NSSuper ctor.", standardError);
+        error("Exception NSSuper ctor.", standardError);
     }
 }
 
@@ -231,7 +231,7 @@ NSSuper::trace(string pTracePtr[], int nbString, TRACETYPE iTraceLevel)
     }
     catch (...)
     {
-        erreur("Exception NSSuper::trace.", standardError);
+        error("Exception NSSuper::trace.", standardError);
     }
 }
 
@@ -409,7 +409,7 @@ bool NSSuper::InitDatabase()
     }
     catch (...)
     {
-        erreur("Exception Supervisor::InitDatabase.", standardError);
+        error("Exception Supervisor::InitDatabase.", standardError);
         return false;
     }
 }
@@ -481,7 +481,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception Supervisor::creePilot.", standardError);
+  error("Exception Supervisor::creePilot.", standardError);
   return;
 }
 */
@@ -816,7 +816,7 @@ NSContexte::BbkAskUser(std::string sArchetype, int iTypeArc)
     }
     catch (...)
     {
-        erreur("Exception Supervisor::BbkAskUser.", standardError);
+        error("Exception Supervisor::BbkAskUser.", standardError);
         return false;
     }
 }
@@ -848,7 +848,7 @@ NSContexte::bbkToDo(int iTypeArc, std::string ssWhatToDo, std::string ssParam1, 
     }
     catch (...)
     {
-        erreur("Exception Supervisor::bbkToDo.", standardError);
+        error("Exception Supervisor::bbkToDo.", standardError);
         return false;
     }
 }
@@ -869,7 +869,7 @@ NSContexte::BbkShowReferential(std::string sReferential)
     }
     catch (...)
     {
-        erreur("Exception Supervisor::BbkShowReferential.", standardError);
+        error("Exception Supervisor::BbkShowReferential.", standardError);
         return false;
     }
 }
@@ -1034,7 +1034,7 @@ NSContexte::Ob1AskUser(BB1BBInterfaceForKs* pKsDesc)
     }
     catch (...)
     {
-        erreur("Exception NSContexte::Ob1AskUser.", standardError);
+        error("Exception NSContexte::Ob1AskUser.", standardError);
         return false;
     }
 }

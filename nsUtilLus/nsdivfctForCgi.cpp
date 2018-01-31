@@ -227,13 +227,13 @@ char pseumaj(char lettre)
 }
 
 // -----------------------------------------------------------------------------
-// Function    : erreur(Pchar texte, int gravite, Retcode ErrPx)
+// Function    : error(Pchar texte, int gravite, Retcode ErrPx)
 // Arguments   :	texte   -> texte affiché en cas d'erreur.
 //            		gravité -> niveau de gravité.
 // Description : Affiche les messages d'erreur et sort si le niveau de gravité est 1.
 // Returns     : Retourne 0 si le problème rencontré est surmontable.
 // -----------------------------------------------------------------------------
-int erreur(const char *texte, ERRORTYPE iSeverity)
+int error(const char *texte, ERRORTYPE iSeverity)
 {
     // NOTE : Si parent == NULL (cas par défaut)
     // La MessageBox ne sera pas modale !!!
@@ -588,7 +588,7 @@ VectString& VectString::operator=(VectString src)
     } // try
     catch (...)
     {
-        erreur("Exception VectString::operator=", standardError);}
+        error("Exception VectString::operator=", standardError);}
     return (*this);
 }
 
@@ -602,7 +602,7 @@ VectString::VectString(VectString& src)
     } // try
     catch (...)
     {
-        erreur("Exception VectString copy ctor.", standardError);
+        error("Exception VectString copy ctor.", standardError);
     }
 }
 
@@ -674,7 +674,7 @@ ClasseStringVector& ClasseStringVector::operator=(ClasseStringVector src)
     } // try
     catch (...)
     {
-        erreur("Exception ClasseStringVector = operator.", standardError);
+        error("Exception ClasseStringVector = operator.", standardError);
     }
     return (*this);
 }
@@ -689,7 +689,7 @@ ClasseStringVector::ClasseStringVector(ClasseStringVector& src)
     } // try
     catch (...)
     {
-        erreur("Exception ClasseStringVector copy ctor.", standardError);
+        error("Exception ClasseStringVector copy ctor.", standardError);
     }
 }
 // -----------------------------------------------------------------------------
@@ -872,7 +872,7 @@ void DecomposeChaine(string* pChaine, ClasseStringVector* pVect, string separate
     } // try
     catch (...)
     {
-        erreur("Exception DecomposeChaine.", standardError);
+        error("Exception DecomposeChaine.", standardError);
     }
 }
 

@@ -100,7 +100,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::classeTout", standardError);
+	error("Exception NSGenerateurFr::classeTout", standardError);
 }
 }
 
@@ -1015,7 +1015,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::generePhrase.", standardError);
+	error("Exception NSGenerateurFr::generePhrase.", standardError);
 	return false;
 }
 }

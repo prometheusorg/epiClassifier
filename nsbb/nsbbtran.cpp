@@ -258,7 +258,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception (new NSTransferInfo 1).", standardError, 0);
+	error("Exception (new NSTransferInfo 1).", standardError, 0);
 }
 }
 
@@ -278,7 +278,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception (new NSTransferInfo 2).", standardError, 0);
+	error("Exception (new NSTransferInfo 2).", standardError, 0);
 }
 }
 
@@ -412,7 +412,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception (new NSTransferInfo copie).", standardError, 0);
+	error("Exception (new NSTransferInfo copie).", standardError, 0);
 }
 }
 
@@ -466,7 +466,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception (new NSTransferArray copie).", standardError, 0);
+	error("Exception (new NSTransferArray copie).", standardError, 0);
 }
 }
 

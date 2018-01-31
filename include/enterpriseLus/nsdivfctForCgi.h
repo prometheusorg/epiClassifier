@@ -124,7 +124,7 @@ enum GRAPHELEMTYPE { isIncorrectID = 0, isCollectiveID, isGroupID, isLocalID, is
 	BOOL   _export ptrInit(unsigned char **strPtr, const unsigned char *strInit);
 
   // fonctions de gestion d'erreur
-  int 	 _export erreur(const char *texte, ERRORTYPE gravite);
+  int 	 _export error(const char *texte, ERRORTYPE gravite);
   bool   _export getModeFileErr();
   void   _export setModeFileErr(bool bMode);
   void   _export fileError(string sError);
@@ -362,7 +362,7 @@ enum GRAPHELEMTYPE { isIncorrectID = 0, isCollectiveID, isGroupID, isLocalID, is
 	BOOL   ptrInit(char **strPtr, const char *strInit);
 	BOOL   ptrInit(unsigned char **strPtr, const unsigned char *strInit);
 
-  int 	 erreur(const char *texte, ERRORTYPE gravite);
+  int 	 error(const char *texte, ERRORTYPE gravite);
 
   bool   getModeFileErr();
   void   setModeFileErr(bool bMode);

@@ -69,7 +69,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseur copy ctor.", standardError);
+	error("Exception NSPhraseur copy ctor.", standardError);
 }
 }
 
@@ -120,7 +120,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseur = operator.", standardError);
+	error("Exception NSPhraseur = operator.", standardError);
 	return *this;
 }
 }
@@ -272,7 +272,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseur::initParentheses.", standardError);
+	error("Exception NSPhraseur::initParentheses.", standardError);
 }
 }
 
@@ -288,7 +288,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseur::initDeuxPoints.", standardError);
+	error("Exception NSPhraseur::initDeuxPoints.", standardError);
 }
 }
 
@@ -389,7 +389,7 @@ try
 }
 catch (...)
 {
-  erreur("Exception NSPhraseur::classeAdjectif.", standardError);
+  error("Exception NSPhraseur::classeAdjectif.", standardError);
 }
 }
 
@@ -463,7 +463,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseMot copy ctor.", standardError);
+	error("Exception NSPhraseMot copy ctor.", standardError);
 }
 }
 
@@ -560,7 +560,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseMot = operator.", standardError);
+	error("Exception NSPhraseMot = operator.", standardError);
 	return *this;
 }
 }
@@ -609,7 +609,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseMot::initComplement.", standardError);
+	error("Exception NSPhraseMot::initComplement.", standardError);
 }
 }
 
@@ -1088,7 +1088,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseMotArray copy ctor.", standardError);
+	error("Exception NSPhraseMotArray copy ctor.", standardError);
 }
 }
 
@@ -1159,7 +1159,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSPhraseMotArray = operator.", standardError);
+	error("Exception NSPhraseMotArray = operator.", standardError);
 	return *this;
 }
 }
@@ -1287,7 +1287,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NsProposition copy ctor.", standardError);
+	error("Exception NsProposition copy ctor.", standardError);
 }
 }
 
@@ -1366,7 +1366,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NsProposition = operator.", standardError);
+	error("Exception NsProposition = operator.", standardError);
 	return *this;
 }
 }
@@ -1391,7 +1391,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSPropositionArray copy ctor.", 0, 0);
+    error("Exception NSPropositionArray copy ctor.", 0, 0);
 }
 }
 
@@ -1437,7 +1437,7 @@ try
 }
 catch (...)
 {
-    erreur("Exception NSPropositionArray = operator.", 0, 0);
+    error("Exception NSPropositionArray = operator.", 0, 0);
     return *this;
 }
 } */

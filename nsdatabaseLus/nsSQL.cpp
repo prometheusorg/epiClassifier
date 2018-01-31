@@ -266,7 +266,7 @@ MYSQL_RES * ontologyBaseManager::executeQuery(const string sQuery,
     if (bVerbose)
     {
         string sErreurMsg = string("Error for query [") + sQuery + string("] -> ") + sMysqlErrorMessage;
-        erreur(sErreurMsg.c_str(), standardError);
+        error(sErreurMsg.c_str(), standardError);
     }
 
     return (MYSQL_RES *) 0;

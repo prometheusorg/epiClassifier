@@ -268,7 +268,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateurFr::generePhrase.", standardError);
+    error("Exception NSGenerateurFr::generePhrase.", standardError);
   return false;
 }
 }
@@ -290,7 +290,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateur::ajouteMot.", standardError);
+    error("Exception NSGenerateur::ajouteMot.", standardError);
 	return false;
 }
 }
@@ -331,7 +331,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenerateur::ajouteCopieMot.", standardError);
+    error("Exception NSGenerateur::ajouteCopieMot.", standardError);
 	return false;
 }
 }
@@ -630,7 +630,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenComplement copy ctor.", standardError);
+    error("Exception NSGenComplement copy ctor.", standardError);
 }
 }
 
@@ -891,7 +891,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray copy ctor.", standardError);
+    error("Exception NSGenereCompArray copy ctor.", standardError);
 }
 }
 
@@ -1008,7 +1008,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray::classeTout", standardError);
+    error("Exception NSGenereCompArray::classeTout", standardError);
 	return;
 }
 }
@@ -1060,7 +1060,7 @@ try
 }
 catch (...)
 {
-	erreur("Exception NSGenereCompArray::operator=", standardError);
+    error("Exception NSGenereCompArray::operator=", standardError);
 	return *this;
 }
 }
