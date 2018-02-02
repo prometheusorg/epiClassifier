@@ -24,48 +24,68 @@
 #  define _EPISODUS __import
 # endif
 
-// Taille des champs du fichier CLASSER
-// Criteres d'inclusion et d'exclusion de classification
+// `classer` (En classify) table: varchar and char column sizes
+// classification's inclusion and exclusion criteria
 
-// NAUTILUS code
+// CODE varchar(5)
 # define CLASSER_CODE_LEN 		       5
 
-// Classification
+// CLASSIFICATION varchar(5)
 # define CLASSER_CLASSIF_LEN 		     5
 
-// O: obligatory P: possible I: impossible
-// O: obligatoire P: possible I: interdit
+// CRITERE (En CRITERIA) char(1)
+// En O: obligatory P: possible I: impossible
+// Fr O: obligatoire P: possible I: interdit
 # define CLASSER_CRITERE_LEN  	     1
-# define CLASSER_RELATION_LEN  	    20  // éléments de classification
 
-// Indice des champs du fichier CLASSER
+// RELATION varchar(20)
+// classification elements
+# define CLASSER_RELATION_LEN  	    20
+
+// Column indexes of table `classer`
 # define CLASSER_CODE_FIELD  		     1
 # define CLASSER_CLASSIF_FIELD 		   2
 # define CLASSER_CRITERE_FIELD  		 3
 # define CLASSER_RELATION_FIELD  	   4
 
-// Taille des champs du fichier CLASSIF
-// Classifications : code, libelle, chapitre
-# define CLASSIF_CLASSIF_LEN 		     5  // Classification
-# define CLASSIF_CODE_LEN 		      10  // Code NAUTILUS
-# define CLASSIF_LIBELLE_LEN 	     200  // Classification
-# define CLASSIF_CHAPITRE_LEN  	     4  // Obligatoire Possible Interdit
+/* `classif` (classification) table: varchar column sizes */
+
+// CLASSIF (name of classification) varchar(5)
+// 66391
+// 6ACRO: BI-RADS (Breast Imaging-Reporting and Data System) of the ACR
+// 6CIMA: ICD-10
+// 6CISP: ICPC-2
+// 6MGDC:
+// 6MGIT:
+// 6MGRE:
+// 6NSCP: Professions et catégories socioprofessionnelles: French classification
+//        of occupations (labour and jobs)
+# define CLASSIF_CLASSIF_LEN 		     5
+
+// CODE varchar(10)
+# define CLASSIF_CODE_LEN 		      10
+
+// LIBELLE (En label) varchar(200)
+# define CLASSIF_LIBELLE_LEN 	     200
+
+// CHAP (chapter) varchar(4)
+# define CLASSIF_CHAPITRE_LEN  	     4
 
 
-// Indice des champs du fichier CLASSER
+// Column indexes of table `classif`
 # define CLASSIF_CLASSIF_FIELD 		   1
 # define CLASSIF_CODE_FIELD 		     2
 # define CLASSIF_LIBELLE_FIELD 	     3
 # define CLASSIF_CHAPITRE_FIELD  	   4
 
-// Taille des champs du fichier THESAURUS
+/* `clinical_labels` table: varchar column sizes */
 # define THESAURUS_ORIGINE_LEN 		    1
 # define THESAURUS_IBUI_LEN 		    	8
 # define THESAURUS_LABEL_LEN 		    255
 # define THESAURUS_ICPC2_LEN 	       10
 # define THESAURUS_ICD10_LEN  		   10
 
-// Indice des champs du fichier THESAURUS
+// Column indexes of table `clinical_labels`
 #ifndef _ENTERPRISE_DLL
 
 # define THESAURUS_IBUI_FIELD					1
@@ -108,13 +128,13 @@
 
 // -----------------------------------------------------------------------------
 //
-// Table CLASSER.DB
+// Table CLASSER
 //
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
-// Classe NSEpiClasserData
-// Objet contenant les donnees
+// Class NSEpiClasserData
+// Objects containing data
 // -----------------------------------------------------------------------------
 #ifndef __linux__
 class _EPISODUS NSEpiClasserData
@@ -160,7 +180,7 @@ class NSEpiClasser;
 #endif
 
 // -----------------------------------------------------------------------------
-// Classe NSEpiClasserInfo  (destinee a etre stockee dans une Array)
+// Class NSEpiClasserInfo  (to be stored in an array)
 // -----------------------------------------------------------------------------
 
 class NSEpiClasserInfo
@@ -199,8 +219,8 @@ class NSEpiClasserInfo
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Classe NSEpiClasser
-// Objet derive de NSFiche servant aux acces de base de donnees
+// Class NSEpiClasser
+// Object derived from NSFiche used to access database
 // -----------------------------------------------------------------------------
 class _EPISODUS NSEpiClasser : public NSEpiClasserInfo,
                                public NSFiche
@@ -229,13 +249,13 @@ class _EPISODUS NSEpiClasser : public NSEpiClasserInfo,
 
 // -----------------------------------------------------------------------------
 //
-// Table THESAURUS.DB
+// Table clinical_labels (thesaurus)
 //
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
-// Classe NSThesaurusData
-// Objet contenant les donnees
+// Class NSThesaurusData
+// Object containing data
 // -----------------------------------------------------------------------------
 #ifndef __linux__
 class _EPISODUS NSThesaurusData
@@ -281,7 +301,7 @@ class NSThesaurus;
 #endif
 
 // -----------------------------------------------------------------------------
-// Classe NSThesaurusInfo  (destinee a etre stockee dans une Array)
+// Class NSThesaurusInfo  (to be stored in an array)
 // -----------------------------------------------------------------------------
 #ifndef __linux__
 class _EPISODUS NSThesaurusInfo
@@ -324,8 +344,8 @@ class NSThesaurusInfo
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Classe NSThesaurus
-// Objet derive de NSFiche servant aux acces de base de donnees
+// Class NSThesaurus
+// Object derived from NSFiche used to access database
 // -----------------------------------------------------------------------------
 class _EPISODUS NSThesaurus : public NSThesaurusInfo,
                               public NSFiche
@@ -352,8 +372,8 @@ class _EPISODUS NSThesaurus : public NSThesaurusInfo,
 #endif
 
 // -----------------------------------------------------------------------------
-// Classe NSEpiClassifData
-// Objet contenant les donnees
+// Class NSEpiClassifData
+// Object containing data
 // -----------------------------------------------------------------------------
 #ifndef __linux__
 class _EPISODUS NSEpiClassifData
@@ -397,11 +417,13 @@ class NSEpiClassifData
 class NSEpiClassif;
 #endif
 
-enum ICPC_CATEGORY  { IcpcUndefined = 0, IcpcSymptom, IcpcProcedure, IcpcPathology };
-enum ICPC_PATHOLOGY { IcpcUndefinedPatho = 0, IcpcInfection, IcpcNeoplasm, IcpcTraumatism, IcpcCongenital, IcpcOtherPatho };
+enum ICPC_CATEGORY  { IcpcUndefined = 0, IcpcSymptom, IcpcProcedure,
+                      IcpcPathology };
+enum ICPC_PATHOLOGY { IcpcUndefinedPatho = 0, IcpcInfection, IcpcNeoplasm,
+                      IcpcTraumatism, IcpcCongenital, IcpcOtherPatho };
 
 // -----------------------------------------------------------------------------
-// Classe NSEpiClassifInfo  (destinee a etre stockee dans une Array)
+// Class NSEpiClassifInfo  (to be stored in an array)
 // -----------------------------------------------------------------------------
 #ifndef __linux__
 class _EPISODUS NSEpiClassifInfo
@@ -499,8 +521,8 @@ class NSEpiClassifArray : public NSEpiClassifInfoVector
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Classe NSEpiClassif
-// Objet derive de NSFiche servant aux acces de base de donnees
+// Class NSEpiClassif
+// Objet derived from NSFiche used to access database
 // -----------------------------------------------------------------------------
 class _EPISODUS NSEpiClassif : public NSEpiClassifInfo, public NSFiche
 {
@@ -532,7 +554,7 @@ class _EPISODUS NSEpiClassif : public NSEpiClassifInfo, public NSFiche
 #endif
 
 // -----------------------------------------------------------------------------
-// Définition de NSCodPrestArray (Array de NSCodPrestInfo(s))
+// Definition of NSCodPrestArray (Array of NSCodPrestInfo(s))
 // -----------------------------------------------------------------------------
 /*
 typedef vector<NSCodPrestInfo *>            NSFicheCodPrestArray;
@@ -552,4 +574,3 @@ class NSCodPrestArray : public NSFicheCodPrestArray
 
 // -----------------------------------------------------------------------------
 #endif // __EPTABLES_H
-

@@ -1,8 +1,8 @@
 // -----------------------------------------------------------------------------
 //    EPTABLES.CPP
-//    NAUTILUS juillet 2001
+//    NAUTILUS 2001-07
 //
-//    Implementation des objets de base de donnees
+//    Implement database objects
 // -----------------------------------------------------------------------------
 
 #include <cstring>
@@ -1941,13 +1941,13 @@ NSEpiProbEvenInfo::operator==(const NSEpiProbEvenInfo& o)
 
 // -----------------------------------------------------------------------------
 //
-// Implémentation des méthodes NSEpiClasser
+// Implementation of NSEpiClasser methods
 //
 // -----------------------------------------------------------------------------
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiClasserData::NSEpiClasserData()
 {
@@ -1957,7 +1957,7 @@ NSEpiClasserData::NSEpiClasserData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClasserData::NSEpiClasserData(const NSEpiClasserData& rv)
 {
@@ -1969,14 +1969,14 @@ NSEpiClasserData::NSEpiClasserData(const NSEpiClasserData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiClasserData::~NSEpiClasserData()
 {
 }
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// Operator =
 // -----------------------------------------------------------------------------
 NSEpiClasserData&
 NSEpiClasserData::operator=(const NSEpiClasserData& src)
@@ -1994,7 +1994,7 @@ NSEpiClasserData::operator=(const NSEpiClasserData& src)
 
 
 // -----------------------------------------------------------------------------
-// Opérateur de comparaison
+// Comparison operator
 // -----------------------------------------------------------------------------
 int
 NSEpiClasserData::operator==(const NSEpiClasserData& o)
@@ -2502,13 +2502,20 @@ void
 NSThesaurus::alimenteFiche()
 {
   char ibui[THESAURUS_IBUI_LEN + 1];
-  char labelFr[THESAURUS_LABEL_LEN + 1];  char labelNl[THESAURUS_LABEL_LEN + 1];  char icpc2[THESAURUS_ICPC2_LEN + 1];
+  char labelFr[THESAURUS_LABEL_LEN + 1];
+  char labelNl[THESAURUS_LABEL_LEN + 1];
+  char icpc2[THESAURUS_ICPC2_LEN + 1];
   char icd10[THESAURUS_ICD10_LEN + 1];
-  char icpc2_2[THESAURUS_ICPC2_LEN + 1];  char icd10_2[THESAURUS_ICD10_LEN + 1];  char icpc2_1X[THESAURUS_ICPC2_LEN + 1];
+  char icpc2_2[THESAURUS_ICPC2_LEN + 1];
+  char icd10_2[THESAURUS_ICD10_LEN + 1];
+  char icpc2_1X[THESAURUS_ICPC2_LEN + 1];
   char icd10_1X[THESAURUS_ICD10_LEN + 1];
-  char icpc2_2X[THESAURUS_ICPC2_LEN + 1];  char icd10_2X[THESAURUS_ICD10_LEN + 1];
+  char icpc2_2X[THESAURUS_ICPC2_LEN + 1];
+  char icd10_2X[THESAURUS_ICD10_LEN + 1];
   char icpc2_1Y[THESAURUS_ICPC2_LEN + 1];
-  char icd10_1Y[THESAURUS_ICD10_LEN + 1];  char icpc2_2Y[THESAURUS_ICPC2_LEN + 1];  char icd10_2Y[THESAURUS_ICD10_LEN + 1];
+  char icd10_1Y[THESAURUS_ICD10_LEN + 1];
+  char icpc2_2Y[THESAURUS_ICPC2_LEN + 1];
+  char icd10_2Y[THESAURUS_ICD10_LEN + 1];
 
   alimenteChamp(ibui,			THESAURUS_IBUI_FIELD,     THESAURUS_IBUI_LEN);
   alimenteChamp(labelFr,	THESAURUS_FR_LABEL_FIELD,	THESAURUS_LABEL_LEN);
@@ -2546,8 +2553,7 @@ NSThesaurus::alimenteFiche()
 // -----------------------------------------------------------------------------
 // Transfère le contenu des valeurs de la fiche dans pRecBuff
 // -----------------------------------------------------------------------------
-void
-NSThesaurus::videFiche()
+void NSThesaurus::videFiche()
 {
   videChamp((char*)(_Donnees._ibui.c_str()),		 THESAURUS_IBUI_FIELD,     THESAURUS_IBUI_LEN);
   videChamp((char*)(_Donnees._labelFr.c_str()),	 THESAURUS_FR_LABEL_FIELD, THESAURUS_LABEL_LEN);
@@ -2569,8 +2575,7 @@ NSThesaurus::videFiche()
 // -----------------------------------------------------------------------------
 // Ouvre la table primaire et les index secondaires
 // -----------------------------------------------------------------------------
-DBIResult
-NSThesaurus::open()
+DBIResult NSThesaurus::open()
 {
 	char tableName[] = "Clinical_Labels.DB";
 
@@ -2581,16 +2586,14 @@ NSThesaurus::open()
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSThesaurus::Create()
+bool NSThesaurus::Create()
 {
 	return true;
 }
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSThesaurus::Modify()
+bool NSThesaurus::Modify()
 {
 	return true;
 }
@@ -2598,8 +2601,7 @@ NSThesaurus::Modify()
 // -----------------------------------------------------------------------------
 // Opérateur d'affectation
 // -----------------------------------------------------------------------------
-NSThesaurus&
-NSThesaurus::operator=(NSThesaurus src)
+NSThesaurus& NSThesaurus::operator=(NSThesaurus src)
 {
   if (this == &src)
     return *this;
@@ -2612,8 +2614,7 @@ NSThesaurus::operator=(NSThesaurus src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSThesaurus::operator==(const NSThesaurus& o)
+int NSThesaurus::operator==(const NSThesaurus& o)
 {
   return (_Donnees == o._Donnees);
 }
@@ -2654,8 +2655,7 @@ NSThesaurusInfo::~NSThesaurusInfo()
 // -----------------------------------------------------------------------------
 // arrange the result "as a" Classer record for a given classification
 // -----------------------------------------------------------------------------
-string
-NSThesaurusInfo::getClasserString(string sClassif)
+string NSThesaurusInfo::getClasserString(string sClassif)
 {
   if (string("") == sClassif)
     sClassif = string("6CISP");
@@ -2686,8 +2686,7 @@ NSThesaurusInfo::getClasserString(string sClassif)
   return sReturn;
 }
 
-void
-NSThesaurusInfo::addALaClasser(string* pResult, string sCode)
+void NSThesaurusInfo::addALaClasser(string* pResult, string sCode)
 {
   if ((NULL == pResult) || (string("") == sCode))
     return;
