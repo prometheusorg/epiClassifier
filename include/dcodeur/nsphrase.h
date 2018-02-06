@@ -527,4 +527,3 @@ typedef NSPropositionVector::iterator iterProposition;
 typedef NTArray<NsProposition> NSPropositionArray;
 
 #endif  // __NSPHRASE_H
-

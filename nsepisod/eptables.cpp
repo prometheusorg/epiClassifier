@@ -26,7 +26,7 @@
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContactData::NSEpiContactData()
 {
@@ -36,7 +36,7 @@ NSEpiContactData::NSEpiContactData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContactData::NSEpiContactData(NSEpiContactData& rv)
 {
@@ -49,7 +49,7 @@ NSEpiContactData::NSEpiContactData(NSEpiContactData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContactData::~NSEpiContactData()
 {
@@ -57,7 +57,7 @@ NSEpiContactData::~NSEpiContactData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiContactData&
 NSEpiContactData::operator=(NSEpiContactData src)
@@ -103,7 +103,7 @@ NSEpiContactData::metAZero()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContact::NSEpiContact(NSContexte *pCtx)
   : NSEpiContactInfo(),
@@ -113,7 +113,7 @@ NSEpiContact::NSEpiContact(NSContexte *pCtx)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContact::NSEpiContact(NSEpiContact& rv)
   : NSEpiContactInfo(rv),
@@ -123,7 +123,7 @@ NSEpiContact::NSEpiContact(NSEpiContact& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContact::~NSEpiContact()
 {
@@ -212,7 +212,7 @@ NSEpiContact::operator==(const NSEpiContact& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiContactInfo::NSEpiContactInfo()
 {
@@ -222,7 +222,7 @@ NSEpiContactInfo::NSEpiContactInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiContact
+// Constructor à partir d'un NSEpiContact
 // -----------------------------------------------------------------------------
 NSEpiContactInfo::NSEpiContactInfo(NSEpiContact *pContact)
 {
@@ -235,7 +235,7 @@ NSEpiContactInfo::NSEpiContactInfo(NSEpiContact *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContactInfo::NSEpiContactInfo(NSEpiContactInfo& rv)
 {
@@ -248,7 +248,7 @@ NSEpiContactInfo::NSEpiContactInfo(NSEpiContactInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContactInfo::~NSEpiContactInfo()
 {
@@ -287,7 +287,7 @@ NSEpiContactInfo::operator==(const NSEpiContactInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContElmtData::NSEpiContElmtData()
 {
@@ -297,7 +297,7 @@ NSEpiContElmtData::NSEpiContElmtData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContElmtData::NSEpiContElmtData(NSEpiContElmtData& rv)
 {
@@ -308,7 +308,7 @@ NSEpiContElmtData::NSEpiContElmtData(NSEpiContElmtData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContElmtData::~NSEpiContElmtData()
 {
@@ -316,7 +316,7 @@ NSEpiContElmtData::~NSEpiContElmtData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiContElmtData&
 NSEpiContElmtData::operator=(NSEpiContElmtData src)
@@ -359,7 +359,7 @@ NSEpiContElmtData::metAZero()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContElmt::NSEpiContElmt(NSContexte *pCtx)
   : NSEpiContElmtInfo(),
@@ -369,7 +369,7 @@ NSEpiContElmt::NSEpiContElmt(NSContexte *pCtx)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContElmt::NSEpiContElmt(NSEpiContElmt& rv)
   : NSEpiContElmtInfo(rv),
@@ -379,7 +379,7 @@ NSEpiContElmt::NSEpiContElmt(NSEpiContElmt& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContElmt::~NSEpiContElmt()
 {
@@ -467,7 +467,7 @@ NSEpiContElmt::operator==(const NSEpiContElmt& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiContElmtInfo::NSEpiContElmtInfo()
 {
@@ -477,7 +477,7 @@ NSEpiContElmtInfo::NSEpiContElmtInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiContElmt
+// Constructor à partir d'un NSEpiContElmt
 // -----------------------------------------------------------------------------
 NSEpiContElmtInfo::NSEpiContElmtInfo(NSEpiContElmt *pContact)
 {
@@ -490,7 +490,7 @@ NSEpiContElmtInfo::NSEpiContElmtInfo(NSEpiContElmt *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContElmtInfo::NSEpiContElmtInfo(NSEpiContElmtInfo& rv)
 {
@@ -503,7 +503,7 @@ NSEpiContElmtInfo::NSEpiContElmtInfo(NSEpiContElmtInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContElmtInfo::~NSEpiContElmtInfo()
 {
@@ -542,7 +542,7 @@ NSEpiContElmtInfo::operator==(const NSEpiContElmtInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContClasData::NSEpiContClasData()
 {
@@ -552,7 +552,7 @@ NSEpiContClasData::NSEpiContClasData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContClasData::NSEpiContClasData(NSEpiContClasData& rv)
 {
@@ -563,7 +563,7 @@ NSEpiContClasData::NSEpiContClasData(NSEpiContClasData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContClasData::~NSEpiContClasData()
 {
@@ -571,7 +571,7 @@ NSEpiContClasData::~NSEpiContClasData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiContClasData&
 NSEpiContClasData::operator=(NSEpiContClasData src)
@@ -613,7 +613,7 @@ NSEpiContClasData::metAZero()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContClass::NSEpiContClass(NSContexte *pCtx)
   : NSEpiContClasInfo(),
@@ -622,7 +622,7 @@ NSEpiContClass::NSEpiContClass(NSContexte *pCtx)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContClass::NSEpiContClass(NSEpiContClass& rv)
   : NSEpiContClasInfo(rv),
@@ -631,7 +631,7 @@ NSEpiContClass::NSEpiContClass(NSEpiContClass& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContClass::~NSEpiContClass()
 {
@@ -716,7 +716,7 @@ NSEpiContClass::operator==(const NSEpiContClass& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiContClasInfo::NSEpiContClasInfo()
 {
@@ -726,7 +726,7 @@ NSEpiContClasInfo::NSEpiContClasInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiContClass
+// Constructor à partir d'un NSEpiContClass
 // -----------------------------------------------------------------------------
 NSEpiContClasInfo::NSEpiContClasInfo(NSEpiContClass *pContact)
 {
@@ -739,7 +739,7 @@ NSEpiContClasInfo::NSEpiContClasInfo(NSEpiContClass *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContClasInfo::NSEpiContClasInfo(NSEpiContClasInfo& rv)
 {
@@ -752,7 +752,7 @@ NSEpiContClasInfo::NSEpiContClasInfo(NSEpiContClasInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContClasInfo::~NSEpiContClasInfo()
 {
@@ -790,7 +790,7 @@ NSEpiContClasInfo::operator==(const NSEpiContClasInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContCodeData::NSEpiContCodeData()
 {
@@ -800,7 +800,7 @@ NSEpiContCodeData::NSEpiContCodeData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContCodeData::NSEpiContCodeData(NSEpiContCodeData& rv)
 {
@@ -812,7 +812,7 @@ NSEpiContCodeData::NSEpiContCodeData(NSEpiContCodeData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContCodeData::~NSEpiContCodeData()
 {
@@ -820,7 +820,7 @@ NSEpiContCodeData::~NSEpiContCodeData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiContCodeData&
 NSEpiContCodeData::operator=(NSEpiContCodeData src)
@@ -864,7 +864,7 @@ NSEpiContCodeData::metAZero()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiContCode::NSEpiContCode(NSContexte *pCtx)
               : NSEpiContCodeInfo(), NSFiche(pCtx)
@@ -872,7 +872,7 @@ NSEpiContCode::NSEpiContCode(NSContexte *pCtx)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContCode::NSEpiContCode(NSEpiContCode& rv)
               : NSEpiContCodeInfo(rv), NSFiche(rv.pContexte)
@@ -880,7 +880,7 @@ NSEpiContCode::NSEpiContCode(NSEpiContCode& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContCode::~NSEpiContCode()
 {
@@ -963,7 +963,7 @@ NSEpiContCode::operator==(const NSEpiContCode& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiContCodeInfo::NSEpiContCodeInfo()
 {
@@ -973,7 +973,7 @@ NSEpiContCodeInfo::NSEpiContCodeInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiContCode
+// Constructor à partir d'un NSEpiContCode
 // -----------------------------------------------------------------------------
 NSEpiContCodeInfo::NSEpiContCodeInfo(NSEpiContCode *pContact)
 {
@@ -985,7 +985,7 @@ NSEpiContCodeInfo::NSEpiContCodeInfo(NSEpiContCode *pContact)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiContCodeInfo::NSEpiContCodeInfo(NSEpiContCodeInfo& rv)
 {
@@ -997,7 +997,7 @@ NSEpiContCodeInfo::NSEpiContCodeInfo(NSEpiContCodeInfo& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiContCodeInfo::~NSEpiContCodeInfo()
 {
@@ -1034,7 +1034,7 @@ NSEpiContCodeInfo::operator==(const NSEpiContCodeInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccupData::NSEpiPreoccupData()
 {
@@ -1044,7 +1044,7 @@ NSEpiPreoccupData::NSEpiPreoccupData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccupData::NSEpiPreoccupData(NSEpiPreoccupData& rv)
 {
@@ -1063,7 +1063,7 @@ NSEpiPreoccupData::NSEpiPreoccupData(NSEpiPreoccupData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccupData::~NSEpiPreoccupData()
 {
@@ -1071,7 +1071,7 @@ NSEpiPreoccupData::~NSEpiPreoccupData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiPreoccupData&
 NSEpiPreoccupData::operator=(NSEpiPreoccupData src)
@@ -1130,7 +1130,7 @@ NSEpiPreoccupData::metAZero()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccup::NSEpiPreoccup(NSContexte *pCtx)
   : NSEpiPreoccupInfo(),
@@ -1139,7 +1139,7 @@ NSEpiPreoccup::NSEpiPreoccup(NSContexte *pCtx)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccup::NSEpiPreoccup(NSEpiPreoccup& rv)
   : NSEpiPreoccupInfo(rv),
@@ -1149,7 +1149,7 @@ NSEpiPreoccup::NSEpiPreoccup(NSEpiPreoccup& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccup::~NSEpiPreoccup()
 {
@@ -1252,7 +1252,7 @@ NSEpiPreoccup::operator==(const NSEpiPreoccup& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiPreoccupInfo::NSEpiPreoccupInfo()
 {
@@ -1262,7 +1262,7 @@ NSEpiPreoccupInfo::NSEpiPreoccupInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiPreoccup
+// Constructor à partir d'un NSEpiPreoccup
 // -----------------------------------------------------------------------------
 NSEpiPreoccupInfo::NSEpiPreoccupInfo(NSEpiPreoccup *pContact)
 {
@@ -1275,7 +1275,7 @@ NSEpiPreoccupInfo::NSEpiPreoccupInfo(NSEpiPreoccup *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccupInfo::NSEpiPreoccupInfo(NSEpiPreoccupInfo& rv)
 {
@@ -1288,7 +1288,7 @@ NSEpiPreoccupInfo::NSEpiPreoccupInfo(NSEpiPreoccupInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiPreoccupInfo::~NSEpiPreoccupInfo()
 {
@@ -1347,7 +1347,7 @@ NSEpiPreoccupInfo::operator==(const NSEpiPreoccupInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiProblemeData::NSEpiProblemeData()
 {
@@ -1357,7 +1357,7 @@ NSEpiProblemeData::NSEpiProblemeData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProblemeData::NSEpiProblemeData(NSEpiProblemeData& rv)
 {
@@ -1380,7 +1380,7 @@ NSEpiProblemeData::NSEpiProblemeData(NSEpiProblemeData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProblemeData::~NSEpiProblemeData()
 {
@@ -1388,7 +1388,7 @@ NSEpiProblemeData::~NSEpiProblemeData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiProblemeData&
 NSEpiProblemeData::operator=(NSEpiProblemeData src)
@@ -1456,7 +1456,7 @@ NSEpiProblemeData::metAZero()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiProbleme::NSEpiProbleme(NSContexte *pCtx)
   : NSEpiProblemeInfo(),
@@ -1466,7 +1466,7 @@ NSEpiProbleme::NSEpiProbleme(NSContexte *pCtx)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProbleme::NSEpiProbleme(NSEpiProbleme& rv)
   : NSEpiProblemeInfo(rv),
@@ -1476,7 +1476,7 @@ NSEpiProbleme::NSEpiProbleme(NSEpiProbleme& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProbleme::~NSEpiProbleme()
 {
@@ -1587,7 +1587,7 @@ NSEpiProbleme::operator==(const NSEpiProbleme& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiProblemeInfo::NSEpiProblemeInfo()
 {
@@ -1597,7 +1597,7 @@ NSEpiProblemeInfo::NSEpiProblemeInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiProbleme
+// Constructor à partir d'un NSEpiProbleme
 // -----------------------------------------------------------------------------
 NSEpiProblemeInfo::NSEpiProblemeInfo(NSEpiProbleme *pContact)
 {
@@ -1610,7 +1610,7 @@ NSEpiProblemeInfo::NSEpiProblemeInfo(NSEpiProbleme *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProblemeInfo::NSEpiProblemeInfo(NSEpiProblemeInfo& rv)
 {
@@ -1623,7 +1623,7 @@ NSEpiProblemeInfo::NSEpiProblemeInfo(NSEpiProblemeInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProblemeInfo::~NSEpiProblemeInfo()
 {
@@ -1662,7 +1662,7 @@ NSEpiProblemeInfo::operator==(const NSEpiProblemeInfo& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiProbEvenData::NSEpiProbEvenData()
 {
@@ -1672,7 +1672,7 @@ NSEpiProbEvenData::NSEpiProbEvenData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProbEvenData::NSEpiProbEvenData(NSEpiProbEvenData& rv)
 {
@@ -1689,7 +1689,7 @@ NSEpiProbEvenData::NSEpiProbEvenData(NSEpiProbEvenData& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProbEvenData::~NSEpiProbEvenData()
 {
@@ -1697,7 +1697,7 @@ NSEpiProbEvenData::~NSEpiProbEvenData()
 
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSEpiProbEvenData&
 NSEpiProbEvenData::operator=(NSEpiProbEvenData src)
@@ -1752,7 +1752,7 @@ NSEpiProbEvenData::metAZero()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiProbEven::NSEpiProbEven(NSContexte *pCtx)
   : NSEpiProbEvenInfo(),
@@ -1762,7 +1762,7 @@ NSEpiProbEven::NSEpiProbEven(NSContexte *pCtx)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProbEven::NSEpiProbEven(NSEpiProbEven& rv)
   : NSEpiProbEvenInfo(rv),
@@ -1772,7 +1772,7 @@ NSEpiProbEven::NSEpiProbEven(NSEpiProbEven& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProbEven::~NSEpiProbEven()
 {
@@ -1871,7 +1871,7 @@ NSEpiProbEven::operator==(const NSEpiProbEven& o)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiProbEvenInfo::NSEpiProbEvenInfo()
 {
@@ -1881,7 +1881,7 @@ NSEpiProbEvenInfo::NSEpiProbEvenInfo()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiProbEven
+// Constructor à partir d'un NSEpiProbEven
 // -----------------------------------------------------------------------------
 NSEpiProbEvenInfo::NSEpiProbEvenInfo(NSEpiProbEven *pContact)
 {
@@ -1894,7 +1894,7 @@ NSEpiProbEvenInfo::NSEpiProbEvenInfo(NSEpiProbEven *pContact)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiProbEvenInfo::NSEpiProbEvenInfo(NSEpiProbEvenInfo& rv)
 {
@@ -1907,7 +1907,7 @@ NSEpiProbEvenInfo::NSEpiProbEvenInfo(NSEpiProbEvenInfo& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiProbEvenInfo::~NSEpiProbEvenInfo()
 {
@@ -2011,18 +2011,16 @@ NSEpiClasserData::operator==(const NSEpiClasserData& o)
 // -----------------------------------------------------------------------------
 // Met à zéro les variables de la fiche
 // -----------------------------------------------------------------------------
-void
-NSEpiClasserData::metAZero()
-{
-	_sCode           = string("");
-	_sClassification = string("");
-	_sCriteria       = string("");
-	_sRelation       = string("");
+void NSEpiClasserData::metAZero() {
+    _sCode.clear();
+    _sClassification.clear();
+    _sCriteria.clear();
+    _sRelation.clear();
 }
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiClasser::NSEpiClasser(NSSuper *pSuper)
              :NSEpiClasserInfo(),
@@ -2031,7 +2029,7 @@ NSEpiClasser::NSEpiClasser(NSSuper *pSuper)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClasser::NSEpiClasser(NSEpiClasser& rv)
              :NSEpiClasserInfo(rv),
@@ -2040,7 +2038,7 @@ NSEpiClasser::NSEpiClasser(NSEpiClasser& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiClasser::~NSEpiClasser()
 {
@@ -2049,13 +2047,14 @@ NSEpiClasser::~NSEpiClasser()
 // -----------------------------------------------------------------------------
 // Donne l'ensemble des relations pour un code, une relation, un critère
 // -----------------------------------------------------------------------------
-DBIResult
-NSEpiClasser::donneRelations(string *pResult, string sCode, string sClassification, string sCritere)
-{
+DBIResult NSEpiClasser::donneRelations(string *pResult,
+                                       string sCode,
+                                       string sClassification,
+                                       string sCritere) {
   if (NULL == pResult)
     return DBIERR_NONE;
 
-  *pResult = string("");
+  pResult->clear();
 
   bool bOpenClose = false;
   if (isOpen != true)
@@ -2119,9 +2118,9 @@ NSEpiClasser::donneRelations(string *pResult, string sCode, string sClassificati
           (_Donnees.getClassification() == sClassification))
   {
     if ((_Donnees.getCriteria() == sCritere) &&
-        (_Donnees.getRelation() != string("")))
+        (!_Donnees.getRelation().empty())
     {
-      if (string("") != *pResult)
+      if (!pResult->empty())
         *pResult += string(";");
       *pResult += _Donnees.getRelation();
     }
@@ -2176,9 +2175,7 @@ NSEpiClasser::alimenteFiche()
 // -----------------------------------------------------------------------------
 // Transfère le contenu des valeurs de la fiche dans pRecBuff
 // -----------------------------------------------------------------------------
-void
-NSEpiClasser::videFiche()
-{
+void NSEpiClasser::videFiche() {
   videChamp((char*)(_Donnees.getCode().c_str()),           CLASSER_CODE_FIELD,     CLASSER_CODE_LEN);
   videChamp((char*)(_Donnees.getClassification().c_str()), CLASSER_CLASSIF_FIELD,  CLASSER_CLASSIF_LEN);
   videChamp((char*)(_Donnees.getCriteria().c_str()),       CLASSER_CRITERE_FIELD,  CLASSER_CRITERE_LEN);
@@ -2188,8 +2185,7 @@ NSEpiClasser::videFiche()
 // -----------------------------------------------------------------------------
 // Ouvre la table primaire et les index secondaires
 // -----------------------------------------------------------------------------
-DBIResult
-NSEpiClasser::open()
+DBIResult NSEpiClasser::open()
 {
 	char tableName[] = "CLASSER.DB";
 
@@ -2200,17 +2196,13 @@ NSEpiClasser::open()
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSEpiClasser::Create()
-{
+bool NSEpiClasser::Create() {
 	return true;
 }
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSEpiClasser::Modify()
-{
+bool NSEpiClasser::Modify() {
 	return true;
 }
 
@@ -2218,9 +2210,7 @@ NSEpiClasser::Modify()
 // -----------------------------------------------------------------------------
 // Opérateur d'affectation
 // -----------------------------------------------------------------------------
-NSEpiClasser&
-NSEpiClasser::operator=(NSEpiClasser src)
-{
+NSEpiClasser& NSEpiClasser::operator=(NSEpiClasser src) {
   if (this == &src)
     return *this;
 
@@ -2232,32 +2222,28 @@ NSEpiClasser::operator=(NSEpiClasser src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSEpiClasser::operator==(const NSEpiClasser& o)
-{
+int NSEpiClasser::operator==(const NSEpiClasser& o) {
   return (_Donnees == o._Donnees);
 }
 #endif
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
-NSEpiClasserInfo::NSEpiClasserInfo()
-{
+NSEpiClasserInfo::NSEpiClasserInfo() {
 }
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiClasser
+// Constructor à partir d'un NSEpiClasser
 // -----------------------------------------------------------------------------
-NSEpiClasserInfo::NSEpiClasserInfo(NSEpiClasser *pContact)
-{
+NSEpiClasserInfo::NSEpiClasserInfo(NSEpiClasser *pContact) {
 	_Donnees = pContact->_Donnees;
 }
 #endif
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClasserInfo::NSEpiClasserInfo(NSEpiClasserInfo& rv)
 {
@@ -2265,7 +2251,7 @@ NSEpiClasserInfo::NSEpiClasserInfo(NSEpiClasserInfo& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiClasserInfo::~NSEpiClasserInfo()
 {
@@ -2288,9 +2274,7 @@ NSEpiClasserInfo::operator=(NSEpiClasserInfo src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSEpiClasserInfo::operator==(const NSEpiClasserInfo& o)
-{
+int NSEpiClasserInfo::operator==(const NSEpiClasserInfo& o) {
   return (_Donnees == o._Donnees);
 }
 
@@ -2358,13 +2342,13 @@ NSEpiClasserInfo::donneRelations(string *pResult, string sCode, string sClassifi
 
 // -----------------------------------------------------------------------------
 //
-// Implémentation des méthodes NSThesaurus
+// Implement NSThesaurus methods
 //
 // -----------------------------------------------------------------------------
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSThesaurusData::NSThesaurusData()
 {
@@ -2374,7 +2358,7 @@ NSThesaurusData::NSThesaurusData()
 
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSThesaurusData::NSThesaurusData(NSThesaurusData& rv)
 {
@@ -2398,14 +2382,14 @@ NSThesaurusData::NSThesaurusData(NSThesaurusData& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSThesaurusData::~NSThesaurusData()
 {
 }
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
 NSThesaurusData&
 NSThesaurusData::operator=(NSThesaurusData src)
@@ -2437,9 +2421,7 @@ NSThesaurusData::operator=(NSThesaurusData src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSThesaurusData::operator==(const NSThesaurusData& o)
-{
+int NSThesaurusData::operator==(const NSThesaurusData& o) {
 	if (_ibui == o._ibui)
 		return 1;
 	else
@@ -2449,26 +2431,24 @@ NSThesaurusData::operator==(const NSThesaurusData& o)
 // -----------------------------------------------------------------------------
 // Met à zéro les variables de la fiche
 // -----------------------------------------------------------------------------
-void
-NSThesaurusData::metAZero()
-{
+void NSThesaurusData::metAZero() {
   _iId      = -1;
-  _sOrigine = string("");
-	_ibui     = string("");
-  _labelFr  = string("");
-  _labelNl  = string("");
-  _icpc2    = string("");
-  _icd10    = string("");
-  _icpc2_2  = string("");
-  _icd10_2  = string("");
-  _icpc2_1X = string("");
-  _icd10_1X = string("");
-  _icpc2_2X = string("");
-  _icd10_2X = string("");
-  _icpc2_1Y = string("");
-  _icd10_1Y = string("");
-  _icpc2_2Y = string("");
-  _icd10_2Y = string("");
+  _sOrigine.clear();
+    _ibui.clear();
+  _labelFr.clear();
+  _labelNl.clear();
+  _icpc2.clear();
+  _icd10.clear();
+  _icpc2_2.clear();
+  _icd10_2.clear();
+  _icpc2_1X.clear();
+  _icd10_1X.clear();
+  _icpc2_2X.clear();
+  _icd10_2X.clear();
+  _icpc2_1Y.clear();
+  _icd10_1Y.clear();
+  _icpc2_2Y.clear();
+  _icd10_2Y.clear();
 }
 
 #ifndef _ENTERPRISE_DLL
@@ -2498,9 +2478,7 @@ NSThesaurus::~NSThesaurus()
 // -----------------------------------------------------------------------------
 // Transfère le contenu de pRecBuff dans les variables de la fiche
 // -----------------------------------------------------------------------------
-void
-NSThesaurus::alimenteFiche()
-{
+void NSThesaurus::alimenteFiche() {
   char ibui[THESAURUS_IBUI_LEN + 1];
   char labelFr[THESAURUS_LABEL_LEN + 1];
   char labelNl[THESAURUS_LABEL_LEN + 1];
@@ -2621,7 +2599,7 @@ int NSThesaurus::operator==(const NSThesaurus& o)
 #endif
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSThesaurusInfo::NSThesaurusInfo()
 {
@@ -2629,7 +2607,7 @@ NSThesaurusInfo::NSThesaurusInfo()
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiClasser
+// Constructor à partir d'un NSEpiClasser
 // -----------------------------------------------------------------------------
 NSThesaurusInfo::NSThesaurusInfo(NSThesaurus *pContact)
 {
@@ -2638,7 +2616,7 @@ NSThesaurusInfo::NSThesaurusInfo(NSThesaurus *pContact)
 #endif
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSThesaurusInfo::NSThesaurusInfo(NSThesaurusInfo& rv)
 {
@@ -2646,7 +2624,7 @@ NSThesaurusInfo::NSThesaurusInfo(NSThesaurusInfo& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSThesaurusInfo::~NSThesaurusInfo()
 {
@@ -2655,12 +2633,11 @@ NSThesaurusInfo::~NSThesaurusInfo()
 // -----------------------------------------------------------------------------
 // arrange the result "as a" Classer record for a given classification
 // -----------------------------------------------------------------------------
-string NSThesaurusInfo::getClasserString(string sClassif)
-{
-  if (string("") == sClassif)
+string NSThesaurusInfo::getClasserString(string sClassif) {
+  if (sClassif.empty())
     sClassif = string("6CISP");
 
-  string sReturn = string("");
+  string sReturn;
 
   if (strlen(sClassif.c_str()) < BASE_SENS_LEN)
     return sReturn;
@@ -2688,7 +2665,7 @@ string NSThesaurusInfo::getClasserString(string sClassif)
 
 void NSThesaurusInfo::addALaClasser(string* pResult, string sCode)
 {
-  if ((NULL == pResult) || (string("") == sCode))
+  if ((NULL == pResult) || (sCode.empty()))
     return;
 
   string sAdaptedCode = sCode;
@@ -2701,7 +2678,7 @@ void NSThesaurusInfo::addALaClasser(string* pResult, string sCode)
     sAdaptedCode = string(sAdaptedCode, 0, 3);
   }
 
-  if (string("") != *pResult)
+  if (!pResult->empty())
     *pResult += string(";");
 
   *pResult += sAdaptedCode;
@@ -2724,9 +2701,7 @@ NSThesaurusInfo::operator=(NSThesaurusInfo src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSThesaurusInfo::operator==(const NSThesaurusInfo& o)
-{
+int NSThesaurusInfo::operator==(const NSThesaurusInfo& o) {
   return (_Donnees == o._Donnees);
 }
 
@@ -2799,7 +2774,7 @@ NSThesaurusInfo::alimenteFicheSentinelle(MYSQL_ROW *pRow)
 
 
 // -----------------------------------------------------------------------------
-// Constructeur
+// Constructor
 // -----------------------------------------------------------------------------
 NSEpiClassifData::NSEpiClassifData()
 {
@@ -2808,7 +2783,7 @@ NSEpiClassifData::NSEpiClassifData()
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClassifData::NSEpiClassifData(const NSEpiClassifData& rv)
 {
@@ -2819,18 +2794,16 @@ NSEpiClassifData::NSEpiClassifData(const NSEpiClassifData& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiClassifData::~NSEpiClassifData()
 {
 }
 
 // -----------------------------------------------------------------------------
-// Opérateur =
+// copy assignment operator
 // -----------------------------------------------------------------------------
-NSEpiClassifData&
-NSEpiClassifData::operator=(const NSEpiClassifData& src)
-{
+NSEpiClassifData& NSEpiClassifData::operator=(const NSEpiClassifData& src) {
   if (this == &src)
     return *this;
 
@@ -2845,9 +2818,7 @@ NSEpiClassifData::operator=(const NSEpiClassifData& src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSEpiClassifData::operator==(const NSEpiClassifData& o)
-{
+int NSEpiClassifData::operator==(const NSEpiClassifData& o) {
 	if ((_sCode           == o._sCode)           &&
       (_sClassification == o._sClassification) &&
       (_sLabel          == o._sLabel)          &&
@@ -2860,18 +2831,16 @@ NSEpiClassifData::operator==(const NSEpiClassifData& o)
 // -----------------------------------------------------------------------------
 // Met à zéro les variables de la fiche
 // -----------------------------------------------------------------------------
-void
-NSEpiClassifData::metAZero()
-{
-	_sClassification = string("");
-	_sCode           = string("");
-	_sLabel          = string("");
-	_sChapter        = string("");
+void NSEpiClassifData::metAZero() {
+    _sClassification.clear();
+    _sCode.clear();
+    _sLabel.clear();
+    _sChapter.clear();
 }
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-//  Constructeur
+//  Constructor
 // -----------------------------------------------------------------------------
 NSEpiClassif::NSEpiClassif(NSSuper *pSuper)
              :NSEpiClassifInfo(), NSFiche(pSuper)
@@ -2879,7 +2848,7 @@ NSEpiClassif::NSEpiClassif(NSSuper *pSuper)
 }
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClassif::NSEpiClassif(NSEpiClassif& rv)
              :NSEpiClassifInfo(rv), NSFiche(rv._pSuper)
@@ -2887,10 +2856,9 @@ NSEpiClassif::NSEpiClassif(NSEpiClassif& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
-NSEpiClassif::~NSEpiClassif()
-{
+NSEpiClassif::~NSEpiClassif() {
 }
 
 #ifdef _ENTERPRISE_DLL
@@ -2918,9 +2886,7 @@ NSEpiClassif::alimenteFiche(MYSQL_ROW *pRow)
 // -----------------------------------------------------------------------------
 // Transfère le contenu de pRecBuff dans les variables de la fiche
 // -----------------------------------------------------------------------------
-void
-NSEpiClassif::alimenteFiche()
-{
+void NSEpiClassif::alimenteFiche() {
   char classification[CLASSIF_CLASSIF_LEN + 1];
   char code[CLASSIF_CODE_LEN + 1];  char libelle[CLASSIF_LIBELLE_LEN + 1];  char chapitre[CLASSIF_CHAPITRE_LEN + 1];
 
@@ -2938,9 +2904,7 @@ NSEpiClassif::alimenteFiche()
 // -----------------------------------------------------------------------------
 // Transfère le contenu des valeurs de la fiche dans pRecBuff
 // -----------------------------------------------------------------------------
-void
-NSEpiClassif::videFiche()
-{
+void NSEpiClassif::videFiche() {
   videChamp((char*)(_Donnees.getClassification().c_str()), CLASSIF_CLASSIF_FIELD,  CLASSIF_CLASSIF_LEN);
   videChamp((char*)(_Donnees.getCode().c_str()),           CLASSIF_CODE_FIELD,     CLASSIF_CODE_LEN);
   videChamp((char*)(_Donnees.getLabel().c_str()),          CLASSIF_LIBELLE_FIELD,  CLASSIF_LIBELLE_LEN);
@@ -2950,9 +2914,7 @@ NSEpiClassif::videFiche()
 // -----------------------------------------------------------------------------
 // Ouvre la table primaire et les index secondaires
 // -----------------------------------------------------------------------------
-DBIResult
-NSEpiClassif::open()
-{
+DBIResult NSEpiClassif::open() {
 	char tableName[] = "CLASSIF.DB";
 
 	// Appelle la fonction open() de la classe de base pour ouvrir l'index primaire
@@ -2964,17 +2926,13 @@ NSEpiClassif::open()
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSEpiClassif::Create()
-{
+bool NSEpiClassif::Create() {
 	return true;
 }
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-bool
-NSEpiClassif::Modify()
-{
+bool NSEpiClassif::Modify() {
 	return true;
 }
 
@@ -2996,16 +2954,14 @@ NSEpiClassif::operator=(NSEpiClassif src)
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSEpiClassif::operator==(const NSEpiClassif& o)
-{
+int NSEpiClassif::operator==(const NSEpiClassif& o) {
   return (_Donnees == o._Donnees);
 }
 
 
-bool
-NSEpiClassif::initArrayFromCodeList(string sClassification, ClasseStringVector* pVectCodes, NSEpiClassifArray* pResultArray)
-{
+bool NSEpiClassif::initArrayFromCodeList(string sClassification,
+                                         ClasseStringVector* pVectCodes,
+                                         NSEpiClassifArray* pResultArray) {
   if ((NULL == pVectCodes) || (NULL == pResultArray))
     return false;
 
@@ -3063,7 +3019,7 @@ NSEpiClassif::initArrayFromCodeList(string sClassification, ClasseStringVector* 
 #endif // #ifndef _ENTERPRISE_DLL
 
 // -----------------------------------------------------------------------------
-// Constructeur par défaut
+// Constructor par défaut
 // -----------------------------------------------------------------------------
 NSEpiClassifInfo::NSEpiClassifInfo()
 {
@@ -3071,7 +3027,7 @@ NSEpiClassifInfo::NSEpiClassifInfo()
 
 #ifndef _ENTERPRISE_DLL
 // -----------------------------------------------------------------------------
-// Constructeur à partir d'un NSEpiClasser
+// Constructor à partir d'un NSEpiClasser
 // -----------------------------------------------------------------------------
 NSEpiClassifInfo::NSEpiClassifInfo(NSEpiClassif *pContact)
 {
@@ -3080,7 +3036,7 @@ NSEpiClassifInfo::NSEpiClassifInfo(NSEpiClassif *pContact)
 #endif
 
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSEpiClassifInfo::NSEpiClassifInfo(NSEpiClassifInfo& rv)
 {
@@ -3088,7 +3044,7 @@ NSEpiClassifInfo::NSEpiClassifInfo(NSEpiClassifInfo& rv)
 }
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 NSEpiClassifInfo::~NSEpiClassifInfo()
 {
@@ -3098,9 +3054,7 @@ NSEpiClassifInfo::~NSEpiClassifInfo()
 // Get ICPC category
 // Based ICPC's design : symptoms < 30, pathologies >= 70, procedures in-between
 // -----------------------------------------------------------------------------
-ICPC_CATEGORY
-NSEpiClassifInfo::getIcpcCategory()
-{
+ICPC_CATEGORY NSEpiClassifInfo::getIcpcCategory() {
   // Valid ICPC codes must be in the form Char Digit Digit (ex : R05)
   //
   if (strlen(_Donnees.getCode().c_str()) < 3)
@@ -3118,18 +3072,14 @@ NSEpiClassifInfo::getIcpcCategory()
   return IcpcProcedure;
 }
 
-ICPC_PATHOLOGY
-NSEpiClassifInfo::getIcpcPathology()
-{
+ICPC_PATHOLOGY NSEpiClassifInfo::getIcpcPathology() {
   return IcpcUndefinedPatho;
 }
 
 // -----------------------------------------------------------------------------
 // Opérateur d'affectation
 // -----------------------------------------------------------------------------
-NSEpiClassifInfo&
-NSEpiClassifInfo::operator=(const NSEpiClassifInfo& src)
-{
+NSEpiClassifInfo& NSEpiClassifInfo::operator=(const NSEpiClassifInfo& src) {
   if (&src == this)
     return *this;
 
@@ -3139,21 +3089,16 @@ NSEpiClassifInfo::operator=(const NSEpiClassifInfo& src)
 }
 
 #ifndef _ENTERPRISE_DLL
-NSEpiClassifInfo&
-NSEpiClassifInfo::operator=(const NSEpiClassif& src)
-{
+NSEpiClassifInfo& NSEpiClassifInfo::operator=(const NSEpiClassif& src) {
   _Donnees = src._Donnees;
-
-	return *this;
+  return *this;
 }
 #endif
 
 // -----------------------------------------------------------------------------
 // Opérateur de comparaison
 // -----------------------------------------------------------------------------
-int
-NSEpiClassifInfo::operator==(const NSEpiClassifInfo& o)
-{
+int NSEpiClassifInfo::operator==(const NSEpiClassifInfo& o) {
   return (_Donnees == o._Donnees);
 }
 
@@ -3182,9 +3127,7 @@ NSEpiClassifInfoArray::~NSEpiClassifInfoArray()
   vider();
 }
 
-bool
-NSEpiClassifInfoArray::ajouteElement(NSEpiClassifInfo *pElement)
-{
+bool NSEpiClassifInfoArray::ajouteElement(NSEpiClassifInfo *pElement) {
   // Si l'élément existe déjà, on ne fait rien
   if (false == empty())
     for (NSEpiClassifInfoIter i = begin(); end() != i; i++)
@@ -3196,9 +3139,7 @@ NSEpiClassifInfoArray::ajouteElement(NSEpiClassifInfo *pElement)
   return true;
 }
 
-void
-NSEpiClassifInfoArray::vider()
-{
+void NSEpiClassifInfoArray::vider() {
   if (empty())
     return;
 
@@ -3211,13 +3152,13 @@ NSEpiClassifInfoArray::vider()
 
 // -----------------------------------------------------------------------------
 //
-// Implémentation des méthodes de NSEpiClassifArray
+// Implement NSEpiClassifArray methods
 //
 // -----------------------------------------------------------------------------
 NSEpiClassifArray::NSEpiClassifArray()
                   :NSEpiClassifInfoVector()
 {
-  _sFileName = string("");
+  _sFileName.clear();
 }
 
 NSEpiClassifArray::NSEpiClassifArray(string sFile)
@@ -3231,9 +3172,7 @@ NSEpiClassifArray::~NSEpiClassifArray()
   vider();
 }
 
-bool
-NSEpiClassifArray::fillArray()
-{
+bool NSEpiClassifArray::fillArray() {
   ifstream  inFile;
   string    line;
 
@@ -3247,10 +3186,10 @@ NSEpiClassifArray::fillArray()
     if (line != "")
     {
       // on ajoute dans l'EpiClassifArray ce qu'on vient de lire dans le fichier
-      string  sClassif  = "";
-      string  sCode     = "";
-      string  sLibelle  = "";
-      string  sChapitre = "";
+      string  sClassif;
+      string  sCode;
+      string  sLibelle;
+      string  sChapitre;
 
       // recherche de la classif
       // le premier paramètre est l'ID dans la table, c'est pour cela qu'on
@@ -3305,9 +3244,7 @@ NSEpiClassifArray::fillArray()
   return true;
 }
 
-bool
-NSEpiClassifArray::searchKey(string sClassif, string sCode)
-{
+bool NSEpiClassifArray::searchKey(string sClassif, string sCode) {
   for (NSEpiClassifInfoIter iter = begin(); end() != iter; iter++)
   {
     if (((*iter)->getClassification() == sClassif)  &&
@@ -3320,9 +3257,7 @@ NSEpiClassifArray::searchKey(string sClassif, string sCode)
   return false;
 }
 
-bool
-NSEpiClassifArray::vider()
-{
+bool NSEpiClassifArray::vider() {
   if (empty())
     return true;
 
@@ -3338,14 +3273,14 @@ NSEpiClassifArray::vider()
 
 // -----------------------------------------------------------------------------
 //
-// Implémentation des méthodes NSCodPrestArray
+// Implement NSCodPrestArray method
 //
 // -----------------------------------------------------------------------------
 
 
 /*
 // -----------------------------------------------------------------------------
-// Constructeur copie
+// Copy constructor
 // -----------------------------------------------------------------------------
 NSCodPrestArray::NSCodPrestArray(NSCodPrestArray& rv)
   : NSFicheCodPrestArray()
@@ -3356,7 +3291,7 @@ NSCodPrestArray::NSCodPrestArray(NSCodPrestArray& rv)
 
 
 // -----------------------------------------------------------------------------
-// Destructeur
+// Destructor
 // -----------------------------------------------------------------------------
 void
 NSCodPrestArray::vider()
@@ -3374,6 +3309,3 @@ NSCodPrestArray::~NSCodPrestArray()
 	vider();
 }
 */
-
-//////////////////////////// fin du fichier EpTables.cpp
-
